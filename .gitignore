@@ -1,0 +1,19 @@
+*.pyc
+*.pyo
+*~
+mViewer.log
+
+*.egg-info/
+
+# Microsoft VisualStudio Code Editor
+.vscode/
+
+# log files
+.logs/
+
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+
+# filewriter callback output files
+*.h5
+*.dat
