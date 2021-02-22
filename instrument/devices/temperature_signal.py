@@ -71,7 +71,7 @@ class MyPvPositioner(PVPositioner):
         tcalc.channels.C.input_value.put(noise)
         tcalc.channels.D.input_value.put(limiter)
         tcalc.scanning_rate.put(rate)  # 1 second
-        tcalc.calculation.put("A+max(D,(B-A))*RNDM+2*C*(RNDM-0.5)")
+        tcalc.calculation.put("A+min(D,(B-A))*RNDM+2*C*(RNDM-0.5)")
         self.tolerance.put(tol)
 
 
