@@ -11,3 +11,4 @@ from .motors import *
 from .noisy import *
 from .scaler import *
 from .shutter import *
+from .temperature_signal import *
