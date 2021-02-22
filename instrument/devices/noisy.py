@@ -1,0 +1,36 @@
+
+"""
+simulated noisy detector
+"""
+
+__all__ = ["noisy", "change_noisy_parameters", ]
+
+from ..session_logs import logger
+logger.info(__file__)
+
+from .calculation_records import calcs
+from .motors import m1
+from ophyd import EpicsSignalRO
+import apstools.devices
+import numpy
+
+
+def change_noisy_parameters(fwhm=0.015, peak=10000, noise=0.05):
+    """
+    Setup the swait record with new random numbers.
+
+    BLOCKING calls, not a bluesky plan
+    """
+    calcs.calc1.reset()
+    apstools.devices.setup_lorentzian_swait(
+        calcs.calc1,
+        m1.user_readback,
+        center = 2*numpy.random.random() - 1,
+        width = fwhm * numpy.random.random(),
+        scale = peak * (9 + numpy.random.random()),
+        noise=noise,
+    )
+
+# demo: use swait records to make "noisy" detector signals
+noisy = EpicsSignalRO('ioc:userCalc1', name='noisy', labels=("detectors",))
+change_noisy_parameters()
