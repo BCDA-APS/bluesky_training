@@ -11,6 +11,7 @@ __all__ = [
 ]
 
 from ..session_logs import logger
+
 logger.info(__file__)
 
 from ..devices import calcouts
@@ -75,20 +76,20 @@ def example_findpeak(number_of_scans=4, number_of_points=23):
         m1.move(peaks["cen"]["noisy"])
         RE(bp.rel_scan([noisy], m1, -fwhm, fwhm, 23))
     """
-    k = 1.5     # range expansion factor
+    k = 1.5  # range expansion factor
     fwhm = 2.1 / k
     cen = 0
     results = []
     for _again in range(number_of_scans):
         m1.move(cen)
-        yield from bp.rel_scan([noisy], m1, -k*fwhm, k*fwhm, number_of_points)
+        yield from bp.rel_scan([noisy], m1, -k * fwhm, k * fwhm, number_of_points)
         if "noisy" not in peaks["fwhm"]:
             logger.error("no data in `peaks`, end of these scans")
             break
         fwhm = peaks["fwhm"]["noisy"]
         cen = peaks["cen"]["noisy"]
         results.append((RE.md["scan_id"], cen, fwhm))
-    
+
     tbl = pyRestTable.Table()
     tbl.labels = "scan_id center FWHM".split()
     for row in results:
@@ -108,5 +109,5 @@ def repeat_findpeak(iters=1):
         apstools.utils.trim_plot_lines(bec, 4, m1, noisy)
         change_noisy_parameters()
         yield from example_findpeak()
-        logger.info("Finished #%d of %d iterations", _i+1, iters)
+        logger.info("Finished #%d of %d iterations", _i + 1, iters)
     # bec.enable_plots()

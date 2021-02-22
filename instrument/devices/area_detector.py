@@ -30,12 +30,15 @@ AD_IOC_FILES_ROOT = "/"
 BLUESKY_FILES_ROOT = "/tmp/docker_ioc/iocad"
 TEST_IMAGE_DIR = "tmp/adsimdet/%Y/%m/%d/"
 
+
 class MyFixedCam(SimDetectorCam):
     pool_max_buffers = None
     offset = ADComponent(EpicsSignalWithRBV, "Offset")
 
+
 class MyHDF5Plugin(FileStoreHDF5IterativeWrite, HDF5Plugin_V34):
     pass
+
 
 class MySimDetector(SingleTrigger, DetectorBase):
     """ADSimDetector"""
@@ -49,6 +52,7 @@ class MySimDetector(SingleTrigger, DetectorBase):
         read_path_template=os.path.join(BLUESKY_FILES_ROOT, TEST_IMAGE_DIR),
     )
 
+
 def change_ad_simulated_image_parameters():
     """
     Make the image be a "peak" (simulate a diffraction spot).
@@ -59,25 +63,28 @@ def change_ad_simulated_image_parameters():
     """
     cam = adsimdet.cam
     cam.reset.put(1)
-    cam.sim_mode.put(1)     # Peaks
-    cam.gain.put(100 + 100*np.random.random())
-    cam.offset.put(10*np.random.random())
-    cam.noise.put(20*np.random.random())
-    cam.peak_start.peak_start_x.put(200 + 500*np.random.random())
-    cam.peak_start.peak_start_y.put(200 + 500*np.random.random())
-    cam.peak_width.peak_width_x.put(10 + 100*np.random.random())
-    cam.peak_width.peak_width_y.put(10 + 100*np.random.random())
-    cam.peak_variation.put(0.5 + 20*np.random.random())
+    cam.sim_mode.put(1)  # Peaks
+    cam.gain.put(100 + 100 * np.random.random())
+    cam.offset.put(10 * np.random.random())
+    cam.noise.put(20 * np.random.random())
+    cam.peak_start.peak_start_x.put(200 + 500 * np.random.random())
+    cam.peak_start.peak_start_y.put(200 + 500 * np.random.random())
+    cam.peak_width.peak_width_x.put(10 + 100 * np.random.random())
+    cam.peak_width.peak_width_y.put(10 + 100 * np.random.random())
+    cam.peak_variation.put(0.5 + 20 * np.random.random())
+
 
 def dither_ad_off():
     # select: 0 = off (Passive)
     calcs.calc9.scanning_rate.put(0)
     calcs.calc10.scanning_rate.put(0)
 
+
 def dither_ad_on(select=6):
     # select: 6 = 1 Hz (1 second), 9 = 10 Hz (.1 second)
     calcs.calc9.scanning_rate.put(select)
     calcs.calc10.scanning_rate.put(select)
+
 
 def dither_ad_peak_position(magnitude=40):
     """

@@ -1,4 +1,3 @@
-
 """
 IOC statistics: synApps iocStats
 """
@@ -11,9 +10,11 @@ __all__ = [
 # fmt: on
 
 from ..session_logs import logger
+
 logger.info(__file__)
 
 from ophyd import Component, Device, EpicsSignalRO
+
 
 class IocInfoDevice(Device):
 

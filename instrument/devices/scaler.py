@@ -19,9 +19,7 @@ scaler1 = ScalerCH("ioc:scaler1", name="scaler1", labels=["scalers", "detectors"
 scaler1.wait_for_connection()
 
 if not len(scaler1.channels.chan01.chname.get()):
-    logger.info(
-        f"{scaler1.name} has no channel names.  Assigning channel names."
-    )
+    logger.info(f"{scaler1.name} has no channel names.  Assigning channel names.")
     scaler1.channels.chan01.chname.put("timebase")
     scaler1.channels.chan02.chname.put("I0")
     scaler1.channels.chan03.chname.put("scint")
