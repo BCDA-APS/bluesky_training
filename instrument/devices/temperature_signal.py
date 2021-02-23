@@ -25,7 +25,7 @@ class MyPvPositioner(PVPositioner):
     readback = Component(EpicsSignalRO, ".VAL")
     done = Component(Signal, value=True)
     done_value = True
-    tolerance = Component(Signal, value=1)
+    tolerance = Component(EpicsSignal, ".E")
 
     def cb_done(self, *args, **kwargs):
         diff = self.readback.get() - self.setpoint.get()
@@ -56,7 +56,7 @@ class MyPvPositioner(PVPositioner):
         self.readback.subscribe(self.cb_done)
         self.setpoint.subscribe(self.cb_done)
 
-    def setup_temperature(self, setpoint=None, noise=2, rate=6, tol=1, limiter=2):
+    def setup_temperature(self, setpoint=None, noise=2, rate=6, tol=1, max_change=2):
         """
         Setup the swait record with new random numbers.
 
@@ -69,14 +69,14 @@ class MyPvPositioner(PVPositioner):
         if setpoint is not None:
             tcalc.channels.B.input_value.put(setpoint)
         tcalc.channels.C.input_value.put(noise)
-        tcalc.channels.D.input_value.put(limiter)
+        tcalc.channels.D.input_value.put(max_change)
+        tcalc.channels.E.input_value.put(tol)
         tcalc.scanning_rate.put(rate)  # 1 second
         tcalc.calculation.put("A+min(D,(B-A))*RNDM+2*C*(RNDM-0.5)")
-        self.tolerance.put(tol)
 
 
 temperature = MyPvPositioner(
     "ioc:userCalc8", name="temperature", limits=(-20, 255), egu="C",
 )
 temperature.wait_for_connection()
-temperature.setup_temperature(setpoint=25, noise=0.5, rate=5, tol=1)
+temperature.setup_temperature(setpoint=25, noise=0.5, rate=5, tol=1, max_change=2)
