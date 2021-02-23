@@ -4,7 +4,7 @@ IOC statistics: synApps iocStats
 
 # fmt: off
 __all__ = [
-    "ioc_stats",
+    "gp_stats",
     # "ad_stats", 
 ]
 # fmt: on
@@ -22,7 +22,7 @@ class IocInfoDevice(Device):
     uptime = Component(EpicsSignalRO, ":UPTIME")
 
 
-ioc_stats = IocInfoDevice("ioc:", name="ioc_stats")
+gp_stats = IocInfoDevice("gp:", name="gp_stats")
 
 # Too bad, this ADSimDetector does not have iocStats
 # ad_stats = IocInfoDevice("ad:", name="ad_stats")

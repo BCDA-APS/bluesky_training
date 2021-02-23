@@ -114,7 +114,7 @@ class MyPvPositioner(PVPositioner):
 
 
 temperature = MyPvPositioner(
-    "ioc:userCalc8", name="temperature", limits=(-20, 255), egu="C",
+    "gp:userCalc8", name="temperature", limits=(-20, 255), egu="C",
 )
 temperature.wait_for_connection()
 temperature.setup_temperature(

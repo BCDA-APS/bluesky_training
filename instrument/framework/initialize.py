@@ -118,5 +118,5 @@ bec.disable_baseline()
 
 # set default timeout for all EpicsSignal connections & communications
 EpicsSignalBase.set_defaults(
-    auto_monitor=True, timeout=60, write_timeout=60, connection_timeout=5,
+    auto_monitor=True, timeout=60, write_timeout=60, connection_timeout=15,
 )
