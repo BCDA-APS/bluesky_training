@@ -14,8 +14,6 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..devices import calcouts
-from ..devices import calcs
 from ..devices import change_noisy_parameters
 from ..devices import m1
 from ..devices import noisy
@@ -23,8 +21,6 @@ from ..framework import bec
 from ..framework import bp
 from ..framework import peaks
 from ..framework import RE
-from ..framework import sd
-from bluesky import preprocessors as bpp
 import apstools.utils
 import pyRestTable
 
@@ -95,10 +91,6 @@ def example_findpeak(number_of_scans=4, number_of_points=23):
     for row in results:
         tbl.addRow(row)
     logger.info("iterative results:\n%s", str(tbl))
-
-
-sd.baseline.append(calcs)
-sd.baseline.append(calcouts)
 
 
 def repeat_findpeak(iters=1):
