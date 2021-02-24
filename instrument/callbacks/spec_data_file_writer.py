@@ -17,7 +17,7 @@ import apstools.utils
 import datetime
 import os
 
-from .initialize import RE, callback_db
+from ..framework import RE, callback_db
 
 # write scans to SPEC data file
 specwriter = apstools.filewriters.SpecWriterCallback()

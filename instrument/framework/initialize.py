@@ -81,7 +81,9 @@ if old_md is not None:
 callback_db = {}
 
 # Connect with our mongodb database
-db = databroker.catalog["class_2021_03"].v1
+catalog_name = "class_2021_03"
+db = databroker.catalog[catalog_name].v1
+logger.info(f"using databroker catalog '{catalog_name}'")
 
 # Subscribe metadatastore to documents.
 # If this is removed, data is not saved to metadatastore.
