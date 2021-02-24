@@ -4,6 +4,8 @@
 
 **Notebooks**
 
+NOTE: 2021-02-23 - These notebooks are all under construction.
+
 1. [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/master/describe_instrument.ipynb)
 1. [Command Review](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/master/command_review.ipynb)
 1. [Count the scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/master/count_scaler.ipynb)
