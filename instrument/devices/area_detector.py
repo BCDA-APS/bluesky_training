@@ -110,7 +110,7 @@ def dither_ad_peak_position(magnitude=40):
 
 
 adsimdet = MySimDetector("ad:", name="adsimdet", labels=("area_detector",))
-adsimdet.wait_for_connection()
+adsimdet.wait_for_connection(timeout=15)
 adsimdet.hdf1.create_directory.put(-5)
 
 adsimdet.cam.stage_sigs["image_mode"] = "Single"

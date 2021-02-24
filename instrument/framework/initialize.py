@@ -92,8 +92,8 @@ sd = SupplementalData()
 RE.preprocessors.append(sd)
 
 # Add a progress bar.
-pbar_manager = ProgressBarManager()
-RE.waiting_hook = pbar_manager
+# pbar_manager = ProgressBarManager()
+# RE.waiting_hook = pbar_manager
 
 # Register bluesky IPython magics.
 get_ipython().register_magics(BlueskyMagics)
