@@ -37,28 +37,26 @@ class MyPvPositioner(PVPositioner):
     tolerance = Component(EpicsSignal, ".E")
     report_dmov_changes = Component(Signal, value=True, kind="omitted")
 
-    def cb_done(self, *args, **kwargs):
+    def cb_readback(self, *args, **kwargs):
         """
-        Called when either setpoint or readback change (EPICS CA monitor event).
+        Called when readback changes (EPICS CA monitor event).
         """
-        # fmt: off
-        if (
-            kwargs.get("obj") is not None 
-            and
-            kwargs["obj"].name == self.setpoint.name
-        ):
-            # When the setpoint is changed, force done=False.
-            # For any move, done must go != done_value, then back to done_value (True).
-            # Without this part, a small move (within tolerance) will not return.
-            # Next update of readback will compute self.done.
-            self.done.put(not self.done_value)
-            return
-        # fmt: on
         diff = self.readback.get() - self.setpoint.get()
         dmov = abs(diff) <= self.tolerance.get()
         if self.report_dmov_changes.get() and dmov != self.done.get():
             logger.debug(f"{self.name} reached: {dmov}")
         self.done.put(dmov)
+
+    def cb_setpoint(self, *args, **kwargs):
+        """
+        Called when setpoint changes (EPICS CA monitor event).
+
+        When the setpoint is changed, force done=False.  For any move, 
+        done must go != done_value, then back to done_value (True).
+        Without this response, a small move (within tolerance) will not return.
+        Next update of readback will compute self.done.
+        """
+        self.done.put(not self.done_value)
 
     def __init__(
         self,
@@ -82,8 +80,8 @@ class MyPvPositioner(PVPositioner):
             egu=egu,
             **kwargs,
         )
-        self.readback.subscribe(self.cb_done)
-        self.setpoint.subscribe(self.cb_done)
+        self.readback.subscribe(self.cb_readback)
+        self.setpoint.subscribe(self.cb_setpoint)
 
     def setup_temperature(
         self,
