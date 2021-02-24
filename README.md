@@ -18,8 +18,8 @@ NOTE: 2021-02-23 - These notebooks are all under construction.
 name | URL
 --- | ---
 Bluesky Framework | https://blueskyproject.io/
-bluesky| https://blueskyproject.io/bluesky
-ophyd| https://blueskyproject.io/ophyd
-databroker| https://blueskyproject.io/databroker
-apstools| https://apstools.readthedocs.io/
-APS instruments| https://github.com/BCDA-APS/use_bluesky/wiki/
+bluesky | https://blueskyproject.io/bluesky
+ophyd | https://blueskyproject.io/ophyd
+databroker | https://blueskyproject.io/databroker
+apstools | https://apstools.readthedocs.io/
+APS instruments | https://github.com/BCDA-APS/use_bluesky/wiki/
