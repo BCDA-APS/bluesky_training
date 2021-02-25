@@ -1,9 +1,6 @@
 
 """
-start bluesky in IPython session for poof
+start bluesky in IPython session
 """
 
 from instrument.collection import *
-
-# show_ophyd_symbols()
-# print_RE_md(printing=False)
