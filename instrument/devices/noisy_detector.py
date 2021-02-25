@@ -18,7 +18,7 @@ import apstools.devices
 import numpy
 
 
-def change_noisy_parameters(fwhm=0.015, peak=10000, noise=0.05):
+def change_noisy_parameters(fwhm=0.15, peak=10000, noise=0.08):
     """
     Setup the swait record with new random numbers.
 
@@ -31,7 +31,7 @@ def change_noisy_parameters(fwhm=0.015, peak=10000, noise=0.05):
         center=2 * numpy.random.random() - 1,
         width=fwhm * numpy.random.random(),
         scale=peak * (9 + numpy.random.random()),
-        noise=noise,
+        noise=noise * (0.01 + numpy.random.random()),
     )
 
 

@@ -5,8 +5,8 @@ Find the peak of noisy v. m1 in the range of +/- 2.
 """
 
 __all__ = [
-    "example1",
-    "example_findpeak",
+    "two_pass_scan",
+    "findpeak_multipass",
     "repeat_findpeak",
 ]
 
@@ -25,7 +25,7 @@ import apstools.utils
 import pyRestTable
 
 
-def example1(md=None):
+def two_pass_scan(md=None):
     """
     Find the peak of noisy v. m1 in the range of +/- 2.
 
@@ -36,19 +36,10 @@ def example1(md=None):
     This is a 2 scan procedure.  First scan passes through 
     the full range.  Second scan is centered on the peak
     and width of the first scan.
-
-    ::
-
-        RE(bp.scan([noisy], m1, -2.1, 2.1, 23))
-        sig = peaks["fwhm"]["noisy"]; m1.move(peaks["cen"]["noisy"]); RE(bp.rel_scan([noisy], m1, -sig, +sig, 23))
-    
-    1. replace ``RE()`` with ``yield from ``
-    2. break lines at ``;``
-    3. import objects as needed
-    4. add this plan's name to ``__all__`` list at top
-    5. changed bp.scan to bp.rel_scan
     """
     md = md or {}
+
+    change_noisy_parameters()
 
     sig = 2
     m1.move(0)
@@ -63,7 +54,7 @@ def example1(md=None):
     m1.move(peaks["cen"]["noisy"])
 
 
-def example_findpeak(number_of_scans=4, number_of_points=23, md=None):
+def findpeak_multipass(number_of_scans=4, number_of_points=23, md=None):
     """
     find peak of noisy v. m1 by repeated scans with refinement
 
@@ -92,6 +83,7 @@ def example_findpeak(number_of_scans=4, number_of_points=23, md=None):
         fwhm = peaks["fwhm"]["noisy"]
         cen = peaks["cen"]["noisy"]
         results.append((RE.md["scan_id"], cen, fwhm))
+    m1.move(cen)
 
     tbl = pyRestTable.Table()
     tbl.labels = "scan_id center FWHM".split()
@@ -109,6 +101,6 @@ def repeat_findpeak(iters=1, md=None):
         md["iteration"] = _i+1
         apstools.utils.trim_plot_lines(bec, 4, m1, noisy)
         change_noisy_parameters()
-        yield from example_findpeak(md=md)
+        yield from findpeak_multipass(md=md)
         logger.info("Finished #%d of %d iterations", _i + 1, iters)
     # bec.enable_plots()
