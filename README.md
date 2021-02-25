@@ -8,7 +8,7 @@
 * [Access data later, after the measurement](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/after_measurement.ipynb)
 * [Count the scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/count_scaler.ipynb)
 
-NOTE: 2021-02-24 - These notebooks are  under construction.
+NOTE: 2021-02-24 - These notebooks are under construction.
 
 * [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/describe_instrument.ipynb)
 * [Command Review](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/command_review.ipynb)
