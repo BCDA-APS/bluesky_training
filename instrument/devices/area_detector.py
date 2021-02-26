@@ -16,8 +16,8 @@ logger.info(__file__)
 
 from .calculation_records import calcs
 from ophyd import ADComponent
-from ophyd import EpicsSignalWithRBV
 from ophyd import DetectorBase
+from ophyd import EpicsSignalWithRBV
 from ophyd import ImagePlugin
 from ophyd import SimDetectorCam
 from ophyd import SingleTrigger
@@ -28,7 +28,16 @@ import os
 
 AD_IOC_FILES_ROOT = "/"
 BLUESKY_FILES_ROOT = "/tmp/docker_ioc/iocad"
-TEST_IMAGE_DIR = "tmp/adsimdet/%Y/%m/%d/"
+# IOC_IMAGE_DIR = "/tmp/adsimdet/%Y/%m/%d/"
+IOC_IMAGE_DIR = "/tmp/images/"
+AD_IOC_PATH = os.path.join(
+    AD_IOC_FILES_ROOT,
+    IOC_IMAGE_DIR.lstrip("/")
+)
+BLUESKY_PATH = os.path.join(
+    BLUESKY_FILES_ROOT,
+    IOC_IMAGE_DIR.lstrip("/")
+)
 
 
 class MyFixedCam(SimDetectorCam):
@@ -48,8 +57,8 @@ class MySimDetector(SingleTrigger, DetectorBase):
     hdf1 = ADComponent(
         MyHDF5Plugin,
         "HDF1:",
-        write_path_template=os.path.join(AD_IOC_FILES_ROOT, TEST_IMAGE_DIR),
-        read_path_template=os.path.join(BLUESKY_FILES_ROOT, TEST_IMAGE_DIR),
+        write_path_template=AD_IOC_PATH,
+        read_path_template=BLUESKY_PATH,
     )
 
 
@@ -111,6 +120,9 @@ def dither_ad_peak_position(magnitude=40):
 
 adsimdet = MySimDetector("ad:", name="adsimdet", labels=("area_detector",))
 adsimdet.wait_for_connection(timeout=15)
+
+adsimdet.read_attrs.append("hdf1")
+
 adsimdet.hdf1.create_directory.put(-5)
 
 adsimdet.cam.stage_sigs["image_mode"] = "Single"
@@ -120,9 +132,6 @@ adsimdet.cam.stage_sigs["acquire_period"] = 0.105
 adsimdet.hdf1.stage_sigs["lazy_open"] = 1
 adsimdet.hdf1.stage_sigs["compression"] = "None"
 adsimdet.hdf1.stage_sigs["file_template"] = "%s%s_%3.3d.h5"
-# move capture to the last item
-del adsimdet.hdf1.stage_sigs["capture"]
-adsimdet.hdf1.stage_sigs["capture"] = 1
 
 # WORKAROUND
 # Even with `lazy_open=1`, ophyd checks if the area
