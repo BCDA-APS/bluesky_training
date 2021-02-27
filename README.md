@@ -2,7 +2,7 @@
 
 [Instrument package](https://github.com/BCDA-APS/use_bluesky/tree/main/instrument_package_guide.md) for use with the Bluesky framework at beam line BCDA, class.
 
-**Notebooks**
+## Notebooks
 
 * [Watch a temperature](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/watch_temperature.ipynb)
 * [Access data later, after the measurement](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/after_measurement.ipynb)
@@ -16,8 +16,11 @@ NOTE: 2021-02-24 - These notebooks are under construction.
 
 * [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/describe_instrument.ipynb)
 
+## Installation
 
-**References**
+Instructions are available for [installation on Linux workstations](install.md).  The steps are similar on Mac OS and Windows but details are not provided here.
+
+## References
 
 name | URL
 --- | ---
