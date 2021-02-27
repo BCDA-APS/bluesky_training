@@ -1,9 +1,9 @@
 """
-peak_analysis
+analyze an image frame
 """
 
 __all__ = [
-    "analyze_peak",
+    "analyze_image",
 ]
 
 from ..session_logs import logger
@@ -11,6 +11,7 @@ from ..session_logs import logger
 logger.info(__file__)
 
 import numpy as np
+import pyRestTable
 from scipy.ndimage.measurements import center_of_mass
 from scipy.integrate import trapz
 
@@ -69,11 +70,32 @@ def analyze_peak(y_arr, x_arr=None):
             fwhm = np.abs(crossings[-1] - crossings[0], dtype=float)
 
     return dict(
-        center_position=center_position,
         centroid_position=centroid_position,
-        maximum=maximum_position,
-        minimum=minimum_position,
-        crossings=crossings,
         fwhm=fwhm,
+        # half_max=mid,
+        crossings=crossings,
+        maximum=maximum_position,
+        center_position=center_position,
+        minimum=minimum_position,
         # stdDev=stdDev,
     )
+
+
+def analyze_image(image):
+    horizontal = analyze_peak(image.sum(axis=0))
+    vertical = analyze_peak(image.sum(axis=1))
+
+    table = pyRestTable.Table()
+    table.addLabel("measure")
+    table.addLabel("vertical (dim_1)")
+    table.addLabel("horizontal (dim_2)")
+    for key in horizontal.keys():
+        table.addRow(
+            (
+                key,
+                vertical[key],
+                horizontal[key],
+            )
+        )
+
+    print(table)

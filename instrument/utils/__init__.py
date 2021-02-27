@@ -2,4 +2,4 @@
 any extra commands or utility functions here
 """
 
-from .peak_analysis import *
+from .image_analysis import *
