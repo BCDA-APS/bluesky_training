@@ -19,7 +19,7 @@ from ophyd import Component, Device, EpicsSignalRO
 class IocInfoDevice(Device):
 
     iso8601 = Component(EpicsSignalRO, "iso8601")
-    uptime = Component(EpicsSignalRO, ":UPTIME")
+    uptime = Component(EpicsSignalRO, "UPTIME")
 
 
 gp_stats = IocInfoDevice("gp:", name="gp_stats")
