@@ -49,11 +49,15 @@ class MyHDF5Plugin(FileStoreHDF5IterativeWrite, HDF5Plugin_V34):
     pass
 
 
+class MyFixedImagePlugin(ImagePlugin):
+    pool_max_buffers = None
+
+
 class MySimDetector(SingleTrigger, DetectorBase):
     """ADSimDetector"""
 
     cam = ADComponent(MyFixedCam, "cam1:")
-    image = ADComponent(ImagePlugin, "image1:")
+    image = ADComponent(MyFixedImagePlugin, "image1:")
     hdf1 = ADComponent(
         MyHDF5Plugin,
         "HDF1:",
