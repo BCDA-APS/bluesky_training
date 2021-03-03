@@ -1,6 +1,6 @@
 # README.md
 
-[Instrument package](https://github.com/BCDA-APS/use_bluesky/tree/main/instrument_package_guide.md) for use with the Bluesky framework at beam line BCDA, class.
+This repository, via Jupyter notebooks, demonstrates use of the Bluesky framework at a typical beam line scenario for a BCDA-sponsored class.
 
 ## Notebooks
 
