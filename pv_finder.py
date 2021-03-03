@@ -33,6 +33,10 @@ _registry = None
 
 
 class PVRegistry:
+    """
+    Cross-reference EPICS PVs with ophyd EpicsSignalBase objects.
+    """
+
     def __init__(self):
         """
         Search ophyd objects for PV names.
@@ -41,7 +45,7 @@ class PVRegistry:
         (and defaults to the global namespace if the former
         cannot be obtained).
         """
-        self._db = defaultdict(list)
+        self._db = defaultdict(lambda: defaultdict(list))
         self._known_device_names = []
         if (g := ipython_shell_namespace()) == 0:
             # fallback
@@ -82,9 +86,8 @@ class PVRegistry:
 
     def _register_signal(self, signal, pv, mode):
         """Register a signal with the given mode."""
-        key = f"{mode}: {pv}"
-        if (fdn := full_dotted_name(signal)) not in self._db[key]:
-            self._db[key].append(fdn)
+        if (fdn := full_dotted_name(signal)) not in self._db[pv][mode]:
+            self._db[pv][mode].append(fdn)
 
     def _signal_processor(self, signal):
         """Register a signal's read & write PVs."""
@@ -98,7 +101,7 @@ class PVRegistry:
             raise ValueError(
                 f"Incorrect mode given ({mode}." "  Must be either `R` or `W`."
             )
-        return self._db[f"{mode}: {pvname}"]
+        return self._db[pvname][mode]
 
     def search(self, pvname):
         """Search for PV in both read & write modes."""
@@ -108,7 +111,7 @@ class PVRegistry:
         )
 
 
-def findpv(pvname):
+def findpv(pvname, force_rebuild=False):
     """
     Find all ophyd objects associated with the given EPICS PV.
 
@@ -117,6 +120,10 @@ def findpv(pvname):
     pvname
         *str* :
         EPICS PV name to search
+    force_rebuild
+        *bool* :
+        If ``True``, rebuild the internal registry that maps
+        EPICS PV names to ophyd objects.
 
     RETURNS
 
@@ -135,6 +142,6 @@ def findpv(pvname):
 
     """
     global _registry
-    if _registry is None:
+    if _registry is None or force_rebuild:
         _registry = PVRegistry()
     return _registry.search(pvname)
