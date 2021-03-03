@@ -29,11 +29,10 @@ from ophyd import Device
 from ophyd.signal import EpicsSignalBase
 
 
-_known_device_names = []
 _registry = None
 
-class PVRegistry:
 
+class PVRegistry:
     def __init__(self):
         """
         Search ophyd objects for PV names.
@@ -43,6 +42,7 @@ class PVRegistry:
         cannot be obtained).
         """
         self._db = defaultdict(list)
+        self._known_device_names = []
         if (g := ipython_shell_namespace()) == 0:
             # fallback
             g = globals()
@@ -68,8 +68,8 @@ class PVRegistry:
                 self._signal_processor(v)
             elif isinstance(v, Device):
                 # print("Device", v.name)
-                if v.name not in _known_device_names:
-                    _known_device_names.append(v.name)
+                if v.name not in self._known_device_names:
+                    self._known_device_names.append(v.name)
                     self._ophyd_epicsobject_walker(v)
 
     def _ref_dict(self, parent, key):
@@ -96,8 +96,7 @@ class PVRegistry:
         """Search for PV in specified mode."""
         if mode not in ["R", "W"]:
             raise ValueError(
-                f"Incorrect mode given ({mode}."
-                "  Must be either `R` or `W`."
+                f"Incorrect mode given ({mode}." "  Must be either `R` or `W`."
             )
         return self._db[f"{mode}: {pvname}"]
 
@@ -108,7 +107,8 @@ class PVRegistry:
             write=self.search_by_mode(pvname, "W"),
         )
 
-def findpv(pvname, force_rebuild=False):
+
+def findpv(pvname):
     """
     Find all ophyd objects associated with the given EPICS PV.
 
@@ -117,10 +117,6 @@ def findpv(pvname, force_rebuild=False):
     pvname
         *str* :
         EPICS PV name to search
-    force_rebuild
-        *bool* :
-        If ``True``, rebuild the internal registry that maps
-        EPICS PV names to ophyd objects.
 
     RETURNS
 
