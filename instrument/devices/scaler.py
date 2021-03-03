@@ -20,7 +20,12 @@ scaler1 = ScalerCH("gp:scaler1", name="scaler1", labels=["scalers", "detectors"]
 scaler1.wait_for_connection()
 
 if not len(scaler1.channels.chan01.chname.get()):
-    logger.info(f"{scaler1.name} has no channel names.  Assigning channel names.")
+    # CAUTION: define channel names JUST for this simulation.
+    # For a real instrument, the names are assigned when the 
+    # detector pulse cables are connected to the scaler channels.
+    logger.info(
+        f"{scaler1.name} has no channel names.  Assigning channel names."
+    )
     scaler1.channels.chan01.chname.put("timebase")
     scaler1.channels.chan02.chname.put("I0")
     scaler1.channels.chan03.chname.put("scint")
