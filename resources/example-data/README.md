@@ -1,10 +1,22 @@
 # example-data
 
-**<font color="red">NOTE</font>**: This page is under construction.
+**Objective**
 
-Previously, we collected some data using our instrument.  From the most
-recent console log file, we can see the commands used to collect the
-most recent scans:
+* Extract data from the Bluesky data collection database.
+* Copy to a different computer.
+* Repeat previous analyses of 2-D data.
+
+- [example-data](#example-data)
+  - [Pack: Extract measurements from the `databroker`](#pack-extract-measurements-from-the-databroker)
+    - [compressed archive file](#compressed-archive-file)
+  - [Unpack the data](#unpack-the-data)
+  - [Load the data with databroker](#load-the-data-with-databroker)
+
+## Pack: Extract measurements from the `databroker`
+
+Previously, we collected a variety of measurements (bluesky *runs*)
+using our simulated instrument. From a console log file, we can see the
+commands used to collect the most recent scans:
 
 ```python
 RE(findpeak_multipass(md=dict(motive="demo")))
@@ -29,8 +41,8 @@ RE(bp.scan([noisy], m1, 0.944, 0.968, 21, md=dict(point_density="very fine")))
 #[Out]# ('a8bcac2d-d3b5-47e8-aa2d-19525ea992d5',)
 ```
 
-From another console log file, we see the command to collect one of the
-images:
+From another console log file, we see the `count` command was used to
+collect one of the images:
 
 ```python
 # Wed, 03 Mar 2021 10:01:31
@@ -38,7 +50,9 @@ RE(bp.count([adsimdet], md={"motive": "locate_image_peak"}))
 #[Out]# ('eb1924b3-b051-4709-8d38-98a4bce487fc',)
 ```
 
-The runs that we collected used three different plan commands:
+The runs that we collected used three different plan commands from
+[`bluesky.plans`](https://blueskyproject.io/bluesky/plans.html) (aliased
+to `bp`):
 
 command | type of measurement
 :--- | :---
@@ -47,13 +61,13 @@ command | type of measurement
 `bp.scan` | temperature scan
 `bp.rel_scan` | 1-D scan of `noisy` v. `m1`
 
-We get all collected measurements since 2021-02-22 (with this linux
+We collected all measurements since 2021-02-22 (with this linux
 command):
 
     databroker-pack class_2021_03 -q "TimeRange(since='2021-02-22')" /tmp/class_data_examples  --copy-external
 
 **NOTE**: For the older area detector image files, the (HDF5) image files were no
-longer available on disk so the packing failed for just those runs.  Of
+longer available on disk so the *packing* failed for just those runs.  Of
 the 59 runs collected in that interval, 18 were not able to pack since
 the image files had been deleted from disk.
 
@@ -106,36 +120,34 @@ file | description
 
 </details>
 
-Once the runs are packed, we prepared the compressed archive file
-[`class_data_examples.tgz`](class_data_examples.tgz):
+### compressed archive file
+
+Once the runs are packed, prepare a compressed archive file
+[`class_data_examples.tgz`](class_data_examples.tgz) using the Windows
+*zip* command or the Linux *tar* command:
 
     cd /tmp
     tar czf class_data_examples.tgz class_data_examples/
 
 ## Unpack the data
 
-https://blueskyproject.io/databroker-pack/usage.html#unpacking-a-packed-catalog
+Copy the compressed archive file to the data-analysis computer.  The
+data analysis computer does not need the `bluesky` or `ophyd` packages;
+those are for data collection and are note needed for analysis.
 
-```
-mkdir /tmp/sandbox
-cd /tmp/sandbox
-tar xzf /tmp/class_data_examples.tgz
-```
+Unpack the `class_data_examples` folder to the desired location on the
+data analysis computer.  Once the [unpack
+operation](https://blueskyproject.io/databroker-pack/usage.html#unpacking-a-packed-catalog)
+has been run, this folder should not be moved.
 
-We'll create a new catalog called: `class_example_data`
+We'll demonstrate *unpacking* on a Windows 10 workstation (with an
+existing conda environment for bluesky already installed):
 
-```
-databroker-unpack inplace /tmp/sandbox/class_data_examples class_example_data
-```
-
-This worked on Windows (with an existing conda environment for bluesky already installed):
-
-  (bluesky_2021_1) C:\Users\Pete\Documents\projects\BCDA-APS\bluesky_instrument_training>databroker-unpack inplace C:\Users\Pete\Downloads\class_data_examples class_example_daDownloads\class_data_examples class_example_data
-  Placed configuration file at C:\Users\Pete\AppData\Local\intake\intake\databroker_unpack_class_example_data.yml
+    (bluesky_2021_1) C:\> databroker-unpack inplace C:\Users\Pete\Downloads\class_data_examples class_data_examples
 
 The command finished with this output:
 
-    Placed configuration file at /home/prjemian/.local/share/intake/databroker_unpack_class_example_data.yml
+    Placed configuration file at C:\Users\Pete\AppData\Local\intake\intake\databroker_unpack_class_example_data.yml
 
 ## Load the data with databroker
 
