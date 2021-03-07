@@ -1,5 +1,7 @@
 # example-data
 
+**<font color="red">NOTE</font>**: This page is under construction.
+
 Previously, we collected some data using our instrument.  From the most
 recent console log file, we can see the commands used to collect the
 most recent scans:
