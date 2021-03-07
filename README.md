@@ -12,7 +12,7 @@ This repository, via Jupyter notebooks, demonstrates use of the Bluesky framewor
 * [Locate peak on 2-D area detector image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/locate_image_peak.ipynb)
 * [Command Review](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/command_review.ipynb)
 * [Copy data to another workstation](/resources/example-data/README.md)
-* [Analyze 2-D data on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/resources/example-data/demonstration.ipynb)
+* [Analyze 2-D data on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/resources/example-data/demonstrate.ipynb)
 
 
 ## Installation
