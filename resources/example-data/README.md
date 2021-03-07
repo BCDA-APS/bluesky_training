@@ -152,4 +152,5 @@ The command finished with this output:
 ## Load the data with databroker
 
 Start an ipython console session or Jupyter lab notebook.  We'll
-demonstrate with the [`demonstrate.ipynb`](demonstrate.ipynb) notebook.
+demonstrate with the [`demonstrate.ipynb`](demonstrate.ipynb) 
+[notebook](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/resources/example-data/demonstrate.ipynb).
