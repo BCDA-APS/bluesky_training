@@ -152,4 +152,4 @@ The command finished with this output:
 ## Load the data with databroker
 
 Start an ipython console session or Jupyter lab notebook.  We'll
-demonstrate with the [`demonstrate.ipynb``](demonstrate.ipynb) notebook.
+demonstrate with the [`demonstrate.ipynb`](demonstrate.ipynb) notebook.
