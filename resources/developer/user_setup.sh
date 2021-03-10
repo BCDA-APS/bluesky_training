@@ -79,5 +79,5 @@ EOF
 # previously-collected data for analysis
 
 cd ~
-unzip /home/class_data_examples.zip
+# unzip /home/class_data_examples.zip
 databroker-unpack inplace "${HOME}/class_data_examples" class_data_examples
