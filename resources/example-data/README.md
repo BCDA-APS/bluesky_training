@@ -123,11 +123,11 @@ file | description
 ### compressed archive file
 
 Once the runs are packed, prepare a compressed archive file
-[`class_data_examples.tgz`](class_data_examples.tgz) using the Windows
-*zip* command or the Linux *tar* command:
+[`class_data_examples.zip`](class_data_examples.zip) using the Windows
+*zip* command (or the Linux *tar* and *gzip* commands):
 
     cd /tmp
-    tar czf class_data_examples.tgz class_data_examples/
+    unzip class_data_examples.tgz class_data_examples/
 
 ## Unpack the data
 
