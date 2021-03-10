@@ -80,4 +80,4 @@ EOF
 
 cd ~
 # unzip /home/class_data_examples.zip
-databroker-unpack inplace "${HOME}/class_data_examples" class_data_examples
+databroker-unpack inplace "/opt/class_data_examples" class_data_examples
