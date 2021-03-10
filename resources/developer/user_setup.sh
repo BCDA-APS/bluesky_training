@@ -38,7 +38,7 @@ export GP_IOC_PREFIX="gp${USER}:"
 export AD_IOC_PREFIX="ad${USER}:"
 
 EOF
-cat /home/add2bash.rc >> ~/.bash_aliases
+cat /home/add2bash.rc > ~/.bash_aliases
 
 ############################################################
 # IPython
@@ -68,7 +68,7 @@ popd
 # databroker configuration YAML file
 
 mkdir -p ~/.local/share/intake
-cat >> ~/.local/share/intake/databroker_mongodb.yml << EOF
+cat > ~/.local/share/intake/databroker_mongodb.yml << EOF
 sources:
   class_2021_03:
     args:
@@ -81,5 +81,5 @@ EOF
 # previously-collected data for analysis
 
 cd ~
-# unzip /home/class_data_examples.zip
+/bin/rm -f ~/.local/share/intake/databroker_unpack_class_data_examples.yml
 databroker-unpack inplace "/opt/class_data_examples" class_data_examples
