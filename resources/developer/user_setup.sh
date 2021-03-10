@@ -28,7 +28,7 @@
 
 . /opt/miniconda3/bin/activate class_2021_03
 
-mkdir ~/bin
+mkdir -p ~/bin
 
 # prefixes for GP and AD IOCs
 cat >> ~/.bash_aliases << EOF
