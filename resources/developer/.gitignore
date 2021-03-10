@@ -2,3 +2,4 @@ instrument.tar.gz
 blueskyStarter.sh
 environment.yml
 miniconda.sh
+*.zip

@@ -1,5 +1,5 @@
-# build started:  2021-03-09T19:52:41-06:00
-Sending build context to Docker daemon  94.27MB
+# build started:  2021-03-09T23:15:40-06:00
+Sending build context to Docker daemon    103MB
 Step 1/20 : FROM  prjemian/os_only-1.1
  ---> bd1d69e3644f
 Step 2/20 : LABEL version="1.1.0"       maintainer="prjemian <prjemian@gmail.com>"       Description="source: https://github.com/prjemian/epics-docker/"
@@ -14,80 +14,501 @@ Step 4/20 : WORKDIR /home
 Step 5/20 : CMD ["/bin/bash"]
  ---> Using cache
  ---> 520bdb49797d
-Step 6/20 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get -y install wget sudo less
+Step 6/20 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get -y install less sudo unzip wget
  ---> Using cache
- ---> 6fc8ce137440
+ ---> edc1b0147279
 Step 7/20 : RUN     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -     && echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
  ---> Using cache
- ---> b89e51ecea23
+ ---> 36e4f0179a3c
 Step 8/20 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb-org
  ---> Using cache
- ---> 3d396db1fb26
+ ---> 6aa4130959e1
 Step 9/20 : ADD https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d /etc/init.d/mongod
 
  ---> Using cache
- ---> 0c4224e0409c
+ ---> fb1b422834a1
 Step 10/20 : RUN     chmod +x /etc/init.d/mongod     && service mongod start     && service mongod status
  ---> Using cache
- ---> 8c350fe6b627
+ ---> fda41ebd1daa
 Step 11/20 : COPY miniconda.sh /root
  ---> Using cache
- ---> 368f0e7346b9
+ ---> 5cb47e9e38e7
 Step 12/20 : COPY environment.yml /opt
  ---> Using cache
- ---> 0c61f630ecb5
+ ---> 8692d701e98a
 Step 13/20 : RUN bash /root/miniconda.sh -b -p /opt/miniconda3
  ---> Using cache
- ---> 923271964b07
+ ---> 45d1f2918486
 Step 14/20 : RUN     export PATH=${PATH}:/opt/miniconda3/bin     && . /opt/miniconda3/bin/activate     && conda env create -f /opt/environment.yml     && conda env list
  ---> Using cache
- ---> 7ec96a1d4ed1
+ ---> bc15a1bb9df7
 Step 15/20 : ENV GP_IOC_PREFIX="gp:"
  ---> Using cache
- ---> d8c8c4860084
+ ---> 181f9366ecef
 Step 16/20 : ENV AD_IOC_PREFIX="ad:"
  ---> Using cache
- ---> c4025e0d5e9f
-Step 17/20 : COPY add2bash.rc user_setup.sh instrument.tar.gz blueskyStarter.sh /home/
- ---> a89f6f1c4747
+ ---> c7bbe59a4227
+Step 17/20 : COPY add2bash.rc user_setup.sh instrument.tar.gz blueskyStarter.sh class_data_examples.zip /home/
+ ---> 290606211f4e
 Step 18/20 : RUN cat /home/add2bash.rc >> /etc/skel/.bashrc
- ---> Running in 9f3cc7e86a1d
-Removing intermediate container 9f3cc7e86a1d
- ---> 9438cb68a3cb
+ ---> Running in ebe184417bf7
+Removing intermediate container ebe184417bf7
+ ---> 3c794410f3b6
 Step 19/20 : RUN     for u in test1 test2 test3 test4 test5; do         /usr/sbin/useradd -d /home/$u -m $u -p $u;         su -l -c /home/user_setup.sh - $u;     done
- ---> Running in 56ecf5dc3a36
-[91m/home/user_setup.sh: line 8: _developer_commands: command not found
-[0m[91m[ProfileCreate] Generating default config file: '/home/test1/.ipython-bluesky/profile_bluesky/ipython_config.py'
+ ---> Running in df58b1facb7b
+[91m[ProfileCreate] Generating default config file: '/home/test1/.ipython-bluesky/profile_bluesky/ipython_config.py'
 [0m[91m[ProfileCreate] Generating default config file: '/home/test1/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
 [0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
 ~/.ipython-bluesky/profile_bluesky/startup
-[91m/home/user_setup.sh: line 8: _developer_commands: command not found
-[0m[91m[ProfileCreate] Generating default config file: '/home/test2/.ipython-bluesky/profile_bluesky/ipython_config.py'
+Archive:  /home/class_data_examples.zip
+  inflating: class_data_examples/catalog.yml  
+   creating: class_data_examples/documents/
+  inflating: class_data_examples/documents/01013b8e-0927-407e-a246-3d341484ac8e.msgpack  
+  inflating: class_data_examples/documents/0401c919-d6e8-49b1-87c8-8a99b8d69356.msgpack  
+  inflating: class_data_examples/documents/0cfb3cc3-beb1-44e6-968c-ccd3852b7f24.msgpack  
+  inflating: class_data_examples/documents/0d5f561c-57a3-448b-8b4d-dcd1ec57420f.msgpack  
+  inflating: class_data_examples/documents/0eca468f-79bd-4999-ab7f-7dff7fad7048.msgpack  
+  inflating: class_data_examples/documents/1219f704-d776-4f77-bc10-0acaa205dc12.msgpack  
+  inflating: class_data_examples/documents/1da9f496-af64-4115-bcb9-8bf19515560a.msgpack  
+  inflating: class_data_examples/documents/1dbed4fc-1afe-4ff0-b71f-d57015b64723.msgpack  
+  inflating: class_data_examples/documents/2156695a-043c-48bd-9d02-36c526e59e29.msgpack  
+  inflating: class_data_examples/documents/2befeb8f-8428-4697-9568-466acbd18bb0.msgpack  
+  inflating: class_data_examples/documents/2c53015b-1b04-41a4-90a3-ffe7346f367c.msgpack  
+  inflating: class_data_examples/documents/2f50c663-6144-4e6b-a14b-9c472b0b2fc3.msgpack  
+  inflating: class_data_examples/documents/3132baf7-ab5d-4794-940b-6c0562e2b802.msgpack  
+  inflating: class_data_examples/documents/33296ab3-7464-46f8-baef-4919ceef6d69.msgpack  
+  inflating: class_data_examples/documents/361400d1-fb29-4b4d-9fa7-86e1b1f760e3.msgpack  
+  inflating: class_data_examples/documents/372f4d89-ed78-40c3-953b-028ac7c4a7b7.msgpack  
+  inflating: class_data_examples/documents/37d2c3bc-fbcb-4fc2-9997-def194b184b6.msgpack  
+  inflating: class_data_examples/documents/4705e974-7838-4fda-9dd3-116765e7a766.msgpack  
+  inflating: class_data_examples/documents/483efa40-3ace-4803-bf98-fd5c91e1255f.msgpack  
+  inflating: class_data_examples/documents/4fe01dd5-64de-431c-b389-5b4e730c5188.msgpack  
+  inflating: class_data_examples/documents/550ba458-d43a-4304-b211-91f207f6ca44.msgpack  
+  inflating: class_data_examples/documents/56bdfb2c-b2cb-4b75-a026-1f2f7b085b7d.msgpack  
+  inflating: class_data_examples/documents/56c2daed-df28-4034-b390-ed245e202e0b.msgpack  
+  inflating: class_data_examples/documents/6255bc83-6c85-48b5-9026-c887cc4c3c02.msgpack  
+  inflating: class_data_examples/documents/6bb9a4b8-61c7-4a9a-853a-338e8fae031c.msgpack  
+  inflating: class_data_examples/documents/75b01ca2-d521-4cb0-a4ab-ce26e1eb49a4.msgpack  
+  inflating: class_data_examples/documents/7a497331-959c-4f4b-8b6b-3a2b67626d6b.msgpack  
+  inflating: class_data_examples/documents/7e309ce3-043d-4545-a376-451956b5c2fe.msgpack  
+  inflating: class_data_examples/documents/7eff8cdf-6226-4ffb-908f-691a5f9c50a3.msgpack  
+  inflating: class_data_examples/documents/8253dc63-20a2-4099-a739-71fd3eaca7d0.msgpack  
+  inflating: class_data_examples/documents/857eed47-e943-4031-9cb6-6002b8121bc6.msgpack  
+  inflating: class_data_examples/documents/893c2d84-1938-429a-a4af-6cadf978301b.msgpack  
+  inflating: class_data_examples/documents/922b2f1c-de1b-40c1-89d9-2a6304a32748.msgpack  
+  inflating: class_data_examples/documents/950a22e4-734f-438b-a9d4-6727d905988c.msgpack  
+  inflating: class_data_examples/documents/9ff9c167-20c2-400b-a352-7946c6a4e8dd.msgpack  
+  inflating: class_data_examples/documents/a1c743d5-b22b-42a4-a812-0d02d01f79b2.msgpack  
+  inflating: class_data_examples/documents/a748a3ac-3eea-4dde-a78f-0bf79fcf966f.msgpack  
+  inflating: class_data_examples/documents/a8bcac2d-d3b5-47e8-aa2d-19525ea992d5.msgpack  
+  inflating: class_data_examples/documents/aa13d7d6-79e0-40ed-a432-2f411c6bb855.msgpack  
+  inflating: class_data_examples/documents/abf25cac-1c26-431f-9757-0547abc90d79.msgpack  
+  inflating: class_data_examples/documents/b322f081-ba4f-42c2-a2db-f85dd031eff7.msgpack  
+  inflating: class_data_examples/documents/b4e4cbbb-a4b1-4146-aea5-ba8bc7ad7b76.msgpack  
+  inflating: class_data_examples/documents/bdf47b3a-c34a-411e-8fd3-94f8e08c2e50.msgpack  
+  inflating: class_data_examples/documents/c0835cae-3e7c-4ae4-8fbc-5ff8c4f1bc66.msgpack  
+  inflating: class_data_examples/documents/c49f2048-f318-4d8b-8a41-feda20e7981c.msgpack  
+  inflating: class_data_examples/documents/c5f59314-8827-42dc-887b-9430dde84eea.msgpack  
+  inflating: class_data_examples/documents/c988131f-2ede-4fb2-a316-e1eb77cb6621.msgpack  
+  inflating: class_data_examples/documents/d19530f7-1ca6-4c02-a83b-229b3d92b6d1.msgpack  
+  inflating: class_data_examples/documents/daaebeb6-84de-41de-bc64-a34323d55072.msgpack  
+  inflating: class_data_examples/documents/e50cb383-7e75-47e0-9b97-9b7bf034900b.msgpack  
+  inflating: class_data_examples/documents/e6938705-039f-4c51-9ac2-d497426c000c.msgpack  
+  inflating: class_data_examples/documents/eb1924b3-b051-4709-8d38-98a4bce487fc.msgpack  
+  inflating: class_data_examples/documents/ebf8703c-465c-415f-8e8a-e56712c185d4.msgpack  
+  inflating: class_data_examples/documents/ec4915d9-f6f2-4b8d-85eb-cf4b3556b2f5.msgpack  
+  inflating: class_data_examples/documents/ede0c75b-db74-4b18-9b9e-ad80240a4225.msgpack  
+  inflating: class_data_examples/documents/f0b4614a-9508-406d-955e-be4f5410f1db.msgpack  
+  inflating: class_data_examples/documents/f5825b65-ff95-487f-a67a-736e18b19247.msgpack  
+  inflating: class_data_examples/documents/f7b96eb0-8dd4-49a7-a6a4-d50e25feb8dd.msgpack  
+  inflating: class_data_examples/documents/fd39b228-6086-472c-afd4-affc7c2ac819.msgpack  
+  inflating: class_data_examples/documents_manifest.txt  
+   creating: class_data_examples/external_files/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/00f538f3-337e-4406-8b0f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16a1c967-b954-4134-80b4_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16d07270-ecf1-48e2-974f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/1a634b98-990d-468b-9f9b_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3898a848-8a4f-466d-835d_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3d18dc8a-b0ff-444b-8131_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/598538db-68e1-4395-bc15_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6905b25f-9868-4cd6-9a4f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6a72e0bb-32bf-4d7c-87c5_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/778afc64-3547-4d3a-9654_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/7fec9b2a-f6cb-49e6-9d83_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/9a38edab-e5af-44f6-bc38_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/a0509358-ab8a-4101-8b7d_000.h5  
+  inflating: class_data_examples/external_files_manifest_a1a737180dacd6b068e429c62e66ab2d.txt  
+Placed configuration file at /home/test1/.local/share/intake/databroker_unpack_class_data_examples.yml
+[91m[ProfileCreate] Generating default config file: '/home/test2/.ipython-bluesky/profile_bluesky/ipython_config.py'
 [0m[91m[ProfileCreate] Generating default config file: '/home/test2/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
 [0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
 ~/.ipython-bluesky/profile_bluesky/startup
-[91m/home/user_setup.sh: line 8: _developer_commands: command not found
-[0m[91m[ProfileCreate] Generating default config file: '/home/test3/.ipython-bluesky/profile_bluesky/ipython_config.py'
+Archive:  /home/class_data_examples.zip
+  inflating: class_data_examples/catalog.yml  
+   creating: class_data_examples/documents/
+  inflating: class_data_examples/documents/01013b8e-0927-407e-a246-3d341484ac8e.msgpack  
+  inflating: class_data_examples/documents/0401c919-d6e8-49b1-87c8-8a99b8d69356.msgpack  
+  inflating: class_data_examples/documents/0cfb3cc3-beb1-44e6-968c-ccd3852b7f24.msgpack  
+  inflating: class_data_examples/documents/0d5f561c-57a3-448b-8b4d-dcd1ec57420f.msgpack  
+  inflating: class_data_examples/documents/0eca468f-79bd-4999-ab7f-7dff7fad7048.msgpack  
+  inflating: class_data_examples/documents/1219f704-d776-4f77-bc10-0acaa205dc12.msgpack  
+  inflating: class_data_examples/documents/1da9f496-af64-4115-bcb9-8bf19515560a.msgpack  
+  inflating: class_data_examples/documents/1dbed4fc-1afe-4ff0-b71f-d57015b64723.msgpack  
+  inflating: class_data_examples/documents/2156695a-043c-48bd-9d02-36c526e59e29.msgpack  
+  inflating: class_data_examples/documents/2befeb8f-8428-4697-9568-466acbd18bb0.msgpack  
+  inflating: class_data_examples/documents/2c53015b-1b04-41a4-90a3-ffe7346f367c.msgpack  
+  inflating: class_data_examples/documents/2f50c663-6144-4e6b-a14b-9c472b0b2fc3.msgpack  
+  inflating: class_data_examples/documents/3132baf7-ab5d-4794-940b-6c0562e2b802.msgpack  
+  inflating: class_data_examples/documents/33296ab3-7464-46f8-baef-4919ceef6d69.msgpack  
+  inflating: class_data_examples/documents/361400d1-fb29-4b4d-9fa7-86e1b1f760e3.msgpack  
+  inflating: class_data_examples/documents/372f4d89-ed78-40c3-953b-028ac7c4a7b7.msgpack  
+  inflating: class_data_examples/documents/37d2c3bc-fbcb-4fc2-9997-def194b184b6.msgpack  
+  inflating: class_data_examples/documents/4705e974-7838-4fda-9dd3-116765e7a766.msgpack  
+  inflating: class_data_examples/documents/483efa40-3ace-4803-bf98-fd5c91e1255f.msgpack  
+  inflating: class_data_examples/documents/4fe01dd5-64de-431c-b389-5b4e730c5188.msgpack  
+  inflating: class_data_examples/documents/550ba458-d43a-4304-b211-91f207f6ca44.msgpack  
+  inflating: class_data_examples/documents/56bdfb2c-b2cb-4b75-a026-1f2f7b085b7d.msgpack  
+  inflating: class_data_examples/documents/56c2daed-df28-4034-b390-ed245e202e0b.msgpack  
+  inflating: class_data_examples/documents/6255bc83-6c85-48b5-9026-c887cc4c3c02.msgpack  
+  inflating: class_data_examples/documents/6bb9a4b8-61c7-4a9a-853a-338e8fae031c.msgpack  
+  inflating: class_data_examples/documents/75b01ca2-d521-4cb0-a4ab-ce26e1eb49a4.msgpack  
+  inflating: class_data_examples/documents/7a497331-959c-4f4b-8b6b-3a2b67626d6b.msgpack  
+  inflating: class_data_examples/documents/7e309ce3-043d-4545-a376-451956b5c2fe.msgpack  
+  inflating: class_data_examples/documents/7eff8cdf-6226-4ffb-908f-691a5f9c50a3.msgpack  
+  inflating: class_data_examples/documents/8253dc63-20a2-4099-a739-71fd3eaca7d0.msgpack  
+  inflating: class_data_examples/documents/857eed47-e943-4031-9cb6-6002b8121bc6.msgpack  
+  inflating: class_data_examples/documents/893c2d84-1938-429a-a4af-6cadf978301b.msgpack  
+  inflating: class_data_examples/documents/922b2f1c-de1b-40c1-89d9-2a6304a32748.msgpack  
+  inflating: class_data_examples/documents/950a22e4-734f-438b-a9d4-6727d905988c.msgpack  
+  inflating: class_data_examples/documents/9ff9c167-20c2-400b-a352-7946c6a4e8dd.msgpack  
+  inflating: class_data_examples/documents/a1c743d5-b22b-42a4-a812-0d02d01f79b2.msgpack  
+  inflating: class_data_examples/documents/a748a3ac-3eea-4dde-a78f-0bf79fcf966f.msgpack  
+  inflating: class_data_examples/documents/a8bcac2d-d3b5-47e8-aa2d-19525ea992d5.msgpack  
+  inflating: class_data_examples/documents/aa13d7d6-79e0-40ed-a432-2f411c6bb855.msgpack  
+  inflating: class_data_examples/documents/abf25cac-1c26-431f-9757-0547abc90d79.msgpack  
+  inflating: class_data_examples/documents/b322f081-ba4f-42c2-a2db-f85dd031eff7.msgpack  
+  inflating: class_data_examples/documents/b4e4cbbb-a4b1-4146-aea5-ba8bc7ad7b76.msgpack  
+  inflating: class_data_examples/documents/bdf47b3a-c34a-411e-8fd3-94f8e08c2e50.msgpack  
+  inflating: class_data_examples/documents/c0835cae-3e7c-4ae4-8fbc-5ff8c4f1bc66.msgpack  
+  inflating: class_data_examples/documents/c49f2048-f318-4d8b-8a41-feda20e7981c.msgpack  
+  inflating: class_data_examples/documents/c5f59314-8827-42dc-887b-9430dde84eea.msgpack  
+  inflating: class_data_examples/documents/c988131f-2ede-4fb2-a316-e1eb77cb6621.msgpack  
+  inflating: class_data_examples/documents/d19530f7-1ca6-4c02-a83b-229b3d92b6d1.msgpack  
+  inflating: class_data_examples/documents/daaebeb6-84de-41de-bc64-a34323d55072.msgpack  
+  inflating: class_data_examples/documents/e50cb383-7e75-47e0-9b97-9b7bf034900b.msgpack  
+  inflating: class_data_examples/documents/e6938705-039f-4c51-9ac2-d497426c000c.msgpack  
+  inflating: class_data_examples/documents/eb1924b3-b051-4709-8d38-98a4bce487fc.msgpack  
+  inflating: class_data_examples/documents/ebf8703c-465c-415f-8e8a-e56712c185d4.msgpack  
+  inflating: class_data_examples/documents/ec4915d9-f6f2-4b8d-85eb-cf4b3556b2f5.msgpack  
+  inflating: class_data_examples/documents/ede0c75b-db74-4b18-9b9e-ad80240a4225.msgpack  
+  inflating: class_data_examples/documents/f0b4614a-9508-406d-955e-be4f5410f1db.msgpack  
+  inflating: class_data_examples/documents/f5825b65-ff95-487f-a67a-736e18b19247.msgpack  
+  inflating: class_data_examples/documents/f7b96eb0-8dd4-49a7-a6a4-d50e25feb8dd.msgpack  
+  inflating: class_data_examples/documents/fd39b228-6086-472c-afd4-affc7c2ac819.msgpack  
+  inflating: class_data_examples/documents_manifest.txt  
+   creating: class_data_examples/external_files/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/00f538f3-337e-4406-8b0f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16a1c967-b954-4134-80b4_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16d07270-ecf1-48e2-974f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/1a634b98-990d-468b-9f9b_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3898a848-8a4f-466d-835d_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3d18dc8a-b0ff-444b-8131_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/598538db-68e1-4395-bc15_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6905b25f-9868-4cd6-9a4f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6a72e0bb-32bf-4d7c-87c5_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/778afc64-3547-4d3a-9654_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/7fec9b2a-f6cb-49e6-9d83_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/9a38edab-e5af-44f6-bc38_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/a0509358-ab8a-4101-8b7d_000.h5  
+  inflating: class_data_examples/external_files_manifest_a1a737180dacd6b068e429c62e66ab2d.txt  
+Placed configuration file at /home/test2/.local/share/intake/databroker_unpack_class_data_examples.yml
+[91m[ProfileCreate] Generating default config file: '/home/test3/.ipython-bluesky/profile_bluesky/ipython_config.py'
 [0m[91m[ProfileCreate] Generating default config file: '/home/test3/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
 [0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
 ~/.ipython-bluesky/profile_bluesky/startup
-[91m/home/user_setup.sh: line 8: _developer_commands: command not found
-[0m[91m[ProfileCreate] Generating default config file: '/home/test4/.ipython-bluesky/profile_bluesky/ipython_config.py'
+Archive:  /home/class_data_examples.zip
+  inflating: class_data_examples/catalog.yml  
+   creating: class_data_examples/documents/
+  inflating: class_data_examples/documents/01013b8e-0927-407e-a246-3d341484ac8e.msgpack  
+  inflating: class_data_examples/documents/0401c919-d6e8-49b1-87c8-8a99b8d69356.msgpack  
+  inflating: class_data_examples/documents/0cfb3cc3-beb1-44e6-968c-ccd3852b7f24.msgpack  
+  inflating: class_data_examples/documents/0d5f561c-57a3-448b-8b4d-dcd1ec57420f.msgpack  
+  inflating: class_data_examples/documents/0eca468f-79bd-4999-ab7f-7dff7fad7048.msgpack  
+  inflating: class_data_examples/documents/1219f704-d776-4f77-bc10-0acaa205dc12.msgpack  
+  inflating: class_data_examples/documents/1da9f496-af64-4115-bcb9-8bf19515560a.msgpack  
+  inflating: class_data_examples/documents/1dbed4fc-1afe-4ff0-b71f-d57015b64723.msgpack  
+  inflating: class_data_examples/documents/2156695a-043c-48bd-9d02-36c526e59e29.msgpack  
+  inflating: class_data_examples/documents/2befeb8f-8428-4697-9568-466acbd18bb0.msgpack  
+  inflating: class_data_examples/documents/2c53015b-1b04-41a4-90a3-ffe7346f367c.msgpack  
+  inflating: class_data_examples/documents/2f50c663-6144-4e6b-a14b-9c472b0b2fc3.msgpack  
+  inflating: class_data_examples/documents/3132baf7-ab5d-4794-940b-6c0562e2b802.msgpack  
+  inflating: class_data_examples/documents/33296ab3-7464-46f8-baef-4919ceef6d69.msgpack  
+  inflating: class_data_examples/documents/361400d1-fb29-4b4d-9fa7-86e1b1f760e3.msgpack  
+  inflating: class_data_examples/documents/372f4d89-ed78-40c3-953b-028ac7c4a7b7.msgpack  
+  inflating: class_data_examples/documents/37d2c3bc-fbcb-4fc2-9997-def194b184b6.msgpack  
+  inflating: class_data_examples/documents/4705e974-7838-4fda-9dd3-116765e7a766.msgpack  
+  inflating: class_data_examples/documents/483efa40-3ace-4803-bf98-fd5c91e1255f.msgpack  
+  inflating: class_data_examples/documents/4fe01dd5-64de-431c-b389-5b4e730c5188.msgpack  
+  inflating: class_data_examples/documents/550ba458-d43a-4304-b211-91f207f6ca44.msgpack  
+  inflating: class_data_examples/documents/56bdfb2c-b2cb-4b75-a026-1f2f7b085b7d.msgpack  
+  inflating: class_data_examples/documents/56c2daed-df28-4034-b390-ed245e202e0b.msgpack  
+  inflating: class_data_examples/documents/6255bc83-6c85-48b5-9026-c887cc4c3c02.msgpack  
+  inflating: class_data_examples/documents/6bb9a4b8-61c7-4a9a-853a-338e8fae031c.msgpack  
+  inflating: class_data_examples/documents/75b01ca2-d521-4cb0-a4ab-ce26e1eb49a4.msgpack  
+  inflating: class_data_examples/documents/7a497331-959c-4f4b-8b6b-3a2b67626d6b.msgpack  
+  inflating: class_data_examples/documents/7e309ce3-043d-4545-a376-451956b5c2fe.msgpack  
+  inflating: class_data_examples/documents/7eff8cdf-6226-4ffb-908f-691a5f9c50a3.msgpack  
+  inflating: class_data_examples/documents/8253dc63-20a2-4099-a739-71fd3eaca7d0.msgpack  
+  inflating: class_data_examples/documents/857eed47-e943-4031-9cb6-6002b8121bc6.msgpack  
+  inflating: class_data_examples/documents/893c2d84-1938-429a-a4af-6cadf978301b.msgpack  
+  inflating: class_data_examples/documents/922b2f1c-de1b-40c1-89d9-2a6304a32748.msgpack  
+  inflating: class_data_examples/documents/950a22e4-734f-438b-a9d4-6727d905988c.msgpack  
+  inflating: class_data_examples/documents/9ff9c167-20c2-400b-a352-7946c6a4e8dd.msgpack  
+  inflating: class_data_examples/documents/a1c743d5-b22b-42a4-a812-0d02d01f79b2.msgpack  
+  inflating: class_data_examples/documents/a748a3ac-3eea-4dde-a78f-0bf79fcf966f.msgpack  
+  inflating: class_data_examples/documents/a8bcac2d-d3b5-47e8-aa2d-19525ea992d5.msgpack  
+  inflating: class_data_examples/documents/aa13d7d6-79e0-40ed-a432-2f411c6bb855.msgpack  
+  inflating: class_data_examples/documents/abf25cac-1c26-431f-9757-0547abc90d79.msgpack  
+  inflating: class_data_examples/documents/b322f081-ba4f-42c2-a2db-f85dd031eff7.msgpack  
+  inflating: class_data_examples/documents/b4e4cbbb-a4b1-4146-aea5-ba8bc7ad7b76.msgpack  
+  inflating: class_data_examples/documents/bdf47b3a-c34a-411e-8fd3-94f8e08c2e50.msgpack  
+  inflating: class_data_examples/documents/c0835cae-3e7c-4ae4-8fbc-5ff8c4f1bc66.msgpack  
+  inflating: class_data_examples/documents/c49f2048-f318-4d8b-8a41-feda20e7981c.msgpack  
+  inflating: class_data_examples/documents/c5f59314-8827-42dc-887b-9430dde84eea.msgpack  
+  inflating: class_data_examples/documents/c988131f-2ede-4fb2-a316-e1eb77cb6621.msgpack  
+  inflating: class_data_examples/documents/d19530f7-1ca6-4c02-a83b-229b3d92b6d1.msgpack  
+  inflating: class_data_examples/documents/daaebeb6-84de-41de-bc64-a34323d55072.msgpack  
+  inflating: class_data_examples/documents/e50cb383-7e75-47e0-9b97-9b7bf034900b.msgpack  
+  inflating: class_data_examples/documents/e6938705-039f-4c51-9ac2-d497426c000c.msgpack  
+  inflating: class_data_examples/documents/eb1924b3-b051-4709-8d38-98a4bce487fc.msgpack  
+  inflating: class_data_examples/documents/ebf8703c-465c-415f-8e8a-e56712c185d4.msgpack  
+  inflating: class_data_examples/documents/ec4915d9-f6f2-4b8d-85eb-cf4b3556b2f5.msgpack  
+  inflating: class_data_examples/documents/ede0c75b-db74-4b18-9b9e-ad80240a4225.msgpack  
+  inflating: class_data_examples/documents/f0b4614a-9508-406d-955e-be4f5410f1db.msgpack  
+  inflating: class_data_examples/documents/f5825b65-ff95-487f-a67a-736e18b19247.msgpack  
+  inflating: class_data_examples/documents/f7b96eb0-8dd4-49a7-a6a4-d50e25feb8dd.msgpack  
+  inflating: class_data_examples/documents/fd39b228-6086-472c-afd4-affc7c2ac819.msgpack  
+  inflating: class_data_examples/documents_manifest.txt  
+   creating: class_data_examples/external_files/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/00f538f3-337e-4406-8b0f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16a1c967-b954-4134-80b4_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16d07270-ecf1-48e2-974f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/1a634b98-990d-468b-9f9b_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3898a848-8a4f-466d-835d_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3d18dc8a-b0ff-444b-8131_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/598538db-68e1-4395-bc15_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6905b25f-9868-4cd6-9a4f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6a72e0bb-32bf-4d7c-87c5_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/778afc64-3547-4d3a-9654_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/7fec9b2a-f6cb-49e6-9d83_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/9a38edab-e5af-44f6-bc38_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/a0509358-ab8a-4101-8b7d_000.h5  
+  inflating: class_data_examples/external_files_manifest_a1a737180dacd6b068e429c62e66ab2d.txt  
+Placed configuration file at /home/test3/.local/share/intake/databroker_unpack_class_data_examples.yml
+[91m[ProfileCreate] Generating default config file: '/home/test4/.ipython-bluesky/profile_bluesky/ipython_config.py'
 [0m[91m[ProfileCreate] Generating default config file: '/home/test4/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
 [0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
 ~/.ipython-bluesky/profile_bluesky/startup
-[91m/home/user_setup.sh: line 8: _developer_commands: command not found
-[0m[91m[ProfileCreate] Generating default config file: '/home/test5/.ipython-bluesky/profile_bluesky/ipython_config.py'
+Archive:  /home/class_data_examples.zip
+  inflating: class_data_examples/catalog.yml  
+   creating: class_data_examples/documents/
+  inflating: class_data_examples/documents/01013b8e-0927-407e-a246-3d341484ac8e.msgpack  
+  inflating: class_data_examples/documents/0401c919-d6e8-49b1-87c8-8a99b8d69356.msgpack  
+  inflating: class_data_examples/documents/0cfb3cc3-beb1-44e6-968c-ccd3852b7f24.msgpack  
+  inflating: class_data_examples/documents/0d5f561c-57a3-448b-8b4d-dcd1ec57420f.msgpack  
+  inflating: class_data_examples/documents/0eca468f-79bd-4999-ab7f-7dff7fad7048.msgpack  
+  inflating: class_data_examples/documents/1219f704-d776-4f77-bc10-0acaa205dc12.msgpack  
+  inflating: class_data_examples/documents/1da9f496-af64-4115-bcb9-8bf19515560a.msgpack  
+  inflating: class_data_examples/documents/1dbed4fc-1afe-4ff0-b71f-d57015b64723.msgpack  
+  inflating: class_data_examples/documents/2156695a-043c-48bd-9d02-36c526e59e29.msgpack  
+  inflating: class_data_examples/documents/2befeb8f-8428-4697-9568-466acbd18bb0.msgpack  
+  inflating: class_data_examples/documents/2c53015b-1b04-41a4-90a3-ffe7346f367c.msgpack  
+  inflating: class_data_examples/documents/2f50c663-6144-4e6b-a14b-9c472b0b2fc3.msgpack  
+  inflating: class_data_examples/documents/3132baf7-ab5d-4794-940b-6c0562e2b802.msgpack  
+  inflating: class_data_examples/documents/33296ab3-7464-46f8-baef-4919ceef6d69.msgpack  
+  inflating: class_data_examples/documents/361400d1-fb29-4b4d-9fa7-86e1b1f760e3.msgpack  
+  inflating: class_data_examples/documents/372f4d89-ed78-40c3-953b-028ac7c4a7b7.msgpack  
+  inflating: class_data_examples/documents/37d2c3bc-fbcb-4fc2-9997-def194b184b6.msgpack  
+  inflating: class_data_examples/documents/4705e974-7838-4fda-9dd3-116765e7a766.msgpack  
+  inflating: class_data_examples/documents/483efa40-3ace-4803-bf98-fd5c91e1255f.msgpack  
+  inflating: class_data_examples/documents/4fe01dd5-64de-431c-b389-5b4e730c5188.msgpack  
+  inflating: class_data_examples/documents/550ba458-d43a-4304-b211-91f207f6ca44.msgpack  
+  inflating: class_data_examples/documents/56bdfb2c-b2cb-4b75-a026-1f2f7b085b7d.msgpack  
+  inflating: class_data_examples/documents/56c2daed-df28-4034-b390-ed245e202e0b.msgpack  
+  inflating: class_data_examples/documents/6255bc83-6c85-48b5-9026-c887cc4c3c02.msgpack  
+  inflating: class_data_examples/documents/6bb9a4b8-61c7-4a9a-853a-338e8fae031c.msgpack  
+  inflating: class_data_examples/documents/75b01ca2-d521-4cb0-a4ab-ce26e1eb49a4.msgpack  
+  inflating: class_data_examples/documents/7a497331-959c-4f4b-8b6b-3a2b67626d6b.msgpack  
+  inflating: class_data_examples/documents/7e309ce3-043d-4545-a376-451956b5c2fe.msgpack  
+  inflating: class_data_examples/documents/7eff8cdf-6226-4ffb-908f-691a5f9c50a3.msgpack  
+  inflating: class_data_examples/documents/8253dc63-20a2-4099-a739-71fd3eaca7d0.msgpack  
+  inflating: class_data_examples/documents/857eed47-e943-4031-9cb6-6002b8121bc6.msgpack  
+  inflating: class_data_examples/documents/893c2d84-1938-429a-a4af-6cadf978301b.msgpack  
+  inflating: class_data_examples/documents/922b2f1c-de1b-40c1-89d9-2a6304a32748.msgpack  
+  inflating: class_data_examples/documents/950a22e4-734f-438b-a9d4-6727d905988c.msgpack  
+  inflating: class_data_examples/documents/9ff9c167-20c2-400b-a352-7946c6a4e8dd.msgpack  
+  inflating: class_data_examples/documents/a1c743d5-b22b-42a4-a812-0d02d01f79b2.msgpack  
+  inflating: class_data_examples/documents/a748a3ac-3eea-4dde-a78f-0bf79fcf966f.msgpack  
+  inflating: class_data_examples/documents/a8bcac2d-d3b5-47e8-aa2d-19525ea992d5.msgpack  
+  inflating: class_data_examples/documents/aa13d7d6-79e0-40ed-a432-2f411c6bb855.msgpack  
+  inflating: class_data_examples/documents/abf25cac-1c26-431f-9757-0547abc90d79.msgpack  
+  inflating: class_data_examples/documents/b322f081-ba4f-42c2-a2db-f85dd031eff7.msgpack  
+  inflating: class_data_examples/documents/b4e4cbbb-a4b1-4146-aea5-ba8bc7ad7b76.msgpack  
+  inflating: class_data_examples/documents/bdf47b3a-c34a-411e-8fd3-94f8e08c2e50.msgpack  
+  inflating: class_data_examples/documents/c0835cae-3e7c-4ae4-8fbc-5ff8c4f1bc66.msgpack  
+  inflating: class_data_examples/documents/c49f2048-f318-4d8b-8a41-feda20e7981c.msgpack  
+  inflating: class_data_examples/documents/c5f59314-8827-42dc-887b-9430dde84eea.msgpack  
+  inflating: class_data_examples/documents/c988131f-2ede-4fb2-a316-e1eb77cb6621.msgpack  
+  inflating: class_data_examples/documents/d19530f7-1ca6-4c02-a83b-229b3d92b6d1.msgpack  
+  inflating: class_data_examples/documents/daaebeb6-84de-41de-bc64-a34323d55072.msgpack  
+  inflating: class_data_examples/documents/e50cb383-7e75-47e0-9b97-9b7bf034900b.msgpack  
+  inflating: class_data_examples/documents/e6938705-039f-4c51-9ac2-d497426c000c.msgpack  
+  inflating: class_data_examples/documents/eb1924b3-b051-4709-8d38-98a4bce487fc.msgpack  
+  inflating: class_data_examples/documents/ebf8703c-465c-415f-8e8a-e56712c185d4.msgpack  
+  inflating: class_data_examples/documents/ec4915d9-f6f2-4b8d-85eb-cf4b3556b2f5.msgpack  
+  inflating: class_data_examples/documents/ede0c75b-db74-4b18-9b9e-ad80240a4225.msgpack  
+  inflating: class_data_examples/documents/f0b4614a-9508-406d-955e-be4f5410f1db.msgpack  
+  inflating: class_data_examples/documents/f5825b65-ff95-487f-a67a-736e18b19247.msgpack  
+  inflating: class_data_examples/documents/f7b96eb0-8dd4-49a7-a6a4-d50e25feb8dd.msgpack  
+  inflating: class_data_examples/documents/fd39b228-6086-472c-afd4-affc7c2ac819.msgpack  
+  inflating: class_data_examples/documents_manifest.txt  
+   creating: class_data_examples/external_files/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/00f538f3-337e-4406-8b0f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16a1c967-b954-4134-80b4_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16d07270-ecf1-48e2-974f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/1a634b98-990d-468b-9f9b_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3898a848-8a4f-466d-835d_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3d18dc8a-b0ff-444b-8131_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/598538db-68e1-4395-bc15_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6905b25f-9868-4cd6-9a4f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6a72e0bb-32bf-4d7c-87c5_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/778afc64-3547-4d3a-9654_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/7fec9b2a-f6cb-49e6-9d83_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/9a38edab-e5af-44f6-bc38_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/a0509358-ab8a-4101-8b7d_000.h5  
+  inflating: class_data_examples/external_files_manifest_a1a737180dacd6b068e429c62e66ab2d.txt  
+Placed configuration file at /home/test4/.local/share/intake/databroker_unpack_class_data_examples.yml
+[91m[ProfileCreate] Generating default config file: '/home/test5/.ipython-bluesky/profile_bluesky/ipython_config.py'
 [0m[91m[ProfileCreate] Generating default config file: '/home/test5/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
 [0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
 ~/.ipython-bluesky/profile_bluesky/startup
-Removing intermediate container 56ecf5dc3a36
- ---> a6d250eb6a19
+Archive:  /home/class_data_examples.zip
+  inflating: class_data_examples/catalog.yml  
+   creating: class_data_examples/documents/
+  inflating: class_data_examples/documents/01013b8e-0927-407e-a246-3d341484ac8e.msgpack  
+  inflating: class_data_examples/documents/0401c919-d6e8-49b1-87c8-8a99b8d69356.msgpack  
+  inflating: class_data_examples/documents/0cfb3cc3-beb1-44e6-968c-ccd3852b7f24.msgpack  
+  inflating: class_data_examples/documents/0d5f561c-57a3-448b-8b4d-dcd1ec57420f.msgpack  
+  inflating: class_data_examples/documents/0eca468f-79bd-4999-ab7f-7dff7fad7048.msgpack  
+  inflating: class_data_examples/documents/1219f704-d776-4f77-bc10-0acaa205dc12.msgpack  
+  inflating: class_data_examples/documents/1da9f496-af64-4115-bcb9-8bf19515560a.msgpack  
+  inflating: class_data_examples/documents/1dbed4fc-1afe-4ff0-b71f-d57015b64723.msgpack  
+  inflating: class_data_examples/documents/2156695a-043c-48bd-9d02-36c526e59e29.msgpack  
+  inflating: class_data_examples/documents/2befeb8f-8428-4697-9568-466acbd18bb0.msgpack  
+  inflating: class_data_examples/documents/2c53015b-1b04-41a4-90a3-ffe7346f367c.msgpack  
+  inflating: class_data_examples/documents/2f50c663-6144-4e6b-a14b-9c472b0b2fc3.msgpack  
+  inflating: class_data_examples/documents/3132baf7-ab5d-4794-940b-6c0562e2b802.msgpack  
+  inflating: class_data_examples/documents/33296ab3-7464-46f8-baef-4919ceef6d69.msgpack  
+  inflating: class_data_examples/documents/361400d1-fb29-4b4d-9fa7-86e1b1f760e3.msgpack  
+  inflating: class_data_examples/documents/372f4d89-ed78-40c3-953b-028ac7c4a7b7.msgpack  
+  inflating: class_data_examples/documents/37d2c3bc-fbcb-4fc2-9997-def194b184b6.msgpack  
+  inflating: class_data_examples/documents/4705e974-7838-4fda-9dd3-116765e7a766.msgpack  
+  inflating: class_data_examples/documents/483efa40-3ace-4803-bf98-fd5c91e1255f.msgpack  
+  inflating: class_data_examples/documents/4fe01dd5-64de-431c-b389-5b4e730c5188.msgpack  
+  inflating: class_data_examples/documents/550ba458-d43a-4304-b211-91f207f6ca44.msgpack  
+  inflating: class_data_examples/documents/56bdfb2c-b2cb-4b75-a026-1f2f7b085b7d.msgpack  
+  inflating: class_data_examples/documents/56c2daed-df28-4034-b390-ed245e202e0b.msgpack  
+  inflating: class_data_examples/documents/6255bc83-6c85-48b5-9026-c887cc4c3c02.msgpack  
+  inflating: class_data_examples/documents/6bb9a4b8-61c7-4a9a-853a-338e8fae031c.msgpack  
+  inflating: class_data_examples/documents/75b01ca2-d521-4cb0-a4ab-ce26e1eb49a4.msgpack  
+  inflating: class_data_examples/documents/7a497331-959c-4f4b-8b6b-3a2b67626d6b.msgpack  
+  inflating: class_data_examples/documents/7e309ce3-043d-4545-a376-451956b5c2fe.msgpack  
+  inflating: class_data_examples/documents/7eff8cdf-6226-4ffb-908f-691a5f9c50a3.msgpack  
+  inflating: class_data_examples/documents/8253dc63-20a2-4099-a739-71fd3eaca7d0.msgpack  
+  inflating: class_data_examples/documents/857eed47-e943-4031-9cb6-6002b8121bc6.msgpack  
+  inflating: class_data_examples/documents/893c2d84-1938-429a-a4af-6cadf978301b.msgpack  
+  inflating: class_data_examples/documents/922b2f1c-de1b-40c1-89d9-2a6304a32748.msgpack  
+  inflating: class_data_examples/documents/950a22e4-734f-438b-a9d4-6727d905988c.msgpack  
+  inflating: class_data_examples/documents/9ff9c167-20c2-400b-a352-7946c6a4e8dd.msgpack  
+  inflating: class_data_examples/documents/a1c743d5-b22b-42a4-a812-0d02d01f79b2.msgpack  
+  inflating: class_data_examples/documents/a748a3ac-3eea-4dde-a78f-0bf79fcf966f.msgpack  
+  inflating: class_data_examples/documents/a8bcac2d-d3b5-47e8-aa2d-19525ea992d5.msgpack  
+  inflating: class_data_examples/documents/aa13d7d6-79e0-40ed-a432-2f411c6bb855.msgpack  
+  inflating: class_data_examples/documents/abf25cac-1c26-431f-9757-0547abc90d79.msgpack  
+  inflating: class_data_examples/documents/b322f081-ba4f-42c2-a2db-f85dd031eff7.msgpack  
+  inflating: class_data_examples/documents/b4e4cbbb-a4b1-4146-aea5-ba8bc7ad7b76.msgpack  
+  inflating: class_data_examples/documents/bdf47b3a-c34a-411e-8fd3-94f8e08c2e50.msgpack  
+  inflating: class_data_examples/documents/c0835cae-3e7c-4ae4-8fbc-5ff8c4f1bc66.msgpack  
+  inflating: class_data_examples/documents/c49f2048-f318-4d8b-8a41-feda20e7981c.msgpack  
+  inflating: class_data_examples/documents/c5f59314-8827-42dc-887b-9430dde84eea.msgpack  
+  inflating: class_data_examples/documents/c988131f-2ede-4fb2-a316-e1eb77cb6621.msgpack  
+  inflating: class_data_examples/documents/d19530f7-1ca6-4c02-a83b-229b3d92b6d1.msgpack  
+  inflating: class_data_examples/documents/daaebeb6-84de-41de-bc64-a34323d55072.msgpack  
+  inflating: class_data_examples/documents/e50cb383-7e75-47e0-9b97-9b7bf034900b.msgpack  
+  inflating: class_data_examples/documents/e6938705-039f-4c51-9ac2-d497426c000c.msgpack  
+  inflating: class_data_examples/documents/eb1924b3-b051-4709-8d38-98a4bce487fc.msgpack  
+  inflating: class_data_examples/documents/ebf8703c-465c-415f-8e8a-e56712c185d4.msgpack  
+  inflating: class_data_examples/documents/ec4915d9-f6f2-4b8d-85eb-cf4b3556b2f5.msgpack  
+  inflating: class_data_examples/documents/ede0c75b-db74-4b18-9b9e-ad80240a4225.msgpack  
+  inflating: class_data_examples/documents/f0b4614a-9508-406d-955e-be4f5410f1db.msgpack  
+  inflating: class_data_examples/documents/f5825b65-ff95-487f-a67a-736e18b19247.msgpack  
+  inflating: class_data_examples/documents/f7b96eb0-8dd4-49a7-a6a4-d50e25feb8dd.msgpack  
+  inflating: class_data_examples/documents/fd39b228-6086-472c-afd4-affc7c2ac819.msgpack  
+  inflating: class_data_examples/documents_manifest.txt  
+   creating: class_data_examples/external_files/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/
+   creating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/00f538f3-337e-4406-8b0f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16a1c967-b954-4134-80b4_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/16d07270-ecf1-48e2-974f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/1a634b98-990d-468b-9f9b_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3898a848-8a4f-466d-835d_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/3d18dc8a-b0ff-444b-8131_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/598538db-68e1-4395-bc15_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6905b25f-9868-4cd6-9a4f_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/6a72e0bb-32bf-4d7c-87c5_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/778afc64-3547-4d3a-9654_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/7fec9b2a-f6cb-49e6-9d83_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/9a38edab-e5af-44f6-bc38_000.h5  
+  inflating: class_data_examples/external_files/a1a737180dacd6b068e429c62e66ab2d/tmp/docker_ioc/iocad/tmp/images/a0509358-ab8a-4101-8b7d_000.h5  
+  inflating: class_data_examples/external_files_manifest_a1a737180dacd6b068e429c62e66ab2d.txt  
+Placed configuration file at /home/test5/.local/share/intake/databroker_unpack_class_data_examples.yml
+Removing intermediate container df58b1facb7b
+ ---> 898ce3a809a5
 Step 20/20 : RUN pwd && ls
- ---> Running in e0ab037f2915
+ ---> Running in 5fb8656b21c6
 /home
 add2bash.rc
 blueskyStarter.sh
+class_data_examples.zip
 instrument.tar.gz
 test1
 test2
@@ -95,8 +516,8 @@ test3
 test4
 test5
 user_setup.sh
-Removing intermediate container e0ab037f2915
- ---> 6a5075d1af8c
-Successfully built 6a5075d1af8c
+Removing intermediate container 5fb8656b21c6
+ ---> f8a1aaa197b4
+Successfully built f8a1aaa197b4
 Successfully tagged prjemian/dutc-base:latest
-# build finished:  2021-03-09T19:52:47-06:00
+# build finished:  2021-03-09T23:16:06-06:00

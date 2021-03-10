@@ -11,7 +11,7 @@ CMD ["/bin/bash"]
 
 RUN \
     DEBIAN_FRONTEND=noninteractive apt-get update -y \
-    && DEBIAN_FRONTEND=noninteractive apt-get -y install wget sudo less
+    && DEBIAN_FRONTEND=noninteractive apt-get -y install less sudo unzip wget
 
 ############################################################
 # MongoDB
@@ -54,7 +54,7 @@ ENV AD_IOC_PREFIX="ad:"
 # user accounts
 
 # COPY add2bash.rc /root/
-COPY add2bash.rc user_setup.sh instrument.tar.gz blueskyStarter.sh /home/
+COPY add2bash.rc user_setup.sh instrument.tar.gz blueskyStarter.sh class_data_examples.zip /home/
 RUN cat /home/add2bash.rc >> /etc/skel/.bashrc
 RUN \
     for u in test1 test2 test3 test4 test5; do \
