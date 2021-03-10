@@ -1,0 +1,102 @@
+# build started:  2021-03-09T19:52:41-06:00
+Sending build context to Docker daemon  94.27MB
+Step 1/20 : FROM  prjemian/os_only-1.1
+ ---> bd1d69e3644f
+Step 2/20 : LABEL version="1.1.0"       maintainer="prjemian <prjemian@gmail.com>"       Description="source: https://github.com/prjemian/epics-docker/"
+ ---> Using cache
+ ---> 592ffc2004ed
+Step 3/20 : USER  root
+ ---> Using cache
+ ---> f25c0264f371
+Step 4/20 : WORKDIR /home
+ ---> Using cache
+ ---> 7d572c9ade4b
+Step 5/20 : CMD ["/bin/bash"]
+ ---> Using cache
+ ---> 520bdb49797d
+Step 6/20 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get -y install wget sudo less
+ ---> Using cache
+ ---> 6fc8ce137440
+Step 7/20 : RUN     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -     && echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
+ ---> Using cache
+ ---> b89e51ecea23
+Step 8/20 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb-org
+ ---> Using cache
+ ---> 3d396db1fb26
+Step 9/20 : ADD https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d /etc/init.d/mongod
+
+ ---> Using cache
+ ---> 0c4224e0409c
+Step 10/20 : RUN     chmod +x /etc/init.d/mongod     && service mongod start     && service mongod status
+ ---> Using cache
+ ---> 8c350fe6b627
+Step 11/20 : COPY miniconda.sh /root
+ ---> Using cache
+ ---> 368f0e7346b9
+Step 12/20 : COPY environment.yml /opt
+ ---> Using cache
+ ---> 0c61f630ecb5
+Step 13/20 : RUN bash /root/miniconda.sh -b -p /opt/miniconda3
+ ---> Using cache
+ ---> 923271964b07
+Step 14/20 : RUN     export PATH=${PATH}:/opt/miniconda3/bin     && . /opt/miniconda3/bin/activate     && conda env create -f /opt/environment.yml     && conda env list
+ ---> Using cache
+ ---> 7ec96a1d4ed1
+Step 15/20 : ENV GP_IOC_PREFIX="gp:"
+ ---> Using cache
+ ---> d8c8c4860084
+Step 16/20 : ENV AD_IOC_PREFIX="ad:"
+ ---> Using cache
+ ---> c4025e0d5e9f
+Step 17/20 : COPY add2bash.rc user_setup.sh instrument.tar.gz blueskyStarter.sh /home/
+ ---> a89f6f1c4747
+Step 18/20 : RUN cat /home/add2bash.rc >> /etc/skel/.bashrc
+ ---> Running in 9f3cc7e86a1d
+Removing intermediate container 9f3cc7e86a1d
+ ---> 9438cb68a3cb
+Step 19/20 : RUN     for u in test1 test2 test3 test4 test5; do         /usr/sbin/useradd -d /home/$u -m $u -p $u;         su -l -c /home/user_setup.sh - $u;     done
+ ---> Running in 56ecf5dc3a36
+[91m/home/user_setup.sh: line 8: _developer_commands: command not found
+[0m[91m[ProfileCreate] Generating default config file: '/home/test1/.ipython-bluesky/profile_bluesky/ipython_config.py'
+[0m[91m[ProfileCreate] Generating default config file: '/home/test1/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
+[0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
+~/.ipython-bluesky/profile_bluesky/startup
+[91m/home/user_setup.sh: line 8: _developer_commands: command not found
+[0m[91m[ProfileCreate] Generating default config file: '/home/test2/.ipython-bluesky/profile_bluesky/ipython_config.py'
+[0m[91m[ProfileCreate] Generating default config file: '/home/test2/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
+[0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
+~/.ipython-bluesky/profile_bluesky/startup
+[91m/home/user_setup.sh: line 8: _developer_commands: command not found
+[0m[91m[ProfileCreate] Generating default config file: '/home/test3/.ipython-bluesky/profile_bluesky/ipython_config.py'
+[0m[91m[ProfileCreate] Generating default config file: '/home/test3/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
+[0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
+~/.ipython-bluesky/profile_bluesky/startup
+[91m/home/user_setup.sh: line 8: _developer_commands: command not found
+[0m[91m[ProfileCreate] Generating default config file: '/home/test4/.ipython-bluesky/profile_bluesky/ipython_config.py'
+[0m[91m[ProfileCreate] Generating default config file: '/home/test4/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
+[0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
+~/.ipython-bluesky/profile_bluesky/startup
+[91m/home/user_setup.sh: line 8: _developer_commands: command not found
+[0m[91m[ProfileCreate] Generating default config file: '/home/test5/.ipython-bluesky/profile_bluesky/ipython_config.py'
+[0m[91m[ProfileCreate] Generating default config file: '/home/test5/.ipython-bluesky/profile_bluesky/ipython_kernel_config.py'
+[0m~/bin ~/.ipython-bluesky/profile_bluesky/startup
+~/.ipython-bluesky/profile_bluesky/startup
+Removing intermediate container 56ecf5dc3a36
+ ---> a6d250eb6a19
+Step 20/20 : RUN pwd && ls
+ ---> Running in e0ab037f2915
+/home
+add2bash.rc
+blueskyStarter.sh
+instrument.tar.gz
+test1
+test2
+test3
+test4
+test5
+user_setup.sh
+Removing intermediate container e0ab037f2915
+ ---> 6a5075d1af8c
+Successfully built 6a5075d1af8c
+Successfully tagged prjemian/dutc-base:latest
+# build finished:  2021-03-09T19:52:47-06:00
