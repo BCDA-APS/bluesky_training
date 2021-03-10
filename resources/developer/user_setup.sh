@@ -61,6 +61,7 @@ EOF
 
 cp /home/blueskyStarter.sh ./
 pushd ~/bin
+/bin/rm -f ./blueskyStarter.sh
 ln -s ${IPYTHON_DIR}/profile_bluesky/startup/blueskyStarter.sh ./
 popd
 
