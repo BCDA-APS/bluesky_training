@@ -26,6 +26,7 @@ from ophyd.areadetector.plugins import HDF5Plugin_V34
 import numpy as np
 import os
 
+AD_IOC_PREFIX = os.environ.get("AD_IOC_PREFIX", "ad:")
 AD_IOC_FILES_ROOT = "/"
 BLUESKY_FILES_ROOT = "/tmp/docker_ioc/iocad"
 # IOC_IMAGE_DIR = "/tmp/adsimdet/%Y/%m/%d/"
@@ -122,7 +123,7 @@ def dither_ad_peak_position(magnitude=40):
     dither_ad_on()
 
 
-adsimdet = MySimDetector("ad:", name="adsimdet", labels=("area_detector",))
+adsimdet = MySimDetector(AD_IOC_PREFIX, name="adsimdet", labels=("area_detector",))
 adsimdet.wait_for_connection(timeout=15)
 
 adsimdet.read_attrs.append("hdf1")

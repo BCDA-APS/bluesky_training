@@ -11,9 +11,12 @@ logger.info(__file__)
 from ..framework import sd
 from ophyd import EpicsSignalRO
 import apstools.synApps
+import os
 
-calcs = apstools.synApps.UserCalcsDevice("gp:", name="calcs")
-calcouts = apstools.synApps.UserCalcoutDevice("gp:", name="calcouts")
+GP_IOC_PREFIX = os.environ.get("GP_IOC_PREFIX", "gp:")
+
+calcs = apstools.synApps.UserCalcsDevice(GP_IOC_PREFIX, name="calcs")
+calcouts = apstools.synApps.UserCalcoutDevice(GP_IOC_PREFIX, name="calcouts")
 
 calcs.enable.put(1)
 

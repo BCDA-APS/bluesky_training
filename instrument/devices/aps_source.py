@@ -15,7 +15,7 @@ import apstools.devices
 from ..framework import sd
 
 aps = apstools.devices.ApsMachineParametersDevice(name="aps")
-sd.baseline.append(aps)
+# sd.baseline.append(aps)
 
 # undulator = apstools.devices.ApsUndulator("ID45", name="undulator")
 # undulator = apstools.devices.ApsUndulatorDual("ID45", name="undulator")

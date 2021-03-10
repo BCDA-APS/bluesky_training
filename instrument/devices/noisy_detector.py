@@ -16,6 +16,9 @@ from .motors import m1
 from ophyd import EpicsSignalRO
 import apstools.devices
 import numpy
+import os
+
+GP_IOC_PREFIX = os.environ.get("GP_IOC_PREFIX", "gp:")
 
 
 def change_noisy_parameters(fwhm=0.15, peak=10000, noise=0.08):
@@ -36,5 +39,5 @@ def change_noisy_parameters(fwhm=0.15, peak=10000, noise=0.08):
 
 
 # demo: use swait records to make "noisy" detector signals
-noisy = EpicsSignalRO("gp:userCalc1", name="noisy", labels=("detectors",))
+noisy = EpicsSignalRO(f"{GP_IOC_PREFIX}userCalc1", name="noisy", labels=("detectors",))
 change_noisy_parameters()

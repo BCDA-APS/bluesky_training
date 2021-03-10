@@ -18,6 +18,9 @@ from ophyd import EpicsSignalRO
 from ophyd import PVPositioner
 from ophyd import Signal
 import numpy as np
+import os
+
+GP_IOC_PREFIX = os.environ.get("GP_IOC_PREFIX", "gp:")
 
 
 class MyPvPositioner(PVPositioner):
@@ -112,7 +115,7 @@ class MyPvPositioner(PVPositioner):
 
 
 temperature = MyPvPositioner(
-    "gp:userCalc8", name="temperature", limits=(-20, 255), egu="C",
+    f"{GP_IOC_PREFIX}userCalc8", name="temperature", limits=(-20, 255), egu="C",
 )
 temperature.wait_for_connection()
 temperature.setup_temperature(
