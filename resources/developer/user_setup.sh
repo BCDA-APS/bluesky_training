@@ -23,6 +23,9 @@ export AD_IOC_PREFIX="ad${USER}:"
 EOF
 cat /home/add2bash.rc >> ~/.bash_aliases
 
+export GP_IOC_PREFIX="gp${USER}:"
+export AD_IOC_PREFIX="ad${USER}:"
+
 ############################################################
 # IPython
 
