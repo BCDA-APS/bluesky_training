@@ -6,23 +6,6 @@
 
 #   su -l -s /bin/bash test3
 
-# _developer_commands = """
-
-# # must ALWAYS start this in the container
-# service mongod start
-# service mongod status
-
-# # "login" as user "test3"
-# su -l -s /bin/bash test3
-
-# # Are IOC prefixes defined?
-# ! env | grep -i ioc
-
-# import os
-# os.environ.get("GP_IOC_PREFIX", "gp:")
-
-# """
-
 ############################################################
 # operating environment
 
