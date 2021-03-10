@@ -14,7 +14,7 @@
 mkdir -p ~/bin
 
 # prefixes for GP and AD IOCs
-cat >> ~/.bash_aliases << EOF
+cat > ~/.bash_aliases << EOF
 #
 # IOC prefixes
 export GP_IOC_PREFIX="gp${USER}:"
@@ -35,7 +35,7 @@ env | sort > env.txt
 cd ${IPYTHON_DIR}/profile_bluesky/startup
 tar xzf /home/instrument.tar.gz
 
-cat >> run_instrument.py << EOF
+cat > run_instrument.py << EOF
 from instrument.collection import *
 EOF
 
