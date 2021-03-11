@@ -20,8 +20,9 @@ cat > ~/.bash_aliases << EOF
 export GP_IOC_PREFIX="gp${USER}:"
 export AD_IOC_PREFIX="ad${USER}:"
 
-# only listen to IOCs running on this workstation
-export EPICS_CA_ADDR_LIST="localhost"
+# only listen to docker IOCs running on this workstation
+export DOCKER_IOC_BROADCAST_ADDRESS=172.17.255.255
+export EPICS_CA_ADDR_LIST="${DOCKER_IOC_BROADCAST_ADDRESS}"
 export EPICS_CA_AUTO_ADDR_LIST=NO
 
 EOF
