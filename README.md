@@ -5,8 +5,8 @@ This repository, via Jupyter notebooks, demonstrates use of the Bluesky framewor
 ## Notebooks
 
 * [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/describe_instrument.ipynb)
-* [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/custom_plan.ipynb)
-* [Databroker analysis of 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/databroker_analysis.ipynb)
+* [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/bluesky/custom_plan.ipynb)
+* [Databroker analysis of 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/bluesky/databroker_analysis.ipynb)
 
 ## Other Notebooks
 * [Watch a temperature](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/watch_temperature.ipynb)
