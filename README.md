@@ -4,6 +4,7 @@ This repository, via Jupyter notebooks, demonstrates use of the Bluesky framewor
 
 ## Notebooks
 
+* [Bluesky *Hello, World!*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/hello_world.ipynb)
 * [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/describe_instrument.ipynb)
 * [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/custom_plan.ipynb)
 * [Databroker analysis of 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/databroker_analysis.ipynb)
@@ -22,6 +23,17 @@ This repository, via Jupyter notebooks, demonstrates use of the Bluesky framewor
 ## Installation
 
 Instructions are available for [installation on Linux workstations](install.md).  The steps are similar on Mac OS and Windows but details are not provided here.
+
+## References
+
+name | URL
+--- | ---
+Bluesky Framework | https://blueskyproject.io/
+bluesky | https://blueskyproject.io/bluesky
+ophyd | https://blueskyproject.io/ophyd
+databroker | https://blueskyproject.io/databroker
+apstools | https://apstools.readthedocs.io/
+APS instruments | https://github.com/BCDA-APS/use_bluesky/wiki/
 
 ## References
 
