@@ -1,13 +1,13 @@
 # file: bluesky_class.yml
 # purpose: Configuration file to connect Bluesky databroker with MongoDB
-# For 2021-03 Python Training at APS
+# Configuration for training sessions.
 
 # Copy to: ~/.local/share/intake/bluesky_class.yml
 # Create subdirectories as needed
 
 sources:
-  class_2021_03:
+  training:
     args:
-      asset_registry_db: mongodb://localhost:27017/class_2021_03-bluesky
-      metadatastore_db: mongodb://localhost:27017/class_2021_03-bluesky
+      asset_registry_db: mongodb://localhost:27017/training-bluesky
+      metadatastore_db: mongodb://localhost:27017/training-bluesky
     driver: bluesky-mongo-normalized-catalog
