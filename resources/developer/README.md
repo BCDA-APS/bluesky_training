@@ -28,9 +28,14 @@ export INSTALLER_PATH=$(pwd)
 make instrument >> infrastructure_setup-$(date -Idate).log
 ```
 
-Gets the docker shell scripts to start and remove EPICS containers, the
-Anaconda python installation (the base environment) with the Bluesky
-framework.
+Installs (to `/opt`):
+
+- docker shell scripts to start and remove EPICS containers
+- the Anaconda python installation (the base environment)
+- the Bluesky framework in the base environment
+- the example data files
+- the (bluesky) instrument package
+- per-user setup scripts
 
 ```sh
 sudo su

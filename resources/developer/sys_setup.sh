@@ -18,7 +18,7 @@ cp ../../environment.yml /opt
 # install the starter scripts for the Docker containers
 
 url=https://raw.githubusercontent.com/prjemian/epics-docker/master/v1.1
-cd /opt
+pushd /opt
 wget ${url}/n5_custom_synApps/start_xxx.sh
 wget ${url}/n5_custom_synApps/remove_container.sh
 wget ${url}/n6_custom_areaDetector/start_adsim.sh
@@ -40,3 +40,17 @@ export PATH=${PATH}:/opt/miniconda3/bin
 source /opt/miniconda3/bin/activate
 conda env create -f /opt/environment.yml
 conda env list
+
+############################################################
+# instrument package and data examples
+
+popd
+cp \
+    add2bash.rc \
+    blueskyStarter.sh \
+    class_data_examples.zip \
+    instrument.tar.gz \
+    user_setup.sh \
+    /home/
+/bin/rm -rf /opt/class_data_examples
+cd /opt && unzip /home/class_data_examples.zip
