@@ -30,7 +30,6 @@ pushd resources/developer/
 export INSTALLER_PATH=$(pwd)
 cp ../example-data/class_data_examples.zip ${INSTALLER_PATH}
 pushd ../..
-cp ./blueskyStarter.sh ${INSTALLER_PATH}
 tar czf ${INSTALLER_PATH}/bluesky.tar.gz ./bluesky
 popd
 ```
