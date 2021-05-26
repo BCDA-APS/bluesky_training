@@ -25,7 +25,12 @@ Gather various resources to simplify infrastructure installation.
 ```sh
 pushd resources/developer/
 export INSTALLER_PATH=$(pwd)
-make instrument >> infrastructure_setup-$(date -Idate).log
+cp ../example-data/class_data_examples.zip ${INSTALLER_PATH}
+pushd ../..
+cp ./blueskyStarter.sh ${INSTALLER_PATH}
+cd ./bluesky/
+tar czf ${INSTALLER_PATH}/instrument.tar.gz ./instrument
+popd
 ```
 
 Installs (to `/opt`):

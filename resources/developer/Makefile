@@ -31,9 +31,3 @@ net ::
 	docker network create \
 		--driver bridge \
 		$(NET)
-
-instrument ::
-	cp ../../environment.yml ./
-	cp ../../blueskyStarter.sh ./
-	cp ../example-data/class_data_examples.zip ./
-	cd ../../bluesky && tar czf ./resources/developer/instrument.tar.gz instrument
