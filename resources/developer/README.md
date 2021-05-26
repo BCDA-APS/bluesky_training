@@ -88,17 +88,13 @@ docker ps
 
 ## Configure each user account
 
----------------
+Provision each user account with notebooks and access to the Python software
+stack.  Create an IOC starter shell script for each account and add it to the
+script to (re)start IOCs for all configured accounts.
 
-... orphaned setup ...
+Must be done from root account.
 
 ```sh
-############################################################
-# generic IOC prefixes
-
-export GP_IOC_PREFIX="gp:"
-export AD_IOC_PREFIX="ad:"
-
 ############################################################
 # user accounts
 
@@ -111,9 +107,22 @@ EOF
 chmod +x /opt/start_iocs.sh
 
 USERS=
-USERS+=" test7"
-USERS+=" test8"
-USERS+=" test9"
+USERS+=" test0"
+USERS+=" test1"
+USERS+=" test2"
+USERS+=" arun"
+USERS+=" cypark"
+USERS+=" dutc"
+USERS+=" hrubiak"
+USERS+=" jade"
+USERS+=" jssmith"
+USERS+=" kenesei"
+USERS+=" kmpeters"
+USERS+=" lrebuffi"
+USERS+=" makarov"
+USERS+=" prep0"
+USERS+=" strempfer"
+USERS+=" wenqianxu"
 
 for u in ${USERS} ; do
     # /usr/sbin/useradd -d /home/$u -m $u -p $u;
