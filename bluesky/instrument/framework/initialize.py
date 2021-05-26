@@ -3,7 +3,7 @@ initialize the bluesky framework
 """
 
 __all__ = """
-    RE  db  sd  bec  peaks
+    RE  db cat  sd  bec  peaks
     bp  bps  bpp
     summarize_plan
     np
@@ -70,6 +70,7 @@ if not os.path.exists(md_path):
 
     old_md = get_history()
 
+
 # Set up a RunEngine and use metadata backed PersistentDict
 RE = RunEngine({})
 RE.md = PersistentDict(md_path)
@@ -82,7 +83,8 @@ callback_db = {}
 
 # Connect with our mongodb database
 catalog_name = "class_2021_03"
-db = databroker.catalog[catalog_name].v1
+cat = databroker.catalog[catalog_name]
+db = cat.v1
 logger.info(f"using databroker catalog '{catalog_name}'")
 
 # Subscribe metadatastore to documents.
