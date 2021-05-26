@@ -16,13 +16,14 @@
 ############################################################
 # Docker & EPICS IOCs
 
-# docker already installed
+# pre-requisite: docker already installed
+# install the starter scripts for the Docker containers
 
-url=https://raw.githubusercontent.com/prjemian/epics-docker/master
+url=https://raw.githubusercontent.com/prjemian/epics-docker/master/v1.1
 cd /opt
-wget ${url}/n3_synApps/start_xxx.sh
-wget ${url}/n4_areaDetector/start_adsim.sh
-wget ${url}/n3_synApps/remove_container.sh
+wget ${url}/n5_custom_synApps/start_xxx.sh
+wget ${url}/n5_custom_synApps/remove_container.sh
+wget ${url}/n6_custom_areaDetector/start_adsim.sh
 chmod +x start_xxx.sh start_adsim.sh remove_container.sh
 
 ############################################################
