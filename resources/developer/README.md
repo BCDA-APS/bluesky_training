@@ -26,11 +26,11 @@ git checkout 4-refactor-one-folder
 Gather various resources to simplify infrastructure installation.
 
 ```sh
+cd bluesky_instrument_training/
 pushd resources/developer/
 export INSTALLER_PATH=$(pwd)
-cp ../example-data/class_data_examples.zip ${INSTALLER_PATH}
-pushd ../..
-tar czf ${INSTALLER_PATH}/bluesky.tar.gz ./bluesky
+cd ~
+tar czf course_content.tar.gz ./bluesky_instrument_training
 popd
 ```
 

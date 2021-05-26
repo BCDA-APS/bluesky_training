@@ -47,9 +47,8 @@ conda env list
 
 popd
 cp \
-    blueskyStarter.sh \
-    class_data_examples.zip \
-    bluesky.tar.gz \
+    /home/jemian/course_content.tar.gz \
+    /home/jemian/bluesky_instrument_training/resources/example-data/class_data_examples.zip \
     user_setup.sh \
     /home/
 /bin/rm -rf /opt/class_data_examples

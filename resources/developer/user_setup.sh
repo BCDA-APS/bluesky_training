@@ -53,15 +53,22 @@ from instrument.collection import *
 EOF
 
 # ~/bluesky directory
-tar xzf /home/bluesky.tar.gz ./
+mkdir ~/installer
+cd ~/installer
+tar xzf /home/course_content.tar.gz 
+cd bluesky_instrument_training
+mv ./bluesky ~/
+mv *.ipynb ~/
+cd ~
+/bin/rm -rf ./installer
+chmod +x ~/bluesky/blueskyStarter.sh
 
 ############################################################
 # bash starter script
 
-cp /home/blueskyStarter.sh ./
 pushd ~/bin
 /bin/rm -f ./blueskyStarter.sh
-ln -s ${IPYTHON_DIR}/profile_bluesky/startup/blueskyStarter.sh ./
+ln -s ~/bluesky/blueskyStarter.sh ./
 popd
 
 ############################################################
