@@ -38,7 +38,8 @@ bash Miniconda3-latest-Linux-x86_64.sh -b -p /opt/miniconda3
 # source "/opt/miniconda3/etc/profile.d/conda.sh"
 export PATH=${PATH}:/opt/miniconda3/bin
 source /opt/miniconda3/bin/activate
-conda env create -f /opt/environment.yml
+# add Bluesky framework to base environment
+conda env update -n base -f /opt/environment.yml
 conda env list
 
 ############################################################
@@ -46,10 +47,9 @@ conda env list
 
 popd
 cp \
-    add2bash.rc \
     blueskyStarter.sh \
     class_data_examples.zip \
-    instrument.tar.gz \
+    bluesky.tar.gz \
     user_setup.sh \
     /home/
 /bin/rm -rf /opt/class_data_examples

@@ -9,13 +9,15 @@
 ############################################################
 # operating environment
 
-source /opt/miniconda3/bin/activate
-conda init
-
 mkdir -p ~/bin
 
 # prefixes for GP and AD IOCs
 cat > ~/.bash_aliases << EOF
+# user configuration of bash shell
+
+export PATH="\${HOME}/bin:\${PATH}"
+export PATH="\${PATH}:/opt/miniconda3/bin"
+
 #
 # IOC prefixes
 export GP_IOC_PREFIX="gp${USER}:"
@@ -28,7 +30,8 @@ export EPICS_CA_AUTO_ADDR_LIST=NO
 
 EOF
 
-cat /home/add2bash.rc >> ~/.bash_aliases
+source /opt/miniconda3/bin/activate
+conda init
 
 export GP_IOC_PREFIX="gp${USER}:"
 export AD_IOC_PREFIX="ad${USER}:"
@@ -42,12 +45,15 @@ ipython profile create --ipython-dir=${IPYTHON_DIR} --profile=bluesky
 
 env | sort > env.txt
 
-cd ${IPYTHON_DIR}/profile_bluesky/startup
-tar xzf /home/instrument.tar.gz
-
-cat > run_instrument.py << EOF
+cat > ${IPYTHON_DIR}/profile_bluesky/startup/run_instrument.py << EOF
+import os
+import sys
+sys.path.append(os.path.join(os.environ["HOME"], "bluesky"))
 from instrument.collection import *
 EOF
+
+# ~/bluesky directory
+tar xzf /home/bluesky.tar.gz ./
 
 ############################################################
 # bash starter script

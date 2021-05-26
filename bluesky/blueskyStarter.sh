@@ -6,7 +6,7 @@ if [[ "${CONDA_BIN}" = "." ]]; then
 fi
 export CONDA_ACTIVATE="${CONDA_BIN}/activate"
 # export CONDA_ENVIRONMENT=bluesky_2021_1
-export CONDA_ENVIRONMENT=class_2021_03
+export CONDA_ENVIRONMENT=base
 
 export IPYTHON_PROFILE=bluesky
 export IPYTHONDIR="${HOME}/.ipython-bluesky"

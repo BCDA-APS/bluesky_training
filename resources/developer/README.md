@@ -31,8 +31,7 @@ export INSTALLER_PATH=$(pwd)
 cp ../example-data/class_data_examples.zip ${INSTALLER_PATH}
 pushd ../..
 cp ./blueskyStarter.sh ${INSTALLER_PATH}
-cd ./bluesky/
-tar czf ${INSTALLER_PATH}/instrument.tar.gz ./instrument
+tar czf ${INSTALLER_PATH}/bluesky.tar.gz ./bluesky
 popd
 ```
 
