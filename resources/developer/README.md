@@ -4,6 +4,8 @@
   - [Infrastructure: `sys_setup.sh`](#infrastructure-sys_setupsh)
     - [Get the installation scripts](#get-the-installation-scripts)
     - [Install the infrastructure](#install-the-infrastructure)
+    - [Get the EPICS docker images](#get-the-epics-docker-images)
+  - [Configure each user account](#configure-each-user-account)
 
 ## Infrastructure: `sys_setup.sh`
 
@@ -48,6 +50,35 @@ bash ./sys_setup.sh 2>&1 >> infrastructure_setup-$(date -Idate).log
 exit
 popd
 ```
+
+### Get the EPICS docker images
+
+For the first time, download the docker images for the two types of
+EPICS IOC we'll need (we need one of each for every user).  It takes
+some time to download the images for the first time, so do that now.
+
+```sh
+# confirm which containers are running
+docker ps
+
+# start a general purpose EPICS IOC with prefix gp
+/opt/start_xxx.sh gp
+
+# start a simulated area detector EPICS IOC with prefix ad
+/opt/start_adsim.sh ad
+
+# confirm which containers are running
+docker ps
+
+# stop the containers
+/opt/remove_container.sh iocgp
+/opt/remove_container.sh iocad
+
+# confirm which containers are running
+docker ps
+```
+
+## Configure each user account
 
 ---------------
 
