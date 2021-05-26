@@ -91,39 +91,39 @@ cp \
 cd /opt && unzip /home/class_data_examples.zip
 popd
 
-############################################################
-# user accounts
-
-cd /opt
-cat > ./start_iocs.sh << EOF
-#!/bin/bash
-# start all class EPICS IOCs
-#
-EOF
-chmod +x /opt/start_iocs.sh
-
-USERS=
-USERS+=" test7"
-USERS+=" test8"
-USERS+=" test9"
-
-for u in ${USERS} ; do
-    # /usr/sbin/useradd -d /home/$u -m $u -p $u;
-
-    # run the setup script as the user
-    su -l -c /home/user_setup.sh - ${u};
-
-    ioc_starter="/opt/ioc_start_${u}.sh"
-    cat > ${ioc_starter} << EOF
-#!/bin/bash
-# file: ${ioc_starter}
-# purpose: (re)start all EPICS IOCs for user: ${u}
-
-# NOTE: no trailing colon here
-/opt/start_adsim.sh ad${u}
-/opt/start_xxx.sh gp${u}
-EOF
-    chmod +x "${ioc_starter}"
-    echo "${ioc_starter}" >> /opt/start_iocs.sh
-
-done
+# ############################################################
+# # user accounts
+# 
+# cd /opt
+# cat > ./start_iocs.sh << EOF
+# #!/bin/bash
+# # start all class EPICS IOCs
+# #
+# EOF
+# chmod +x /opt/start_iocs.sh
+# 
+# USERS=
+# USERS+=" test7"
+# USERS+=" test8"
+# USERS+=" test9"
+# 
+# for u in ${USERS} ; do
+#     # /usr/sbin/useradd -d /home/$u -m $u -p $u;
+# 
+#     # run the setup script as the user
+#     su -l -c /home/user_setup.sh - ${u};
+# 
+#     ioc_starter="/opt/ioc_start_${u}.sh"
+#     cat > ${ioc_starter} << EOF
+# #!/bin/bash
+# # file: ${ioc_starter}
+# # purpose: (re)start all EPICS IOCs for user: ${u}
+# 
+# # NOTE: no trailing colon here
+# /opt/start_adsim.sh ad${u}
+# /opt/start_xxx.sh gp${u}
+# EOF
+#     chmod +x "${ioc_starter}"
+#     echo "${ioc_starter}" >> /opt/start_iocs.sh
+# 
+# done
