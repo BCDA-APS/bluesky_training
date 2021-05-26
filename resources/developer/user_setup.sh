@@ -9,7 +9,8 @@
 ############################################################
 # operating environment
 
-. /opt/miniconda3/bin/activate class_2021_03
+source /opt/miniconda3/bin/activate
+conda init
 
 mkdir -p ~/bin
 
@@ -26,6 +27,7 @@ export EPICS_CA_ADDR_LIST=172.17.255.255
 export EPICS_CA_AUTO_ADDR_LIST=NO
 
 EOF
+
 cat /home/add2bash.rc >> ~/.bash_aliases
 
 export GP_IOC_PREFIX="gp${USER}:"
