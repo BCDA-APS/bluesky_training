@@ -46,8 +46,7 @@ popd
 
 ---------------
 
-Install the example data files, the (bluesky) instrument package, and
-per-user setup scripts
+... orphaned setup ...
 
 ```sh
 ############################################################
@@ -55,26 +54,6 @@ per-user setup scripts
 
 export GP_IOC_PREFIX="gp:"
 export AD_IOC_PREFIX="ad:"
-
-############################################################
-# example data
-
-repo_url=https://github.com/BCDA-APS/bluesky_instrument_training
-cd ${HOME}
-/bin/rm -rf bluesky_instrument_training  # for repeat runs
-git clone ${repo_url}
-pushd ${HOME}/bluesky_instrument_training/resources/developer
-make instrument
-cp \
-    add2bash.rc \
-    blueskyStarter.sh \
-    class_data_examples.zip \
-    instrument.tar.gz \
-    user_setup.sh \
-    /home/
-/bin/rm -rf /opt/class_data_examples
-cd /opt && unzip /home/class_data_examples.zip
-popd
 
 ############################################################
 # user accounts
