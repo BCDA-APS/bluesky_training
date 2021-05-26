@@ -64,7 +64,7 @@ popd
 mkdir -p ~/.local/share/intake
 cat > ~/.local/share/intake/databroker_mongodb.yml << EOF
 sources:
-  class_2021_03:
+  dutc_training:
     args:
       asset_registry_db: mongodb://localhost:27017/${USER}-bluesky
       metadatastore_db: mongodb://localhost:27017/${USER}-bluesky
