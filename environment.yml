@@ -6,47 +6,48 @@ channels:
   - aps-anl-tag
 dependencies:
   # - anaconda
+  - aps-dm-api
+  - apstools
   - area-detector-handlers
+  - black
   - bluesky>=1.6.2
   - databroker-pack
   - databroker>=1.2
+  - flake8
   - h5py
+  - hklpy
   - imagecodecs-lite
   - ipympl
   - ipython
   - jupyter
   - jupyterlab
   - lxml
+  - nexpy
   - notebook
   - ophyd>=1.5.1
+  - pandas
   - pint
   - pip
   - psutil
+  - punx
   - pyEpics>=3.4.2
   - pylint
+  - pymca
   - pymongo
   - pyqt=5
   - pyRestTable
+  - pytest
   - python>=3.8
   - qt=5
   - scikit-image
   - spec2nexus
+  - sphinx
+  - sphinxcontrib-napoleon
   - stdlogpj
   - versioneer
   - xlrd
-  - aps-dm-api
-  - apstools
-  - black
-  - flake8
-  - hklpy
-  - nexpy
-  - pandas
-  - punx
-  - pymca
-  - sphinx
-  - sphinxcontrib-napoleon
-  - pytest
-  - pip:
-    - bluesky-live
-    # - sphinx-rtd-theme
-    - super-state-machine
+  # pip not needed now: all packages included from above
+  # - pip:
+  #   - bluesky-live
+  #   # - sphinx-rtd-theme
+  #   - super-state-machine
