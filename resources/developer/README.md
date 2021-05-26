@@ -4,6 +4,7 @@
   - [Infrastructure: `sys_setup.sh`](#infrastructure-sys_setupsh)
     - [Get the installation scripts](#get-the-installation-scripts)
     - [Install the infrastructure](#install-the-infrastructure)
+    - [update the `conda` tool](#update-the-conda-tool)
     - [Get the EPICS docker images](#get-the-epics-docker-images)
   - [Configure each user account](#configure-each-user-account)
 
@@ -49,6 +50,18 @@ sudo su
 bash ./sys_setup.sh 2>&1 >> infrastructure_setup-$(date -Idate).log
 exit
 popd
+```
+
+### update the `conda` tool
+
+Sometimes, the Miniconda installer provides an older `conda` tool.  If
+suggested, update `conda`:
+
+```sh
+sudo su
+source /opt/miniconda3/bin/activate
+conda update conda
+exit
 ```
 
 ### Get the EPICS docker images
