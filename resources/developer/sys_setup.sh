@@ -48,6 +48,7 @@ export PATH=${PATH}:/opt/miniconda3/bin
 source /opt/miniconda3/bin/activate
 # add Bluesky framework to base environment
 conda env update -n base -f /opt/environment.yml
+pip install dotenv
 conda env list
 
 ############################################################
