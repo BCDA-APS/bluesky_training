@@ -52,7 +52,17 @@ sys.path.append(os.path.join(os.environ["HOME"], "bluesky"))
 from instrument.collection import *
 EOF
 
-# ~/bluesky directory
+############################################################
+# create~/bluesky directory
+cd ~
+if [ -d "bluesky" ]; then 
+    # move old dir out of the way
+    TS=$(date -Iseconds | sed s+':'+''+g -)
+    TAR_NAME="bluesky-${TS}.tar.gz"
+    echo "archive existing 'bluesky' directory to ${TAR_NAME}"
+    tar czf ${TAR_NAME} ./bluesky
+    /bin/rm -rf ./bluesky
+fi
 mkdir ~/installer
 cd ~/installer
 tar xzf /home/course_content.tar.gz 
