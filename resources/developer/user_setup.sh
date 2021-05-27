@@ -85,9 +85,9 @@ popd
 # databroker configuration YAML file
 
 mkdir -p ~/.local/share/intake
-cat > ~/.local/share/intake/databroker_mongodb.yml << EOF
+cat > ~/.local/share/intake/training.yml << EOF
 sources:
-  dutc_training:
+  training:
     args:
       asset_registry_db: mongodb://localhost:27017/${USER}-bluesky
       metadatastore_db: mongodb://localhost:27017/${USER}-bluesky

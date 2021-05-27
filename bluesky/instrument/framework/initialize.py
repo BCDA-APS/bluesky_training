@@ -82,7 +82,7 @@ if old_md is not None:
 callback_db = {}
 
 # Connect with our mongodb database
-catalog_name = "dutc_training"
+catalog_name = "training"
 # databroker v2 api
 cat = databroker.catalog[catalog_name]
 # databroker v1 api
