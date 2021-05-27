@@ -7,6 +7,7 @@
     - [update the `conda` tool](#update-the-conda-tool)
     - [Get the EPICS docker images](#get-the-epics-docker-images)
   - [Configure each user account](#configure-each-user-account)
+  - [(Re)Start the EPICS IOCs for all accounts](#restart-the-epics-iocs-for-all-accounts)
 
 ## Infrastructure: `sys_setup.sh`
 
@@ -106,59 +107,59 @@ EOF
 chmod +x /opt/start_iocs.sh
 
 USERS=
-# USERS+=" dutc"
-# USERS+=" jade"
+USERS+=" dutc"
+USERS+=" jade"
 USERS+=" jemian"
-# USERS+=" arun"
-# USERS+=" cypark"
-# USERS+=" hrubiak"
-# USERS+=" jssmith"
-# USERS+=" kenesei"
-# USERS+=" kmpeters"
-# USERS+=" lrebuffi"
-# USERS+=" makarov"
-# USERS+=" strempfer"
-# USERS+=" wenqianxu"
-# USERS+=" audit0"
-# USERS+=" audit1"
-# USERS+=" audit2"
-# USERS+=" audit3"
-# USERS+=" audit4"
-# USERS+=" audit5"
-# USERS+=" audit6"
-# USERS+=" audit7"
-# USERS+=" audit8"
-# USERS+=" audit9"
-# USERS+=" prep0"
-# USERS+=" prep1"
-# USERS+=" prep2"
-# USERS+=" prep3"
-# USERS+=" prep4"
-# USERS+=" prep5"
-# USERS+=" prep6"
-# USERS+=" prep7"
-# USERS+=" prep8"
-# USERS+=" prep9"
-# USERS+=" student0"
-# USERS+=" student1"
-# USERS+=" student2"
-# USERS+=" student3"
-# USERS+=" student4"
-# USERS+=" student5"
-# USERS+=" student6"
-# USERS+=" student7"
-# USERS+=" student8"
-# USERS+=" student9"
-# USERS+=" test0"
-# USERS+=" test1"
-# USERS+=" test2"
-# USERS+=" test3"
-# USERS+=" test4"
-# USERS+=" test5"
-# USERS+=" test6"
-# USERS+=" test7"
-# USERS+=" test8"
-# USERS+=" test9"
+USERS+=" arun"
+USERS+=" cypark"
+USERS+=" hrubiak"
+USERS+=" jssmith"
+USERS+=" kenesei"
+USERS+=" kmpeters"
+USERS+=" lrebuffi"
+USERS+=" makarov"
+USERS+=" strempfer"
+USERS+=" wenqianxu"
+USERS+=" audit0"
+USERS+=" audit1"
+USERS+=" audit2"
+USERS+=" audit3"
+USERS+=" audit4"
+USERS+=" audit5"
+USERS+=" audit6"
+USERS+=" audit7"
+USERS+=" audit8"
+USERS+=" audit9"
+USERS+=" prep0"
+USERS+=" prep1"
+USERS+=" prep2"
+USERS+=" prep3"
+USERS+=" prep4"
+USERS+=" prep5"
+USERS+=" prep6"
+USERS+=" prep7"
+USERS+=" prep8"
+USERS+=" prep9"
+USERS+=" student0"
+USERS+=" student1"
+USERS+=" student2"
+USERS+=" student3"
+USERS+=" student4"
+USERS+=" student5"
+USERS+=" student6"
+USERS+=" student7"
+USERS+=" student8"
+USERS+=" student9"
+USERS+=" test0"
+USERS+=" test1"
+USERS+=" test2"
+USERS+=" test3"
+USERS+=" test4"
+USERS+=" test5"
+USERS+=" test6"
+USERS+=" test7"
+USERS+=" test8"
+USERS+=" test9"
 
 for u in ${USERS} ; do
     # run the setup script as the user
@@ -178,4 +179,13 @@ EOF
     echo "${ioc_starter}" >> /opt/start_iocs.sh
 
 done
+```
+
+## (Re)Start the EPICS IOCs for all accounts
+
+Run this command as root (this will stop then start the GP and AreaDetector IOC
+for each user account):
+
+```sh
+/opt/start_iocs.sh
 ```
