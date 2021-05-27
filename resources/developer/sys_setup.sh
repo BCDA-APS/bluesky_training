@@ -24,6 +24,14 @@ wget ${url}/n5_custom_synApps/remove_container.sh
 wget ${url}/n6_custom_areaDetector/start_adsim.sh
 chmod +x start_xxx.sh start_adsim.sh remove_container.sh
 
+# find the remove_container.sh script
+sed -i s:'remove_container.sh':'/opt/remove_container.sh':g ./start_xxx.sh
+sed -i s:'remove_container.sh':'/opt/remove_container.sh':g ./start_adsim.sh
+
+# remove unnecessary lines
+sed -i s:'echo -n "removing':'# echo -n "removing':g ./remove_container.sh
+sed -i s:'docker rm':'# docker rm':g ./remove_container.sh
+
 ############################################################
 # MongoDB
 

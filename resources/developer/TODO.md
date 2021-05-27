@@ -2,8 +2,8 @@
 
 2021-05-26
 
-* [ ] `start_xxx.sh` and `start_adsim.sh` need to find `remove_container.sh` : absolute paths needed
-* [ ] `remove_container.sh` does not need to remove container images after stopping since they remove themselves : two lines commented out
+* [x] `start_xxx.sh` and `start_adsim.sh` need to find `remove_container.sh` : absolute paths needed
+* [x] `remove_container.sh` does not need to remove container images after stopping since they remove themselves : two lines commented out
 * [x] need the [`dotenv`](https://github.com/pedroburon/dotenv) extension (`pip install dotenv`)
 
 Note: The jupyterhub runs from a custom docker container
