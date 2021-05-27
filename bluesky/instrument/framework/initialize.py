@@ -3,7 +3,7 @@ initialize the bluesky framework
 """
 
 __all__ = """
-    RE  db cat  sd  bec  peaks
+    RE  cat  sd  bec  peaks
     bp  bps  bpp
     summarize_plan
     np
