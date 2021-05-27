@@ -78,7 +78,7 @@ docker ps
 # confirm which containers are running
 docker ps
 
-# stop the containers
+# stop (and remove) the containers
 /opt/remove_container.sh iocgp
 /opt/remove_container.sh iocad
 
