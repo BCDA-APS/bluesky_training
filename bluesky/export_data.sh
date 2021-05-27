@@ -2,7 +2,7 @@
 
 # Export all data collected during Bluesky Case Studies course
 
-CATALOG=dutc_training
+CATALOG=training
 OUTPUT_DIR=./${CATALOG}
 OPTIONS=
 OPTIONS+=" --all"
