@@ -26,7 +26,6 @@ git checkout 4-refactor-one-folder
 Gather various resources to simplify infrastructure installation.
 
 ```sh
-export INSTALLER_PATH=${HOME}/bluesky_instrument_training/resources/developer
 cd ~
 tar czf ~/course_content.tar.gz ./bluesky_instrument_training
 ```
