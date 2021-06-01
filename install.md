@@ -36,8 +36,8 @@ starter scripts.
 The docker images will download on first use.  Install the scripts to manage the area detector VM:
 
     cd ~/bin
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/master/n4_areaDetector/start_adsim.sh
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/master/n3_synApps/remove_container.sh
+    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n6_custom_areaDetector/start_adsim.sh
+    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n5_custom_synApps/remove_container.sh
 
 Start the `ad:` EPICS VM (_IOC_ in the EPICS-speaking world):
 
@@ -57,8 +57,8 @@ IOC.  Use EPICS command (`caget`) within the container:
 The docker images will download on first use.  Install the scripts to manage the general purpose VM:
 
     cd ~/bin
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/master/n3_synApps/start_xxx.sh
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/master/n3_synApps/remove_container.sh
+    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n5_custom_synApps/start_xxx.sh
+    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n5_custom_synApps/remove_container.sh
 
 Start the `gp:` EPICS VM (_IOC_ in the EPICS-speaking world):
 
