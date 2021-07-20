@@ -4,10 +4,10 @@ This repository, via Jupyter notebooks, demonstrates use of the Bluesky framewor
 
 ## Notebooks
 
-* [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/4-refactor-one-folder/describe_instrument.ipynb)
-* [Bluesky Hello World](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/4-refactor-one-folder/bluesky/hello_world.ipynb)
-* [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/4-refactor-one-folder/bluesky/custom_plan.ipynb)
-* [Databroker analysis of 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/4-refactor-one-folder/bluesky/databroker_analysis.ipynb)
+* [Bluesky *Hello, World!*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/hello_world.ipynb)
+* [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/describe_instrument.ipynb)
+* [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/custom_plan.ipynb)
+* [Databroker analysis of 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/databroker_analysis.ipynb)
 
 ## Other Notebooks
 * [Watch a temperature](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/4-refactor-one-folder/watch_temperature.ipynb)
@@ -23,6 +23,17 @@ This repository, via Jupyter notebooks, demonstrates use of the Bluesky framewor
 ## Installation
 
 Instructions are available for [installation on Linux workstations](install.md).  The steps are similar on Mac OS and Windows but details are not provided here.
+
+## References
+
+name | URL
+--- | ---
+Bluesky Framework | https://blueskyproject.io/
+bluesky | https://blueskyproject.io/bluesky
+ophyd | https://blueskyproject.io/ophyd
+databroker | https://blueskyproject.io/databroker
+apstools | https://apstools.readthedocs.io/
+APS instruments | https://github.com/BCDA-APS/use_bluesky/wiki/
 
 ## References
 
