@@ -109,17 +109,8 @@ chmod +x /opt/start_iocs.sh
 USERS=
 USERS+=" dutc"
 USERS+=" jade"
-USERS+=" jemian"
-USERS+=" arun"
-USERS+=" cypark"
-USERS+=" hrubiak"
-USERS+=" jssmith"
-USERS+=" kenesei"
-USERS+=" kmpeters"
-USERS+=" lrebuffi"
-USERS+=" makarov"
-USERS+=" strempfer"
-USERS+=" wenqianxu"
+# TODO: specific user IDs next
+# additional accounts
 USERS+=" audit0"
 USERS+=" audit1"
 USERS+=" audit2"
