@@ -42,7 +42,7 @@ set of folders (created by tools from Bluesky's
 * [Copy data to another workstation](/resources/example-data/README.md)
 * [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb) using Data Broker
 
-### Quick Reference
+### Review
 
 * [Command Review](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/command_review.ipynb)
 * [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/describe_instrument.ipynb)
@@ -61,5 +61,7 @@ Bluesky Framework | https://blueskyproject.io/
 bluesky | https://blueskyproject.io/bluesky
 ophyd | https://blueskyproject.io/ophyd
 databroker | https://blueskyproject.io/databroker
+databroker-pack | https://blueskyproject.io/databroker-pack
 apstools | https://apstools.readthedocs.io/
 APS instruments | https://github.com/BCDA-APS/use_bluesky/wiki/
+APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
