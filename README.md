@@ -36,11 +36,16 @@ notebooks use data recorded previously and stored in a structured
 set of folders (created by tools from Bluesky's
 [databroker-pack](https://blueskyproject.io/databroker-pack/) package.)
 
+#### Data Processing, Reduction, and/or Analysis
+
 * [Access data later, after the measurement](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb) using Data Broker
 * [Analyze a 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/databroker_analysis.ipynb) using Data Broker
 * [Analyze a 2-D image on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb)
-* [Copy data to another workstation](/resources/example-data/README.md)
 * [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb) using Data Broker
+
+#### Data Movement
+
+* [Copy data to another workstation](/resources/example-data/README.md)
 
 ### Review
 
