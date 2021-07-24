@@ -25,6 +25,7 @@ addition to measurement activities.
 * [Lineup a 1-D peak](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/lineup_1d_peak.ipynb)
 * [Locate peak on 2-D area detector image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb)
 * [Watch a temperature](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/watch_temperature.ipynb)
+* [moving 2 motors with dynamic limits](demo_dynamic_limits_2motor.ipynb) - EPICS : Demo of dynamic limit signal to avoid collision of two motors
 
 ### Post-measurement (such as Analysis)
 
