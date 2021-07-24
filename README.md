@@ -30,14 +30,15 @@ addition to measurement activities.
 
 Typically, measurement data is sent to Bluesky's [databroker](https://blueskyproject.io/databroker) package for storage in a MongoDB
 database (or a structured set of folders) for access and analysis.  These
-notebooks use data recorded previously and stored in a structured set of folders
-(created by tools from Bluesky's
+notebooks use data recorded previously and stored in a structured
+set of folders (created by tools from Bluesky's
 [databroker-pack](https://blueskyproject.io/databroker-pack/) package.)
 
-* [Access data later, after the measurement](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb)
+* [Access data later, after the measurement](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb) using Data Broker
+* [Analyze a 2-D image using](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/databroker_analysis.ipynb) using Data Broker
 * [Analyze 2-D data on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb)
 * [Copy data to another workstation](/resources/example-data/README.md)
-* [Databroker analysis of 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/databroker_analysis.ipynb)
+* [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/use_bluesky/blob/main/lessons/plot_x_y_databroker.ipynb) using Data Broker
 
 ### Reference
 
