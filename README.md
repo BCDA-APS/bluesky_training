@@ -42,7 +42,7 @@ set of folders (created by tools from Bluesky's
 * [Copy data to another workstation](/resources/example-data/README.md)
 * [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb) using Data Broker
 
-### Reference
+### Quick Reference
 
 * [Command Review](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/command_review.ipynb)
 * [Overview of the `instrument` package](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/describe_instrument.ipynb)
