@@ -15,7 +15,7 @@ file::///demo_doodle.html#4.-As-ophyd.Device).  The previous sections
 work through why the ophyd support has to be a Device and not a Signal.
 Section 5 runs this with the bluesky `count() plan.
 
-To simulate a linux command to be run, a shell script (doodle.sh) was
+To simulate a linux command to be run, a shell script (`doodle.sh`) was
 created that prints a 5 second countdown to stdout (the terminal
 console).
 
@@ -25,4 +25,3 @@ file | description
 :--- | :---
 `demo_doodle.ipynb` | Jupyter notebook
 `doodle.sh` | Example Linux program (a bash shell script)
-`demo_doodle.html` | HTML rendering of the Jupyter notebook
