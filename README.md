@@ -38,7 +38,7 @@ set of folders (created by tools from Bluesky's
 * [Analyze a 2-D image using](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/databroker_analysis.ipynb) using Data Broker
 * [Analyze 2-D data on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb)
 * [Copy data to another workstation](/resources/example-data/README.md)
-* [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/use_bluesky/blob/main/lessons/plot_x_y_databroker.ipynb) using Data Broker
+* [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb) using Data Broker
 
 ### Reference
 
