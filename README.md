@@ -20,6 +20,7 @@ Includes hardware configuration ([ophyd](https://blueskyproject.io/ophyd)) and
 custom measurement plans ([bluesky](https://blueskyproject.io/bluesky)), in
 addition to measurement activities.
 
+* [Basic scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-scaler.ipynb)
 * [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/custom_plan.ipynb)
 * [Count the scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/count_scaler.ipynb)
 * [Lineup a 1-D peak](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/lineup_1d_peak.ipynb)
