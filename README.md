@@ -24,6 +24,7 @@ activities.
 
 1. [scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-scaler.ipynb)
 1. [motor](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-motor.ipynb)
+1. [step scan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-step-scan.ipynb)
 
 #### Advanced
 
