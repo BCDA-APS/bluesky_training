@@ -7,34 +7,54 @@ class.
 ## Notebooks
 
 Jupyter notebooks are used to document Bluesky-related activites and provide
-documentation.
+documentation.  They are gathered into sections by topic.  Within a section,
+there is no particular order, except as numbered.
 
 ### Introductory
 
 * [Bluesky *Hello, World!*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/hello_world.ipynb)
 * [Connect with EPICS](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb)
 
-### Measurement
+### Basic hardware configuration and measurement
 
-Includes hardware configuration ([ophyd](https://blueskyproject.io/ophyd)) and
-custom measurement plans ([bluesky](https://blueskyproject.io/bluesky)), in
-addition to measurement activities.
+These notebooks demonstrate the basics of hardware configuration
+([ophyd](https://blueskyproject.io/ophyd)) and custom measurement plans
+([bluesky](https://blueskyproject.io/bluesky)), in addition to measurement
+activities.
 
-* [Basic scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-scaler.ipynb)
-* [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/custom_plan.ipynb)
-* [Count the scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/count_scaler.ipynb)
-* [Lineup a 1-D peak](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/lineup_1d_peak.ipynb)
-* [Locate peak on 2-D area detector image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb)
-* [Move 2 motors with dynamic limits](demo_dynamic_limits_2motor.ipynb) - EPICS : Demo of dynamic limit signal to avoid collision of two motors
+1. [scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-scaler.ipynb)
+1. [motor](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic-motor.ipynb)
+
+#### Advanced
+
 * [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/use_bluesky/blob/main/lessons/linux_command_as_Device/demo_doodle.ipynb)
-* [Watch a temperature](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/watch_temperature.ipynb)
+
+### Measurement using the `instrument` package
+
+As the configuration of a system becomes more complex, it may be easier to
+describe (and startup) by making the steps into Python package that can be
+`import`ed.  These notebooks start with an `instrument` package that is
+preconfigured to use the general purpose `gp:` IOC and the area detector `ad:`
+IOC.
+
+1. [Count the scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/count_scaler.ipynb)
+1. [Watch a temperature](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/watch_temperature.ipynb)
+1. [Lineup a 1-D peak](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/lineup_1d_peak.ipynb)
+1. [Locate peak on 2-D area detector image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb)
+
+* [Custom bluesky plan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/custom_plan.ipynb)
+
+#### Advanced
+
+* [Move 2 motors with dynamic limits](demo_dynamic_limits_2motor.ipynb) - EPICS : Demo of dynamic limit signal to avoid collision of two motors
 
 ### Post-measurement (such as Analysis)
 
-Typically, measurement data is sent to Bluesky's [databroker](https://blueskyproject.io/databroker) package for storage in a MongoDB
-database (or a structured set of folders) for access and analysis.  These
-notebooks use data recorded previously and stored in a structured
-set of folders (created by tools from Bluesky's
+Typically, measurement data is sent to Bluesky's
+[databroker](https://blueskyproject.io/databroker) package for storage in a
+MongoDB database (or a structured set of folders) for access and analysis.
+These notebooks use data recorded previously and stored in a structured set of
+folders (created by tools from Bluesky's
 [databroker-pack](https://blueskyproject.io/databroker-pack/) package.)
 
 #### Data Processing, Reduction, and/or Analysis
