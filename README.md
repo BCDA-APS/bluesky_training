@@ -28,7 +28,7 @@ activities.
 
 #### Advanced
 
-* [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/use_bluesky/blob/main/lessons/linux_command_as_Device/demo_doodle.ipynb)
+* [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
 
 ### Measurement using the `instrument` package
 
@@ -47,7 +47,7 @@ IOC.
 
 #### Advanced
 
-* [Move 2 motors with dynamic limits](demo_dynamic_limits_2motor.ipynb) - EPICS : Demo of dynamic limit signal to avoid collision of two motors
+* [Move 2 motors with dynamic limits](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_dynamic_limits_2motor.ipynb) - EPICS : Demo of dynamic limit signal to avoid collision of two motors
 
 ### Post-measurement (such as Analysis)
 
