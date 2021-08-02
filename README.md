@@ -22,13 +22,13 @@ These notebooks demonstrate the basics of hardware configuration
 ([bluesky](https://blueskyproject.io/bluesky)), in addition to measurement
 activities.
 
-1. [scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic_scaler.ipynb)
-1. [motor](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic_motor.ipynb)
-1. [step scan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic_step_scan.ipynb)
+1. [scaler](basic_scaler.ipynb)
+1. [motor](basic_motor.ipynb)
+1. [step scan](basic_step_scan.ipynb)
 
 #### Advanced
 
-* [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
+* [Run a Linux command as an `ophyd.Device`](demo_doodle.ipynb)
 
 ### Measurement using the `instrument` package
 
