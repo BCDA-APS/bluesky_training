@@ -12,6 +12,8 @@ there is no particular order, except as numbered.
 
 ### Introductory
 
+The [APS Bluesky 101](APS_Bluesky_101.md) introductory course covers these two notebooks as well as scanning with scaler _v._ motor.
+
 * [Bluesky *Hello, World!*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/hello_world.ipynb)
 * [Connect with EPICS](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb)
 
