@@ -44,6 +44,7 @@ database server, and Python infrastructure.
 - How does `databroker` store the data?
 - What is MongoDB?
 - [How to execute Linux command from Bluesky?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
+- How to setup and use a diffractometer with Bluesky?
 
 ## Syllabus
 
