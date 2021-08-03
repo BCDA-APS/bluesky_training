@@ -10,8 +10,11 @@
 ## Overview
 
 The *APS Bluesky 101* class is the first in a series, providing a basic
-introduction to using the [Bluesky
-framework](https://blueskyproject.io).
+introduction to using the [Bluesky framework](https://blueskyproject.io).
+
+The class should take (roughly) about 3 hours.  The first hour will cover
+from the *Welcome* through the *Jupyter Lab* section.  The remaining time
+will be spent on the *Connect with EPICS and scan with Bluesky* section.
 
 The Linux Virtual Machine used to provide a complete system similar to
 what is used at an APS beam line, includes Bluesky software, EPICS
@@ -49,6 +52,8 @@ database server, and Python infrastructure.
 ## Syllabus
 
 - Bluesky 101
+  - Welcome
+  - Verify everyone's VM is working
   - Command line:
     - has IOC started? `caget gp:datetime`
     - to restart IOCs: `start_iocs.sh`
@@ -56,15 +61,16 @@ database server, and Python infrastructure.
   - Jupyter Lab
     - start Jupyter:
       1. `blueskyStarter.sh lab`
-      2. web browser starts in ~30s
+      2. automatically starts web browser (should appear within ~10s, ready in ~30s)
       3. opens in `bluesky` subdirectory
     - [*Hello World*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/hello_world.ipynb) and `ophyd.EpicsSignal`
-  - Connect with EPICS
+    - [More on `EpicsSignal`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
+  - Connect with EPICS and scan with Bluesky
     - [Scan with motor and scaler](https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/basic-motor-scaler-scan.ipynb)
       - Connect the motor
       - Connection the scaler
-      - Control the counting time
+      - Control the scaler's counting time
       - Prepare to scan
-      - Standard scan with standard plan: `bluesky.plans.scan()`
-      - Staging : Scan with _different_ counting time.
+      - Standard scan with standard _plan_: `bluesky.plans.scan()`
+      - *Staging* : Scan with _different_ counting time.
       - Custom scan _plan_ with configurable count time
