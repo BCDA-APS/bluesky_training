@@ -34,7 +34,7 @@ database server, and Python infrastructure.
 - The core parts of the [Bluesky](https://blueskyproject.io) Framework
 - Start [Jupyter](https://jupyter.org/) [Lab](https://jupyterlab.readthedocs.io) (in web browser) for Bluesky sessions
 - Connect with [EPICS](https://epics-controls.org/) (in the VM)
-- Setup and scan scaler _v._ motor using the Bluesky `RunEngine` and `databroker`
+- Setup and scan scaler _v._ motor using the `bluesky.RunEngine` and `databroker.catalog`
 
 ## Not covered here
 
