@@ -86,6 +86,9 @@ class MyPvPositioner(PVPositioner):
         self.readback.subscribe(self.cb_readback)
         self.setpoint.subscribe(self.cb_setpoint)
 
+        # the readback needs no adjective
+        self.readback.name = self.name
+
     def setup_temperature(
         self,
         setpoint=None,
