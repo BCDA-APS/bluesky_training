@@ -16,11 +16,11 @@ The class should take (roughly) about 3 hours.  The first hour will cover
 from the *Welcome* through the *Jupyter Lab* section.  The remaining time
 will be spent on the *Connect with EPICS and scan with Bluesky* section.
 
-The Linux Virtual Machine used to provide a complete system similar to
-what is used at an APS beam line, includes Bluesky software, EPICS
-client tools (both command line and GUI), IOCs for area detector and
-general purpose work, web browsers, graphical text editors, MongoDB
-database server, and Python infrastructure.
+The Linux Virtual Machine provides a complete, self-contained system with all
+software installed, similar to what is used for scientific measurements with
+an APS instrument, includes Bluesky software, EPICS client tools (both command
+line and GUI), IOCs for area detector and general purpose work, web browsers,
+graphical text editors, MongoDB database server, and Python infrastructure.
 
 ## Before the class
 
