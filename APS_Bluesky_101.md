@@ -31,23 +31,23 @@ database server, and Python infrastructure.
 
 ## Covered here
 
-- The core parts of Bluesky
-- Start Jupyter Lab (in web browser) for Bluesky sessions
-- Connect with EPICS (in the VM)
+- The core parts of the [Bluesky](https://blueskyproject.io) Framework
+- Start [Jupyter](https://jupyter.org/) [Lab](https://jupyterlab.readthedocs.io) (in web browser) for Bluesky sessions
+- Connect with [EPICS](https://epics-controls.org/) (in the VM)
 - Setup and scan scaler _v._ motor using the Bluesky `RunEngine` and `databroker`
 
 ## Not covered here
 
-- How is Bluesky deployed at the APS?
+- How is Bluesky deployed at the APS? (hint: This class provides an example.)
 - [How to access data from previous measurements?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb)
 - [How to plot data from previous scans?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb)
 - [How to send data to users?](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/README.md)
-- How to use EPICS area detectors? ([setup](https://apstools.readthedocs.io/en/latest/examples/_ad__pilatus.html), [measure](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb), [analyze from `databroker`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/databroker_analysis.ipynb))
-- How to support complex devices?
-- How does `databroker` store the data?
-- What is MongoDB?
+- How to use [EPICS area detectors](https://areadetector.github.io)? ([setup](https://apstools.readthedocs.io/en/latest/examples/_ad__pilatus.html), [measure](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb), [analyze from `databroker`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/databroker_analysis.ipynb))
+- How to support complex [devices](https://blueskyproject.io/ophyd/tutorials/device.html?highlight=device)?
+- How does [`databroker`](https://blueskyproject.io/databroker/) store the data?
+- What is [MongoDB](https://www.mongodb.com/)?
 - [How to execute Linux command from Bluesky?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
-- How to setup and use a diffractometer with Bluesky?
+- [How to setup and use a diffractometer with Bluesky?](https://blueskyproject.io/hklpy/examples/index.html)
 
 ## Syllabus
 
