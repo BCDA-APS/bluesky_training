@@ -28,7 +28,7 @@ activities.
 
 #### Advanced
 
-* [Run a Linux command as an `ophyd.Device`](demo_doodle.ipynb)
+* [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
 
 ### Measurement using the `instrument` package
 
