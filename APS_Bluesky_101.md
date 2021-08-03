@@ -26,8 +26,8 @@ database server, and Python infrastructure.
 
 - (required) [**Install the Virtual Machine**](https://github.com/BCDA-APS/epics-bluesky-vm/blob/main/install_vm.md) on your workstation.
 - (helpful) Read the [VM Overview](https://github.com/BCDA-APS/epics-bluesky-vm/blob/main/README.md#about-this-vm) and the [EPICS hardware simulations provided](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/describe_instrument.ipynb#Description).
-- (helpful) Have a basic understanding of running programs in Linux.
-- (helpful) Basic understanding of programming Python.
+- (helpful) Have a basic understanding of [running programs in Linux](https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners).
+- (helpful) [Basic understanding of programming Python.](https://www.python.org/about/gettingstarted/)
 
 ## Covered here
 
