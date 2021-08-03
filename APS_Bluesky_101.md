@@ -9,8 +9,8 @@
 
 ## Overview
 
-The *APS Bluesky 101* class is the first in a series, providing a basic
-introduction to using the [Bluesky framework](https://blueskyproject.io).
+The *APS Bluesky 101* class is the first in a series, providing a basic, yet
+hands-on, introduction to using the [Bluesky framework](https://blueskyproject.io).
 
 The class should take (roughly) about 3 hours.  The first hour will cover
 from the *Welcome* through the *Jupyter Lab* section.  The remaining time
