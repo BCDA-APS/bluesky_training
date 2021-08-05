@@ -6,6 +6,7 @@
   - [Covered here](#covered-here)
   - [Not covered here](#not-covered-here)
   - [Syllabus](#syllabus)
+  - [Reference](#reference)
 
 ## Overview
 
@@ -76,3 +77,10 @@ graphical text editors, MongoDB database server, and Python infrastructure.
       - Standard scan with standard _plan_: `bluesky.plans.scan()`
       - *Staging* : Scan with _different_ counting time.
       - Custom scan _plan_ with configurable count time
+
+## Reference
+
+- [Nice list](https://blueskyproject.io/tutorials/README.html#references)
+- [Bluesky tutorials](https://blueskyproject.io/tutorials/README.html)
+- [Jupyter Lab](https://jupyterlab.readthedocs.io)
+- [EPICS](https://epics-controls.org/) ([old web site](https://epics.anl.gov/))
