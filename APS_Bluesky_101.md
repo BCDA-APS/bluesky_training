@@ -39,6 +39,7 @@ graphical text editors, MongoDB database server, and Python infrastructure.
 ## Not covered here
 
 - How is Bluesky deployed at the APS? (hint: This class provides an example.)
+- Are there other tutorials available online?  [Yes!](https://blueskyproject.io/tutorials/README.html)
 - [How to access data from previous measurements?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb)
 - [How to plot data from previous scans?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb)
 - [How to send data to users?](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/README.md)
