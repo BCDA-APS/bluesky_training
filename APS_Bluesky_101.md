@@ -60,6 +60,14 @@ graphical text editors, MongoDB database server, and Python infrastructure.
     - has IOC started? `caget gp:datetime`
     - to restart IOCs: `start_iocs.sh`
     - start EPICS GUI: `start_caQtDM_gp`
+  - apply a class software update
+    
+    ```sh
+    cd ~/training
+    git pull
+    cd ~/
+    ```
+
   - Jupyter Lab
     - start Jupyter:
       1. `blueskyStarter.sh lab`
