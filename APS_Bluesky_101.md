@@ -66,6 +66,7 @@ graphical text editors, MongoDB database server, and Python infrastructure.
       3. opens in `bluesky` subdirectory
     - [*Hello World*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/hello_world.ipynb) and `ophyd.EpicsSignal`
     - [More on `EpicsSignal`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
+    - For more about Juypter, see the Bluesky [Hello Python and Jupyter](https://blueskyproject.io/tutorials/Hello%20Python%20and%20Jupyter.html) Tutorial.
   - Connect with EPICS and scan with Bluesky
     - [Scan with motor and scaler](https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/basic-motor-scaler-scan.ipynb)
       - Connect the motor
