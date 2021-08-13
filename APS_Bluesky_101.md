@@ -29,7 +29,15 @@ graphical text editors, MongoDB database server, and Python infrastructure.
   - Welcome
   - Check VMs are working
     - spot check (should check _before_ class to fix problems) or follow as observer
-  - apply software updates & patches: `bash ~/training/patch1.sh`
+  - apply software updates & patches:
+    
+    ```sh
+    cd ~/training
+    git pull
+    bash ./patch1.sh
+    cd ~/
+    ```
+
 - half-hour
   - start Jupyter lab: `blueskyStarter.sh lab`
   - run `hello_world.ipynb` notebook (10 minutes)
