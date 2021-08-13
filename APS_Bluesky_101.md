@@ -2,10 +2,10 @@
 
 - [APS Bluesky 101](#aps-bluesky-101)
   - [Overview](#overview)
+  - [Syllabus](#syllabus)
   - [Before the class](#before-the-class)
   - [Covered here](#covered-here)
   - [Not covered here](#not-covered-here)
-  - [Syllabus](#syllabus)
   - [Reference](#reference)
 
 ## Overview
@@ -22,6 +22,32 @@ software installed, similar to what is used for scientific measurements with
 an APS instrument, includes Bluesky software, EPICS client tools (both command
 line and GUI), IOCs for area detector and general purpose work, web browsers,
 graphical text editors, MongoDB database server, and Python infrastructure.
+
+## Syllabus
+
+- half-hour
+  - Welcome
+  - Check VMs are working
+    - spot check (should check _before_ class to fix problems) or follow as observer
+  - apply software updates & patches: `bash ~/training/patch1.sh`
+- half-hour
+  - start Jupyter lab: `blueskyStarter.sh lab`
+  - run `hello_world.ipynb` notebook (10 minutes)
+  - Challenges and Discussion (remaining time, ~25 minutes)
+- half-hour -  `basic-motor-scaler-scan.ipynb` notebook
+  - Connect the motor
+  - Connect the scaler
+  - Prepare to scan
+- half-hour
+    - First scan
+    - discussion
+    - break
+- half-hour
+  - Fix a few _problems_
+  - Scan with a *different* counting time : _staging_
+  - Custom plan with configurable count time
+- half-hour
+  - Challenges and Discussion
 
 ## Before the class
 
@@ -51,44 +77,11 @@ graphical text editors, MongoDB database server, and Python infrastructure.
 - [How to execute Linux command from Bluesky?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
 - [How to setup and use a diffractometer with Bluesky?](https://blueskyproject.io/hklpy/examples/index.html)
 
-## Syllabus
-
-- Bluesky 101
-  - Welcome
-  - Verify everyone's VM is working
-  - Command line:
-    - has IOC started? `caget gp:datetime`
-    - to restart IOCs: `start_iocs.sh`
-    - start EPICS GUI: `start_caQtDM_gp`
-  - apply a class software update
-    
-    ```sh
-    cd ~/training
-    git pull
-    cd ~/
-    ```
-
-  - Jupyter Lab
-    - start Jupyter:
-      1. `blueskyStarter.sh lab`
-      2. automatically starts web browser (should appear within ~10s, ready in ~30s)
-      3. opens in `bluesky` subdirectory
-    - [*Hello World*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/hello_world.ipynb) and `ophyd.EpicsSignal`
-    - [More on `EpicsSignal`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
-    - For more about Juypter, see the Bluesky [Hello Python and Jupyter](https://blueskyproject.io/tutorials/Hello%20Python%20and%20Jupyter.html) Tutorial.
-  - Connect with EPICS and scan with Bluesky
-    - [Scan with motor and scaler](https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/basic-motor-scaler-scan.ipynb)
-      - Connect the motor
-      - Connection the scaler
-      - Control the scaler's counting time
-      - Prepare to scan
-      - Standard scan with standard _plan_: `bluesky.plans.scan()`
-      - *Staging* : Scan with _different_ counting time.
-      - Custom scan _plan_ with configurable count time
-
 ## Reference
 
 - [Nice list](https://blueskyproject.io/tutorials/README.html#references)
 - [Bluesky tutorials](https://blueskyproject.io/tutorials/README.html)
 - [Jupyter Lab](https://jupyterlab.readthedocs.io)
 - [EPICS](https://epics-controls.org/) ([old web site](https://epics.anl.gov/))
+- [More on `EpicsSignal`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
+- For more about Juypter, see the Bluesky [Hello Python and Jupyter](https://blueskyproject.io/tutorials/Hello%20Python%20and%20Jupyter.html) Tutorial.
