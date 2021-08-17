@@ -33,6 +33,7 @@ graphical text editors, MongoDB database server, and Python infrastructure.
     
     ```sh
     cd ~/training
+    git stash
     git pull
     bash ./patch1.sh
     cd ~/
