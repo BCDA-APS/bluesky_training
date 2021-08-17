@@ -40,8 +40,8 @@ graphical text editors, MongoDB database server, and Python infrastructure.
 
 - half-hour
   - start Jupyter lab: `blueskyStarter.sh lab`
-  - run `hello_world.ipynb` notebook (10 minutes)
-  - Challenges and Discussion (remaining time, ~25 minutes)
+  - run `hello_world.ipynb` notebook
+  - Challenges and Discussion
 - half-hour -  `basic-motor-scaler-scan.ipynb` notebook
   - Connect the motor
   - Connect the scaler
