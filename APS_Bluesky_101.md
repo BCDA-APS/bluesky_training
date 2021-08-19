@@ -25,6 +25,8 @@ graphical text editors, MongoDB database server, and Python infrastructure.
 
 ## Syllabus
 
+note: time spans are estimates
+
 - half-hour
   - Welcome
   - Check VMs are working
