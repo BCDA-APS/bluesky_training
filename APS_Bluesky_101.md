@@ -62,7 +62,10 @@ note: time spans are estimates
 
 ## Before the class
 
-- (required) [**Install the Virtual Machine**](https://github.com/BCDA-APS/epics-bluesky-vm/blob/main/install_vm.md) on your workstation.
+- (required) [**Install the Virtual Machine**](https://github.com/BCDA-APS/epics-bluesky-vm/blob/main/install_vm.md) on your workstation if you are permitted to install software on your computer.
+  - If you cannot install and run the VM, you can attend the course as
+    an observer or view the video later.  A link to the video will be provided
+    once it becomes available.
 - (helpful) Read the [VM Overview](https://github.com/BCDA-APS/epics-bluesky-vm/blob/main/README.md#about-this-vm) and the [EPICS hardware simulations provided](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/describe_instrument.ipynb#Description).
 - (helpful) Have a basic understanding of [running programs in Linux](https://maker.pro/linux/tutorial/basic-linux-commands-for-beginners).
 - (helpful) [Basic understanding of programming Python.](https://www.python.org/about/gettingstarted/)
