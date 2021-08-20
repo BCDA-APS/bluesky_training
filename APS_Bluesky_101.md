@@ -49,10 +49,10 @@ note: time spans are estimates
   - Connect the motor
   - Connect the scaler
   - Prepare to scan
+  - break
 - half-hour
     - First scan
     - discussion
-    - break
 - half-hour
   - Fix a few _problems_
   - Scan with a *different* counting time : _staging_
