@@ -11,6 +11,19 @@ acquisition, primarily using EPICS.
 
 (Based on a [2021 slide set](https://anl.box.com/s/l506pozlzjvy8d5ttjxq3a1fev4q2z6h) prepared for the APS Spectroscopy SIG.  Other slide sets are available in [ANL's Box folder](https://anl.box.com/s/kityevv6n9x7ngll99z53acy76bp64ys).)
 
+The Bluesky framework provides Python tools for coordinating measurement
+steps with data acquisition, analysis, and visualization.  For data
+acquisition, it relies on the popular PyEpics library to connect with
+the instrument control system.  For measurements, it provides a set of
+standard scanning plans as well as provisions to customize or build your
+own as needs dictate.  Visualization for data acquisition is provided
+through the matplotlib package and Qt while for analysis, packages such
+as dask, pandas, and others may be used.  Data may be exported in a
+variety of formats with existing tools or into a different format with
+your own tool.  As used at APS, primary data will be stored in a mongodb
+database for each instrument with Python tools available for retrieval
+and catalogging.
+
 ## Motivation
 
 Improve the experimental efficiency of our users.
