@@ -43,7 +43,7 @@ note: time spans are estimates
 
 - half-hour
   - start Jupyter lab: `blueskyStarter.sh lab`
-  - [Bluesky: Brief Introduction](intro2bluesky.md)
+  - [Bluesky: Brief Introduction](bluesky/intro2bluesky.md)
   - run `hello_world.ipynb` notebook
   - Challenges and Discussion
 - half-hour -  `basic-motor-scaler-scan.ipynb` notebook
