@@ -41,9 +41,9 @@ note: time spans are estimates
     cd ~/
     ```
 
-  - [Bluesky: Brief Introduction](intro2bluesky.md)
 - half-hour
   - start Jupyter lab: `blueskyStarter.sh lab`
+  - [Bluesky: Brief Introduction](intro2bluesky.md)
   - run `hello_world.ipynb` notebook
   - Challenges and Discussion
 - half-hour -  `basic-motor-scaler-scan.ipynb` notebook
