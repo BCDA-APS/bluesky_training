@@ -32,7 +32,7 @@ note: time spans are estimates
   - Check VMs are working
     - spot check (should check _before_ class to fix problems) or follow as observer
   - apply software updates & patches:
-    
+
     ```sh
     cd ~/training
     git stash
@@ -41,6 +41,7 @@ note: time spans are estimates
     cd ~/
     ```
 
+  - [Bluesky: Brief Introduction](intro2bluesky.md)
 - half-hour
   - start Jupyter lab: `blueskyStarter.sh lab`
   - run `hello_world.ipynb` notebook
@@ -49,10 +50,10 @@ note: time spans are estimates
   - Connect the motor
   - Connect the scaler
   - Prepare to scan
-  - break
+  - **Break**
 - half-hour
-    - First scan
-    - discussion
+  - First scan
+  - discussion
 - half-hour
   - Fix a few _problems_
   - Scan with a *different* counting time : _staging_
