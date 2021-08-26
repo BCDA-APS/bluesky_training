@@ -60,7 +60,7 @@ _A huge part of my job is to set these experiments up for success._
   - Discoverable data repositories
 - [**apstools**](https://apstools.readthedocs.io/)
   - Various Python tools for use with Bluesky at the APS
-  - synApps Devices & APS-specific Devices (unuldator, shutter, ...)
+  - synApps Devices & APS-specific Devices (undulator, shutter, ...)
   - APS storage ring `current`
   - Information from APS Proposal and ESAF databases
 
