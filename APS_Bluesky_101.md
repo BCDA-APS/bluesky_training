@@ -7,6 +7,8 @@
   - [Covered here](#covered-here)
   - [Not covered here](#not-covered-here)
   - [Reference](#reference)
+    - [Community](#community)
+    - [Information](#information)
 
 ## Overview
 
@@ -94,8 +96,17 @@ note: time spans are estimates
 
 ## Reference
 
-- [Nice list](https://blueskyproject.io/tutorials/README.html#references)
+### Community
+
+* [APS Bluesky Office Hours](https://tinyurl.com/BlueskyOfficeHours) every Wednesday, 2:30-3:30 pm
+* [APS Teams channel for Bluesky](https://teams.microsoft.com/l/channel/19%3af9523bff12844888b25bd7d49a5fad56%40thread.skype/Bluesky?groupId=334721bd-e27f-4663-add0-9941fb4e98e8&tenantId=0cfca185-25f7-49e3-8ae7-704d5326e285)
+* [interlaboratory Bluesky chat on Slack](https://nikea.slack.com)
+* [NSLS-II/DAMA open Q&A on Gitter](https://gitter.im/NSLS-II/DAMA)
+
+### Information
+
 - [Bluesky tutorials](https://blueskyproject.io/tutorials/README.html)
+- [References from Bluesky Tutorials](https://blueskyproject.io/tutorials/README.html#references)
 - [Jupyter Lab](https://jupyterlab.readthedocs.io)
 - [EPICS](https://epics-controls.org/) ([old web site](https://epics.anl.gov/))
 - [More on `EpicsSignal`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
