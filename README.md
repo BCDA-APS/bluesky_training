@@ -12,6 +12,8 @@ there is no particular order, except as numbered.
 
 ### Introductory
 
+The [APS Bluesky 101](APS_Bluesky_101.md) introductory course covers these two notebooks as well as scanning with scaler _v._ motor.
+
 * [Bluesky *Hello, World!*](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/hello_world.ipynb)
 * [Connect with EPICS](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb)
 
@@ -22,13 +24,13 @@ These notebooks demonstrate the basics of hardware configuration
 ([bluesky](https://blueskyproject.io/bluesky)), in addition to measurement
 activities.
 
-1. [scaler](basic_scaler.ipynb)
-1. [motor](basic_motor.ipynb)
-1. [step scan](basic_step_scan.ipynb)
+1. [scaler](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic_scaler.ipynb)
+1. [motor](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic_motor.ipynb)
+1. [step scan](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/basic_step_scan.ipynb)
 
 #### Advanced
 
-* [Run a Linux command as an `ophyd.Device`](demo_doodle.ipynb)
+* [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
 
 ### Measurement using the `instrument` package
 
@@ -61,7 +63,7 @@ folders (created by tools from Bluesky's
 #### Data Processing, Reduction, and/or Analysis
 
 * [Access data later, after the measurement](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb) using Data Broker
-* [Analyze a 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/databroker_analysis.ipynb) using Data Broker
+* [Analyze a 2-D image](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/databroker_analysis.ipynb) using Data Broker
 * [Analyze a 2-D image on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb)
 * [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb) using Data Broker
 
