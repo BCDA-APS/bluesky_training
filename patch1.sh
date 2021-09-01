@@ -13,6 +13,9 @@ else
     echo "running"
 fi
 
+echo "adding ipympl forcontrol of jupyter notebook plots"
+conda install -y -n bluesky_2021_1 -c conda-forge ipympl
+
 echo "Fix the GUI starter scripts"
 cd ~/bin
 /bin/rm ./start_caQtDM_ad
