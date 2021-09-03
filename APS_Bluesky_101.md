@@ -42,6 +42,7 @@ note: time spans are estimates
     bash ./patch1.sh
     cd ~/
     ```
+  - check that IOC is running: `caget gp:UPTIME` in terminal
 
 - half-hour
   - start Jupyter lab: `blueskyStarter.sh lab`
@@ -50,6 +51,7 @@ note: time spans are estimates
 - hour - interactive notebooks
   - `hello_world.ipynb` notebook
   - `basic-motor-scaler-scan.ipynb` notebook
+    - start caQtDM and view motor `gp:m1`: `start_caQtDM_gp` (in a new terminal tab)
     - Connect the motor
     - Connect the scaler
     - Prepare to scan
@@ -57,8 +59,8 @@ note: time spans are estimates
 - half-hour
   - First scan
   - discussion
-- half-hour
   - Fix a few _problems_
+- half-hour
   - Scan with a *different* counting time : _staging_
   - Custom plan with configurable count time
   - Discussion
