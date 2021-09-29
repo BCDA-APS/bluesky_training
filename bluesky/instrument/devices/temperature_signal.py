@@ -61,33 +61,43 @@ class MyPvPositioner(PVPositioner):
         """
         self.done.put(not self.done_value)
 
-    def __init__(
-        self,
-        prefix,
-        *,
-        limits=None,
-        name=None,
-        read_attrs=None,
-        configuration_attrs=None,
-        parent=None,
-        egu="",
-        **kwargs,
-    ):
-        super().__init__(
-            prefix=prefix,
-            limits=limits,
-            name=name,
-            read_attrs=read_attrs,
-            configuration_attrs=configuration_attrs,
-            parent=parent,
-            egu=egu,
+    def __init__(self, *args, **kwargs):
+        """
+        These are the arguments in the full signature:
+
+            self,
+            prefix,
+            *,
+            limits=None,
+            name=None,
+            read_attrs=None,
+            configuration_attrs=None,
+            parent=None,
+            egu="",
             **kwargs,
-        )
+        """
+        super().__init__(*args, **kwargs)
+
+        # setup callbacks on readback and setpoint
         self.readback.subscribe(self.cb_readback)
         self.setpoint.subscribe(self.cb_setpoint)
 
         # the readback needs no adjective
         self.readback.name = self.name
+
+    @property
+    def inposition(self):
+        """
+        Report (boolean) if positioner is done.
+        """
+        return self.done.get() == self.done_value
+
+    def stop(self, *, success=False):
+        """
+        Hold the current readback when the stop() method is called and not done.
+        """
+        if not self.done.get():
+            self.setpoint.put(self.position)
 
     def setup_temperature(
         self,
