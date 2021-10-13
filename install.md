@@ -1,6 +1,6 @@
 # Prepare Linux Workstation for Python Notebooks with Bluesky
 
-revision: 2021-02-27
+revision: 2021-12-13
 
 Without much explanation, these are the steps to prepare (install the various
 components) a Linux workstation for these *Python Notebooks with Bluesky*.
