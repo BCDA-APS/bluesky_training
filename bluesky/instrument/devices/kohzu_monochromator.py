@@ -37,23 +37,22 @@ class MyKohzu(KohzuSeqCtl_Monochromator):
 
             RE(dcm.into_control_range())
         """
-        if (
-            self.m_theta.position >= p_theta
-            and self.m_y.position <= p_y
-            and self.m_z.position >= p_z
-        ):
+        args = []
+        if self.m_theta.position < p_theta:
+            args += [self.m_theta, p_theta]
+        if self.m_y.position > p_y:
+            args += [self.m_y, p_y]
+        if self.m_z.position < p_z:
+            args += [self.m_z, p_z]
+        if (len(args) == 0):
             # all motors in range, no work to do, MUST yield something
             yield from bps.null()
             return
-        # fmt: off
-        yield from bps.mv(
-            self.m_theta, p_theta,
-            self.m_y, p_y,
-            self.m_z, p_z,
-        )
-        # fmt: on
         yield from bps.sleep(1)  # allow IOC to react
-        yield from bps.mv(self.operator_acknowledge, 1)
+        yield from bps.mv(
+            self.operator_acknowledge, 1,
+            self.mode, "Auto"
+        )
 
     def stop(self):
         self.m_theta.stop()
