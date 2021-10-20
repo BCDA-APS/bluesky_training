@@ -50,7 +50,7 @@ IOC.
 #### Advanced
 
 * [Move 2 motors with dynamic limits](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_dynamic_limits_2motor.ipynb) - EPICS : Demo of dynamic limit signal to avoid collision of two motors
-* [XAFS scan, multi-segment](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/xafs_scan.ipynb) - step scan
+* [XAFS scan, multi-segment](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/xafs_scan.ipynb) - step scan (note: detector data is random numbers)
 
 ### Post-measurement (such as Analysis)
 
