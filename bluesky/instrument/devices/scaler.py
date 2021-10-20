@@ -4,7 +4,7 @@ example scaler
 
 __all__ = """
     scaler1
-    timebase I0 scint diode
+    timebase I0 I00 I000 scint diode
 """.split()
 
 from ..session_logs import logger
@@ -33,6 +33,8 @@ if not len(scaler1.channels.chan01.chname.get()):
     scaler1.channels.chan02.chname.put("I0")
     scaler1.channels.chan03.chname.put("scint")
     scaler1.channels.chan04.chname.put("diode")
+    scaler1.channels.chan05.chname.put("I000")
+    scaler1.channels.chan06.chname.put("I00")
     time.sleep(1)  # wait for IOC
 
 # choose just the channels with EPICS names
@@ -44,6 +46,8 @@ timebase = scaler1.channels.chan01.s
 I0 = scaler1.channels.chan02.s
 scint = scaler1.channels.chan03.s
 diode = scaler1.channels.chan04.s
+I000 = scaler1.channels.chan05.s
+I00 = scaler1.channels.chan06.s
 
-for item in (timebase, I0, scint, diode):
+for item in (timebase, I0, I00, I000, scint, diode):
     item._ophyd_labels_ = set(["channel", "counter",])
