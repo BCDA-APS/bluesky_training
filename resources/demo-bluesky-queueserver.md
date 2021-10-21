@@ -2,7 +2,7 @@
 
 Starting with the [bluesky-queueserver web
 documentation](https://blueskyproject.io/bluesky-queueserver/cli_tools.html),
-make a quick demonstration of what it can do out of the box from the linux
+make a quick demonstration of what it can do *out of the box* from the linux
 command line.
 
 CONTENTS
