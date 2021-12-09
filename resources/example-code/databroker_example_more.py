@@ -9,7 +9,8 @@ cat = databroker.catalog["class_data_examples"]
 
 
 def get_run_by_scan_id(scan_id):
-    run = cat.search({"scan_id": scan_id})[-1]
+    # run = cat.search({"scan_id": scan_id})[-1]
+    run = cat[scan_id]  # simple access
     print(f"{run.metadata['start']['scan_id'] = }")
     print(f"{run.metadata['start']['plan_name'] = }")
     return run

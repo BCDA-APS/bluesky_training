@@ -13,8 +13,8 @@ else
     echo "running"
 fi
 
-echo "adding ipympl forcontrol of jupyter notebook plots"
-conda install -y -n bluesky_2021_1 -c conda-forge ipympl
+# echo "adding ipympl forcontrol of jupyter notebook plots"
+# conda install -y -n bluesky_2021_1 -c conda-forge ipympl
 
 echo "Fix the GUI starter scripts"
 cd ~/bin
@@ -30,3 +30,6 @@ ln -s ~/training/start_MEDM_ad.sh ./start_MEDM_ad
 /bin/rm ./start_MEDM_gp
 ln -s /tmp/docker_ioc/iocgp/xxx-R6-2/start_MEDM_xxx ./start_MEDM_gp
 cd ~/
+
+# echo "Check IOC uptime"
+# caget gp:UPTIME
