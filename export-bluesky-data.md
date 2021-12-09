@@ -1,7 +1,5 @@
 # Exporting data from Bluesky
 
-<center>!!! <em>work-in-progress</em> !!!</center>
-
 An instrument scientist asks:
 
 > How to export experiment data for a user?
