@@ -67,9 +67,11 @@ folders (created by tools from Bluesky's
 * [Analyze a 2-D image on Windows workstation](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb)
 * [Plot (x,y) data from a run](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb) using Data Broker
 
-#### Data Movement
+#### Export, Copy Data
 
-* [Copy data to another workstation](/resources/example-data/README.md)
+* [Export data, overview](export-bluesky-data.md)
+* [Export data to CSV](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/export-to-csv.ipynb)
+* [Transfer data to another workstation](/resources/example-data/README.md)
 
 ### Review
 
