@@ -94,6 +94,6 @@ bluesky | https://blueskyproject.io/bluesky
 ophyd | https://blueskyproject.io/ophyd
 databroker | https://blueskyproject.io/databroker
 databroker-pack | https://blueskyproject.io/databroker-pack
-apstools | https://apstools.readthedocs.io/
+apstools | https://BCDA-APS.github.io/apstools
 APS instruments | https://github.com/BCDA-APS/use_bluesky/wiki/
 APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
