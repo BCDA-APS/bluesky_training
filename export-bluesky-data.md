@@ -128,6 +128,19 @@ Data variables:
     m1_user_setpoint  (time) float64 -0.6792 -0.6904 -0.7016 ... -1.004 -1.015
 ```
 
+
+Before plotting, tell matplotlib how to render the plot image:
+
+```python
+import matplotlib
+# for IPython console sessions
+% matplotlib
+
+# for notebooks, either of these
+% matplotlib notebook
+% matplotlib inline
+```
+
 Knowing that the independent data (x) name is `m1` and the dependent data (y) name is `noisy`, this data can be plotted:
 
 ```python
