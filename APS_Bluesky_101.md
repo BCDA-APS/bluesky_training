@@ -98,7 +98,7 @@ note: time spans are estimates
 
 ## Reference
 
-Links to the videos from the training sessions of 2021 August and September are available: https://anl.app.box.com/file/799085250134?s=t3v27bfpmd9oly4qut9hfvg3hdnhm3c2 but ANL credentials and permissions apply.
+Links to the videos from the training sessions of 2021 August and September are publicly-available on Box.com: https://anl.box.com/s/5ovic1hhoxrek9as0idawy61z9a32n4l
 
 ### Community
 
