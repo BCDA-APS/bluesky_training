@@ -27,8 +27,8 @@ import spec2nexus
 from .initialize import RE
 
 # Set up default metadata
-RE.md["beamline_id"] = f"Bluesky_training"
-RE.md["instrument_name"] = f"Bluesky Case Studies"
+RE.md["beamline_id"] = "Bluesky_training"
+RE.md["instrument_name"] = "Bluesky Case Studies"
 RE.md["proposal_id"] = "training"
 RE.md["pid"] = os.getpid()
 
