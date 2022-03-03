@@ -18,27 +18,24 @@ from .calculation_records import calcs
 from ophyd import ADComponent
 from ophyd import DetectorBase
 from ophyd import EpicsSignalWithRBV
-from ophyd import ImagePlugin
 from ophyd import SimDetectorCam
 from ophyd import SingleTrigger
 from ophyd.areadetector.filestore_mixins import FileStoreHDF5IterativeWrite
 from ophyd.areadetector.plugins import HDF5Plugin_V34
+from ophyd.areadetector.plugins import ImagePlugin_V34
 import numpy as np
 import os
+import pathlib
 
-AD_IOC_PREFIX = os.environ.get("AD_IOC_PREFIX", "ad:")
-AD_IOC_FILES_ROOT = "/"
-BLUESKY_FILES_ROOT = "/tmp/docker_ioc/iocad"
-# IOC_IMAGE_DIR = "/tmp/adsimdet/%Y/%m/%d/"
-IOC_IMAGE_DIR = "/tmp/images/"
-AD_IOC_PATH = os.path.join(
-    AD_IOC_FILES_ROOT,
-    IOC_IMAGE_DIR.lstrip("/")
-)
-BLUESKY_PATH = os.path.join(
-    BLUESKY_FILES_ROOT,
-    IOC_IMAGE_DIR.lstrip("/")
-)
+PV_PREFIX = os.environ.get("AD_IOC_PREFIX", "ad:")
+
+IMAGE_DIR = "adsimdet/%Y/%m/%d"
+AD_IOC_MOUNT_PATH = pathlib.Path("/tmp")
+BLUESKY_MOUNT_PATH = pathlib.Path("/tmp/docker_ioc/iocad/tmp")
+
+# MUST end with a `/`
+WRITE_PATH_TEMPLATE = f"{AD_IOC_MOUNT_PATH / IMAGE_DIR}/"
+READ_PATH_TEMPLATE = f"{BLUESKY_MOUNT_PATH / IMAGE_DIR}/"
 
 
 class MyFixedCam(SimDetectorCam):
@@ -47,23 +44,25 @@ class MyFixedCam(SimDetectorCam):
 
 
 class MyHDF5Plugin(FileStoreHDF5IterativeWrite, HDF5Plugin_V34):
-    pass
+    """
+    Add data acquisition methods to HDF5Plugin.
 
-
-class MyFixedImagePlugin(ImagePlugin):
-    pool_max_buffers = None
+    * ``stage()`` - prepare device PVs befor data acquisition
+    * ``unstage()`` - restore device PVs after data acquisition
+    * ``generate_datum()`` - coordinate image storage metadata
+    """
 
 
 class MySimDetector(SingleTrigger, DetectorBase):
     """ADSimDetector"""
 
     cam = ADComponent(MyFixedCam, "cam1:")
-    image = ADComponent(MyFixedImagePlugin, "image1:")
+    image = ADComponent(ImagePlugin_V34, "image1:")
     hdf1 = ADComponent(
         MyHDF5Plugin,
         "HDF1:",
-        write_path_template=AD_IOC_PATH,
-        read_path_template=BLUESKY_PATH,
+        write_path_template=WRITE_PATH_TEMPLATE,
+        read_path_template=READ_PATH_TEMPLATE,
     )
 
 
@@ -123,7 +122,7 @@ def dither_ad_peak_position(magnitude=40):
     dither_ad_on()
 
 
-adsimdet = MySimDetector(AD_IOC_PREFIX, name="adsimdet", labels=("area_detector",))
+adsimdet = MySimDetector(PV_PREFIX, name="adsimdet", labels=("area_detector",))
 adsimdet.wait_for_connection(timeout=15)
 
 adsimdet.read_attrs.append("hdf1")
