@@ -122,7 +122,14 @@ bec.disable_baseline()
 # diagnostics
 # RE.msg_hook = ts_msg_hook
 
+# fmt: off
 # set default timeout for all EpicsSignal connections & communications
-EpicsSignalBase.set_defaults(
-    auto_monitor=True, timeout=60, write_timeout=60, connection_timeout=60,
-)
+TIMEOUT = 60
+if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
+    EpicsSignalBase.set_defaults(
+        auto_monitor=True,
+        timeout=60,
+        write_timeout=60,
+        connection_timeout=60,
+    )
+# fmt: on
