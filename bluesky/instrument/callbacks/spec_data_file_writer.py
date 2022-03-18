@@ -18,15 +18,15 @@ except ModuleNotFoundError:
     import apstools.filewriters as APS_fw
 import apstools.utils
 import datetime
-import os
+import pathlib
 
 from ..framework import RE, callback_db
 
 # write scans to SPEC data file
 specwriter = APS_fw.SpecWriterCallback()
-# _path = "/tmp"      # make the SPEC file in /tmp (assumes OS is Linux)
-_path = os.getcwd()  # make the SPEC file in current working directory (assumes is writable)
-specwriter.newfile(os.path.join(_path, specwriter.spec_filename))
+# make the SPEC file in current working directory (assumes is writable)
+_path = pathlib.Path().cwd()
+specwriter.newfile(str(_path / specwriter.spec_filename))
 callback_db["specwriter"] = RE.subscribe(specwriter.receiver)
 
 logger.info(f"writing to SPEC file: {specwriter.spec_filename}")
@@ -49,14 +49,14 @@ def newSpecFile(title, scan_id=1):
     global specwriter
     mmdd = str(datetime.datetime.now()).split()[0][5:].replace("-", "_")
     clean = apstools.utils.cleanupText(title)
-    fname = "%s_%s.dat" % (mmdd, clean)
-    if os.path.exists(fname):
+    fname = pathlib.Path(f"{mmdd}_{clean}.dat")
+    if fname.exists():
         logger.warning(f">>> file already exists: {fname} <<<")
-        specwriter.newfile(fname, RE=RE)
+        specwriter.newfile(str(fname), RE=RE)
         handled = "appended"
 
     else:
-        specwriter.newfile(fname, scan_id=scan_id, RE=RE)
+        specwriter.newfile(str(fname), scan_id=scan_id, RE=RE)
         handled = "created"
 
     logger.info(f"SPEC file name : {specwriter.spec_filename}")
