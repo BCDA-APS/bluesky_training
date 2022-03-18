@@ -9,14 +9,14 @@ from ..session_logs import logger
 logger.info(__file__)
 
 from ..framework import sd
-from ophyd import EpicsSignalRO
+from ..utils import configuration_dict
 import apstools.synApps
-import os
 
-GP_IOC_PREFIX = os.environ.get("GP_IOC_PREFIX", "gp:")
 
-calcs = apstools.synApps.UserCalcsDevice(GP_IOC_PREFIX, name="calcs")
-calcouts = apstools.synApps.UserCalcoutDevice(GP_IOC_PREFIX, name="calcouts")
+IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
+
+calcs = apstools.synApps.UserCalcsDevice(IOC, name="calcs")
+calcouts = apstools.synApps.UserCalcoutDevice(IOC, name="calcouts")
 
 # Normally, do not do _any_ actions (like these) in the instrument
 # package since that might affect other simultaneous use.  In this

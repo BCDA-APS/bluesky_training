@@ -14,6 +14,7 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
+from ..utils import configuration_dict
 from .calculation_records import calcs
 from ophyd import ADComponent
 from ophyd import DetectorBase
@@ -24,10 +25,10 @@ from ophyd.areadetector.filestore_mixins import FileStoreHDF5IterativeWrite
 from ophyd.areadetector.plugins import HDF5Plugin_V34
 from ophyd.areadetector.plugins import ImagePlugin_V34
 import numpy as np
-import os
 import pathlib
 
-PV_PREFIX = os.environ.get("AD_IOC_PREFIX", "ad:")
+
+IOC = configuration_dict.get("ADSIM_IOC_PREFIX", "ad:")
 
 IMAGE_DIR = "adsimdet/%Y/%m/%d"
 AD_IOC_MOUNT_PATH = pathlib.Path("/tmp")
@@ -122,7 +123,7 @@ def dither_ad_peak_position(magnitude=40):
     dither_ad_on()
 
 
-adsimdet = MySimDetector(PV_PREFIX, name="adsimdet", labels=("area_detector",))
+adsimdet = MySimDetector(IOC, name="adsimdet", labels=("area_detector",))
 adsimdet.wait_for_connection(timeout=15)
 
 adsimdet.read_attrs.append("hdf1")
