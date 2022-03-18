@@ -17,3 +17,6 @@ mViewer.log
 # filewriter callback output files
 *.h5
 *.dat
+
+# local developer Python code
+dev_*.py
