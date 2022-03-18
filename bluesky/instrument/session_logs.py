@@ -8,7 +8,7 @@ __all__ = [
 
 from IPython import get_ipython
 import logging
-import os
+import pathlib
 import stdlogpj  # pip install stdlogpj
 
 SESSION_NAME = "bluesky-session"
@@ -18,10 +18,10 @@ BYTE = 1
 kB = 1024 * BYTE
 MB = 1024 * kB
 
-_log_path = os.path.join(os.getcwd(), ".logs")
-if not os.path.exists(_log_path):
-    os.mkdir(_log_path)
-CONSOLE_IO_FILE = os.path.join(_log_path, "ipython_console.log")
+_log_path = pathlib.Path().cwd() / ".logs"
+if not _log_path.exists():
+    _log_path.mkdir()
+CONSOLE_IO_FILE = _log_path / "ipython_console.log"
 
 # start logging console to file
 # https://ipython.org/ipython-doc/3/interactive/magics.html#magic-logstart

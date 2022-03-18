@@ -15,7 +15,6 @@ logger.info(__file__)
 
 from ..utils import configuration_dict
 from ophyd import EpicsMotor, Component, EpicsSignal
-import os
 
 
 IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
