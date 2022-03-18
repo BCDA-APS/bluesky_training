@@ -25,11 +25,12 @@ import socket
 import spec2nexus
 
 from .initialize import RE
+from ..utils import configuration_dict
 
 # Set up default metadata
-RE.md["beamline_id"] = "Bluesky_training"
-RE.md["instrument_name"] = "Bluesky Case Studies"
-RE.md["proposal_id"] = "training"
+RE.md["beamline_id"] = configuration_dict["beamline_id"]
+RE.md["instrument_name"] = configuration_dict["instrument_name"]
+RE.md["proposal_id"] = configuration_dict["proposal_id"]
 RE.md["pid"] = os.getpid()
 
 HOSTNAME = socket.gethostname() or "localhost"

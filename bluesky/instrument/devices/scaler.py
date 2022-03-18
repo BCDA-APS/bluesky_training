@@ -11,15 +11,15 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ophyd import Kind
+from ..utils import configuration_dict
 from ophyd.scaler import ScalerCH
-import os
 import time
 
-GP_IOC_PREFIX = os.environ.get("GP_IOC_PREFIX", "gp:")
+
+IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
 
 # make an instance of the entire scaler, for general control
-scaler1 = ScalerCH(f"{GP_IOC_PREFIX}scaler1", name="scaler1", labels=["scalers", "detectors"])
+scaler1 = ScalerCH(f"{IOC}scaler1", name="scaler1", labels=["scalers", "detectors"])
 scaler1.wait_for_connection()
 
 if not len(scaler1.channels.chan01.chname.get()):

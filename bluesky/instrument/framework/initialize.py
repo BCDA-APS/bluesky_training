@@ -14,7 +14,9 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-import os, sys
+from ..utils import configuration_dict
+import os
+import sys
 
 # fmt: off
 sys.path.append(
@@ -82,16 +84,14 @@ if old_md is not None:
 callback_db = {}
 
 # Connect with our mongodb database
-catalog_name = "training"
+catalog_name = configuration_dict.get("databroker_catalog", "training")
 # databroker v2 api
 cat = databroker.catalog[catalog_name]
-# databroker v1 api
-db = cat.v1
 logger.info(f"using databroker catalog '{catalog_name}'")
 
 # Subscribe metadatastore to documents.
 # If this is removed, data is not saved to metadatastore.
-callback_db["db"] = RE.subscribe(db.v1.insert)
+callback_db["db"] = RE.subscribe(cat.v1.insert)
 
 # Set up SupplementalData.
 sd = SupplementalData()
