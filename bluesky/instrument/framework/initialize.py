@@ -14,13 +14,12 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..utils import configuration_dict
-import os
 import pathlib
 import sys
 
 sys.path.append(str(pathlib.Path(__file__).absolute().parent.parent.parent))
 
+from ..utils import configuration_dict
 from bluesky import RunEngine
 from bluesky import SupplementalData
 from bluesky.callbacks.best_effort import BestEffortCallback
@@ -43,21 +42,12 @@ import numpy as np
 
 
 def get_md_path():
-    # md_dir_name = "Bluesky_RunEngine_md"
-    # if os.environ == "win32":
-    #     home = os.environ["LOCALAPPDATA"]
-    #     path = os.path.join(home, md_dir_name)
-    # else:  # at least on "linux"
-    #     home = os.environ["HOME"]
-    #     path = os.path.join(home, ".config", md_dir_name)
-    # return path
-
-    return str(pathlib.Path().home() / "Bluesky_RunEngine_md")
+    return str(pathlib.Path.home() / "Bluesky_RunEngine_md")
 
 
-# check if we need to transition from SQLite-backed historydict
 md_path = get_md_path()
 #### remove this legacy code after 2022-07-31 and below (old_md)
+# check if we need to transition from SQLite-backed historydict
 # old_md = None
 # if not os.path.exists(md_path):
 #     logger.info("New directory to store RE.md between sessions: %s", md_path)
