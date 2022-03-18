@@ -16,19 +16,10 @@ logger.info(__file__)
 
 from ..utils import configuration_dict
 import os
+import pathlib
 import sys
 
-# fmt: off
-sys.path.append(
-    os.path.abspath(
-        os.path.join(
-            os.path.dirname(__file__),
-            "..",
-            "..",
-        )
-    )
-)
-# fmt: on
+sys.path.append(str(pathlib.Path(__file__).absolute().parent.parent.parent))
 
 from bluesky import RunEngine
 from bluesky import SupplementalData
@@ -52,39 +43,42 @@ import numpy as np
 
 
 def get_md_path():
-    md_dir_name = "Bluesky_RunEngine_md"
-    if os.environ == "win32":
-        home = os.environ["LOCALAPPDATA"]
-        path = os.path.join(home, md_dir_name)
-    else:  # at least on "linux"
-        home = os.environ["HOME"]
-        path = os.path.join(home, ".config", md_dir_name)
-    return path
+    # md_dir_name = "Bluesky_RunEngine_md"
+    # if os.environ == "win32":
+    #     home = os.environ["LOCALAPPDATA"]
+    #     path = os.path.join(home, md_dir_name)
+    # else:  # at least on "linux"
+    #     home = os.environ["HOME"]
+    #     path = os.path.join(home, ".config", md_dir_name)
+    # return path
+
+    return str(pathlib.Path().home() / "Bluesky_RunEngine_md")
 
 
 # check if we need to transition from SQLite-backed historydict
-old_md = None
 md_path = get_md_path()
-if not os.path.exists(md_path):
-    logger.info("New directory to store RE.md between sessions: %s", md_path)
-    os.makedirs(md_path)
-    from bluesky.utils import get_history
+#### remove this legacy code after 2022-07-31 and below (old_md)
+# old_md = None
+# if not os.path.exists(md_path):
+#     logger.info("New directory to store RE.md between sessions: %s", md_path)
+#     os.makedirs(md_path)
+#     from bluesky.utils import get_history
 
-    old_md = get_history()
+#     old_md = get_history()
 
 
 # Set up a RunEngine and use metadata backed PersistentDict
 RE = RunEngine({})
 RE.md = PersistentDict(md_path)
-if old_md is not None:
-    logger.info("migrating RE.md storage to PersistentDict")
-    RE.md.update(old_md)
+# if old_md is not None:
+#     logger.info("migrating RE.md storage to PersistentDict")
+#     RE.md.update(old_md)
 
 # keep track of callback subscriptions
 callback_db = {}
 
 # Connect with our mongodb database
-catalog_name = configuration_dict.get("databroker_catalog", "training")
+catalog_name = configuration_dict.get("DATABROKER_CATALOG", "training")
 # databroker v2 api
 cat = databroker.catalog[catalog_name]
 logger.info(f"using databroker catalog '{catalog_name}'")
@@ -97,9 +91,10 @@ callback_db["db"] = RE.subscribe(cat.v1.insert)
 sd = SupplementalData()
 RE.preprocessors.append(sd)
 
-# Add a progress bar.
-# pbar_manager = ProgressBarManager()
-# RE.waiting_hook = pbar_manager
+if configuration_dict.get("USE_PROGRESS_BAR", False):
+    # Add a progress bar.
+    pbar_manager = ProgressBarManager()
+    RE.waiting_hook = pbar_manager
 
 # Register bluesky IPython magics.
 get_ipython().register_magics(BlueskyMagics)
@@ -122,14 +117,12 @@ bec.disable_baseline()
 # diagnostics
 # RE.msg_hook = ts_msg_hook
 
-# fmt: off
 # set default timeout for all EpicsSignal connections & communications
 TIMEOUT = 60
 if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
     EpicsSignalBase.set_defaults(
         auto_monitor=True,
-        timeout=60,
-        write_timeout=60,
-        connection_timeout=60,
+        timeout=configuration_dict.get("PV_TIMEOUT", TIMEOUT),
+        write_timeout=configuration_dict.get("PV_WRITE_TIMEOUT", TIMEOUT),
+        connection_timeout=configuration_dict.get("PV_CONNECTION_TIMEOUT", TIMEOUT),
     )
-# fmt: on
