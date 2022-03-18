@@ -28,9 +28,9 @@ from .initialize import RE
 from ..utils import configuration_dict
 
 # Set up default metadata
-RE.md["beamline_id"] = configuration_dict["beamline_id"]
-RE.md["instrument_name"] = configuration_dict["instrument_name"]
-RE.md["proposal_id"] = configuration_dict["proposal_id"]
+RE.md["beamline_id"] = configuration_dict.get("beamline_id", "undefined")
+RE.md["instrument_name"] = configuration_dict.get("instrument_name", "undefined")
+RE.md["proposal_id"] = configuration_dict.get("proposal_id", "undefined")
 RE.md["pid"] = os.getpid()
 
 HOSTNAME = socket.gethostname() or "localhost"
