@@ -10,8 +10,8 @@ DATABROKER_CATALOG: training
 
 # default RunEngine metadata
 beamline_id: Bluesky_training
-instrument_name: Bluesky Case Studies
-proposal_id: none
+instrument_name: BCDA EPICS Bluesky training
+proposal_id: training
 
 # default timeouts (seconds)
 PV_TIMEOUT: 60
@@ -19,3 +19,18 @@ PV_WRITE_TIMEOUT: 60
 PV_CONNECTION_TIMEOUT: 60
 
 USE_PROGRESS_BAR: false
+
+# Minimum software package version checks: MAJOR.minor (no .patch).
+# These will be converted to tuple() for comparisons.
+MINIMUM_PYTHON_VERSION:
+  - 3
+  - 7
+MINIMUM_BLUESKY_VERSION:
+  - 1
+  - 8
+MINIMUM_OPHYD_VERSION:
+  - 1
+  - 6
+MINIMUM_DATABROKER_VERSION:
+  - 1
+  - 2
