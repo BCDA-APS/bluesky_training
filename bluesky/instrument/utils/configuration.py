@@ -23,4 +23,9 @@ import yaml
 PATH = pathlib.Path(__file__).absolute().parent.parent
 CONFIG_FILE = PATH / "configuration.yml"
 
-configuration_dict = yaml.load(open(CONFIG_FILE, "r").read(), yaml.Loader)
+if CONFIG_FILE.exists():
+    configuration_dict = yaml.load(open(CONFIG_FILE, "r").read(), yaml.Loader)
+else:
+    raise FileNotFoundError(
+        f"Could not find instrument configuration file: {CONFIG_FILE}"
+    )
