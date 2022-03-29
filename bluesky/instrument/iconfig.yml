@@ -13,12 +13,23 @@ beamline_id: Bluesky_training
 instrument_name: BCDA EPICS Bluesky training
 proposal_id: training
 
+# paths
+AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
+AD_MOUNT_PATH: /tmp
+BLUESKY_MOUNT_PATH: /tmp/docker_ioc/iocbdpad/tmp
+
+# permissions
+ALLOW_AREA_DETECTOR_WARMUP: false
+ENABLE_AREA_DETECTOR_IMAGE_PLUGIN: true
+ENABLE_CALCS: true
+USE_PROGRESS_BAR: false
+
+# ----------------------------------
+
 # default timeouts (seconds)
 PV_TIMEOUT: 60
 PV_WRITE_TIMEOUT: 60
 PV_CONNECTION_TIMEOUT: 60
-
-USE_PROGRESS_BAR: false
 
 # Minimum software package version checks: MAJOR.minor (no .patch).
 # These will be converted to tuple() for comparisons.
