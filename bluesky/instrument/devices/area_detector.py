@@ -14,7 +14,7 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..utils import configuration_dict
+from .. import iconfig
 from .calculation_records import calcs
 from ophyd import ADComponent
 from ophyd import DetectorBase
@@ -28,7 +28,7 @@ import numpy as np
 import pathlib
 
 
-IOC = configuration_dict.get("ADSIM_IOC_PREFIX", "ad:")
+IOC = iconfig.get("ADSIM_IOC_PREFIX", "ad:")
 
 IMAGE_DIR = "adsimdet/%Y/%m/%d"
 AD_IOC_MOUNT_PATH = pathlib.Path("/tmp")

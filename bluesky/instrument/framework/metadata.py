@@ -24,13 +24,13 @@ import pyRestTable
 import socket
 import spec2nexus
 
+from .. import iconfig
 from .initialize import RE
-from ..utils import configuration_dict
 
 # Set up default metadata
-RE.md["beamline_id"] = configuration_dict.get("beamline_id", "undefined")
-RE.md["instrument_name"] = configuration_dict.get("instrument_name", "undefined")
-RE.md["proposal_id"] = configuration_dict.get("proposal_id", "undefined")
+RE.md["beamline_id"] = iconfig.get("beamline_id", "undefined")
+RE.md["instrument_name"] = iconfig.get("instrument_name", "undefined")
+RE.md["proposal_id"] = iconfig.get("proposal_id", "undefined")
 RE.md["pid"] = os.getpid()
 
 HOSTNAME = socket.gethostname() or "localhost"

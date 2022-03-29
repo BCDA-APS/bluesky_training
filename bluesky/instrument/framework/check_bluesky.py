@@ -9,7 +9,7 @@ from ..session_logs import logger
 logger.info(__file__)
 
 import sys
-from ..utils import configuration_dict
+from .. import iconfig
 
 # ensure BlueSky is available
 try:
@@ -24,7 +24,7 @@ except ImportError:
 
 # ensure minimum bluesky version
 
-req_version = tuple(configuration_dict.get("MINIMUM_BLUESKY_VERSION", (1, 8)))
+req_version = tuple(iconfig.get("MINIMUM_BLUESKY_VERSION", (1, 8)))
 cur_version = tuple(map(int, bluesky.__version__.split(".")[:2]))
 if cur_version < req_version:
     ver_str = ".".join((map(str, req_version)))
@@ -37,7 +37,7 @@ if cur_version < req_version:
 
 import ophyd
 
-req_version = tuple(configuration_dict.get("MINIMUM_OPHYD_VERSION", (1, 6)))
+req_version = tuple(iconfig.get("MINIMUM_OPHYD_VERSION", (1, 6)))
 cur_version = tuple(map(int, ophyd.__version__.split(".")[:2]))
 if cur_version < req_version:
     ver_str = ".".join((map(str, req_version)))
@@ -51,7 +51,7 @@ if cur_version < req_version:
 
 import databroker
 
-req_version = tuple(configuration_dict.get("MINIMUM_DATABROKER_VERSION", (1, 2)))
+req_version = tuple(iconfig.get("MINIMUM_DATABROKER_VERSION", (1, 2)))
 cur_version = tuple(map(int, databroker.__version__.split(".")[:2]))
 if cur_version < req_version:
     ver_str = ".".join((map(str, req_version)))

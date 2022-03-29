@@ -11,7 +11,7 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..utils import configuration_dict
+from .. import iconfig
 from .calculation_records import calcs
 from .motors import m1
 from ophyd import EpicsSignalRO
@@ -19,7 +19,7 @@ import apstools.devices
 import numpy
 
 
-IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
+IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
 
 def change_noisy_parameters(fwhm=0.15, peak=10000, noise=0.08):

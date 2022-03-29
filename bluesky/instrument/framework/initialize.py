@@ -19,7 +19,7 @@ import sys
 
 sys.path.append(str(pathlib.Path(__file__).absolute().parent.parent.parent))
 
-from ..utils import configuration_dict
+from .. import iconfig
 from bluesky import RunEngine
 from bluesky import SupplementalData
 from bluesky.callbacks.best_effort import BestEffortCallback
@@ -68,7 +68,7 @@ RE.md = PersistentDict(md_path)
 callback_db = {}
 
 # Connect with our mongodb database
-catalog_name = configuration_dict.get("DATABROKER_CATALOG", "training")
+catalog_name = iconfig.get("DATABROKER_CATALOG", "training")
 # databroker v2 api
 cat = databroker.catalog[catalog_name]
 logger.info(f"using databroker catalog '{catalog_name}'")
@@ -81,7 +81,7 @@ callback_db["db"] = RE.subscribe(cat.v1.insert)
 sd = SupplementalData()
 RE.preprocessors.append(sd)
 
-if configuration_dict.get("USE_PROGRESS_BAR", False):
+if iconfig.get("USE_PROGRESS_BAR", False):
     # Add a progress bar.
     pbar_manager = ProgressBarManager()
     RE.waiting_hook = pbar_manager
@@ -112,7 +112,7 @@ TIMEOUT = 60
 if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
     EpicsSignalBase.set_defaults(
         auto_monitor=True,
-        timeout=configuration_dict.get("PV_TIMEOUT", TIMEOUT),
-        write_timeout=configuration_dict.get("PV_WRITE_TIMEOUT", TIMEOUT),
-        connection_timeout=configuration_dict.get("PV_CONNECTION_TIMEOUT", TIMEOUT),
+        timeout=iconfig.get("PV_TIMEOUT", TIMEOUT),
+        write_timeout=iconfig.get("PV_WRITE_TIMEOUT", TIMEOUT),
+        connection_timeout=iconfig.get("PV_CONNECTION_TIMEOUT", TIMEOUT),
     )

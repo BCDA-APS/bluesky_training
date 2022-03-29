@@ -8,12 +8,12 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
+from .. import iconfig
 from ..framework import sd
-from ..utils import configuration_dict
 import apstools.synApps
 
 
-IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
+IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
 calcs = apstools.synApps.UserCalcsDevice(IOC, name="calcs")
 calcouts = apstools.synApps.UserCalcoutDevice(IOC, name="calcouts")
