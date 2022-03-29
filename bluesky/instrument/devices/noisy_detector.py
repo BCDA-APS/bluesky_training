@@ -40,5 +40,7 @@ def change_noisy_parameters(fwhm=0.15, peak=10000, noise=0.08):
 
 
 # demo: use swait records to make "noisy" detector signals
-noisy = EpicsSignalRO(f"{IOC}userCalc1", name="noisy", labels=("detectors",))
+noisy = EpicsSignalRO(
+    f"{IOC}userCalc1", name="noisy", labels=("detectors", "simulator")
+)
 change_noisy_parameters()
