@@ -1,14 +1,16 @@
 """
-analyze an image frame
+Statistical peak analysis functions
 """
 
 __all__ = [
     "analyze_image",
+    "analyze_peak",
 ]
 
 from ..session_logs import logger
 
 logger.info(__file__)
+
 
 import numpy as np
 import pyRestTable
@@ -52,7 +54,7 @@ def analyze_peak(y_arr, x_arr=None):
     # stdDev = np.sqrt((sumXXY / sumY) - (sumXY / sumY)**2)
 
     mid = (np.max(y) + np.min(y)) / 2
-    crossings = np.where(np.diff((y > mid).astype(np.int)))[0]
+    crossings = np.where(np.diff((y > mid).astype(int)))[0]
     _cen_list = []
     for cr in crossings.ravel():
         _x = x[cr : cr + 2]
