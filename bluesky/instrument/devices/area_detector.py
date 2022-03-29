@@ -14,7 +14,7 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..utils import configuration_dict
+from .. import iconfig
 from .calculation_records import calcs
 from ophyd import ADComponent
 from ophyd import DetectorBase
@@ -28,13 +28,13 @@ import numpy as np
 import pathlib
 
 
-IOC = configuration_dict.get("ADSIM_IOC_PREFIX", "ad:")
+IOC = iconfig["ADSIM_IOC_PREFIX"]
 
-IMAGE_DIR = "adsimdet/%Y/%m/%d"
-AD_IOC_MOUNT_PATH = pathlib.Path("/tmp")
-BLUESKY_MOUNT_PATH = pathlib.Path("/tmp/docker_ioc/iocad/tmp")
+IMAGE_DIR = iconfig["AD_IMAGE_DIR"]
+AD_IOC_MOUNT_PATH = pathlib.Path(iconfig["AD_MOUNT_PATH"])
+BLUESKY_MOUNT_PATH = pathlib.Path(iconfig["BLUESKY_MOUNT_PATH"])
 
-# MUST end with a `/`
+# MUST end with a `/`, pathlib will NOT provide it
 WRITE_PATH_TEMPLATE = f"{AD_IOC_MOUNT_PATH / IMAGE_DIR}/"
 READ_PATH_TEMPLATE = f"{BLUESKY_MOUNT_PATH / IMAGE_DIR}/"
 
@@ -138,15 +138,16 @@ adsimdet.hdf1.stage_sigs["lazy_open"] = 1
 adsimdet.hdf1.stage_sigs["compression"] = "None"
 adsimdet.hdf1.stage_sigs["file_template"] = "%s%s_%3.3d.h5"
 
-# WORKAROUND
-# Even with `lazy_open=1`, ophyd checks if the area
-# detector HDF5 plugin has been primed.  We might
-# need to prime it.  Here's ophyd's test:
-if np.array(adsimdet.hdf1.array_size.get()).sum() == 0:
-    logger.info(f"Priming {adsimdet.hdf1.name} ...")
-    adsimdet.hdf1.warmup()
-    logger.info(f"Enabling {adsimdet.image.name} plugin ...")
-    adsimdet.image.enable.put("Enable")
+if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
+    # WORKAROUND
+    # Even with `lazy_open=1`, ophyd checks if the area
+    # detector HDF5 plugin has been primed.  We might
+    # need to prime it.  Here's ophyd's test:
+    if np.array(adsimdet.hdf1.array_size.get()).sum() == 0:
+        logger.info(f"Priming {adsimdet.hdf1.name} ...")
+        adsimdet.hdf1.warmup()
+        logger.info(f"Enabling {adsimdet.image.name} plugin ...")
+        adsimdet.image.enable.put("Enable")
 
 # peak new peak parameters
 change_ad_simulated_image_parameters()

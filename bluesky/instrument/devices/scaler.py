@@ -11,12 +11,12 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..utils import configuration_dict
+from .. import iconfig
 from ophyd.scaler import ScalerCH
 import time
 
 
-IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
+IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
 # make an instance of the entire scaler, for general control
 scaler1 = ScalerCH(f"{IOC}scaler1", name="scaler1", labels=["scalers", "detectors"])

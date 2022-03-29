@@ -1,5 +1,5 @@
 """
-APS only: connect with facility information
+APS only: insertion device
 """
 
 __all__ = [
@@ -12,8 +12,6 @@ logger.info(__file__)
 
 import apstools.devices
 
-# from ..framework import sd
 
 undulator = apstools.devices.ApsUndulator("ID45", name="undulator")
 # undulator = apstools.devices.ApsUndulatorDual("ID45", name="undulator")
-# sd.baseline.append(undulator)

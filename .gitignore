@@ -1,3 +1,6 @@
+# bluesky-queueserver
+existing_plans_and_devices.yaml
+
 *.pyc
 *.pyo
 *~

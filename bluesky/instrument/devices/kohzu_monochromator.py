@@ -10,14 +10,14 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from ..utils import configuration_dict
+from .. import iconfig
 from apstools.devices import KohzuSeqCtl_Monochromator
 from bluesky import plan_stubs as bps
 from ophyd import Component
 from ophyd import EpicsMotor
 
 
-IOC = configuration_dict.get("GP_IOC_PREFIX", "gp:")
+IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
 
 class MyKohzu(KohzuSeqCtl_Monochromator):
