@@ -9,7 +9,6 @@ from ..session_logs import logger
 logger.info(__file__)
 
 from .. import iconfig
-from ..framework import sd
 import apstools.synApps
 
 
@@ -25,7 +24,3 @@ if iconfig.get("ENABLE_CALCS", False):
     # These steps enable all the userCalcN and userCalcoutN records to process.
     calcs.enable.put(1)
     calcouts.enable.put(1)
-
-# record all calculation signals before & after each run
-sd.baseline.append(calcs)
-sd.baseline.append(calcouts)
