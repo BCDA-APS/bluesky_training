@@ -9,6 +9,8 @@ def isnotebook():
     see: https://stackoverflow.com/a/39662359/1046449
     """
     try:
+        from IPython import get_ipython
+
         _ipython = get_ipython()
         if _ipython is not None:
             shell = _ipython.__class__.__name__

@@ -19,7 +19,7 @@ except ImportError:
         "No module named `bluesky`\n"
         f"This python is from directory: {sys.prefix}\n"
         "\n"
-        "You should exit now and find the ipython with Bluesky."
+        "You should exit now and find a Python with Bluesky."
     )
 
 # ensure minimum bluesky version

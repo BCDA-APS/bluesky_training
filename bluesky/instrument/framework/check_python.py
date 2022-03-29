@@ -21,6 +21,6 @@ if cur_version < req_version:
         f"Requires Python {ver_str}+ with the Bluesky framework.\n"
         f"You have Python {sys.version} from {sys.prefix}\n"
         "\n"
-        "You should exit now and start ipython"
+        "You should exit now and start a Python"
         " with the Bluesky framework."
     )
