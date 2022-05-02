@@ -1,29 +1,33 @@
 """
-configure for data collection using bluesky-queueserver
+Configure for data collection using bluesky-queueserver.
 """
+
+import logging
+logger = logging.getLogger(__name__)
+
+logger.info(__file__)
+print(__file__)
+
+from . import iconfig
+from .epics_signal_config import scan_id_epics
+from .queueserver_framework import *
 
 from .devices import *
 from .plans import *
+from .utils import *
+from .callbacks import *
+
 from bluesky.plans import *
 from bluesky.plan_stubs import sleep
+from ophyd import Device
+from ophyd import Signal
+import pyRestTable
 
 
-def startup_report():
-    """Show instrument data on startup"""
-    from . import iconfig
-    from ophyd import Device, Signal
-    import inspect
-    import pyRestTable
-
-    table = pyRestTable.Table()
-    table.labels = "key value".split()
-    for k, v in sorted(iconfig.items()):
-        table.addRow((k, v))
-    if len(table.rows) > 0:
-        print("")
-        print("Instrument configuration (iconfig):")
-        print(table)
-
+def print_devices_and_signals():
+    """
+    Print the Devices and Signals in the current global namespace.
+    """
     glo = globals().copy()
 
     table = pyRestTable.Table()
@@ -40,6 +44,12 @@ def startup_report():
         print("Table of Devices and signals:")
         print(table)
 
+
+def print_plans():
+    """
+    Print the plans in the current global namespace.
+    """
+    glo = globals().copy()
     plans = [
         k
         for k, v in sorted(glo.items()) 
@@ -52,4 +62,5 @@ def startup_report():
         print("")
 
 
-startup_report()
+if iconfig.get("APS_IN_BASELINE", False):
+    sd.baseline.append(aps)
