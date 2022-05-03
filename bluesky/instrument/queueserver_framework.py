@@ -54,7 +54,13 @@ versions = dict(
     spec2nexus=spec2nexus.__version__,
 )
 
-cat = databroker.catalog[iconfig["DATABROKER_CATALOG"]]
+try:
+    cat = databroker.catalog[iconfig["DATABROKER_CATALOG"]]
+    logger.info("using databroker catalog '%s'", cat.name)
+except KeyError:
+    cat = databroker.temp().v2
+    logger.info("using TEMPORARY databroker catalog '%s'", cat.name)
+
 if scan_id_epics is None:
     RE = bluesky.RunEngine({})
 else:

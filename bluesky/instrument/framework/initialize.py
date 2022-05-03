@@ -66,8 +66,13 @@ RE.md = PersistentDict(md_path)
 # Connect with our mongodb database
 catalog_name = iconfig.get("DATABROKER_CATALOG", "training")
 # databroker v2 api
-cat = databroker.catalog[catalog_name]
-logger.info(f"using databroker catalog '{catalog_name}'")
+try:
+    cat = databroker.catalog[catalog_name]
+    logger.info("using databroker catalog '%s'", cat.name)
+except KeyError:
+    cat = databroker.temp().v2
+    logger.info("using TEMPORARY databroker catalog '%s'", cat.name)
+
 
 # Subscribe metadatastore to documents.
 # If this is removed, data is not saved to metadatastore.
