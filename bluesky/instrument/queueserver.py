@@ -25,6 +25,15 @@ from ophyd import Signal
 import pyRestTable
 
 
+if iconfig.get("WRITE_SPEC_DATA_FILES", False):
+    if specwriter is not None:
+        RE.subscribe(specwriter.receiver)
+        logger.info(f"writing to SPEC file: {specwriter.spec_filename}")
+        logger.info("   >>>>   Using default SPEC file name   <<<<")
+        logger.info("   file will be created when bluesky ends its next scan")
+        logger.info("   to change SPEC file, use command:   newSpecFile('title')")
+
+
 def print_devices_and_signals():
     """
     Print the Devices and Signals in the current global namespace.
