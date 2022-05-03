@@ -7,7 +7,6 @@ __all__ = """
     bp  bps  bpp
     summarize_plan
     np
-    callback_db
     """.split()
 
 from ..session_logs import logger
@@ -64,9 +63,6 @@ RE.md = PersistentDict(md_path)
 #     logger.info("migrating RE.md storage to PersistentDict")
 #     RE.md.update(old_md)
 
-# keep track of callback subscriptions
-callback_db = {}
-
 # Connect with our mongodb database
 catalog_name = iconfig.get("DATABROKER_CATALOG", "training")
 # databroker v2 api
@@ -75,7 +71,7 @@ logger.info(f"using databroker catalog '{catalog_name}'")
 
 # Subscribe metadatastore to documents.
 # If this is removed, data is not saved to metadatastore.
-callback_db["db"] = RE.subscribe(cat.v1.insert)
+RE.subscribe(cat.v1.insert)
 
 # Set up SupplementalData.
 sd = SupplementalData()
@@ -93,14 +89,14 @@ if _ipython is not None:
 
 # Set up the BestEffortCallback.
 bec = BestEffortCallback()
-callback_db["bec"] = RE.subscribe(bec)
+RE.subscribe(bec)
 peaks = bec.peaks  # just as alias for less typing
 bec.disable_baseline()
 
 # At the end of every run, verify that files were saved and
 # print a confirmation message.
 # from bluesky.callbacks.broker import verify_files_saved
-# callback_db['post_run_verify'] = RE.subscribe(post_run(verify_files_saved), 'stop')
+# RE.subscribe(post_run(verify_files_saved), 'stop')
 
 # Uncomment the following lines to turn on
 # verbose messages for debugging.

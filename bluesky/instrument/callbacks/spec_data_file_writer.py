@@ -20,14 +20,14 @@ import apstools.utils
 import datetime
 import pathlib
 
-from ..framework import RE, callback_db
+from ..framework import RE
 
 # write scans to SPEC data file
 specwriter = APS_fw.SpecWriterCallback()
 # make the SPEC file in current working directory (assumes is writable)
 _path = pathlib.Path().cwd()
 specwriter.newfile(str(_path / specwriter.spec_filename))
-callback_db["specwriter"] = RE.subscribe(specwriter.receiver)
+RE.subscribe(specwriter.receiver)
 
 logger.info(f"writing to SPEC file: {specwriter.spec_filename}")
 logger.info("   >>>>   Using default SPEC file name   <<<<")
