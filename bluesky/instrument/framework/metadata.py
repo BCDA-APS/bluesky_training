@@ -8,7 +8,7 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
-from . import iconfig
+from .. import iconfig
 from ..epics_signal_config import epics_scan_id_source
 from ..epics_signal_config import scan_id_epics
 import apstools
