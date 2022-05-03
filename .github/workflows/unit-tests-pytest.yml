@@ -27,6 +27,7 @@ jobs:
         mamba-version: "*"
         python-version: ${{ matrix.python-version }}
         use-only-tar-bz2: true  # required for caching
+
     - shell: bash -l {0}
       run: |
         conda info
@@ -86,10 +87,10 @@ jobs:
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
         PV: gp:UPTIME
 
-    - name: install test data catalogs
-      shell: bash -l {0}
-      run: |
-        ./resources/unpack.sh
+    # - name: install test data catalogs
+    #   shell: bash -l {0}
+    #   run: |
+    #     ./resources/unpack.sh
 
     - name: Diagnostics
       run: |
