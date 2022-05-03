@@ -5,7 +5,7 @@ if [[ "${CONDA_BIN}" = "" ]]; then
   export CONDA_BIN=/APSshare/miniconda/x86_64/bin
 fi
 export CONDA_ACTIVATE="${CONDA_BIN}/activate"
-export CONDA_ENVIRONMENT="${BLUESKY_ENV:-class_2021_03}"
+export CONDA_ENVIRONMENT="${BLUESKY_ENV:-training_2022}"
 # export CONDA_ENVIRONMENT=base
 
 export IPYTHON_PROFILE=bluesky
