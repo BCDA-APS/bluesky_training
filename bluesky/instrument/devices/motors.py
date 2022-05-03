@@ -23,6 +23,7 @@ IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 class MyEpicsMotor(EpicsMotor):
     steps_per_revolution = Component(EpicsSignal, ".SREV", kind="omitted")
 
+
 m1 = MyEpicsMotor(f"{IOC}m1", name="m1", labels=("motor",))
 m2 = MyEpicsMotor(f"{IOC}m2", name="m2", labels=("motor",))
 m3 = MyEpicsMotor(f"{IOC}m3", name="m3", labels=("motor",))

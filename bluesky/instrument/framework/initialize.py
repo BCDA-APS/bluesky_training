@@ -46,7 +46,7 @@ def get_md_path():
 
 
 md_path = get_md_path()
-#### remove this legacy code after 2022-07-31 and below (old_md)
+# ### remove this legacy code after 2022-07-31 and below (old_md)
 # check if we need to transition from SQLite-backed historydict
 # old_md = None
 # if not os.path.exists(md_path):

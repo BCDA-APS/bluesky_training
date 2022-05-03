@@ -27,7 +27,6 @@ import pyRestTable
 import socket
 import spec2nexus
 
-from .. import iconfig
 from .initialize import cat, RE
 
 

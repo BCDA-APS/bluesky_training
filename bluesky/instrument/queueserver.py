@@ -3,6 +3,7 @@ Configure for data collection using bluesky-queueserver.
 """
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 logger.info(__file__)
@@ -50,11 +51,13 @@ def print_plans():
     Print the plans in the current global namespace.
     """
     glo = globals().copy()
+    # fmt: off
     plans = [
         k
-        for k, v in sorted(glo.items()) 
+        for k, v in sorted(glo.items())
         if inspect.isgeneratorfunction(v)
     ]
+    # fmt: on
     if len(plans) > 0:
         print("List of Plans:")
         for k in plans:

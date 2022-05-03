@@ -24,7 +24,7 @@ scaler1.wait_for_connection()
 
 if not len(scaler1.channels.chan01.chname.get()):
     # CAUTION: define channel names JUST for this simulation.
-    # For a real instrument, the names are assigned when the 
+    # For a real instrument, the names are assigned when the
     # detector pulse cables are connected to the scaler channels.
     logger.info(
         f"{scaler1.name} has no channel names.  Assigning channel names."
@@ -50,4 +50,4 @@ I000 = scaler1.channels.chan05.s
 I00 = scaler1.channels.chan06.s
 
 for item in (timebase, I0, I00, I000, scint, diode):
-    item._ophyd_labels_ = set(["channel", "counter",])
+    item._ophyd_labels_ = set(["channel", "counter"])

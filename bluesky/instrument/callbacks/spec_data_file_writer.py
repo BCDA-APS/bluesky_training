@@ -43,7 +43,7 @@ def spec_comment(comment, doc=None):
 def newSpecFile(title, scan_id=1):
     """
     user choice of the SPEC file name
-    
+
     cleans up title, prepends month and day and appends file extension
     """
     global specwriter
