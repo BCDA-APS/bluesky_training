@@ -34,7 +34,7 @@ def test_contents():
         assert key in iconfig
 
 
-def test_contents():
+def test_import():
     sys.path.append(str(ROOT_PATH))
     from instrument import iconfig
 
