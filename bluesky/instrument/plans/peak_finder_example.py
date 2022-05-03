@@ -45,12 +45,13 @@ def two_pass_scan(cat=None, md=None):
     change_noisy_parameters()
 
     sig = 2
+    expansion_factor = 1.2  # expand search by FWHM*expansion_factor
     m1.move(0)
     for i in range(1, 3):
         md["scan_sequence"] = i
         uid = yield from bp.rel_scan([noisy], m1, -sig, +sig, 23, md=md)
         stats = _get_peak_stats(uid, noisy.name, m1.name, cat)
-        sig = stats["fwhm"]
+        sig = stats["fwhm"] * expansion_factor
         m1.move(stats["centroid_position"])
 
 
