@@ -1,4 +1,5 @@
 import pathlib
+import sys
 import yaml
 
 
@@ -31,3 +32,10 @@ def test_contents():
     """.strip().split()
     for key in key_list:
         assert key in iconfig
+
+
+def test_contents():
+    sys.path.append(str(ROOT_PATH))
+    from instrument import iconfig
+
+    assert isinstance(iconfig, dict)
