@@ -32,11 +32,12 @@ def spec_comment(comment, doc=None):
     APS_fw.spec_comment(comment, doc, specwriter)
 
 
-def newSpecFile(title, scan_id=1):
+def newSpecFile(title, scan_id=1, RE=None):
     """
-    user choice of the SPEC file name
+    User choice of the SPEC file name.
 
-    cleans up title, prepends month and day and appends file extension
+    Cleans up title, prepends month and day and appends file extension.
+    If ``RE`` is passed, then resets ``RE.md["scan_id"] = scan_id``.
     """
     global specwriter
     mmdd = str(datetime.datetime.now()).split()[0][5:].replace("-", "_")
@@ -44,11 +45,17 @@ def newSpecFile(title, scan_id=1):
     fname = pathlib.Path(f"{mmdd}_{clean}.dat")
     if fname.exists():
         logger.warning(f">>> file already exists: {fname} <<<")
-        specwriter.newfile(str(fname))  # TODO: , RE=RE)
+        if RE is None:
+            specwriter.newfile(str(fname))
+        else:
+            specwriter.newfile(str(fname), RE=RE)
         handled = "appended"
 
     else:
-        specwriter.newfile(str(fname), scan_id=scan_id)  # TODO: , RE=RE)
+        if RE is None:
+            specwriter.newfile(str(fname), scan_id=scan_id)
+        else:
+            specwriter.newfile(str(fname), scan_id=scan_id, RE=RE)
         handled = "created"
 
     logger.info(f"SPEC file name : {specwriter.spec_filename}")
