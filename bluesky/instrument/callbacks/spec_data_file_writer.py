@@ -44,11 +44,11 @@ def newSpecFile(title, scan_id=1):
     fname = pathlib.Path(f"{mmdd}_{clean}.dat")
     if fname.exists():
         logger.warning(f">>> file already exists: {fname} <<<")
-        specwriter.newfile(str(fname), RE=RE)
+        specwriter.newfile(str(fname))  # TODO: , RE=RE)
         handled = "appended"
 
     else:
-        specwriter.newfile(str(fname), scan_id=scan_id, RE=RE)
+        specwriter.newfile(str(fname), scan_id=scan_id)  # TODO: , RE=RE)
         handled = "created"
 
     logger.info(f"SPEC file name : {specwriter.spec_filename}")
