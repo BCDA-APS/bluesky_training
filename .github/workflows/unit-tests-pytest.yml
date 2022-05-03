@@ -106,11 +106,6 @@ jobs:
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
         PV: gp:UPTIME
 
-    # - name: install test data catalogs
-    #   shell: bash -l {0}
-    #   run: |
-    #     ./resources/unpack.sh
-
     - name: Diagnostics
       run: |
         $CONDA/bin/conda list --name $ENV_NAME
@@ -118,6 +113,11 @@ jobs:
       env:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Run Bluesky queueserver
+      run: |
+        bash ./bluesky/qserver.sh start
+        bash ./bluesky/qserver.sh status
 
     - name: Run tests with pytest & coverage
       run: |
