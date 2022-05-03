@@ -8,6 +8,9 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
+from . import iconfig
+from ..epics_signal_config import epics_scan_id_source
+from ..epics_signal_config import scan_id_epics
 import apstools
 import bluesky
 import databroker
@@ -25,17 +28,11 @@ import socket
 import spec2nexus
 
 from .. import iconfig
-from .initialize import RE
+from .initialize import cat, RE
 
-# Set up default metadata
-RE.md["beamline_id"] = iconfig.get("beamline_id", "undefined")
-RE.md["instrument_name"] = iconfig.get("instrument_name", "undefined")
-RE.md["proposal_id"] = iconfig.get("proposal_id", "undefined")
-RE.md["pid"] = os.getpid()
 
 HOSTNAME = socket.gethostname() or "localhost"
-USERNAME = getpass.getuser() or "APS lesson user"
-RE.md["login_id"] = USERNAME + "@" + HOSTNAME
+USERNAME = getpass.getuser() or "Bluesky user"
 
 # useful diagnostic to record with all data
 versions = dict(
@@ -51,4 +48,12 @@ versions = dict(
     pyRestTable=pyRestTable.__version__,
     spec2nexus=spec2nexus.__version__,
 )
+
+# Set up default metadata
+RE.md["databroker_catalog"] = cat.name
+RE.md["login_id"] = USERNAME + "@" + HOSTNAME
+RE.md.update(iconfig.get("RUNENGINE_METADATA", {}))
 RE.md["versions"] = versions
+RE.md["pid"] = os.getpid()
+if scan_id_epics is not None:
+    RE.md["scan_id"] = scan_id_epics.get()

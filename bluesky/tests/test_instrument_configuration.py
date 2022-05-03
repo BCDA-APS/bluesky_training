@@ -27,6 +27,7 @@ def test_contents():
     PV_CONNECTION_TIMEOUT
     PV_TIMEOUT
     PV_WRITE_TIMEOUT
+    RUNENGINE_METADATA
     """.strip().split()
     for key in key_list:
         assert key in iconfig

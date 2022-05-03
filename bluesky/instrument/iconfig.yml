@@ -9,9 +9,10 @@ GP_IOC_PREFIX: "gp:"
 DATABROKER_CATALOG: training
 
 # default RunEngine metadata
-beamline_id: Bluesky_training
-instrument_name: BCDA EPICS Bluesky training
-proposal_id: training
+RUNENGINE_METADATA:
+  beamline_id: Bluesky_training
+  instrument_name: BCDA EPICS Bluesky training
+  proposal_id: training
 
 # paths
 AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
