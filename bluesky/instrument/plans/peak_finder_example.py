@@ -22,13 +22,20 @@ from bluesky import plans as bp
 import pyRestTable
 
 
-def _get_peak_stats(uid, yname, xname, cat):
+def _get_peak_stats(uid, yname, xname):
     """(internal) Convenience function."""
-    ds = cat[uid].primary.read()
-    return analyze_peak(ds[yname].data, ds[xname].data)
+    logger.info("scan '%s(%s)' uid: %s", yname, xname, uid)
+    try:
+        logger.info("Catalog: %s (%s)", cat, type(cat))
+        logger.info("Catalog name: %s", cat.name)
+        ds = cat[uid].primary.read()
+        return analyze_peak(ds[yname].data, ds[xname].data)
+    except NameError:
+        logger.warning("Catalog object not defined.  No peak statistics.")
+        return {}
 
 
-def two_pass_scan(cat=None, md=None):
+def two_pass_scan(md=None):
     """
     Find the peak of noisy v. m1 in the range of +/- 2.
 
@@ -50,12 +57,16 @@ def two_pass_scan(cat=None, md=None):
     for i in range(1, 3):
         md["scan_sequence"] = i
         uid = yield from bp.rel_scan([noisy], m1, -sig, +sig, 23, md=md)
-        stats = _get_peak_stats(uid, noisy.name, m1.name, cat)
-        sig = stats["fwhm"] * expansion_factor
-        m1.move(stats["centroid_position"])
+        stats = _get_peak_stats(uid, noisy.name, m1.name)
+        if len(stats) > 0:
+            sig = stats["fwhm"] * expansion_factor
+            m1.move(stats["centroid_position"])
+        else:
+            logger.warning("Catalog object not found.  No peak statistics.")
+            break
 
 
-def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, cat=None, md=None):
+def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, md=None):
     """
     find peak of noisy v. m1 by repeated scans with refinement
 
@@ -65,7 +76,7 @@ def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, cat=
         m1.move(0.0)
         for _ in range(3):
             RE(bp.rel_scan([noisy], m1, -sig, sig, 23))
-            stats = _get_peak_stats(uid, noisy.name, m1.name, cat)
+            stats = _get_peak_stats(uid, noisy.name, m1.name)
             sig = stats["fwhm"]
             m1.move(stats["centroid_position"])
     """
@@ -80,11 +91,14 @@ def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, cat=
         uid = yield from bp.rel_scan(
             [noisy], m1, -magnify * sig, magnify * sig, number_of_points, md=md
         )
-        stats = _get_peak_stats(uid, noisy.name, m1.name, cat)
-        scan_id = cat[uid].metadata["start"]["scan_id"]
-        sig = stats["fwhm"]
-        cen = stats["centroid_position"]
-        results.append((scan_id, cen, sig))
+        stats = _get_peak_stats(uid, noisy.name, m1.name)
+        if len(stats) > 0:
+            scan_id = cat[uid].metadata["start"]["scan_id"]
+            sig = stats["fwhm"]
+            cen = stats["centroid_position"]
+            results.append((scan_id, cen, sig))
+        else:
+            break
     m1.move(cen)
 
     tbl = pyRestTable.Table()
@@ -94,11 +108,11 @@ def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, cat=
     logger.info("iterative results:\n%s", str(tbl))
 
 
-def repeat_findpeak(iters=1, cat=None, md=None):
+def repeat_findpeak(iters=1, md=None):
     md = md or {}
     for _i in range(iters):
         md["iteration"] = _i+1
         # FIXME: apstools.utils.trim_plot_lines(bec, 4, m1, noisy)
         change_noisy_parameters()
-        yield from findpeak_multipass(cat=cat, md=md)
+        yield from findpeak_multipass(md=md)
         logger.info("Finished #%d of %d iterations", _i + 1, iters)
