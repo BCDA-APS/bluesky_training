@@ -28,7 +28,8 @@ jobs:
         python-version: ${{ matrix.python-version }}
         use-only-tar-bz2: true  # required for caching
 
-    - shell: bash -l {0}
+    - name: Diagnostics
+      shell: bash -l {0}
       run: |
         conda info
         conda list
@@ -43,10 +44,26 @@ jobs:
         bash ./.github/scripts/start_adsim.sh ad
         docker ps -a
 
+    - name: Install EPICS dependencies
+      run: |
+        $CONDA/bin/conda install epics-base "readline!=8.1.2" --name $ENV_NAME
+        $CONDA/bin/conda list -r --name $ENV_NAME
+      env:
+        ENV_NAME: anaconda-test-env
+
+    - name: Run EPICS PV tests with caget
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        which caget
+        caget gp:UPTIME
+        caget ad:cam1:Acquire_RBV
+      env:
+        ENV_NAME: anaconda-test-env
+
     # $CONDA is an environment variable pointing to the
     # root of the miniconda directory
 
-    - name: Install Python package requirements
+    - name: Install remaining Python package requirements
       run: |
         $CONDA/bin/conda env update --file environment.yml --name $ENV_NAME
         $CONDA/bin/conda install pytest coverage coveralls --name $ENV_NAME
