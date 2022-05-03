@@ -23,6 +23,7 @@ ALLOW_AREA_DETECTOR_WARMUP: false
 ENABLE_AREA_DETECTOR_IMAGE_PLUGIN: true
 ENABLE_CALCS: true
 USE_PROGRESS_BAR: false
+WRITE_SPEC_DATA_FILES: true
 
 # ----------------------------------
 
