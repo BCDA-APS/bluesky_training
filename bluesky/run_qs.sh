@@ -21,7 +21,13 @@ if [ -z "${CONDA}" ] ; then
 fi
 CONDA_BASE_DIR="${CONDA}/bin"
 
-source "${CONDA_BASE_DIR}/activate" "${CONDA_ENVIRONMENT}"
+# In GitHub Actions workflow,
+# $ENV_NAME is an environment variable naming the conda environment to be used
+if [ -z "${ENV_NAME}" ] ; then
+    ENV_NAME="${CONDA_ENVIRONMENT}"
+fi
+
+source "${CONDA_BASE_DIR}/activate" "${ENV_NAME}"
 
 SHELL_SCRIPT_NAME=${BASH_SOURCE:-${0}}
 if [ -z "$STARTUP_DIR" ] ; then
@@ -33,4 +39,5 @@ start-re-manager \
     --startup-dir "${STARTUP_DIR}" \
     --update-existing-plans-devices ENVIRONMENT_OPEN \
     --zmq-publish-console ON \
-    --databroker-config "${DATABROKER_CATALOG}"
+    --keep-re
+    # --databroker-config "${DATABROKER_CATALOG}"
