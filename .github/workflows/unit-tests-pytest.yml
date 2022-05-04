@@ -121,31 +121,32 @@ jobs:
     - name: Run Bluesky queueserver
       run: |
         source $CONDA/bin/activate $ENV_NAME
-        # bash ./bluesky/qserver.sh run &
-        bash ./bluesky/qserver.sh start
+        bash ./bluesky/qserver.sh run &
+        # bash ./bluesky/qserver.sh start
+        sleep 10
         bash ./bluesky/qserver.sh status
         qserver status
       env:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Run tests with pytest & coverage
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     # proceed as in hklpy
-    #     coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
-    #     coverage combine
-    #     coverage report --precision 3
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    - name: Run tests with pytest & coverage
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        # proceed as in hklpy
+        coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
+        coverage combine
+        coverage report --precision 3
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Upload to coveralls
-    #   # https://github.com/TheKevJames/coveralls-python
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     coveralls --service=github
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload to coveralls
+      # https://github.com/TheKevJames/coveralls-python
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        coveralls --service=github
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
