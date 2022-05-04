@@ -10,10 +10,17 @@ DATABROKER_CATALOG=training
 
 # activate conda environment
 
-CONDA_BASE_DIR=/APSshare/miniconda/x86_64/bin
-if [ ! -d "${CONDA_BASE_DIR}" ]; then
-    CONDA_BASE_DIR=/opt/miniconda3/bin
+# In GitHub Actions workflow,
+# $CONDA is an environment variable pointing to the
+# root of the miniconda directory
+if [ -z "${CONDA}" ] ; then
+    CONDA=/APSshare/miniconda/x86_64
+    if [ ! -d "${CONDA}" ]; then
+        CONDA_BASE_DIR=/opt/miniconda3
+    fi
 fi
+CONDA_BASE_DIR="${CONDA}/bin"
+
 source "${CONDA_BASE_DIR}/activate" "${CONDA_ENVIRONMENT}"
 
 SHELL_SCRIPT_NAME=${BASH_SOURCE:-${0}}
