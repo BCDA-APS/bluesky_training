@@ -124,6 +124,9 @@ jobs:
         bash ./bluesky/qserver.sh run
         sleep 5
     #     bash ./bluesky/qserver.sh status
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
     # - name: Run tests with pytest & coverage
     #   run: |
