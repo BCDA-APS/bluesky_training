@@ -4,7 +4,7 @@ on: [push]
 
 jobs:
   build:
-    name: Setup py${{ matrix.python-version }}
+    name: Test with py${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
       matrix:
