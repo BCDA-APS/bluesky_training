@@ -120,6 +120,8 @@ jobs:
 
     - name: Run Bluesky queueserver
       run: |
+        source $CONDA/bin/activate $ENV_NAME
+        bash ./bluesky/qserver.sh run
         bash ./bluesky/qserver.sh start
         bash ./bluesky/qserver.sh status
         qserver status
