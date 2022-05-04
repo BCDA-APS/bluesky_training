@@ -114,15 +114,15 @@ jobs:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    - name: Install Redis
+    - name: Install Redis & screen
       run: |
-        sudo apt install redis
+        sudo apt install redis screen
 
     - name: Run Bluesky queueserver
       run: |
         source $CONDA/bin/activate $ENV_NAME
-        bash ./bluesky/qserver.sh run &
-        # bash ./bluesky/qserver.sh start
+        # bash ./bluesky/qserver.sh run &
+        bash ./bluesky/qserver.sh start
         bash ./bluesky/qserver.sh status
         qserver status
       env:
