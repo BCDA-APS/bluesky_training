@@ -13,6 +13,9 @@ from . import iconfig
 from .epics_signal_config import scan_id_epics
 from .queueserver_framework import *
 
+# guides choice of module to import cat
+iconfig["framework"] = "queueserver"
+
 from .devices import *
 from .plans import *
 from .utils import *

@@ -14,6 +14,7 @@ from ..session_logs import logger
 
 logger.info(__file__)
 
+from .. import iconfig
 from ..devices import change_noisy_parameters
 from ..devices import m1
 from ..devices import noisy
@@ -21,13 +22,16 @@ from ..utils.image_analysis import analyze_peak
 from bluesky import plans as bp
 import pyRestTable
 
+if iconfig.get("framework", "unknown") == "queueserver":
+    from ..queueserver_framework import cat
+else:
+    from ..framework import cat
+
 
 def _get_peak_stats(uid, yname, xname):
     """(internal) Convenience function."""
-    logger.info("scan '%s(%s)' uid: %s", yname, xname, uid)
+    logger.debug("compute scan statistics: '%s(%s)' uid: %s", yname, xname, uid)
     try:
-        logger.info("Catalog: %s (%s)", cat, type(cat))
-        logger.info("Catalog name: %s", cat.name)
         ds = cat[uid].primary.read()
         return analyze_peak(ds[yname].data, ds[xname].data)
     except NameError:
