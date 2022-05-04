@@ -27,6 +27,8 @@ if [ -z "${ENV_NAME}" ] ; then
     ENV_NAME="${CONDA_ENVIRONMENT}"
 fi
 
+echo "Environment: $(env | sort)"
+
 source "${CONDA_BASE_DIR}/activate" "${ENV_NAME}"
 
 SHELL_SCRIPT_NAME=${BASH_SOURCE:-${0}}
