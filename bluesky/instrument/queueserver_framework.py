@@ -4,6 +4,9 @@ Define RE for bluesky-queueserver.
 
 __all__ = """
     cat
+    make_kv_table
+    print_instrument_configuration
+    print_RE_metadata
     RE
     sd
 """.split()
@@ -51,7 +54,13 @@ versions = dict(
     spec2nexus=spec2nexus.__version__,
 )
 
-cat = databroker.catalog[iconfig["DATABROKER_CATALOG"]]
+try:
+    cat = databroker.catalog[iconfig["DATABROKER_CATALOG"]]
+    logger.info("using databroker catalog '%s'", cat.name)
+except KeyError:
+    cat = databroker.temp().v2
+    logger.info("using TEMPORARY databroker catalog '%s'", cat.name)
+
 if scan_id_epics is None:
     RE = bluesky.RunEngine({})
 else:
@@ -70,3 +79,33 @@ if scan_id_epics is not None:
 # Set up SupplementalData.
 sd = bluesky.SupplementalData()
 RE.preprocessors.append(sd)
+
+
+def make_kv_table(data):
+    table = pyRestTable.Table()
+    table.labels = "key value".split()
+    for k, v in sorted(data.items()):
+        if isinstance(v, dict):
+            table.addRow((k, make_kv_table(v)))
+        else:
+            table.addRow((k, v))
+    return table
+
+
+def print_instrument_configuration():
+    if len(iconfig) > 0:
+        table = make_kv_table(iconfig)
+        print("")
+        print("Instrument configuration (iconfig):")
+        print(table)
+
+
+def print_RE_metadata():
+    """
+    Print a table (to the console) with the current RunEngine metadata.
+    """
+    if len(RE.md) > 0:
+        table = make_kv_table(RE.md)
+        print("")
+        print("RunEngine metadata:")
+        print(table)

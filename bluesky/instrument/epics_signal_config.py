@@ -8,6 +8,7 @@ __all__ = """
 """.split()
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 logger.info(__file__)
@@ -52,7 +53,7 @@ def epics_scan_id_source(*args, **kwargs):
         raise RuntimeError(
             "epics_scan_id_source() called when"
             " 'RUN_ENGINE_SCAN_ID_PV' is"
-             "undefined in 'iconfig.yml' file."
+            "undefined in 'iconfig.yml' file."
         )
     new_scan_id = max(scan_id_epics.get(), 0) + 1
     scan_id_epics.put(new_scan_id)

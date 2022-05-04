@@ -52,7 +52,7 @@ class MyPvPositioner(PVPositioner):
         """
         Called when setpoint changes (EPICS CA monitor event).
 
-        When the setpoint is changed, force done=False.  For any move, 
+        When the setpoint is changed, force done=False.  For any move,
         done must go != done_value, then back to done_value (True).
         Without this response, a small move (within tolerance) will not return.
         Next update of readback will compute self.done.

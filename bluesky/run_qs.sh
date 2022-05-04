@@ -4,17 +4,32 @@
 
 #--------------------
 # change the program defaults here
-CONDA_ENVIRONMENT=bluesky_2022_2
+CONDA_ENVIRONMENT=training_2022
 DATABROKER_CATALOG=training
 #--------------------
 
 # activate conda environment
 
-CONDA_BASE_DIR=/APSshare/miniconda/x86_64/bin
-if [ ! -d "${CONDA_BASE_DIR}" ]; then
-    CONDA_BASE_DIR=/opt/miniconda3/bin
+# In GitHub Actions workflow,
+# $CONDA is an environment variable pointing to the
+# root of the miniconda directory
+if [ "${CONDA}" == "" ] ; then
+    CONDA=/APSshare/miniconda/x86_64
+    if [ ! -d "${CONDA}" ]; then
+        CONDA=/opt/miniconda3
+    fi
 fi
-source "${CONDA_BASE_DIR}/activate" "${CONDA_ENVIRONMENT}"
+CONDA_BASE_DIR="${CONDA}/bin"
+
+# In GitHub Actions workflow,
+# $ENV_NAME is an environment variable naming the conda environment to be used
+if [ -z "${ENV_NAME}" ] ; then
+    ENV_NAME="${CONDA_ENVIRONMENT}"
+fi
+
+# echo "Environment: $(env | sort)"
+
+source "${CONDA_BASE_DIR}/activate" "${ENV_NAME}"
 
 SHELL_SCRIPT_NAME=${BASH_SOURCE:-${0}}
 if [ -z "$STARTUP_DIR" ] ; then
@@ -26,4 +41,5 @@ start-re-manager \
     --startup-dir "${STARTUP_DIR}" \
     --update-existing-plans-devices ENVIRONMENT_OPEN \
     --zmq-publish-console ON \
-    --databroker-config "${DATABROKER_CATALOG}"
+    --keep-re
+    # --databroker-config "${DATABROKER_CATALOG}"

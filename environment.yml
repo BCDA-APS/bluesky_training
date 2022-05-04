@@ -1,53 +1,85 @@
-name: class_2021_03
+name: training_2022
+
+# use:
+#   date; conda env create --force -f ./environment.yml; date
+
 channels:
   - defaults
   - conda-forge
   - nsls2forge
   - aps-anl-tag
+
 dependencies:
-  # - anaconda
-  - aps-dm-api
-  - apstools
-  - area-detector-handlers
-  - black
-  - bluesky>=1.6.2
-  - databroker-pack
-  - databroker>=1.2
-  - flake8
-  - h5py
-  - hklpy
-  - imagecodecs-lite
-  - ipympl
+
+  # --- Python core packages
+  - python=3.9
   - ipython
   - jupyter
   - jupyterlab
-  - lxml
-  - nexpy
   - notebook
-  - ophyd>=1.5.1
-  - pandas
-  - pint
   - pip
   - psutil
-  - punx
-  - pyEpics>=3.4.2
+
+  # --- testing and quality assurance
+  - black
+  - flake8
   - pylint
-  - pymca
-  - pymongo
-  - pyqt=5
-  - pyRestTable
   - pytest
-  - python>=3.8
+
+  # --- Qt
+  - pyqt=5
   - qt=5
+
+  # --- general support packages
+  - bitshuffle
+  - epics-base>=7.0.5
+  - h5py
+  - hdf5plugin
+  - imagecodecs-lite
+  - ipympl
+  - lxml
+  - pandas
+  - pint
+  - pyEpics>=3.5.0
+  - pymongo
   - scikit-image
-  - spec2nexus
-  - sphinx
-  - sphinxcontrib-napoleon
-  - stdlogpj
-  - versioneer
   - xlrd
-  # pip not needed now: all packages included from above
-  # - pip:
-  #   - bluesky-live
-  #   # - sphinx-rtd-theme
-  #   - super-state-machine
+
+  # # --- Bluesky framework packages
+  # all moved to pip install (conda takes additional 10m to solve)
+
+  # --- user-requested packages
+  - nexpy
+  - punx
+  - pvview
+  - pymca
+  - pyRestTable
+  - spec2nexus
+  - stdlogpj
+  - xrayutilities
+
+  # # --- packaging and publishing
+  # - conda-build
+  # - coverage
+  # - sphinx
+  # - sphinxcontrib-napoleon
+  # - twine
+  # - versioneer
+
+  - pip:
+    - apstools
+    - area-detector-handlers
+    - bluesky-queueserver
+    - bluesky-queueserver-api
+    - bluesky-widgets
+    - bluesky>=1.8.1
+    - databroker-pack
+    - databroker>=1.2.4,<2
+    - hklpy
+    - ophyd>=1.6.3
+    - pydm
+
+    - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
+    # --- optional Bluesky framework packages for evaluation
+    # - bluesky-webclient is NOT Python software, don't install it this way
+    #    https://github.com/bluesky/bluesky-webclient

@@ -1,0 +1,152 @@
+name: Unit Tests
+
+on: [push]
+
+jobs:
+  build:
+    name: Test with py${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # python-version: ['3.7', '3.8', '3.9', '3.10']
+        python-version: ['3.7', '3.8', '3.9']
+      max-parallel: 5
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Setup Miniconda
+      uses: conda-incubator/setup-miniconda@v2
+      with:
+        activate-environment:
+            anaconda-test-env-py-${{ matrix.python-version }}
+        auto-update-conda: true
+        channel-priority: true
+        channels: defaults,conda-forge,aps-anl-tag
+        # environment-file: environment.yml
+        mamba-version: "*"
+        python-version: ${{ matrix.python-version }}
+        use-only-tar-bz2: true  # required for caching
+
+    - name: Diagnostics
+      shell: bash -l {0}
+      run: |
+        conda info
+        conda list
+        conda config --show-sources
+        conda config --show
+        conda env list
+        printenv | sort
+
+    - name: Start EPICS IOCs in Docker
+      run: |
+        bash ./.github/scripts/start_xxx.sh gp
+        bash ./.github/scripts/start_adsim.sh ad
+        docker ps -a
+
+    - name: Install EPICS dependencies
+      run: |
+        $CONDA/bin/conda install epics-base "readline!=8.1.2" --name $ENV_NAME
+        $CONDA/bin/conda list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Run EPICS PV tests with caget
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        which caget
+        caget gp:UPTIME
+        caget ad:cam1:Acquire_RBV
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    # $CONDA is an environment variable pointing to the
+    # root of the miniconda directory
+
+    - name: Install remaining Python package requirements
+      run: |
+        $CONDA/bin/conda env update --file environment.yml --name $ENV_NAME
+        $CONDA/bin/conda install pytest coverage coveralls --name $ENV_NAME
+        $CONDA/bin/conda list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Confirm EPICS IOC is available via caget
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        caget "${PV}"
+        caget ad:cam1:Acquire_RBV
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        PV: gp:UPTIME
+
+    - name: Confirm EPICS IOC is available via PyEpics
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        python -c "import epics; print(epics.caget('${PV}'))"
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        PV: gp:UPTIME
+
+    - name: Confirm EPICS IOC is available via ophyd
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        CMD="import ophyd"
+        CMD+="; up = ophyd.EpicsSignalRO('${PV}', name='up')"
+        CMD+="; up.wait_for_connection()"
+        CMD+="; print(up.get())"
+        python -c "${CMD}"
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        PV: gp:UPTIME
+
+    - name: Diagnostics
+      run: |
+        $CONDA/bin/conda list --name $ENV_NAME
+        $CONDA/bin/conda list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Install Redis & screen
+      run: |
+        sudo apt install redis screen
+
+    - name: Run Bluesky queueserver
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        bash ./bluesky/qserver.sh run &
+        # bash ./bluesky/qserver.sh start
+        sleep 10
+        bash ./bluesky/qserver.sh status
+        qserver status
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Run tests with pytest & coverage
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        # proceed as in hklpy
+        coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
+        coverage combine
+        coverage report --precision 3
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Upload to coveralls
+      # https://github.com/TheKevJames/coveralls-python
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        coveralls --service=github
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -9,9 +9,10 @@ GP_IOC_PREFIX: "gp:"
 DATABROKER_CATALOG: training
 
 # default RunEngine metadata
-beamline_id: Bluesky_training
-instrument_name: BCDA EPICS Bluesky training
-proposal_id: training
+RUNENGINE_METADATA:
+  beamline_id: Bluesky_training
+  instrument_name: BCDA EPICS Bluesky training
+  proposal_id: training
 
 # paths
 AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
@@ -28,9 +29,9 @@ WRITE_SPEC_DATA_FILES: true
 # ----------------------------------
 
 # default timeouts (seconds)
-PV_TIMEOUT: 60
-PV_WRITE_TIMEOUT: 60
-PV_CONNECTION_TIMEOUT: 60
+PV_TIMEOUT: &TIMEOUT 60
+PV_WRITE_TIMEOUT: *TIMEOUT
+PV_CONNECTION_TIMEOUT: *TIMEOUT
 
 # Minimum software package version checks: MAJOR.minor (no .patch).
 # These will be converted to tuple() for comparisons.

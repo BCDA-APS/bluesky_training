@@ -20,25 +20,31 @@ from ..devices import m1
 from ..devices import noisy
 from ..utils.image_analysis import analyze_peak
 from bluesky import plans as bp
-import databroker
 import pyRestTable
 
-
-cat = databroker.catalog[iconfig["DATABROKER_CATALOG"]]
+if iconfig.get("framework", "unknown") == "queueserver":
+    from ..queueserver_framework import cat
+else:
+    from ..framework import cat
 
 
 def _get_peak_stats(uid, yname, xname):
     """(internal) Convenience function."""
-    ds = cat[uid].primary.read()
-    return analyze_peak(ds[yname].data, ds[xname].data)
+    logger.debug("compute scan statistics: '%s(%s)' uid: %s", yname, xname, uid)
+    try:
+        ds = cat[uid].primary.read()
+        return analyze_peak(ds[yname].data, ds[xname].data)
+    except NameError:
+        logger.warning("Catalog object not defined.  No peak statistics.")
+        return {}
 
 
 def two_pass_scan(md=None):
     """
     Find the peak of noisy v. m1 in the range of +/- 2.
 
-    We know the peak of the simulated noisy detector is
-    positioned somewhere between -1 to +1.  Overscan that
+    We know the peak center of the simulated noisy detector
+    is positioned randomly between -1 to +1.  Overscan that
     range to find both sides of the peak.
 
     This is a 2 scan procedure.  First scan passes through
@@ -50,13 +56,18 @@ def two_pass_scan(md=None):
     change_noisy_parameters()
 
     sig = 2
+    expansion_factor = 1.2  # expand search by FWHM*expansion_factor
     m1.move(0)
     for i in range(1, 3):
         md["scan_sequence"] = i
         uid = yield from bp.rel_scan([noisy], m1, -sig, +sig, 23, md=md)
         stats = _get_peak_stats(uid, noisy.name, m1.name)
-        sig = stats["fwhm"]
-        m1.move(stats["centroid_position"])
+        if len(stats) > 0:
+            sig = stats["fwhm"] * expansion_factor
+            m1.move(stats["centroid_position"])
+        else:
+            logger.warning("Catalog object not found.  No peak statistics.")
+            break
 
 
 def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, md=None):
@@ -85,10 +96,13 @@ def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, md=N
             [noisy], m1, -magnify * sig, magnify * sig, number_of_points, md=md
         )
         stats = _get_peak_stats(uid, noisy.name, m1.name)
-        scan_id = cat[uid].metadata["start"]["scan_id"]
-        sig = stats["fwhm"]
-        cen = stats["centroid_position"]
-        results.append((scan_id, cen, sig))
+        if len(stats) > 0:
+            scan_id = cat[uid].metadata["start"]["scan_id"]
+            sig = stats["fwhm"]
+            cen = stats["centroid_position"]
+            results.append((scan_id, cen, sig))
+        else:
+            break
     m1.move(cen)
 
     tbl = pyRestTable.Table()

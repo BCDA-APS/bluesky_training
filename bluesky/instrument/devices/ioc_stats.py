@@ -5,7 +5,7 @@ IOC statistics: synApps iocStats
 # fmt: off
 __all__ = [
     "gp_stats",
-    # "ad_stats", 
+    # "ad_stats",
 ]
 # fmt: on
 
