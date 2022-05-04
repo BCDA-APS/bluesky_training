@@ -122,7 +122,7 @@ jobs:
     - name: Run Bluesky queueserver
       run: |
         bash ./bluesky/qserver.sh start
-        bash sleep 5
+        sleep 5
         bash ./bluesky/qserver.sh status
 
     - name: Run tests with pytest & coverage
