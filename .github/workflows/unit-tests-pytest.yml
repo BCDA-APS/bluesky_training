@@ -114,10 +114,9 @@ jobs:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    - name: Start Redis v5
-      uses: superchargejs/redis-github-action@1.1.0
-      with:
-        redis-version: 5
+    - name: Install Redis
+      run: |
+        sudo apt install redis
 
     - name: Run Bluesky queueserver
       run: |
