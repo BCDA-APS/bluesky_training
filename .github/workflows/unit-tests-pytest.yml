@@ -53,27 +53,27 @@ jobs:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Run EPICS PV tests with caget
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     which caget
-    #     caget gp:UPTIME
-    #     caget ad:cam1:Acquire_RBV
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    - name: Run EPICS PV tests with caget
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        which caget
+        caget gp:UPTIME
+        caget ad:cam1:Acquire_RBV
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # # $CONDA is an environment variable pointing to the
-    # # root of the miniconda directory
+    # $CONDA is an environment variable pointing to the
+    # root of the miniconda directory
 
-    # - name: Install remaining Python package requirements
-    #   run: |
-    #     $CONDA/bin/conda env update --file environment.yml --name $ENV_NAME
-    #     $CONDA/bin/conda install pytest coverage coveralls --name $ENV_NAME
-    #     $CONDA/bin/conda list -r --name $ENV_NAME
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    - name: Install remaining Python package requirements
+      run: |
+        mamba env update --file environment.yml --name $ENV_NAME
+        mamba install pytest coverage coveralls --name $ENV_NAME
+        mamba list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
     # - name: Confirm EPICS IOC is available via caget
     #   run: |
@@ -109,8 +109,8 @@ jobs:
 
     # - name: Diagnostics
     #   run: |
-    #     $CONDA/bin/conda list --name $ENV_NAME
-    #     $CONDA/bin/conda list -r --name $ENV_NAME
+    #     mamba list --name $ENV_NAME
+    #     mamba list -r --name $ENV_NAME
     #   env:
     #     PY_VER: ${{ matrix.python-version }}
     #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
