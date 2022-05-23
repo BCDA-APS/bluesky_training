@@ -32,6 +32,7 @@ jobs:
       shell: bash -l {0}
       run: |
         which mamba
+        which micromamba
         conda info
         conda list
         conda config --show-sources
