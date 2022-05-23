@@ -31,7 +31,7 @@ jobs:
     # https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html#micromamba
     - name: Install micromamba
       run: |
-        mamba install micromamba" -c defaults -c conda-forge
+        mamba install micromamba -c defaults -c conda-forge
 
     - name: Diagnostics
       shell: bash -l {0}
