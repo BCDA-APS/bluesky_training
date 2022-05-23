@@ -3,6 +3,13 @@ name: training_2022
 # use:
 #   date -Is; mamba env create --force -f ./environment.yml; date -Is
 
+# then (manually):
+# pip install --pre \
+#   databroker \
+#   tiled[all] \
+#   area_detector_handlers
+
+
 channels:
   - defaults
   - conda-forge
@@ -31,8 +38,11 @@ dependencies:
   - qt=5
 
   # --- general support packages
+  - aps-dm-api>=5
   - bitshuffle
+  - blosc
   - epics-base>=7.0.5
+  - h5netcdf
   - h5py
   - hdf5plugin
   - imagecodecs-lite
@@ -45,8 +55,7 @@ dependencies:
   - scikit-image
   - xlrd
 
-  # # --- Bluesky framework packages
-  # all moved to pip install (conda takes additional 10m to solve)
+  # --- Bluesky framework packages
   - apstools
   - area-detector-handlers
   - bluesky-queueserver
@@ -77,21 +86,21 @@ dependencies:
   # - twine
   # - versioneer
 
-  # - pip:
-  #   # - apstools
-  #   # - area-detector-handlers
-  #   # - bluesky-queueserver
-  #   # - bluesky-queueserver-api
-  #   # - bluesky-widgets
-  #   # - bluesky>=1.8.1
-  #   # - databroker-pack
-  #   # # - databroker>=1.2.4,<2
-  #   # - databroker
-  #   # - hklpy
-  #   # - ophyd>=1.6.3
-  #   # - pydm
+  # for tiled install (separately, by pip, as above)
+  - anyio
+  - prometheus_client
+  - jinja2
+  - dask
+  - fastapi
+  - httpx
+  - pydantic
+  - uvicorn
+  - lz4
+  - tifffile
 
-  #   - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
-  #   # --- optional Bluesky framework packages for evaluation
-  #   # - bluesky-webclient is NOT Python software, don't install it this way
-  #   #    https://github.com/bluesky/bluesky-webclient
+  - pip:
+
+    - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
+    # --- optional Bluesky framework packages for evaluation
+    # - bluesky-webclient is NOT Python software, don't install it this way
+    #    https://github.com/bluesky/bluesky-webclient
