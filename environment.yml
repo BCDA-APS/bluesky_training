@@ -19,7 +19,7 @@ channels:
 dependencies:
 
   # --- Python core packages
-  - python=3.9
+  - python
   - ipython
   - jupyter
   - jupyterlab
@@ -29,6 +29,8 @@ dependencies:
 
   # --- testing and quality assurance
   - black
+  - coverage
+  - coveralls
   - flake8
   - pylint
   - pytest
@@ -80,7 +82,6 @@ dependencies:
 
   # # --- packaging and publishing
   # - conda-build
-  # - coverage
   # - sphinx
   # - sphinxcontrib-napoleon
   # - twine
@@ -88,15 +89,15 @@ dependencies:
 
   # for tiled install (separately, by pip, as above)
   - anyio
-  - prometheus_client
-  - jinja2
   - dask
   - fastapi
   - httpx
-  - pydantic
-  - uvicorn
+  - jinja2
   - lz4
+  - prometheus_client
+  - pydantic
   - tifffile
+  - uvicorn
 
   - pip:
 

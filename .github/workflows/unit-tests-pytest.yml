@@ -66,10 +66,17 @@ jobs:
     # $CONDA is an environment variable pointing to the
     # root of the miniconda directory
 
-    - name: Install remaining Python package requirements
+    - name: Install Python package requirements
       run: |
         mamba env update --file environment.yml --name $ENV_NAME
-        mamba install pytest coverage coveralls --name $ENV_NAME
+        mamba list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Pip install additional package requirements
+      run: |
+        pip install --pre databroker tiled[all] area_detector_handlers
         mamba list -r --name $ENV_NAME
       env:
         PY_VER: ${{ matrix.python-version }}
