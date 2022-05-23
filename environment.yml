@@ -74,7 +74,8 @@ dependencies:
     - bluesky-widgets
     - bluesky>=1.8.1
     - databroker-pack
-    - databroker>=1.2.4,<2
+    # - databroker>=1.2.4,<2
+    - databroker>=2
     - hklpy
     - ophyd>=1.6.3
     - pydm
