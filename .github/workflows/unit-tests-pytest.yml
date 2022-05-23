@@ -82,79 +82,79 @@ jobs:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Confirm EPICS IOC is available via caget
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     caget "${PV}"
-    #     caget ad:cam1:Acquire_RBV
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
-    #     PV: gp:UPTIME
+    - name: Confirm EPICS IOC is available via caget
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        caget "${PV}"
+        caget ad:cam1:Acquire_RBV
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        PV: gp:UPTIME
 
-    # - name: Confirm EPICS IOC is available via PyEpics
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     python -c "import epics; print(epics.caget('${PV}'))"
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
-    #     PV: gp:UPTIME
+    - name: Confirm EPICS IOC is available via PyEpics
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        python -c "import epics; print(epics.caget('${PV}'))"
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        PV: gp:UPTIME
 
-    # - name: Confirm EPICS IOC is available via ophyd
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     CMD="import ophyd"
-    #     CMD+="; up = ophyd.EpicsSignalRO('${PV}', name='up')"
-    #     CMD+="; up.wait_for_connection()"
-    #     CMD+="; print(up.get())"
-    #     python -c "${CMD}"
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
-    #     PV: gp:UPTIME
+    - name: Confirm EPICS IOC is available via ophyd
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        CMD="import ophyd"
+        CMD+="; up = ophyd.EpicsSignalRO('${PV}', name='up')"
+        CMD+="; up.wait_for_connection()"
+        CMD+="; print(up.get())"
+        python -c "${CMD}"
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        PV: gp:UPTIME
 
-    # - name: Diagnostics
-    #   run: |
-    #     mamba list --name $ENV_NAME
-    #     mamba list -r --name $ENV_NAME
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    - name: Diagnostics
+      run: |
+        mamba list --name $ENV_NAME
+        mamba list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Install Redis & screen
-    #   run: |
-    #     sudo apt install redis screen
+    - name: Install Redis & screen
+      run: |
+        sudo apt install redis screen
 
-    # - name: Run Bluesky queueserver
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     bash ./bluesky/qserver.sh run &
-    #     # bash ./bluesky/qserver.sh start
-    #     sleep 10
-    #     bash ./bluesky/qserver.sh status
-    #     qserver status
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    - name: Run Bluesky queueserver
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        bash ./bluesky/qserver.sh run &
+        # bash ./bluesky/qserver.sh start
+        sleep 10
+        bash ./bluesky/qserver.sh status
+        qserver status
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Run tests with pytest & coverage
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     # proceed as in hklpy
-    #     coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
-    #     coverage combine
-    #     coverage report --precision 3
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    - name: Run tests with pytest & coverage
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        # proceed as in hklpy
+        coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
+        coverage combine
+        coverage report --precision 3
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    # - name: Upload to coveralls
-    #   # https://github.com/TheKevJames/coveralls-python
-    #   run: |
-    #     source $CONDA/bin/activate $ENV_NAME
-    #     coveralls --service=github
-    #   env:
-    #     PY_VER: ${{ matrix.python-version }}
-    #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
-    #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Upload to coveralls
+      # https://github.com/TheKevJames/coveralls-python
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        coveralls --service=github
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
