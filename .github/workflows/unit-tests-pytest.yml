@@ -76,6 +76,7 @@ jobs:
 
     - name: Pip install additional package requirements
       run: |
+        source $CONDA/bin/activate $ENV_NAME
         pip install --pre databroker tiled[all] area_detector_handlers
         mamba list -r --name $ENV_NAME
       env:
