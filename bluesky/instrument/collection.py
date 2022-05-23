@@ -6,6 +6,13 @@ from .session_logs import logger
 
 logger.info(__file__)
 
+# conda environment name
+import os
+_conda_prefix = os.environ.get("CONDA_PREFIX")
+if _conda_prefix is not None:
+    logger.info("CONDA_PREFIX = %s", _conda_prefix)
+del _conda_prefix
+
 from . import mpl
 
 logger.info("#### Bluesky Framework ####")
