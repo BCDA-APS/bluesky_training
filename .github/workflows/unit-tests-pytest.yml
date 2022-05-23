@@ -28,13 +28,10 @@ jobs:
         python-version: ${{ matrix.python-version }}
         use-only-tar-bz2: true  # required for caching
 
+    # https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html#micromamba
     - name: Install micromamba
       run: |
-        mamba install micromamba" --name $ENV_NAME -c defaults -c conda-forge
-        mamba list -r --name $ENV_NAME
-      env:
-        PY_VER: ${{ matrix.python-version }}
-        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+        mamba install micromamba" -c defaults -c conda-forge
 
     - name: Diagnostics
       shell: bash -l {0}
