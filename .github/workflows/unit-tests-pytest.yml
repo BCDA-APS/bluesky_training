@@ -31,6 +31,7 @@ jobs:
     - name: Diagnostics
       shell: bash -l {0}
       run: |
+        which mamba
         conda info
         conda list
         conda config --show-sources
@@ -46,8 +47,8 @@ jobs:
 
     - name: Install EPICS dependencies
       run: |
-        $CONDA/bin/conda install epics-base "readline!=8.1.2" --name $ENV_NAME
-        $CONDA/bin/conda list -r --name $ENV_NAME
+        mamba install epics-base "readline!=8.1.2" --name $ENV_NAME
+        mamba list -r --name $ENV_NAME
       env:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
@@ -65,11 +66,23 @@ jobs:
     # $CONDA is an environment variable pointing to the
     # root of the miniconda directory
 
-    - name: Install remaining Python package requirements
+    - name: Install Python package requirements
       run: |
-        $CONDA/bin/conda env update --file environment.yml --name $ENV_NAME
-        $CONDA/bin/conda install pytest coverage coveralls --name $ENV_NAME
-        $CONDA/bin/conda list -r --name $ENV_NAME
+        mamba env update --file environment.yml --name $ENV_NAME
+        mamba list -r --name $ENV_NAME
+      env:
+        PY_VER: ${{ matrix.python-version }}
+        ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Pip install additional package requirements
+      run: |
+        source $CONDA/bin/activate $ENV_NAME
+        # diagnostic
+        conda list cover
+        #
+        pip install --pre databroker tiled[all] area_detector_handlers
+        pip install -U coveralls
+        mamba list -r --name $ENV_NAME
       env:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
@@ -108,8 +121,8 @@ jobs:
 
     - name: Diagnostics
       run: |
-        $CONDA/bin/conda list --name $ENV_NAME
-        $CONDA/bin/conda list -r --name $ENV_NAME
+        mamba list --name $ENV_NAME
+        mamba list -r --name $ENV_NAME
       env:
         PY_VER: ${{ matrix.python-version }}
         ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}

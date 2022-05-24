@@ -9,18 +9,24 @@ RM = REManagerAPI()
 
 
 def test_env_open():
+    keylist = "re_state manager_state worker_environment_state".split()
     try:
         RM.environment_close()
         RM.wait_for_idle()
     except RequestFailedError:
         pass
     RM.environment_open()
+    status = RM.status()
+    for key in keylist:
+        assert key in status
+        assert status[key] != "idle", (key, status.get(key, "no such key"))
+
     RM.wait_for_idle()
 
     status = RM.status()
-    for key in "re_state manager_state worker_environment_state".split():
+    for key in keylist:
         assert key in status
-        assert status[key] == "idle"
+        assert status[key] == "idle", (key, status.get(key, "no such key"))
 
 
 @pytest.mark.parametrize(
