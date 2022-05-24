@@ -20,7 +20,7 @@ def test_env_open():
     status = RM.status()
     for key in "re_state manager_state worker_environment_state".split():
         assert key in status
-        assert status[key] == "idle"
+        assert status[key] == "idle", status
 
 
 @pytest.mark.parametrize(
