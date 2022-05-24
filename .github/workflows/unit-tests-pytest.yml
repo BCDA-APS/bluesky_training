@@ -77,7 +77,11 @@ jobs:
     - name: Pip install additional package requirements
       run: |
         source $CONDA/bin/activate $ENV_NAME
+        # diagnostic
+        conda list cover
+        #
         pip install --pre databroker tiled[all] area_detector_handlers
+        pip install -U coveralls
         mamba list -r --name $ENV_NAME
       env:
         PY_VER: ${{ matrix.python-version }}
