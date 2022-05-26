@@ -97,3 +97,4 @@ databroker-pack | https://blueskyproject.io/databroker-pack
 apstools | https://BCDA-APS.github.io/apstools
 APS instruments | https://github.com/BCDA-APS/use_bluesky/wiki/
 APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
+License | [![license: ANL](https://img.shields.io/badge/license-ANL-brightgreen)](LICENSE.txt)
