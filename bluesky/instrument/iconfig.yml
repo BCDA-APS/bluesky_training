@@ -17,7 +17,7 @@ RUNENGINE_METADATA:
 # paths
 AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
 AD_MOUNT_PATH: /tmp
-BLUESKY_MOUNT_PATH: /tmp/docker_ioc/iocbdpad/tmp
+BLUESKY_MOUNT_PATH: /tmp/docker_ioc/iocad/tmp
 
 # permissions
 ALLOW_AREA_DETECTOR_WARMUP: false
