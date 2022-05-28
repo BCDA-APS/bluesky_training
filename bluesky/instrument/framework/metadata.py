@@ -56,3 +56,7 @@ RE.md["versions"] = versions
 RE.md["pid"] = os.getpid()
 if scan_id_epics is not None:
     RE.md["scan_id"] = scan_id_epics.get()
+conda_prefix = os.environ.get("CONDA_PREFIX")
+if conda_prefix is not None:
+    RE.md["conda_prefix"] = conda_prefix
+del conda_prefix

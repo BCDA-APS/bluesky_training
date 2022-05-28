@@ -13,7 +13,7 @@ RUNENGINE_METADATA:
   beamline_id: Bluesky_training
   instrument_name: BCDA EPICS Bluesky training
   proposal_id: training
-  catalog: *databroker_catalog
+  databroker_catalog: *databroker_catalog
 
 # paths
 AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
