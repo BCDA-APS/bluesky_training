@@ -24,6 +24,7 @@ from ophyd import SingleTrigger
 from ophyd.areadetector.filestore_mixins import FileStoreHDF5IterativeWrite
 from ophyd.areadetector.plugins import HDF5Plugin_V34
 from ophyd.areadetector.plugins import ImagePlugin_V34
+from ophyd.areadetector.plugins import PvaPlugin_V34
 import numpy as np
 import pathlib
 
@@ -65,6 +66,7 @@ class MySimDetector(SingleTrigger, DetectorBase):
         write_path_template=WRITE_PATH_TEMPLATE,
         read_path_template=READ_PATH_TEMPLATE,
     )
+    pva = ADComponent(PvaPlugin_V34, "Pva1:")
 
 
 def change_ad_simulated_image_parameters():
