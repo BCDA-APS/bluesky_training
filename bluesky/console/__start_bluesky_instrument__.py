@@ -7,16 +7,12 @@ from IPython import get_ipython
 import pathlib
 import sys
 
-# add the "bluesky/" directory to the system path
-__BLUESKY_IN_HOME_DIRECTORY__ = False
-# first, identify the parent directory
-if __BLUESKY_IN_HOME_DIRECTORY__:
-    BLUESKY_DIRECTORY = pathlib.Path.home()
-else:
+# find the "bluesky/" directory
+BLUESKY_DIRECTORY = pathlib.Path.home() / "bluesky"
+if not BLUESKY_DIRECTORY.exists():
     # <training repository directory>
     BLUESKY_DIRECTORY = pathlib.Path(__file__).absolute().parent.parent.parent
-# next, name the "bluesky" subdirectory
-BLUESKY_DIRECTORY = BLUESKY_DIRECTORY / "bluesky"
+    BLUESKY_DIRECTORY = BLUESKY_DIRECTORY / "bluesky"
 if not BLUESKY_DIRECTORY.exists():
     raise FileNotFoundError(
         f"Cannot find bluesky directory: {BLUESKY_DIRECTORY}"
