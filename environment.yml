@@ -3,13 +3,6 @@ name: training_2022
 # use:
 #   date -Is; micromamba create -y -f ./environment.yml; date -Is
 
-# then (manually):
-# pip install --pre \
-#   databroker \
-#   tiled[all] \
-#   area_detector_handlers
-
-
 channels:
   - conda-forge
   - defaults
