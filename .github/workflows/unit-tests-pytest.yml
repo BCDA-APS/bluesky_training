@@ -21,7 +21,7 @@ jobs:
         environment-file: environment.yml
         environment-name: anaconda-test-env-py-${{ matrix.python-version }}
 
-    - name: Diagnostics
+    - name: Initial Diagnostics
       shell: bash -l {0}
       run: |
         micromamba info
@@ -37,6 +37,8 @@ jobs:
         bash ./.github/scripts/start_xxx.sh gp
         bash ./.github/scripts/start_adsim.sh ad
         docker ps -a
+        ls -lAFgh /tmp/docker_ioc/iocad/
+        ls -lAFgh /tmp/docker_ioc/iocgp/
 
     # - name: Install EPICS dependencies
     #   shell: bash -l {0}
@@ -47,10 +49,10 @@ jobs:
     #   #   PY_VER: ${{ matrix.python-version }}
     #   #   ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    - name: Run EPICS PV tests with caget
+    - name: Confirm EPICS is available with caget
       shell: bash -l {0}
       run: |
-        source $CONDA/bin/activate $ENV_NAME
+        # source $CONDA/bin/activate $ENV_NAME
         which caget
         caget gp:UPTIME
         caget ad:cam1:Acquire_RBV
@@ -82,21 +84,22 @@ jobs:
     #     PY_VER: ${{ matrix.python-version }}
     #     ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
-    - name: Confirm EPICS IOC is available via caget
-      shell: bash -l {0}
-      run: |
-        source $CONDA/bin/activate $ENV_NAME
-        caget gp:UPTIME
-        caget ad:cam1:Acquire_RBV
-      # env:
-      #   PY_VER: ${{ matrix.python-version }}
-      #   ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
-      #   PV: gp:UPTIME
+    # - name: Confirm EPICS IOC is available via caget
+    #   shell: bash -l {0}
+    #   run: |
+    #     # source $CONDA/bin/activate $ENV_NAME
+    #     caget gp:UPTIME
+    #     caget ad:cam1:Acquire_RBV
+    #   # env:
+    #   #   PY_VER: ${{ matrix.python-version }}
+    #   #   ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    #   #   PV: gp:UPTIME
 
     - name: Confirm EPICS IOC is available via PyEpics
       shell: bash -l {0}
       run: |
-        source $CONDA/bin/activate $ENV_NAME
+        # source $CONDA/bin/activate $ENV_NAME
+        which python
         python -c "import epics; print(epics.caget('gp:UPTIME'))"
       # env:
       #   PY_VER: ${{ matrix.python-version }}
@@ -106,7 +109,7 @@ jobs:
     - name: Confirm EPICS IOC is available via ophyd
       shell: bash -l {0}
       run: |
-        source $CONDA/bin/activate $ENV_NAME
+        # source $CONDA/bin/activate $ENV_NAME
         CMD="import ophyd"
         CMD+="; up = ophyd.EpicsSignalRO('gp:UPTIME', name='up')"
         CMD+="; up.wait_for_connection()"
@@ -133,7 +136,7 @@ jobs:
     - name: Run Bluesky queueserver
       shell: bash -l {0}
       run: |
-        source $CONDA/bin/activate $ENV_NAME
+        # source $CONDA/bin/activate $ENV_NAME
         bash ./bluesky/qserver.sh run &
         # bash ./bluesky/qserver.sh start
         sleep 10
@@ -146,7 +149,7 @@ jobs:
     - name: Run tests with pytest & coverage
       shell: bash -l {0}
       run: |
-        source $CONDA/bin/activate $ENV_NAME
+        # source $CONDA/bin/activate $ENV_NAME
         # proceed as in hklpy
         coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
         coverage combine
@@ -159,7 +162,7 @@ jobs:
       shell: bash -l {0}
       # https://github.com/TheKevJames/coveralls-python
       run: |
-        source $CONDA/bin/activate $ENV_NAME
+        # source $CONDA/bin/activate $ENV_NAME
         coveralls --service=github
       env:
         # PY_VER: ${{ matrix.python-version }}
