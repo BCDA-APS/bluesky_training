@@ -17,7 +17,7 @@ fi
 SELECTION=${1:-usage}
 SESSION_NAME=${2:-"${DEFAULT_SESSION_NAME}"}
 
-PROCESS=run_qs.sh
+PROCESS=run_qstarter_py.sh
 STARTUP_COMMAND="${STARTUP_DIR}/${PROCESS}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
