@@ -9,7 +9,7 @@ jobs:
     strategy:
       matrix:
         # python-version: ['3.7', '3.8', '3.9', '3.10']
-        python-version: ['3.8', '3.9']
+        python-version: ['3.7', '3.8', '3.9']
       max-parallel: 5
 
     steps:
@@ -20,6 +20,11 @@ jobs:
       with:
         environment-file: environment.yml
         environment-name: anaconda-test-env-py-${{ matrix.python-version }}
+
+    - name: Upgrade mongoquery
+      shell: bash -l {0}
+      run: |
+        micromamba install -c nsls2forge "mongoquery >=1.3.6"
 
     - name: Initial Diagnostics
       shell: bash -l {0}
