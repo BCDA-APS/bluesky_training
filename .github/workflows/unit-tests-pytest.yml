@@ -24,11 +24,11 @@ jobs:
     - name: Initial Diagnostics
       shell: bash -l {0}
       run: |
+        micromamba env list
         micromamba info
         micromamba list
         conda config --show-sources
         conda config --show
-        micromamba env list
         printenv | sort
 
     - name: Start EPICS IOCs in Docker
@@ -120,14 +120,14 @@ jobs:
       #   ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
       #   PV: gp:UPTIME
 
-    - name: Diagnostics
-      shell: bash -l {0}
-      run: |
-        micromamba list --name $ENV_NAME
-        micromamba list -r --name $ENV_NAME
-      # env:
-      #   PY_VER: ${{ matrix.python-version }}
-      #   ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
+    # - name: Diagnostics
+    #   shell: bash -l {0}
+    #   run: |
+    #     micromamba list --name $ENV_NAME
+    #     micromamba list -r --name $ENV_NAME
+    #   # env:
+    #   #   PY_VER: ${{ matrix.python-version }}
+    #   #   ENV_NAME: anaconda-test-env-py-${{ matrix.python-version }}
 
     - name: Install Redis & screen
       run: |
