@@ -3,7 +3,9 @@ start bluesky in IPython console session
 """
 
 # start a Bluesky data collection console session
-import pathlib, sys
+from IPython import get_ipython
+import pathlib
+import sys
 
 # add the "bluesky/" directory to the system path
 __BLUESKY_IN_HOME_DIRECTORY__ = False
