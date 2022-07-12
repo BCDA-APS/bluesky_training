@@ -50,7 +50,6 @@ dependencies:
   - imagecodecs-lite
   - ipympl
   - lxml
-  - mongoquery >=1.3.6
   - pandas
   - pint
   - pyEpics >=3.5.0
