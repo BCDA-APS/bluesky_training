@@ -64,7 +64,7 @@ _A huge part of my job is to set these experiments up for success._
   - APS storage ring `current`
   - Information from APS Proposal and ESAF databases
 - [**MongoDB**](https://www.mongodb.com/)
-  - Database that stores lightweight (non-image) data and references to image files.
+  - Database (used by **databroker**) that stores lightweight (non-image) data. metadata, and references to image files.
   - Data is stored as documents in [JSON](https://www.w3schools.com/whatis/whatis_json.asp) (text) format.
 
 info | web address
