@@ -1,7 +1,7 @@
 name: training_2022
 
 # use:
-#   date -Is; mamba env create --force -f ./environment.yml; date -Is
+#   date -Is; micromamba create -y -f ./environment.yml; date -Is
 
 # then (manually):
 # pip install --pre \
@@ -11,10 +11,10 @@ name: training_2022
 
 
 channels:
-  - defaults
   - conda-forge
-  - nsls2forge
+  - defaults
   - aps-anl-tag
+  - nsls2forge
 
 dependencies:
 
@@ -40,10 +40,10 @@ dependencies:
   - qt=5
 
   # --- general support packages
-  - aps-dm-api>=5
+  - aps-dm-api >=5
   - bitshuffle
   - blosc
-  - epics-base>=7.0.5
+  - epics-base >=7.0.5
   - h5netcdf
   - h5py
   - hdf5plugin
@@ -52,8 +52,9 @@ dependencies:
   - lxml
   - pandas
   - pint
-  - pyEpics>=3.5.0
+  - pyEpics >=3.5.0
   - pymongo
+  - readline !=8.1.2
   - scikit-image
   - xlrd
 
@@ -63,11 +64,11 @@ dependencies:
   - bluesky-queueserver
   - bluesky-queueserver-api
   - bluesky-widgets
-  - bluesky>=1.8.1
+  - bluesky >=1.8.1
   - databroker-pack
-  - databroker=1
+  - databroker =1.2
   - hklpy
-  - ophyd>=1.6.3
+  - ophyd >=1.6.3
   - pydm
 
   # --- user-requested packages
@@ -105,3 +106,4 @@ dependencies:
     # --- optional Bluesky framework packages for evaluation
     # - bluesky-webclient is NOT Python software, don't install it this way
     #    https://github.com/bluesky/bluesky-webclient
+    - tiled[all]
