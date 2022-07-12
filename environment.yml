@@ -50,6 +50,7 @@ dependencies:
   - imagecodecs-lite
   - ipympl
   - lxml
+  # - mongoquery >=1.3.6  # -c nsls2forge  must upgrade later
   - pandas
   - pint
   - pyEpics >=3.5.0
