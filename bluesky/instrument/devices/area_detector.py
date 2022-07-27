@@ -56,7 +56,7 @@ class MyHDF5Plugin(FileStoreHDF5IterativeWrite, HDF5Plugin_V34):
 
 
 class MySimDetector(SingleTrigger, DetectorBase):
-    """ADSimDetector"""
+    """Custom ADSimDetector."""
 
     cam = ADComponent(MyFixedCam, "cam1:")
     image = ADComponent(ImagePlugin_V34, "image1:")
