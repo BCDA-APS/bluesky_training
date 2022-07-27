@@ -2,6 +2,10 @@ name: Unit Tests
 
 on: [push]
 
+defaults:
+  run:
+    shell: bash -l {0}
+
 jobs:
   build:
     name: Test with py${{ matrix.python-version }}
@@ -22,12 +26,10 @@ jobs:
         environment-name: anaconda-test-env-py-${{ matrix.python-version }}
 
     - name: Upgrade mongoquery
-      shell: bash -l {0}
       run: |
         micromamba install -c nsls2forge "mongoquery >=1.3.6"
 
     - name: Initial Diagnostics
-      shell: bash -l {0}
       run: |
         micromamba env list
         micromamba info
@@ -37,7 +39,6 @@ jobs:
         printenv | sort
 
     - name: Start EPICS IOCs in Docker
-      shell: bash -l {0}
       run: |
         bash ./.github/scripts/start_xxx.sh gp
         bash ./.github/scripts/start_adsim.sh ad
@@ -46,20 +47,17 @@ jobs:
         ls -lAFgh /tmp/docker_ioc/iocgp/
 
     - name: Confirm EPICS is available with caget
-      shell: bash -l {0}
       run: |
         which caget
         caget gp:UPTIME
         caget ad:cam1:Acquire_RBV
 
     - name: Confirm EPICS IOC is available via PyEpics
-      shell: bash -l {0}
       run: |
         which python
         python -c "import epics; print(epics.caget('gp:UPTIME'))"
 
     - name: Confirm EPICS IOC is available via ophyd
-      shell: bash -l {0}
       run: |
         CMD="import ophyd"
         CMD+="; up = ophyd.EpicsSignalRO('gp:UPTIME', name='up')"
@@ -72,7 +70,6 @@ jobs:
         sudo apt install redis screen
 
     - name: Run Bluesky queueserver
-      shell: bash -l {0}
       run: |
         bash ./bluesky/qserver.sh run &
         # bash ./bluesky/qserver.sh start
@@ -81,7 +78,6 @@ jobs:
         qserver status
 
     - name: Run tests with pytest & coverage
-      shell: bash -l {0}
       run: |
         # proceed as in hklpy
         coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
@@ -89,7 +85,6 @@ jobs:
         coverage report --precision 3
 
     - name: Upload to coveralls
-      shell: bash -l {0}
       # https://github.com/TheKevJames/coveralls-python
       run: |
         # source $CONDA/bin/activate $ENV_NAME
