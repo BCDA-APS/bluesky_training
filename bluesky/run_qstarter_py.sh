@@ -16,7 +16,13 @@ DATABROKER_CATALOG=training
 if [ "${CONDA}" == "" ] ; then
     CONDA=/APSshare/miniconda/x86_64
     if [ ! -d "${CONDA}" ]; then
-        CONDA=/opt/miniconda3
+        if [ "${CONDA_EXE}" != "" ]; then
+            # CONDA_EXE is the conda exectuable
+            CONDA=$(dirname $(dirname $(readlink -f "${CONDA_EXE}")))
+        else
+            # fallback
+            CONDA=/opt/miniconda3
+        fi
     fi
 fi
 CONDA_BASE_DIR="${CONDA}/bin"
