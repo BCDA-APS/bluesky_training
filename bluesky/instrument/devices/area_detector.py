@@ -16,6 +16,8 @@ logger.info(__file__)
 
 from .. import iconfig
 from .calculation_records import calcs
+from apstools.devices import AD_plugin_primed
+from apstools.devices import AD_prime_plugin2
 from ophyd import ADComponent
 from ophyd import DetectorBase
 from ophyd import EpicsSignalWithRBV
@@ -59,13 +61,13 @@ class MySimDetector(SingleTrigger, DetectorBase):
     """Custom ADSimDetector."""
 
     cam = ADComponent(MyFixedCam, "cam1:")
-    image = ADComponent(ImagePlugin_V34, "image1:")
     hdf1 = ADComponent(
         MyHDF5Plugin,
         "HDF1:",
         write_path_template=WRITE_PATH_TEMPLATE,
         read_path_template=READ_PATH_TEMPLATE,
     )
+    image = ADComponent(ImagePlugin_V34, "image1:")
     pva = ADComponent(PvaPlugin_V34, "Pva1:")
 
 
@@ -145,11 +147,13 @@ if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
     # Even with `lazy_open=1`, ophyd checks if the area
     # detector HDF5 plugin has been primed.  We might
     # need to prime it.  Here's ophyd's test:
-    if np.array(adsimdet.hdf1.array_size.get()).sum() == 0:
-        logger.info(f"Priming {adsimdet.hdf1.name} ...")
-        adsimdet.hdf1.warmup()
-        logger.info(f"Enabling {adsimdet.image.name} plugin ...")
-        adsimdet.image.enable.put("Enable")
+    # if np.array(adsimdet.hdf1.array_size.get()).sum() == 0:
+    #     logger.info(f"Priming {adsimdet.hdf1.name} ...")
+    #     adsimdet.hdf1.warmup()
+    #     logger.info(f"Enabling {adsimdet.image.name} plugin ...")
+    #     adsimdet.image.enable.put("Enable")
+    if not AD_plugin_primed(adsimdet.hdf1):
+        AD_prime_plugin2(adsimdet.hdf1)
 
 # peak new peak parameters
 change_ad_simulated_image_parameters()
