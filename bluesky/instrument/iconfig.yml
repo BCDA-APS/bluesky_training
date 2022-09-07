@@ -27,6 +27,11 @@ ENABLE_CALCS: true
 USE_PROGRESS_BAR: false
 WRITE_SPEC_DATA_FILES: true
 
+# override default control layer for ophyd
+# if undefined, defaults to PyEpics
+# OPHYD_CONTROL_LAYER: PyEpics
+# OPHYD_CONTROL_LAYER: caproto
+
 # ----------------------------------
 
 # default timeouts (seconds)

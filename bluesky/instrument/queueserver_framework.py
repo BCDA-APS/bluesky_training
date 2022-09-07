@@ -80,6 +80,9 @@ if scan_id_epics is not None:
 sd = bluesky.SupplementalData()
 RE.preprocessors.append(sd)
 
+ophyd.set_cl(iconfig.get("OPHYD_CONTROL_LAYER", "PyEpics").lower())
+logger.info(f"using ophyd control layer: {ophyd.cl.name}")
+
 
 def make_kv_table(data):
     table = pyRestTable.Table()

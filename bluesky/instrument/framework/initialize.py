@@ -107,6 +107,9 @@ bec.disable_baseline()
 # verbose messages for debugging.
 # ophyd.logger.setLevel(logging.DEBUG)
 
+ophyd.set_cl(iconfig.get("OPHYD_CONTROL_LAYER", "PyEpics").lower())
+logger.info(f"using ophyd control layer: {ophyd.cl.name}")
+
 # diagnostics
 # RE.msg_hook = ts_msg_hook
 
