@@ -6,8 +6,6 @@ __all__ = [
     "logger",
 ]
 
-from bluesky.log import config_bluesky_logging
-from ophyd.log import config_ophyd_logging
 import logging
 import pathlib
 # NOTE: no need for stdlogpj now
@@ -67,7 +65,7 @@ def stream_log_handler():
 
 # TODO: hoist to apstools.utils
 def file_log_handler(
-    logger_name, 
+    logger_name,
     file_name_base=None,
     maxBytes=0,
     backupCount=0,
@@ -76,44 +74,44 @@ def file_log_handler(
 ):
     """
     standard setup for logging
-        
+
     PARAMETERS
-    
+
     logger_name : str
         name of the the logger
-    
+
     file_name_base : str
         Part of the name to store the log file.
         Full name is `f"<log_path>/{file_name_base}.log"`
         in present working directory.
-    
+
     log_path : str
         Part of the name to store the log file.
         Full name is `f"<log_path>/{file_name_base}.log"`
         in present working directory.
         default: (the present working directory)/LOG_DIR_BASE
-    
+
     level : int
         Threshold for reporting messages with this logger.
         Logging messages which are less severe than *level* will be ignored.
         default: 10 (logging.DEBUG)
         see: https://docs.python.org/3/library/logging.html#levels
-    
+
     maxBytes : (optional) int
-        Log file *rollover* begins whenever the current 
+        Log file *rollover* begins whenever the current
         log file is nearly *maxBytes* in length.
         default: 0
-    
+
     backupCount : (optional) int
         When *backupCount* is non-zero, the system will keep
         up to *backupCount* numbered log files (with added extensions
         `.1`, '.2`, ...).  The current log file always has no
-        numbered extension.  The previous log file is the 
+        numbered extension.  The previous log file is the
         one with the lowest extension number.
         default: 0
-    
+
     **Note**:  When either *maxBytes* or *backupCount* are zero,
-    log file rollover never occurs, so you generally want to set 
+    log file rollover never occurs, so you generally want to set
     *backupCount* to at least 1, and have a non-zero *maxBytes*.
     """
     file_name_base = file_name_base or logger_name
@@ -161,15 +159,38 @@ setup_IPython_console_logging()
 logger.info("#" * 60 + " startup")
 logger.info("logging started")
 logger.info(f"logging level = {logger.level}")
-config_bluesky_logging(  # TODO: What about log file rotation?
-    str(get_log_path() / "bluesky.log"),
-    datefmt="%a-%H:%M:%S",
-    level="INFO",
-    color=False,
-)
-config_ophyd_logging(  # TODO: What about log file rotation?
-    str(get_log_path() / "ophyd.log"),
-    datefmt="%a-%H:%M:%S",
-    level="INFO",
-    color=False,
-)
+
+# Setup logging for some bluesky/ophyd internals
+# https://blueskyproject.io/ophyd/user_v1/reference/logging.html#logger-names
+# https://blueskyproject.io/bluesky/debugging.html#logger-names
+# - 'bluesky' — the logger to which all bluesky log records propagate
+# - 'bluesky.emit_document' — A log record is emitted whenever a Document is emitted. The log record does not contain the full content of the Document.
+# - 'bluesky.RE' — Records from a RunEngine. INFO-level notes state changes. DEBUG-level notes when each message from a plan is about to be processed and when a status object has completed.
+# - 'bluesky.RE.msg — A log record is emitted when each Msg is about to be processed.
+# - 'bluesky.RE.state — A log record is emitted when the RunEngine’s state changes.
+# - 'ophyd' — the logger to which all ophyd log records propagate
+# - 'ophyd.objects' — logs records from all devices and signals (that is, OphydObject subclasses)
+# - 'ophyd.control_layer' — logs requests issued to the underlying control layer (e.g. pyepics, caproto)
+# - 'ophyd.event_dispatcher' — issues regular summaries of the backlog of updates from the control layer that are being processed on background threads
+
+log_these_names = {
+    # "bluesky": "DEBUG",
+    # "bluesky.emit_document": "DEBUG",
+    # "bluesky.RE.msg": "DEBUG",
+    # "ophyd": "DEBUG",
+    "ophyd.control_layer": "DEBUG",
+    # "ophyd.objects": "DEBUG",
+    # "databroker": "DEBUG",
+}
+for logger_name, level in log_these_names.items():
+    _l = logging.getLogger(logger_name)
+    _l.setLevel(logging.DEBUG)  # allow any log content at this level
+    _l.addHandler(
+        file_log_handler(  # logger to a file
+            logger_name,
+            logger_name,
+            maxBytes=1 * MB,
+            backupCount=9,
+            level=level,  # filter reporting to this level
+        )
+    )
