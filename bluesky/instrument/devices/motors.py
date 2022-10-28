@@ -9,7 +9,9 @@ __all__ = """
     m13 m14 m15 m16
 """.split()
 
-from ..session_logs import logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 logger.info(__file__)
 

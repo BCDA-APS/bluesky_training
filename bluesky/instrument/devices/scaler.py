@@ -7,7 +7,9 @@ __all__ = """
     timebase I0 I00 I000 scint diode
 """.split()
 
-from ..session_logs import logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 logger.info(__file__)
 

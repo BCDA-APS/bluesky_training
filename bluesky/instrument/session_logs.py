@@ -148,9 +148,9 @@ def file_log_handler(
 
 logger = logging.getLogger(SESSION_NAME)
 logger.setLevel(logging.DEBUG)  # allow any log content at this level
-logger.addHandler(stream_log_handler())  # logger to the console
+logger.addHandler(stream_log_handler())  # terse log to the console
 logger.addHandler(
-    file_log_handler(  # logger to a file
+    file_log_handler(  # verbose log to a file
         SESSION_NAME, IPYTHON_LOGGER, maxBytes=1 * MB, backupCount=9
     )
 )
@@ -159,6 +159,12 @@ setup_IPython_console_logging()
 logger.info("#" * 60 + " startup")
 logger.info("logging started")
 logger.info(f"logging level = {logger.level}")
+
+# log messages from the instrument package: '__package__'
+_l = logging.getLogger(__package__)
+_l.setLevel("DEBUG")
+_l.addHandler(stream_log_handler())  # terse log to the console
+_l.info(__file__)
 
 # Setup logging for some bluesky/ophyd internals
 # https://blueskyproject.io/ophyd/user_v1/reference/logging.html#logger-names

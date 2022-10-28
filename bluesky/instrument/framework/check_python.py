@@ -4,7 +4,9 @@ make sure we have the software packages we need
 
 __all__ = []
 
-from ..session_logs import logger
+import logging
+
+logger = logging.getLogger(__name__)
 
 logger.info(__file__)
 
