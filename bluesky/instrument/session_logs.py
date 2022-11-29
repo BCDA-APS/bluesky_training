@@ -116,13 +116,15 @@ def file_log_handler(
     log file rollover never occurs, so you generally want to set
     *backupCount* to at least 1, and have a non-zero *maxBytes*.
     """
+    from logging.handlers import RotatingFileHandler
+
     file_name_base = file_name_base or logger_name
     log_path = log_path or get_log_path()
     log_file = log_path / f"{file_name_base}.log"
     level = level or logging.DEBUG
 
     if maxBytes > 0 or backupCount > 0:
-        handler = logging.handlers.RotatingFileHandler(
+        handler = RotatingFileHandler(
             log_file, maxBytes=maxBytes, backupCount=backupCount)
     else:
         handler = logging.FileHandler(log_file)
