@@ -48,6 +48,7 @@ dependencies:
   - pint
   - pyEpics >=3.5.0
   - pymongo
+  - pysumreg
   - readline !=8.1.2
   - scikit-image
   - xlrd
@@ -93,6 +94,7 @@ dependencies:
   - pydantic
   - tifffile
   - uvicorn
+  - tiled
 
   - pip:
 
@@ -100,4 +102,3 @@ dependencies:
     # --- optional Bluesky framework packages for evaluation
     # - bluesky-webclient is NOT Python software, don't install it this way
     #    https://github.com/bluesky/bluesky-webclient
-    - tiled[all]
