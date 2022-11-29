@@ -29,6 +29,8 @@ def get_log_path():
 
 # TODO: hoist to apstools.utils
 def setup_IPython_console_logging():
+    from IPython import get_ipython
+
     console_io_file = get_log_path() / "ipython_console.log"
     try:
         # start logging console to file
