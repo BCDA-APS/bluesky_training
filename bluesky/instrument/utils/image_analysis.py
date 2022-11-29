@@ -16,7 +16,7 @@ logger.info(__file__)
 
 import numpy as np
 import pyRestTable
-from scipy.ndimage.measurements import center_of_mass
+from scipy.ndimage import center_of_mass
 from scipy.integrate import trapz
 
 
