@@ -141,7 +141,7 @@ adsimdet.cam.stage_sigs["num_images"] = 1
 adsimdet.cam.stage_sigs["acquire_time"] = 0.1
 adsimdet.cam.stage_sigs["acquire_period"] = 0.105
 adsimdet.hdf1.stage_sigs["lazy_open"] = 1
-adsimdet.hdf1.stage_sigs["compression"] = "None"
+adsimdet.hdf1.stage_sigs["compression"] = adsimdet.hdf1.compression.enum_strs.index("zlib")
 adsimdet.hdf1.stage_sigs["file_template"] = "%s%s_%3.3d.h5"
 
 if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
