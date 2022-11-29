@@ -53,9 +53,9 @@ jobs:
         environment-file: environment.yml
         environment-name: anaconda-test-env-py-${{ matrix.python-version }}
 
-    - name: Upgrade mongoquery
-      run: |
-        micromamba install -c nsls2forge "mongoquery >=1.3.6"
+    # - name: Upgrade mongoquery
+    #   run: |
+    #     micromamba install -c nsls2forge "mongoquery >=1.3.6"
 
     - name: Initial Diagnostics
       run: |
