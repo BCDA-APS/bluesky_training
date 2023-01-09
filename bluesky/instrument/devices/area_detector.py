@@ -24,10 +24,7 @@ from apstools.devices import CamMixin_V34
 from apstools.devices import SingleTrigger_V34
 from ophyd import ADComponent
 from ophyd import DetectorBase
-from ophyd import EpicsSignalWithRBV
 from ophyd import SimDetectorCam
-from ophyd import SingleTrigger
-from ophyd.areadetector import DetectorBase
 from ophyd.areadetector.filestore_mixins import FileStoreHDF5IterativeWrite
 from ophyd.areadetector.plugins import HDF5Plugin_V34
 from ophyd.areadetector.plugins import ImagePlugin_V34
