@@ -20,11 +20,14 @@ from .. import iconfig
 from .calculation_records import calcs
 from apstools.devices import AD_plugin_primed
 from apstools.devices import AD_prime_plugin2
+from apstools.devices import CamMixin_V34
+from apstools.devices import SingleTrigger_V34
 from ophyd import ADComponent
 from ophyd import DetectorBase
 from ophyd import EpicsSignalWithRBV
 from ophyd import SimDetectorCam
 from ophyd import SingleTrigger
+from ophyd.areadetector import DetectorBase
 from ophyd.areadetector.filestore_mixins import FileStoreHDF5IterativeWrite
 from ophyd.areadetector.plugins import HDF5Plugin_V34
 from ophyd.areadetector.plugins import ImagePlugin_V34
@@ -44,9 +47,8 @@ WRITE_PATH_TEMPLATE = f"{AD_IOC_MOUNT_PATH / IMAGE_DIR}/"
 READ_PATH_TEMPLATE = f"{BLUESKY_MOUNT_PATH / IMAGE_DIR}/"
 
 
-class MyFixedCam(SimDetectorCam):
-    pool_max_buffers = None
-    offset = ADComponent(EpicsSignalWithRBV, "Offset")
+class SimDetectorCam_V34(CamMixin_V34, SimDetectorCam):
+    """Revise SimDetectorCam for ADCore revisions."""
 
 
 class MyHDF5Plugin(FileStoreHDF5IterativeWrite, HDF5Plugin_V34):
@@ -58,11 +60,22 @@ class MyHDF5Plugin(FileStoreHDF5IterativeWrite, HDF5Plugin_V34):
     * ``generate_datum()`` - coordinate image storage metadata
     """
 
+    def stage(self):
+        self.stage_sigs.move_to_end("capture", last=True)
+        super().stage()
 
-class MySimDetector(SingleTrigger, DetectorBase):
-    """Custom ADSimDetector."""
 
-    cam = ADComponent(MyFixedCam, "cam1:")
+class SimDetector_V34(SingleTrigger_V34, DetectorBase):
+    """
+    ADSimDetector
+
+    SingleTrigger:
+
+    * stop any current acquisition
+    * sets image_mode to 'Multiple'
+    """
+
+    cam = ADComponent(SimDetectorCam_V34, "cam1:")
     hdf1 = ADComponent(
         MyHDF5Plugin,
         "HDF1:",
@@ -129,23 +142,19 @@ def dither_ad_peak_position(magnitude=40):
     dither_ad_on()
 
 
-adsimdet = MySimDetector(IOC, name="adsimdet", labels=("area_detector",))
+adsimdet = SimDetector_V34(IOC, name="adsimdet", labels=("area_detector",))
 adsimdet.wait_for_connection(timeout=15)
 
 adsimdet.read_attrs.append("hdf1")
 
 adsimdet.hdf1.create_directory.put(-5)
 
-adsimdet.cam.stage_sigs["image_mode"] = "Single"
-adsimdet.cam.stage_sigs["num_images"] = 1
-adsimdet.cam.stage_sigs["acquire_time"] = 0.1
-adsimdet.cam.stage_sigs["acquire_period"] = 0.105
-adsimdet.hdf1.stage_sigs["lazy_open"] = 1
-adsimdet.hdf1.stage_sigs["compression"] = adsimdet.hdf1.compression.enum_strs.index("zlib")
-adsimdet.hdf1.stage_sigs["file_template"] = "%s%s_%3.3d.h5"
+# override default setting from ophyd
+adsimdet.hdf1.stage_sigs["blocking_callbacks"] = "No"
+adsimdet.cam.stage_sigs["wait_for_plugins"] = "Yes"
+adsimdet.image.stage_sigs["blocking_callbacks"] = "No"
 
 if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
-    # WORKAROUND
     # Even with `lazy_open=1`, ophyd checks if the area
     # detector HDF5 plugin has been primed.  We might
     # need to prime it.  Here's ophyd's test:
@@ -154,6 +163,8 @@ if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
     #     adsimdet.hdf1.warmup()
     #     logger.info(f"Enabling {adsimdet.image.name} plugin ...")
     #     adsimdet.image.enable.put("Enable")
+    # This test is not sufficient.
+    # WORKAROUND (involving a few more tests)
     if not AD_plugin_primed(adsimdet.hdf1):
         AD_prime_plugin2(adsimdet.hdf1)
 
