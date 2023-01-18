@@ -142,7 +142,10 @@ def dither_ad_peak_position(magnitude=40):
 try:
     adsimdet = SimDetector_V34(IOC, name="adsimdet", labels=("area_detector",))
     adsimdet.wait_for_connection(timeout=15)
-
+except TimeoutError:
+    logger.warning("Did not connect to area detector IOC '%s'", IOC)
+    adsimdet = None
+else:
     adsimdet.read_attrs.append("hdf1")
 
     adsimdet.hdf1.create_directory.put(-5)
@@ -170,6 +173,3 @@ try:
     change_ad_simulated_image_parameters()
     # have EPICS dither the peak position
     dither_ad_peak_position()
-except TimeoutError:
-    logger.warning("Did not connect to area detector IOC '%s'", IOC)
-    adsimdet = None
