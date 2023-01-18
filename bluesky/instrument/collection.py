@@ -13,6 +13,13 @@ if _conda_prefix is not None:
     logger.info("CONDA_PREFIX = %s", _conda_prefix)
 del _conda_prefix
 
+from . import iconfig
+
+# terse error dumps (Exception tracebacks)
+_xmode_level = iconfig.get("XMODE_DEBUG_LEVEL", "Minimal")
+get_ipython().run_line_magic('xmode', _xmode_level)
+logger.info("xmode exception level: '%s'", _xmode_level)
+
 from . import mpl
 
 logger.info("#### Bluesky Framework ####")

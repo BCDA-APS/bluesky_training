@@ -40,6 +40,8 @@ PV_WRITE_TIMEOUT: *TIMEOUT
 # PV_CONNECTION_TIMEOUT: *TIMEOUT
 PV_CONNECTION_TIMEOUT: 10
 
+XMODE_DEBUG_LEVEL: Minimal
+
 # Minimum software package version checks: MAJOR.minor (no .patch).
 # These will be converted to tuple() for comparisons.
 MINIMUM_PYTHON_VERSION:
