@@ -139,33 +139,37 @@ def dither_ad_peak_position(magnitude=40):
     dither_ad_on()
 
 
-adsimdet = SimDetector_V34(IOC, name="adsimdet", labels=("area_detector",))
-adsimdet.wait_for_connection(timeout=15)
+try:
+    adsimdet = SimDetector_V34(IOC, name="adsimdet", labels=("area_detector",))
+    adsimdet.wait_for_connection(timeout=15)
 
-adsimdet.read_attrs.append("hdf1")
+    adsimdet.read_attrs.append("hdf1")
 
-adsimdet.hdf1.create_directory.put(-5)
+    adsimdet.hdf1.create_directory.put(-5)
 
-# override default setting from ophyd
-adsimdet.hdf1.stage_sigs["blocking_callbacks"] = "No"
-adsimdet.cam.stage_sigs["wait_for_plugins"] = "Yes"
-adsimdet.image.stage_sigs["blocking_callbacks"] = "No"
+    # override default setting from ophyd
+    adsimdet.hdf1.stage_sigs["blocking_callbacks"] = "No"
+    adsimdet.cam.stage_sigs["wait_for_plugins"] = "Yes"
+    adsimdet.image.stage_sigs["blocking_callbacks"] = "No"
 
-if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
-    # Even with `lazy_open=1`, ophyd checks if the area
-    # detector HDF5 plugin has been primed.  We might
-    # need to prime it.  Here's ophyd's test:
-    # if np.array(adsimdet.hdf1.array_size.get()).sum() == 0:
-    #     logger.info(f"Priming {adsimdet.hdf1.name} ...")
-    #     adsimdet.hdf1.warmup()
-    #     logger.info(f"Enabling {adsimdet.image.name} plugin ...")
-    #     adsimdet.image.enable.put("Enable")
-    # This test is not sufficient.
-    # WORKAROUND (involving a few more tests)
-    if not AD_plugin_primed(adsimdet.hdf1):
-        AD_prime_plugin2(adsimdet.hdf1)
+    if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
+        # Even with `lazy_open=1`, ophyd checks if the area
+        # detector HDF5 plugin has been primed.  We might
+        # need to prime it.  Here's ophyd's test:
+        # if np.array(adsimdet.hdf1.array_size.get()).sum() == 0:
+        #     logger.info(f"Priming {adsimdet.hdf1.name} ...")
+        #     adsimdet.hdf1.warmup()
+        #     logger.info(f"Enabling {adsimdet.image.name} plugin ...")
+        #     adsimdet.image.enable.put("Enable")
+        # This test is not sufficient.
+        # WORKAROUND (involving a few more tests)
+        if not AD_plugin_primed(adsimdet.hdf1):
+            AD_prime_plugin2(adsimdet.hdf1)
 
-# peak new peak parameters
-change_ad_simulated_image_parameters()
-# have EPICS dither the peak position
-dither_ad_peak_position()
+    # peak new peak parameters
+    change_ad_simulated_image_parameters()
+    # have EPICS dither the peak position
+    dither_ad_peak_position()
+except TimeoutError:
+    logger.warning("Did not connect to area detector IOC '%s'", IOC)
+    adsimdet = None
