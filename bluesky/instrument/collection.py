@@ -14,6 +14,7 @@ if _conda_prefix is not None:
 del _conda_prefix
 
 from . import iconfig
+from IPython import get_ipython
 
 # terse error dumps (Exception tracebacks)
 _xmode_level = iconfig.get("XMODE_DEBUG_LEVEL", "Minimal")

@@ -35,7 +35,7 @@ WRITE_SPEC_DATA_FILES: true
 # ----------------------------------
 
 # default timeouts (seconds)
-PV_TIMEOUT: &TIMEOUT 60
+PV_READ_TIMEOUT: &TIMEOUT 60
 PV_WRITE_TIMEOUT: *TIMEOUT
 PV_CONNECTION_TIMEOUT: *TIMEOUT
 
