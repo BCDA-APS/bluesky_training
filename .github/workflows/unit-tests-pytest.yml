@@ -1,19 +1,54 @@
 name: Unit Tests
 
-on: [push]
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:   # allow manual triggering
 
 defaults:
   run:
     shell: bash -l {0}
 
 jobs:
-  build:
-    name: Test with py${{ matrix.python-version }}
+
+  lint:
+    name: Code style
     runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install Dependencies
+        run: |
+          which python
+          which pip
+          python -m pip install --upgrade pip
+          pip install flake8
+
+      - name: Run flake8
+        run: |
+          flake8
+
+  test-matrix:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    needs: lint
     strategy:
       matrix:
-        # python-version: ['3.7', '3.8', '3.9', '3.10']
-        python-version: ['3.7', '3.8', '3.9']
+        python-version:
+          - "3.8"
+          - "3.9"
+          - "3.10"
+          - "3.11"
       max-parallel: 5
 
     steps:
@@ -21,13 +56,18 @@ jobs:
 
     - name: Create Python ${{ matrix.python-version }} environment
       uses: mamba-org/provision-with-micromamba@main
+      # use main branch to enable choice of channel-priority
       with:
+        cache-env: true
+        cache-env-key: env-key-${{ matrix.python-version }}
+        channel-priority: flexible
         environment-file: environment.yml
         environment-name: anaconda-test-env-py-${{ matrix.python-version }}
-
-    - name: Upgrade mongoquery
-      run: |
-        micromamba install -c nsls2forge "mongoquery >=1.3.6"
+        extra-specs: |
+          coveralls
+          pytest
+          pytest-cov
+          setuptools-scm
 
     - name: Initial Diagnostics
       run: |
@@ -38,6 +78,9 @@ jobs:
         conda config --show
         printenv | sort
 
+    - name: Directories before Docker
+      run: ls -lAFghrt ~/
+
     - name: Start EPICS IOCs in Docker
       run: |
         bash ./.github/scripts/start_xxx.sh gp
@@ -45,6 +88,9 @@ jobs:
         docker ps -a
         ls -lAFgh /tmp/docker_ioc/iocad/
         ls -lAFgh /tmp/docker_ioc/iocgp/
+
+    - name: Directories after Docker
+      run: ls -lAFghrt ~/
 
     - name: Confirm EPICS is available with caget
       run: |
@@ -79,15 +125,37 @@ jobs:
 
     - name: Run tests with pytest & coverage
       run: |
-        # proceed as in hklpy
         coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
         coverage combine
         coverage report --precision 3
 
-    - name: Upload to coveralls
-      # https://github.com/TheKevJames/coveralls-python
+    - name: Gather coverage data from matrix run
+      shell: bash -l {0}
       run: |
-        # source $CONDA/bin/activate $ENV_NAME
+        micromamba list coveralls
+        which coveralls
+        coveralls debug
         coveralls --service=github
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        COVERALLS_FLAG_NAME: ${{ matrix.test-name }}
+        COVERALLS_PARALLEL: true
+
+  # https://coveralls-python.readthedocs.io/en/latest/usage/configuration.html#github-actions-support
+  coveralls:
+    name: Report unit test coverage to coveralls
+    needs: test-matrix
+    runs-on: ubuntu-latest
+    container: python:3-slim
+
+    steps:
+      - name: Gather coverage and report to Coveralls
+        run: |
+          echo "Finally!"
+          pip3 install --upgrade coveralls
+          # debug mode: output prepared json and reported files list to stdout
+          # https://coveralls-python.readthedocs.io/en/latest/troubleshooting.html
+          coveralls debug
+          coveralls --service=github --finish
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

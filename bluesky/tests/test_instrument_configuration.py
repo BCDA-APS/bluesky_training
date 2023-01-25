@@ -26,9 +26,10 @@ def test_contents():
     MINIMUM_OPHYD_VERSION
     MINIMUM_PYTHON_VERSION
     PV_CONNECTION_TIMEOUT
-    PV_TIMEOUT
+    PV_READ_TIMEOUT
     PV_WRITE_TIMEOUT
     RUNENGINE_METADATA
+    XMODE_DEBUG_LEVEL
     """.strip().split()
     for key in key_list:
         assert key in iconfig

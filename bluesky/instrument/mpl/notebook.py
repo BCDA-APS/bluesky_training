@@ -6,6 +6,7 @@ __all__ = [
     "plt",
 ]
 
+from IPython import get_ipython
 import logging
 
 logger = logging.getLogger(__name__)
