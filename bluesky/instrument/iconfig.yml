@@ -43,13 +43,13 @@ PV_CONNECTION_TIMEOUT: *TIMEOUT
 # These will be converted to tuple() for comparisons.
 MINIMUM_PYTHON_VERSION:
   - 3
-  - 7
+  - 8
 MINIMUM_BLUESKY_VERSION:
   - 1
-  - 8
+  - 10
 MINIMUM_OPHYD_VERSION:
   - 1
-  - 6
+  - 7
 MINIMUM_DATABROKER_VERSION:
   - 1
   - 2
