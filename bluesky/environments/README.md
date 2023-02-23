@@ -1,6 +1,7 @@
 # Environment Definitions
 
-This directory contains the [YAML](https://yaml.org) files that define install a conda environment.
+This directory contains the [YAML](https://yaml.org) files that define install a
+conda environment.
 
 CONTENTS
 
