@@ -17,15 +17,30 @@ try:
     import apstools.callbacks as APS_fw
 except ModuleNotFoundError:
     import apstools.filewriters as APS_fw
-import apstools.utils
+
 import datetime
 import pathlib
+
+import apstools.utils
+
+from ..framework.initialize import RE
 
 # write scans to SPEC data file
 specwriter = APS_fw.SpecWriterCallback()
 # make the SPEC file in current working directory (assumes is writable)
 _path = pathlib.Path().cwd()
-specwriter.newfile(str(_path / specwriter.spec_filename))
+specwriter.newfile(_path / specwriter.spec_filename)
+
+try:
+    # feature new in apstools 1.6.14
+    from apstools.plans import label_stream_wrapper
+
+    def motor_start_preprocessor(plan):
+        return label_stream_wrapper(plan, "motor", when="start")
+
+    RE.preprocessors.append(motor_start_preprocessor)
+except Exception:
+    logger.warning("Could load support to log motors positions.")
 
 
 def spec_comment(comment, doc=None):
@@ -47,16 +62,16 @@ def newSpecFile(title, scan_id=1, RE=None):
     if fname.exists():
         logger.warning(f">>> file already exists: {fname} <<<")
         if RE is None:
-            specwriter.newfile(str(fname))
+            specwriter.newfile(fname)
         else:
-            specwriter.newfile(str(fname), RE=RE)
+            specwriter.newfile(fname, RE=RE)
         handled = "appended"
 
     else:
         if RE is None:
-            specwriter.newfile(str(fname), scan_id=scan_id)
+            specwriter.newfile(fname, scan_id=scan_id)
         else:
-            specwriter.newfile(str(fname), scan_id=scan_id, RE=RE)
+            specwriter.newfile(fname, scan_id=scan_id, RE=RE)
         handled = "created"
 
     logger.info(f"SPEC file name : {specwriter.spec_filename}")
