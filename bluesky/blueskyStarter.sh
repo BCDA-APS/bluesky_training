@@ -13,7 +13,7 @@ pick () {  # activate ENV_NAME using (micromamba or conda) from given arg
 
     ARG="${1}"
     # echo "============"
-    # echo "ARG = ${ARG}"
+    # echo "==> ARG=${ARG}"
 
     if [ "${ARG}" == "" ]; then
         # echo "empty"
@@ -27,7 +27,7 @@ pick () {  # activate ENV_NAME using (micromamba or conda) from given arg
         || pick "${ARG}/bin/conda"
 
         if [ "${cmd_base}" != "" ]; then
-            # echo "cmd_base = ${cmd_base}"
+            # echo "==> cmd_base = ${cmd_base}"
             return 0
         fi
         return 1
@@ -38,9 +38,9 @@ pick () {  # activate ENV_NAME using (micromamba or conda) from given arg
         return 1
     fi
 
-    # echo "cmd = ${CMD}"
+    # echo "==> CMD=${CMD}"
     if [ -x "${CMD}" ]; then
-        # echo "executable cmd = ${CMD}"
+        # echo "==> executable cmd = ${CMD}"
         match_env_name=$( \
             ${CMD} env list \
             | grep "^[ ]*${ENV_NAME} " \
@@ -49,18 +49,26 @@ pick () {  # activate ENV_NAME using (micromamba or conda) from given arg
         if [ "${match_env_name}" != "" ]; then
             # found the requested environment name
             cmd_base=$(basename "${CMD}")
-            # echo "match_env_name cmd = ${match_env_name}"
+            # echo "==> match_env_name cmd = ${match_env_name}"
             case "${cmd_base}" in
                 micromamba)
                     eval "$(${CMD} shell hook --shell=bash)"
+                    # TODO: Resolve a conflict
+                    #   Problems when ENV_NAME environment exists
+                    #   for both micromamba and conda.  Error is reported
+                    #   on line 96.  Must be line 96 of activate script.
+                    # echo "==> CONDA_PROMPT_MODIFIER==${CONDA_PROMPT_MODIFIER=}"
+                    # echo "==> cmd_base==${cmd_base=}"
+                    # echo "==> ENV_NAME==${ENV_NAME=}"
                     "${cmd_base}" activate "${ENV_NAME}"
-                    # echo "MAMBA_ROOT_PREFIX = ${MAMBA_ROOT_PREFIX}"
+                    # echo "==> CONDA_PROMPT_MODIFIER==${CONDA_PROMPT_MODIFIER=}"
+                    # echo "==> MAMBA_ROOT_PREFIX = ${MAMBA_ROOT_PREFIX}"
                     return 0
                     ;;
                 conda | mamba)
                     source "$(dirname ${CMD})/activate" base
                     "${cmd_base}" activate "${ENV_NAME}"
-                    # echo "CONDA_PREFIX = ${CONDA_PREFIX}"
+                    # echo "==> CONDA_PREFIX = ${CONDA_PREFIX}"
                     return 0
                     ;;
                 *)
@@ -84,6 +92,8 @@ pick_environment_executable () {  # Activate the environment
     || pick "/opt/miniconda3" \
     || pick "${HOME}/Apps/miniconda" \
     || pick "${HOME}/Apps/anaconda"
+
+    echo "==> CONDA_PREFIX=${CONDA_PREFIX}"
 
     if [ "${cmd_base}" != "" ]; then
         echo "$(which python) -- $(python --version)"
@@ -125,13 +135,8 @@ usage () {
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 
 case $(echo "${1}" | tr '[:upper:]' '[:lower:]') in
-  gui | jupyter | lab | notebook | server)
-    lab_server  ;;
-  "" | console | ipython)
-    console_session  ;;
-  help | usage)
-    usage  ;;
-  *)
-    usage
-    exit 1
+  gui | jupyter | lab | notebook | server) lab_server  ;;
+  "" | console | ipython) console_session  ;;
+  help | usage) usage  ;;
+  *) usage; exit 1
 esac
