@@ -24,20 +24,18 @@ logger = logging.getLogger(__name__)
 logger.info(__file__)
 
 import hkl
-from ophyd import Component
-from ophyd import EpicsMotor
-from ophyd import EpicsSignalRO
+from ophyd import Component, EpicsMotor, EpicsSignalRO
 
 from .. import iconfig
 
 IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 # No defined motor assignments, pick different than fourc (m29-32)
-M_TTH   = "m23"
+M_TTH = "m23"
 M_OMEGA = "m24"
-M_CHI   = "m25"
-M_PHI   = "m26"
+M_CHI = "m25"
+M_PHI = "m26"
 M_GAMMA = "m27"
-M_MU    = "m28"
+M_MU = "m28"
 
 
 class SixCircle(hkl.SimMixin, hkl.E6C):
