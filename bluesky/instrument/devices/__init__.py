@@ -14,10 +14,12 @@ local, custom Device definitions
 
 from .area_detector import *
 from .calculation_records import *
+from .fourc_diffractometer import *
 from .ioc_stats import *
 from .kohzu_monochromator import *
 from .motors import *
 from .noisy_detector import *
 from .scaler import *
 from .shutter_simulator import *
+from .simulated_fourc import *
 from .temperature_signal import *

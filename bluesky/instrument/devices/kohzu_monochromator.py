@@ -23,9 +23,9 @@ IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
 
 class MyKohzu(KohzuSeqCtl_Monochromator):
-    m_theta = Component(EpicsMotor, "m45", kind="normal")
-    m_y = Component(EpicsMotor, "m46", kind="normal")
-    m_z = Component(EpicsMotor, "m47", kind="normal")
+    m_theta = Component(EpicsMotor, "m45", kind="normal", labels=["motor"])
+    m_y = Component(EpicsMotor, "m46", kind="normal", labels=["motor"])
+    m_z = Component(EpicsMotor, "m47", kind="normal", labels=["motor"])
 
     def into_control_range(self, p_theta=2, p_y=-15, p_z=90):
         """
