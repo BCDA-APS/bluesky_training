@@ -22,4 +22,5 @@ from .noisy_detector import *
 from .scaler import *
 from .shutter_simulator import *
 from .simulated_fourc import *
+from .simulated_kappa import *
 from .temperature_signal import *
