@@ -23,4 +23,5 @@ from .scaler import *
 from .shutter_simulator import *
 from .simulated_fourc import *
 from .simulated_kappa import *
+from .sixc_diffractometer import *
 from .temperature_signal import *
