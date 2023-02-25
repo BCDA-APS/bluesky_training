@@ -92,6 +92,8 @@ dependencies:
   - coverage
   - mamba
   - micromamba
+  - myst-parser
+  - nbsphinx
   - pydata-sphinx-theme
   - pygithub
   - sphinx
