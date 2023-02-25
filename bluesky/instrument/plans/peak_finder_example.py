@@ -115,6 +115,7 @@ def findpeak_multipass(number_of_scans=4, number_of_points=23, magnify=1.2, md=N
 
 
 def repeat_findpeak(iters=1, md=None):
+    """Repeat findpeak_multipass() with new parameters each time."""
     md = md or {}
     for _i in range(iters):
         md["iteration"] = _i+1
