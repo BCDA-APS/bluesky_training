@@ -19,6 +19,20 @@ from ..framework.initialize import bec
 
 
 def lup(detectors, motor, start, finish, npts=5, key="cen"):
+    """
+    Lineup a positioner.
+
+    Step-scan the motor from start to finish and collect data from the detectors.
+    The **first** detector in the list will be used to assess alignment.
+    The statistical measure is selected by ``key`` with a default of
+    center: ``key="cen"``.
+
+    The bluesky ``BestEffortCallback``is required, with plots enabled, to
+    collect the data for the statistical measure.
+
+    If the chosen key is reported, the `lup()` plan will move the positioner to
+    the new value at the end of the plan and print the new position.
+    """
     det0 = detectors[0].name
     print(f"{det0=}")
     yield from bp.rel_scan(detectors, motor, start, finish, npts)
