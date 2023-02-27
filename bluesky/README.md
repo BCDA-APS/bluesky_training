@@ -1,4 +1,4 @@
-# Bluesky Data Acquisition Sessions
+# Bluesky Training Repository
 
 Contains:
 
@@ -10,4 +10,5 @@ Bluesky queueserver support | [introduction](qserver.md), `*qs*`
 Instrument configuration | `instrument/`
 Jupyter notebooks | `*.ipynb`
 PNG files used in notebooks | `resources/`
-Unit tests | `tests/`
+Conda environments | [`environments/`](./environments/README.md)
+Unit tests | [`tests/`](./tests/README.md)
