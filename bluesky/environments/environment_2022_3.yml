@@ -1,0 +1,105 @@
+name: bluesky_2022_3
+
+# use:
+# prefer micromamba (conda takes much longer, if ever, to solve)
+# micromamba installed in ~30s
+#   date; micromamba create -y -n bluesky_2022_3 -f ./environment_2022_3.yml; date
+#   # then activate with:
+#   eval "$(micromamba shell hook --shell=bash)"
+#   micromamba activate bluesky_2022_3
+# conda installed in ~250s
+#   date; conda env create --force -f ./environment_2022_3.yml; date
+#   # then activate with:
+#   conda activate bluesky_2022_3
+
+channels:
+  - conda-forge
+  - apsu
+  - aps-anl-tag
+  - defaults
+  # - sveseli
+  # - nsls2forge
+
+dependencies:
+
+  # --- Python core packages
+  - python >=3.9
+  - ipython
+  - jupyter
+  - jupyterlab
+  - notebook
+  - pip
+  - psutil
+
+  # --- testing and quality assurance
+  - black
+  - flake8
+  - pylint
+  - pytest
+  - pytest-notebook
+
+  # --- Qt
+  - pyqt =5
+  - qt =5
+
+  # --- general support packages
+  - bitshuffle
+  - epics-base >=7.0.5
+  - h5py
+  - hdf5plugin
+  - imagecodecs-lite
+  - ipympl
+  - lxml
+  - pandas
+  - pint
+  - pyEpics >=3.5.0
+  - pymongo
+  - scikit-image
+  - xlrd
+
+  # --- Bluesky framework packages
+  - adl2pydm
+  - apstools >=1.6.3
+  - area-detector-handlers
+  - bluesky-queueserver
+  - bluesky-queueserver-api
+  - bluesky-widgets
+  - bluesky >=1.8.1
+  - databroker-pack
+  - databroker =1.2
+  - happi
+  - hklpy >=1.0.3  # --- linux-64
+  - ophyd >=1.6.3
+  - pydm
+  - tiled-server
+  # https://github.com/pydata/xarray/issues/6818
+  - xarray !=2022.6.0  # incompatible with numpy=1.20
+
+  # --- user-requested packages
+  - aps-dm-api >=5   # linux-64  osx-64
+  # - c2dataviewer  # --- linux-64
+  - nexpy
+  - punx
+  - pvapy
+  - pvview
+  - pymca
+  - pyRestTable
+  - spec2nexus
+  - stdlogpj
+  - xrayutilities
+
+  # --- packaging and publishing
+  - conda-build
+  - coverage
+  - sphinx
+  - sphinxcontrib-napoleon
+  - twine
+  - versioneer
+  - mamba
+  - micromamba
+  - pygithub
+
+  # - pip:
+  #   # --- optional Bluesky framework packages for evaluation
+  #   # - bluesky-webclient is NOT Python software, don't install it this way
+  #   #    https://github.com/bluesky/bluesky-webclient

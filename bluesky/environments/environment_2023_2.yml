@@ -7,12 +7,8 @@ name: bluesky_2023_2
 # activate:
 #   conda activate bluesky_2023_2
 
-# The `blueskyStarter.sh` script looks for any of these environment variables
-# to choose the correct environment.  It will search in the order below.
-# Suggest setting one of these in either `~/.bashrc` or `~/.bash_aliases`.
-#   export BLUESKY_ENVIRONMENT=bluesky_2023_2
-#   export BLUESKY_ENV=bluesky_2023_2
-#   export BLUESKY_CONDA_ENV=bluesky_2023_2
+# Note this advice about bash environment variables:
+# https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/environments/admin/bluesky.md#bash-environment-variables
 
 channels:
   - conda-forge
@@ -100,12 +96,12 @@ dependencies:
   - twine
   - versioneer
 
-  # if using this environment at APS, then uncomment these (and apsbss below)
-  # - aps-dm-api >=5   # linux-64  osx-64
-  # - c2dataviewer  # --- linux-64
+  # if not using this environment at APS, then comment these (and apsbss below)
+  - aps-dm-api >=5   # linux-64  osx-64
+  - c2dataviewer  # --- linux-64
 
   - pip:
-    # - apsbss  # only works on APS subnet
+    - apsbss  # only works on APS subnet
     # - happi
     # - tiled[all]
     - https://github.com/BCDA-APS/adl2pydm/archive/main.zip

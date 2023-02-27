@@ -1,0 +1,73 @@
+name: bluesky_2022_1
+
+# use:
+#   date; conda env create --force -f ./environment_2022_1.yml; date
+
+channels:
+  - defaults
+  - conda-forge
+  - aps-anl-tag
+  - nsls2forge
+
+dependencies:
+  # --- Python core packages
+  - python<3.8
+  - ipython
+  - jupyter
+  - jupyterlab
+  - notebook
+  - pip
+  - psutil
+  # --- testing and quality assurance
+  - black
+  - flake8
+  - pylint
+  - pytest
+  # --- Qt
+  - pyqt=5
+  - qt=5
+  # --- support packages
+  - aps-dm-api
+  - epics-base>=7.0.5
+  - h5py
+  - imagecodecs-lite
+  - ipympl
+  - lxml
+  - pandas
+  - pint
+  - pyEpics>=3.5.0
+  - pymongo
+  - scikit-image
+  - xlrd
+  # --- Bluesky framework packages
+  - apstools
+  - area-detector-handlers
+  - bluesky>=1.8.1
+  - databroker>=1.2.4
+  - databroker-pack
+  - hklpy>=1.0.1
+  - ophyd>=1.6.3
+  - pydm
+  # --- optional Bluesky framework packages for evaluation
+  - bluesky-queueserver
+  - bluesky-widgets
+  # --- user-requested packages
+  - nexpy
+  - punx
+  - pvview
+  - pymca
+  - pyRestTable
+  - spec2nexus
+  - stdlogpj
+  - xrayutilities
+  # --- packaging and publishing
+  - conda-build
+  - coverage
+  - sphinx
+  - sphinxcontrib-napoleon
+  - twine
+  - versioneer
+  - pip:
+    - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
+    # - bluesky-webclient is NOT Python software, don't install it this way
+    #    https://github.com/bluesky/bluesky-webclient
