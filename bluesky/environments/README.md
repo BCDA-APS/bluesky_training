@@ -13,7 +13,7 @@ CONTENTS
 ## YAML files
 
 This directory contains the master source for these YAML files.
-The repository is: https://github.com/BCDA-APS/bluesky_training/tree/main/environments
+The repository is: https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/environments
 
 version | file
 --- | ---

@@ -1,10 +1,9 @@
 name: bluesky_2023_2
 
 # download:
-#   wget https://raw.githubusercontent.com/BCDA-APS/use_bluesky/main/install/environment_2023_2.yml
+#   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2023_2.yml
 # create:
 #   conda env create --force -n bluesky_2023_2 --force -f ./environment_2023_2.yml --solver=libmamba
-#   Assumes conda-libmamba-solver package (v23+) is installed in base environment.
 # activate:
 #   conda activate bluesky_2023_2
 
