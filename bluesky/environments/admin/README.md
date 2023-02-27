@@ -1,12 +1,8 @@
 # Conda environments
 
 One way to control the versions of the packages used by your Python software is
-to use Python virtual environments
-[(`venv`s)](https://realpython.com/python-virtual-environments-a-primer/) or
-[conda
-environments](https://towardsdatascience.com/a-guide-to-conda-environments-bc6180fc533).
-This document will describe the use of [conda
-environments](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html).
+to use Python virtual environments (`venv`s) or conda environments. This
+document will describe the use of conda environments.
 
 - [Conda environments](#conda-environments)
   - [base environment](#base-environment)
@@ -66,7 +62,10 @@ conda environment.
 
 ## Other reading
 
-- [getting started with conda](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
-- [difference between base environment and no environment at all](https://stackoverflow.com/questions/55134440/)
+- [Getting started with conda](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
+- [conda environments - User Guide](https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html)
+- [conda environments - Independent Guide](https://towardsdatascience.com/a-guide-to-conda-environments-bc6180fc533)
 - [Managing conda environments](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html)
+- [difference between base environment and no environment at all](https://stackoverflow.com/questions/55134440/)
+- `venv`: [Python virtual environments](https://realpython.com/python-virtual-environments-a-primer/)
 - [micromamba environments](https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html)
