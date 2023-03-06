@@ -29,6 +29,7 @@ from ophyd.areadetector.filestore_mixins import FileStoreHDF5IterativeWrite
 from ophyd.areadetector.plugins import HDF5Plugin_V34
 from ophyd.areadetector.plugins import ImagePlugin_V34
 from ophyd.areadetector.plugins import PvaPlugin_V34
+from ophyd.ophydobj import Kind
 import numpy as np
 import pathlib
 
@@ -146,14 +147,17 @@ except TimeoutError:
     logger.warning("Did not connect to area detector IOC '%s'", IOC)
     adsimdet = None
 else:
-    adsimdet.read_attrs.append("hdf1")
-
+    # override default settingd from ophyd
     adsimdet.hdf1.create_directory.put(-5)
+    adsimdet.hdf1.kind = Kind.config | Kind.normal  # Ensure plugin's read is called.
 
-    # override default setting from ophyd
-    adsimdet.hdf1.stage_sigs["blocking_callbacks"] = "No"
-    adsimdet.cam.stage_sigs["wait_for_plugins"] = "Yes"
-    adsimdet.image.stage_sigs["blocking_callbacks"] = "No"
+    # The plugins do not block, the cam must wait for the plugins to finish.
+    for det in (adsimdet, ):
+        for nm in det.component_names:
+            obj = getattr(det, nm)
+            if "blocking_callbacks" in dir(obj):  # is it a plugin?
+                obj.stage_sigs["blocking_callbacks"] = "No"
+        det.cam.stage_sigs["wait_for_plugins"] = "Yes"
 
     if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
         # Even with `lazy_open=1`, ophyd checks if the area
@@ -164,12 +168,10 @@ else:
         #     adsimdet.hdf1.warmup()
         #     logger.info(f"Enabling {adsimdet.image.name} plugin ...")
         #     adsimdet.image.enable.put("Enable")
-        # This test is not sufficient.
+        # Ophyd's test is not sufficient.
         # WORKAROUND (involving a few more tests)
         if not AD_plugin_primed(adsimdet.hdf1):
             AD_prime_plugin2(adsimdet.hdf1)
 
-    # peak new peak parameters
-    change_ad_simulated_image_parameters()
-    # have EPICS dither the peak position
-    dither_ad_peak_position()
+    change_ad_simulated_image_parameters()  # new peak parameters
+    dither_ad_peak_position()  # EPICS will dither the peak position
