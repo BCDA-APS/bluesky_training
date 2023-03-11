@@ -23,7 +23,7 @@ from ophyd import Component, Device, Signal
 
 from bluesky import plans as bp
 
-print("Hello!")
+print("Loading 'Hello, World!' example.")
 
 
 class HelloDevice(Device):
