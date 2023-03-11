@@ -39,6 +39,8 @@ def new_instrument_from_template(destination=None):
         print(f"Using {LOCAL_ZIP_FILE}")
         stream = LOCAL_ZIP_FILE
     else:
+        # TODO: download and save to LOCAL_ZIP_FILE if not exists, then revise workflow here
+        # TODO: check if that file might be out of date
         print(f"Downloading {TRAINING_REPO_URL}")
         r = requests.get(TRAINING_REPO_URL, stream=True)
         if not r.ok:
