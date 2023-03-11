@@ -1,31 +1,43 @@
 """
-Install a new instrument for bluesky.
+Install a new instrument package for bluesky from the training template.
 """
 
-import io
+import argparse
+import logging
 import pathlib
 import shutil
 import tempfile
+import time
 import zipfile
 
 import requests
 
-# TODO: import logging
-
 REPO_NAME = "bluesky_training"
+REPO_ORG = "https://github.com/BCDA-APS"
 BRANCH = "main"
+
 BASE_NAME = f"{REPO_NAME}-{BRANCH}"
+HEADER = f"{BASE_NAME}/bluesky/"
 LOCAL_ZIP_FILE = pathlib.Path("/tmp") / f"{BASE_NAME}.zip"
-TRAINING_REPO = f"https://github.com/BCDA-APS/{REPO_NAME}"
-TRAINING_REPO_URL = f"{TRAINING_REPO}/archive/refs/heads/{BRANCH}.zip"
+TRAINING_REPO = f"{REPO_ORG}/{REPO_NAME}"
+DOWNLOAD_URL = f"{TRAINING_REPO}/archive/refs/heads/{BRANCH}.zip"
+
+SECOND = 1
+MINUTE = 60 * SECOND
+HOUR = 60 * MINUTE
+DAY = 24 * HOUR
 
 
 def new_instrument_from_template(destination=None):
     """
     Install a new bluesky instrument from the online training repository.
 
-    destination obj:
-        Instance of pathlib.Path(), directory for the new instrument.
+    PARAMETERS
+
+    destination *str* or *obj*:
+        Directory for the new instrument.  Either a *str* or an
+        instance of ``pathlib.Path()``.
+        If ``None``, installs into a temporary directory.
     """
     destination = pathlib.Path(destination or tempfile.mkdtemp())
     if destination.exists() and len(list(destination.iterdir())) > 0:
@@ -34,27 +46,44 @@ def new_instrument_from_template(destination=None):
         # delete any content without review.
         raise RuntimeError(f"Directory is not empty: {destination=}")
 
-    # download or use from local copy
-    if LOCAL_ZIP_FILE.exists():
-        print(f"Using {LOCAL_ZIP_FILE}")
-        stream = LOCAL_ZIP_FILE
-    else:
-        # TODO: download and save to LOCAL_ZIP_FILE if not exists, then revise workflow here
-        # TODO: check if that file might be out of date
-        print(f"Downloading {TRAINING_REPO_URL}")
-        r = requests.get(TRAINING_REPO_URL, stream=True)
-        if not r.ok:
-            raise RuntimeError(f"Problem getting zip file: {TRAINING_REPO_URL}")
-        stream = io.BytesIO(r.content)
-    z = zipfile.ZipFile(stream)
+    # fmt: off
+    if (
+        not LOCAL_ZIP_FILE.exists()
+        or LOCAL_ZIP_FILE.stat().st_mtime < time.time() - 1 * DAY
+    ):
+        download_zip()
+    # fmt: on
+
+    extract_content(LOCAL_ZIP_FILE, destination)
+    move_content(destination / HEADER, destination)
+    revise_content(destination)
+
+    # remove the source directory from the repository
+    shutil.rmtree(destination / BASE_NAME)
+
+    return destination
+
+
+def download_zip():
+    """Download repository as ZIP file."""
+    print(f"Downloading {DOWNLOAD_URL}")
+    r = requests.get(DOWNLOAD_URL, stream=True)
+    if not r.ok:
+        raise RuntimeError(f"Problem getting zip file: {DOWNLOAD_URL}")
+    with open(LOCAL_ZIP_FILE, "wb") as f:
+        f.write(r.content)
+
+
+def extract_content(archive, destination):
+    """Extract the bluesky directory from the repo zip file."""
+    print(f"Extracting content from {archive}")
+    z = zipfile.ZipFile(archive)
     print(f"Installing to {destination}")
 
-    # extract the bluesky directory from the repo zip file
-    header = f"{BASE_NAME}/bluesky/"
     # fmt: off
     for item in z.namelist():
         if (
-            item.startswith(header)
+            item.startswith(HEADER)
             and
             not item.endswith(".ipynb")
         ):
@@ -62,8 +91,10 @@ def new_instrument_from_template(destination=None):
             z.extract(item, path=destination)
     # fmt: on
 
-    # move the content into the destination directory
-    for item in (destination / header).iterdir():
+
+def move_content(source, destination):
+    """Move the content into the destination directory."""
+    for item in source.iterdir():
         target = destination / item.name
         if item.is_file():
             # print(f"file: {item.name}  -->  {target}")
@@ -74,8 +105,18 @@ def new_instrument_from_template(destination=None):
         else:
             print(f"ERROR: did not identify {item=}")
 
-    # remove the source directory from the repository
-    shutil.rmtree(destination / BASE_NAME)
+
+def revise_content(destination):
+    """
+    Edit the instrument package to be a new template.
+    """
+    # TODO: edit training configuration (IOC prefix, area detector, motors, ...)
+    # instrument/iconfig.yml
+    # instrument/devices/__init__.py
+    # instrument/plans/__init__.py
+    # session_log_patch.md
+    # tests/
+    # Consider adding a Sphinx docs directory
 
 
 if __name__ == "__main__":
