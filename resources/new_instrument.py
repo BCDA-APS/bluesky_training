@@ -129,22 +129,22 @@ def revise_content(destination):
 
     file = destination / "instrument" / "iconfig.yml"
     # TODO: Leave this for user to edit as first steps
-
-    file = destination / "instrument" / "devices" / "__init__.py"
+    key = "DATABROKER_CATALOG: &databroker_catalog"
     buf = []
     for line in read(file):
-        if line.startswith("from ."):
-            line = f"# {line}"
+        if key in line:
+            line = f"{key} EDIT_CATALOG_NAME_HERE"
         buf.append(line)
     write(file, buf)
 
-    file = destination / "instrument" / "plans" / "__init__.py"
-    buf = []
-    for line in read(file):
-        if line.startswith("from ."):
-            line = f"# {line}"
-        buf.append(line)
-    write(file, buf)
+    for group in "devices plans".split():
+        file = destination / "instrument" / group / "__init__.py"
+        buf = []
+        for line in read(file):
+            if line.startswith("from ."):
+                line = f"# {line}"
+            buf.append(line)
+        write(file, buf)
 
     # fmt: off
     remove_these_files = [
@@ -226,15 +226,7 @@ def command_line_options():
 if __name__ == "__main__":
     args = command_line_options()
     destination = pathlib.Path(args.directory)
-    DEVELOPMENT = True  # TODO: remove for production
-    if DEVELOPMENT:
-        destination = pathlib.Path("/tmp/tmp_instrument")  # TODO: remove for production
     logger.info("Installing to: '%s'", destination)
 
-    if DEVELOPMENT:
-        if destination.exists():  # TODO: remove for production
-            logger.debug("Removing directory '%s'", destination)
-            shutil.rmtree(destination)
-
     new_instrument_from_template(destination)
-    # TODO: set up git repo
+    # TODO: set up git repo - best left to user instructions (for now, at least)
