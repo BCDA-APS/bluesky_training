@@ -62,6 +62,7 @@ def new_instrument_from_template(destination=None):
     revise_content(destination)
 
     # remove the source directory from the repository
+    logger.debug("Removing directory '%s'", destination / BASE_NAME)
     shutil.rmtree(destination / BASE_NAME)
 
     return destination
@@ -116,11 +117,13 @@ def revise_content(destination):
     destination = pathlib.Path(destination)
 
     def read(file):
+        logger.debug("Reading '%s'", file)
         with open(file, "r") as f:
             lines = f.read().splitlines()
         return lines
 
     def write(file, lines):
+        logger.debug("Writing '%s'", file)
         with open(file, "w") as f:
             f.write("\n".join(lines))
 
@@ -150,13 +153,16 @@ def revise_content(destination):
     ]
     for file in remove_these_files:
         if file.exists():
+            logger.debug("Removing file '%s'", file)
             file.unlink()
     # fmt: on
 
     # Consider keeping ``tests/`` as examples, but it will need
     # serious revision to be a template.
+    # For now, remove it.
     subdir = destination / "tests"
     if subdir.exists():
+        logger.debug("Removing directory '%s'", subdir)
         shutil.rmtree(subdir)
 
 
@@ -195,7 +201,7 @@ def command_line_options():
         default=logging.WARNING,
     )
     parser.add_argument(
-        "--verbose",
+        "--info",
         help="Also report information messages.",
         action="store_const",
         dest="loglevel",
@@ -227,6 +233,7 @@ if __name__ == "__main__":
 
     if DEVELOPMENT:
         if destination.exists():  # TODO: remove for production
+            logger.debug("Removing directory '%s'", destination)
             shutil.rmtree(destination)
 
     new_instrument_from_template(destination)
