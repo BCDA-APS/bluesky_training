@@ -136,7 +136,7 @@ def revise_content(destination):
             f.write("\n".join(lines))
 
     file = destination / "instrument" / "iconfig.yml"
-    # TODO: Leave this for user to edit as first steps
+    # User should edit this to assigned catalog name.
     key = "DATABROKER_CATALOG: &databroker_catalog"
     buf = []
     for line in read(file):
@@ -237,4 +237,4 @@ if __name__ == "__main__":
     logger.info("Installing to: '%s'", destination)
 
     new_instrument_from_template(destination)
-    # TODO: set up git repo - best left to user instructions (for now, at least)
+    # User instructions should describe how to set up git repo: git init
