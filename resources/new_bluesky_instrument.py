@@ -2,6 +2,9 @@
 
 """
 Install a new instrument package for bluesky from the training template.
+
+* see: https://github.com/BCDA-APS/bluesky_training/blob/main/resources/new_bluesky_instrument.py
+* raw: https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/resources/new_bluesky_instrument.py
 """
 
 import logging
