@@ -1,8 +1,9 @@
+#!/usr/bin/env python
+
 """
 Install a new instrument package for bluesky from the training template.
 """
 
-import argparse
 import logging
 import pathlib
 import shutil
@@ -11,6 +12,8 @@ import time
 import zipfile
 
 import requests
+
+logger = None  # set by command_line_options()
 
 REPO_NAME = "bluesky_training"
 REPO_ORG = "https://github.com/BCDA-APS"
@@ -66,7 +69,7 @@ def new_instrument_from_template(destination=None):
 
 def download_zip():
     """Download repository as ZIP file."""
-    print(f"Downloading {DOWNLOAD_URL}")
+    logger.info("Downloading '%s'", DOWNLOAD_URL)
     r = requests.get(DOWNLOAD_URL, stream=True)
     if not r.ok:
         raise RuntimeError(f"Problem getting zip file: {DOWNLOAD_URL}")
@@ -76,9 +79,9 @@ def download_zip():
 
 def extract_content(archive, destination):
     """Extract the bluesky directory from the repo zip file."""
-    print(f"Extracting content from {archive}")
+    logger.info("Extracting content from '%s'", archive)
     z = zipfile.ZipFile(archive)
-    print(f"Installing to {destination}")
+    logger.info("Installing to '%s'", destination)
 
     # fmt: off
     for item in z.namelist():
@@ -87,7 +90,7 @@ def extract_content(archive, destination):
             and
             not item.endswith(".ipynb")
         ):
-            # print(item)
+            logger.debug("extracting archive item: '%s'", item)
             z.extract(item, path=destination)
     # fmt: on
 
@@ -97,30 +100,134 @@ def move_content(source, destination):
     for item in source.iterdir():
         target = destination / item.name
         if item.is_file():
-            # print(f"file: {item.name}  -->  {target}")
+            logger.debug("file: '%s'  -->  '%s'", item.name, target)
             shutil.copy2(item, destination / target)
         elif item.is_dir():
-            # print(f"dir:  {item.name}  -->  {target}")
+            logger.debug("dir:  '%s'  -->  '%s'", item.name, target)
             shutil.copytree(item, destination / target)
         else:
-            print(f"ERROR: did not identify {item=}")
+            logger.warning("PROBLEM: did not identify this content: '%s'", item)
 
 
 def revise_content(destination):
     """
-    Edit the instrument package to be a new template.
+    Change the instrument package from training to be a new template.
     """
-    # TODO: edit training configuration (IOC prefix, area detector, motors, ...)
-    # instrument/iconfig.yml
-    # instrument/devices/__init__.py
-    # instrument/plans/__init__.py
-    # session_log_patch.md
-    # tests/
-    # Consider adding a Sphinx docs directory
+    destination = pathlib.Path(destination)
+
+    def read(file):
+        with open(file, "r") as f:
+            lines = f.read().splitlines()
+        return lines
+
+    def write(file, lines):
+        with open(file, "w") as f:
+            f.write("\n".join(lines))
+
+    file = destination / "instrument" / "iconfig.yml"
+    # TODO: Leave this for user to edit as first steps
+
+    file = destination / "instrument" / "devices" / "__init__.py"
+    buf = []
+    for line in read(file):
+        if line.startswith("from ."):
+            line = f"# {line}"
+        buf.append(line)
+    write(file, buf)
+
+    file = destination / "instrument" / "plans" / "__init__.py"
+    buf = []
+    for line in read(file):
+        if line.startswith("from ."):
+            line = f"# {line}"
+        buf.append(line)
+    write(file, buf)
+
+    # fmt: off
+    remove_these_files = [
+        destination / "export_data.sh",
+        destination / "session_log-patch.md",
+    ]
+    for file in remove_these_files:
+        if file.exists():
+            file.unlink()
+    # fmt: on
+
+    # Consider keeping ``tests/`` as examples, but it will need
+    # serious revision to be a template.
+    subdir = destination / "tests"
+    if subdir.exists():
+        shutil.rmtree(subdir)
+
+
+def command_line_options():
+    import argparse
+    import sys
+
+    global logger
+
+    parser = argparse.ArgumentParser(
+        prog=pathlib.Path(sys.argv[0]).name,
+        description=__doc__.strip().splitlines()[0],
+    )
+
+    parser.add_argument(
+        "-d",
+        "--directory",
+        type=str,
+        help=(
+            "Directory for the new instrument."
+            "  Default is the present working directory"
+            f" ({pathlib.Path('.').absolute()})."
+            "  The directory will be created if it does not exist."
+            "  If the directory exists and it is not empty, this"
+            " program will stop before any action is taken."
+        ),
+        default=".",
+    )
+
+    parser.add_argument(
+        "--quiet",
+        help="Report only warnings and errors. (default)",
+        action="store_const",
+        dest="loglevel",
+        const=logging.WARNING,
+        default=logging.WARNING,
+    )
+    parser.add_argument(
+        "--verbose",
+        help="Also report information messages.",
+        action="store_const",
+        dest="loglevel",
+        const=logging.INFO,
+    )
+    parser.add_argument(
+        "--debug",
+        help="Also report debugging messages",
+        action="store_const",
+        dest="loglevel",
+        const=logging.DEBUG,
+    )
+
+    args = parser.parse_args()
+
+    logging.basicConfig(level=args.loglevel)
+    logger = logging.getLogger(__name__)
+
+    return args
 
 
 if __name__ == "__main__":
-    # TODO: command-line interface
-    destination = "/tmp/tmp_instrument"
+    args = command_line_options()
+    destination = pathlib.Path(args.directory)
+    DEVELOPMENT = True  # TODO: remove for production
+    if DEVELOPMENT:
+        destination = pathlib.Path("/tmp/tmp_instrument")  # TODO: remove for production
+    logger.info("Installing to: '%s'", destination)
+
+    if DEVELOPMENT:
+        if destination.exists():  # TODO: remove for production
+            shutil.rmtree(destination)
+
     new_instrument_from_template(destination)
     # TODO: set up git repo
