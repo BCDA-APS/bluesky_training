@@ -71,11 +71,14 @@ def new_instrument_from_template(destination=None):
 def download_zip():
     """Download repository as ZIP file."""
     logger.info("Downloading '%s'", DOWNLOAD_URL)
-    r = requests.get(DOWNLOAD_URL, stream=True)
-    if not r.ok:
-        raise RuntimeError(f"Problem getting zip file: {DOWNLOAD_URL}")
-    with open(LOCAL_ZIP_FILE, "wb") as f:
-        f.write(r.content)
+    try:
+        r = requests.get(DOWNLOAD_URL, stream=True)
+        if not r.ok:
+            raise RuntimeError(f"Problem getting zip file: {DOWNLOAD_URL}")
+        with open(LOCAL_ZIP_FILE, "wb") as f:
+            f.write(r.content)
+    except Exception as exinfo:
+        logger.warning("Problem: %s", exinfo)
 
 
 def extract_content(archive, destination):
@@ -93,6 +96,8 @@ def extract_content(archive, destination):
         ):
             logger.debug("extracting archive item: '%s'", item)
             z.extract(item, path=destination)
+        else:
+            logger.debug("ignoring archive item: '%s'", item)
     # fmt: on
 
 
