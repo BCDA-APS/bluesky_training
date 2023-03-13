@@ -4,9 +4,7 @@ Contents
 
 - [Steps to install a new instrument](#steps-to-install-a-new-instrument)
   - [Setup a bluesky instrument](#setup-a-bluesky-instrument)
-  - [Setup a conda environment](#setup-a-conda-environment)
-    - [Get the `conda` command](#get-the-conda-command)
-    - [Install the environment for bluesky](#install-the-environment-for-bluesky)
+  - [Create the conda environment](#create-the-conda-environment)
   - [Activate the conda environment](#activate-the-conda-environment)
   - [Test the new bluesky instrument](#test-the-new-bluesky-instrument)
   - [Setup your databroker catalog configuration](#setup-your-databroker-catalog-configuration)
@@ -32,7 +30,7 @@ Training](https://github.com/BCDA-APS/bluesky_training) repository template.
 workstations, this program should be available from
 `/APSshare/bin/new_bluesky_instrument.py`.)
 
-To run this program, the only requirements are Python 3.8+ and the
+`new_bluesky_instrument.py` only needs Python 3.8+ and the
 [requests](https://docs.python-requests.org/en/latest/index.html) package.
 
 Here's an example:
@@ -45,131 +43,37 @@ INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
 ```
 
-See the program's help (`new_bluesky_instrument.py -h`) for usage information.
+Use `new_bluesky_instrument.py -h` for usage information.
 
-The installer will download the ZIP file from the repository if it's not already
+The installer will download the ZIP file from the GitHub training repository if it's not already
 present in the `/tmp` directory or if the existing file is old.
 
-## Setup a conda environment
+## Create the conda environment
 
 A bluesky instrument uses many Python packages not included in the Python
 Standard Library.  Rather than add these directly into the system Python
 installation, it is recommended to create a Python virtual environment which has
 the suite of packages (and specific versions) required.
 
-Principally, a Python virtual environment gives you control over the suite of
-packages and insulates you from any system software updates.
+Follow this [guide](./conda_environment.md) to create the `bluesky_2023_2` conda
+environment for
+data collection with bluesky.
 
-Here, we describe the creation of a Python virtual environment managed by
-[conda](https://docs.conda.io/projects/conda/en/latest/index.html).  While
-opinions may vary, we see some advantages to using `conda` over
-[`venv`](https://docs.python.org/3/library/venv.html).  Consequently, we use
-`conda` to install most packages, falling back to `pip` to install any remaining
-packages.  We use [YAML](https://yaml.org) files to describe these conda
-environments.  See this
-[article](https://medium.com/@balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22)
-for more instruction about conda environment YAML files.
-
-### Get the `conda` command
-
-Skip ahead to the next section if you already have a `conda` command available
-in your `bash` shell.
-
-If your (`bash` shell) command prompt does not start with `(base)` (or some
-other conda aenvironment name), you probably do not have a conda environment
-activated and probably do not have a `conda` command available.
-
-Follow these steps:
-
-1. Use the `bash` shell:
-
-   ```bash
-   $ bash
-   user@host:~$
-   ```
-
-2. Activate the `conda` base environment:
-
-   ```bash
-   user@host:~$ source /PATH/TO/CONDA/bin/activate
-   ```
-
-   where `/PATH/TO/CONDA`  is the directory of your conda base installation.  At APS, that location is `/APSshare/miniconda/x86_64`.  For workstations on other networks, you may need to install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) for yourself.
-
-### Install the environment for bluesky
-
-Using the new instrument as setup above (where the installation directory was
-`~/bluesky`), then look for the latest installation configuration file in the
-`~bluesky/environments/` directory.  At this time, the latest file is
-`environment_2023_2.yml`.
-
-We create different versions of the YAML file, named for the APS operating cycle
-(2021-1, 2023-2, ...), as the suite of packages for a working installation may
-change over time.  By keeping all these files in a `environments/` subdirectory,
-we can restore any of these environments with a simple command.
-
-The instruction to (re)create the conda environment
-is in (a comment in) the first few lines of the file:
+Here's an example:
 
 ```bash
-(base) user@host:~/bluesky/environments $ head environment_2023_2.yml
-name: bluesky_2023_2
-
-# download:
-#   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2023_2.yml
-# create:
-#   conda env create --force -n bluesky_2023_2 -f ./environment_2023_2.yml --solver=libmamba
-# activate:
-#   conda activate bluesky_2023_2
-
-# Note this advice about bash environment variables:
-```
-
-On a workstation with access to the outside network (some APS workstations are
-restricted to APS-ONLY access), create the conda environment with the next
-command.  Line breaks have been added for this documentation.
-
-```bash
-conda env create \
+(base) user@host:~$ cd ~/bluesky
+(base) user@host:~$ conda env create \
     --force \
     -n bluesky_2023_2 \
-    -f ./environment_2023_2.yml \
+    -f ./environments/environment_2023_2.yml \
     --solver=libmamba
-```
-
-Installation usually takes (at least) a few minutes to complete.
-
-**Notes**:
-
-- The `--force` option will replace any existing environment by this name
-  **without asking for confirmation**.
-  Remove this option if you wish.
-- The `-n bluesky_2023_2` sets the name of the conda environment to be created.
-- The `-f ./environment_2023_2.yml` option names the YAML file to be used (so
-  the `./` part means you need to make this command **from within** the
-  `/bluesky/environments/` directory or the YAML file will not be found).
-- The `--solver=libmamba` option will use the (much faster)
-  [`conda-libmamba-solver`](https://conda.github.io/conda-libmamba-solver/).
-  Either install that in your `base` environment or remove this install option.
-
-Once finished, the installer will report the commands to manage the new
-environment:
-
-```bash
-#
-# To activate this environment, use
-#
-#     $ conda activate bluesky_2023_2
-#
-# To deactivate an active environment, use
-#
-#     $ conda deactivate
 ```
 
 ## Activate the conda environment
 
 As shown above, you will need to activate the conda environment in each console
-session when you plan to use it.  Here, we activate the `bluesky_2023_2` environment:
+session when you plan to use it.  Here's an example:
 
 ```bash
 (base) user@host:~/bluesky $ conda activate bluesky_2023_2
@@ -186,66 +90,23 @@ in which they are installed.
 
 At this point, you have assembled enough of the parts to test the initial
 installation with bluesky. Follow the steps in [this
-guide](./test_new_bluesky_instrument.md).
+guide](./test_new_bluesky_instrument.md) to test the installation.
 
 In the remaining steps, we'll configure the instrument for your catalog and
 specific hardware configuration.
 
 ## Setup your databroker catalog configuration
 
-The bluesky instrument uses a YAML file which describes the connection
-with some location where data is stored, typically a MongoDB collection.
-This is called a catalog configuration file.
-
-The catalog configuration file must be placed in a directory where
-[`databroker`](https://blueskyproject.io/databroker/how-to/mongo-backed-catalog.html)
-expects to find it.  Run this snippet to find the list of paths where it looks on your system:
-
-```bash
-(bluesky_2023_2) user@host:~/bluesky$ python -c "import databroker; print(databroker.catalog_search_path())"
-('/home/user/.local/share/intake', '/home/user/.conda/envs/bluesky_2023_2/share/intake')
-```
-
-Create a YAML file in one of these directories. (The actual file name does not
-matter.  Only that it ends with `.yml`.  Also, amongst all the `.yml` files
-found on the search path, any catalog names defined only appear once.)  Since
-you might recreate the environment, it is suggested not to install into any
-environment directory (such as
-`/home/user/.conda/envs/bluesky_2023_2/share/intake` listed above).
-
-Here is an example used with the Bluesky training demonstration:
-
-```yml
-# file: training.yml
-# purpose: Configuration file to connect Bluesky databroker with MongoDB
-# For Bluesky Python Training at APS
-
-# Copy to: ~/.local/share/intake/training.yml
-# Create subdirectories as needed
-
-sources:
-  training:
-    args:
-      asset_registry_db: mongodb://localhost:27017/training-bluesky
-      metadatastore_db: mongodb://localhost:27017/training-bluesky
-    driver: bluesky-mongo-normalized-catalog
-```
-
-Let's assume (for example purposes) this catalog assignment:
+Let's assume (for example purposes), you have been given this bluesky/databroker
+catalog assignment:
 
 - name: `45ida_abcd`
 - MongoDB server: `mongoserver.xray.aps.anl.gov`
 - MongoDB collection: `45ida_abcd-bluesky`
 
-1. Create any missing directories as needed: `mkdir -p ~/.local/share/intake`
-1. Create file ` ~/.local/share/intake/databroker_catalog.yml`
-1. Open in an editor and copy/paste the content above.
-1. Change `training:` to your catalog's name, such as `45ida_abcd:`
-1. Change both lines with `mongodb://...` to
-   `mongodb://mongoserver.xray.aps.anl.gov:27017/45ida_abcd-bluesky`.
-1. Change the comments accordingly.
+See this [guide](./configure_databroker.md) to configure databroker.
 
-Confirm that databroker can find this catalog configuration file:
+Confirm that databroker can find the `45ida_abcd` catalog:
 
 ```bash
 (bluesky_2023_2) user@host:~/bluesky$ python -c "import databroker; print(list(databroker.catalog))"
@@ -262,13 +123,14 @@ TODO
 
 ## Start version control
 
-It is highly recommended that you place your bluesky instrument directory under
-some form of software version control.  At minimum, this can provide some form
-of backup protection.  It also helps others to collaborate with similar bluesky
-instruments by sharing your instrument's implementations.
+While this step is optional, it is **highly recommended** that you place your
+bluesky instrument directory under some form of software version control.  At
+minimum, this can provide some form of backup protection.  It also helps others
+to collaborate with similar bluesky instruments by sharing your instrument's
+implementations.
 
-Instructions for using [`git`](https://git-scm.com/) with
-[GitHub](https://github.com/) or the [APS GitLab
+Instructions for using [`git`](https://git-scm.com/) as software version control
+with [GitHub](https://github.com/) or the [APS GitLab
 server](https://git.aps.anl.gov/) are provided in [this separate
 document](./git-help.md).
 

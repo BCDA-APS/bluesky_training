@@ -64,6 +64,11 @@ BLUESKY_MOUNT_PATH: /tmp/docker_ioc/iocad/tmp
 
 ## Parts of the instrument package
 
+The `instrument` package is divided into several submodules to make it easier to identify
+the source definition of any supported item.
+
+TODO: other parts at the root level?
+
 ### Framework
 
 The `instrument.framework` directory contains the files that setup the core of Bluesky (and related packages).
