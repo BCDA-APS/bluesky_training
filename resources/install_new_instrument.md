@@ -70,6 +70,8 @@ Here's an example:
     --solver=libmamba
 ```
 
+[TODO:](https://github.com/BCDA-APS/use_bluesky/blob/main/install/README.md#add-environment-configuration-to-bash_aliases)
+
 ## Activate the conda environment
 
 As shown above, you will need to activate the conda environment in each console
@@ -115,7 +117,7 @@ Confirm that databroker can find the `45ida_abcd` catalog:
 
 ## IPython startup
 
-TODO
+[TODO:](https://github.com/BCDA-APS/use_bluesky/blob/main/install/README.md#create-ipython-profile-for-bluesky)
 
 - ipython directory
 - ipython profile
