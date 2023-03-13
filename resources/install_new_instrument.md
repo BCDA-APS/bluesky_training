@@ -10,7 +10,7 @@ Contents
   - [Activate the conda environment](#activate-the-conda-environment)
   - [Setup a databroker catalog configuration](#setup-a-databroker-catalog-configuration)
   - [Setup version control with git](#setup-version-control-with-git)
-  - [Setup configuring bluesky instrument](#setup-configuring-bluesky-instrument)
+  - [Configure bluesky instrument](#configure-bluesky-instrument)
 
 Note:  These *instructions have been written for workstations running the
 Linux operating system*.  They may be used for other operating systems but
@@ -199,7 +199,7 @@ TODO
     # add & commit content
     # push back to origin
 
-## Setup configuring bluesky instrument
+## Configure bluesky instrument
 
 TODO
 
