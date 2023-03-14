@@ -8,7 +8,7 @@ Contents
   - [Activate the conda environment](#activate-the-conda-environment)
   - [Test the new bluesky instrument](#test-the-new-bluesky-instrument)
   - [Setup your databroker catalog configuration](#setup-your-databroker-catalog-configuration)
-  - [IPython startup](#ipython-startup)
+  - [IPython profile](#ipython-profile)
   - [Start version control](#start-version-control)
   - [Configure bluesky instrument](#configure-bluesky-instrument)
 
@@ -103,7 +103,9 @@ in which they are installed.
 
 At this point, you have assembled enough of the parts to test the initial
 installation with bluesky. Follow the steps in [this
-guide](./test_new_bluesky_instrument.md) to test the installation.
+guide](./test_new_bluesky_instrument.md) to test the installation.  Additional
+instructions are available to [test the
+installation](../bluesky/environments/admin/testing.md) with EPICS.
 
 In the remaining steps, we'll configure the instrument for your catalog and
 specific hardware configuration.

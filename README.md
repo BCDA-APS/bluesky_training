@@ -4,6 +4,23 @@ This repository, via [Jupyter](https://jupyter.org/) notebooks, demonstrates use
 of the Bluesky framework at a typical beam line scenario for a BCDA-sponsored
 class.
 
+- [README.md](#readmemd)
+  - [Notebooks](#notebooks)
+    - [Introductory](#introductory)
+    - [Basic hardware configuration and measurement](#basic-hardware-configuration-and-measurement)
+      - [Advanced](#advanced)
+    - [Measurement using the `instrument` package](#measurement-using-the-instrument-package)
+      - [Advanced](#advanced-1)
+    - [Post-measurement (such as Analysis)](#post-measurement-such-as-analysis)
+      - [Data Processing, Reduction, and/or Analysis](#data-processing-reduction-andor-analysis)
+      - [Export, Copy Data](#export-copy-data)
+    - [Review](#review)
+  - [Installation](#installation)
+    - [Install for Training](#install-for-training)
+    - [Install as Bluesky `instrument` package](#install-as-bluesky-instrument-package)
+  - [References](#references)
+
+
 ## Notebooks
 
 Jupyter notebooks are used to document Bluesky-related activites and provide
@@ -82,8 +99,17 @@ folders (created by tools from Bluesky's
 
 ## Installation
 
+### Install for Training
+
 Instructions are available for [installation on Linux workstations](install.md).
 The steps are similar on Mac OS and Windows but details are not provided here.
+
+### Install as Bluesky `instrument` package
+
+Parts of this repository (under the `bluesky`) also serve as a template for
+creating a new bluesky `instrument` package.  See these
+[instructions](/resources/install_new_instrument.md) for the _Steps to install a
+new instrument_.
 
 ## References
 

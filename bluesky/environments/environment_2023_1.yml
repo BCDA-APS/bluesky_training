@@ -7,7 +7,7 @@ name: bluesky_2023_1
 #   micromamba activate bluesky_2023_1
 
 # download:
-#   wget https://raw.githubusercontent.com/BCDA-APS/use_bluesky/main/install/environment_2023_1.yml
+#   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2023_1.yml
 
 # Add/revise environment variable for default bluesky environment.
 # Might be defined in either ~/.bashrc or ~/.bash_aliases
