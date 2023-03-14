@@ -12,7 +12,7 @@ available.  See [these instructions](./base.md) for the installation steps.
 
 ## Install the environment
 
-With _normal_ ( not _elevated_) privileges, install the latest conda environment
+With _normal_ (not _elevated_) privileges, install the latest conda environment
 for Bluesky.  Use the YAML (`.yml`) file to define the package requirements.
 
 ```bash

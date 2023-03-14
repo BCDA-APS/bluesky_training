@@ -70,9 +70,20 @@ Here's an example:
     --solver=libmamba
 ```
 
-[TODO:](https://github.com/BCDA-APS/use_bluesky/blob/main/install/README.md#add-environment-configuration-to-bash_aliases)
+The [`blueskyStarter.sh`](../../blueskyStarter.sh) script looks for any of these
+(bash shell) environment variables to choose the correct conda environment for
+Bluesky.  It will search in the order below. Suggest setting one of these in
+either `~/.bashrc` or `~/.bash_aliases`.
+
+```bash
+export BLUESKY_ENVIRONMENT=bluesky_2023_2
+export BLUESKY_ENV=bluesky_2023_2
+export BLUESKY_CONDA_ENV=bluesky_2023_2
+```
 
 ## Activate the conda environment
+
+<!-- TODO: Compare content here with similar content in bluesky/environments/admin -->
 
 As shown above, you will need to activate the conda environment in each console
 session when you plan to use it.  Here's an example:
@@ -115,13 +126,22 @@ Confirm that databroker can find the `45ida_abcd` catalog:
 ['45ida_abcd']
 ```
 
-## IPython startup
+## IPython profile
 
-[TODO:](https://github.com/BCDA-APS/use_bluesky/blob/main/install/README.md#create-ipython-profile-for-bluesky)
+If there is an existing `~/.ipython` directory (perhaps created for other use
+from this account), then choose a unique directory for bluesky.  Typical
+alternative is `~/.ipython-bluesky`.  These commands create the
+[IPython profile](https://ipython.readthedocs.io/en/stable/config/intro.html)
+for bluesky, then create a starter script for the `instrument` package within that profile's `startup` directory.
 
-- ipython directory
-- ipython profile
-- file in the startup directory
+```bash
+ipython profile create bluesky --ipython-dir="~/.ipython"
+cat > ~/.ipython/profile_bluesky/startup/00-start-bluesky.py  << EOF
+import pathlib, sys
+sys.append(str(pathlib.Path().home() / "bluesky"))
+from instrument.collection import *
+EOF
+```
 
 ## Start version control
 
