@@ -81,9 +81,10 @@ export BLUESKY_ENV=bluesky_2023_2
 export BLUESKY_CONDA_ENV=bluesky_2023_2
 ```
 
-## Activate the conda environment
+More documentation about conda is available
+[elsewhere](../bluesky/environments/README.md) in this repository.
 
-<!-- TODO: Compare content here with similar content in bluesky/environments/admin -->
+## Activate the conda environment
 
 As shown above, you will need to activate the conda environment in each console
 session when you plan to use it.  Here's an example:
@@ -111,6 +112,8 @@ In the remaining steps, we'll configure the instrument for your catalog and
 specific hardware configuration.
 
 ## Setup your databroker catalog configuration
+
+Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog configuration.
 
 Let's assume (for example purposes), you have been given this bluesky/databroker
 catalog assignment:
@@ -154,9 +157,9 @@ to collaborate with similar bluesky instruments by sharing your instrument's
 implementations.
 
 Instructions for using [`git`](https://git-scm.com/) as software version control
-with [GitHub](https://github.com/) or the [APS GitLab
-server](https://git.aps.anl.gov/) are provided in [this separate
-document](./git-help.md).
+with [GitHub](https://github.com/) or the
+[APS GitLab server](https://git.aps.anl.gov/) are provided in
+[this separate document](./git-help.md#overview).
 
 ## Configure bluesky instrument
 
