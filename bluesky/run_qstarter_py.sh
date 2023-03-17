@@ -4,7 +4,7 @@
 
 #--------------------
 # change the program defaults here
-CONDA_ENVIRONMENT="${BLUESKY_CONDA_ENV:-training_2022}
+CONDA_ENVIRONMENT="${BLUESKY_CONDA_ENV:-training_2022}"
 DATABROKER_CATALOG=training
 #--------------------
 
