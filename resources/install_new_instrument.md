@@ -70,7 +70,7 @@ Here's an example:
     --solver=libmamba
 ```
 
-The [`blueskyStarter.sh`](../../blueskyStarter.sh) script looks for any of these
+The [`blueskyStarter.sh`](/bluesky/blueskyStarter.sh) script looks for any of these
 (bash shell) environment variables to choose the correct conda environment for
 Bluesky.  It will search in the order below. Suggest setting one of these in
 either `~/.bashrc` or `~/.bash_aliases`.
