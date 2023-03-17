@@ -76,7 +76,7 @@ def new_instrument_from_template(destination=None):
         instance of ``pathlib.Path()``.
         If ``None``, installs into a temporary directory.
     """
-    destination = pathlib.Path(destination or tempfile.mkdtemp())
+    destination = pathlib.Path(destination or tempfile.mkdtemp()).absolute()
     if destination.exists() and len(list(destination.iterdir())) > 0:
         # We _could_ use shutil to clear the directory but
         # the caller should sort this out.  We should not
@@ -267,7 +267,13 @@ def command_line_options():
 if __name__ == "__main__":
     args = command_line_options()
     destination = pathlib.Path(args.directory)
-    logger.info("Installing to: '%s'", destination)
+    logger.info("Requested installation to: '%s'", destination)
+
+    # # TODO: Developer use only
+    # destination = pathlib.Path(__file__).parent / "bluesky"
+    # if destination.exists():
+    #     logger.debug("Removing file '%s'", destination)
+    #     shutil.rmtree(destination)
 
     new_instrument_from_template(destination)
     # User instructions should describe how to set up git repo: git init
