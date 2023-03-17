@@ -3,10 +3,10 @@
 # start a bluesky session in IPython console (default) or Jupyter notebook GUI
 
 # Get the Python environment name.
-# either: BLUESKY_ENVIRONMENT or BLUESKY_ENV or BLUESKY_CONDA_ENV or DEFAULT_ENV
+# either: BLUESKY_CONDA_ENV (with fallback to DEFAULT_ENV)
 DEFAULT_ENV=bluesky_2023_1
 # DEFAULT_ENV=training_2022
-export ENV_NAME="${BLUESKY_ENVIRONMENT:-${BLUESKY_ENV:-${BLUESKY_CONDA_ENV:-${DEFAULT_ENV}}}}"
+export ENV_NAME="${BLUESKY_CONDA_ENV:-${DEFAULT_ENV}}
 export IPYTHON_PROFILE=bluesky
 export IPYTHONDIR="${HOME}/.ipython-bluesky"
 

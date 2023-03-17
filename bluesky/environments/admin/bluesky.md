@@ -70,13 +70,11 @@ conda config --env --append channels apsu
 
 ## bash environment variables
 
-The [`blueskyStarter.sh`](../../blueskyStarter.sh) script looks for any of these
-(bash shell) environment variables to choose the correct conda environment for
-Bluesky.  It will search in the order below. Suggest setting one of these in
-either `~/.bashrc` or `~/.bash_aliases`.
+The [`blueskyStarter.sh`](/bluesky/blueskyStarter.sh) script looks for the
+`BLUESKY_CONDA_ENV` (bash shell) environment variable to choose the correct
+conda environment for Bluesky.  Suggest setting this in `~/.bash_aliases` (if
+that does not exist, then add it to `~/.bashrc`).
 
 ```bash
-export BLUESKY_ENVIRONMENT=bluesky_2023_2
-export BLUESKY_ENV=bluesky_2023_2
 export BLUESKY_CONDA_ENV=bluesky_2023_2
 ```
