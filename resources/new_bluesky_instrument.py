@@ -81,8 +81,7 @@ def new_instrument_from_template(destination=None):
         # We _could_ use shutil to clear the directory but
         # the caller should sort this out.  We should not
         # delete any content without review.
-        raise RuntimeError(f"Directory is not empty: {destination=}")
-
+        raise RuntimeError("Directory is not empty: " + str(destination))
     # fmt: off
     if (
         not LOCAL_ZIP_FILE.exists()
