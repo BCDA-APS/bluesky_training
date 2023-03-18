@@ -27,10 +27,11 @@ Use the program
 to install a new bluesky instrument configuration from the online [APS Bluesky
 Training](https://github.com/BCDA-APS/bluesky_training) repository template.
 
-**Note**: APS users can run this program with this command:
+**Note**: APS users can run this program with this command to create a new
+`bluesky` directory in their home directory:
 
 ```bash
-python /APSshare/bin/new_bluesky_instrument.py
+python /APSshare/bin/new_bluesky_instrument.py ~/bluesky
 ```
 
 Workstations on other networks will need to download this program from the URL
@@ -64,7 +65,7 @@ the suite of packages (and specific versions) required.
 Follow this [guide](./conda_environment.md) to create the `bluesky_2023_2` conda
 environment for data collection with bluesky.
 
-**Note**:  You must use `bash` shell.
+**IMPORTANT**:  You must use `bash` shell.
 
 Here's an example:
 
@@ -118,7 +119,8 @@ specific hardware configuration.
 
 ## Setup your databroker catalog configuration
 
-Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog configuration.
+Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog
+configuration.
 
 Let's assume (for example purposes), you have been given this bluesky/databroker
 catalog assignment:
