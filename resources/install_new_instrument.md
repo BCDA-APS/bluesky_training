@@ -18,7 +18,7 @@ expect some modifications are necessary.  One such modification is that the
 `libhkl` library, needed for diffractometer support, is only available for Linux
 x86_64 host architectures.
 
-In Linux, use the `bash` command shell.
+**IMPORTANT**: In Linux, use the `bash` command shell.
 
 ## Setup a bluesky instrument
 
@@ -26,18 +26,24 @@ Use the program
 [`new_bluesky_instrument.py`](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/new_bluesky_instrument.py)
 to install a new bluesky instrument configuration from the online [APS Bluesky
 Training](https://github.com/BCDA-APS/bluesky_training) repository template.
-(While you will need to download this program on other networks, at APS
-workstations, this program should be available from
-`/APSshare/bin/new_bluesky_instrument.py`.)
 
-`new_bluesky_instrument.py` only needs Python 3.8+ and the
+**Note**: APS users can run this program with this command:
+
+```bash
+python /APSshare/bin/new_bluesky_instrument.py
+```
+
+Workstations on other networks will need to download this program from the URL
+above.
+
+`new_bluesky_instrument.py` only needs Python 3.6+ and the
 [requests](https://docs.python-requests.org/en/latest/index.html) package.
 
 Here's an example:
 
 ```bash
-(base) user@host:~$ new_bluesky_instrument.py  ~/bluesky
-INFO:__main__:Installing to: '/tmp/tmp_instrument'
+(base) user@host:~$ python new_bluesky_instrument.py  ./bluesky
+INFO:__main__:Requested installation to: 'bluesky'
 INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
@@ -45,8 +51,8 @@ INFO:__main__:Installing to '/home/user/bluesky'
 
 Use `new_bluesky_instrument.py -h` for usage information.
 
-The installer will download the ZIP file from the GitHub training repository if it's not already
-present in the `/tmp` directory or if the existing file is old.
+The installer will download the ZIP file from the GitHub training repository if
+it's not already present in the `/tmp` directory or if the existing file is old.
 
 ## Create the conda environment
 
@@ -56,8 +62,9 @@ installation, it is recommended to create a Python virtual environment which has
 the suite of packages (and specific versions) required.
 
 Follow this [guide](./conda_environment.md) to create the `bluesky_2023_2` conda
-environment for
-data collection with bluesky.
+environment for data collection with bluesky.
+
+**Note**:  You must use `bash` shell.
 
 Here's an example:
 
@@ -101,10 +108,10 @@ in which they are installed.
 ## Test the new bluesky instrument
 
 At this point, you have assembled enough of the parts to test the initial
-installation with bluesky. Follow the steps in [this
-guide](./test_new_bluesky_instrument.md) to test the installation.  Additional
-instructions are available to [test the
-installation](../bluesky/environments/admin/testing.md) with EPICS.
+installation with bluesky. Follow the steps in this
+[guide](./test_new_bluesky_instrument.md) to test the installation.  
+Additional instructions are available to
+[test](../bluesky/environments/admin/testing.md) the installation with EPICS.
 
 In the remaining steps, we'll configure the instrument for your catalog and
 specific hardware configuration.
