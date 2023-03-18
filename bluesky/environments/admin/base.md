@@ -1,10 +1,12 @@
-# Base environment
+# Conda Base Environment
 
-Install the base conda environment so that it is read-only to an account with
+Install the conda base environment so that it is read-only to an account with
 standard privileges so that normal users cannot install or modify the base
-environment by accident.  One way is to install it with elevated privileges.
+environment by accident.  One way is to install it with *elevated privileges*
+(with permissions to read & write in directories which are read-only with
+regular permissions).
 
-This steps are for those who will administer the base conda environment.
+These steps are for those who will administer the base conda environment.
 
 ## Install Miniconda base environment
 

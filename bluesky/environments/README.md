@@ -19,6 +19,11 @@ version | file
 --- | ---
 2023-2 (developing) | [`environment_2023_2.yml`](./environment_2023_2.yml)
 2023-1 (latest) | [`environment_2023_1.yml`](./environment_2023_1.yml)
+2022_3 | [`environment_2022_3.yml`](./environment_2022_3.yml)
+2022_2 | [`environment_2022_2.yml`](./environment_2022_2.yml)
+2022_1 | [`environment_2022_1.yml`](./environment_2022_1.yml)
+2021_2 | [`environment_2021_2.yml`](./environment_2021_2.yml)
+2021_1 | [`environment_2021_1.yml`](./environment_2021_1.yml)
 
 _note_: Prior to the 2023-2 version, the master source for these YAML files was the
 [BCDA Bluesky

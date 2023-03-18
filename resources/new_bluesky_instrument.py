@@ -5,6 +5,37 @@ Install a new instrument package for bluesky from the training template.
 
 * see: https://github.com/BCDA-APS/bluesky_training/blob/main/resources/new_bluesky_instrument.py
 * raw: https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/resources/new_bluesky_instrument.py
+
+EXAMPLE::
+
+    (base) user@host:~$ new_bluesky_instrument.py  /tmp/tmp_instrument/
+    INFO:__main__:Installing to: '/tmp/tmp_instrument'
+    INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
+    INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
+    INFO:__main__:Installing to '/tmp/tmp_instrument'
+
+USAGE::
+
+    (base) user@host:~$ new_bluesky_instrument.py  /tmp/tmp_instrument/
+    usage: new_bluesky_instrument.py [-h] [--quiet | --info | --debug] [directory]
+
+    Install a new instrument package for bluesky from the training template.
+
+    positional arguments:
+    directory   Directory for the new instrument. If omitted, use the present working directory (/home/user). The directory will be
+                created if it does not exist. If the directory exists and it is not empty, this program will stop before any action is taken.
+
+    options:
+    -h, --help  show this help message and exit
+    --quiet     Reporting: only warnings and errors
+    --info      Reporting: also information messages (default)
+    --debug     Reporting: also debugging messages
+
+DEPENDENCIES:
+
+* Python 3.8 or higher
+* Python Standard Libraries (already installed with Python)
+* requests package: https://docs.python-requests.org/en/latest/index.html
 """
 
 import logging
@@ -45,13 +76,12 @@ def new_instrument_from_template(destination=None):
         instance of ``pathlib.Path()``.
         If ``None``, installs into a temporary directory.
     """
-    destination = pathlib.Path(destination or tempfile.mkdtemp())
+    destination = pathlib.Path(destination or tempfile.mkdtemp()).absolute()
     if destination.exists() and len(list(destination.iterdir())) > 0:
         # We _could_ use shutil to clear the directory but
         # the caller should sort this out.  We should not
         # delete any content without review.
-        raise RuntimeError(f"Directory is not empty: {destination=}")
-
+        raise RuntimeError("Directory is not empty: " + str(destination))
     # fmt: off
     if (
         not LOCAL_ZIP_FILE.exists()
@@ -186,38 +216,40 @@ def command_line_options():
     )
 
     parser.add_argument(
-        "-d",
-        "--directory",
+        "directory",
         type=str,
         help=(
             "Directory for the new instrument."
-            "  Default is the present working directory"
+            "  If omitted, use the present working directory"
             f" ({pathlib.Path('.').absolute()})."
             "  The directory will be created if it does not exist."
             "  If the directory exists and it is not empty, this"
             " program will stop before any action is taken."
         ),
         default=".",
+        nargs="?",
     )
 
-    parser.add_argument(
+    logging_group = parser.add_mutually_exclusive_group(required=False)
+
+    logging_group.add_argument(
         "--quiet",
-        help="Report only warnings and errors. (default)",
+        help="Reporting: only warnings and errors",
         action="store_const",
         dest="loglevel",
         const=logging.WARNING,
-        default=logging.WARNING,
+        default=logging.INFO,
     )
-    parser.add_argument(
+    logging_group.add_argument(
         "--info",
-        help="Also report information messages.",
+        help="Reporting: also information messages (default)",
         action="store_const",
         dest="loglevel",
         const=logging.INFO,
     )
-    parser.add_argument(
+    logging_group.add_argument(
         "--debug",
-        help="Also report debugging messages",
+        help="Reporting: also debugging messages",
         action="store_const",
         dest="loglevel",
         const=logging.DEBUG,
@@ -234,7 +266,13 @@ def command_line_options():
 if __name__ == "__main__":
     args = command_line_options()
     destination = pathlib.Path(args.directory)
-    logger.info("Installing to: '%s'", destination)
+    logger.info("Requested installation to: '%s'", destination)
+
+    # # TODO: Developer use only
+    # destination = pathlib.Path(__file__).parent / "bluesky"
+    # if destination.exists():
+    #     logger.debug("Removing file '%s'", destination)
+    #     shutil.rmtree(destination)
 
     new_instrument_from_template(destination)
     # User instructions should describe how to set up git repo: git init
