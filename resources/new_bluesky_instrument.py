@@ -33,7 +33,7 @@ USAGE::
 
 DEPENDENCIES:
 
-* Python 3.8 or higher
+* Python 3.6 or higher
 * Python Standard Libraries (already installed with Python)
 * requests package: https://docs.python-requests.org/en/latest/index.html
 """
