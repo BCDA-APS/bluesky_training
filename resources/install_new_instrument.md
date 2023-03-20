@@ -85,6 +85,7 @@ that does not exist, then add it to `~/.bashrc`).
 
 ```bash
 export BLUESKY_CONDA_ENV=bluesky_2023_2
+alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 ```
 
 More documentation about conda is available
