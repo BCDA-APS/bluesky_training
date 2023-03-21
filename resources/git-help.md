@@ -83,6 +83,12 @@ GitLab organizes repositories using this pattern:  `https://git.aps.anl.gov/ORGA
 
 The `SUBGROUP` level is optional.
 
+## Create a GitHub repository
+
+We took notes when creating a repository for the APS 6-ID-D
+[HEDM bluesky instrument](https://github.com/aps-ht-hedm/bluesky_instrument.git).
+Once you have a GitHub organization, follow the notes [here](./create_github_repo.md).
+
 ## Guides
 
 This is a sampling of How-To guides explaining git and GitHub repositories.

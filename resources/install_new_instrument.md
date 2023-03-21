@@ -85,6 +85,7 @@ that does not exist, then add it to `~/.bashrc`).
 
 ```bash
 export BLUESKY_CONDA_ENV=bluesky_2023_2
+alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 ```
 
 More documentation about conda is available
@@ -150,7 +151,7 @@ for bluesky, then create a starter script for the `instrument` package within th
 ipython profile create bluesky --ipython-dir="~/.ipython"
 cat > ~/.ipython/profile_bluesky/startup/00-start-bluesky.py  << EOF
 import pathlib, sys
-sys.append(str(pathlib.Path().home() / "bluesky"))
+sys.path.append(str(pathlib.Path().home() / "bluesky"))
 from instrument.collection import *
 EOF
 ```
