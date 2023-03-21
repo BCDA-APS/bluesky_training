@@ -6,7 +6,7 @@
 # either: BLUESKY_CONDA_ENV (with fallback to DEFAULT_ENV)
 DEFAULT_ENV=bluesky_2023_1
 # DEFAULT_ENV=training_2022
-export ENV_NAME="${BLUESKY_CONDA_ENV:-${DEFAULT_ENV}}
+export ENV_NAME="${BLUESKY_CONDA_ENV:-${DEFAULT_ENV}}"
 export IPYTHON_PROFILE=bluesky
 export IPYTHONDIR="${HOME}/.ipython-bluesky"
 
