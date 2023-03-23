@@ -8,10 +8,10 @@ The catalog configuration file must be placed in a directory where
 [`databroker`](https://blueskyproject.io/databroker/how-to/mongo-backed-catalog.html)
 expects to find it.  Run this snippet to find the list of paths where it looks on your system:
 
-```bash
-(bluesky_2023_2) user@host:~/bluesky$ python -c "import databroker; print(databroker.catalog_search_path())"
+<pre>
+$ <b>python -c "import databroker; print(databroker.catalog_search_path())"</b>
 ('/home/user/.local/share/intake', '/home/user/.conda/envs/bluesky_2023_2/share/intake')
-```
+</pre>
 
 Create a YAML file in one of these directories. (The actual file name does not
 matter.  Only that it ends with `.yml`.  Also, amongst all the `.yml` files
@@ -54,7 +54,7 @@ Let's assume (for example purposes) this catalog assignment ([BCDA instruction t
 
 Confirm that databroker can find this catalog configuration file:
 
-```bash
-(bluesky_2023_2) user@host:~/bluesky$ python -c "import databroker; print(list(databroker.catalog))"
+<pre>
+$ <b>python -c "import databroker; print(list(databroker.catalog))"</b> 
 ['45ida_abcd']
-```
+</pre>
