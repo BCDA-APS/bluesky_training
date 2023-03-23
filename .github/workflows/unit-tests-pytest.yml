@@ -67,6 +67,7 @@ jobs:
           coveralls
           pytest
           pytest-cov
+          python=${{ matrix.python-version }}
           setuptools-scm
 
     - name: Initial Diagnostics
