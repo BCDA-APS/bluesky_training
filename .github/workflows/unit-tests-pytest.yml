@@ -114,7 +114,7 @@ jobs:
 
     - name: Install Redis & screen
       run: |
-        sudo apt install redis screen
+        sudo apt-get install redis screen
 
     - name: Run Bluesky queueserver
       run: |
