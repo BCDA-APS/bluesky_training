@@ -30,7 +30,7 @@ logger.addHandler(
         backupCount=9,
     )
 )
-setup_IPython_console_logging()  # TODO: upstream needs log_path= kwarg
+setup_IPython_console_logging()  # TODO: upstream function needs log_path=None kwarg
 
 logger.info("#" * 60 + " startup")
 logger.info("logging started")
