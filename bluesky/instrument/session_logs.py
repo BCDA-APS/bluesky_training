@@ -25,7 +25,9 @@ logger.setLevel(logging.DEBUG)  # allow any log content at this level
 logger.addHandler(stream_log_handler())  # terse log to the console
 logger.addHandler(
     file_log_handler(  # verbose log to a file
-        file_name_base=IPYTHON_LOGGER, maxBytes=1 * MB, backupCount=9,
+        file_name_base=IPYTHON_LOGGER,
+        maxBytes=1 * MB,
+        backupCount=9,
     )
 )
 setup_IPython_console_logging()  # TODO: upstream needs log_path= kwarg
