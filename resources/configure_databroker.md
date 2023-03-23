@@ -38,7 +38,7 @@ sources:
     driver: bluesky-mongo-normalized-catalog
 ```
 
-Let's assume (for example purposes) this catalog assignment:
+Let's assume (for example purposes) this catalog assignment ([BCDA instruction to create an assignment](https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md)):
 
 - name: `45ida_abcd`
 - MongoDB server: `mongoserver.xray.aps.anl.gov`
