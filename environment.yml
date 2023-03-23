@@ -94,9 +94,9 @@ dependencies:
   - pydantic
   - tifffile
   - uvicorn
-  - tiled
 
   - pip:
+    - tiled
 
     - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
     # --- optional Bluesky framework packages for evaluation
