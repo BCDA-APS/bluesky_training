@@ -119,7 +119,7 @@ def file_log_handler(
     from logging.handlers import RotatingFileHandler
 
     file_name_base = file_name_base or logger_name
-    log_path = log_path or get_log_path()
+    log_path = pathlib.Path(log_path or get_log_path())
     log_file = log_path / f"{file_name_base}.log"
     level = level or logging.DEBUG
 
