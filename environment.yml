@@ -54,7 +54,7 @@ dependencies:
   - xlrd
 
   # --- Bluesky framework packages
-  - apstools
+  - apstools >=1.6.15
   - area-detector-handlers
   - bluesky-queueserver <0.0.18
   - bluesky-queueserver-api
