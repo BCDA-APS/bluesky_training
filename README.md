@@ -47,7 +47,8 @@ activities.
 
 #### Advanced
 
-* [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
+- [Run a Linux command as an `ophyd.Device`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
+- [Store Images, Darks, and Flats frames separately in HDF5 files](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/images_darks_flats.ipynb)
 
 ### Measurement using the `instrument` package
 
