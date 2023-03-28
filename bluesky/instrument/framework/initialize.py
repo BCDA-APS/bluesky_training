@@ -43,27 +43,19 @@ import numpy as np
 
 
 def get_md_path():
-    return str(pathlib.Path.home() / "Bluesky_RunEngine_md")
-
-
-md_path = get_md_path()
-# ### remove this legacy code after 2022-07-31 and below (old_md)
-# check if we need to transition from SQLite-backed historydict
-# old_md = None
-# if not os.path.exists(md_path):
-#     logger.info("New directory to store RE.md between sessions: %s", md_path)
-#     os.makedirs(md_path)
-#     from bluesky.utils import get_history
-
-#     old_md = get_history()
+    path = iconfig.get("RUNENGINE_MD_PATH")
+    if path is None:
+        path = pathlib.Path.home() / "Bluesky_RunEngine_md"
+    else:
+        path = pathlib.Path(path)
+    logger.info("RunEngine metadata saved in directory: %s", str(path))
+    return str(path)
 
 
 # Set up a RunEngine and use metadata backed PersistentDict
 RE = RunEngine({})
-RE.md = PersistentDict(md_path)
-# if old_md is not None:
-#     logger.info("migrating RE.md storage to PersistentDict")
-#     RE.md.update(old_md)
+RE.md = PersistentDict(get_md_path())
+
 
 # Connect with our mongodb database
 catalog_name = iconfig.get("DATABROKER_CATALOG", "training")
