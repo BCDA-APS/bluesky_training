@@ -36,7 +36,7 @@ and its contents under `git` version control and push to a GitHub repository.
    - clone the repository from the web host
    - Use [`git init`](https://github.com/git-guides/git-init) in the `bluesky/` directory
 3. Create a [`.gitignore` file](https://git-scm.com/docs/gitignore), such as this [example](https://github.com/APS-USAXS/usaxs-bluesky/blob/master/.gitignore)
-4. [Add](https://git-scm.com/docs/git-add) content and [commit](https://git-scm.com/docs/git-commit) with [a meaningful commit message](https://www.freecodecamp.org/news/git-best-practices-commits-and-code-reviews/)
+4. [Add](https://git-scm.com/docs/git-add) content and [commit](https://git-scm.com/docs/git-commit) with [a meaningful commit message](https://www.freecodecamp.org/news/git-best-practices-commits-and-code-reviews/) (see these [hints](https://github.com/bluesky/databroker/blob/main/.github/CONTRIBUTING.md#writing-the-commit-message) for relevant prefixes)
 5. [Push](https://git-scm.com/docs/git-push) content to web host
 
 ### GitHub
