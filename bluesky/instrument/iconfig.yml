@@ -27,12 +27,20 @@ ENABLE_CALCS: true
 USE_PROGRESS_BAR: false
 WRITE_SPEC_DATA_FILES: true
 
+# ----------------------------------
+
 # override default control layer for ophyd
 # if undefined, defaults to PyEpics
 # OPHYD_CONTROL_LAYER: PyEpics
 # OPHYD_CONTROL_LAYER: caproto
 
-# ----------------------------------
+# Uncomment any of these to override the defaults
+LOGGING:
+  # MAX_BYTES: 1000000
+  NUMBER_OF_PREVIOUS_BACKUPS: 9
+  # LOG_PATH: /tmp
+  # If LOG_PATH undefined, this session will log into PWD/logs/
+  # where PWD is present working directory when session is started
 
 # default timeouts (seconds)
 PV_READ_TIMEOUT: &TIMEOUT 15

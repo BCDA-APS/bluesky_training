@@ -54,9 +54,9 @@ dependencies:
   - xlrd
 
   # --- Bluesky framework packages
-  - apstools
+  - apstools >=1.6.15
   - area-detector-handlers
-  - bluesky-queueserver
+  - bluesky-queueserver <0.0.18
   - bluesky-queueserver-api
   - bluesky-widgets
   - bluesky >=1.8.1
@@ -94,9 +94,9 @@ dependencies:
   - pydantic
   - tifffile
   - uvicorn
-  - tiled
 
   - pip:
+    - tiled
 
     - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
     # --- optional Bluesky framework packages for evaluation
