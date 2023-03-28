@@ -48,6 +48,7 @@ def get_md_path():
         path = pathlib.Path.home() / "Bluesky_RunEngine_md"
     else:
         path = pathlib.Path(path)
+    logger.info("RunEngine metadata saved in directory: %s", str(path))
     return str(path)
 
 
