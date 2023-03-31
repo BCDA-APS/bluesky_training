@@ -15,11 +15,12 @@ RUNENGINE_METADATA:
   proposal_id: training
   databroker_catalog: *databroker_catalog
 
-# paths
+# area detector paths used by training IOC
+# These are examples for other use of this instrument.
+# see: https://bcda-aps.github.io/apstools/latest/examples/de_0_adsim_hdf5_basic.html#File-Directories
 AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
 AD_MOUNT_PATH: /tmp
 BLUESKY_MOUNT_PATH: /tmp/docker_ioc/iocad/tmp
-# RUNENGINE_MD_PATH: /home/USERNAME/Bluesky_RunEngine_md
 
 # permissions
 ALLOW_AREA_DETECTOR_WARMUP: true
@@ -29,6 +30,10 @@ USE_PROGRESS_BAR: false
 WRITE_SPEC_DATA_FILES: true
 
 # ----------------------------------
+
+# Directory to "autosave" the RE.md dictionary (uses PersistentDict)
+# Uncomment and modify to change from the default.
+# RUNENGINE_MD_PATH: /home/USERNAME/Bluesky_RunEngine_md
 
 # override default control layer for ophyd
 # if undefined, defaults to PyEpics
