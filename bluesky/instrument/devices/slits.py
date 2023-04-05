@@ -37,6 +37,30 @@ m6 	    h.xn        Slit1H:mXn
 
    These assignments will be corrected in the next version of the
    docker image: ``prjemian/synapps``.
+
+There are two representations of the same ``2slit.db`` database.
+Choose between a hierarchical or flat representation:
+
+* ``Optics2Slit2D_HV()`` has a hierarchical structure::
+
+   slit1
+       h
+           xp, xn, size, center
+       v
+           xp, xn, size, center
+
+* ``Optics2Slit2D_InbOutBotTop()`` has a flat structure::
+
+   slit1
+       top
+       bot
+       out
+       inb
+       hsize
+       hcenter
+       vsize
+       vcenter
+
 """
 
 __all__ = """
@@ -56,23 +80,5 @@ logger.info(__file__)
 
 IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
-
-# Optics2Slit2D_HV() has a hierarchical structure
-# slit1
-#     h
-#         xp, xn, size, center
-#     v
-#         xp, xn, size, center
-
-# Optics2Slit2D_InbOutBotTop() has a flat structure
-# slit1
-#     top
-#     bot
-#     out
-#     inb
-#     hsize
-#     hcenter
-#     vsize
-#     vcenter
 
 slit1 = Optics2Slit2D_HV(f"{IOC}Slit1", name="slit1")
