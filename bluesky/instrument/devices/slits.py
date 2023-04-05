@@ -19,12 +19,24 @@ motor	position    assignment
 =====   ==========  ==================
 m41	    v.xp        Slit1V:mXp
 m42	    v.xn        Slit1V:mXn
-m43	    h.xp        Slit1H:mXp
-m44	    h.xn        Slit1H:mXn
+m5 	    h.xp        Slit1H:mXp
+m6 	    h.xn        Slit1H:mXn
 =====   ==========  ==================
 
-.. warning:  The training IOC is misconfigured (in docker)
-   to use m5 & m6 instead of m43 & m44.
+.. warning:  Some motor assignments in the training IOC are misconfigured.
+   The misconfiguration happens in the IOC configuration in the
+   ``prjemian/custom-synapps-6.2`` docker image.
+   (https://hub.docker.com/r/prjemian/custom-synapps-6.2)
+
+   ==========   ==========  ============
+   in docker    should be   assignment
+   ==========   ==========  ============
+   m5           m43         Slit1H:mXp
+   m6           m44         Slit1H:mXn
+   ==========   ==========  ============
+
+   These assignments will be corrected in the next version of the
+   docker image: ``prjemian/synapps``.
 """
 
 __all__ = """
