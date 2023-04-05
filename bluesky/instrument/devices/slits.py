@@ -35,7 +35,7 @@ import logging
 
 # Choose between alternate interfaces to the same controls:
 from apstools.synApps import Optics2Slit2D_HV
-from apstools.synApps import Optics2Slit2D_InbOutBotTop
+# from apstools.synApps import Optics2Slit2D_InbOutBotTop
 
 from .. import iconfig
 
