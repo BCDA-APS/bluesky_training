@@ -1,14 +1,38 @@
 """
 2D slits, 4 individual motorized blades.
 
-.. note:: The motor assignments should already be set in the IOC
-    as part of the 2slit.db database.
+.. note:: The motor assignments are set in the IOC
+    when loading the ``2slit.db`` database.
 
-Coordinates of ``Optics2Slit2D_HV`` (viewing from detector towards source)::
+There are two representations of the same ``2slit.db`` database.
+Choose between a hierarchical or flat representation:
 
-        v.xp
-    h.xn    h.xp
-        v.xn
+* ``Optics2Slit2D_HV()`` has a hierarchical structure::
+
+   slit1
+       h
+           xp, xn, size, center
+       v
+           xp, xn, size, center
+
+* ``Optics2Slit2D_InbOutBotTop()`` has a flat structure::
+
+   slit1
+       top
+       bot
+       out
+       inb
+       hsize
+       hcenter
+       vsize
+       vcenter
+
+Coordinates of each representation (viewing from detector towards source)::
+
+    Optics2Slit2D_HV        Optics2Slit2D_InbOutBotTop
+        v.xp                        top
+    h.xn    h.xp                inb     out
+        v.xn                        bot
 
 * https://github.com/epics-modules/optics/blob/master/opticsApp/Db/2slit.db
 * https://bcda-aps.github.io/apstools/latest/api/synApps/_db_2slit.html#apstools.synApps.db_2slit.Optics2Slit2D_InbOutBotTop
@@ -37,30 +61,6 @@ m6 	    h.xn        Slit1H:mXn
 
    These assignments will be corrected in the next version of the
    docker image: ``prjemian/synapps``.
-
-There are two representations of the same ``2slit.db`` database.
-Choose between a hierarchical or flat representation:
-
-* ``Optics2Slit2D_HV()`` has a hierarchical structure::
-
-   slit1
-       h
-           xp, xn, size, center
-       v
-           xp, xn, size, center
-
-* ``Optics2Slit2D_InbOutBotTop()`` has a flat structure::
-
-   slit1
-       top
-       bot
-       out
-       inb
-       hsize
-       hcenter
-       vsize
-       vcenter
-
 """
 
 __all__ = """
