@@ -38,16 +38,16 @@ Coordinates of each representation (viewing from detector towards source)::
 * https://bcda-aps.github.io/apstools/latest/api/synApps/_db_2slit.html#apstools.synApps.db_2slit.Optics2Slit2D_InbOutBotTop
 * https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps#motor-assignments
 
-=====   ==========  ==================
-motor	position    assignment
-=====   ==========  ==================
-m41	    v.xp        Slit1V:mXp
-m42	    v.xn        Slit1V:mXn
-m5 	    h.xp        Slit1H:mXp
-m6 	    h.xn        Slit1H:mXn
-=====   ==========  ==================
+======   ==========  ==================
+motor    position    assignment
+======   ==========  ==================
+m41	     v.xp        Slit1V:mXp
+m42	     v.xn        Slit1V:mXn
+m5 (!) 	 h.xp        Slit1H:mXp
+m6 (!)   h.xn        Slit1H:mXn
+======   ==========  ==================
 
-.. warning:  Some motor assignments in the training IOC are misconfigured.
+.. warning: (!) Some motor assignments in the training IOC are misconfigured.
    The misconfiguration happens in the IOC configuration in the
    ``prjemian/custom-synapps-6.2`` docker image.
    (https://hub.docker.com/r/prjemian/custom-synapps-6.2)
@@ -59,7 +59,7 @@ m6 	    h.xn        Slit1H:mXn
    m6           m44         Slit1H:mXn
    ==========   ==========  ============
 
-   These assignments will be corrected in the next version of the
+   These assignments will be corrected in a future version of the
    docker image: ``prjemian/synapps``.
 """
 
