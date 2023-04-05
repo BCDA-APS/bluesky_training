@@ -33,6 +33,7 @@ __all__ = """
 
 import logging
 
+# Choose between alternate interfaces to the same controls:
 from apstools.synApps import Optics2Slit2D_HV
 from apstools.synApps import Optics2Slit2D_InbOutBotTop
 
@@ -43,7 +44,6 @@ logger.info(__file__)
 
 IOC = iconfig.get("GP_IOC_PREFIX", "gp:")
 
-# Choose between alternate interfaces to the same controls:
 
 # Optics2Slit2D_HV() has a hierarchical structure
 # slit1
