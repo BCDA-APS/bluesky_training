@@ -5,7 +5,8 @@
     when loading the ``2slit.db`` database.
 
 There are two representations of the same ``2slit.db`` database.
-Choose between a hierarchical or flat representation:
+Choose between a hierarchical (``Optics2Slit2D_HV()``)
+or flat structure (``Optics2Slit2D_InbOutBotTop()`):
 
 * ``Optics2Slit2D_HV()`` has a hierarchical structure::
 
@@ -34,7 +35,11 @@ Coordinates of each representation (viewing from detector towards source)::
     h.xn    h.xp                inb     out
         v.xn                        bot
 
-Motor Assignments
+**Motor Assignments**
+
+This information is for reference only.  The Python configuration
+here does not need to know the motor assignments.  That is part
+of the IOC configuration.
 
 ======   ==========  ==================
 motor    position    assignment
@@ -60,7 +65,7 @@ m6 (!)   h.xn        Slit1H:mXn
    These assignments will be corrected in a future version of the
    docker image: ``prjemian/synapps``.
 
-References
+**References**
 
 * https://github.com/epics-modules/optics/blob/master/opticsApp/Db/2slit.db
 * https://bcda-aps.github.io/apstools/latest/api/synApps/_db_2slit.html#apstools.synApps.db_2slit.Optics2Slit2D_InbOutBotTop
