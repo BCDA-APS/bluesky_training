@@ -34,16 +34,14 @@ Coordinates of each representation (viewing from detector towards source)::
     h.xn    h.xp                inb     out
         v.xn                        bot
 
-* https://github.com/epics-modules/optics/blob/master/opticsApp/Db/2slit.db
-* https://bcda-aps.github.io/apstools/latest/api/synApps/_db_2slit.html#apstools.synApps.db_2slit.Optics2Slit2D_InbOutBotTop
-* https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps#motor-assignments
+Motor Assignments
 
 ======   ==========  ==================
 motor    position    assignment
 ======   ==========  ==================
-m41	     v.xp        Slit1V:mXp
-m42	     v.xn        Slit1V:mXn
-m5 (!) 	 h.xp        Slit1H:mXp
+m41      v.xp        Slit1V:mXp
+m42      v.xn        Slit1V:mXn
+m5 (!)   h.xp        Slit1H:mXp
 m6 (!)   h.xn        Slit1H:mXn
 ======   ==========  ==================
 
@@ -61,6 +59,12 @@ m6 (!)   h.xn        Slit1H:mXn
 
    These assignments will be corrected in a future version of the
    docker image: ``prjemian/synapps``.
+
+References
+
+* https://github.com/epics-modules/optics/blob/master/opticsApp/Db/2slit.db
+* https://bcda-aps.github.io/apstools/latest/api/synApps/_db_2slit.html#apstools.synApps.db_2slit.Optics2Slit2D_InbOutBotTop
+* https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps#motor-assignments
 """
 
 __all__ = """
