@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # file: iocStarter.sh
-# purpose: start EPICS IOCs for 2021-03 training
+# purpose: start EPICS training IOCs in docker containers
 
-start_xxx.sh gp
-start_adsim.sh ad
+iocmgr.sh start GP gp
+iocmgr.sh start ADSIM ad
