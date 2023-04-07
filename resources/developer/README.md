@@ -1,5 +1,8 @@
 # Steps to setup the VM for Bluesky and EPICS
 
+**_Note_**:  These instructions (reference here now) are for activities in 2021
+and are no longer useful.  They will not be updated.
+
 - [Steps to setup the VM for Bluesky and EPICS](#steps-to-setup-the-vm-for-bluesky-and-epics)
   - [Infrastructure: `sys_setup.sh`](#infrastructure-sys_setupsh)
     - [Get the installation scripts](#get-the-installation-scripts)

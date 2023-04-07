@@ -33,15 +33,15 @@ starter scripts.
 
 ### IOC `ad:` (Area Detector) simulates (2-D) area detector
 
-The docker images will download on first use.  Install the scripts to manage the area detector VM:
+The docker image will download on first use.  Install the script to manage the area detector VM:
 
     cd ~/bin
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n6_custom_areaDetector/start_adsim.sh
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n5_custom_synApps/remove_container.sh
+    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/resources/iocmgr.sh
+    chmod +x iocmgr.sh
 
 Start the `ad:` EPICS VM (_IOC_ in the EPICS-speaking world):
 
-    start_adsim.sh ad
+    iocmgr.sh start ADSIM ad
 
     # put in the PATH for this session
     export PATH=~/bin:${PATH}
@@ -54,15 +54,15 @@ IOC.  Use EPICS command (`caget`) within the container:
 
 ### IOC `gp:` (General Purpose) simulates motors, 1-D detectors, other tools
 
-The docker images will download on first use.  Install the scripts to manage the general purpose VM:
+The docker image will download on first use.  Install the script to manage the area detector VM:
 
     cd ~/bin
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n5_custom_synApps/start_xxx.sh
-    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/v1.1/n5_custom_synApps/remove_container.sh
+    wget https://raw.githubusercontent.com/prjemian/epics-docker/main/resources/iocmgr.sh
+    chmod +x iocmgr.sh
 
 Start the `gp:` EPICS VM (_IOC_ in the EPICS-speaking world):
 
-    start_xxx.sh gp
+    iocmgr.sh start GP gp
 
 Test that docker container `iocgp` is running and provides its EPICS
 IOC.  Use EPICS command (`caget`) within the container:
