@@ -31,4 +31,5 @@ class IocInfoDevice(Device):
 gp_stats = IocInfoDevice(IOC, name="gp_stats")
 
 # Too bad, this ADSimDetector does not have iocStats
-# ad_stats = IocInfoDevice("ad:", name="ad_stats")
+# IOC = iconfig.get("ADSIM_IOC_PREFIX", "ad:")
+# ad_stats = IocInfoDevice(IOC, name="ad_stats")

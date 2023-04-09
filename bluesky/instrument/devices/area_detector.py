@@ -34,7 +34,7 @@ import numpy as np
 import pathlib
 
 
-IOC = iconfig["ADSIM_IOC_PREFIX"]
+IOC = iconfig.get("ADSIM_IOC_PREFIX", "ad:")
 
 IMAGE_DIR = iconfig["AD_IMAGE_DIR"]
 AD_IOC_MOUNT_PATH = pathlib.Path(iconfig["AD_MOUNT_PATH"])
