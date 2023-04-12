@@ -20,34 +20,23 @@ on:
 
 jobs:
 
-  build:
+  pages:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout
-      uses: actions/checkout@master
-      with:
-        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-
-    # bluesky_training is not a package, so it cannot be installed by pip
-    # - name: Install package
-    #   run: |
-    #     pip install -e .
-
-    # - name: Install Sphinx dependencies
-    #   run: |
-    #     pip install \
-    #       myst-parser \
-    #       nbsphinx \
-    #       pydata-sphinx-theme \
-    #       "sphinx<6"
+    # - name: Checkout
+    #   uses: actions/checkout@master
+    #   with:
+    #     fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 
     - name: Build and Commit
       uses: sphinx-notes/pages@v3
       with:
+        cache: true
         # path to conf.py directory
         documentation_path: docs/source
-        requirements_path: ./docs/requirements.txt
+        publish: false
+        # requirements_path: ./docs/requirements.txt
 
     - name: Publish (push gh-pages branch) only on demand
       uses: peaceiris/actions-gh-pages@v3
