@@ -13,6 +13,8 @@ jobs:
 
     steps:
 
+    # TODO: install pandoc via apt
+
     - id: deployment
       uses: sphinx-notes/pages@v3
       with:
