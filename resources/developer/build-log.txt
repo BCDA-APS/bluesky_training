@@ -1,873 +1,0 @@
-# build started:  2021-03-10T00:15:00-06:00
-Sending build context to Docker daemon  8.803MB
-Step 1/23 : FROM  ubuntu:latest
- ---> 4dd97cefde62
-Step 2/23 : LABEL version="1.1.0"       maintainer="prjemian <prjemian@gmail.com>"       Description="source: https://github.com/prjemian/epics-docker/"
- ---> Running in 51ef7ae8a627
-Removing intermediate container 51ef7ae8a627
- ---> 924d954e66d1
-Step 3/23 : USER  root
- ---> Running in 4461be56089e
-Removing intermediate container 4461be56089e
- ---> 26dae62d68c0
-Step 4/23 : WORKDIR /home
- ---> Running in 505ca044aeea
-Removing intermediate container 505ca044aeea
- ---> 30ad159b42c2
-Step 5/23 : CMD ["/bin/bash"]
- ---> Running in 911675ba33a4
-Removing intermediate container 911675ba33a4
- ---> 9f0e72253d1c
-Step 6/23 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get -y install gnupg less sudo unzip wget
- ---> Running in be1c7011155b
-Get:1 http://archive.ubuntu.com/ubuntu focal InRelease [265 kB]
-Get:2 http://security.ubuntu.com/ubuntu focal-security InRelease [109 kB]
-Get:3 http://security.ubuntu.com/ubuntu focal-security/main amd64 Packages [658 kB]
-Get:4 http://archive.ubuntu.com/ubuntu focal-updates InRelease [114 kB]
-Get:5 http://archive.ubuntu.com/ubuntu focal-backports InRelease [101 kB]
-Get:6 http://archive.ubuntu.com/ubuntu focal/multiverse amd64 Packages [177 kB]
-Get:7 http://archive.ubuntu.com/ubuntu focal/restricted amd64 Packages [33.4 kB]
-Get:8 http://archive.ubuntu.com/ubuntu focal/universe amd64 Packages [11.3 MB]
-Get:9 http://security.ubuntu.com/ubuntu focal-security/multiverse amd64 Packages [21.6 kB]
-Get:10 http://security.ubuntu.com/ubuntu focal-security/universe amd64 Packages [675 kB]
-Get:11 http://security.ubuntu.com/ubuntu focal-security/restricted amd64 Packages [178 kB]
-Get:12 http://archive.ubuntu.com/ubuntu focal/main amd64 Packages [1275 kB]
-Get:13 http://archive.ubuntu.com/ubuntu focal-updates/restricted amd64 Packages [210 kB]
-Get:14 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 Packages [1066 kB]
-Get:15 http://archive.ubuntu.com/ubuntu focal-updates/universe amd64 Packages [938 kB]
-Get:16 http://archive.ubuntu.com/ubuntu focal-updates/multiverse amd64 Packages [29.6 kB]
-Get:17 http://archive.ubuntu.com/ubuntu focal-backports/universe amd64 Packages [4301 B]
-Fetched 17.2 MB in 5s (3777 kB/s)
-Reading package lists...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-The following additional packages will be installed:
-  ca-certificates dirmngr gnupg-l10n gnupg-utils gpg gpg-agent gpg-wks-client
-  gpg-wks-server gpgconf gpgsm libasn1-8-heimdal libassuan0 libgssapi3-heimdal
-  libhcrypto4-heimdal libheimbase1-heimdal libheimntlm0-heimdal
-  libhx509-5-heimdal libkrb5-26-heimdal libksba8 libldap-2.4-2 libldap-common
-  libnpth0 libpsl5 libreadline8 libroken18-heimdal libsasl2-2 libsasl2-modules
-  libsasl2-modules-db libsqlite3-0 libssl1.1 libwind0-heimdal openssl
-  pinentry-curses publicsuffix readline-common
-Suggested packages:
-  dbus-user-session libpam-systemd pinentry-gnome3 tor parcimonie xloadimage
-  scdaemon libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal
-  libsasl2-modules-ldap libsasl2-modules-otp libsasl2-modules-sql pinentry-doc
-  readline-doc zip
-The following NEW packages will be installed:
-  ca-certificates dirmngr gnupg gnupg-l10n gnupg-utils gpg gpg-agent
-  gpg-wks-client gpg-wks-server gpgconf gpgsm less libasn1-8-heimdal
-  libassuan0 libgssapi3-heimdal libhcrypto4-heimdal libheimbase1-heimdal
-  libheimntlm0-heimdal libhx509-5-heimdal libkrb5-26-heimdal libksba8
-  libldap-2.4-2 libldap-common libnpth0 libpsl5 libreadline8
-  libroken18-heimdal libsasl2-2 libsasl2-modules libsasl2-modules-db
-  libsqlite3-0 libssl1.1 libwind0-heimdal openssl pinentry-curses publicsuffix
-  readline-common sudo unzip wget
-0 upgraded, 40 newly installed, 0 to remove and 1 not upgraded.
-Need to get 7773 kB of archives.
-After this operation, 23.9 MB of additional disk space will be used.
-Get:1 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libssl1.1 amd64 1.1.1f-1ubuntu2.2 [1319 kB]
-Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 openssl amd64 1.1.1f-1ubuntu2.2 [620 kB]
-Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 ca-certificates all 20210119~20.04.1 [146 kB]
-Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 less amd64 551-1ubuntu0.1 [123 kB]
-Get:5 http://archive.ubuntu.com/ubuntu focal/main amd64 readline-common all 8.0-4 [53.5 kB]
-Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 libreadline8 amd64 8.0-4 [131 kB]
-Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libsqlite3-0 amd64 3.31.1-4ubuntu0.2 [549 kB]
-Get:8 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 sudo amd64 1.8.31-1ubuntu1.2 [514 kB]
-Get:9 http://archive.ubuntu.com/ubuntu focal/main amd64 libpsl5 amd64 0.21.0-1ubuntu1 [51.5 kB]
-Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 publicsuffix all 20200303.0012-1 [111 kB]
-Get:11 http://archive.ubuntu.com/ubuntu focal/main amd64 wget amd64 1.20.3-1ubuntu1 [349 kB]
-Get:12 http://archive.ubuntu.com/ubuntu focal/main amd64 libassuan0 amd64 2.5.3-7ubuntu2 [35.7 kB]
-Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gpgconf amd64 2.2.19-3ubuntu2.1 [124 kB]
-Get:14 http://archive.ubuntu.com/ubuntu focal/main amd64 libksba8 amd64 1.3.5-2 [92.6 kB]
-Get:15 http://archive.ubuntu.com/ubuntu focal/main amd64 libroken18-heimdal amd64 7.7.0+dfsg-1ubuntu1 [41.8 kB]
-Get:16 http://archive.ubuntu.com/ubuntu focal/main amd64 libasn1-8-heimdal amd64 7.7.0+dfsg-1ubuntu1 [181 kB]
-Get:17 http://archive.ubuntu.com/ubuntu focal/main amd64 libheimbase1-heimdal amd64 7.7.0+dfsg-1ubuntu1 [29.7 kB]
-Get:18 http://archive.ubuntu.com/ubuntu focal/main amd64 libhcrypto4-heimdal amd64 7.7.0+dfsg-1ubuntu1 [87.9 kB]
-Get:19 http://archive.ubuntu.com/ubuntu focal/main amd64 libwind0-heimdal amd64 7.7.0+dfsg-1ubuntu1 [48.0 kB]
-Get:20 http://archive.ubuntu.com/ubuntu focal/main amd64 libhx509-5-heimdal amd64 7.7.0+dfsg-1ubuntu1 [107 kB]
-Get:21 http://archive.ubuntu.com/ubuntu focal/main amd64 libkrb5-26-heimdal amd64 7.7.0+dfsg-1ubuntu1 [208 kB]
-Get:22 http://archive.ubuntu.com/ubuntu focal/main amd64 libheimntlm0-heimdal amd64 7.7.0+dfsg-1ubuntu1 [15.1 kB]
-Get:23 http://archive.ubuntu.com/ubuntu focal/main amd64 libgssapi3-heimdal amd64 7.7.0+dfsg-1ubuntu1 [96.1 kB]
-Get:24 http://archive.ubuntu.com/ubuntu focal/main amd64 libsasl2-modules-db amd64 2.1.27+dfsg-2 [14.9 kB]
-Get:25 http://archive.ubuntu.com/ubuntu focal/main amd64 libsasl2-2 amd64 2.1.27+dfsg-2 [49.3 kB]
-Get:26 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libldap-common all 2.4.49+dfsg-2ubuntu1.7 [17.1 kB]
-Get:27 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libldap-2.4-2 amd64 2.4.49+dfsg-2ubuntu1.7 [155 kB]
-Get:28 http://archive.ubuntu.com/ubuntu focal/main amd64 libnpth0 amd64 1.6-1 [7736 B]
-Get:29 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 dirmngr amd64 2.2.19-3ubuntu2.1 [329 kB]
-Get:30 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gnupg-l10n all 2.2.19-3ubuntu2.1 [51.7 kB]
-Get:31 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gnupg-utils amd64 2.2.19-3ubuntu2.1 [480 kB]
-Get:32 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gpg amd64 2.2.19-3ubuntu2.1 [483 kB]
-Get:33 http://archive.ubuntu.com/ubuntu focal/main amd64 pinentry-curses amd64 1.1.0-3build1 [36.3 kB]
-Get:34 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gpg-agent amd64 2.2.19-3ubuntu2.1 [232 kB]
-Get:35 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gpg-wks-client amd64 2.2.19-3ubuntu2.1 [97.6 kB]
-Get:36 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gpg-wks-server amd64 2.2.19-3ubuntu2.1 [90.3 kB]
-Get:37 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gpgsm amd64 2.2.19-3ubuntu2.1 [217 kB]
-Get:38 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 gnupg all 2.2.19-3ubuntu2.1 [259 kB]
-Get:39 http://archive.ubuntu.com/ubuntu focal/main amd64 libsasl2-modules amd64 2.1.27+dfsg-2 [49.1 kB]
-Get:40 http://archive.ubuntu.com/ubuntu focal/main amd64 unzip amd64 6.0-25ubuntu1 [169 kB]
-[91mdebconf: delaying package configuration, since apt-utils is not installed
-[0mFetched 7773 kB in 3s (2956 kB/s)
-Selecting previously unselected package libssl1.1:amd64.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4121 files and directories currently installed.)
-Preparing to unpack .../00-libssl1.1_1.1.1f-1ubuntu2.2_amd64.deb ...
-Unpacking libssl1.1:amd64 (1.1.1f-1ubuntu2.2) ...
-Selecting previously unselected package openssl.
-Preparing to unpack .../01-openssl_1.1.1f-1ubuntu2.2_amd64.deb ...
-Unpacking openssl (1.1.1f-1ubuntu2.2) ...
-Selecting previously unselected package ca-certificates.
-Preparing to unpack .../02-ca-certificates_20210119~20.04.1_all.deb ...
-Unpacking ca-certificates (20210119~20.04.1) ...
-Selecting previously unselected package less.
-Preparing to unpack .../03-less_551-1ubuntu0.1_amd64.deb ...
-Unpacking less (551-1ubuntu0.1) ...
-Selecting previously unselected package readline-common.
-Preparing to unpack .../04-readline-common_8.0-4_all.deb ...
-Unpacking readline-common (8.0-4) ...
-Selecting previously unselected package libreadline8:amd64.
-Preparing to unpack .../05-libreadline8_8.0-4_amd64.deb ...
-Unpacking libreadline8:amd64 (8.0-4) ...
-Selecting previously unselected package libsqlite3-0:amd64.
-Preparing to unpack .../06-libsqlite3-0_3.31.1-4ubuntu0.2_amd64.deb ...
-Unpacking libsqlite3-0:amd64 (3.31.1-4ubuntu0.2) ...
-Selecting previously unselected package sudo.
-Preparing to unpack .../07-sudo_1.8.31-1ubuntu1.2_amd64.deb ...
-Unpacking sudo (1.8.31-1ubuntu1.2) ...
-Selecting previously unselected package libpsl5:amd64.
-Preparing to unpack .../08-libpsl5_0.21.0-1ubuntu1_amd64.deb ...
-Unpacking libpsl5:amd64 (0.21.0-1ubuntu1) ...
-Selecting previously unselected package publicsuffix.
-Preparing to unpack .../09-publicsuffix_20200303.0012-1_all.deb ...
-Unpacking publicsuffix (20200303.0012-1) ...
-Selecting previously unselected package wget.
-Preparing to unpack .../10-wget_1.20.3-1ubuntu1_amd64.deb ...
-Unpacking wget (1.20.3-1ubuntu1) ...
-Selecting previously unselected package libassuan0:amd64.
-Preparing to unpack .../11-libassuan0_2.5.3-7ubuntu2_amd64.deb ...
-Unpacking libassuan0:amd64 (2.5.3-7ubuntu2) ...
-Selecting previously unselected package gpgconf.
-Preparing to unpack .../12-gpgconf_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gpgconf (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package libksba8:amd64.
-Preparing to unpack .../13-libksba8_1.3.5-2_amd64.deb ...
-Unpacking libksba8:amd64 (1.3.5-2) ...
-Selecting previously unselected package libroken18-heimdal:amd64.
-Preparing to unpack .../14-libroken18-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libroken18-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libasn1-8-heimdal:amd64.
-Preparing to unpack .../15-libasn1-8-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libasn1-8-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libheimbase1-heimdal:amd64.
-Preparing to unpack .../16-libheimbase1-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libheimbase1-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libhcrypto4-heimdal:amd64.
-Preparing to unpack .../17-libhcrypto4-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libhcrypto4-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libwind0-heimdal:amd64.
-Preparing to unpack .../18-libwind0-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libwind0-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libhx509-5-heimdal:amd64.
-Preparing to unpack .../19-libhx509-5-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libhx509-5-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libkrb5-26-heimdal:amd64.
-Preparing to unpack .../20-libkrb5-26-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libkrb5-26-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libheimntlm0-heimdal:amd64.
-Preparing to unpack .../21-libheimntlm0-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libheimntlm0-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libgssapi3-heimdal:amd64.
-Preparing to unpack .../22-libgssapi3-heimdal_7.7.0+dfsg-1ubuntu1_amd64.deb ...
-Unpacking libgssapi3-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Selecting previously unselected package libsasl2-modules-db:amd64.
-Preparing to unpack .../23-libsasl2-modules-db_2.1.27+dfsg-2_amd64.deb ...
-Unpacking libsasl2-modules-db:amd64 (2.1.27+dfsg-2) ...
-Selecting previously unselected package libsasl2-2:amd64.
-Preparing to unpack .../24-libsasl2-2_2.1.27+dfsg-2_amd64.deb ...
-Unpacking libsasl2-2:amd64 (2.1.27+dfsg-2) ...
-Selecting previously unselected package libldap-common.
-Preparing to unpack .../25-libldap-common_2.4.49+dfsg-2ubuntu1.7_all.deb ...
-Unpacking libldap-common (2.4.49+dfsg-2ubuntu1.7) ...
-Selecting previously unselected package libldap-2.4-2:amd64.
-Preparing to unpack .../26-libldap-2.4-2_2.4.49+dfsg-2ubuntu1.7_amd64.deb ...
-Unpacking libldap-2.4-2:amd64 (2.4.49+dfsg-2ubuntu1.7) ...
-Selecting previously unselected package libnpth0:amd64.
-Preparing to unpack .../27-libnpth0_1.6-1_amd64.deb ...
-Unpacking libnpth0:amd64 (1.6-1) ...
-Selecting previously unselected package dirmngr.
-Preparing to unpack .../28-dirmngr_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking dirmngr (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gnupg-l10n.
-Preparing to unpack .../29-gnupg-l10n_2.2.19-3ubuntu2.1_all.deb ...
-Unpacking gnupg-l10n (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gnupg-utils.
-Preparing to unpack .../30-gnupg-utils_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gnupg-utils (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gpg.
-Preparing to unpack .../31-gpg_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gpg (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package pinentry-curses.
-Preparing to unpack .../32-pinentry-curses_1.1.0-3build1_amd64.deb ...
-Unpacking pinentry-curses (1.1.0-3build1) ...
-Selecting previously unselected package gpg-agent.
-Preparing to unpack .../33-gpg-agent_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gpg-agent (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gpg-wks-client.
-Preparing to unpack .../34-gpg-wks-client_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gpg-wks-client (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gpg-wks-server.
-Preparing to unpack .../35-gpg-wks-server_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gpg-wks-server (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gpgsm.
-Preparing to unpack .../36-gpgsm_2.2.19-3ubuntu2.1_amd64.deb ...
-Unpacking gpgsm (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package gnupg.
-Preparing to unpack .../37-gnupg_2.2.19-3ubuntu2.1_all.deb ...
-Unpacking gnupg (2.2.19-3ubuntu2.1) ...
-Selecting previously unselected package libsasl2-modules:amd64.
-Preparing to unpack .../38-libsasl2-modules_2.1.27+dfsg-2_amd64.deb ...
-Unpacking libsasl2-modules:amd64 (2.1.27+dfsg-2) ...
-Selecting previously unselected package unzip.
-Preparing to unpack .../39-unzip_6.0-25ubuntu1_amd64.deb ...
-Unpacking unzip (6.0-25ubuntu1) ...
-Setting up libksba8:amd64 (1.3.5-2) ...
-Setting up libpsl5:amd64 (0.21.0-1ubuntu1) ...
-Setting up libssl1.1:amd64 (1.1.1f-1ubuntu2.2) ...
-Setting up unzip (6.0-25ubuntu1) ...
-Setting up libsqlite3-0:amd64 (3.31.1-4ubuntu0.2) ...
-Setting up libsasl2-modules:amd64 (2.1.27+dfsg-2) ...
-Setting up less (551-1ubuntu0.1) ...
-Setting up libnpth0:amd64 (1.6-1) ...
-Setting up libassuan0:amd64 (2.5.3-7ubuntu2) ...
-Setting up libldap-common (2.4.49+dfsg-2ubuntu1.7) ...
-Setting up libsasl2-modules-db:amd64 (2.1.27+dfsg-2) ...
-Setting up gnupg-l10n (2.2.19-3ubuntu2.1) ...
-Setting up sudo (1.8.31-1ubuntu1.2) ...
-Setting up libsasl2-2:amd64 (2.1.27+dfsg-2) ...
-Setting up libroken18-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up openssl (1.1.1f-1ubuntu2.2) ...
-Setting up readline-common (8.0-4) ...
-Setting up publicsuffix (20200303.0012-1) ...
-Setting up libheimbase1-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up pinentry-curses (1.1.0-3build1) ...
-Setting up wget (1.20.3-1ubuntu1) ...
-Setting up libasn1-8-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up libreadline8:amd64 (8.0-4) ...
-Setting up libhcrypto4-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up ca-certificates (20210119~20.04.1) ...
-Updating certificates in /etc/ssl/certs...
-129 added, 0 removed; done.
-Setting up libwind0-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up gpgconf (2.2.19-3ubuntu2.1) ...
-Setting up gpg (2.2.19-3ubuntu2.1) ...
-Setting up gnupg-utils (2.2.19-3ubuntu2.1) ...
-Setting up gpg-agent (2.2.19-3ubuntu2.1) ...
-Setting up libhx509-5-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up gpgsm (2.2.19-3ubuntu2.1) ...
-Setting up gpg-wks-server (2.2.19-3ubuntu2.1) ...
-Setting up libkrb5-26-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up libheimntlm0-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up libgssapi3-heimdal:amd64 (7.7.0+dfsg-1ubuntu1) ...
-Setting up libldap-2.4-2:amd64 (2.4.49+dfsg-2ubuntu1.7) ...
-Setting up dirmngr (2.2.19-3ubuntu2.1) ...
-Setting up gpg-wks-client (2.2.19-3ubuntu2.1) ...
-Setting up gnupg (2.2.19-3ubuntu2.1) ...
-Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
-Processing triggers for ca-certificates (20210119~20.04.1) ...
-Updating certificates in /etc/ssl/certs...
-0 added, 0 removed; done.
-Running hooks in /etc/ca-certificates/update.d...
-done.
-Removing intermediate container be1c7011155b
- ---> 58ff7b586dd2
-Step 7/23 : RUN     wget -qO - https://www.mongodb.org/static/pgp/server-4.4.asc | sudo apt-key add -     && echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
- ---> Running in eb96487d3e8a
-[91mWarning: apt-key output should not be parsed (stdout is not a terminal)
-[0mOK
-deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse
-Removing intermediate container eb96487d3e8a
- ---> b6da96ab23bf
-Step 8/23 : RUN     DEBIAN_FRONTEND=noninteractive apt-get update -y     && DEBIAN_FRONTEND=noninteractive apt-get install -y mongodb-org
- ---> Running in 4a63fc95dd24
-Ign:1 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 InRelease
-Hit:2 http://archive.ubuntu.com/ubuntu focal InRelease
-Hit:3 http://security.ubuntu.com/ubuntu focal-security InRelease
-Get:4 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 Release [5372 B]
-Get:5 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 Release.gpg [801 B]
-Hit:6 http://archive.ubuntu.com/ubuntu focal-updates InRelease
-Hit:7 http://archive.ubuntu.com/ubuntu focal-backports InRelease
-Get:8 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 Packages [8807 B]
-Get:9 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse arm64 Packages [6835 B]
-Fetched 21.8 kB in 1s (20.9 kB/s)
-Reading package lists...
-Reading package lists...
-Building dependency tree...
-Reading state information...
-The following additional packages will be installed:
-  krb5-locales libbrotli1 libcurl4 libgssapi-krb5-2 libk5crypto3 libkeyutils1
-  libkrb5-3 libkrb5support0 libnghttp2-14 librtmp1 libssh-4
-  mongodb-database-tools mongodb-org-database-tools-extra mongodb-org-mongos
-  mongodb-org-server mongodb-org-shell mongodb-org-tools tzdata
-Suggested packages:
-  krb5-doc krb5-user
-The following NEW packages will be installed:
-  krb5-locales libbrotli1 libcurl4 libgssapi-krb5-2 libk5crypto3 libkeyutils1
-  libkrb5-3 libkrb5support0 libnghttp2-14 librtmp1 libssh-4
-  mongodb-database-tools mongodb-org mongodb-org-database-tools-extra
-  mongodb-org-mongos mongodb-org-server mongodb-org-shell mongodb-org-tools
-  tzdata
-0 upgraded, 19 newly installed, 0 to remove and 1 not upgraded.
-Need to get 104 MB of archives.
-After this operation, 209 MB of additional disk space will be used.
-Get:1 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-database-tools amd64 100.3.0-1-g0536cca3 [52.8 MB]
-Get:2 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 tzdata all 2021a-0ubuntu0.20.04 [295 kB]
-Get:3 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 krb5-locales all 1.17-6ubuntu4.1 [11.4 kB]
-Get:4 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkrb5support0 amd64 1.17-6ubuntu4.1 [30.9 kB]
-Get:5 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libk5crypto3 amd64 1.17-6ubuntu4.1 [79.9 kB]
-Get:6 http://archive.ubuntu.com/ubuntu focal/main amd64 libkeyutils1 amd64 1.6-6ubuntu1 [10.2 kB]
-Get:7 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libkrb5-3 amd64 1.17-6ubuntu4.1 [330 kB]
-Get:8 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libgssapi-krb5-2 amd64 1.17-6ubuntu4.1 [121 kB]
-Get:9 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libbrotli1 amd64 1.0.7-6ubuntu0.1 [267 kB]
-Get:10 http://archive.ubuntu.com/ubuntu focal/main amd64 libnghttp2-14 amd64 1.40.0-1build1 [78.7 kB]
-Get:11 http://archive.ubuntu.com/ubuntu focal/main amd64 librtmp1 amd64 2.4+20151223.gitfa8646d.1-2build1 [54.9 kB]
-Get:12 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libssh-4 amd64 0.9.3-2ubuntu2.1 [170 kB]
-Get:13 http://archive.ubuntu.com/ubuntu focal-updates/main amd64 libcurl4 amd64 7.68.0-1ubuntu2.4 [234 kB]
-Get:14 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-shell amd64 4.4.4 [13.2 MB]
-Get:15 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-server amd64 4.4.4 [20.4 MB]
-Get:16 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-mongos amd64 4.4.4 [15.8 MB]
-Get:17 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-database-tools-extra amd64 4.4.4 [5628 B]
-Get:18 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org-tools amd64 4.4.4 [2888 B]
-Get:19 https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4/multiverse amd64 mongodb-org amd64 4.4.4 [3516 B]
-[91mdebconf: delaying package configuration, since apt-utils is not installed
-[0mFetched 104 MB in 17s (5967 kB/s)
-Selecting previously unselected package tzdata.
-(Reading database ... (Reading database ... 5%(Reading database ... 10%(Reading database ... 15%(Reading database ... 20%(Reading database ... 25%(Reading database ... 30%(Reading database ... 35%(Reading database ... 40%(Reading database ... 45%(Reading database ... 50%(Reading database ... 55%(Reading database ... 60%(Reading database ... 65%(Reading database ... 70%(Reading database ... 75%(Reading database ... 80%(Reading database ... 85%(Reading database ... 90%(Reading database ... 95%(Reading database ... 100%(Reading database ... 4912 files and directories currently installed.)
-Preparing to unpack .../00-tzdata_2021a-0ubuntu0.20.04_all.deb ...
-Unpacking tzdata (2021a-0ubuntu0.20.04) ...
-Selecting previously unselected package krb5-locales.
-Preparing to unpack .../01-krb5-locales_1.17-6ubuntu4.1_all.deb ...
-Unpacking krb5-locales (1.17-6ubuntu4.1) ...
-Selecting previously unselected package libkrb5support0:amd64.
-Preparing to unpack .../02-libkrb5support0_1.17-6ubuntu4.1_amd64.deb ...
-Unpacking libkrb5support0:amd64 (1.17-6ubuntu4.1) ...
-Selecting previously unselected package libk5crypto3:amd64.
-Preparing to unpack .../03-libk5crypto3_1.17-6ubuntu4.1_amd64.deb ...
-Unpacking libk5crypto3:amd64 (1.17-6ubuntu4.1) ...
-Selecting previously unselected package libkeyutils1:amd64.
-Preparing to unpack .../04-libkeyutils1_1.6-6ubuntu1_amd64.deb ...
-Unpacking libkeyutils1:amd64 (1.6-6ubuntu1) ...
-Selecting previously unselected package libkrb5-3:amd64.
-Preparing to unpack .../05-libkrb5-3_1.17-6ubuntu4.1_amd64.deb ...
-Unpacking libkrb5-3:amd64 (1.17-6ubuntu4.1) ...
-Selecting previously unselected package libgssapi-krb5-2:amd64.
-Preparing to unpack .../06-libgssapi-krb5-2_1.17-6ubuntu4.1_amd64.deb ...
-Unpacking libgssapi-krb5-2:amd64 (1.17-6ubuntu4.1) ...
-Selecting previously unselected package libbrotli1:amd64.
-Preparing to unpack .../07-libbrotli1_1.0.7-6ubuntu0.1_amd64.deb ...
-Unpacking libbrotli1:amd64 (1.0.7-6ubuntu0.1) ...
-Selecting previously unselected package libnghttp2-14:amd64.
-Preparing to unpack .../08-libnghttp2-14_1.40.0-1build1_amd64.deb ...
-Unpacking libnghttp2-14:amd64 (1.40.0-1build1) ...
-Selecting previously unselected package librtmp1:amd64.
-Preparing to unpack .../09-librtmp1_2.4+20151223.gitfa8646d.1-2build1_amd64.deb ...
-Unpacking librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build1) ...
-Selecting previously unselected package libssh-4:amd64.
-Preparing to unpack .../10-libssh-4_0.9.3-2ubuntu2.1_amd64.deb ...
-Unpacking libssh-4:amd64 (0.9.3-2ubuntu2.1) ...
-Selecting previously unselected package libcurl4:amd64.
-Preparing to unpack .../11-libcurl4_7.68.0-1ubuntu2.4_amd64.deb ...
-Unpacking libcurl4:amd64 (7.68.0-1ubuntu2.4) ...
-Selecting previously unselected package mongodb-database-tools.
-Preparing to unpack .../12-mongodb-database-tools_100.3.0-1-g0536cca3_amd64.deb ...
-Unpacking mongodb-database-tools (100.3.0-1-g0536cca3) ...
-Selecting previously unselected package mongodb-org-shell.
-Preparing to unpack .../13-mongodb-org-shell_4.4.4_amd64.deb ...
-Unpacking mongodb-org-shell (4.4.4) ...
-Selecting previously unselected package mongodb-org-server.
-Preparing to unpack .../14-mongodb-org-server_4.4.4_amd64.deb ...
-Unpacking mongodb-org-server (4.4.4) ...
-Selecting previously unselected package mongodb-org-mongos.
-Preparing to unpack .../15-mongodb-org-mongos_4.4.4_amd64.deb ...
-Unpacking mongodb-org-mongos (4.4.4) ...
-Selecting previously unselected package mongodb-org-database-tools-extra.
-Preparing to unpack .../16-mongodb-org-database-tools-extra_4.4.4_amd64.deb ...
-Unpacking mongodb-org-database-tools-extra (4.4.4) ...
-Selecting previously unselected package mongodb-org-tools.
-Preparing to unpack .../17-mongodb-org-tools_4.4.4_amd64.deb ...
-Unpacking mongodb-org-tools (4.4.4) ...
-Selecting previously unselected package mongodb-org.
-Preparing to unpack .../18-mongodb-org_4.4.4_amd64.deb ...
-Unpacking mongodb-org (4.4.4) ...
-Setting up libkeyutils1:amd64 (1.6-6ubuntu1) ...
-Setting up libbrotli1:amd64 (1.0.7-6ubuntu0.1) ...
-Setting up libnghttp2-14:amd64 (1.40.0-1build1) ...
-Setting up krb5-locales (1.17-6ubuntu4.1) ...
-Setting up libkrb5support0:amd64 (1.17-6ubuntu4.1) ...
-Setting up tzdata (2021a-0ubuntu0.20.04) ...
-
-Current default time zone: 'Etc/UTC'
-Local time is now:      Wed Mar 10 06:15:44 UTC 2021.
-Universal Time is now:  Wed Mar 10 06:15:44 UTC 2021.
-Run 'dpkg-reconfigure tzdata' if you wish to change it.
-
-Setting up librtmp1:amd64 (2.4+20151223.gitfa8646d.1-2build1) ...
-Setting up libk5crypto3:amd64 (1.17-6ubuntu4.1) ...
-Setting up mongodb-org-database-tools-extra (4.4.4) ...
-Setting up libkrb5-3:amd64 (1.17-6ubuntu4.1) ...
-Setting up libgssapi-krb5-2:amd64 (1.17-6ubuntu4.1) ...
-Setting up mongodb-database-tools (100.3.0-1-g0536cca3) ...
-Setting up libssh-4:amd64 (0.9.3-2ubuntu2.1) ...
-Setting up libcurl4:amd64 (7.68.0-1ubuntu2.4) ...
-Setting up mongodb-org-server (4.4.4) ...
-Adding system user `mongodb' (UID 101) ...
-Adding new user `mongodb' (UID 101) with group `nogroup' ...
-Not creating home directory `/home/mongodb'.
-Adding group `mongodb' (GID 101) ...
-Done.
-Adding user `mongodb' to group `mongodb' ...
-Adding user mongodb to group mongodb
-Done.
-/var/lib/dpkg/info/mongodb-org-server.postinst: 43: systemctl: not found
-Setting up mongodb-org-shell (4.4.4) ...
-Setting up mongodb-org-tools (4.4.4) ...
-Setting up mongodb-org-mongos (4.4.4) ...
-Setting up mongodb-org (4.4.4) ...
-Processing triggers for libc-bin (2.31-0ubuntu9.2) ...
-Removing intermediate container 4a63fc95dd24
- ---> 4c365967eeba
-Step 9/23 : ADD https://raw.githubusercontent.com/mongodb/mongo/master/debian/init.d /etc/init.d/mongod
-
- ---> 2162e986d2e1
-Step 10/23 : RUN     chmod +x /etc/init.d/mongod     && service mongod start     && service mongod status
- ---> Running in 31f35fdc18f4
-[91m/etc/init.d/mongod: 136: ulimit: error setting limit (Operation not permitted)
-[0m * Starting database mongod
-   ...done.
- * Checking status of database mongod
-   ...done.
-Removing intermediate container 31f35fdc18f4
- ---> 97a14cce0df2
-Step 11/23 : ADD http://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh /root/miniconda.sh
-
-
- ---> 0f07c03b5928
-Step 12/23 : RUN bash /root/miniconda.sh -b -p /opt/miniconda3
- ---> Running in 265361a5697c
-PREFIX=/opt/miniconda3
-Unpacking payload ...
-[91m  0%|          | 0/36 [00:00<?, ?it/s][0m[91mExtracting : six-1.15.0-py38h06a4308_0.conda:   0%|          | 0/36 [00:00<?, ?it/s][0m[91mExtracting : ld_impl_linux-64-2.33.1-h53a641e_7.conda:   3%|2         | 1/36 [00:00<00:00, 52.06it/s][0m[91mExtracting : tk-8.6.10-hbc83047_0.conda:   6%|5         | 2/36 [00:00<00:01, 29.08it/s]              [0m[91mExtracting : yaml-0.2.5-h7b6447c_0.conda:   8%|8         | 3/36 [00:00<00:00, 43.00it/s][0m[91mExtracting : _libgcc_mutex-0.1-main.conda:  11%|#1        | 4/36 [00:00<00:00, 56.14it/s][0m[91mExtracting : wheel-0.35.1-pyhd3eb1b0_0.conda:  14%|#3        | 5/36 [00:00<00:00, 69.45it/s][0m[91mExtracting : conda-4.9.2-py38h06a4308_0.conda:  17%|#6        | 6/36 [00:00<00:00, 74.90it/s][0m[91mExtracting : certifi-2020.6.20-pyhd3eb1b0_3.conda:  19%|#9        | 7/36 [00:00<00:00, 86.34it/s][0m[91mExtracting : xz-5.2.5-h7b6447c_0.conda:  22%|##2       | 8/36 [00:00<00:00, 97.79it/s]           [0m[91mExtracting : ca-certificates-2020.10.14-0.conda:  25%|##5       | 9/36 [00:00<00:00, 109.04it/s][0m[91mExtracting : sqlite-3.33.0-h62c20be_0.conda:  28%|##7       | 10/36 [00:00<00:00, 120.13it/s]   [0m[91mExtracting : tqdm-4.51.0-pyhd3eb1b0_0.conda:  31%|###       | 11/36 [00:00<00:00, 131.34it/s][0m[91mExtracting : setuptools-50.3.1-py38h06a4308_1.conda:  33%|###3      | 12/36 [00:00<00:00, 142.80it/s][0m[91mExtracting : cffi-1.14.3-py38h261ae71_2.conda:  36%|###6      | 13/36 [00:00<00:00, 154.16it/s]      [0m[91mExtracting : zlib-1.2.11-h7b6447c_3.conda:  39%|###8      | 14/36 [00:00<00:00, 165.67it/s]    [0m[91mExtracting : libffi-3.3-he6710b0_2.conda:  42%|####1     | 15/36 [00:00<00:00, 177.13it/s] [0m[91mExtracting : pyopenssl-19.1.0-pyhd3eb1b0_1.conda:  44%|####4     | 16/36 [00:00<00:00, 188.54it/s][0m[91mExtracting : cryptography-3.2.1-py38h3c74f83_1.conda:  47%|####7     | 17/36 [00:00<00:00, 199.91it/s][0m[91mExtracting : pycosat-0.6.3-py38h7b6447c_1.conda:  50%|#####     | 18/36 [00:00<00:00, 211.22it/s]     [0m[91mExtracting : ncurses-6.2-he6710b0_1.conda:  53%|#####2    | 19/36 [00:00<00:00, 93.57it/s]       [0m[91mExtracting : ncurses-6.2-he6710b0_1.conda:  56%|#####5    | 20/36 [00:00<00:00, 98.45it/s][0m[91mExtracting : libgcc-ng-9.1.0-hdf63c60_0.conda:  56%|#####5    | 20/36 [00:00<00:00, 98.45it/s][0m[91mExtracting : openssl-1.1.1h-h7b6447c_0.conda:  58%|#####8    | 21/36 [00:00<00:00, 98.45it/s] [0m[91mExtracting : chardet-3.0.4-py38h06a4308_1003.conda:  61%|######1   | 22/36 [00:00<00:00, 98.45it/s][0m[91mExtracting : pysocks-1.7.1-py38h06a4308_0.conda:  64%|######3   | 23/36 [00:00<00:00, 98.45it/s]   [0m[91mExtracting : libstdcxx-ng-9.1.0-hdf63c60_0.conda:  67%|######6   | 24/36 [00:00<00:00, 98.45it/s][0m[91mExtracting : pycparser-2.20-py_2.conda:  69%|######9   | 25/36 [00:00<00:00, 98.45it/s]          [0m[91mExtracting : python-3.8.5-h7579374_1.conda:  72%|#######2  | 26/36 [00:00<00:00, 98.45it/s]Extracting : python-3.8.5-h7579374_1.conda:  75%|#######5  | 27/36 [00:00<00:00, 47.20it/s][0m[91mExtracting : ruamel_yaml-0.15.87-py38h7b6447c_1.conda:  75%|#######5  | 27/36 [00:00<00:00, 47.20it/s][0m[91mExtracting : readline-8.0-h7b6447c_0.conda:  78%|#######7  | 28/36 [00:00<00:00, 47.20it/s]           [0m[91mExtracting : requests-2.24.0-py_0.conda:  81%|########  | 29/36 [00:00<00:00, 47.20it/s]   [0m[91mExtracting : libedit-3.1.20191231-h14c3975_1.conda:  83%|########3 | 30/36 [00:00<00:00, 47.20it/s][0m[91mExtracting : pip-20.2.4-py38h06a4308_0.conda:  86%|########6 | 31/36 [00:00<00:00, 47.20it/s]      [0m[91mExtracting : brotlipy-0.7.0-py38h27cfd23_1003.conda:  89%|########8 | 32/36 [00:00<00:00, 47.20it/s][0m[91mExtracting : urllib3-1.25.11-py_0.conda:  92%|#########1| 33/36 [00:00<00:00, 47.20it/s]            [0m[91mExtracting : conda-package-handling-1.7.2-py38h03888b9_0.conda:  94%|#########4| 34/36 [00:00<00:00, 47.20it/s][0m[91mExtracting : idna-2.10-py_0.conda:  97%|#########7| 35/36 [00:00<00:00, 47.20it/s]                             [0m[91m                                                                                  [0m[91m[0mCollecting package metadata (current_repodata.json): ...working... done
-Solving environment: ...working... done
-
-## Package Plan ##
-
-  environment location: /opt/miniconda3
-
-  added / updated specs:
-    - _libgcc_mutex==0.1=main
-    - brotlipy==0.7.0=py38h27cfd23_1003
-    - ca-certificates==2020.10.14=0
-    - certifi==2020.6.20=pyhd3eb1b0_3
-    - cffi==1.14.3=py38h261ae71_2
-    - chardet==3.0.4=py38h06a4308_1003
-    - conda-package-handling==1.7.2=py38h03888b9_0
-    - conda==4.9.2=py38h06a4308_0
-    - cryptography==3.2.1=py38h3c74f83_1
-    - idna==2.10=py_0
-    - ld_impl_linux-64==2.33.1=h53a641e_7
-    - libedit==3.1.20191231=h14c3975_1
-    - libffi==3.3=he6710b0_2
-    - libgcc-ng==9.1.0=hdf63c60_0
-    - libstdcxx-ng==9.1.0=hdf63c60_0
-    - ncurses==6.2=he6710b0_1
-    - openssl==1.1.1h=h7b6447c_0
-    - pip==20.2.4=py38h06a4308_0
-    - pycosat==0.6.3=py38h7b6447c_1
-    - pycparser==2.20=py_2
-    - pyopenssl==19.1.0=pyhd3eb1b0_1
-    - pysocks==1.7.1=py38h06a4308_0
-    - python==3.8.5=h7579374_1
-    - readline==8.0=h7b6447c_0
-    - requests==2.24.0=py_0
-    - ruamel_yaml==0.15.87=py38h7b6447c_1
-    - setuptools==50.3.1=py38h06a4308_1
-    - six==1.15.0=py38h06a4308_0
-    - sqlite==3.33.0=h62c20be_0
-    - tk==8.6.10=hbc83047_0
-    - tqdm==4.51.0=pyhd3eb1b0_0
-    - urllib3==1.25.11=py_0
-    - wheel==0.35.1=pyhd3eb1b0_0
-    - xz==5.2.5=h7b6447c_0
-    - yaml==0.2.5=h7b6447c_0
-    - zlib==1.2.11=h7b6447c_3
-
-
-The following NEW packages will be INSTALLED:
-
-  _libgcc_mutex      pkgs/main/linux-64::_libgcc_mutex-0.1-main
-  brotlipy           pkgs/main/linux-64::brotlipy-0.7.0-py38h27cfd23_1003
-  ca-certificates    pkgs/main/linux-64::ca-certificates-2020.10.14-0
-  certifi            pkgs/main/noarch::certifi-2020.6.20-pyhd3eb1b0_3
-  cffi               pkgs/main/linux-64::cffi-1.14.3-py38h261ae71_2
-  chardet            pkgs/main/linux-64::chardet-3.0.4-py38h06a4308_1003
-  conda              pkgs/main/linux-64::conda-4.9.2-py38h06a4308_0
-  conda-package-han~ pkgs/main/linux-64::conda-package-handling-1.7.2-py38h03888b9_0
-  cryptography       pkgs/main/linux-64::cryptography-3.2.1-py38h3c74f83_1
-  idna               pkgs/main/noarch::idna-2.10-py_0
-  ld_impl_linux-64   pkgs/main/linux-64::ld_impl_linux-64-2.33.1-h53a641e_7
-  libedit            pkgs/main/linux-64::libedit-3.1.20191231-h14c3975_1
-  libffi             pkgs/main/linux-64::libffi-3.3-he6710b0_2
-  libgcc-ng          pkgs/main/linux-64::libgcc-ng-9.1.0-hdf63c60_0
-  libstdcxx-ng       pkgs/main/linux-64::libstdcxx-ng-9.1.0-hdf63c60_0
-  ncurses            pkgs/main/linux-64::ncurses-6.2-he6710b0_1
-  openssl            pkgs/main/linux-64::openssl-1.1.1h-h7b6447c_0
-  pip                pkgs/main/linux-64::pip-20.2.4-py38h06a4308_0
-  pycosat            pkgs/main/linux-64::pycosat-0.6.3-py38h7b6447c_1
-  pycparser          pkgs/main/noarch::pycparser-2.20-py_2
-  pyopenssl          pkgs/main/noarch::pyopenssl-19.1.0-pyhd3eb1b0_1
-  pysocks            pkgs/main/linux-64::pysocks-1.7.1-py38h06a4308_0
-  python             pkgs/main/linux-64::python-3.8.5-h7579374_1
-  readline           pkgs/main/linux-64::readline-8.0-h7b6447c_0
-  requests           pkgs/main/noarch::requests-2.24.0-py_0
-  ruamel_yaml        pkgs/main/linux-64::ruamel_yaml-0.15.87-py38h7b6447c_1
-  setuptools         pkgs/main/linux-64::setuptools-50.3.1-py38h06a4308_1
-  six                pkgs/main/linux-64::six-1.15.0-py38h06a4308_0
-  sqlite             pkgs/main/linux-64::sqlite-3.33.0-h62c20be_0
-  tk                 pkgs/main/linux-64::tk-8.6.10-hbc83047_0
-  tqdm               pkgs/main/noarch::tqdm-4.51.0-pyhd3eb1b0_0
-  urllib3            pkgs/main/noarch::urllib3-1.25.11-py_0
-  wheel              pkgs/main/noarch::wheel-0.35.1-pyhd3eb1b0_0
-  xz                 pkgs/main/linux-64::xz-5.2.5-h7b6447c_0
-  yaml               pkgs/main/linux-64::yaml-0.2.5-h7b6447c_0
-  zlib               pkgs/main/linux-64::zlib-1.2.11-h7b6447c_3
-
-
-Preparing transaction: ...working... done
-Executing transaction: ...working... done
-installation finished.
-Removing intermediate container 265361a5697c
- ---> 5afcfe925a46
-Step 13/23 : COPY environment.yml /opt
- ---> 2564d3b176b0
-Step 14/23 : RUN     export PATH=${PATH}:/opt/miniconda3/bin     && . /opt/miniconda3/bin/activate     && conda env create -f /opt/environment.yml     && conda env list
- ---> Running in 2bf0f4ad826d
-Collecting package metadata (repodata.json): ...working... done
-Solving environment: ...working... done
-
-Downloading and Extracting Packages
-pycairo-1.19.1       | 73 KB     |            |   0% pycairo-1.19.1       | 73 KB     | ##1        |  22% pycairo-1.19.1       | 73 KB     | ########## | 100% 
-fasteners-0.16       | 24 KB     |            |   0% fasteners-0.16       | 24 KB     | ########## | 100% 
-mccabe-0.6.1         | 15 KB     |            |   0% mccabe-0.6.1         | 15 KB     | ########## | 100% 
-parso-0.7.0          | 72 KB     |            |   0% parso-0.7.0          | 72 KB     | ########## | 100% 
-dbus-1.13.18         | 504 KB    |            |   0% dbus-1.13.18         | 504 KB    | ######9    |  70% dbus-1.13.18         | 504 KB    | ########## | 100% 
-libwebp-1.0.1        | 471 KB    |            |   0% libwebp-1.0.1        | 471 KB    | ####4      |  44% libwebp-1.0.1        | 471 KB    | ########## | 100% 
-super_state_machine- | 11 KB     |            |   0% super_state_machine- | 11 KB     | ########## | 100% super_state_machine- | 11 KB     | ########## | 100% 
-ipywidgets-7.6.3     | 105 KB    |            |   0% ipywidgets-7.6.3     | 105 KB    | ########## | 100% 
-fisx-1.2.0           | 4.8 MB    |            |   0% fisx-1.2.0           | 4.8 MB    | 3          |   3% fisx-1.2.0           | 4.8 MB    | #2         |  13% fisx-1.2.0           | 4.8 MB    | #9         |  19% fisx-1.2.0           | 4.8 MB    | ####       |  40% fisx-1.2.0           | 4.8 MB    | #####3     |  53% fisx-1.2.0           | 4.8 MB    | ######5    |  66% fisx-1.2.0           | 4.8 MB    | #######7   |  78% fisx-1.2.0           | 4.8 MB    | ########9  |  90% fisx-1.2.0           | 4.8 MB    | ########## | 100% 
-scipy-1.6.1          | 15.6 MB   |            |   0% scipy-1.6.1          | 15.6 MB   | 1          |   2% scipy-1.6.1          | 15.6 MB   | 5          |   6% scipy-1.6.1          | 15.6 MB   | #          |  11% scipy-1.6.1          | 15.6 MB   | #4         |  15% scipy-1.6.1          | 15.6 MB   | #8         |  19% scipy-1.6.1          | 15.6 MB   | ##1        |  22% scipy-1.6.1          | 15.6 MB   | ##6        |  26% scipy-1.6.1          | 15.6 MB   | ###1       |  31% scipy-1.6.1          | 15.6 MB   | ###5       |  35% scipy-1.6.1          | 15.6 MB   | ###8       |  39% scipy-1.6.1          | 15.6 MB   | ####2      |  43% scipy-1.6.1          | 15.6 MB   | ####7      |  47% scipy-1.6.1          | 15.6 MB   | #####1     |  51% scipy-1.6.1          | 15.6 MB   | #####5     |  55% scipy-1.6.1          | 15.6 MB   | #####9     |  59% scipy-1.6.1          | 15.6 MB   | ######2    |  63% scipy-1.6.1          | 15.6 MB   | ######7    |  68% scipy-1.6.1          | 15.6 MB   | #######2   |  73% scipy-1.6.1          | 15.6 MB   | #######6   |  77% scipy-1.6.1          | 15.6 MB   | ########1  |  81% scipy-1.6.1          | 15.6 MB   | ########5  |  85% scipy-1.6.1          | 15.6 MB   | ########9  |  89% scipy-1.6.1          | 15.6 MB   | #########2 |  93% scipy-1.6.1          | 15.6 MB   | #########6 |  97% scipy-1.6.1          | 15.6 MB   | ########## | 100% 
-argon2-cffi-20.1.0   | 46 KB     |            |   0% argon2-cffi-20.1.0   | 46 KB     | ########## | 100% 
-libxslt-1.1.34       | 432 KB    |            |   0% libxslt-1.1.34       | 432 KB    | #######7   |  78% libxslt-1.1.34       | 432 KB    | ########## | 100% 
-jupyterlab_pygments- | 8 KB      |            |   0% jupyterlab_pygments- | 8 KB      | ########## | 100% 
-area-detector-handle | 21 KB     |            |   0% area-detector-handle | 21 KB     | ########## | 100% area-detector-handle | 21 KB     | ########## | 100% 
-lerc-2.2.1           | 185 KB    |            |   0% lerc-2.2.1           | 185 KB    | ########## | 100% 
-bluesky-1.6.7        | 153 KB    |            |   0% bluesky-1.6.7        | 153 KB    | ########## | 100% bluesky-1.6.7        | 153 KB    | ########## | 100% 
-blas-1.0             | 6 KB      |            |   0% blas-1.0             | 6 KB      | ########## | 100% 
-terminado-0.9.2      | 25 KB     |            |   0% terminado-0.9.2      | 25 KB     | ########## | 100% 
-scikit-image-0.17.2  | 9.3 MB    |            |   0% scikit-image-0.17.2  | 9.3 MB    | 4          |   4% scikit-image-0.17.2  | 9.3 MB    | #          |  11% scikit-image-0.17.2  | 9.3 MB    | #7         |  17% scikit-image-0.17.2  | 9.3 MB    | ##3        |  24% scikit-image-0.17.2  | 9.3 MB    | ###        |  30% scikit-image-0.17.2  | 9.3 MB    | ###6       |  37% scikit-image-0.17.2  | 9.3 MB    | ####3      |  43% scikit-image-0.17.2  | 9.3 MB    | ####9      |  49% scikit-image-0.17.2  | 9.3 MB    | #####7     |  57% scikit-image-0.17.2  | 9.3 MB    | ######3    |  64% scikit-image-0.17.2  | 9.3 MB    | #######    |  70% scikit-image-0.17.2  | 9.3 MB    | #######7   |  78% scikit-image-0.17.2  | 9.3 MB    | ########3  |  84% scikit-image-0.17.2  | 9.3 MB    | #########  |  90% scikit-image-0.17.2  | 9.3 MB    | #########5 |  96% scikit-image-0.17.2  | 9.3 MB    | ########## | 100% 
-deprecated-1.2.11    | 12 KB     |            |   0% deprecated-1.2.11    | 12 KB     | ########## | 100% 
-jupyter_client-6.1.7 | 77 KB     |            |   0% jupyter_client-6.1.7 | 77 KB     | ########## | 100% jupyter_client-6.1.7 | 77 KB     | ########## | 100% 
-pygobject-3.38.0     | 287 KB    |            |   0% pygobject-3.38.0     | 287 KB    | #######2   |  72% pygobject-3.38.0     | 287 KB    | ########## | 100% pygobject-3.38.0     | 287 KB    | ########## | 100% 
-traitlets-5.0.5      | 81 KB     |            |   0% traitlets-5.0.5      | 81 KB     | #######9   |  79% traitlets-5.0.5      | 81 KB     | ########## | 100% 
-chardet-4.0.0        | 194 KB    |            |   0% chardet-4.0.0        | 194 KB    | ########## | 100% 
-hdf5-1.10.6          | 3.7 MB    |            |   0% hdf5-1.10.6          | 3.7 MB    | 8          |   9% hdf5-1.10.6          | 3.7 MB    | ##5        |  26% hdf5-1.10.6          | 3.7 MB    | ####2      |  43% hdf5-1.10.6          | 3.7 MB    | #####9     |  59% hdf5-1.10.6          | 3.7 MB    | #######5   |  76% hdf5-1.10.6          | 3.7 MB    | #########2 |  93% hdf5-1.10.6          | 3.7 MB    | ########## | 100% 
-gstreamer-1.14.0     | 3.2 MB    |            |   0% gstreamer-1.14.0     | 3.2 MB    | #1         |  12% gstreamer-1.14.0     | 3.2 MB    | ###        |  31% gstreamer-1.14.0     | 3.2 MB    | ####9      |  50% gstreamer-1.14.0     | 3.2 MB    | ######8    |  69% gstreamer-1.14.0     | 3.2 MB    | ########7  |  88% gstreamer-1.14.0     | 3.2 MB    | ########## | 100% 
-gst-plugins-base-1.1 | 4.9 MB    |            |   0% gst-plugins-base-1.1 | 4.9 MB    | 7          |   7% gst-plugins-base-1.1 | 4.9 MB    | #9         |  20% gst-plugins-base-1.1 | 4.9 MB    | ###2       |  32% gst-plugins-base-1.1 | 4.9 MB    | ####4      |  44% gst-plugins-base-1.1 | 4.9 MB    | #####6     |  57% gst-plugins-base-1.1 | 4.9 MB    | ######9    |  69% gst-plugins-base-1.1 | 4.9 MB    | ########   |  80% gst-plugins-base-1.1 | 4.9 MB    | #########4 |  95% gst-plugins-base-1.1 | 4.9 MB    | ########## | 100% 
-aps-dm-api-3.2.2     | 5.5 MB    |            |   0% aps-dm-api-3.2.2     | 5.5 MB    | ########## | 100% aps-dm-api-3.2.2     | 5.5 MB    | ########## | 100% 
-openssl-1.1.1j       | 2.5 MB    |            |   0% openssl-1.1.1j       | 2.5 MB    | #6         |  17% openssl-1.1.1j       | 2.5 MB    | ####       |  41% openssl-1.1.1j       | 2.5 MB    | ######4    |  65% openssl-1.1.1j       | 2.5 MB    | ########8  |  89% openssl-1.1.1j       | 2.5 MB    | ########## | 100% 
-brunsli-0.1          | 164 KB    |            |   0% brunsli-0.1          | 164 KB    | ########## | 100% 
-more-itertools-8.7.0 | 42 KB     |            |   0% more-itertools-8.7.0 | 42 KB     | ########## | 100% 
-pandas-1.2.3         | 8.8 MB    |            |   0% pandas-1.2.3         | 8.8 MB    | 4          |   5% pandas-1.2.3         | 8.8 MB    | #1         |  12% pandas-1.2.3         | 8.8 MB    | #8         |  19% pandas-1.2.3         | 8.8 MB    | ##5        |  26% pandas-1.2.3         | 8.8 MB    | ###2       |  32% pandas-1.2.3         | 8.8 MB    | ###9       |  39% pandas-1.2.3         | 8.8 MB    | ####6      |  46% pandas-1.2.3         | 8.8 MB    | #####2     |  52% pandas-1.2.3         | 8.8 MB    | ######     |  60% pandas-1.2.3         | 8.8 MB    | ######7    |  67% pandas-1.2.3         | 8.8 MB    | #######4   |  74% pandas-1.2.3         | 8.8 MB    | ########   |  81% pandas-1.2.3         | 8.8 MB    | ########7  |  88% pandas-1.2.3         | 8.8 MB    | #########4 |  95% pandas-1.2.3         | 8.8 MB    | ########## | 100% 
-readline-8.1         | 362 KB    |            |   0% readline-8.1         | 362 KB    | ########## | 100% readline-8.1         | 362 KB    | ########## | 100% 
-jupyter_console-6.2. | 26 KB     |            |   0% jupyter_console-6.2. | 26 KB     | ########## | 100% 
-ansi2html-1.5.2      | 265 KB    |            |   0% ansi2html-1.5.2      | 265 KB    | ########## | 100% 
-defusedxml-0.7.1     | 23 KB     |            |   0% defusedxml-0.7.1     | 23 KB     | ########## | 100% 
-punx-0.2.5           | 200 KB    |            |   0% punx-0.2.5           | 200 KB    | ########## | 100% punx-0.2.5           | 200 KB    | ########## | 100% 
-snappy-1.1.8         | 40 KB     |            |   0% snappy-1.1.8         | 40 KB     | ########## | 100% 
-jinja2-2.11.3        | 101 KB    |            |   0% jinja2-2.11.3        | 101 KB    | ######3    |  63% jinja2-2.11.3        | 101 KB    | ########## | 100% 
-jdcal-1.4.1          | 11 KB     |            |   0% jdcal-1.4.1          | 11 KB     | ########## | 100% 
-jupyterlab_widgets-1 | 109 KB    |            |   0% jupyterlab_widgets-1 | 109 KB    | ########## | 100% 
-olefile-0.46         | 33 KB     |            |   0% olefile-0.46         | 33 KB     | ########## | 100% 
-pandocfilters-1.4.3  | 14 KB     |            |   0% pandocfilters-1.4.3  | 14 KB     | ########## | 100% 
-mongoquery-1.3.5     | 8 KB      |            |   0% mongoquery-1.3.5     | 8 KB      | ########## | 100% 
-pyjwt-1.7.1          | 33 KB     |            |   0% pyjwt-1.7.1          | 33 KB     | ########## | 100% 
-ipympl-0.6.3         | 41 KB     |            |   0% ipympl-0.6.3         | 41 KB     | ########## | 100% 
-apstools-1.4.1       | 101 KB    |            |   0% apstools-1.4.1       | 101 KB    | ########## | 100% apstools-1.4.1       | 101 KB    | ########## | 100% 
-perl-5.26.2          | 10.5 MB   |            |   0% perl-5.26.2          | 10.5 MB   | 3          |   4% perl-5.26.2          | 10.5 MB   | 9          |  10% perl-5.26.2          | 10.5 MB   | #5         |  15% perl-5.26.2          | 10.5 MB   | ##1        |  21% perl-5.26.2          | 10.5 MB   | ##6        |  27% perl-5.26.2          | 10.5 MB   | ###2       |  33% perl-5.26.2          | 10.5 MB   | ###8       |  38% perl-5.26.2          | 10.5 MB   | ####5      |  46% perl-5.26.2          | 10.5 MB   | #####1     |  52% perl-5.26.2          | 10.5 MB   | #####7     |  58% perl-5.26.2          | 10.5 MB   | ######3    |  63% perl-5.26.2          | 10.5 MB   | #######1   |  71% perl-5.26.2          | 10.5 MB   | #######7   |  77% perl-5.26.2          | 10.5 MB   | ########3  |  83% perl-5.26.2          | 10.5 MB   | ########9  |  89% perl-5.26.2          | 10.5 MB   | #########4 |  94% perl-5.26.2          | 10.5 MB   | ########## | 100% perl-5.26.2          | 10.5 MB   | ########## | 100% 
-pyzmq-20.0.0         | 447 KB    |            |   0% pyzmq-20.0.0         | 447 KB    | #########3 |  93% pyzmq-20.0.0         | 447 KB    | ########## | 100% 
-ipykernel-5.3.4      | 183 KB    |            |   0% ipykernel-5.3.4      | 183 KB    | ########## | 100% ipykernel-5.3.4      | 183 KB    | ########## | 100% 
-jedi-0.17.2          | 924 KB    |            |   0% jedi-0.17.2          | 924 KB    | ####5      |  45% jedi-0.17.2          | 924 KB    | ########## | 100% jedi-0.17.2          | 924 KB    | ########## | 100% 
-nbconvert-6.0.7      | 481 KB    |            |   0% nbconvert-6.0.7      | 481 KB    | ########6  |  87% nbconvert-6.0.7      | 481 KB    | ########## | 100% 
-decorator-4.4.2      | 12 KB     |            |   0% decorator-4.4.2      | 12 KB     | ########## | 100% 
-stdlogpj-1.0.3       | 18 KB     |            |   0% stdlogpj-1.0.3       | 18 KB     | ########## | 100% stdlogpj-1.0.3       | 18 KB     | ########## | 100% 
-mistune-0.8.4        | 55 KB     |            |   0% mistune-0.8.4        | 55 KB     | ########## | 100% 
-pixman-0.40.0        | 370 KB    |            |   0% pixman-0.40.0        | 370 KB    | ########## | 100% pixman-0.40.0        | 370 KB    | ########## | 100% 
-cryptography-3.3.1   | 567 KB    |            |   0% cryptography-3.3.1   | 567 KB    | ######2    |  62% cryptography-3.3.1   | 567 KB    | ########## | 100% 
-locket-0.2.1         | 10 KB     |            |   0% locket-0.2.1         | 10 KB     | ########## | 100% 
-typed-ast-1.4.2      | 189 KB    |            |   0% typed-ast-1.4.2      | 189 KB    | ########## | 100% 
-zict-2.0.0           | 10 KB     |            |   0% zict-2.0.0           | 10 KB     | ########## | 100% 
-imagecodecs-lite-201 | 211 KB    |            |   0% imagecodecs-lite-201 | 211 KB    | ########## | 100% imagecodecs-lite-201 | 211 KB    | ########## | 100% 
-pip-21.0.1           | 1.8 MB    |            |   0% pip-21.0.1           | 1.8 MB    | ##2        |  23% pip-21.0.1           | 1.8 MB    | #####7     |  57% pip-21.0.1           | 1.8 MB    | #########1 |  92% pip-21.0.1           | 1.8 MB    | ########## | 100% 
-future-0.18.2        | 632 KB    |            |   0% future-0.18.2        | 632 KB    | ######8    |  68% future-0.18.2        | 632 KB    | ########## | 100% 
-icu-58.2             | 10.5 MB   |            |   0% icu-58.2             | 10.5 MB   | 3          |   3% icu-58.2             | 10.5 MB   | 9          |   9% icu-58.2             | 10.5 MB   | #4         |  15% icu-58.2             | 10.5 MB   | ##         |  21% icu-58.2             | 10.5 MB   | ##5        |  26% icu-58.2             | 10.5 MB   | ###3       |  33% icu-58.2             | 10.5 MB   | ###8       |  39% icu-58.2             | 10.5 MB   | ####4      |  45% icu-58.2             | 10.5 MB   | #####      |  50% icu-58.2             | 10.5 MB   | #####7     |  57% icu-58.2             | 10.5 MB   | ######2    |  63% icu-58.2             | 10.5 MB   | ######9    |  70% icu-58.2             | 10.5 MB   | #######5   |  76% icu-58.2             | 10.5 MB   | ########1  |  81% icu-58.2             | 10.5 MB   | ########6  |  86% icu-58.2             | 10.5 MB   | #########1 |  91% icu-58.2             | 10.5 MB   | #########8 |  99% icu-58.2             | 10.5 MB   | ########## | 100% 
-humanize-3.2.0       | 39 KB     |            |   0% humanize-3.2.0       | 39 KB     | ########## | 100% 
-pytest-6.2.2         | 442 KB    |            |   0% pytest-6.2.2         | 442 KB    | ####7      |  47% pytest-6.2.2         | 442 KB    | ########## | 100% 
-imagesize-1.2.0      | 8 KB      |            |   0% imagesize-1.2.0      | 8 KB      | ########## | 100% 
-doct-1.1.0           | 7 KB      |            |   0% doct-1.1.0           | 7 KB      | ########## | 100% 
-msgpack-numpy-0.4.7. | 10 KB     |            |   0% msgpack-numpy-0.4.7. | 10 KB     | ########## | 100% 
-toolz-0.11.1         | 46 KB     |            |   0% toolz-0.11.1         | 46 KB     | ########## | 100% 
-openpyxl-3.0.6       | 159 KB    |            |   0% openpyxl-3.0.6       | 159 KB    | ########## | 100% 
-historydict-1.2.3    | 6 KB      |            |   0% historydict-1.2.3    | 6 KB      | ########## | 100% 
-networkx-2.5         | 1.1 MB    |            |   0% networkx-2.5         | 1.1 MB    | ###5       |  35% networkx-2.5         | 1.1 MB    | #########  |  91% networkx-2.5         | 1.1 MB    | ########## | 100% 
-zfp-0.5.5            | 172 KB    |            |   0% zfp-0.5.5            | 172 KB    | ########## | 100% 
-wheel-0.36.2         | 33 KB     |            |   0% wheel-0.36.2         | 33 KB     | ########## | 100% 
-lxml-4.6.2           | 1.3 MB    |            |   0% lxml-4.6.2           | 1.3 MB    | ###1       |  31% lxml-4.6.2           | 1.3 MB    | #######8   |  79% lxml-4.6.2           | 1.3 MB    | ########## | 100% 
-cairo-1.14.12        | 906 KB    |            |   0% cairo-1.14.12        | 906 KB    | ####4      |  44% cairo-1.14.12        | 906 KB    | ########## | 100% cairo-1.14.12        | 906 KB    | ########## | 100% 
-slicerator-1.0.0     | 16 KB     |            |   0% slicerator-1.0.0     | 16 KB     | ########## | 100% 
-idna-2.10            | 52 KB     |            |   0% idna-2.10            | 52 KB     | ########## | 100% 
-distributed-2021.3.0 | 1.0 MB    |            |   0% distributed-2021.3.0 | 1.0 MB    | ###9       |  39% distributed-2021.3.0 | 1.0 MB    | #########8 |  99% distributed-2021.3.0 | 1.0 MB    | ########## | 100% 
-pandoc-2.11          | 9.6 MB    |            |   0% pandoc-2.11          | 9.6 MB    | 4          |   4% pandoc-2.11          | 9.6 MB    | #          |  11% pandoc-2.11          | 9.6 MB    | #5         |  15% pandoc-2.11          | 9.6 MB    | ##3        |  23% pandoc-2.11          | 9.6 MB    | ##9        |  30% pandoc-2.11          | 9.6 MB    | ###6       |  36% pandoc-2.11          | 9.6 MB    | ####2      |  42% pandoc-2.11          | 9.6 MB    | ####8      |  48% pandoc-2.11          | 9.6 MB    | #####3     |  53% pandoc-2.11          | 9.6 MB    | #####9     |  60% pandoc-2.11          | 9.6 MB    | ######5    |  66% pandoc-2.11          | 9.6 MB    | #######1   |  72% pandoc-2.11          | 9.6 MB    | #######9   |  80% pandoc-2.11          | 9.6 MB    | ########6  |  86% pandoc-2.11          | 9.6 MB    | #########3 |  94% pandoc-2.11          | 9.6 MB    | ########## | 100% pandoc-2.11          | 9.6 MB    | ########## | 100% 
-isort-5.7.0          | 82 KB     |            |   0% isort-5.7.0          | 82 KB     | ########## | 100% 
-giflib-5.1.4         | 68 KB     |            |   0% giflib-5.1.4         | 68 KB     | ########## | 100% 
-async_generator-1.10 | 23 KB     |            |   0% async_generator-1.10 | 23 KB     | ########## | 100% 
-boltons-20.2.1       | 207 KB    |            |   0% boltons-20.2.1       | 207 KB    | ########## | 100% boltons-20.2.1       | 207 KB    | ########## | 100% 
-click-7.1.2          | 64 KB     |            |   0% click-7.1.2          | 64 KB     | ########## | 100% 
-lazy-object-proxy-1. | 28 KB     |            |   0% lazy-object-proxy-1. | 28 KB     | ########## | 100% 
-pycodestyle-2.6.0    | 38 KB     |            |   0% pycodestyle-2.6.0    | 38 KB     | ########## | 100% 
-zipp-3.4.0           | 15 KB     |            |   0% zipp-3.4.0           | 15 KB     | ########## | 100% 
-regex-2020.11.13     | 321 KB    |            |   0% regex-2020.11.13     | 321 KB    | ########## | 100% 
-testpath-0.4.4       | 85 KB     |            |   0% testpath-0.4.4       | 85 KB     | ########## | 100% 
-packaging-20.9       | 37 KB     |            |   0% packaging-20.9       | 37 KB     | ########## | 100% 
-setuptools-52.0.0    | 714 KB    |            |   0% setuptools-52.0.0    | 714 KB    | #####6     |  56% setuptools-52.0.0    | 714 KB    | ########## | 100% 
-h5py-2.10.0          | 948 KB    |            |   0% h5py-2.10.0          | 948 KB    | ####5      |  46% h5py-2.10.0          | 948 KB    | ########## | 100% h5py-2.10.0          | 948 KB    | ########## | 100% 
-cloudpickle-1.6.0    | 30 KB     |            |   0% cloudpickle-1.6.0    | 30 KB     | ########## | 100% 
-pywavelets-1.1.1     | 3.5 MB    |            |   0% pywavelets-1.1.1     | 3.5 MB    | #1         |  12% pywavelets-1.1.1     | 3.5 MB    | ##6        |  27% pywavelets-1.1.1     | 3.5 MB    | ###9       |  40% pywavelets-1.1.1     | 3.5 MB    | ######1    |  62% pywavelets-1.1.1     | 3.5 MB    | #######9   |  79% pywavelets-1.1.1     | 3.5 MB    | #########5 |  96% pywavelets-1.1.1     | 3.5 MB    | ########## | 100% 
-wcwidth-0.2.5        | 29 KB     |            |   0% wcwidth-0.2.5        | 29 KB     | ########## | 100% 
-pytz-2021.1          | 181 KB    |            |   0% pytz-2021.1          | 181 KB    | ########## | 100% pytz-2021.1          | 181 KB    | ########## | 100% 
-spec2nexus-2021.1.8  | 8.8 MB    |            |   0% spec2nexus-2021.1.8  | 8.8 MB    | ########## | 100% spec2nexus-2021.1.8  | 8.8 MB    | ########## | 100% 
-jupyterlab_server-1. | 25 KB     |            |   0% jupyterlab_server-1. | 25 KB     | ########## | 100% 
-numcodecs-0.7.3      | 628 KB    |            |   0% numcodecs-0.7.3      | 628 KB    | ######6    |  66% numcodecs-0.7.3      | 628 KB    | ########## | 100% 
-jupyter-1.0.0        | 7 KB      |            |   0% jupyter-1.0.0        | 7 KB      | ########## | 100% 
-tornado-6.1          | 588 KB    |            |   0% tornado-6.1          | 588 KB    | #######3   |  74% tornado-6.1          | 588 KB    | ########## | 100% 
-jsonschema-3.2.0     | 47 KB     |            |   0% jsonschema-3.2.0     | 47 KB     | ########## | 100% 
-sphinxcontrib-devhel | 23 KB     |            |   0% sphinxcontrib-devhel | 23 KB     | ########## | 100% 
-qtpy-1.9.0           | 38 KB     |            |   0% qtpy-1.9.0           | 38 KB     | ########## | 100% 
-heapdict-1.0.1       | 9 KB      |            |   0% heapdict-1.0.1       | 9 KB      | ########## | 100% 
-pathspec-0.7.0       | 26 KB     |            |   0% pathspec-0.7.0       | 26 KB     | ########## | 100% 
-suitcase-utils-0.5.3 | 12 KB     |            |   0% suitcase-utils-0.5.3 | 12 KB     | ########## | 100% 
-dask-core-2021.3.0   | 659 KB    |            |   0% dask-core-2021.3.0   | 659 KB    | #####8     |  58% dask-core-2021.3.0   | 659 KB    | ########## | 100% 
-pillow-8.1.2         | 622 KB    |            |   0% pillow-8.1.2         | 622 KB    | ######9    |  69% pillow-8.1.2         | 622 KB    | ########## | 100% 
-nbformat-5.1.2       | 68 KB     |            |   0% nbformat-5.1.2       | 68 KB     | ########## | 100% 
-jupyterlab-2.2.6     | 3.4 MB    |            |   0% jupyterlab-2.2.6     | 3.4 MB    | #1         |  12% jupyterlab-2.2.6     | 3.4 MB    | ##9        |  30% jupyterlab-2.2.6     | 3.4 MB    | ####3      |  44% jupyterlab-2.2.6     | 3.4 MB    | #####3     |  53% jupyterlab-2.2.6     | 3.4 MB    | ######2    |  62% jupyterlab-2.2.6     | 3.4 MB    | ########   |  81% jupyterlab-2.2.6     | 3.4 MB    | #########8 |  99% jupyterlab-2.2.6     | 3.4 MB    | ########## | 100% 
-ophyd-1.6.1          | 189 KB    |            |   0% ophyd-1.6.1          | 189 KB    | ########## | 100% ophyd-1.6.1          | 189 KB    | ########## | 100% 
-python-dateutil-2.8. | 221 KB    |            |   0% python-dateutil-2.8. | 221 KB    | ########## | 100% 
-hklpy-0.3.15         | 23 KB     |            |   0% hklpy-0.3.15         | 23 KB     | ########## | 100% hklpy-0.3.15         | 23 KB     | ########## | 100% 
-pexpect-4.8.0        | 53 KB     |            |   0% pexpect-4.8.0        | 53 KB     | ########## | 100% 
-sphinxcontrib-napole | 19 KB     |            |   0% sphinxcontrib-napole | 19 KB     | ########## | 100% 
-kiwisolver-1.3.1     | 80 KB     |            |   0% kiwisolver-1.3.1     | 80 KB     | ########## | 100% 
-importlib_resources- | 39 KB     |            |   0% importlib_resources- | 39 KB     | ########## | 100% 
-snowballstemmer-2.1. | 62 KB     |            |   0% snowballstemmer-2.1. | 62 KB     | ########## | 100% 
-libgomp-9.3.0        | 376 KB    |            |   0% libgomp-9.3.0        | 376 KB    | 4          |   4% libgomp-9.3.0        | 376 KB    | ########## | 100% libgomp-9.3.0        | 376 KB    | ########## | 100% 
-pint-0.16.1          | 168 KB    |            |   0% pint-0.16.1          | 168 KB    | ########## | 100% pint-0.16.1          | 168 KB    | ########## | 100% 
-prompt-toolkit-3.0.8 | 248 KB    |            |   0% prompt-toolkit-3.0.8 | 248 KB    | ########## | 100% 
-zarr-2.6.1           | 101 KB    |            |   0% zarr-2.6.1           | 101 KB    | ########## | 100% 
-pymca-5.6.3          | 8.6 MB    |            |   0% pymca-5.6.3          | 8.6 MB    | 3          |   4% pymca-5.6.3          | 8.6 MB    | #          |  11% pymca-5.6.3          | 8.6 MB    | #7         |  18% pymca-5.6.3          | 8.6 MB    | ##4        |  25% pymca-5.6.3          | 8.6 MB    | ###2       |  32% pymca-5.6.3          | 8.6 MB    | ###9       |  39% pymca-5.6.3          | 8.6 MB    | ####6      |  46% pymca-5.6.3          | 8.6 MB    | #####3     |  53% pymca-5.6.3          | 8.6 MB    | ######     |  60% pymca-5.6.3          | 8.6 MB    | ######7    |  67% pymca-5.6.3          | 8.6 MB    | #######6   |  76% pymca-5.6.3          | 8.6 MB    | ########3  |  83% pymca-5.6.3          | 8.6 MB    | #########  |  90% pymca-5.6.3          | 8.6 MB    | #########6 |  97% pymca-5.6.3          | 8.6 MB    | ########## | 100% 
-openjpeg-2.3.0       | 301 KB    |            |   0% openjpeg-2.3.0       | 301 KB    | ########## | 100% openjpeg-2.3.0       | 301 KB    | ########## | 100% 
-tqdm-4.56.0          | 80 KB     |            |   0% tqdm-4.56.0          | 80 KB     | ########## | 100% 
-jxrlib-1.1           | 223 KB    |            |   0% jxrlib-1.1           | 223 KB    | ########## | 100% 
-psutil-5.8.0         | 327 KB    |            |   0% psutil-5.8.0         | 327 KB    | ########## | 100% 
-pyrsistent-0.17.3    | 90 KB     |            |   0% pyrsistent-0.17.3    | 90 KB     | ########## | 100% 
-json5-0.9.5          | 22 KB     |            |   0% json5-0.9.5          | 22 KB     | ########## | 100% 
-babel-2.9.0          | 5.5 MB    |            |   0% babel-2.9.0          | 5.5 MB    | 6          |   6% babel-2.9.0          | 5.5 MB    | ##         |  21% babel-2.9.0          | 5.5 MB    | ###1       |  32% babel-2.9.0          | 5.5 MB    | ####2      |  43% babel-2.9.0          | 5.5 MB    | #####4     |  54% babel-2.9.0          | 5.5 MB    | ######3    |  63% babel-2.9.0          | 5.5 MB    | #######7   |  78% babel-2.9.0          | 5.5 MB    | ########8  |  89% babel-2.9.0          | 5.5 MB    | ########## | 100% babel-2.9.0          | 5.5 MB    | ########## | 100% 
-gobject-introspectio | 1.4 MB    |            |   0% gobject-introspectio | 1.4 MB    | ##9        |  30% gobject-introspectio | 1.4 MB    | #######4   |  74% gobject-introspectio | 1.4 MB    | ########## | 100% 
-bluesky-live-0.0.7   | 30 KB     |            |   0% bluesky-live-0.0.7   | 30 KB     | ########## | 100% 
-intake-0.6.1         | 2.6 MB    |            |   0% intake-0.6.1         | 2.6 MB    | #5         |  16% intake-0.6.1         | 2.6 MB    | ###8       |  39% intake-0.6.1         | 2.6 MB    | ######2    |  62% intake-0.6.1         | 2.6 MB    | ########5  |  85% intake-0.6.1         | 2.6 MB    | ########## | 100% 
-lz4-c-1.9.3          | 186 KB    |            |   0% lz4-c-1.9.3          | 186 KB    | ########## | 100% 
-pygments-2.8.1       | 703 KB    |            |   0% pygments-2.8.1       | 703 KB    | #####6     |  57% pygments-2.8.1       | 703 KB    | ########## | 100% pygments-2.8.1       | 703 KB    | ########## | 100% 
-attrs-20.3.0         | 43 KB     |            |   0% attrs-20.3.0         | 43 KB     | ########## | 100% 
-py-1.10.0            | 76 KB     |            |   0% py-1.10.0            | 76 KB     | ########## | 100% 
-black-19.10b0        | 86 KB     |            |   0% black-19.10b0        | 86 KB     | ########## | 100% 
-pyopenssl-20.0.1     | 49 KB     |            |   0% pyopenssl-20.0.1     | 49 KB     | ########## | 100% 
-suitcase-jsonl-0.2.0 | 9 KB      |            |   0% suitcase-jsonl-0.2.0 | 9 KB      | ########## | 100% suitcase-jsonl-0.2.0 | 9 KB      | ########## | 100% 
-pyparsing-2.4.7      | 59 KB     |            |   0% pyparsing-2.4.7      | 59 KB     | ########## | 100% 
-colorama-0.4.4       | 21 KB     |            |   0% colorama-0.4.4       | 21 KB     | ########## | 100% 
-mkl_fft-1.3.0        | 177 KB    |            |   0% mkl_fft-1.3.0        | 177 KB    | ########## | 100% 
-_openmp_mutex-4.5    | 22 KB     |            |   0% _openmp_mutex-4.5    | 22 KB     | ########## | 100% 
-nbclient-0.5.3       | 62 KB     |            |   0% nbclient-0.5.3       | 62 KB     | ########## | 100% 
-suitcase-mongo-0.2.0 | 21 KB     |            |   0% suitcase-mongo-0.2.0 | 21 KB     | ########## | 100% 
-certifi-2020.12.5    | 141 KB    |            |   0% certifi-2020.12.5    | 141 KB    | ########## | 100% 
-cycler-0.10.0        | 14 KB     |            |   0% cycler-0.10.0        | 14 KB     | ########## | 100% 
-alabaster-0.7.12     | 16 KB     |            |   0% alabaster-0.7.12     | 16 KB     | ########## | 100% 
-libtiff-4.1.0        | 449 KB    |            |   0% libtiff-4.1.0        | 449 KB    | ###9       |  39% libtiff-4.1.0        | 449 KB    | ########## | 100% 
-qt-5.9.7             | 68.5 MB   |            |   0% qt-5.9.7             | 68.5 MB   |            |   0% qt-5.9.7             | 68.5 MB   | 1          |   1% qt-5.9.7             | 68.5 MB   | 1          |   2% qt-5.9.7             | 68.5 MB   | 2          |   3% qt-5.9.7             | 68.5 MB   | 3          |   3% qt-5.9.7             | 68.5 MB   | 4          |   4% qt-5.9.7             | 68.5 MB   | 5          |   5% qt-5.9.7             | 68.5 MB   | 6          |   6% qt-5.9.7             | 68.5 MB   | 7          |   7% qt-5.9.7             | 68.5 MB   | 7          |   8% qt-5.9.7             | 68.5 MB   | 8          |   9% qt-5.9.7             | 68.5 MB   | 9          |  10% qt-5.9.7             | 68.5 MB   | #          |  11% qt-5.9.7             | 68.5 MB   | #1         |  11% qt-5.9.7             | 68.5 MB   | #2         |  12% qt-5.9.7             | 68.5 MB   | #3         |  13% qt-5.9.7             | 68.5 MB   | #4         |  14% qt-5.9.7             | 68.5 MB   | #5         |  15% qt-5.9.7             | 68.5 MB   | #5         |  16% qt-5.9.7             | 68.5 MB   | #6         |  17% qt-5.9.7             | 68.5 MB   | #8         |  18% qt-5.9.7             | 68.5 MB   | #8         |  19% qt-5.9.7             | 68.5 MB   | #9         |  20% qt-5.9.7             | 68.5 MB   | ##1        |  21% qt-5.9.7             | 68.5 MB   | ##2        |  22% qt-5.9.7             | 68.5 MB   | ##2        |  23% qt-5.9.7             | 68.5 MB   | ##4        |  24% qt-5.9.7             | 68.5 MB   | ##5        |  25% qt-5.9.7             | 68.5 MB   | ##6        |  26% qt-5.9.7             | 68.5 MB   | ##7        |  27% qt-5.9.7             | 68.5 MB   | ##8        |  28% qt-5.9.7             | 68.5 MB   | ##9        |  29% qt-5.9.7             | 68.5 MB   | ###        |  30% qt-5.9.7             | 68.5 MB   | ###1       |  31% qt-5.9.7             | 68.5 MB   | ###2       |  32% qt-5.9.7             | 68.5 MB   | ###3       |  33% qt-5.9.7             | 68.5 MB   | ###4       |  34% qt-5.9.7             | 68.5 MB   | ###5       |  35% qt-5.9.7             | 68.5 MB   | ###6       |  36% qt-5.9.7             | 68.5 MB   | ###7       |  37% qt-5.9.7             | 68.5 MB   | ###8       |  38% qt-5.9.7             | 68.5 MB   | ###9       |  40% qt-5.9.7             | 68.5 MB   | ####       |  40% qt-5.9.7             | 68.5 MB   | ####1      |  41% qt-5.9.7             | 68.5 MB   | ####2      |  43% qt-5.9.7             | 68.5 MB   | ####3      |  44% qt-5.9.7             | 68.5 MB   | ####4      |  44% qt-5.9.7             | 68.5 MB   | ####5      |  46% qt-5.9.7             | 68.5 MB   | ####6      |  47% qt-5.9.7             | 68.5 MB   | ####7      |  48% qt-5.9.7             | 68.5 MB   | ####8      |  49% qt-5.9.7             | 68.5 MB   | ####9      |  50% qt-5.9.7             | 68.5 MB   | #####      |  51% qt-5.9.7             | 68.5 MB   | #####1     |  52% qt-5.9.7             | 68.5 MB   | #####2     |  53% qt-5.9.7             | 68.5 MB   | #####3     |  54% qt-5.9.7             | 68.5 MB   | #####4     |  55% qt-5.9.7             | 68.5 MB   | #####5     |  56% qt-5.9.7             | 68.5 MB   | #####6     |  57% qt-5.9.7             | 68.5 MB   | #####7     |  58% qt-5.9.7             | 68.5 MB   | #####8     |  59% qt-5.9.7             | 68.5 MB   | #####9     |  60% qt-5.9.7             | 68.5 MB   | ######     |  61% qt-5.9.7             | 68.5 MB   | ######1    |  62% qt-5.9.7             | 68.5 MB   | ######2    |  63% qt-5.9.7             | 68.5 MB   | ######3    |  64% qt-5.9.7             | 68.5 MB   | ######4    |  65% qt-5.9.7             | 68.5 MB   | ######5    |  66% qt-5.9.7             | 68.5 MB   | ######6    |  67% qt-5.9.7             | 68.5 MB   | ######7    |  68% qt-5.9.7             | 68.5 MB   | ######8    |  69% qt-5.9.7             | 68.5 MB   | ######9    |  70% qt-5.9.7             | 68.5 MB   | #######    |  71% qt-5.9.7             | 68.5 MB   | #######1   |  72% qt-5.9.7             | 68.5 MB   | #######2   |  73% qt-5.9.7             | 68.5 MB   | #######3   |  74% qt-5.9.7             | 68.5 MB   | #######4   |  75% qt-5.9.7             | 68.5 MB   | #######5   |  76% qt-5.9.7             | 68.5 MB   | #######6   |  77% qt-5.9.7             | 68.5 MB   | #######7   |  78% qt-5.9.7             | 68.5 MB   | #######8   |  79% qt-5.9.7             | 68.5 MB   | #######9   |  80% qt-5.9.7             | 68.5 MB   | ########   |  81% qt-5.9.7             | 68.5 MB   | ########1  |  82% qt-5.9.7             | 68.5 MB   | ########2  |  83% qt-5.9.7             | 68.5 MB   | ########3  |  84% qt-5.9.7             | 68.5 MB   | ########5  |  85% qt-5.9.7             | 68.5 MB   | ########6  |  86% qt-5.9.7             | 68.5 MB   | ########7  |  87% qt-5.9.7             | 68.5 MB   | ########8  |  88% qt-5.9.7             | 68.5 MB   | ########8  |  89% qt-5.9.7             | 68.5 MB   | ########9  |  90% qt-5.9.7             | 68.5 MB   | #########1 |  91% qt-5.9.7             | 68.5 MB   | #########1 |  92% qt-5.9.7             | 68.5 MB   | #########2 |  93% qt-5.9.7             | 68.5 MB   | #########3 |  94% qt-5.9.7             | 68.5 MB   | #########4 |  95% qt-5.9.7             | 68.5 MB   | #########5 |  96% qt-5.9.7             | 68.5 MB   | #########6 |  96% qt-5.9.7             | 68.5 MB   | #########7 |  97% qt-5.9.7             | 68.5 MB   | #########8 |  98% qt-5.9.7             | 68.5 MB   | #########9 |  99% qt-5.9.7             | 68.5 MB   | ########## | 100% 
-widgetsnbextension-3 | 866 KB    |            |   0% widgetsnbextension-3 | 866 KB    | ####4      |  44% widgetsnbextension-3 | 866 KB    | ########## | 100% 
-imagecodecs-2021.1.1 | 5.7 MB    |            |   0% imagecodecs-2021.1.1 | 5.7 MB    | 6          |   7% imagecodecs-2021.1.1 | 5.7 MB    | #7         |  17% imagecodecs-2021.1.1 | 5.7 MB    | ##6        |  26% imagecodecs-2021.1.1 | 5.7 MB    | ###9       |  40% imagecodecs-2021.1.1 | 5.7 MB    | #####      |  50% imagecodecs-2021.1.1 | 5.7 MB    | ######1    |  61% imagecodecs-2021.1.1 | 5.7 MB    | #######1   |  72% imagecodecs-2021.1.1 | 5.7 MB    | ########1  |  82% imagecodecs-2021.1.1 | 5.7 MB    | #########5 |  95% imagecodecs-2021.1.1 | 5.7 MB    | ########## | 100% 
-brotli-1.0.9         | 375 KB    |            |   0% brotli-1.0.9         | 375 KB    | ########## | 100% brotli-1.0.9         | 375 KB    | ########## | 100% 
-libglib-2.66.7       | 3.0 MB    |            |   0% libglib-2.66.7       | 3.0 MB    | #1         |  12% libglib-2.66.7       | 3.0 MB    | ###2       |  32% libglib-2.66.7       | 3.0 MB    | ####6      |  47% libglib-2.66.7       | 3.0 MB    | #######2   |  73% libglib-2.66.7       | 3.0 MB    | #########2 |  93% libglib-2.66.7       | 3.0 MB    | ########## | 100% 
-glib-2.66.7          | 443 KB    |            |   0% glib-2.66.7          | 443 KB    | ####3      |  43% glib-2.66.7          | 443 KB    | ########## | 100% glib-2.66.7          | 443 KB    | ########## | 100% 
-libzopfli-1.0.3      | 171 KB    |            |   0% libzopfli-1.0.3      | 171 KB    | ########## | 100% 
-pylatexenc-2.9       | 96 KB     |            |   0% pylatexenc-2.9       | 96 KB     | ########## | 100% pylatexenc-2.9       | 96 KB     | ########## | 100% 
-libxml2-2.9.10       | 1.2 MB    |            |   0% libxml2-2.9.10       | 1.2 MB    | ###4       |  34% libxml2-2.9.10       | 1.2 MB    | ########5  |  86% libxml2-2.9.10       | 1.2 MB    | ########## | 100% 
-epics-base-7.0.4     | 3.7 MB    |            |   0% epics-base-7.0.4     | 3.7 MB    | 8          |   8% epics-base-7.0.4     | 3.7 MB    | ##4        |  25% epics-base-7.0.4     | 3.7 MB    | ###7       |  37% epics-base-7.0.4     | 3.7 MB    | #####7     |  58% epics-base-7.0.4     | 3.7 MB    | #######4   |  75% epics-base-7.0.4     | 3.7 MB    | #########1 |  91% epics-base-7.0.4     | 3.7 MB    | ########## | 100% 
-sip-4.19.13          | 277 KB    |            |   0% sip-4.19.13          | 277 KB    | ########## | 100% 
-blosc-1.21.0         | 64 KB     |            |   0% blosc-1.21.0         | 64 KB     | ########## | 100% 
-pyflakes-2.2.0       | 56 KB     |            |   0% pyflakes-2.2.0       | 56 KB     | ########## | 100% 
-pockets-0.9.1        | 24 KB     |            |   0% pockets-0.9.1        | 24 KB     | ########## | 100% 
-qtconsole-5.0.2      | 97 KB     |            |   0% qtconsole-5.0.2      | 97 KB     | ########## | 100% 
-libsodium-1.0.18     | 244 KB    |            |   0% libsodium-1.0.18     | 244 KB    | ########## | 100% 
-appdirs-1.4.4        | 13 KB     |            |   0% appdirs-1.4.4        | 13 KB     | ########## | 100% 
-libgfortran-ng-7.3.0 | 1006 KB   |            |   0% libgfortran-ng-7.3.0 | 1006 KB   | ####2      |  43% libgfortran-ng-7.3.0 | 1006 KB   | ########## | 100% libgfortran-ng-7.3.0 | 1006 KB   | ########## | 100% 
-libstdcxx-ng-9.3.0   | 4.0 MB    |            |   0% libstdcxx-ng-9.3.0   | 4.0 MB    | 8          |   9% libstdcxx-ng-9.3.0   | 4.0 MB    | ##3        |  24% libstdcxx-ng-9.3.0   | 4.0 MB    | ###9       |  39% libstdcxx-ng-9.3.0   | 4.0 MB    | #####4     |  54% libstdcxx-ng-9.3.0   | 4.0 MB    | ######4    |  65% libstdcxx-ng-9.3.0   | 4.0 MB    | #######5   |  75% libstdcxx-ng-9.3.0   | 4.0 MB    | ########6  |  86% libstdcxx-ng-9.3.0   | 4.0 MB    | ########## | 100% libstdcxx-ng-9.3.0   | 4.0 MB    | ########## | 100% 
-asciitree-0.3.3      | 10 KB     |            |   0% asciitree-0.3.3      | 10 KB     | ########## | 100% 
-zstd-1.4.5           | 619 KB    |            |   0% zstd-1.4.5           | 619 KB    | ######4    |  65% zstd-1.4.5           | 619 KB    | ########## | 100% 
-pluggy-0.13.1        | 33 KB     |            |   0% pluggy-0.13.1        | 33 KB     | ########## | 100% 
-ptyprocess-0.7.0     | 17 KB     |            |   0% ptyprocess-0.7.0     | 17 KB     | ########## | 100% 
-mkl-service-2.3.0    | 62 KB     |            |   0% mkl-service-2.3.0    | 62 KB     | ########## | 100% 
-numpy-base-1.19.2    | 4.2 MB    |            |   0% numpy-base-1.19.2    | 4.2 MB    | 3          |   4% numpy-base-1.19.2    | 4.2 MB    | ##1        |  21% numpy-base-1.19.2    | 4.2 MB    | ###5       |  36% numpy-base-1.19.2    | 4.2 MB    | #####      |  51% numpy-base-1.19.2    | 4.2 MB    | ######5    |  65% numpy-base-1.19.2    | 4.2 MB    | #######9   |  79% numpy-base-1.19.2    | 4.2 MB    | #########7 |  98% numpy-base-1.19.2    | 4.2 MB    | ########## | 100% 
-nexusformat-0.6.0    | 55 KB     |            |   0% nexusformat-0.6.0    | 55 KB     | ########## | 100% 
-numpy-1.19.2         | 22 KB     |            |   0% numpy-1.19.2         | 22 KB     | ########## | 100% 
-pyyaml-5.4.1         | 174 KB    |            |   0% pyyaml-5.4.1         | 174 KB    | ########## | 100% 
-uncertainties-3.1.5  | 75 KB     |            |   0% uncertainties-3.1.5  | 75 KB     | ########## | 100% 
-markupsafe-1.1.1     | 33 KB     |            |   0% markupsafe-1.1.1     | 33 KB     | ########## | 100% 
-pygithub-1.53        | 113 KB    |            |   0% pygithub-1.53        | 113 KB    | ########## | 100% 
-glib-tools-2.66.7    | 85 KB     |            |   0% glib-tools-2.66.7    | 85 KB     | ########## | 100% 
-charls-2.1.0         | 136 KB    |            |   0% charls-2.1.0         | 136 KB    | ########## | 100% 
-libpng-1.6.37        | 278 KB    |            |   0% libpng-1.6.37        | 278 KB    | ########## | 100% libpng-1.6.37        | 278 KB    | ########## | 100% 
-astroid-2.5          | 284 KB    |            |   0% astroid-2.5          | 284 KB    | ########## | 100% astroid-2.5          | 284 KB    | ########## | 100% 
-requests-2.25.1      | 52 KB     |            |   0% requests-2.25.1      | 52 KB     | ########## | 100% 
-xlrd-2.0.1           | 90 KB     |            |   0% xlrd-2.0.1           | 90 KB     | ########## | 100% 
-bzip2-1.0.8          | 78 KB     |            |   0% bzip2-1.0.8          | 78 KB     | ########## | 100% 
-lmfit-1.0.2          | 71 KB     |            |   0% lmfit-1.0.2          | 71 KB     | ########## | 100% 
-mypy_extensions-0.4. | 9 KB      |            |   0% mypy_extensions-0.4. | 9 KB      | ########## | 100% 
-cytoolz-0.11.0       | 345 KB    |            |   0% cytoolz-0.11.0       | 345 KB    | ########## | 100% 
-nest-asyncio-1.5.1   | 10 KB     |            |   0% nest-asyncio-1.5.1   | 10 KB     | ########## | 100% 
-monotonic-1.5        | 17 KB     |            |   0% monotonic-1.5        | 17 KB     | ########## | 100% 
-hkl-5.0.0.2173       | 134 KB    |            |   0% hkl-5.0.0.2173       | 134 KB    | ########## | 100% hkl-5.0.0.2173       | 134 KB    | ########## | 100% 
-prometheus_client-0. | 45 KB     |            |   0% prometheus_client-0. | 45 KB     | ########## | 100% 
-pcre-8.44            | 212 KB    |            |   0% pcre-8.44            | 212 KB    | ########## | 100% 
-backcall-0.2.0       | 13 KB     |            |   0% backcall-0.2.0       | 13 KB     | ########## | 100% 
-jupyter_core-4.7.1   | 68 KB     |            |   0% jupyter_core-4.7.1   | 68 KB     | ########## | 100% 
-tifffile-2021.3.5    | 129 KB    |            |   0% tifffile-2021.3.5    | 129 KB    | ########## | 100% 
-dask-2021.3.0        | 5 KB      |            |   0% dask-2021.3.0        | 5 KB      | ########## | 100% 
-asteval-0.9.23       | 19 KB     |            |   0% asteval-0.9.23       | 19 KB     | ########## | 100% 
-bokeh-2.3.0          | 5.8 MB    |            |   0% bokeh-2.3.0          | 5.8 MB    | 6          |   7% bokeh-2.3.0          | 5.8 MB    | #7         |  17% bokeh-2.3.0          | 5.8 MB    | ##7        |  28% bokeh-2.3.0          | 5.8 MB    | ###8       |  38% bokeh-2.3.0          | 5.8 MB    | ####8      |  49% bokeh-2.3.0          | 5.8 MB    | #####9     |  59% bokeh-2.3.0          | 5.8 MB    | ######9    |  70% bokeh-2.3.0          | 5.8 MB    | #######9   |  79% bokeh-2.3.0          | 5.8 MB    | #########2 |  93% bokeh-2.3.0          | 5.8 MB    | ########## | 100% 
-importlib_metadata-2 | 11 KB     |            |   0% importlib_metadata-2 | 11 KB     | ########## | 100% 
-prettytable-2.1.0    | 23 KB     |            |   0% prettytable-2.1.0    | 23 KB     | ########## | 100% 
-matplotlib-base-3.3. | 5.1 MB    |            |   0% matplotlib-base-3.3. | 5.1 MB    | 7          |   7% matplotlib-base-3.3. | 5.1 MB    | #9         |  19% matplotlib-base-3.3. | 5.1 MB    | ##7        |  28% matplotlib-base-3.3. | 5.1 MB    | ####3      |  43% matplotlib-base-3.3. | 5.1 MB    | #####8     |  59% matplotlib-base-3.3. | 5.1 MB    | #######    |  71% matplotlib-base-3.3. | 5.1 MB    | ########2  |  83% matplotlib-base-3.3. | 5.1 MB    | #########3 |  94% matplotlib-base-3.3. | 5.1 MB    | ########## | 100% 
-docutils-0.16        | 672 KB    |            |   0% docutils-0.16        | 672 KB    | #####9     |  60% docutils-0.16        | 672 KB    | ########## | 100% 
-flake8-3.8.4         | 128 KB    |            |   0% flake8-3.8.4         | 128 KB    | ########## | 100% 
-sphinxcontrib-jsmath | 8 KB      |            |   0% sphinxcontrib-jsmath | 8 KB      | ########## | 100% 
-pyepics-3.4.3        | 185 KB    |            |   0% pyepics-3.4.3        | 185 KB    | ########## | 100% pyepics-3.4.3        | 185 KB    | ########## | 100% 
-importlib-metadata-2 | 35 KB     |            |   0% importlib-metadata-2 | 35 KB     | ########## | 100% 
-mkl-2020.2           | 138.3 MB  |            |   0% mkl-2020.2           | 138.3 MB  |            |   0% mkl-2020.2           | 138.3 MB  |            |   1% mkl-2020.2           | 138.3 MB  | 1          |   1% mkl-2020.2           | 138.3 MB  | 1          |   2% mkl-2020.2           | 138.3 MB  | 2          |   2% mkl-2020.2           | 138.3 MB  | 2          |   2% mkl-2020.2           | 138.3 MB  | 2          |   3% mkl-2020.2           | 138.3 MB  | 3          |   3% mkl-2020.2           | 138.3 MB  | 3          |   4% mkl-2020.2           | 138.3 MB  | 4          |   4% mkl-2020.2           | 138.3 MB  | 4          |   5% mkl-2020.2           | 138.3 MB  | 5          |   5% mkl-2020.2           | 138.3 MB  | 5          |   6% mkl-2020.2           | 138.3 MB  | 6          |   6% mkl-2020.2           | 138.3 MB  | 6          |   7% mkl-2020.2           | 138.3 MB  | 7          |   7% mkl-2020.2           | 138.3 MB  | 7          |   8% mkl-2020.2           | 138.3 MB  | 7          |   8% mkl-2020.2           | 138.3 MB  | 8          |   8% mkl-2020.2           | 138.3 MB  | 8          |   9% mkl-2020.2           | 138.3 MB  | 9          |   9% mkl-2020.2           | 138.3 MB  | 9          |  10% mkl-2020.2           | 138.3 MB  | #          |  10% mkl-2020.2           | 138.3 MB  | #          |  11% mkl-2020.2           | 138.3 MB  | #1         |  11% mkl-2020.2           | 138.3 MB  | #1         |  12% mkl-2020.2           | 138.3 MB  | #2         |  12% mkl-2020.2           | 138.3 MB  | #2         |  13% mkl-2020.2           | 138.3 MB  | #3         |  13% mkl-2020.2           | 138.3 MB  | #3         |  14% mkl-2020.2           | 138.3 MB  | #4         |  14% mkl-2020.2           | 138.3 MB  | #4         |  15% mkl-2020.2           | 138.3 MB  | #4         |  15% mkl-2020.2           | 138.3 MB  | #5         |  15% mkl-2020.2           | 138.3 MB  | #5         |  16% mkl-2020.2           | 138.3 MB  | #6         |  16% mkl-2020.2           | 138.3 MB  | #6         |  17% mkl-2020.2           | 138.3 MB  | #7         |  17% mkl-2020.2           | 138.3 MB  | #7         |  18% mkl-2020.2           | 138.3 MB  | #8         |  18% mkl-2020.2           | 138.3 MB  | #8         |  19% mkl-2020.2           | 138.3 MB  | #9         |  19% mkl-2020.2           | 138.3 MB  | #9         |  19% mkl-2020.2           | 138.3 MB  | ##         |  20% mkl-2020.2           | 138.3 MB  | ##         |  21% mkl-2020.2           | 138.3 MB  | ##         |  21% mkl-2020.2           | 138.3 MB  | ##1        |  21% mkl-2020.2           | 138.3 MB  | ##1        |  22% mkl-2020.2           | 138.3 MB  | ##2        |  22% mkl-2020.2           | 138.3 MB  | ##2        |  23% mkl-2020.2           | 138.3 MB  | ##3        |  23% mkl-2020.2           | 138.3 MB  | ##3        |  24% mkl-2020.2           | 138.3 MB  | ##4        |  24% mkl-2020.2           | 138.3 MB  | ##4        |  25% mkl-2020.2           | 138.3 MB  | ##5        |  25% mkl-2020.2           | 138.3 MB  | ##5        |  26% mkl-2020.2           | 138.3 MB  | ##6        |  26% mkl-2020.2           | 138.3 MB  | ##6        |  27% mkl-2020.2           | 138.3 MB  | ##7        |  27% mkl-2020.2           | 138.3 MB  | ##7        |  28% mkl-2020.2           | 138.3 MB  | ##8        |  28% mkl-2020.2           | 138.3 MB  | ##8        |  29% mkl-2020.2           | 138.3 MB  | ##9        |  29% mkl-2020.2           | 138.3 MB  | ##9        |  30% mkl-2020.2           | 138.3 MB  | ###        |  30% mkl-2020.2           | 138.3 MB  | ###        |  31% mkl-2020.2           | 138.3 MB  | ###1       |  31% mkl-2020.2           | 138.3 MB  | ###1       |  32% mkl-2020.2           | 138.3 MB  | ###2       |  32% mkl-2020.2           | 138.3 MB  | ###2       |  33% mkl-2020.2           | 138.3 MB  | ###3       |  33% mkl-2020.2           | 138.3 MB  | ###3       |  33% mkl-2020.2           | 138.3 MB  | ###3       |  34% mkl-2020.2           | 138.3 MB  | ###4       |  34% mkl-2020.2           | 138.3 MB  | ###4       |  35% mkl-2020.2           | 138.3 MB  | ###5       |  35% mkl-2020.2           | 138.3 MB  | ###5       |  36% mkl-2020.2           | 138.3 MB  | ###6       |  36% mkl-2020.2           | 138.3 MB  | ###6       |  37% mkl-2020.2           | 138.3 MB  | ###6       |  37% mkl-2020.2           | 138.3 MB  | ###7       |  37% mkl-2020.2           | 138.3 MB  | ###8       |  38% mkl-2020.2           | 138.3 MB  | ###8       |  39% mkl-2020.2           | 138.3 MB  | ###9       |  39% mkl-2020.2           | 138.3 MB  | ###9       |  40% mkl-2020.2           | 138.3 MB  | ####       |  40% mkl-2020.2           | 138.3 MB  | ####       |  40% mkl-2020.2           | 138.3 MB  | ####       |  41% mkl-2020.2           | 138.3 MB  | ####1      |  41% mkl-2020.2           | 138.3 MB  | ####1      |  42% mkl-2020.2           | 138.3 MB  | ####2      |  42% mkl-2020.2           | 138.3 MB  | ####2      |  43% mkl-2020.2           | 138.3 MB  | ####3      |  43% mkl-2020.2           | 138.3 MB  | ####3      |  44% mkl-2020.2           | 138.3 MB  | ####4      |  44% mkl-2020.2           | 138.3 MB  | ####4      |  45% mkl-2020.2           | 138.3 MB  | ####5      |  45% mkl-2020.2           | 138.3 MB  | ####5      |  46% mkl-2020.2           | 138.3 MB  | ####6      |  46% mkl-2020.2           | 138.3 MB  | ####6      |  47% mkl-2020.2           | 138.3 MB  | ####7      |  47% mkl-2020.2           | 138.3 MB  | ####7      |  48% mkl-2020.2           | 138.3 MB  | ####8      |  48% mkl-2020.2           | 138.3 MB  | ####8      |  49% mkl-2020.2           | 138.3 MB  | ####9      |  49% mkl-2020.2           | 138.3 MB  | ####9      |  50% mkl-2020.2           | 138.3 MB  | #####      |  50% mkl-2020.2           | 138.3 MB  | #####      |  51% mkl-2020.2           | 138.3 MB  | #####1     |  51% mkl-2020.2           | 138.3 MB  | #####1     |  52% mkl-2020.2           | 138.3 MB  | #####2     |  52% mkl-2020.2           | 138.3 MB  | #####2     |  53% mkl-2020.2           | 138.3 MB  | #####3     |  53% mkl-2020.2           | 138.3 MB  | #####3     |  54% mkl-2020.2           | 138.3 MB  | #####4     |  54% mkl-2020.2           | 138.3 MB  | #####4     |  55% mkl-2020.2           | 138.3 MB  | #####4     |  55% mkl-2020.2           | 138.3 MB  | #####5     |  56% mkl-2020.2           | 138.3 MB  | #####5     |  56% mkl-2020.2           | 138.3 MB  | #####6     |  56% mkl-2020.2           | 138.3 MB  | #####6     |  57% mkl-2020.2           | 138.3 MB  | #####7     |  57% mkl-2020.2           | 138.3 MB  | #####8     |  58% mkl-2020.2           | 138.3 MB  | #####8     |  58% mkl-2020.2           | 138.3 MB  | #####8     |  59% mkl-2020.2           | 138.3 MB  | #####9     |  60% mkl-2020.2           | 138.3 MB  | ######     |  60% mkl-2020.2           | 138.3 MB  | ######     |  60% mkl-2020.2           | 138.3 MB  | ######1    |  61% mkl-2020.2           | 138.3 MB  | ######1    |  62% mkl-2020.2           | 138.3 MB  | ######1    |  62% mkl-2020.2           | 138.3 MB  | ######2    |  62% mkl-2020.2           | 138.3 MB  | ######2    |  63% mkl-2020.2           | 138.3 MB  | ######3    |  63% mkl-2020.2           | 138.3 MB  | ######3    |  64% mkl-2020.2           | 138.3 MB  | ######4    |  64% mkl-2020.2           | 138.3 MB  | ######4    |  65% mkl-2020.2           | 138.3 MB  | ######5    |  65% mkl-2020.2           | 138.3 MB  | ######5    |  66% mkl-2020.2           | 138.3 MB  | ######5    |  66% mkl-2020.2           | 138.3 MB  | ######6    |  67% mkl-2020.2           | 138.3 MB  | ######7    |  67% mkl-2020.2           | 138.3 MB  | ######7    |  67% mkl-2020.2           | 138.3 MB  | ######7    |  68% mkl-2020.2           | 138.3 MB  | ######8    |  68% mkl-2020.2           | 138.3 MB  | ######8    |  69% mkl-2020.2           | 138.3 MB  | ######9    |  69% mkl-2020.2           | 138.3 MB  | ######9    |  70% mkl-2020.2           | 138.3 MB  | #######    |  70% mkl-2020.2           | 138.3 MB  | #######    |  71% mkl-2020.2           | 138.3 MB  | #######1   |  71% mkl-2020.2           | 138.3 MB  | #######1   |  72% mkl-2020.2           | 138.3 MB  | #######2   |  72% mkl-2020.2           | 138.3 MB  | #######2   |  72% mkl-2020.2           | 138.3 MB  | #######2   |  73% mkl-2020.2           | 138.3 MB  | #######3   |  73% mkl-2020.2           | 138.3 MB  | #######3   |  74% mkl-2020.2           | 138.3 MB  | #######4   |  74% mkl-2020.2           | 138.3 MB  | #######4   |  75% mkl-2020.2           | 138.3 MB  | #######5   |  75% mkl-2020.2           | 138.3 MB  | #######5   |  76% mkl-2020.2           | 138.3 MB  | #######6   |  76% mkl-2020.2           | 138.3 MB  | #######6   |  77% mkl-2020.2           | 138.3 MB  | #######7   |  77% mkl-2020.2           | 138.3 MB  | #######7   |  77% mkl-2020.2           | 138.3 MB  | #######7   |  78% mkl-2020.2           | 138.3 MB  | #######8   |  78% mkl-2020.2           | 138.3 MB  | #######8   |  79% mkl-2020.2           | 138.3 MB  | #######9   |  79% mkl-2020.2           | 138.3 MB  | #######9   |  80% mkl-2020.2           | 138.3 MB  | ########   |  80% mkl-2020.2           | 138.3 MB  | ########   |  81% mkl-2020.2           | 138.3 MB  | ########1  |  81% mkl-2020.2           | 138.3 MB  | ########1  |  82% mkl-2020.2           | 138.3 MB  | ########2  |  82% mkl-2020.2           | 138.3 MB  | ########2  |  83% mkl-2020.2           | 138.3 MB  | ########3  |  83% mkl-2020.2           | 138.3 MB  | ########3  |  84% mkl-2020.2           | 138.3 MB  | ########4  |  84% mkl-2020.2           | 138.3 MB  | ########4  |  85% mkl-2020.2           | 138.3 MB  | ########5  |  85% mkl-2020.2           | 138.3 MB  | ########5  |  86% mkl-2020.2           | 138.3 MB  | ########6  |  86% mkl-2020.2           | 138.3 MB  | ########6  |  86% mkl-2020.2           | 138.3 MB  | ########6  |  87% mkl-2020.2           | 138.3 MB  | ########7  |  87% mkl-2020.2           | 138.3 MB  | ########7  |  88% mkl-2020.2           | 138.3 MB  | ########8  |  88% mkl-2020.2           | 138.3 MB  | ########8  |  89% mkl-2020.2           | 138.3 MB  | ########9  |  89% mkl-2020.2           | 138.3 MB  | ########9  |  90% mkl-2020.2           | 138.3 MB  | #########  |  90% mkl-2020.2           | 138.3 MB  | #########  |  91% mkl-2020.2           | 138.3 MB  | #########1 |  91% mkl-2020.2           | 138.3 MB  | #########1 |  92% mkl-2020.2           | 138.3 MB  | #########2 |  92% mkl-2020.2           | 138.3 MB  | #########2 |  93% mkl-2020.2           | 138.3 MB  | #########3 |  93% mkl-2020.2           | 138.3 MB  | #########3 |  94% mkl-2020.2           | 138.3 MB  | #########4 |  94% mkl-2020.2           | 138.3 MB  | #########4 |  95% mkl-2020.2           | 138.3 MB  | #########5 |  95% mkl-2020.2           | 138.3 MB  | #########5 |  96% mkl-2020.2           | 138.3 MB  | #########6 |  96% mkl-2020.2           | 138.3 MB  | #########6 |  97% mkl-2020.2           | 138.3 MB  | #########7 |  97% mkl-2020.2           | 138.3 MB  | #########7 |  98% mkl-2020.2           | 138.3 MB  | #########8 |  98% mkl-2020.2           | 138.3 MB  | #########8 |  99% mkl-2020.2           | 138.3 MB  | #########9 |  99% mkl-2020.2           | 138.3 MB  | #########9 | 100% mkl-2020.2           | 138.3 MB  | ########## | 100% 
-jpeg-9b              | 214 KB    |            |   0% jpeg-9b              | 214 KB    | ########## | 100% 
-libaec-1.0.4         | 32 KB     |            |   0% libaec-1.0.4         | 32 KB     | ########## | 100% 
-freetype-2.10.4      | 596 KB    |            |   0% freetype-2.10.4      | 596 KB    | ######9    |  70% freetype-2.10.4      | 596 KB    | ########## | 100% 
-python_abi-3.8       | 4 KB      |            |   0% python_abi-3.8       | 4 KB      | ########## | 100% 
-send2trash-1.5.0     | 14 KB     |            |   0% send2trash-1.5.0     | 14 KB     | ########## | 100% 
-sphinxcontrib-appleh | 29 KB     |            |   0% sphinxcontrib-appleh | 29 KB     | ########## | 100% 
-sphinxcontrib-qthelp | 26 KB     |            |   0% sphinxcontrib-qthelp | 26 KB     | ########## | 100% 
-ipython-7.21.0       | 983 KB    |            |   0% ipython-7.21.0       | 983 KB    | ####       |  41% ipython-7.21.0       | 983 KB    | ########## | 100% ipython-7.21.0       | 983 KB    | ########## | 100% 
-entrypoints-0.3      | 10 KB     |            |   0% entrypoints-0.3      | 10 KB     | ########## | 100% 
-mkl_random-1.1.1     | 341 KB    |            |   0% mkl_random-1.1.1     | 341 KB    | #####1     |  52% mkl_random-1.1.1     | 341 KB    | ########## | 100% 
-databroker-pack-0.3. | 21 KB     |            |   0% databroker-pack-0.3. | 21 KB     | ########## | 100% databroker-pack-0.3. | 21 KB     | ########## | 100% 
-fontconfig-2.13.1    | 250 KB    |            |   0% fontconfig-2.13.1    | 250 KB    | ########## | 100% 
-zeromq-4.3.3         | 500 KB    |            |   0% zeromq-4.3.3         | 500 KB    | ########3  |  83% zeromq-4.3.3         | 500 KB    | ########## | 100% 
-iniconfig-1.1.1      | 8 KB      |            |   0% iniconfig-1.1.1      | 8 KB      | ########## | 100% 
-lcms2-2.11           | 307 KB    |            |   0% lcms2-2.11           | 307 KB    | ########## | 100% 
-imageio-2.9.0        | 3.0 MB    |            |   0% imageio-2.9.0        | 3.0 MB    | #1         |  11% imageio-2.9.0        | 3.0 MB    | ###1       |  32% imageio-2.9.0        | 3.0 MB    | ####6      |  47% imageio-2.9.0        | 3.0 MB    | #######1   |  72% imageio-2.9.0        | 3.0 MB    | #########1 |  92% imageio-2.9.0        | 3.0 MB    | ########## | 100% 
-gsl-2.4              | 1.8 MB    |            |   0% gsl-2.4              | 1.8 MB    | ##2        |  23% gsl-2.4              | 1.8 MB    | #####6     |  57% gsl-2.4              | 1.8 MB    | #########  |  90% gsl-2.4              | 1.8 MB    | ########## | 100% 
-typing_extensions-3. | 25 KB     |            |   0% typing_extensions-3. | 25 KB     | ########## | 100% 
-pyresttable-2020.0.3 | 15 KB     |            |   0% pyresttable-2020.0.3 | 15 KB     | ########## | 100% pyresttable-2020.0.3 | 15 KB     | ########## | 100% 
-libxcb-1.14          | 505 KB    |            |   0% libxcb-1.14          | 505 KB    | ########5  |  86% libxcb-1.14          | 505 KB    | ########## | 100% 
-pims-0.5             | 66 KB     |            |   0% pims-0.5             | 66 KB     | ########## | 100% 
-libuuid-1.0.3        | 15 KB     |            |   0% libuuid-1.0.3        | 15 KB     | ########## | 100% 
-ca-certificates-2021 | 118 KB    |            |   0% ca-certificates-2021 | 118 KB    | ########## | 100% 
-cachetools-4.2.1     | 13 KB     |            |   0% cachetools-4.2.1     | 13 KB     | ########## | 100% 
-fsspec-0.8.3         | 72 KB     |            |   0% fsspec-0.8.3         | 72 KB     | ########## | 100% 
-pylint-2.7.2         | 449 KB    |            |   0% pylint-2.7.2         | 449 KB    | #########6 |  96% pylint-2.7.2         | 449 KB    | ########## | 100% 
-pickleshare-0.7.5    | 13 KB     |            |   0% pickleshare-0.7.5    | 13 KB     | ########## | 100% 
-libiconv-1.16        | 1.4 MB    |            |   0% libiconv-1.16        | 1.4 MB    | ##3        |  23% libiconv-1.16        | 1.4 MB    | ######9    |  69% libiconv-1.16        | 1.4 MB    | ########## | 100% libiconv-1.16        | 1.4 MB    | ########## | 100% 
-intel-openmp-2020.2  | 786 KB    |            |   0% intel-openmp-2020.2  | 786 KB    | #####      |  51% intel-openmp-2020.2  | 786 KB    | ########## | 100% 
-notebook-6.2.0       | 4.1 MB    |            |   0% notebook-6.2.0       | 4.1 MB    | #          |  10% notebook-6.2.0       | 4.1 MB    | ##6        |  26% notebook-6.2.0       | 4.1 MB    | ####1      |  41% notebook-6.2.0       | 4.1 MB    | #####6     |  56% notebook-6.2.0       | 4.1 MB    | #######1   |  71% notebook-6.2.0       | 4.1 MB    | ########6  |  86% notebook-6.2.0       | 4.1 MB    | #########9 |  99% notebook-6.2.0       | 4.1 MB    | ########## | 100% 
-suitcase-msgpack-0.2 | 9 KB      |            |   0% suitcase-msgpack-0.2 | 9 KB      | ########## | 100% 
-tzlocal-2.1          | 29 KB     |            |   0% tzlocal-2.1          | 29 KB     | ########## | 100% 
-sphinx-3.5.2         | 1.1 MB    |            |   0% sphinx-3.5.2         | 1.1 MB    | ###2       |  32% sphinx-3.5.2         | 1.1 MB    | ######6    |  67% sphinx-3.5.2         | 1.1 MB    | ########## | 100% sphinx-3.5.2         | 1.1 MB    | ########## | 100% 
-matplotlib-3.3.4     | 26 KB     |            |   0% matplotlib-3.3.4     | 26 KB     | ########## | 100% 
-pyqt-5.9.2           | 4.5 MB    |            |   0% pyqt-5.9.2           | 4.5 MB    | 8          |   9% pyqt-5.9.2           | 4.5 MB    | ##2        |  22% pyqt-5.9.2           | 4.5 MB    | ###5       |  36% pyqt-5.9.2           | 4.5 MB    | ####8      |  49% pyqt-5.9.2           | 4.5 MB    | ######2    |  62% pyqt-5.9.2           | 4.5 MB    | #######5   |  76% pyqt-5.9.2           | 4.5 MB    | ########9  |  89% pyqt-5.9.2           | 4.5 MB    | ########## | 100% 
-versioneer-0.19      | 37 KB     |            |   0% versioneer-0.19      | 37 KB     | ########## | 100% 
-libdeflate-1.7       | 55 KB     |            |   0% libdeflate-1.7       | 55 KB     | ########## | 100% 
-msgpack-python-1.0.2 | 83 KB     |            |   0% msgpack-python-1.0.2 | 83 KB     | ########## | 100% 
-ipython_genutils-0.2 | 27 KB     |            |   0% ipython_genutils-0.2 | 27 KB     | ########## | 100% 
-pymongo-3.11.3       | 1.2 MB    |            |   0% pymongo-3.11.3       | 1.2 MB    | ###2       |  33% pymongo-3.11.3       | 1.2 MB    | ########4  |  84% pymongo-3.11.3       | 1.2 MB    | ########## | 100% 
-event-model-1.17.1   | 36 KB     |            |   0% event-model-1.17.1   | 36 KB     | ########## | 100% 
-sphinxcontrib-serial | 24 KB     |            |   0% sphinxcontrib-serial | 24 KB     | ########## | 100% 
-wrapt-1.12.1         | 50 KB     |            |   0% wrapt-1.12.1         | 50 KB     | ########## | 100% 
-expat-2.2.10         | 153 KB    |            |   0% expat-2.2.10         | 153 KB    | ########## | 100% 
-sortedcontainers-2.3 | 26 KB     |            |   0% sortedcontainers-2.3 | 26 KB     | ########## | 100% 
-toml-0.10.1          | 20 KB     |            |   0% toml-0.10.1          | 20 KB     | ########## | 100% 
-cffi-1.14.5          | 224 KB    |            |   0% cffi-1.14.5          | 224 KB    | ########## | 100% 
-bleach-3.3.0         | 113 KB    |            |   0% bleach-3.3.0         | 113 KB    | ########## | 100% 
-prompt_toolkit-3.0.8 | 12 KB     |            |   0% prompt_toolkit-3.0.8 | 12 KB     | ########## | 100% 
-nexpy-0.13.2         | 579 KB    |            |   0% nexpy-0.13.2         | 579 KB    | ####4      |  44% nexpy-0.13.2         | 579 KB    | ########## | 100% nexpy-0.13.2         | 579 KB    | ########## | 100% 
-urllib3-1.26.3       | 105 KB    |            |   0% urllib3-1.26.3       | 105 KB    | ########## | 100% 
-databroker-1.2.2     | 146 KB    |            |   0% databroker-1.2.2     | 146 KB    | ########## | 100% databroker-1.2.2     | 146 KB    | ########## | 100% 
-et_xmlfile-1.0.1     | 12 KB     |            |   0% et_xmlfile-1.0.1     | 12 KB     | ########## | 100% 
-xarray-0.17.0        | 510 KB    |            |   0% xarray-0.17.0        | 510 KB    | ######9    |  69% xarray-0.17.0        | 510 KB    | ########## | 100% 
-python-3.8.8         | 50.0 MB   |            |   0% python-3.8.8         | 50.0 MB   |            |   1% python-3.8.8         | 50.0 MB   | 1          |   2% python-3.8.8         | 50.0 MB   | 3          |   3% python-3.8.8         | 50.0 MB   | 4          |   4% python-3.8.8         | 50.0 MB   | 5          |   6% python-3.8.8         | 50.0 MB   | 6          |   7% python-3.8.8         | 50.0 MB   | 7          |   8% python-3.8.8         | 50.0 MB   | 9          |   9% python-3.8.8         | 50.0 MB   | #          |  11% python-3.8.8         | 50.0 MB   | #1         |  12% python-3.8.8         | 50.0 MB   | #3         |  13% python-3.8.8         | 50.0 MB   | #4         |  14% python-3.8.8         | 50.0 MB   | #5         |  16% python-3.8.8         | 50.0 MB   | #7         |  17% python-3.8.8         | 50.0 MB   | #8         |  18% python-3.8.8         | 50.0 MB   | #9         |  20% python-3.8.8         | 50.0 MB   | ##         |  21% python-3.8.8         | 50.0 MB   | ##1        |  22% python-3.8.8         | 50.0 MB   | ##3        |  23% python-3.8.8         | 50.0 MB   | ##4        |  24% python-3.8.8         | 50.0 MB   | ##5        |  26% python-3.8.8         | 50.0 MB   | ##6        |  27% python-3.8.8         | 50.0 MB   | ##8        |  28% python-3.8.8         | 50.0 MB   | ##9        |  30% python-3.8.8         | 50.0 MB   | ###        |  31% python-3.8.8         | 50.0 MB   | ###2       |  32% python-3.8.8         | 50.0 MB   | ###3       |  33% python-3.8.8         | 50.0 MB   | ###5       |  35% python-3.8.8         | 50.0 MB   | ###6       |  36% python-3.8.8         | 50.0 MB   | ###7       |  38% python-3.8.8         | 50.0 MB   | ###9       |  39% python-3.8.8         | 50.0 MB   | ####       |  41% python-3.8.8         | 50.0 MB   | ####1      |  42% python-3.8.8         | 50.0 MB   | ####3      |  43% python-3.8.8         | 50.0 MB   | ####4      |  45% python-3.8.8         | 50.0 MB   | ####6      |  46% python-3.8.8         | 50.0 MB   | ####7      |  47% python-3.8.8         | 50.0 MB   | ####8      |  49% python-3.8.8         | 50.0 MB   | ####9      |  49% python-3.8.8         | 50.0 MB   | #####      |  50% python-3.8.8         | 50.0 MB   | #####1     |  51% python-3.8.8         | 50.0 MB   | #####2     |  53% python-3.8.8         | 50.0 MB   | #####4     |  54% python-3.8.8         | 50.0 MB   | #####5     |  55% python-3.8.8         | 50.0 MB   | #####6     |  56% python-3.8.8         | 50.0 MB   | #####7     |  58% python-3.8.8         | 50.0 MB   | #####8     |  59% python-3.8.8         | 50.0 MB   | ######     |  60% python-3.8.8         | 50.0 MB   | ######1    |  61% python-3.8.8         | 50.0 MB   | ######2    |  63% python-3.8.8         | 50.0 MB   | ######4    |  64% python-3.8.8         | 50.0 MB   | ######5    |  65% python-3.8.8         | 50.0 MB   | ######6    |  67% python-3.8.8         | 50.0 MB   | ######8    |  68% python-3.8.8         | 50.0 MB   | ######9    |  70% python-3.8.8         | 50.0 MB   | #######    |  71% python-3.8.8         | 50.0 MB   | #######2   |  73% python-3.8.8         | 50.0 MB   | #######3   |  74% python-3.8.8         | 50.0 MB   | #######5   |  75% python-3.8.8         | 50.0 MB   | #######6   |  77% python-3.8.8         | 50.0 MB   | #######8   |  78% python-3.8.8         | 50.0 MB   | #######9   |  80% python-3.8.8         | 50.0 MB   | ########1  |  81% python-3.8.8         | 50.0 MB   | ########2  |  82% python-3.8.8         | 50.0 MB   | ########3  |  84% python-3.8.8         | 50.0 MB   | ########5  |  85% python-3.8.8         | 50.0 MB   | ########6  |  86% python-3.8.8         | 50.0 MB   | ########7  |  88% python-3.8.8         | 50.0 MB   | ########8  |  89% python-3.8.8         | 50.0 MB   | ########9  |  90% python-3.8.8         | 50.0 MB   | #########1 |  91% python-3.8.8         | 50.0 MB   | #########2 |  92% python-3.8.8         | 50.0 MB   | #########3 |  94% python-3.8.8         | 50.0 MB   | #########4 |  95% python-3.8.8         | 50.0 MB   | #########6 |  96% python-3.8.8         | 50.0 MB   | #########7 |  97% python-3.8.8         | 50.0 MB   | #########8 |  99% python-3.8.8         | 50.0 MB   | #########9 | 100% python-3.8.8         | 50.0 MB   | ########## | 100% 
-webencodings-0.5.1   | 20 KB     |            |   0% webencodings-0.5.1   | 20 KB     | ########## | 100% 
-gettext-0.19.8.1     | 2.9 MB    |            |   0% gettext-0.19.8.1     | 2.9 MB    | 6          |   6% gettext-0.19.8.1     | 2.9 MB    | ##4        |  24% gettext-0.19.8.1     | 2.9 MB    | #####1     |  51% gettext-0.19.8.1     | 2.9 MB    | #######    |  71% gettext-0.19.8.1     | 2.9 MB    | #########2 |  92% gettext-0.19.8.1     | 2.9 MB    | ########## | 100% 
-tblib-1.7.0          | 16 KB     |            |   0% tblib-1.7.0          | 16 KB     | ########## | 100% 
-_libgcc_mutex-0.1    | 3 KB      |            |   0% _libgcc_mutex-0.1    | 3 KB      | ########## | 100% 
-libgcc-ng-9.3.0      | 7.8 MB    |            |   0% libgcc-ng-9.3.0      | 7.8 MB    | 4          |   4% libgcc-ng-9.3.0      | 7.8 MB    | #2         |  12% libgcc-ng-9.3.0      | 7.8 MB    | #9         |  19% libgcc-ng-9.3.0      | 7.8 MB    | ##9        |  29% libgcc-ng-9.3.0      | 7.8 MB    | ###7       |  37% libgcc-ng-9.3.0      | 7.8 MB    | ####4      |  45% libgcc-ng-9.3.0      | 7.8 MB    | #####2     |  53% libgcc-ng-9.3.0      | 7.8 MB    | ######     |  61% libgcc-ng-9.3.0      | 7.8 MB    | ######8    |  68% libgcc-ng-9.3.0      | 7.8 MB    | #######5   |  76% libgcc-ng-9.3.0      | 7.8 MB    | ########4  |  84% libgcc-ng-9.3.0      | 7.8 MB    | #########4 |  95% libgcc-ng-9.3.0      | 7.8 MB    | ########## | 100% 
-partd-1.1.0          | 20 KB     |            |   0% partd-1.1.0          | 20 KB     | ########## | 100% 
-sphinxcontrib-htmlhe | 28 KB     |            |   0% sphinxcontrib-htmlhe | 28 KB     | ########## | 100% 
-Preparing transaction: ...working... done
-Verifying transaction: ...working... done
-Executing transaction: ...working... done
-Installing pip dependencies: ...working... Ran pip subprocess with arguments:
-['/opt/miniconda3/envs/class_2021_03/bin/python', '-m', 'pip', 'install', '-U', '-r', '/opt/condaenv._hmyu8_w.requirements.txt']
-Pip subprocess output:
-Requirement already satisfied: bluesky-live in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from -r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (0.0.7)
-Requirement already satisfied: super-state-machine in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from -r /opt/condaenv._hmyu8_w.requirements.txt (line 2)) (2.0.2)
-Requirement already satisfied: dask[array]>=2 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (2021.3.0)
-Requirement already satisfied: entrypoints in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (0.3)
-Requirement already satisfied: xarray in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (0.17.0)
-Requirement already satisfied: pandas in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (1.2.3)
-Requirement already satisfied: numpy in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (1.19.2)
-Requirement already satisfied: event-model>=1.16.0 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (1.17.1)
-Requirement already satisfied: pyyaml in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from dask[array]>=2->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (5.4.1)
-Requirement already satisfied: toolz>=0.8.2 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from dask[array]>=2->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (0.11.1)
-Requirement already satisfied: jsonschema in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from event-model>=1.16.0->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (3.2.0)
-Requirement already satisfied: six in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from super-state-machine->-r /opt/condaenv._hmyu8_w.requirements.txt (line 2)) (1.15.0)
-Requirement already satisfied: setuptools in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from jsonschema->event-model>=1.16.0->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (52.0.0.post20210125)
-Requirement already satisfied: attrs>=17.4.0 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from jsonschema->event-model>=1.16.0->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (20.3.0)
-Requirement already satisfied: pyrsistent>=0.14.0 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from jsonschema->event-model>=1.16.0->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (0.17.3)
-Requirement already satisfied: python-dateutil>=2.7.3 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from pandas->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (2.8.1)
-Requirement already satisfied: pytz>=2017.3 in ./miniconda3/envs/class_2021_03/lib/python3.8/site-packages (from pandas->bluesky-live->-r /opt/condaenv._hmyu8_w.requirements.txt (line 1)) (2021.1)
-
-done
-#
-# To activate this environment, use
-#
-#     $ conda activate class_2021_03
-#
-# To deactivate an active environment, use
-#
-#     $ conda deactivate
-
-# conda environments:
-#
-base                  *  /opt/miniconda3
-class_2021_03            /opt/miniconda3/envs/class_2021_03
-
-Error processing tar file(exit status 1): write /opt/miniconda3/envs/class_2021_03/lib/libmkl_gf_lp64.so: no space left on device
-# build finished:  2021-03-10T00:21:16-06:00
