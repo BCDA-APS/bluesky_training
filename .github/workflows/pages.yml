@@ -1,4 +1,5 @@
 name: Publish Sphinx Docs to GitHub Pages
+
 on:
   # Build the docs on pushes to main branch, PRs to main branch, and new tags.
   # Publish only on demand.
@@ -18,9 +19,13 @@ on:
         required: true
         default: false
 
+defaults:
+  run:
+    shell: bash -l {0}
+
 jobs:
 
-  pages:
+  docs:
     runs-on: ubuntu-latest
 
     permissions:
