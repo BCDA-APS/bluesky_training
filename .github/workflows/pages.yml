@@ -24,7 +24,7 @@ jobs:
     runs-on: ubuntu-latest
 
     permissions:
-      id-token: read|write|none
+      id-token: write
 
     steps:
 
