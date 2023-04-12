@@ -32,10 +32,10 @@ jobs:
 
     steps:
 
-    - name: Deploy Information
-      if: ${{ github.event.inputs.deploy }}
-      run: |
-        echo "The will be published from this workflow run."
+    # - name: Deploy Information
+    #   if: ${{ github.event.inputs.deploy }}
+    #   run: |
+    #     echo "The will be published from this workflow run."
 
     - name: Install pandoc
       run: |
@@ -51,7 +51,7 @@ jobs:
         cache: true
 
     - uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event.inputs.deploy }}
+      # if: ${{ github.event.inputs.deploy }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ steps.deployment.outputs.artifact }}
