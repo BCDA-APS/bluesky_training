@@ -1,9 +1,9 @@
-name: Deploy Sphinx documentation to GitHub Pages
+name: Publish Sphinx docs to GitHub Pages
 # see: https://github.com/marketplace/actions/sphinx-to-github-pages
 
-on:
-  push:
-    branches: [master] # branch to trigger deployment
+on: [push]
+  # push:
+  #   branches: [master] # branch to trigger deployment
 
 jobs:
 
