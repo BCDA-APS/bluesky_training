@@ -213,40 +213,46 @@ I Mon-14:49:39 - /home/prjemian/.ipython-bluesky/profile_bluesky/startup/instrum
 
 ```python
 In [1]: listobjects()
-========= ================================ ============== =================
-name      ophyd structure                  EPICS PV       label(s)         
-========= ================================ ============== =================
-I0        EpicsSignalRO                    gp:scaler1.S2 counter channel  
-adsimdet  MySimDetector                    ad:            area_detector    
-calcouts  UserCalcoutDevice                gp:                            
-calcs     UserCalcsDevice                  gp:                            
-diode     EpicsSignalRO                    gp:scaler1.S4 counter channel  
-ioc_stats IocInfoDevice                    gp:                            
-m1        EpicsMotor                       gp:m1         motor            
-m10       EpicsMotor                       gp:m10        motor            
-m11       EpicsMotor                       gp:m11        motor            
-m12       EpicsMotor                       gp:m12        motor            
-m13       EpicsMotor                       gp:m13        motor            
-m14       EpicsMotor                       gp:m14        motor            
-m15       EpicsMotor                       gp:m15        motor            
-m16       EpicsMotor                       gp:m16        motor            
-m2        EpicsMotor                       gp:m2         motor            
-m3        EpicsMotor                       gp:m3         motor            
-m4        EpicsMotor                       gp:m4         motor            
-m5        EpicsMotor                       gp:m5         motor            
-m6        EpicsMotor                       gp:m6         motor            
-m7        EpicsMotor                       gp:m7         motor            
-m8        EpicsMotor                       gp:m8         motor            
-m9        EpicsMotor                       gp:m9         motor            
-noisy     EpicsSignalRO                    gp:userCalc1  detectors        
-scaler1   ScalerCH                         gp:scaler1    detectors scalers
-scint     EpicsSignalRO                    gp:scaler1.S3 counter channel  
-shutter   SimulatedApsPssShutterWithStatus                shutters         
-timebase  EpicsSignalRO                    gp:scaler1.S1 counter channel  
-========= ================================ ============== =================
-
-Out[1]: <pyRestTable.rest_table.Table at 0x7f72ec2da190>
-
+Out[1]: 
+=========== ================================ ============== ===================
+name        class                            PV (or prefix) label(s)           
+=========== ================================ ============== ===================
+I0          EpicsSignalRO                    gp:scaler1.S2  counter channel    
+I00         EpicsSignalRO                    gp:scaler1.S6  counter channel    
+I000        EpicsSignalRO                    gp:scaler1.S5  counter channel    
+adsimdet    SimDetector_V34                  ad:            area_detector      
+calcouts    UserCalcoutDevice                gp:                               
+calcs       UserCalcsDevice                  gp:                               
+dcm         MyKohzu                          gp:                               
+diode       EpicsSignalRO                    gp:scaler1.S4  counter channel    
+fourc       FourCircle                       gp:                               
+gp_stats    IocInfoDevice                    gp:                               
+m1          MyEpicsMotor                     gp:m1          motor              
+m10         MyEpicsMotor                     gp:m10         motor              
+m11         MyEpicsMotor                     gp:m11         motor              
+m12         MyEpicsMotor                     gp:m12         motor              
+m13         MyEpicsMotor                     gp:m13         motor              
+m14         MyEpicsMotor                     gp:m14         motor              
+m15         MyEpicsMotor                     gp:m15         motor              
+m16         MyEpicsMotor                     gp:m16         motor              
+m2          MyEpicsMotor                     gp:m2          motor              
+m3          MyEpicsMotor                     gp:m3          motor              
+m4          MyEpicsMotor                     gp:m4          motor              
+m7          MyEpicsMotor                     gp:m7          motor              
+m8          MyEpicsMotor                     gp:m8          motor              
+m9          MyEpicsMotor                     gp:m9          motor              
+noisy       EpicsSignalRO                    gp:userCalc1   detectors simulator
+scaler1     ScalerCH                         gp:scaler1     detectors scalers  
+scint       EpicsSignalRO                    gp:scaler1.S3  counter channel    
+shutter     SimulatedApsPssShutterWithStatus                shutters           
+sim4c       SimulatedE4CV                                                      
+simk4c      SimulatedK4CV                                                      
+simk6c      SimulatedK6C                                                       
+sixc        SixCircle                        gp:                               
+slit1       Optics2Slit2D_HV                 gp:Slit1                          
+temperature MyPvPositioner                   gp:userCalc8                      
+timebase    EpicsSignalRO                    gp:scaler1.S1  counter channel    
+=========== ================================ ============== ===================
 ```
 
 </details>
@@ -273,8 +279,6 @@ motor
   m2                             0.0         -32000.0    32000.0     0.0        
   m3                             0.0         -32000.0    32000.0     0.0        
   m4                             0.0         -32000.0    32000.0     0.0        
-  m5                             0.0         -32000.0    32000.0     0.0        
-  m6                             0.0         -32000.0    32000.0     0.0        
   m7                             0.0         -32000.0    32000.0     0.0        
   m8                             0.0         -32000.0    32000.0     0.0        
   m9                             0.0         -32000.0    32000.0     0.0        
@@ -291,8 +295,6 @@ motor
   m2                                     m2                                    
   m3                                     m3                                    
   m4                                     m4                                    
-  m5                                     m5                                    
-  m6                                     m6                                    
   m7                                     m7                                    
   m8                                     m8                                    
   m9                                     m9                                    
