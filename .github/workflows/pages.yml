@@ -1,0 +1,53 @@
+name: Publish Sphinx Docs to GitHub Pages
+on:
+  # Build the docs on pushes to main branch, PRs to main branch, and new tags.
+  # Publish only on demand.
+  push:
+    branches:
+      - main
+    tags:
+      - '*'  # all tags
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:   # allow manual triggering
+    inputs:
+      deploy:
+        description: 'Deploy documentation'
+        type: boolean
+        required: true
+        default: false
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+
+    - name: Install package
+      run: |
+        pip install -e .
+
+    - name: Install sphinx-rtd-theme
+      run: |
+        pip install sphinx-rtd-theme
+
+    - name: Build and Commit
+      uses: sphinx-notes/pages@master
+      with:
+        # path to conf.py directory
+        documentation_path: docs/source
+
+    - name: Publish (push gh-pages branch) only on demand
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.event.inputs.deploy }}
+      with:
+        publish_branch: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ env.TMP_DIR }}
+        force_orphan: true
