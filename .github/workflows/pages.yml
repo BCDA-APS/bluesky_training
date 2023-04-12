@@ -18,6 +18,8 @@ jobs:
       with:
         documentation_path: ./docs/source
         publish: false
+        requirements_path: ./docs/requirements.txt
+        cache: true
 
     - uses: peaceiris/actions-gh-pages@v3
       with:
