@@ -1,0 +1,1040 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Call Shell Command &amp; Wait for Finish &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_doodle';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Dynamic Limits for Two Motors" href="_dynamic_limits_2motor.html" />
+    <link rel="prev" title="Count the scaler" href="_count_scaler.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Call Shell Command &amp; Wait for Finish</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Call-Shell-Command-&amp;-Wait-for-Finish">
+<h1>Call Shell Command &amp; Wait for Finish<a class="headerlink" href="#Call-Shell-Command-&-Wait-for-Finish" title="Permalink to this heading">#</a></h1>
+<p>Demonstrate how to launch a (Linux bash) shell command and wait for it to finish.</p>
+<p>This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> is for setting and reading one value. The <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> can provide the multiple values needed.</p>
+<p>This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> is for setting and reading only one value. First we show how a <code class="docutils literal notranslate"><span class="pre">Signal</span></code>-based implementation would behave. Then, we show how the <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> can provide the multiple values needed.</p>
+<p>To simulate a Linux command to be run, a bash shell script (<code class="docutils literal notranslate"><span class="pre">doodle.sh</span></code>) was created that runs a 5 second countdown printing to stdout (the terminal console).</p>
+<section id="1.-Example-shell-command">
+<h2>1. Example shell command<a class="headerlink" href="#1.-Example-shell-command" title="Permalink to this heading">#</a></h2>
+<p>The example shell command is a bash script that executes a 5 second countdown. The script is shown first:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>./doodle.sh
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+#!/bin/bash
+
+echo $(date): Doodle demonstration starting
+echo $(date): sleep 5 seconds
+for i in 5 4 3 2 1; do
+    echo $(date): countdown ${i}
+    sleep 1
+done
+echo $(date): Doodle demonstration complete
+</pre></div></div>
+</div>
+<p>Now, run it to show how it works.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>bash<span class="w"> </span>./doodle.sh
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fri 23 Jul 2021 09:38:40 PM CDT: Doodle demonstration starting
+Fri 23 Jul 2021 09:38:40 PM CDT: sleep 5 seconds
+Fri 23 Jul 2021 09:38:40 PM CDT: countdown 5
+Fri 23 Jul 2021 09:38:41 PM CDT: countdown 4
+Fri 23 Jul 2021 09:38:42 PM CDT: countdown 3
+Fri 23 Jul 2021 09:38:43 PM CDT: countdown 2
+Fri 23 Jul 2021 09:38:44 PM CDT: countdown 1
+Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration complete
+</pre></div></div>
+</div>
+</section>
+<section id="2.-Run-from-Python-subprocess">
+<h2>2. Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code><a class="headerlink" href="#2.-Run-from-Python-subprocess" title="Permalink to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">time</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;bash ./doodle.sh&quot;</span>
+
+<span class="c1"># Start the command</span>
+<span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+    <span class="n">command</span><span class="p">,</span>
+    <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+    <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+    <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wait for the command to finish and collect the outputs.</span>
+<span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+time.time() - t0 = 5.049006938934326
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stdout</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">stderr</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+stdout = b&#39;Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:38:45 PM CDT: countdown 5\nFri 23 Jul 2021 09:38:46 PM CDT: countdown 4\nFri 23 Jul 2021 09:38:47 PM CDT: countdown 3\nFri 23 Jul 2021 09:38:48 PM CDT: countdown 2\nFri 23 Jul 2021 09:38:49 PM CDT: countdown 1\nFri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete\n&#39;
+stderr = b&#39;&#39;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># byte strings, must decode to see as string</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+stdout
+ Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting
+Fri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds
+Fri 23 Jul 2021 09:38:45 PM CDT: countdown 5
+Fri 23 Jul 2021 09:38:46 PM CDT: countdown 4
+Fri 23 Jul 2021 09:38:47 PM CDT: countdown 3
+Fri 23 Jul 2021 09:38:48 PM CDT: countdown 2
+Fri 23 Jul 2021 09:38:49 PM CDT: countdown 1
+Fri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete
+
+stderr
+
+</pre></div></div>
+</div>
+</section>
+<section id="3.-As-ophyd.Signal">
+<h2>3. As <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code><a class="headerlink" href="#3.-As-ophyd.Signal" title="Permalink to this heading">#</a></h2>
+<p>Since this is a demonstration, we show here why the <code class="docutils literal notranslate"><span class="pre">Signal</span></code> implementation just does not provide the right behavior.</p>
+<p>An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> will be used to accept an input, launch the shell command in a <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> from the <code class="docutils literal notranslate"><span class="pre">Signal.set()</span></code> method, and wait for the response using an <code class="docutils literal notranslate"><span class="pre">ophyd.Status</span></code> object.</p>
+<p>Since a redefinition of the <code class="docutils literal notranslate"><span class="pre">set()</span></code> method is needed, it is necessary to create a <em>subclass</em> of <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ophyd</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+
+<span class="k">class</span> <span class="nc">ProcessSignal</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">):</span>
+
+    <span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">_readback</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">stderr</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settle_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="n">st</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">wait_process</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_readback</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">_finished</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">st</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+            <span class="n">command</span><span class="p">,</span>
+            <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+            <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="c1"># TODO: settle_time</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wait_process</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">st</span>
+</pre></div>
+</div>
+</div>
+<p>Create the processor object and run (<code class="docutils literal notranslate"><span class="pre">.set()</span></code>) it. This will return immediately, before the shell script finishes. The return result is a <code class="docutils literal notranslate"><span class="pre">Status</span></code> object that <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> will use to wait for the <code class="docutils literal notranslate"><span class="pre">.set()</span></code> operation to finish.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">obj</span> <span class="o">=</span> <span class="n">ProcessSignal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;obj&quot;</span><span class="p">)</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;bash ./doodle.sh&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+st = Status(obj=ProcessSignal(name=&#39;obj&#39;, value=0.0, timestamp=1627094331.38266), done=False, success=False)
+time.time()-t0 = 0.012959480285644531
+</pre></div></div>
+</div>
+<p>The <em>timeout</em> was not configured. The shell script runs for 5 seconds so we use the status object to wait for it to complete.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">_status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">st</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">_status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+obj._status = Status(obj=ProcessSignal(name=&#39;obj&#39;, value=0.0, timestamp=1627094331.38266), done=False, success=False)
+time.time()-t0 = 0.09882283210754395
+obj._status = Status(obj=ProcessSignal(name=&#39;obj&#39;, value=b&#39;Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\n&#39;, timestamp=1627094331.38266), done=True, success=True)
+time.time()-t0 = 5.05002236366272
+</pre></div></div>
+</div>
+<p>Show what is returned from the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;obj&#39;: {&#39;value&#39;: b&#39;Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\n&#39;,
+  &#39;timestamp&#39;: 1627094331.38266}}
+</pre></div></div>
+</div>
+<p>The problem is seen after we try the <code class="docutils literal notranslate"><span class="pre">.put()</span></code> method</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;bash ./doodle.sh&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+st = None
+time.time()-t0 = 0.006703853607177734
+</pre></div></div>
+</div>
+<p>As before, wait for it to finish and the <code class="docutils literal notranslate"><span class="pre">value</span></code> is still the input command. Note the <code class="docutils literal notranslate"><span class="pre">put()</span></code> method does not return its status object so we have to use a sleep timer.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+obj.read() = {&#39;obj&#39;: {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094336.6018999}}
+time.time()-t0 = 0.13547873497009277
+obj.read() = {&#39;obj&#39;: {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094336.6018999}}
+time.time()-t0 = 5.1512017250061035
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ophyd.Signal.put()</span></code> method requests the Signal to go to the <code class="docutils literal notranslate"><span class="pre">value</span></code> and then waits for it to get there (that’s when it uses up its status object). The output of the shell script will <em>never</em> become the value of the command string. If we were to set <code class="docutils literal notranslate"><span class="pre">obj._readback</span></code> to be the output from the shell script, then the <code class="docutils literal notranslate"><span class="pre">put()</span></code> method would never return (it hangs because the readback value does not equal the input value).</p>
+<p>Signal is not the right interface.</p>
+</section>
+<section id="4.-As-ophyd.Device">
+<h2>4. As <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code><a class="headerlink" href="#4.-As-ophyd.Device" title="Permalink to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ophyd</span>
+<span class="kn">import</span> <span class="nn">subprocess</span>
+<span class="kn">import</span> <span class="nn">threading</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">class</span> <span class="nc">ProcessDevice</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Device</span><span class="p">):</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">stdout</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">stderr</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+    <span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start acquisition.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Must set </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.command.  Cannot be `None`.&quot;</span><span class="p">)</span>
+
+        <span class="n">st</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">DeviceStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+
+        <span class="k">def</span> <span class="nf">watch_process</span><span class="p">():</span>
+            <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
+            <span class="c1"># these are byte strings, decode them to get str</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">st</span><span class="o">.</span><span class="n">_finished</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">st</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
+            <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+            <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">watch_process</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">st</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">ProcessDevice</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;obj&quot;</span><span class="p">)</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;command&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bash ./doodle.sh&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
+<span class="n">st</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+time.time() - t0 = 0.011952638626098633s
+st = DeviceStatus(device=obj, done=False, success=False)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;obj_command&#39;,
+              {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094342.1131032}),
+             (&#39;obj_stdout&#39;, {&#39;value&#39;: None, &#39;timestamp&#39;: 1627094342.1135113}),
+             (&#39;obj_stderr&#39;, {&#39;value&#39;: None, &#39;timestamp&#39;: 1627094342.113497})])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+time.time() - t0 = 5.063066720962524s
+st = DeviceStatus(device=obj, done=True, success=True)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;obj_command&#39;,
+              {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094342.1131032}),
+             (&#39;obj_stdout&#39;,
+              {&#39;value&#39;: &#39;Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:39:02 PM CDT: countdown 5\nFri 23 Jul 2021 09:39:03 PM CDT: countdown 4\nFri 23 Jul 2021 09:39:04 PM CDT: countdown 3\nFri 23 Jul 2021 09:39:05 PM CDT: countdown 2\nFri 23 Jul 2021 09:39:06 PM CDT: countdown 1\nFri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete\n&#39;,
+               &#39;timestamp&#39;: 1627094347.1758268}),
+             (&#39;obj_stderr&#39;, {&#39;value&#39;: &#39;&#39;, &#39;timestamp&#39;: 1627094347.1758533})])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[ProcessDevice(prefix=&#39;&#39;, name=&#39;obj&#39;, read_attrs=[&#39;command&#39;, &#39;stdout&#39;, &#39;stderr&#39;], configuration_attrs=[])]
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting
+Fri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds
+Fri 23 Jul 2021 09:39:02 PM CDT: countdown 5
+Fri 23 Jul 2021 09:39:03 PM CDT: countdown 4
+Fri 23 Jul 2021 09:39:04 PM CDT: countdown 3
+Fri 23 Jul 2021 09:39:05 PM CDT: countdown 2
+Fri 23 Jul 2021 09:39:06 PM CDT: countdown 1
+Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
+
+</pre></div></div>
+</div>
+</section>
+<section id="5.-Run-with-bluesky">
+<h2>5. Run with bluesky<a class="headerlink" href="#5.-Run-with-bluesky" title="Permalink to this heading">#</a></h2>
+<p>This is a simplest implementation of the bluesky RunEngine with no custom callbacks, no table output, and no saving data anywhere. Capture the document stream from <code class="docutils literal notranslate"><span class="pre">RE</span></code> using a simple callback (<code class="docutils literal notranslate"><span class="pre">document_printer()</span></code>) that prints the content of each document.</p>
+<p>In this demo, we do not show how to implement a timeout and or interrupt execution of the shell script.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bluesky</span>
+<span class="kn">import</span> <span class="nn">bluesky.plans</span> <span class="k">as</span> <span class="nn">bp</span>
+<span class="kn">import</span> <span class="nn">pprint</span>
+
+<span class="k">def</span> <span class="nf">document_printer</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;***</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">***&quot;</span><span class="p">)</span>
+    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+
+<span class="n">RE</span> <span class="o">=</span> <span class="n">bluesky</span><span class="o">.</span><span class="n">RunEngine</span><span class="p">({})</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">obj</span><span class="p">]),</span> <span class="n">document_printer</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+***start***
+{&#39;detectors&#39;: [&#39;obj&#39;],
+ &#39;hints&#39;: {&#39;dimensions&#39;: [((&#39;time&#39;,), &#39;primary&#39;)]},
+ &#39;num_intervals&#39;: 0,
+ &#39;num_points&#39;: 1,
+ &#39;plan_args&#39;: {&#39;detectors&#39;: [&#34;ProcessDevice(prefix=&#39;&#39;, name=&#39;obj&#39;, &#34;
+                             &#34;read_attrs=[&#39;command&#39;, &#39;stdout&#39;, &#39;stderr&#39;], &#34;
+                             &#39;configuration_attrs=[])&#39;],
+               &#39;num&#39;: 1},
+ &#39;plan_name&#39;: &#39;count&#39;,
+ &#39;plan_type&#39;: &#39;generator&#39;,
+ &#39;scan_id&#39;: 1,
+ &#39;time&#39;: 1627094347.901483,
+ &#39;uid&#39;: &#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,
+ &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;}}
+
+***descriptor***
+{&#39;configuration&#39;: {&#39;obj&#39;: {&#39;data&#39;: {},
+                           &#39;data_keys&#39;: OrderedDict(),
+                           &#39;timestamps&#39;: {}}},
+ &#39;data_keys&#39;: {&#39;obj_command&#39;: {&#39;dtype&#39;: &#39;string&#39;,
+                               &#39;object_name&#39;: &#39;obj&#39;,
+                               &#39;shape&#39;: [],
+                               &#39;source&#39;: &#39;SIM:obj_command&#39;},
+               &#39;obj_stderr&#39;: {&#39;dtype&#39;: &#39;string&#39;,
+                              &#39;object_name&#39;: &#39;obj&#39;,
+                              &#39;shape&#39;: [],
+                              &#39;source&#39;: &#39;SIM:obj_stderr&#39;},
+               &#39;obj_stdout&#39;: {&#39;dtype&#39;: &#39;string&#39;,
+                              &#39;object_name&#39;: &#39;obj&#39;,
+                              &#39;shape&#39;: [],
+                              &#39;source&#39;: &#39;SIM:obj_stdout&#39;}},
+ &#39;hints&#39;: {&#39;obj&#39;: {&#39;fields&#39;: []}},
+ &#39;name&#39;: &#39;primary&#39;,
+ &#39;object_keys&#39;: {&#39;obj&#39;: [&#39;obj_command&#39;, &#39;obj_stdout&#39;, &#39;obj_stderr&#39;]},
+ &#39;run_start&#39;: &#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,
+ &#39;time&#39;: 1627094353.0929906,
+ &#39;uid&#39;: &#39;a2bfc0cb-1447-4be6-92e9-0b3b157e3c30&#39;}
+
+***event***
+{&#39;data&#39;: {&#39;obj_command&#39;: &#39;bash ./doodle.sh&#39;,
+          &#39;obj_stderr&#39;: &#39;&#39;,
+          &#39;obj_stdout&#39;: &#39;Fri 23 Jul 2021 09:39:08 PM CDT: Doodle demonstration &#39;
+                        &#39;starting\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:08 PM CDT: sleep 5 seconds\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:08 PM CDT: countdown 5\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:09 PM CDT: countdown 4\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:10 PM CDT: countdown 3\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:11 PM CDT: countdown 2\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:12 PM CDT: countdown 1\n&#39;
+                        &#39;Fri 23 Jul 2021 09:39:13 PM CDT: Doodle demonstration &#39;
+                        &#39;complete\n&#39;},
+ &#39;descriptor&#39;: &#39;a2bfc0cb-1447-4be6-92e9-0b3b157e3c30&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 1,
+ &#39;time&#39;: 1627094353.3092813,
+ &#39;timestamps&#39;: {&#39;obj_command&#39;: 1627094347.901314,
+                &#39;obj_stderr&#39;: 1627094353.0920315,
+                &#39;obj_stdout&#39;: 1627094353.0919352},
+ &#39;uid&#39;: &#39;2d5d29de-8c80-46c1-8085-c1eb1c609b07&#39;}
+
+***stop***
+{&#39;exit_status&#39;: &#39;success&#39;,
+ &#39;num_events&#39;: {&#39;primary&#39;: 1},
+ &#39;reason&#39;: &#39;&#39;,
+ &#39;run_start&#39;: &#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,
+ &#39;time&#39;: 1627094353.429601,
+ &#39;uid&#39;: &#39;9aa6d3c6-8bfc-4ded-8b9b-28a2f2455ffb&#39;}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,)
+</pre></div></div>
+</div>
+<p>Looks like we got the output from the bash shell script.</p>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_count_scaler.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Count the scaler</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_dynamic_limits_2motor.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Dynamic Limits for Two Motors</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Example-shell-command">1. Example shell command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Run-from-Python-subprocess">2. Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-As-ophyd.Signal">3. As <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#4.-As-ophyd.Device">4. As <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#5.-Run-with-bluesky">5. Run with bluesky</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_doodle.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

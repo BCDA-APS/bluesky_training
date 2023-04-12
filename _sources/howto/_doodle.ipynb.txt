@@ -1,0 +1,724 @@
+{
+ "cells": [
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Call Shell Command & Wait for Finish\n",
+    "\n",
+    "Demonstrate how to launch a (Linux bash) shell command and wait for it to finish.\n",
+    "\n",
+    "This involves setting a command and receiving two different values (_stdout_ and _stderr_).  An `ophyd.Signal` is for setting and reading one value.  The `ophyd.Device` can provide the multiple values needed.\n",
+    "\n",
+    "This involves setting a command and receiving two different values\n",
+    "(_stdout_ and _stderr_).  An `ophyd.Signal` is for setting and reading\n",
+    "only one value.  First we show how a `Signal`-based implementation would\n",
+    "behave.  Then, we show how the `ophyd.Device` can provide the multiple\n",
+    "values needed.\n",
+    "\n",
+    "To simulate a Linux command to be run, a bash shell script (`doodle.sh`)\n",
+    "was created that runs a 5 second countdown printing to stdout (the\n",
+    "terminal console).\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 1. Example shell command\n",
+    "The example shell command is a bash script that executes a 5 second countdown.  The script is shown first:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "#!/bin/bash\n",
+      "\n",
+      "echo $(date): Doodle demonstration starting\n",
+      "echo $(date): sleep 5 seconds\n",
+      "for i in 5 4 3 2 1; do\n",
+      "    echo $(date): countdown ${i}\n",
+      "    sleep 1\n",
+      "done\n",
+      "echo $(date): Doodle demonstration complete\n"
+     ]
+    }
+   ],
+   "source": [
+    "!cat ./doodle.sh"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Now, run it to show how it works."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Fri 23 Jul 2021 09:38:40 PM CDT: Doodle demonstration starting\n",
+      "Fri 23 Jul 2021 09:38:40 PM CDT: sleep 5 seconds\n",
+      "Fri 23 Jul 2021 09:38:40 PM CDT: countdown 5\n",
+      "Fri 23 Jul 2021 09:38:41 PM CDT: countdown 4\n",
+      "Fri 23 Jul 2021 09:38:42 PM CDT: countdown 3\n",
+      "Fri 23 Jul 2021 09:38:43 PM CDT: countdown 2\n",
+      "Fri 23 Jul 2021 09:38:44 PM CDT: countdown 1\n",
+      "Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration complete\n"
+     ]
+    }
+   ],
+   "source": [
+    "!bash ./doodle.sh"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 2. Run from Python `subprocess`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import subprocess\n",
+    "import time"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "command = \"bash ./doodle.sh\"\n",
+    "\n",
+    "# Start the command\n",
+    "t0 = time.time()\n",
+    "process = subprocess.Popen(\n",
+    "    command,\n",
+    "    shell=True,\n",
+    "    stdin=subprocess.PIPE,\n",
+    "    stdout=subprocess.PIPE,\n",
+    "    stderr=subprocess.PIPE,\n",
+    ")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "time.time() - t0 = 5.049006938934326\n"
+     ]
+    }
+   ],
+   "source": [
+    "# wait for the command to finish and collect the outputs.\n",
+    "stdout, stderr = process.communicate()\n",
+    "print(f\"{time.time() - t0 = }\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "stdout = b'Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:38:45 PM CDT: countdown 5\\nFri 23 Jul 2021 09:38:46 PM CDT: countdown 4\\nFri 23 Jul 2021 09:38:47 PM CDT: countdown 3\\nFri 23 Jul 2021 09:38:48 PM CDT: countdown 2\\nFri 23 Jul 2021 09:38:49 PM CDT: countdown 1\\nFri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete\\n'\n",
+      "stderr = b''\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"{stdout = }\")\n",
+    "print(f\"{stderr = }\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "stdout\n",
+      " Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting\n",
+      "Fri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds\n",
+      "Fri 23 Jul 2021 09:38:45 PM CDT: countdown 5\n",
+      "Fri 23 Jul 2021 09:38:46 PM CDT: countdown 4\n",
+      "Fri 23 Jul 2021 09:38:47 PM CDT: countdown 3\n",
+      "Fri 23 Jul 2021 09:38:48 PM CDT: countdown 2\n",
+      "Fri 23 Jul 2021 09:38:49 PM CDT: countdown 1\n",
+      "Fri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete\n",
+      "\n",
+      "stderr\n",
+      " \n"
+     ]
+    }
+   ],
+   "source": [
+    "# byte strings, must decode to see as string\n",
+    "print(\"stdout\\n\", stdout.decode('utf8'))\n",
+    "print(\"stderr\\n\", stderr.decode('utf8'))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 3. As `ophyd.Signal`\n",
+    "\n",
+    "Since this is a demonstration, we show here why the `Signal` implementation just does not provide the right behavior.\n",
+    "\n",
+    "An `ophyd.Signal` will be used to accept an input, launch the shell command in a `subprocess` from the `Signal.set()` method, and wait for the response using an `ophyd.Status` object.\n",
+    "\n",
+    "Since a redefinition of the `set()` method is needed, it is necessary to create a *subclass* of `ophyd.Signal`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import ophyd\n",
+    "import threading\n",
+    "\n",
+    "class ProcessSignal(ophyd.Signal):\n",
+    "\n",
+    "    process = None\n",
+    "    _readback = None\n",
+    "    stderr = None\n",
+    "\n",
+    "    def set(self, command, *, timeout=None, settle_time=None):\n",
+    "        st = ophyd.status.Status(self)\n",
+    "\n",
+    "        def wait_process():\n",
+    "            self._readback, self.stderr = self.process.communicate(timeout=timeout)\n",
+    "            st._finished()\n",
+    "\n",
+    "        self._status = st\n",
+    "        self.process = subprocess.Popen(\n",
+    "            command,\n",
+    "            shell=True,\n",
+    "            stdin=subprocess.PIPE,\n",
+    "            stdout=subprocess.PIPE,\n",
+    "            stderr=subprocess.PIPE,\n",
+    "        )\n",
+    "        # TODO: settle_time\n",
+    "        threading.Thread(target=wait_process, daemon=True).start()\n",
+    "        return st"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Create the processor object and run (`.set()`) it.  This will return immediately, before the shell script finishes.  The return result is a `Status` object that `bluesky` will use to wait for the `.set()` operation to finish."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "st = Status(obj=ProcessSignal(name='obj', value=0.0, timestamp=1627094331.38266), done=False, success=False)\n",
+      "time.time()-t0 = 0.012959480285644531\n"
+     ]
+    }
+   ],
+   "source": [
+    "t0 = time.time()\n",
+    "obj = ProcessSignal(name=\"obj\")\n",
+    "st = obj.set(\"bash ./doodle.sh\")\n",
+    "print(f\"{st = }\")\n",
+    "print(f\"{time.time()-t0 = }\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The _timeout_ was not configured.  The shell script runs for 5 seconds so we use the status object to wait for it to complete."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "obj._status = Status(obj=ProcessSignal(name='obj', value=0.0, timestamp=1627094331.38266), done=False, success=False)\n",
+      "time.time()-t0 = 0.09882283210754395\n",
+      "obj._status = Status(obj=ProcessSignal(name='obj', value=b'Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\\n', timestamp=1627094331.38266), done=True, success=True)\n",
+      "time.time()-t0 = 5.05002236366272\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"{obj._status = }\")\n",
+    "print(f\"{time.time()-t0 = }\")\n",
+    "st.wait()\n",
+    "print(f\"{obj._status = }\")\n",
+    "print(f\"{time.time()-t0 = }\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Show what is returned from the `read()` method."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "{'obj': {'value': b'Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\\n',\n",
+       "  'timestamp': 1627094331.38266}}"
+      ]
+     },
+     "execution_count": 11,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "obj.read()"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The problem is seen after we try the `.put()` method"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "st = None\n",
+      "time.time()-t0 = 0.006703853607177734\n"
+     ]
+    }
+   ],
+   "source": [
+    "t0 = time.time()\n",
+    "st = obj.put(\"bash ./doodle.sh\")\n",
+    "print(f\"{st = }\")\n",
+    "print(f\"{time.time()-t0 = }\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "As before, wait for it to finish and the `value` is still the input command.  Note the `put()` method does not return its status object so we have to use a sleep timer."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "obj.read() = {'obj': {'value': 'bash ./doodle.sh', 'timestamp': 1627094336.6018999}}\n",
+      "time.time()-t0 = 0.13547873497009277\n",
+      "obj.read() = {'obj': {'value': 'bash ./doodle.sh', 'timestamp': 1627094336.6018999}}\n",
+      "time.time()-t0 = 5.1512017250061035\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"{obj.read() = }\")\n",
+    "print(f\"{time.time()-t0 = }\")\n",
+    "time.sleep(5)\n",
+    "print(f\"{obj.read() = }\")\n",
+    "print(f\"{time.time()-t0 = }\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "The `ophyd.Signal.put()` method requests the Signal to go to the `value` and then waits for it to get there (that's when it uses up its status object).  The output of the shell script will *never* become the value of the command string.  If we were to set `obj._readback` to be the output from the shell script, then the `put()` method would never return (it hangs because the readback value does not equal the input value).\n",
+    "\n",
+    "Signal is not the right interface."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 4. As `ophyd.Device`"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import ophyd\n",
+    "import subprocess\n",
+    "import threading\n",
+    "import time\n",
+    "\n",
+    "class ProcessDevice(ophyd.Device):\n",
+    "    command = ophyd.Component(ophyd.Signal, value=None)\n",
+    "    stdout = ophyd.Component(ophyd.Signal, value=None)\n",
+    "    stderr = ophyd.Component(ophyd.Signal, value=None)\n",
+    "    process = None\n",
+    "\n",
+    "    def trigger(self):\n",
+    "        \"\"\"Start acquisition.\"\"\"\n",
+    "        if self.command.get() is None:\n",
+    "            raise ValueError(f\"Must set {self.name}.command.  Cannot be `None`.\")\n",
+    "        \n",
+    "        st = ophyd.status.DeviceStatus(self)\n",
+    "        \n",
+    "        def watch_process():\n",
+    "            out, err = self.process.communicate()\n",
+    "            # these are byte strings, decode them to get str\n",
+    "            self.stdout.put(out.decode(\"utf8\"))\n",
+    "            self.stderr.put(err.decode(\"utf8\"))\n",
+    "            self.process = None\n",
+    "            st._finished()\n",
+    "\n",
+    "        self._status = st\n",
+    "        self.stderr.put(None)\n",
+    "        self.stdout.put(None)\n",
+    "        self.process = subprocess.Popen(\n",
+    "            self.command.get(),\n",
+    "            shell=True,\n",
+    "            stdin=subprocess.PIPE,\n",
+    "            stdout=subprocess.PIPE,\n",
+    "            stderr=subprocess.PIPE,\n",
+    "        )\n",
+    "        threading.Thread(target=watch_process, daemon=True).start()\n",
+    "        return st"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "obj = ProcessDevice(name=\"obj\")\n",
+    "obj.stage_sigs[\"command\"] = \"bash ./doodle.sh\""
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "time.time() - t0 = 0.011952638626098633s\n",
+      "st = DeviceStatus(device=obj, done=False, success=False)\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "OrderedDict([('obj_command',\n",
+       "              {'value': 'bash ./doodle.sh', 'timestamp': 1627094342.1131032}),\n",
+       "             ('obj_stdout', {'value': None, 'timestamp': 1627094342.1135113}),\n",
+       "             ('obj_stderr', {'value': None, 'timestamp': 1627094342.113497})])"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "t0 = time.time()\n",
+    "obj.stage()\n",
+    "st = obj.trigger()\n",
+    "print(f\"{time.time() - t0 = }s\")\n",
+    "print(f\"{st = }\")\n",
+    "obj.read()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "time.time() - t0 = 5.063066720962524s\n",
+      "st = DeviceStatus(device=obj, done=True, success=True)\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "OrderedDict([('obj_command',\n",
+       "              {'value': 'bash ./doodle.sh', 'timestamp': 1627094342.1131032}),\n",
+       "             ('obj_stdout',\n",
+       "              {'value': 'Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:39:02 PM CDT: countdown 5\\nFri 23 Jul 2021 09:39:03 PM CDT: countdown 4\\nFri 23 Jul 2021 09:39:04 PM CDT: countdown 3\\nFri 23 Jul 2021 09:39:05 PM CDT: countdown 2\\nFri 23 Jul 2021 09:39:06 PM CDT: countdown 1\\nFri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete\\n',\n",
+       "               'timestamp': 1627094347.1758268}),\n",
+       "             ('obj_stderr', {'value': '', 'timestamp': 1627094347.1758533})])"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "st.wait()\n",
+    "print(f\"{time.time() - t0 = }s\")\n",
+    "print(f\"{st = }\")\n",
+    "obj.read()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "[ProcessDevice(prefix='', name='obj', read_attrs=['command', 'stdout', 'stderr'], configuration_attrs=[])]"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "obj.unstage()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting\n",
+      "Fri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds\n",
+      "Fri 23 Jul 2021 09:39:02 PM CDT: countdown 5\n",
+      "Fri 23 Jul 2021 09:39:03 PM CDT: countdown 4\n",
+      "Fri 23 Jul 2021 09:39:04 PM CDT: countdown 3\n",
+      "Fri 23 Jul 2021 09:39:05 PM CDT: countdown 2\n",
+      "Fri 23 Jul 2021 09:39:06 PM CDT: countdown 1\n",
+      "Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(obj.stdout.get())"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## 5. Run with bluesky\n",
+    "This is a simplest implementation of the bluesky RunEngine with no custom callbacks, no table output, and no saving data anywhere.  Capture the document stream from `RE` using a simple callback (`document_printer()`) that prints the content of each document.\n",
+    "\n",
+    "In this demo, we do not show how to implement a timeout and or interrupt execution of the shell script."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "***start***\n",
+      "{'detectors': ['obj'],\n",
+      " 'hints': {'dimensions': [(('time',), 'primary')]},\n",
+      " 'num_intervals': 0,\n",
+      " 'num_points': 1,\n",
+      " 'plan_args': {'detectors': [\"ProcessDevice(prefix='', name='obj', \"\n",
+      "                             \"read_attrs=['command', 'stdout', 'stderr'], \"\n",
+      "                             'configuration_attrs=[])'],\n",
+      "               'num': 1},\n",
+      " 'plan_name': 'count',\n",
+      " 'plan_type': 'generator',\n",
+      " 'scan_id': 1,\n",
+      " 'time': 1627094347.901483,\n",
+      " 'uid': 'b7fca79d-87de-446b-aec9-a14369899306',\n",
+      " 'versions': {'bluesky': '1.7.0', 'ophyd': '1.6.1'}}\n",
+      "\n",
+      "***descriptor***\n",
+      "{'configuration': {'obj': {'data': {},\n",
+      "                           'data_keys': OrderedDict(),\n",
+      "                           'timestamps': {}}},\n",
+      " 'data_keys': {'obj_command': {'dtype': 'string',\n",
+      "                               'object_name': 'obj',\n",
+      "                               'shape': [],\n",
+      "                               'source': 'SIM:obj_command'},\n",
+      "               'obj_stderr': {'dtype': 'string',\n",
+      "                              'object_name': 'obj',\n",
+      "                              'shape': [],\n",
+      "                              'source': 'SIM:obj_stderr'},\n",
+      "               'obj_stdout': {'dtype': 'string',\n",
+      "                              'object_name': 'obj',\n",
+      "                              'shape': [],\n",
+      "                              'source': 'SIM:obj_stdout'}},\n",
+      " 'hints': {'obj': {'fields': []}},\n",
+      " 'name': 'primary',\n",
+      " 'object_keys': {'obj': ['obj_command', 'obj_stdout', 'obj_stderr']},\n",
+      " 'run_start': 'b7fca79d-87de-446b-aec9-a14369899306',\n",
+      " 'time': 1627094353.0929906,\n",
+      " 'uid': 'a2bfc0cb-1447-4be6-92e9-0b3b157e3c30'}\n",
+      "\n",
+      "***event***\n",
+      "{'data': {'obj_command': 'bash ./doodle.sh',\n",
+      "          'obj_stderr': '',\n",
+      "          'obj_stdout': 'Fri 23 Jul 2021 09:39:08 PM CDT: Doodle demonstration '\n",
+      "                        'starting\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:08 PM CDT: sleep 5 seconds\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:08 PM CDT: countdown 5\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:09 PM CDT: countdown 4\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:10 PM CDT: countdown 3\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:11 PM CDT: countdown 2\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:12 PM CDT: countdown 1\\n'\n",
+      "                        'Fri 23 Jul 2021 09:39:13 PM CDT: Doodle demonstration '\n",
+      "                        'complete\\n'},\n",
+      " 'descriptor': 'a2bfc0cb-1447-4be6-92e9-0b3b157e3c30',\n",
+      " 'filled': {},\n",
+      " 'seq_num': 1,\n",
+      " 'time': 1627094353.3092813,\n",
+      " 'timestamps': {'obj_command': 1627094347.901314,\n",
+      "                'obj_stderr': 1627094353.0920315,\n",
+      "                'obj_stdout': 1627094353.0919352},\n",
+      " 'uid': '2d5d29de-8c80-46c1-8085-c1eb1c609b07'}\n",
+      "\n",
+      "***stop***\n",
+      "{'exit_status': 'success',\n",
+      " 'num_events': {'primary': 1},\n",
+      " 'reason': '',\n",
+      " 'run_start': 'b7fca79d-87de-446b-aec9-a14369899306',\n",
+      " 'time': 1627094353.429601,\n",
+      " 'uid': '9aa6d3c6-8bfc-4ded-8b9b-28a2f2455ffb'}\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('b7fca79d-87de-446b-aec9-a14369899306',)"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "import bluesky\n",
+    "import bluesky.plans as bp\n",
+    "import pprint\n",
+    "\n",
+    "def document_printer(key, doc):\n",
+    "    print()\n",
+    "    print(f\"***{key}***\")\n",
+    "    pprint.pprint(doc)\n",
+    "\n",
+    "RE = bluesky.RunEngine({})\n",
+    "RE(bp.count([obj]), document_printer)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Looks like we got the output from the bash shell script."
+   ]
+  }
+ ],
+ "metadata": {
+  "interpreter": {
+   "hash": "60aa360bcd8d3c8cfbc4e726e53a455fcd5c15cdf29caaf63c7ca2494eba79e9"
+  },
+  "kernelspec": {
+   "display_name": "Python 3.8.10 64-bit ('bluesky_2021_2': conda)",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.8.10"
+  },
+  "orig_nbformat": 2
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

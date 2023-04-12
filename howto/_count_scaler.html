@@ -1,0 +1,1210 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Count the scaler &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_count_scaler';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Call Shell Command &amp; Wait for Finish" href="_doodle.html" />
+    <link rel="prev" title="APS Accelerator Information for Beam Lines" href="_basic_aps_info.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Count the scaler</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Count-the-scaler">
+<h1>Count the scaler<a class="headerlink" href="#Count-the-scaler" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>In this notebook, we show how to count the scaler:</p>
+<ul class="simple">
+<li><p>on the command line</p></li>
+<li><p>using ophyd</p></li>
+<li><p>using the bluesky RunEngine</p></li>
+</ul>
+<p>We also show how to:</p>
+<ul class="simple">
+<li><p>set the counting time</p></li>
+<li><p>choose certain channels for data acquisition</p></li>
+</ul>
+<section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[ ]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">load_ext</span> dotenv
+    <span class="o">%</span><span class="k">dotenv</span> env.txt
+<span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="s2">&quot;Did not load file with environment variables.&quot;</span>
+        <span class="s2">&quot;  No problem.  Continuing ...&quot;</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">os</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">abspath</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">,</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">)))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Wed-00:27:43 - ############################################################ startup
+I Wed-00:27:43 - logging started
+I Wed-00:27:43 - logging level = 10
+I Wed-00:27:43 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/collection.py
+I Wed-00:27:44 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/mpl/notebook.py
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Wed-00:27:44 - #### Bluesky Framework ####
+I Wed-00:27:44 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/framework/check_python.py
+I Wed-00:27:44 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/framework/check_bluesky.py
+I Wed-00:27:44 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/framework/initialize.py
+I Wed-00:27:45 - using databroker catalog &#39;class_2021_03&#39;
+I Wed-00:27:45 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/framework/metadata.py
+I Wed-00:27:45 - #### Devices ####
+I Wed-00:27:45 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/area_detector.py
+I Wed-00:27:45 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/calculation_records.py
+I Wed-00:27:47 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/ioc_stats.py
+I Wed-00:27:47 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/motors.py
+I Wed-00:27:47 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/noisy_detector.py
+I Wed-00:27:47 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/scaler.py
+I Wed-00:27:49 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/shutter_simulator.py
+I Wed-00:27:49 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/devices/temperature_signal.py
+I Wed-00:27:49 - #### Callbacks ####
+I Wed-00:27:49 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Wed-00:27:49 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/20210317-002749.dat
+I Wed-00:27:49 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Wed-00:27:49 -    file will be created when bluesky ends its next scan
+I Wed-00:27:49 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Wed-00:27:49 - #### Plans ####
+I Wed-00:27:49 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/plans/peak_finder_example.py
+I Wed-00:27:49 - #### Utilities ####
+I Wed-00:27:49 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_instrument_training/bluesky/instrument/utils/image_analysis.py
+I Wed-00:27:49 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+</section>
+<section id="A-closer-look-at-the-EPICS-scaler">
+<h2>A closer look at the EPICS scaler<a class="headerlink" href="#A-closer-look-at-the-EPICS-scaler" title="Permalink to this heading">#</a></h2>
+<p>A scaler is a device that counts digital pulses from a pulse detector such as a scintillation counter or from photodiodes or ionization chamber with pulse chain electronics. Scalers have many channels, some of which might have no associated detector. Our scaler (<code class="docutils literal notranslate"><span class="pre">scaler1</span></code>) is a simulated device that records a random number of pulses in each channel. We are only interested in the channels that have names provided by users in the GUI screens. In this control screen for our scaler, only a few of
+the channels are named:</p>
+<p><img alt="``scaler`` GUI" src="../_images/scaler.png" /></p>
+<p>Let’s configure <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> to report only the <code class="docutils literal notranslate"><span class="pre">diode</span></code> and <code class="docutils literal notranslate"><span class="pre">I0</span></code> channels (plus the count time channel which will <em>always</em> be included). Keep in mind that the argument to this function is a Python list, so the channel names must be enclosed with <code class="docutils literal notranslate"><span class="pre">[]</span></code>. The function does not return a result. If something <em>is</em> printed, there is an error to be fixed.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">select_channels</span><span class="p">([</span><span class="s2">&quot;diode&quot;</span><span class="p">,</span> <span class="s2">&quot;I0&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>The <em>easiest</em> way to count the <code class="docutils literal notranslate"><span class="pre">scaler</span></code> object is to use the <code class="docutils literal notranslate"><span class="pre">`%ct</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/magics.html?highlight=label#taking-a-reading-using-ct-post-v1-3-0">https://blueskyproject.io/bluesky/magics.html?highlight=label#taking-a-reading-using-ct-post-v1-3-0</a>&gt;`__ bluesky magic command, which counts all objects with the <code class="docutils literal notranslate"><span class="pre">detectors</span></code> label.</p>
+<p>Note that the various magic commands are only available from the command line, not for use in a bluesky plan function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          2082.856855128083
+I0                             4.0
+diode                          5.0
+scaler1_time                   1.1
+</pre></div></div>
+</div>
+<p>Compare with the reading when <em>all</em> channels are selected.</p>
+<p>NOTE: To report <em>all</em> named channels, call <code class="docutils literal notranslate"><span class="pre">.select_channels()</span></code> with empty parentheses.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">select_channels</span><span class="p">()</span>
+<span class="o">%</span><span class="k">ct</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          2082.856855128083
+timebase                       11000000.0
+I0                             5.0
+scint                          4.0
+diode                          4.0
+scaler1_time                   1.1
+</pre></div></div>
+</div>
+<p>Now, select just the two channels again before continuing:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">select_channels</span><span class="p">([</span><span class="s2">&quot;diode&quot;</span><span class="p">,</span> <span class="s2">&quot;I0&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>As noted before, the <code class="docutils literal notranslate"><span class="pre">%ct</span></code> command is only available from the command shell.</p>
+<section id="use-ophyd-to-count-the-scaler">
+<h3>use ophyd to count the scaler<a class="headerlink" href="#use-ophyd-to-count-the-scaler" title="Permalink to this heading">#</a></h3>
+<p>We should learn how to use the underlying Python code to do the same steps.</p>
+<p>The first step is to use pure ophyd methods to count and report, then use a bluesky plan to do the same thing. The ophyd methods are <code class="docutils literal notranslate"><span class="pre">trigger</span></code>, <code class="docutils literal notranslate"><span class="pre">wait</span></code>, and <code class="docutils literal notranslate"><span class="pre">read</span></code>. The <code class="docutils literal notranslate"><span class="pre">trigger</span></code> and <code class="docutils literal notranslate"><span class="pre">wait</span></code> methods can be chained together:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Technically, we should <code class="docutils literal notranslate"><span class="pre">stage</span></code> and <code class="docutils literal notranslate"><span class="pre">unstage</span></code> the object. <strong>We’ll use staging to control the count time of the scaler.</strong></p>
+<p>The ophyd <code class="docutils literal notranslate"><span class="pre">`.stage()</span></code> method &lt;<a class="reference external" href="https://nsls-ii.github.io/ophyd/generated/ophyd.device.BlueskyInterface.stage.html?highlight=stage#ophyd.device.BlueskyInterface.stage">https://nsls-ii.github.io/ophyd/generated/ophyd.device.BlueskyInterface.stage.html?highlight=stage#ophyd.device.BlueskyInterface.stage</a>&gt;`__ prepares the object for its <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method, while the <code class="docutils literal notranslate"><span class="pre">.unstage()</span></code> method returns the object’s settings to the previous state before the <code class="docutils literal notranslate"><span class="pre">.stage()</span></code> method was called.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
+<span class="n">scaler1</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="n">scaler1</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[Channels(prefix=&#39;gp:scaler1&#39;, name=&#39;scaler1_channels&#39;, parent=&#39;scaler1&#39;, read_attrs=[&#39;chan02&#39;, &#39;chan02.s&#39;, &#39;chan04&#39;, &#39;chan04.s&#39;], configuration_attrs=[&#39;chan02&#39;, &#39;chan02.chname&#39;, &#39;chan02.preset&#39;, &#39;chan02.gate&#39;, &#39;chan04&#39;, &#39;chan04.chname&#39;, &#39;chan04.preset&#39;, &#39;chan04.gate&#39;]),
+ ScalerCH(prefix=&#39;gp:scaler1&#39;, name=&#39;scaler1&#39;, read_attrs=[&#39;channels&#39;, &#39;channels.chan02&#39;, &#39;channels.chan02.s&#39;, &#39;channels.chan04&#39;, &#39;channels.chan04.s&#39;, &#39;time&#39;], configuration_attrs=[&#39;channels&#39;, &#39;channels.chan02&#39;, &#39;channels.chan02.chname&#39;, &#39;channels.chan02.preset&#39;, &#39;channels.chan02.gate&#39;, &#39;channels.chan04&#39;, &#39;channels.chan04.chname&#39;, &#39;channels.chan04.preset&#39;, &#39;channels.chan04.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#39;auto_count_delay&#39;, &#39;freq&#39;, &#39;preset_time&#39;, &#39;auto_count_time&#39;, &#39;egu&#39;])]
+</pre></div></div>
+</div>
+<p>Let’s find out what happens when <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> is staged. That’s controlled by the contents of a Python dictionary <code class="docutils literal notranslate"><span class="pre">.stage_sigs</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">stage_sigs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict()
+</pre></div></div>
+</div>
+<p>It’s empty, so nothing has been preconfigured for us. Let’s make sure that we get to pick the <em>counting time</em> (the time to accumulate pulses in the various channels), say 2.0 seconds, when we count here.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;preset_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">scaler1</span><span class="o">.</span><span class="n">stage_sigs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;preset_time&#39;, 2)])
+</pre></div></div>
+</div>
+<p>Show the counting time <em>before</em> we count, then <code class="docutils literal notranslate"><span class="pre">stage</span></code>, <code class="docutils literal notranslate"><span class="pre">trigger</span></code>, <code class="docutils literal notranslate"><span class="pre">wait</span></code>, <code class="docutils literal notranslate"><span class="pre">read</span></code>, <code class="docutils literal notranslate"><span class="pre">unstage</span></code>, then finally show the counting time <em>after</em> we count:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scaler configured to count for </span><span class="si">{</span><span class="n">scaler1</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+<span class="n">scaler1</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
+<span class="n">scaler1</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">scaler1</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+<span class="n">scaler1</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Scaler configured to count for </span><span class="si">{</span><span class="n">scaler1</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Scaler configured to count for 1.0s
+OrderedDict([(&#39;I0&#39;, {&#39;value&#39;: 11.0, &#39;timestamp&#39;: 1615958875.732533}), (&#39;diode&#39;, {&#39;value&#39;: 12.0, &#39;timestamp&#39;: 1615958875.732533}), (&#39;scaler1_time&#39;, {&#39;value&#39;: 2.1, &#39;timestamp&#39;: 1615958873.690604})])
+Scaler configured to count for 1.0s
+</pre></div></div>
+</div>
+<p>The report from <code class="docutils literal notranslate"><span class="pre">.read()</span></code> includes both values and timestamps (in seconds since the Python <a class="reference external" href="https://docs.python.org/3/library/time.html">time</a> epoch, UTC). The structure is a Python dictionary. This is the low-level method used to collect readings from any ophyd device. We had to <code class="docutils literal notranslate"><span class="pre">print()</span></code> this since the return result from a command within a sequence is not returned at the end of the sequence, just the return result of the <em>final</em> command in the sequence.</p>
+<p>See that the scaler counted for 2.1 seconds (a small bug in the scaler simulator it seems, always adds .1 to the count time!). But before staging, the scaler was configured for 1.0 seconds, and after unstaging, the scaler returned to that value.</p>
+<p><strong>That’s how to control the counting time for a scaler.</strong> (Area detectors use different terms. More on that later.)</p>
+<details><p>about scaler1_time</p>
+<p>Of note is the key <code class="docutils literal notranslate"><span class="pre">scaler1_time</span></code> which is the name of the ophyd symbol <code class="docutils literal notranslate"><span class="pre">scaler1.time</span></code> as returned by <code class="docutils literal notranslate"><span class="pre">scaler1.time.name</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>In [21]: scaler1.time.name
+    Out [21]: &#39;scaler1_time&#39;
+</pre></div>
+</div>
+</details></section>
+<section id="use-bluesky-(the-package)-to-count-the-scaler">
+<h3>use bluesky (the package) to count the scaler<a class="headerlink" href="#use-bluesky-(the-package)-to-count-the-scaler" title="Permalink to this heading">#</a></h3>
+<p>Now, use the bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.run_engine.RunEngine.html?highlight=runengine#bluesky.run_engine.RunEngine">RunEngine</a> (<code class="docutils literal notranslate"><span class="pre">RE</span></code>) to count <code class="docutils literal notranslate"><span class="pre">scaler1</span></code>. We’ll use the bluesky plan (<code class="docutils literal notranslate"><span class="pre">`bp</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html?highlight=count#pre-assembled-plans">https://blueskyproject.io/bluesky/plans.html?highlight=count#pre-assembled-plans</a>&gt;`__) called <code class="docutils literal notranslate"><span class="pre">`count()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count">https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count</a>&gt;`__. To be consistent with the result returned from <code class="docutils literal notranslate"><span class="pre">%ct</span></code>, we’ll
+include the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> detector.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler1</span><span class="p">,</span><span class="n">noisy</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 22     Time: 2021-03-17 00:27:55
+Persistent Unique Scan ID: &#39;8a7b7b71-9292-4f2c-8119-0d8d9ccca869&#39;
+New stream: &#39;baseline&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+
+|   seq_num |       time |      noisy |         I0 |      diode |
++-----------+------------+------------+------------+------------+
+|         1 | 00:27:58.2 | 2082.85686 |          9 |          8 |
++-----------+------------+------------+------------+------------+
+generator count [&#39;8a7b7b71&#39;] (scan num: 22)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;8a7b7b71-9292-4f2c-8119-0d8d9ccca869&#39;,)
+</pre></div></div>
+</div>
+<p>There are many ways to view data from bluesky runs. The most recent run can be picked from the database using the Python reference for <em>the last item in the list</em>: <code class="docutils literal notranslate"><span class="pre">[-1]</span></code>. We need the <code class="docutils literal notranslate"><span class="pre">v2</span></code> version of the database to access the <code class="docutils literal notranslate"><span class="pre">.primary</span></code> data stream.</p>
+<p>We’ll pick one simple to view the run data, as an <a class="reference external" href="http://xarray.pydata.org/">xarray</a> table since it is easy to display such structured content in a Jupyter notebook. (We could just as easily have displayed the data as a <a class="reference external" href="https://dask.org/">dask</a> table by replacing <code class="docutils literal notranslate"><span class="pre">.read()</span></code> with <code class="docutils literal notranslate"><span class="pre">.to_dask()</span></code>.)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:       (time: 1)
+Coordinates:
+  * time          (time) float64 1.616e+09
+Data variables:
+    noisy         (time) float64 2.083e+03
+    I0            (time) float64 9.0
+    diode         (time) float64 8.0
+    scaler1_time  (time) float64 2.1</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-b0fcfe47-ca34-45e1-a7f4-21b927e7a821' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-b0fcfe47-ca34-45e1-a7f4-21b927e7a821' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-4e44095d-352a-4e85-9f73-d169f6d6f6aa' class='xr-section-summary-in' type='checkbox'  checked><label for='section-4e44095d-352a-4e85-9f73-d169f6d6f6aa' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.616e+09</div><input id='attrs-cbe17e3b-be26-49bd-9f70-29992985978a' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-cbe17e3b-be26-49bd-9f70-29992985978a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0177c12e-f89b-4cca-9c7e-7dbac96b0551' class='xr-var-data-in' type='checkbox'><label for='data-0177c12e-f89b-4cca-9c7e-7dbac96b0551' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.615959e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-6962caf6-272f-4ba3-98f4-86b176838b16' class='xr-section-summary-in' type='checkbox'  checked><label for='section-6962caf6-272f-4ba3-98f4-86b176838b16' class='xr-section-summary' >Data variables: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>noisy</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.083e+03</div><input id='attrs-602e8dc8-eeb3-4f3d-8cea-690582091313' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-602e8dc8-eeb3-4f3d-8cea-690582091313' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c0728f62-eb9a-4ec2-b6c2-4bf6ded71337' class='xr-var-data-in' type='checkbox'><label for='data-c0728f62-eb9a-4ec2-b6c2-4bf6ded71337' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>noisy</dd></dl></div><div class='xr-var-data'><pre>array([2082.85685513])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>I0</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>9.0</div><input id='attrs-a3dc1db2-e73f-4d82-9f80-79b7f5837015' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a3dc1db2-e73f-4d82-9f80-79b7f5837015' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-599aa017-729c-4a48-a942-e46569a8e7e8' class='xr-var-data-in' type='checkbox'><label for='data-599aa017-729c-4a48-a942-e46569a8e7e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scaler1</dd></dl></div><div class='xr-var-data'><pre>array([9.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>diode</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>8.0</div><input id='attrs-446e2c4e-c87e-4ea7-b708-89ee4694100b' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-446e2c4e-c87e-4ea7-b708-89ee4694100b' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-c458b0c6-f055-4d68-a821-7dbe9cbcbfe7' class='xr-var-data-in' type='checkbox'><label for='data-c458b0c6-f055-4d68-a821-7dbe9cbcbfe7' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scaler1</dd></dl></div><div class='xr-var-data'><pre>array([8.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scaler1_time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.1</div><input id='attrs-57ddfe58-a8f0-4399-8b8c-0e2a439fad9d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-57ddfe58-a8f0-4399-8b8c-0e2a439fad9d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-2227d422-5045-4e00-b82c-7699f8b2905b' class='xr-var-data-in' type='checkbox'><label for='data-2227d422-5045-4e00-b82c-7699f8b2905b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scaler1</dd></dl></div><div class='xr-var-data'><pre>array([2.1])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-256e9a15-b00b-43e3-ac4a-69c4433b06e1' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-256e9a15-b00b-43e3-ac4a-69c4433b06e1' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+</div>
+<p>As a last action in this section, use the <code class="docutils literal notranslate"><span class="pre">`listruns()</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_utils.html?highlight=listobjects#apstools.utils.listruns">https://apstools.readthedocs.io/en/latest/source/_utils.html?highlight=listobjects#apstools.utils.listruns</a>&gt;`__ command from <em>apstools</em> to show the (default: 20) most recent runs in the database. The table shows a short version of the run’s unique identifier (<code class="docutils literal notranslate"><span class="pre">short_uid</span></code>), and other more obvious columns of information, truncated to avoid lengthy output. The name of the <a class="reference external" href="https://blueskyproject.io/databroker/index.html">databroker
+catalog</a> (<code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code>) is shown before the table.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listruns</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+catalog name: class_2021_03
+========= ========================== ======= ======= ========================================
+short_uid date/time                  exit    scan_id command
+========= ========================== ======= ======= ========================================
+8a7b7b7   2021-03-17 00:27:55.771259 success 22      count(detectors=[&#39;scaler1&#39;, &#39;noisy&#39;] ...
+026f81d   2021-03-17 00:27:23.738047 success 21      count(detectors=[&#39;scaler1&#39;], num=1)
+5822398   2021-03-17 00:27:22.174106 success 20      count(detectors=[&#39;scaler1&#39;], num=1)
+0a242c0   2021-03-16 17:06:01.575761 success 19      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+0f526a3   2021-03-16 17:05:51.931175 success 18      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+a8ab236   2021-03-16 17:05:42.789213 success 17      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+77a2b56   2021-03-16 17:05:32.949942 success 16      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+f96ede6   2021-03-16 17:05:03.556136 unknown 15      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+2ca3eff   2021-03-16 17:04:54.216955 success 14      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+262caa2   2021-03-16 17:03:53.558178 success 13      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+3aca2b2   2021-03-16 17:03:43.958270 success 12      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+719a2a4   2021-03-16 17:03:34.888805 success 11      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+8075d0f   2021-03-16 17:03:25.864460 success 10      scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+8efb65d   2021-03-16 16:43:06.597677 success 9       scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+dfe19ae   2021-03-16 16:42:57.243883 success 8       scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+1db467b   2021-03-16 16:42:48.120654 success 7       scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+a501ae6   2021-03-16 16:42:38.833505 success 6       scan(detectors=[&#39;scaler1&#39;, &#39;temperat ...
+b90ceb8   2021-03-15 11:54:56.214300 success 5       count(detectors=[&#39;temperature&#39;], num=20)
+0ebbc98   2021-03-15 11:49:42.879512 success 4       count(detectors=[&#39;temperature&#39;], num=20)
+933d541   2021-03-15 11:46:21.149419 success 3       count(detectors=[&#39;temperature&#39;], num=20)
+========= ========================== ======= ======= ========================================
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f1730c26520&gt;
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_basic_aps_info.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">APS Accelerator Information for Beam Lines</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_doodle.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Call Shell Command &amp; Wait for Finish</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#A-closer-look-at-the-EPICS-scaler">A closer look at the EPICS scaler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-ophyd-to-count-the-scaler">use ophyd to count the scaler</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-bluesky-(the-package)-to-count-the-scaler">use bluesky (the package) to count the scaler</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_count_scaler.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

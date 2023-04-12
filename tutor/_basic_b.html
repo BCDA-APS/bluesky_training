@@ -1,0 +1,1875 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Basic, Part B: Motor and Move &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_basic_b';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic, Part C: Step Scan with Scaler and Motor" href="_basic_c.html" />
+    <link rel="prev" title="Basic, Part A: Scaler and Count" href="_basic_a.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Basic, Part B: Motor and Move</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Basic,-Part-B:-Motor-and-Move">
+<h1>Basic, Part B: Motor and Move<a class="headerlink" href="#Basic,-Part-B:-Motor-and-Move" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>Work with an EPICS positioning motor (for precise positioning) in <a class="reference external" href="http://blueskyproject.io/bluesky/">Bluesky</a> and <a class="reference external" href="http://blueskyproject.io/">related tools</a>.</p>
+<p>First, we’ll connect with an EPICS motor (using <a class="reference external" href="http://blueskyproject.io/ophyd/">ophyd</a>), and then use the Bluesky software to scan the motor (with the scaler from <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a>).</p>
+<p>Load <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> device support for the <code class="docutils literal notranslate"><span class="pre">EpicsMotor</span></code> and connect with one EPICS motor channel. We have a synApps XXX-style IOC with the prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. It has a scaler, 16 soft channel motors, and some other support we’ll ignore in this lesson.</p>
+<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md">prjemian/epics-docker</a></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="s2">&quot;gp:m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Show the current value of the motor (that’s the <code class="docutils literal notranslate"><span class="pre">.RBV</span></code> field, in case you were interested).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m1</span><span class="o">.</span><span class="n">position</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+m1.position = 1.0
+</pre></div></div>
+</div>
+<p>Connect the scaler (as was done in the <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a> lesson). Define some of the chaannel names and clear out others.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="s2">&quot;gp:scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+<span class="c1"># Since there are no detectors actually connected to this scaler,</span>
+<span class="c1"># we can change names at our choice.  A real scaler will have</span>
+<span class="c1"># detectors connected to specific channels and we should not modify</span>
+<span class="c1"># these names without regard to how signals are physically connected.</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan01</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;clock&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;I0&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan03</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan04</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan05</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan06</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan07</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan08</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan09</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Use only the channels with EPICS names, those are the <em>interesting</em> channels.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">select_channels</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1627333994.301146}),
+             (&#39;I0&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1627333994.301146}),
+             (&#39;scint&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1627333994.301146}),
+             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627333994.301146}),
+             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627333994.301146}),
+             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1627333994.301146})])
+</pre></div></div>
+</div>
+<p>Create a RunEngine but do not connect it with a data collection strategy. That will come in the next lessons.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">RunEngine</span>
+<span class="kn">import</span> <span class="nn">bluesky.plans</span> <span class="k">as</span> <span class="nn">bp</span>
+<span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">({})</span>
+</pre></div>
+</div>
+</div>
+<p>Run a step scan using the motor and the scaler.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;833360f0-e21b-45e4-9ae5-ac62e26754b1&#39;,)
+</pre></div></div>
+</div>
+<p>Ah, yes. Nothing to see here since we did not setup anything to receive the <em>documents</em> from the RunEngine. Here’s the basic callback from the <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a> lesson.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="k">def</span> <span class="nf">myCallback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Repeat the same scan but handle the document stream with <code class="docutils literal notranslate"><span class="pre">myCallback()</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">myCallback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+start 15
+{&#39;detectors&#39;: [&#39;scaler&#39;],
+ &#39;hints&#39;: {&#39;dimensions&#39;: [([&#39;m1&#39;], &#39;primary&#39;)]},
+ &#39;motors&#39;: (&#39;m1&#39;,),
+ &#39;num_intervals&#39;: 4,
+ &#39;num_points&#39;: 5,
+ &#39;plan_args&#39;: {&#39;args&#39;: [&#34;EpicsMotor(prefix=&#39;gp:m1&#39;, name=&#39;m1&#39;, &#34;
+                        &#39;settle_time=0.0, timeout=None, &#39;
+                        &#34;read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;], &#34;
+                        &#34;configuration_attrs=[&#39;user_offset&#39;, &#34;
+                        &#34;&#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#34;
+                        &#34;&#39;motor_egu&#39;])&#34;,
+                        -1,
+                        1],
+               &#39;detectors&#39;: [&#34;ScalerCH(prefix=&#39;gp:scaler1&#39;, name=&#39;scaler&#39;, &#34;
+                             &#34;read_attrs=[&#39;channels&#39;, &#39;channels.chan01&#39;, &#34;
+                             &#34;&#39;channels.chan01.s&#39;, &#39;channels.chan02&#39;, &#34;
+                             &#34;&#39;channels.chan02.s&#39;, &#39;channels.chan03&#39;, &#34;
+                             &#34;&#39;channels.chan03.s&#39;, &#39;channels.chan11&#39;, &#34;
+                             &#34;&#39;channels.chan11.s&#39;, &#39;channels.chan12&#39;, &#34;
+                             &#34;&#39;channels.chan12.s&#39;, &#39;time&#39;], &#34;
+                             &#34;configuration_attrs=[&#39;channels&#39;, &#34;
+                             &#34;&#39;channels.chan01&#39;, &#39;channels.chan01.chname&#39;, &#34;
+                             &#34;&#39;channels.chan01.preset&#39;, &#34;
+                             &#34;&#39;channels.chan01.gate&#39;, &#39;channels.chan02&#39;, &#34;
+                             &#34;&#39;channels.chan02.chname&#39;, &#34;
+                             &#34;&#39;channels.chan02.preset&#39;, &#34;
+                             &#34;&#39;channels.chan02.gate&#39;, &#39;channels.chan03&#39;, &#34;
+                             &#34;&#39;channels.chan03.chname&#39;, &#34;
+                             &#34;&#39;channels.chan03.preset&#39;, &#34;
+                             &#34;&#39;channels.chan03.gate&#39;, &#39;channels.chan11&#39;, &#34;
+                             &#34;&#39;channels.chan11.chname&#39;, &#34;
+                             &#34;&#39;channels.chan11.preset&#39;, &#34;
+                             &#34;&#39;channels.chan11.gate&#39;, &#39;channels.chan12&#39;, &#34;
+                             &#34;&#39;channels.chan12.chname&#39;, &#34;
+                             &#34;&#39;channels.chan12.preset&#39;, &#34;
+                             &#34;&#39;channels.chan12.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#34;
+                             &#34;&#39;auto_count_delay&#39;, &#39;freq&#39;, &#39;preset_time&#39;, &#34;
+                             &#34;&#39;auto_count_time&#39;, &#39;egu&#39;])&#34;],
+               &#39;num&#39;: 5,
+               &#39;per_step&#39;: &#39;None&#39;},
+ &#39;plan_name&#39;: &#39;scan&#39;,
+ &#39;plan_pattern&#39;: &#39;inner_product&#39;,
+ &#39;plan_pattern_args&#39;: {&#39;args&#39;: [&#34;EpicsMotor(prefix=&#39;gp:m1&#39;, name=&#39;m1&#39;, &#34;
+                                &#39;settle_time=0.0, timeout=None, &#39;
+                                &#34;read_attrs=[&#39;user_readback&#39;, &#34;
+                                &#34;&#39;user_setpoint&#39;], &#34;
+                                &#34;configuration_attrs=[&#39;user_offset&#39;, &#34;
+                                &#34;&#39;user_offset_dir&#39;, &#39;velocity&#39;, &#34;
+                                &#34;&#39;acceleration&#39;, &#39;motor_egu&#39;])&#34;,
+                                -1,
+                                1],
+                       &#39;num&#39;: 5},
+ &#39;plan_pattern_module&#39;: &#39;bluesky.plan_patterns&#39;,
+ &#39;plan_type&#39;: &#39;generator&#39;,
+ &#39;scan_id&#39;: 2,
+ &#39;time&#39;: 1627334154.1719954,
+ &#39;uid&#39;: &#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,
+ &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.6.7&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;}}
+
+descriptor 8
+{&#39;configuration&#39;: {&#39;m1&#39;: {&#39;data&#39;: {&#39;m1_acceleration&#39;: 0.2,
+                                   &#39;m1_motor_egu&#39;: &#39;degrees&#39;,
+                                   &#39;m1_user_offset&#39;: 0.0,
+                                   &#39;m1_user_offset_dir&#39;: 0,
+                                   &#39;m1_velocity&#39;: 1.0},
+                          &#39;data_keys&#39;: OrderedDict([(&#39;m1_user_offset&#39;,
+                                                     {&#39;dtype&#39;: &#39;number&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: -1e+300,
+                                                      &#39;precision&#39;: 5,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.OFF&#39;,
+                                                      &#39;units&#39;: &#39;degrees&#39;,
+                                                      &#39;upper_ctrl_limit&#39;: 1e+300}),
+                                                    (&#39;m1_user_offset_dir&#39;,
+                                                     {&#39;dtype&#39;: &#39;integer&#39;,
+                                                      &#39;enum_strs&#39;: (&#39;Pos&#39;,
+                                                                    &#39;Neg&#39;),
+                                                      &#39;lower_ctrl_limit&#39;: None,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.DIR&#39;,
+                                                      &#39;units&#39;: None,
+                                                      &#39;upper_ctrl_limit&#39;: None}),
+                                                    (&#39;m1_velocity&#39;,
+                                                     {&#39;dtype&#39;: &#39;number&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: 0.1,
+                                                      &#39;precision&#39;: 5,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.VELO&#39;,
+                                                      &#39;units&#39;: &#39;degrees&#39;,
+                                                      &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                    (&#39;m1_acceleration&#39;,
+                                                     {&#39;dtype&#39;: &#39;number&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: -1e+300,
+                                                      &#39;precision&#39;: 5,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.ACCL&#39;,
+                                                      &#39;units&#39;: &#39;sec&#39;,
+                                                      &#39;upper_ctrl_limit&#39;: 1e+300}),
+                                                    (&#39;m1_motor_egu&#39;,
+                                                     {&#39;dtype&#39;: &#39;string&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: None,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.EGU&#39;,
+                                                      &#39;units&#39;: None,
+                                                      &#39;upper_ctrl_limit&#39;: None})]),
+                          &#39;timestamps&#39;: {&#39;m1_acceleration&#39;: 1627333994.442579,
+                                         &#39;m1_motor_egu&#39;: 1627333994.442579,
+                                         &#39;m1_user_offset&#39;: 1627333994.442579,
+                                         &#39;m1_user_offset_dir&#39;: 1627333994.442579,
+                                         &#39;m1_velocity&#39;: 1627333994.442579}},
+                   &#39;scaler&#39;: {&#39;data&#39;: {&#39;scaler_auto_count_delay&#39;: 0.0,
+                                       &#39;scaler_auto_count_time&#39;: 1.0,
+                                       &#39;scaler_channels_chan01_chname&#39;: &#39;clock&#39;,
+                                       &#39;scaler_channels_chan01_gate&#39;: &#39;Y&#39;,
+                                       &#39;scaler_channels_chan01_preset&#39;: 15000000.0,
+                                       &#39;scaler_channels_chan02_chname&#39;: &#39;I0&#39;,
+                                       &#39;scaler_channels_chan02_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan02_preset&#39;: 0.0,
+                                       &#39;scaler_channels_chan03_chname&#39;: &#39;scint&#39;,
+                                       &#39;scaler_channels_chan03_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan03_preset&#39;: 0.0,
+                                       &#39;scaler_channels_chan11_chname&#39;: &#39;roi1&#39;,
+                                       &#39;scaler_channels_chan11_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan11_preset&#39;: 0.0,
+                                       &#39;scaler_channels_chan12_chname&#39;: &#39;roi2&#39;,
+                                       &#39;scaler_channels_chan12_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan12_preset&#39;: 0.0,
+                                       &#39;scaler_count_mode&#39;: &#39;OneShot&#39;,
+                                       &#39;scaler_delay&#39;: 0.0,
+                                       &#39;scaler_egu&#39;: &#39;&#39;,
+                                       &#39;scaler_freq&#39;: 10000000.0,
+                                       &#39;scaler_preset_time&#39;: 1.5},
+                              &#39;data_keys&#39;: OrderedDict([(&#39;scaler_channels_chan01_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM1&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan01_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR1&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan01_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G1&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan02_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM2&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan02_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR2&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan02_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G2&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan03_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM3&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan03_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR3&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan03_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G3&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan11_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM11&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan11_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR11&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan11_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G11&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan12_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM12&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan12_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR12&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan12_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G12&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_count_mode&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;OneShot&#39;,
+                                                                        &#39;AutoCount&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.CONT&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_delay&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.DLY&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_auto_count_delay&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.DLY1&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_freq&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.FREQ&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_preset_time&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.TP&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_auto_count_time&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.TP1&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_egu&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.EGU&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None})]),
+                              &#39;timestamps&#39;: {&#39;scaler_auto_count_delay&#39;: 1627334158.291554,
+                                             &#39;scaler_auto_count_time&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan01_chname&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan01_gate&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan01_preset&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan02_chname&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan02_gate&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan02_preset&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan03_chname&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan03_gate&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan03_preset&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan11_chname&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan11_gate&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan11_preset&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan12_chname&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan12_gate&#39;: 1627334158.291554,
+                                             &#39;scaler_channels_chan12_preset&#39;: 1627334158.291554,
+                                             &#39;scaler_count_mode&#39;: 1627334158.291554,
+                                             &#39;scaler_delay&#39;: 1627334158.291554,
+                                             &#39;scaler_egu&#39;: 1627334158.291554,
+                                             &#39;scaler_freq&#39;: 1627334158.291554,
+                                             &#39;scaler_preset_time&#39;: 1627334158.291554}}},
+ &#39;data_keys&#39;: {&#39;I0&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                      &#39;lower_ctrl_limit&#39;: 0.0,
+                      &#39;object_name&#39;: &#39;scaler&#39;,
+                      &#39;precision&#39;: 0,
+                      &#39;shape&#39;: [],
+                      &#39;source&#39;: &#39;PV:gp:scaler1.S2&#39;,
+                      &#39;units&#39;: &#39;&#39;,
+                      &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;clock&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                         &#39;lower_ctrl_limit&#39;: 0.0,
+                         &#39;object_name&#39;: &#39;scaler&#39;,
+                         &#39;precision&#39;: 0,
+                         &#39;shape&#39;: [],
+                         &#39;source&#39;: &#39;PV:gp:scaler1.S1&#39;,
+                         &#39;units&#39;: &#39;&#39;,
+                         &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;m1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                      &#39;lower_ctrl_limit&#39;: -32000.0,
+                      &#39;object_name&#39;: &#39;m1&#39;,
+                      &#39;precision&#39;: 5,
+                      &#39;shape&#39;: [],
+                      &#39;source&#39;: &#39;PV:gp:m1.RBV&#39;,
+                      &#39;units&#39;: &#39;degrees&#39;,
+                      &#39;upper_ctrl_limit&#39;: 32000.0},
+               &#39;m1_user_setpoint&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                                    &#39;lower_ctrl_limit&#39;: -32000.0,
+                                    &#39;object_name&#39;: &#39;m1&#39;,
+                                    &#39;precision&#39;: 5,
+                                    &#39;shape&#39;: [],
+                                    &#39;source&#39;: &#39;PV:gp:m1.VAL&#39;,
+                                    &#39;units&#39;: &#39;degrees&#39;,
+                                    &#39;upper_ctrl_limit&#39;: 32000.0},
+               &#39;roi1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                        &#39;lower_ctrl_limit&#39;: 0.0,
+                        &#39;object_name&#39;: &#39;scaler&#39;,
+                        &#39;precision&#39;: 0,
+                        &#39;shape&#39;: [],
+                        &#39;source&#39;: &#39;PV:gp:scaler1.S11&#39;,
+                        &#39;units&#39;: &#39;&#39;,
+                        &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;roi2&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                        &#39;lower_ctrl_limit&#39;: 0.0,
+                        &#39;object_name&#39;: &#39;scaler&#39;,
+                        &#39;precision&#39;: 0,
+                        &#39;shape&#39;: [],
+                        &#39;source&#39;: &#39;PV:gp:scaler1.S12&#39;,
+                        &#39;units&#39;: &#39;&#39;,
+                        &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;scaler_time&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                               &#39;lower_ctrl_limit&#39;: 0.0,
+                               &#39;object_name&#39;: &#39;scaler&#39;,
+                               &#39;precision&#39;: 3,
+                               &#39;shape&#39;: [],
+                               &#39;source&#39;: &#39;PV:gp:scaler1.T&#39;,
+                               &#39;units&#39;: &#39;&#39;,
+                               &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;scint&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                         &#39;lower_ctrl_limit&#39;: 0.0,
+                         &#39;object_name&#39;: &#39;scaler&#39;,
+                         &#39;precision&#39;: 0,
+                         &#39;shape&#39;: [],
+                         &#39;source&#39;: &#39;PV:gp:scaler1.S3&#39;,
+                         &#39;units&#39;: &#39;&#39;,
+                         &#39;upper_ctrl_limit&#39;: 0.0}},
+ &#39;hints&#39;: {&#39;m1&#39;: {&#39;fields&#39;: [&#39;m1&#39;]},
+           &#39;scaler&#39;: {&#39;fields&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;, &#39;roi1&#39;, &#39;roi2&#39;]}},
+ &#39;name&#39;: &#39;primary&#39;,
+ &#39;object_keys&#39;: {&#39;m1&#39;: [&#39;m1&#39;, &#39;m1_user_setpoint&#39;],
+                 &#39;scaler&#39;: [&#39;clock&#39;,
+                            &#39;I0&#39;,
+                            &#39;scint&#39;,
+                            &#39;roi1&#39;,
+                            &#39;roi2&#39;,
+                            &#39;scaler_time&#39;]},
+ &#39;run_start&#39;: &#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,
+ &#39;time&#39;: 1627334158.321151,
+ &#39;uid&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 8.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: -1.0,
+          &#39;m1_user_setpoint&#39;: -1.0,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 8.0},
+ &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 1,
+ &#39;time&#39;: 1627334159.597447,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334158.291554,
+                &#39;clock&#39;: 1627334158.291554,
+                &#39;m1&#39;: 1627334156.570483,
+                &#39;m1_user_setpoint&#39;: 1627334154.320055,
+                &#39;roi1&#39;: 1627334158.291554,
+                &#39;roi2&#39;: 1627334158.291554,
+                &#39;scaler_time&#39;: 1627334158.291554,
+                &#39;scint&#39;: 1627334158.291554},
+ &#39;uid&#39;: &#39;48529050-a1d8-4168-b038-60dbc0df5285&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 9.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: -0.5,
+          &#39;m1_user_setpoint&#39;: -0.5,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 8.0},
+ &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 2,
+ &#39;time&#39;: 1627334162.1043005,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334162.096512,
+                &#39;clock&#39;: 1627334162.096512,
+                &#39;m1&#39;: 1627334160.37715,
+                &#39;m1_user_setpoint&#39;: 1627334159.672333,
+                &#39;roi1&#39;: 1627334162.096512,
+                &#39;roi2&#39;: 1627334162.096512,
+                &#39;scaler_time&#39;: 1627334162.096512,
+                &#39;scint&#39;: 1627334162.096512},
+ &#39;uid&#39;: &#39;d24ba3c3-dadf-4a2d-958d-f96b5e2f7ddc&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 7.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: 0.0,
+          &#39;m1_user_setpoint&#39;: 0.0,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 9.0},
+ &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 3,
+ &#39;time&#39;: 1627334164.7096627,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334164.701895,
+                &#39;clock&#39;: 1627334164.701895,
+                &#39;m1&#39;: 1627334162.981871,
+                &#39;m1_user_setpoint&#39;: 1627334162.21886,
+                &#39;roi1&#39;: 1627334164.701895,
+                &#39;roi2&#39;: 1627334164.701895,
+                &#39;scaler_time&#39;: 1627334164.701895,
+                &#39;scint&#39;: 1627334164.701895},
+ &#39;uid&#39;: &#39;f6fc1a0b-e0fb-4ddb-ab89-90442c525d3e&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 8.0,
+          &#39;clock&#39;: 15000000.0,
+          &#39;m1&#39;: 0.5,
+          &#39;m1_user_setpoint&#39;: 0.5,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.5,
+          &#39;scint&#39;: 7.0},
+ &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 4,
+ &#39;time&#39;: 1627334167.218836,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334167.211022,
+                &#39;clock&#39;: 1627334167.211022,
+                &#39;m1&#39;: 1627334165.586726,
+                &#39;m1_user_setpoint&#39;: 1627334164.823617,
+                &#39;roi1&#39;: 1627334167.211022,
+                &#39;roi2&#39;: 1627334167.211022,
+                &#39;scaler_time&#39;: 1627334167.211022,
+                &#39;scint&#39;: 1627334167.211022},
+ &#39;uid&#39;: &#39;edd4ecb7-40a1-45b4-999f-52603fddb5d5&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 6.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: 1.0,
+          &#39;m1_user_setpoint&#39;: 1.0,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 5.0},
+ &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 5,
+ &#39;time&#39;: 1627334169.7239022,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334169.716031,
+                &#39;clock&#39;: 1627334169.716031,
+                &#39;m1&#39;: 1627334168.091639,
+                &#39;m1_user_setpoint&#39;: 1627334167.328457,
+                &#39;roi1&#39;: 1627334169.716031,
+                &#39;roi2&#39;: 1627334169.716031,
+                &#39;scaler_time&#39;: 1627334169.716031,
+                &#39;scint&#39;: 1627334169.716031},
+ &#39;uid&#39;: &#39;51d89f51-a99b-4bc4-a23e-65de1c058661&#39;}
+
+stop 6
+{&#39;exit_status&#39;: &#39;success&#39;,
+ &#39;num_events&#39;: {&#39;primary&#39;: 5},
+ &#39;reason&#39;: &#39;&#39;,
+ &#39;run_start&#39;: &#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,
+ &#39;time&#39;: 1627334169.8411226,
+ &#39;uid&#39;: &#39;ef387dc6-6aac-4f74-8a74-027a10e07ade&#39;}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,)
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="s2">&quot;gp:m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Show the current value of the motor (that’s the <code class="docutils literal notranslate"><span class="pre">.RBV</span></code> field, in case you were interested).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m1</span><span class="o">.</span><span class="n">position</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+m1.position = 1.0
+</pre></div></div>
+</div>
+<p>Connect the scaler (as was done in the <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a> lesson). Define some of the channel names and clear out others.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="s2">&quot;gp:scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+<span class="c1"># Since there are no detectors actually connected to this scaler,</span>
+<span class="c1"># we can change names at our choice.  A real scaler will have</span>
+<span class="c1"># detectors connected to specific channels and we should not modify</span>
+<span class="c1"># these names without regard to how signals are physically connected.</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan01</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;clock&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;I0&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan03</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan04</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan05</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan06</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan07</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan08</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan09</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Use only the channels with EPICS names, those are the <em>interesting</em> channels.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">select_channels</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1627334169.716031}),
+             (&#39;I0&#39;, {&#39;value&#39;: 6.0, &#39;timestamp&#39;: 1627334169.716031}),
+             (&#39;scint&#39;, {&#39;value&#39;: 5.0, &#39;timestamp&#39;: 1627334169.716031}),
+             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627334169.716031}),
+             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627334169.716031}),
+             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1627334169.716031})])
+</pre></div></div>
+</div>
+<p>Create a RunEngine but do not connect it with a data collection strategy. That will come in the next lessons.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">RunEngine</span>
+<span class="kn">import</span> <span class="nn">bluesky.plans</span> <span class="k">as</span> <span class="nn">bp</span>
+<span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">({})</span>
+</pre></div>
+</div>
+</div>
+<p>Run a step scan using the motor and the scaler.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;a73d9f8b-7533-46ad-b1f3-b15d350f4fbd&#39;,)
+</pre></div></div>
+</div>
+<p>Ah, yes. Nothing to see here since we did not setup anything to receive the <em>documents</em> from the RunEngine. Here’s the basic callback from the <code class="docutils literal notranslate"><span class="pre">`basic_scaler</span></code> &lt;_basic_a.ipynb&gt;`__ notebook.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pprint</span>
+<span class="k">def</span> <span class="nf">myCallback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Repeat the same scan but handle the document stream with <code class="docutils literal notranslate"><span class="pre">myCallback()</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">myCallback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+start 15
+{&#39;detectors&#39;: [&#39;scaler&#39;],
+ &#39;hints&#39;: {&#39;dimensions&#39;: [([&#39;m1&#39;], &#39;primary&#39;)]},
+ &#39;motors&#39;: (&#39;m1&#39;,),
+ &#39;num_intervals&#39;: 4,
+ &#39;num_points&#39;: 5,
+ &#39;plan_args&#39;: {&#39;args&#39;: [&#34;EpicsMotor(prefix=&#39;gp:m1&#39;, name=&#39;m1&#39;, &#34;
+                        &#39;settle_time=0.0, timeout=None, &#39;
+                        &#34;read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;], &#34;
+                        &#34;configuration_attrs=[&#39;user_offset&#39;, &#34;
+                        &#34;&#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#34;
+                        &#34;&#39;motor_egu&#39;])&#34;,
+                        -1,
+                        1],
+               &#39;detectors&#39;: [&#34;ScalerCH(prefix=&#39;gp:scaler1&#39;, name=&#39;scaler&#39;, &#34;
+                             &#34;read_attrs=[&#39;channels&#39;, &#39;channels.chan01&#39;, &#34;
+                             &#34;&#39;channels.chan01.s&#39;, &#39;channels.chan02&#39;, &#34;
+                             &#34;&#39;channels.chan02.s&#39;, &#39;channels.chan03&#39;, &#34;
+                             &#34;&#39;channels.chan03.s&#39;, &#39;channels.chan11&#39;, &#34;
+                             &#34;&#39;channels.chan11.s&#39;, &#39;channels.chan12&#39;, &#34;
+                             &#34;&#39;channels.chan12.s&#39;, &#39;time&#39;], &#34;
+                             &#34;configuration_attrs=[&#39;channels&#39;, &#34;
+                             &#34;&#39;channels.chan01&#39;, &#39;channels.chan01.chname&#39;, &#34;
+                             &#34;&#39;channels.chan01.preset&#39;, &#34;
+                             &#34;&#39;channels.chan01.gate&#39;, &#39;channels.chan02&#39;, &#34;
+                             &#34;&#39;channels.chan02.chname&#39;, &#34;
+                             &#34;&#39;channels.chan02.preset&#39;, &#34;
+                             &#34;&#39;channels.chan02.gate&#39;, &#39;channels.chan03&#39;, &#34;
+                             &#34;&#39;channels.chan03.chname&#39;, &#34;
+                             &#34;&#39;channels.chan03.preset&#39;, &#34;
+                             &#34;&#39;channels.chan03.gate&#39;, &#39;channels.chan11&#39;, &#34;
+                             &#34;&#39;channels.chan11.chname&#39;, &#34;
+                             &#34;&#39;channels.chan11.preset&#39;, &#34;
+                             &#34;&#39;channels.chan11.gate&#39;, &#39;channels.chan12&#39;, &#34;
+                             &#34;&#39;channels.chan12.chname&#39;, &#34;
+                             &#34;&#39;channels.chan12.preset&#39;, &#34;
+                             &#34;&#39;channels.chan12.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#34;
+                             &#34;&#39;auto_count_delay&#39;, &#39;freq&#39;, &#39;preset_time&#39;, &#34;
+                             &#34;&#39;auto_count_time&#39;, &#39;egu&#39;])&#34;],
+               &#39;num&#39;: 5,
+               &#39;per_step&#39;: &#39;None&#39;},
+ &#39;plan_name&#39;: &#39;scan&#39;,
+ &#39;plan_pattern&#39;: &#39;inner_product&#39;,
+ &#39;plan_pattern_args&#39;: {&#39;args&#39;: [&#34;EpicsMotor(prefix=&#39;gp:m1&#39;, name=&#39;m1&#39;, &#34;
+                                &#39;settle_time=0.0, timeout=None, &#39;
+                                &#34;read_attrs=[&#39;user_readback&#39;, &#34;
+                                &#34;&#39;user_setpoint&#39;], &#34;
+                                &#34;configuration_attrs=[&#39;user_offset&#39;, &#34;
+                                &#34;&#39;user_offset_dir&#39;, &#39;velocity&#39;, &#34;
+                                &#34;&#39;acceleration&#39;, &#39;motor_egu&#39;])&#34;,
+                                -1,
+                                1],
+                       &#39;num&#39;: 5},
+ &#39;plan_pattern_module&#39;: &#39;bluesky.plan_patterns&#39;,
+ &#39;plan_type&#39;: &#39;generator&#39;,
+ &#39;scan_id&#39;: 2,
+ &#39;time&#39;: 1627334219.9386528,
+ &#39;uid&#39;: &#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,
+ &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.6.7&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;}}
+
+descriptor 8
+{&#39;configuration&#39;: {&#39;m1&#39;: {&#39;data&#39;: {&#39;m1_acceleration&#39;: 0.2,
+                                   &#39;m1_motor_egu&#39;: &#39;degrees&#39;,
+                                   &#39;m1_user_offset&#39;: 0.0,
+                                   &#39;m1_user_offset_dir&#39;: 0,
+                                   &#39;m1_velocity&#39;: 1.0},
+                          &#39;data_keys&#39;: OrderedDict([(&#39;m1_user_offset&#39;,
+                                                     {&#39;dtype&#39;: &#39;number&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: -1e+300,
+                                                      &#39;precision&#39;: 5,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.OFF&#39;,
+                                                      &#39;units&#39;: &#39;degrees&#39;,
+                                                      &#39;upper_ctrl_limit&#39;: 1e+300}),
+                                                    (&#39;m1_user_offset_dir&#39;,
+                                                     {&#39;dtype&#39;: &#39;integer&#39;,
+                                                      &#39;enum_strs&#39;: (&#39;Pos&#39;,
+                                                                    &#39;Neg&#39;),
+                                                      &#39;lower_ctrl_limit&#39;: None,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.DIR&#39;,
+                                                      &#39;units&#39;: None,
+                                                      &#39;upper_ctrl_limit&#39;: None}),
+                                                    (&#39;m1_velocity&#39;,
+                                                     {&#39;dtype&#39;: &#39;number&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: 0.1,
+                                                      &#39;precision&#39;: 5,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.VELO&#39;,
+                                                      &#39;units&#39;: &#39;degrees&#39;,
+                                                      &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                    (&#39;m1_acceleration&#39;,
+                                                     {&#39;dtype&#39;: &#39;number&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: -1e+300,
+                                                      &#39;precision&#39;: 5,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.ACCL&#39;,
+                                                      &#39;units&#39;: &#39;sec&#39;,
+                                                      &#39;upper_ctrl_limit&#39;: 1e+300}),
+                                                    (&#39;m1_motor_egu&#39;,
+                                                     {&#39;dtype&#39;: &#39;string&#39;,
+                                                      &#39;lower_ctrl_limit&#39;: None,
+                                                      &#39;shape&#39;: [],
+                                                      &#39;source&#39;: &#39;PV:gp:m1.EGU&#39;,
+                                                      &#39;units&#39;: None,
+                                                      &#39;upper_ctrl_limit&#39;: None})]),
+                          &#39;timestamps&#39;: {&#39;m1_acceleration&#39;: 1627333994.442579,
+                                         &#39;m1_motor_egu&#39;: 1627334169.871139,
+                                         &#39;m1_user_offset&#39;: 1627333994.442579,
+                                         &#39;m1_user_offset_dir&#39;: 1627333994.442579,
+                                         &#39;m1_velocity&#39;: 1627333994.442579}},
+                   &#39;scaler&#39;: {&#39;data&#39;: {&#39;scaler_auto_count_delay&#39;: 0.0,
+                                       &#39;scaler_auto_count_time&#39;: 1.0,
+                                       &#39;scaler_channels_chan01_chname&#39;: &#39;clock&#39;,
+                                       &#39;scaler_channels_chan01_gate&#39;: &#39;Y&#39;,
+                                       &#39;scaler_channels_chan01_preset&#39;: 15000000.0,
+                                       &#39;scaler_channels_chan02_chname&#39;: &#39;I0&#39;,
+                                       &#39;scaler_channels_chan02_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan02_preset&#39;: 0.0,
+                                       &#39;scaler_channels_chan03_chname&#39;: &#39;scint&#39;,
+                                       &#39;scaler_channels_chan03_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan03_preset&#39;: 0.0,
+                                       &#39;scaler_channels_chan11_chname&#39;: &#39;roi1&#39;,
+                                       &#39;scaler_channels_chan11_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan11_preset&#39;: 0.0,
+                                       &#39;scaler_channels_chan12_chname&#39;: &#39;roi2&#39;,
+                                       &#39;scaler_channels_chan12_gate&#39;: &#39;N&#39;,
+                                       &#39;scaler_channels_chan12_preset&#39;: 0.0,
+                                       &#39;scaler_count_mode&#39;: &#39;OneShot&#39;,
+                                       &#39;scaler_delay&#39;: 0.0,
+                                       &#39;scaler_egu&#39;: &#39;&#39;,
+                                       &#39;scaler_freq&#39;: 10000000.0,
+                                       &#39;scaler_preset_time&#39;: 1.5},
+                              &#39;data_keys&#39;: OrderedDict([(&#39;scaler_channels_chan01_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM1&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan01_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR1&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan01_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G1&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan02_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM2&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan02_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR2&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan02_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G2&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan03_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM3&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan03_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR3&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan03_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G3&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan11_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM11&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan11_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR11&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan11_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G11&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan12_chname&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM12&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_channels_chan12_preset&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 0,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR12&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_channels_chan12_gate&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
+                                                                        &#39;Y&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G12&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_count_mode&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;enum_strs&#39;: (&#39;OneShot&#39;,
+                                                                        &#39;AutoCount&#39;),
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.CONT&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None}),
+                                                        (&#39;scaler_delay&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.DLY&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_auto_count_delay&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.DLY1&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_freq&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.FREQ&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_preset_time&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.TP&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_auto_count_time&#39;,
+                                                         {&#39;dtype&#39;: &#39;number&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: 0.0,
+                                                          &#39;precision&#39;: 3,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.TP1&#39;,
+                                                          &#39;units&#39;: &#39;&#39;,
+                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
+                                                        (&#39;scaler_egu&#39;,
+                                                         {&#39;dtype&#39;: &#39;string&#39;,
+                                                          &#39;lower_ctrl_limit&#39;: None,
+                                                          &#39;shape&#39;: [],
+                                                          &#39;source&#39;: &#39;PV:gp:scaler1.EGU&#39;,
+                                                          &#39;units&#39;: None,
+                                                          &#39;upper_ctrl_limit&#39;: None})]),
+                              &#39;timestamps&#39;: {&#39;scaler_auto_count_delay&#39;: 1627334223.918718,
+                                             &#39;scaler_auto_count_time&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan01_chname&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan01_gate&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan01_preset&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan02_chname&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan02_gate&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan02_preset&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan03_chname&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan03_gate&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan03_preset&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan11_chname&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan11_gate&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan11_preset&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan12_chname&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan12_gate&#39;: 1627334223.918718,
+                                             &#39;scaler_channels_chan12_preset&#39;: 1627334223.918718,
+                                             &#39;scaler_count_mode&#39;: 1627334223.918718,
+                                             &#39;scaler_delay&#39;: 1627334223.918718,
+                                             &#39;scaler_egu&#39;: 1627334223.918718,
+                                             &#39;scaler_freq&#39;: 1627334223.918718,
+                                             &#39;scaler_preset_time&#39;: 1627334223.918718}}},
+ &#39;data_keys&#39;: {&#39;I0&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                      &#39;lower_ctrl_limit&#39;: 0.0,
+                      &#39;object_name&#39;: &#39;scaler&#39;,
+                      &#39;precision&#39;: 0,
+                      &#39;shape&#39;: [],
+                      &#39;source&#39;: &#39;PV:gp:scaler1.S2&#39;,
+                      &#39;units&#39;: &#39;&#39;,
+                      &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;clock&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                         &#39;lower_ctrl_limit&#39;: 0.0,
+                         &#39;object_name&#39;: &#39;scaler&#39;,
+                         &#39;precision&#39;: 0,
+                         &#39;shape&#39;: [],
+                         &#39;source&#39;: &#39;PV:gp:scaler1.S1&#39;,
+                         &#39;units&#39;: &#39;&#39;,
+                         &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;m1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                      &#39;lower_ctrl_limit&#39;: -32000.0,
+                      &#39;object_name&#39;: &#39;m1&#39;,
+                      &#39;precision&#39;: 5,
+                      &#39;shape&#39;: [],
+                      &#39;source&#39;: &#39;PV:gp:m1.RBV&#39;,
+                      &#39;units&#39;: &#39;degrees&#39;,
+                      &#39;upper_ctrl_limit&#39;: 32000.0},
+               &#39;m1_user_setpoint&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                                    &#39;lower_ctrl_limit&#39;: -32000.0,
+                                    &#39;object_name&#39;: &#39;m1&#39;,
+                                    &#39;precision&#39;: 5,
+                                    &#39;shape&#39;: [],
+                                    &#39;source&#39;: &#39;PV:gp:m1.VAL&#39;,
+                                    &#39;units&#39;: &#39;degrees&#39;,
+                                    &#39;upper_ctrl_limit&#39;: 32000.0},
+               &#39;roi1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                        &#39;lower_ctrl_limit&#39;: 0.0,
+                        &#39;object_name&#39;: &#39;scaler&#39;,
+                        &#39;precision&#39;: 0,
+                        &#39;shape&#39;: [],
+                        &#39;source&#39;: &#39;PV:gp:scaler1.S11&#39;,
+                        &#39;units&#39;: &#39;&#39;,
+                        &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;roi2&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                        &#39;lower_ctrl_limit&#39;: 0.0,
+                        &#39;object_name&#39;: &#39;scaler&#39;,
+                        &#39;precision&#39;: 0,
+                        &#39;shape&#39;: [],
+                        &#39;source&#39;: &#39;PV:gp:scaler1.S12&#39;,
+                        &#39;units&#39;: &#39;&#39;,
+                        &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;scaler_time&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                               &#39;lower_ctrl_limit&#39;: 0.0,
+                               &#39;object_name&#39;: &#39;scaler&#39;,
+                               &#39;precision&#39;: 3,
+                               &#39;shape&#39;: [],
+                               &#39;source&#39;: &#39;PV:gp:scaler1.T&#39;,
+                               &#39;units&#39;: &#39;&#39;,
+                               &#39;upper_ctrl_limit&#39;: 0.0},
+               &#39;scint&#39;: {&#39;dtype&#39;: &#39;number&#39;,
+                         &#39;lower_ctrl_limit&#39;: 0.0,
+                         &#39;object_name&#39;: &#39;scaler&#39;,
+                         &#39;precision&#39;: 0,
+                         &#39;shape&#39;: [],
+                         &#39;source&#39;: &#39;PV:gp:scaler1.S3&#39;,
+                         &#39;units&#39;: &#39;&#39;,
+                         &#39;upper_ctrl_limit&#39;: 0.0}},
+ &#39;hints&#39;: {&#39;m1&#39;: {&#39;fields&#39;: [&#39;m1&#39;]},
+           &#39;scaler&#39;: {&#39;fields&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;, &#39;roi1&#39;, &#39;roi2&#39;]}},
+ &#39;name&#39;: &#39;primary&#39;,
+ &#39;object_keys&#39;: {&#39;m1&#39;: [&#39;m1&#39;, &#39;m1_user_setpoint&#39;],
+                 &#39;scaler&#39;: [&#39;clock&#39;,
+                            &#39;I0&#39;,
+                            &#39;scint&#39;,
+                            &#39;roi1&#39;,
+                            &#39;roi2&#39;,
+                            &#39;scaler_time&#39;]},
+ &#39;run_start&#39;: &#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,
+ &#39;time&#39;: 1627334223.9472103,
+ &#39;uid&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 10.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: -1.0,
+          &#39;m1_user_setpoint&#39;: -1.0,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 7.0},
+ &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 1,
+ &#39;time&#39;: 1627334224.9877248,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334223.918718,
+                &#39;clock&#39;: 1627334223.918718,
+                &#39;m1&#39;: 1627334222.294413,
+                &#39;m1_user_setpoint&#39;: 1627334220.0848894,
+                &#39;roi1&#39;: 1627334223.918718,
+                &#39;roi2&#39;: 1627334223.918718,
+                &#39;scaler_time&#39;: 1627334223.918718,
+                &#39;scint&#39;: 1627334223.918718},
+ &#39;uid&#39;: &#39;7385f06f-d532-45ba-a759-26a731d1b0fc&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 9.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: -0.5,
+          &#39;m1_user_setpoint&#39;: -0.5,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 6.0},
+ &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 2,
+ &#39;time&#39;: 1627334227.4251966,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334227.420283,
+                &#39;clock&#39;: 1627334227.420283,
+                &#39;m1&#39;: 1627334225.799421,
+                &#39;m1_user_setpoint&#39;: 1627334225.042071,
+                &#39;roi1&#39;: 1627334227.420283,
+                &#39;roi2&#39;: 1627334227.420283,
+                &#39;scaler_time&#39;: 1627334227.420283,
+                &#39;scint&#39;: 1627334227.420283},
+ &#39;uid&#39;: &#39;e6ef0b03-e841-4fc5-803c-647a4e44ca26&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 8.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: 0.0,
+          &#39;m1_user_setpoint&#39;: 0.0,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 9.0},
+ &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 3,
+ &#39;time&#39;: 1627334229.9296093,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334229.924173,
+                &#39;clock&#39;: 1627334229.924173,
+                &#39;m1&#39;: 1627334228.303182,
+                &#39;m1_user_setpoint&#39;: 1627334227.502291,
+                &#39;roi1&#39;: 1627334229.924173,
+                &#39;roi2&#39;: 1627334229.924173,
+                &#39;scaler_time&#39;: 1627334229.924173,
+                &#39;scint&#39;: 1627334229.924173},
+ &#39;uid&#39;: &#39;7011e199-db4c-4299-9b48-bf748b22510e&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 6.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: 0.5,
+          &#39;m1_user_setpoint&#39;: 0.5,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 8.0},
+ &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 4,
+ &#39;time&#39;: 1627334232.4308178,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334232.428412,
+                &#39;clock&#39;: 1627334232.428412,
+                &#39;m1&#39;: 1627334230.806799,
+                &#39;m1_user_setpoint&#39;: 1627334230.013634,
+                &#39;roi1&#39;: 1627334232.428412,
+                &#39;roi2&#39;: 1627334232.428412,
+                &#39;scaler_time&#39;: 1627334232.428412,
+                &#39;scint&#39;: 1627334232.428412},
+ &#39;uid&#39;: &#39;dc32d440-8482-4ecb-844a-a554c31bd5f9&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 7.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: 1.0,
+          &#39;m1_user_setpoint&#39;: 1.0,
+          &#39;roi1&#39;: 0.0,
+          &#39;roi2&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 6.0},
+ &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 5,
+ &#39;time&#39;: 1627334234.9331014,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1627334234.930827,
+                &#39;clock&#39;: 1627334234.930827,
+                &#39;m1&#39;: 1627334233.310378,
+                &#39;m1_user_setpoint&#39;: 1627334232.511985,
+                &#39;roi1&#39;: 1627334234.930827,
+                &#39;roi2&#39;: 1627334234.930827,
+                &#39;scaler_time&#39;: 1627334234.930827,
+                &#39;scint&#39;: 1627334234.930827},
+ &#39;uid&#39;: &#39;0da7af73-0eb9-4d84-b303-a5670a056982&#39;}
+
+stop 6
+{&#39;exit_status&#39;: &#39;success&#39;,
+ &#39;num_events&#39;: {&#39;primary&#39;: 5},
+ &#39;reason&#39;: &#39;&#39;,
+ &#39;run_start&#39;: &#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,
+ &#39;time&#39;: 1627334234.9921644,
+ &#39;uid&#39;: &#39;a176a034-e41a-47db-9135-82704ec08d22&#39;}
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,)
+</pre></div></div>
+</div>
+<section id="Summary">
+<h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this heading">#</a></h2>
+<p>We’ll show this code as a python program:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env python
+
+&quot;&quot;&quot;Basic : motor&quot;&quot;&quot;
+
+from ophyd import EpicsMotor
+from ophyd.scaler import ScalerCH
+from bluesky import RunEngine
+import bluesky.plans as bp
+
+
+def myCallback(key, doc):
+    print()
+    print(key, len(doc))
+    pprint.pprint(doc)
+
+
+m1 = EpicsMotor(&quot;gp:m1&quot;, name=&quot;m1&quot;)
+m1.wait_for_connection()
+print(m1.position)
+
+scaler = ScalerCH(&quot;gp:scaler1&quot;, name=&quot;scaler&quot;)
+scaler.wait_for_connection()
+
+
+# Since there are no detectors actually connected to this scaler,
+# we can change names at our choice.  A real scaler will have
+# detectors connected to specific channels and we should not modify
+# these names without regard to how signals are physically connected.
+scaler.channels.chan01.chname.put(&quot;clock&quot;)
+scaler.channels.chan02.chname.put(&quot;I0&quot;)
+scaler.channels.chan03.chname.put(&quot;scint&quot;)
+scaler.channels.chan04.chname.put(&quot;&quot;)
+scaler.channels.chan05.chname.put(&quot;&quot;)
+scaler.channels.chan06.chname.put(&quot;&quot;)
+scaler.channels.chan07.chname.put(&quot;&quot;)
+scaler.channels.chan08.chname.put(&quot;&quot;)
+scaler.channels.chan09.chname.put(&quot;&quot;)
+
+
+scaler.match_names()
+scaler.select_channels()
+print(scaler.read())
+
+RE = RunEngine({})
+
+RE(bp.scan([scaler], m1, -1, 1, 5))
+
+RE(bp.scan([scaler], m1, -1, 1, 5), myCallback)
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_basic_a.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Basic, Part A: Scaler and Count</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_basic_c.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic, Part C: Step Scan with Scaler and Motor</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_basic_b.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

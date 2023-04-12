@@ -1,0 +1,951 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Lesson 3, Part A: Show the data as it is acquired &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_lesson3a';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lesson 3, Part B: Show Data - Concise Summary" href="_lesson3b.html" />
+    <link rel="prev" title="Lesson 2: motor and scan" href="_lesson2.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Lesson 3, Part A: Show the data as it is acquired</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Lesson-3,-Part-A:-Show-the-data-as-it-is-acquired">
+<h1>Lesson 3, Part A: Show the data as it is acquired<a class="headerlink" href="#Lesson-3,-Part-A:-Show-the-data-as-it-is-acquired" title="Permalink to this heading">#</a></h1>
+<p>In this lesson, we’ll show how to use the tools provided with Bluesky to show the data as it is acquired using both a table representation and a graphical view, as well. These capabilities are provided by using callbacks. In lessons 1 and 2, we wrote our own simple callback to view the documents that come from the RunEngine during execution of a plan. Quickly, the data became too complex for simple viewing.</p>
+<p>The <em>LiveTable</em> and <em>LivePlot</em> callbacks provide a table and graphical view of the data from the plan. We’ll get to those first. Later, we’ll show the <em>BestEffortCallback</em>, which combines both those callbacks plus a little more. For routine work, we’ll want to use <em>BestEffortCallback</em> all the time. We’ll show how to make that happen so we <em>set it and forget about it</em>.</p>
+<hr class="docutils" />
+<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">sky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/blob/master/n3_synApps/README.md">prjemian/epics-docker</a></p>
+<p>Starting with the configuration from lessons 1 and 2, we first group the <code class="docutils literal notranslate"><span class="pre">import</span></code>s together as is common Python practice:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
+<span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+<span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">RunEngine</span>
+<span class="kn">import</span> <span class="nn">bluesky.plans</span> <span class="k">as</span> <span class="nn">bp</span>
+<span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">use_EPICS_scaler_channels</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">ophyd</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> EpicsMotor
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">ophyd</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">scaler</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ScalerCH
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> RunEngine
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;ophyd&#39;
+</pre></div></div>
+</div>
+<p>Next, make a RunEngine (for scanning) and connect our motor and scaler</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">({})</span>
+
+<span class="n">P</span> <span class="o">=</span> <span class="s2">&quot;sky:&quot;</span>
+<span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2">m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
+<span class="n">scaler</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2">scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[2], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> RE <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">RunEngine</span>({})
+<span class="ansi-green-intense-fg ansi-bold">      3</span> P <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">sky:</span><span style="color: rgb(175,0,0)">&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> m1 <span style="color: rgb(98,98,98)">=</span> EpicsMotor(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">&#34;</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>P<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">m1</span><span style="color: rgb(175,0,0)">&#34;</span>, name<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">m1</span><span style="color: rgb(175,0,0)">&#34;</span>)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RunEngine&#39; is not defined
+</pre></div></div>
+</div>
+<p>Reconfigure the scaler for channel names, set the counting time to 0.5 s, and read the scaler values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan01</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;clock&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;I0&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan03</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">)</span>
+
+<span class="n">scaler</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.4</span><span class="p">)</span>
+
+<span class="n">scaler</span><span class="o">.</span><span class="n">select_channels</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[3], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan01<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">clock</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan02<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">I0</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-green-intense-fg ansi-bold">      3</span> scaler<span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan03<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<section id="Showing-the-data">
+<h2>Showing the data<a class="headerlink" href="#Showing-the-data" title="Permalink to this heading">#</a></h2>
+<p>In lessons 1 and 2, we wrote a <em>callback</em> routine that printed information as the scan prpogressed (that is, we <em>printed select content from the stream of documents emitted by the RunEngine while executing a plan</em>). But our callback was simple and we found there is a lot of content in the documents from the RunEngine.</p>
+<p>The <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#simplest-working-example">simplest example of a Bluesky callback</a> is the <code class="docutils literal notranslate"><span class="pre">print</span></code> function. We want a callback function that understands our data and uses reasonable assumptions to show that data as it is being acquired.</p>
+<p>One method to display our data is in a <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#livetable">table</a> that updates as the scan progresses. We’ll import the <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code> callback from the Bluesky library:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.callbacks</span> <span class="kn">import</span> <span class="n">LiveTable</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[4], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">callbacks</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> LiveTable
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
+</pre></div></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">LiveTable()</span></code> shows acquired data as a plan is executed. The argument is the list of detectors to show in the table. First, we’ll count the scaler 5 times.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="mi">5</span><span class="p">),</span> <span class="n">LiveTable</span><span class="p">([</span><span class="n">scaler</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[5], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], <span style="color: rgb(98,98,98)">5</span>), LiveTable([scaler]))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>You see columns for the data collection sequence number, the time of collection, and each of the <em>named</em> scaler channels. At the end, the short form for the scan’s <code class="docutils literal notranslate"><span class="pre">uid</span></code> is shown as well as <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> which is a more convenient reference to the scan. The user has control to set or reset <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> so do not rely on that number to be unique.</p>
+<p>Next, we’ll scan with motor and scaler, as we did in lesson 2, displaying the acquired data in a <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">LiveTable</span><span class="p">([</span><span class="n">m1</span><span class="p">,</span> <span class="n">scaler</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[6], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>), LiveTable([m1, scaler]))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>In addition to the data columns from <code class="docutils literal notranslate"><span class="pre">count</span></code> above, the motor position (both where the motor reported as its position and where the motor was told to go, respectively) are shown.</p>
+<hr class="docutils" />
+<p>There is a callback routine that will plot the data as it is acquired. When starting graphics, it is necessary to first initialize the graphics manager of the display. The setup is specific to the graphics manager. For command line or python program use, see <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#aside-making-plots-update-live">http://nsls-ii.github.io/bluesky/callbacks.html#aside-making-plots-update-live</a>.</p>
+<p>For jupyter notebooks:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> notebook
+<span class="kn">from</span> <span class="nn">bluesky.utils</span> <span class="kn">import</span> <span class="n">install_nb_kicker</span>
+<span class="n">install_nb_kicker</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[7], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">run_line_magic</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">matplotlib</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">notebook</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">utils</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> install_nb_kicker
+<span class="ansi-green-intense-fg ansi-bold">      3</span> install_nb_kicker()
+
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/IPython/core/interactiveshell.py:2414</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_line_magic</span><span class="ansi-blue-fg">(self, magic_name, line, _stack_depth)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2412</span>     kwargs[<span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">local_ns</span><span style="color: rgb(175,0,0)">&#39;</span>] <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>get_local_scope(stack_depth)
+<span class="ansi-green-intense-fg ansi-bold">   2413</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>builtin_trap:
+<span class="ansi-green-fg">-&gt; 2414</span>     result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">   2416</span> <span style="color: rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-intense-fg ansi-bold">   2417</span> <span style="color: rgb(95,135,135)"># when using magics with decodator @output_can_be_silenced</span>
+<span class="ansi-green-intense-fg ansi-bold">   2418</span> <span style="color: rgb(95,135,135)"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="ansi-green-intense-fg ansi-bold">   2419</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">getattr</span>(fn, magic<span style="color: rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>):
+
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/IPython/core/magics/pylab.py:99</span>, in <span class="ansi-cyan-fg">PylabMagics.matplotlib</span><span class="ansi-blue-fg">(self, line)</span>
+<span class="ansi-green-intense-fg ansi-bold">     97</span>     <span style="color: rgb(0,135,0)">print</span>(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Available matplotlib backends: </span><span class="ansi-bold" style="color: rgb(175,95,135)">%s</span><span style="color: rgb(175,0,0)">&#34;</span> <span style="color: rgb(98,98,98)">%</span> backends_list)
+<span class="ansi-green-intense-fg ansi-bold">     98</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">---&gt; 99</span>     gui, backend <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">shell</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">enable_matplotlib</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">lower</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">if</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">isinstance</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">str</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg ansi-bold" style="color: rgb(0,135,0)">else</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-intense-fg ansi-bold">    100</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_show_matplotlib_backend(args<span style="color: rgb(98,98,98)">.</span>gui, backend)
+
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/IPython/core/interactiveshell.py:3585</span>, in <span class="ansi-cyan-fg">InteractiveShell.enable_matplotlib</span><span class="ansi-blue-fg">(self, gui)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3564</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span> <span style="color: rgb(0,0,255)">enable_matplotlib</span>(<span style="color: rgb(0,135,0)">self</span>, gui<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>):
+<span class="ansi-green-intense-fg ansi-bold">   3565</span> <span style="color: rgb(188,188,188)">    </span><span style="color: rgb(175,0,0)">&#34;&#34;&#34;Enable interactive matplotlib and inline figure support.</span>
+<span class="ansi-green-intense-fg ansi-bold">   3566</span>
+<span class="ansi-green-intense-fg ansi-bold">   3567</span> <span style="color: rgb(175,0,0)">    This takes the following steps:</span>
+<span class="ansi-green-fg">   (...)</span>
+<span class="ansi-green-intense-fg ansi-bold">   3583</span> <span style="color: rgb(175,0,0)">        display figures inline.</span>
+<span class="ansi-green-intense-fg ansi-bold">   3584</span> <span style="color: rgb(175,0,0)">    &#34;&#34;&#34;</span>
+<span class="ansi-green-fg">-&gt; 3585</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">matplotlib_inline</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">backend_inline</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> configure_inline_support
+<span class="ansi-green-intense-fg ansi-bold">   3587</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">IPython</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">core</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> pylabtools <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> pt
+<span class="ansi-green-intense-fg ansi-bold">   3588</span>     gui, backend <span style="color: rgb(98,98,98)">=</span> pt<span style="color: rgb(98,98,98)">.</span>find_gui_and_backend(gui, <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>pylab_gui_select)
+
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/matplotlib_inline/__init__.py:1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">.</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> backend_inline, config  <span style="color: rgb(95,135,135)"># noqa</span>
+<span class="ansi-green-intense-fg ansi-bold">      2</span> __version__ <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">0.1.6</span><span style="color: rgb(175,0,0)">&#34;</span>  <span style="color: rgb(95,135,135)"># noqa</span>
+
+File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.10.11/x64/lib/python3.10/site-packages/matplotlib_inline/backend_inline.py:6</span>
+<span class="ansi-green-intense-fg ansi-bold">      1</span> <span style="color: rgb(175,0,0)">&#34;&#34;&#34;A matplotlib backend for publishing figures via display_data&#34;&#34;&#34;</span>
+<span class="ansi-green-intense-fg ansi-bold">      3</span> <span style="color: rgb(95,135,135)"># Copyright (c) IPython Development Team.</span>
+<span class="ansi-green-intense-fg ansi-bold">      4</span> <span style="color: rgb(95,135,135)"># Distributed under the terms of the BSD 3-Clause License.</span>
+<span class="ansi-green-fg">----&gt; 6</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> <span class="ansi-bold" style="color: rgb(0,0,255)">matplotlib</span>
+<span class="ansi-green-intense-fg ansi-bold">      7</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">matplotlib</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> colors
+<span class="ansi-green-intense-fg ansi-bold">      8</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">matplotlib</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">backends</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> backend_agg
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
+</pre></div></div>
+</div>
+<p>We’ll import the <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code> callback from the Bluesky library:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.callbacks</span> <span class="kn">import</span> <span class="n">LivePlot</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[8], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">callbacks</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> LivePlot
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
+</pre></div></div>
+</div>
+<p>Count the scaler 5 times. We’ll just plot the <code class="docutils literal notranslate"><span class="pre">scint</span></code> signal.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span><span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span> <span class="n">LivePlot</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[9], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler],num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">5</span>), LivePlot(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>To scan, we need to tell <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code> to plot `scint’ <em>vs.</em> the motor:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">LivePlot</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">,</span> <span class="s2">&quot;m1&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[10], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>), LivePlot(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>, <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">m1</span><span style="color: rgb(175,0,0)">&#34;</span>))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<hr class="docutils" />
+<p>Both the table and the plot are very useful diagnostics for routine use. They have been combined in the <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#best-effort-callback">Best-Efforts Callback</a> which provides best-effort plots and visualization for any plan. It uses <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#hints">user-configurable information</a> that is part of every ophyd device to make reasonable assumptions about what information is appropriate to display in the context of the
+current plan.</p>
+<p>We’ll import the <code class="docutils literal notranslate"><span class="pre">BestEffortCallback</span></code> callback from the Bluesky library:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.callbacks.best_effort</span> <span class="kn">import</span> <span class="n">BestEffortCallback</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[11], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">callbacks</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">best_effort</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> BestEffortCallback
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
+</pre></div></div>
+</div>
+<p>Count the scaler 5 times:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">),</span> <span class="n">BestEffortCallback</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[12], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">5</span>), BestEffortCallback())
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>You see both the <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code> and the <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code> output tangled up here in the jupyter notebook. Each is created on demand and then updated as the plan progresses. When executing in a command line environment, the <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code> is shown in a separate window.</p>
+<p>Repeat the same scan, noting that we do not need to inform the callback what to display:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">BestEffortCallback</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[13], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>), BestEffortCallback())
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>Because this is such a useful tool, we want to make this callback happen all the time. The RunEngine manages a list of such callbacks. We <em>subscribe</em> the <code class="docutils literal notranslate"><span class="pre">BestEffortCallback</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">BestEffortCallback</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[14], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span><span style="color: rgb(98,98,98)">.</span>subscribe(BestEffortCallback())
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>Repeat the count of the scaler (without adding the callback in the command):</p>
+<p>In jupyter notebook, we can see the <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code> after our scan command. To see the <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code>, we have to look up a few cells, where the plots of scaler channels <em>vs.</em> <code class="docutils literal notranslate"><span class="pre">m1</span></code> are shown, our latest data identified by <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> in the legend.RE(bp.count([scaler], num=5))</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[15], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">5</span>))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>In jupyter notebook, we can see the <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code> after our count command. To see the <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code>, we have to look up a few cells, where the plots of scaler channels <em>vs.</em> <em>time</em> are shown, our latest data identified by <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> in the legend.</p>
+<p>Then, repeat the scan (again, without adding the callback in the command):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[16], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>In jupyter notebook, we can see the <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code> after our scan command. Notice that the number of columns displayed is less than when we called <code class="docutils literal notranslate"><span class="pre">LiveTable</span></code> ourselves. To see the <code class="docutils literal notranslate"><span class="pre">LivePlot</span></code>, we have to look up a few cells, where the plots of scaler channels <em>vs.</em> <code class="docutils literal notranslate"><span class="pre">m1</span></code> are shown, our latest data identified by <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> in the legend.</p>
+</section>
+<section id="Summary">
+<h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this heading">#</a></h2>
+<p>We’ll show this code as a python program:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env python
+
+&quot;lesson 3: Show the data as it is acquired&quot;
+
+from ophyd import EpicsMotor
+from ophyd.scaler import ScalerCH
+from bluesky import RunEngine
+import bluesky.plans as bp
+from bluesky.callbacks import LiveTable
+from bluesky.callbacks import LivePlot
+from bluesky.callbacks.best_effort import BestEffortCallback
+from apstools.devices import use_EPICS_scaler_channels
+
+
+%matplotlib notebook
+from bluesky.utils import install_qt_kicker
+install_qt_kicker()
+
+
+RE = RunEngine({})
+
+P = &quot;sky:&quot;
+m1 = EpicsMotor(f&quot;{P}m1&quot;, name=&quot;m1&quot;)
+scaler = ScalerCH(f&quot;{P}scaler1&quot;, name=&quot;scaler&quot;)
+m1.wait_for_connection()
+scaler.wait_for_connection()
+scaler.preset_time.put(0.4)
+scaler.select_channels(None)
+print(scaler.read())
+
+RE(bp.count([scaler], num=5), LiveTable([scaler]))
+RE(bp.scan([scaler], m1, 1, 5, 5), LiveTable([m1, scaler]))
+
+RE(bp.count([scaler], num=5), LivePlot(&quot;scint&quot;))
+RE(bp.scan([scaler], m1, 1, 5, 5), LivePlot(&quot;scint&quot;, &quot;m1&quot;))
+
+RE(bp.count([scaler], num=5), BestEffortCallback())
+RE(bp.scan([scaler], m1, 1, 5, 5), BestEffortCallback())
+
+RE.subscribe(BestEffortCallback())
+
+RE(bp.count([scaler], num=5))
+RE(bp.scan([scaler], m1, 1, 5, 5))
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_lesson2.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lesson 2: motor and scan</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_lesson3b.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lesson 3, Part B: Show Data - Concise Summary</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Showing-the-data">Showing the data</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Summary">Summary</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_lesson3a.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

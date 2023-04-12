@@ -1,0 +1,998 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Basic, Part A: Scaler and Count &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_basic_a';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Basic, Part B: Motor and Move" href="_basic_b.html" />
+    <link rel="prev" title="Tutorials" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Basic, Part A: Scaler and Count</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Basic,-Part-A:-Scaler-and-Count">
+<h1>Basic, Part A: Scaler and Count<a class="headerlink" href="#Basic,-Part-A:-Scaler-and-Count" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>In this lesson, we’ll work with a scaler (devices that counts pulses emitted from one or more pulse-emitting <strong>detector</strong> electronics) and use this to make a first lesson in using <a class="reference external" href="http://blueskyproject.io/bluesky/">Bluesky</a> and <a class="reference external" href="http://blueskyproject.io/">related tools</a>.</p>
+<p>First, we’ll show how to start a Jupyter notebook. Next, we’ll connect with an EPICS scaler (using <a class="reference external" href="http://blueskyproject.io/ophyd/">ophyd</a>), and then use the Bluesky software to count from the scaler.</p>
+<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md">prjemian/epics-docker</a></p>
+<section id="Starting-this-session-in-a-Jupyter-notebook">
+<h2>Starting this session in a Jupyter notebook<a class="headerlink" href="#Starting-this-session-in-a-Jupyter-notebook" title="Permalink to this heading">#</a></h2>
+<p>This session was started from the linux command line:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jemian@otz ~ $ source /APSshare/anaconda3/Bluesky/bin/activate
+(base) jemian@otz ~ $ jupyter-notebook
+</pre></div>
+</div>
+<p>This command produced the following console output and then started my default web browser with a one-time-token-authenticated connection to the Jupyter Notebook server (still running in the console):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[I 15:16:57.546 NotebookApp] Serving notebooks from local directory: /home/oxygen18/JEMIAN
+[I 15:16:57.546 NotebookApp] 0 active kernels
+[I 15:16:57.546 NotebookApp] The Jupyter Notebook is running at:
+[I 15:16:57.546 NotebookApp] http://localhost:8888/?token=e6a7584762c731a7c64f8f71246b3e616d779f7b4852c9d9
+[I 15:16:57.546 NotebookApp] Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+[C 15:16:57.547 NotebookApp]
+
+    Copy/paste this URL into your browser when you connect for the first time,
+    to login with a token:
+        http://localhost:8888/?token=e6a7584762c731a7c64f8f71246b3e616d779f7b4852c9d9
+[I 15:17:00.863 NotebookApp] Accepting one-time-token-authenticated connection from ::1
+</pre></div>
+</div>
+<p>Next, found the <strong>New</strong> drop-down menu button (top right, below the <strong>Logout</strong> button) and selected <em>Python 3</em> to start a new notebook page using a Python 3 shell (the only kind available here).</p>
+<p>Finally, from the <strong>File</strong> menu in the jupyter notebook (in the browser), selected <em>Rename …</em> to save the <em>Untitled</em> notebook with the name <em>basic_scaler</em> (default extension is <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>).</p>
+</section>
+<section id="Connect-an-EPICS-scaler">
+<h2>Connect an EPICS scaler<a class="headerlink" href="#Connect-an-EPICS-scaler" title="Permalink to this heading">#</a></h2>
+<p>We have a synApps (v6.1) <em>XXX</em>-style IOC with the prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. It has a <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/std/R3-4-1/documentation/scalerRecord.html">scaler</a>, at least 16 soft channel <a class="reference external" href="https://github.com/epics-modules/motor">motor</a>s, and some other support we’ll ignore in this lesson. Here is a typical display screen for the scaler:</p>
+<p><img alt="16-channel scaler" src="../_images/scaler1.png" /></p>
+<p>The scaler is <code class="docutils literal notranslate"><span class="pre">gp:scaler1</span></code>. We’ll connect to that first. To make the connection, we need to import the <code class="docutils literal notranslate"><span class="pre">`ScalerCH</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/ophyd/builtin-devices.html#epicsscaler">http://nsls-ii.github.io/ophyd/builtin-devices.html#epicsscaler</a>&gt;`__ device from the <code class="docutils literal notranslate"><span class="pre">`ophyd.scaler</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/ophyd/">http://nsls-ii.github.io/ophyd/</a>&gt;`__ library.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[1], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">ophyd</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">scaler</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ScalerCH
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;ophyd&#39;
+</pre></div></div>
+</div>
+<p>Now we can create the scaler object we’ll use as a detector.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="s2">&quot;gp:scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[2], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> scaler <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">ScalerCH</span>(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">gp:scaler1</span><span style="color: rgb(175,0,0)">&#34;</span>, name<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scaler</span><span style="color: rgb(175,0,0)">&#34;</span>)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;ScalerCH&#39; is not defined
+</pre></div></div>
+</div>
+<p>In a script or program, we should wait for that to connect with EPICS.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[3], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>wait_for_connection()
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>Let’s test that connection by asking the scaler to read its values from EPICS.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[4], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>read()
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>By default, the ophyd <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> object shows data for only the channels with names defined in EPICS. Except for one channel (probably a bug in the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> code). To fix that, we’ll load another support library. (Loading additional support as we need it will be a common theme in these lessons. Rather than loading all the libraries first, as is common in python code files, we’ll load support code as the need arises.)</p>
+<p>The new support code is <code class="docutils literal notranslate"><span class="pre">use_EPICS_scaler_channels</span></code> from <code class="docutils literal notranslate"><span class="pre">`apstools.devices</span></code> &lt;<a class="reference external" href="http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels">http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels</a>&gt;`__.</p>
+<p>Our scaler only has a few channels in use (that is, channels where the name of the channel has been specified in the GUI screen). Let’s focus on just those channels.</p>
+<p>To read just the <em>named</em> channels, we call the scaler’s <code class="docutils literal notranslate"><span class="pre">select_channels()</span></code> method and name the scaler channels we wish to see. To see all channels with names defined in EPICS, leave out the argument to <code class="docutils literal notranslate"><span class="pre">select_channels()</span></code> as shown:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">select_channels</span><span class="p">()</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[5], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>select_channels()
+<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>read()
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>If you want to change the name fields on any of the scaler channels from the command line, follow this example.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan04</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan07</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;roi1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[6], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan04<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan07<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">roi1</span><span style="color: rgb(175,0,0)">&#34;</span>)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>Then, update the <code class="docutils literal notranslate"><span class="pre">scaler</span></code> object for these channels.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">select_channels</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[7], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>select_channels(<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
+<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>read()
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+</section>
+<section id="Get,-then-Set-the-count-time-on-the-scaler">
+<h2>Get, then Set the count time on the scaler<a class="headerlink" href="#Get,-then-Set-the-count-time-on-the-scaler" title="Permalink to this heading">#</a></h2>
+<p>The preset counting time (<code class="docutils literal notranslate"><span class="pre">.TP</span></code>) is one of the many fields of the EPICS scaler record. It is available as <code class="docutils literal notranslate"><span class="pre">scaler.preset_time</span></code> in this scaler object. We can inspect this:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">preset_time</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[8], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>preset_time
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>Since <code class="docutils literal notranslate"><span class="pre">scaler.preset_time</span></code> is an <code class="docutils literal notranslate"><span class="pre">`EpicsSignal</span></code> &lt;<a class="github reference external" href="https://github.com/NSLS-II/ophyd/blob/master/ophyd/signal.py#L647">NSLS-II/ophyd</a>&gt;`__, (<a class="reference external" href="http://nsls-ii.github.io/ophyd/signals.html">Signal</a> is a fundamental ophyd structure), we print its <code class="docutils literal notranslate"><span class="pre">.value</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[9], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>preset_time<span style="color: rgb(98,98,98)">.</span>get()
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>Set the scaler to count for 1.5 seconds once it is told to count. We’ll count it next.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[10], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>preset_time<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(98,98,98)">1.5</span>)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>Note, to tell the scaler to count, we put a 1 to its <code class="docutils literal notranslate"><span class="pre">.CNT</span></code> field.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[11], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>count<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(98,98,98)">1</span>)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+<p>Now, read the scaler again. This scaler is not very interesting since it is not connected to any hardware. But, the timestamps have changed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[12], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>read()
+
+<span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
+</pre></div></div>
+</div>
+</section>
+<section id="Use-Bluesky-to-count-the-scaler">
+<h2>Use Bluesky to count the scaler<a class="headerlink" href="#Use-Bluesky-to-count-the-scaler" title="Permalink to this heading">#</a></h2>
+<p>So far, we have used ophyd to talk with the EPICS scaler. Let’s start to use Bluesky. We need to load support to start the Bluesky <a class="reference external" href="http://nsls-ii.github.io/bluesky/tutorial.html#the-runengine">RunEngine</a>. For now, we’ll use the most basic configuration (does not save data anywhere).</p>
+<p>The job of the RunEngine is to process command messages (our data acquisition commands) and to output documents (the data to be acquired). Initially, we’ll use predefined data acquisition sequences (called <a class="reference external" href="http://nsls-ii.github.io/bluesky/plans.html">plans</a>) and ignore the <a class="reference external" href="http://nsls-ii.github.io/bluesky/documents.html">documents</a>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">RunEngine</span>
+<span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">({})</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[13], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> RunEngine
+<span class="ansi-green-intense-fg ansi-bold">      2</span> RE <span style="color: rgb(98,98,98)">=</span> RunEngine({})
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
+</pre></div></div>
+</div>
+<p>Next, we’ll load a library with many <a class="reference external" href="http://nsls-ii.github.io/bluesky/plans.html#summary">predefined plans</a>. The first plan we want to use is <code class="docutils literal notranslate"><span class="pre">`count()</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count">http://nsls-ii.github.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count</a>&gt;`__. By the way, we’ll use a python feature to rename <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> to the shorter <code class="docutils literal notranslate"><span class="pre">bp</span></code> since it will be used a lot.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bluesky.plans</span> <span class="k">as</span> <span class="nn">bp</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[14], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">plans</span> <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> <span class="ansi-bold" style="color: rgb(0,0,255)">bp</span>
+
+<span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
+</pre></div></div>
+</div>
+<p>Now we can count the <code class="docutils literal notranslate"><span class="pre">scaler</span></code> by submitting the <code class="docutils literal notranslate"><span class="pre">bp.count</span></code> plan to the RunEngine instance <code class="docutils literal notranslate"><span class="pre">RE</span></code>. The <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> plan takes one argument, a <em>list</em> of countable objects (just in case you want to count more than one detector at the same time). Our list has only one object: <code class="docutils literal notranslate"><span class="pre">scaler</span></code></p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[15], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler]))
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>The final result from submitting a plan to the RunEngine is an identifier of the sequence of documents. Since we did not capture that sequence, we can’t view it or access it in any way. Let’s <em>fix</em> that next.</p>
+<section id="Report-about-the-documents-emitted-from-the-RunEngine">
+<h3>Report about the documents emitted from the RunEngine<a class="headerlink" href="#Report-about-the-documents-emitted-from-the-RunEngine" title="Permalink to this heading">#</a></h3>
+<p>To display information about the documents emitted from the RunEngine, we need to make a function that will receive the documents.</p>
+<p>In Bluesky terms, this type of function is a <em>callback</em>. It takes two arguments. The first argument is a <code class="docutils literal notranslate"><span class="pre">str</span></code> that tells what kind of document is coming, the second is a python dictionary with the document’s contents. We’ll start by printing summary information. We then submit the plan again with the name of our callback function as a second argument (not to <code class="docutils literal notranslate"><span class="pre">bp.count</span></code> but as a second argument to <code class="docutils literal notranslate"><span class="pre">RE()</span></code>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myCallbackBrief</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">]),</span> <span class="n">myCallbackBrief</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[17], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler]), myCallbackBrief)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>So, there were four documents. See <a class="reference external" href="http://nsls-ii.github.io/bluesky/documents.html">http://nsls-ii.github.io/bluesky/documents.html</a> for the details of each. Let’s extend our callback to print the details of each.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">myCallback</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">doc</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">doc</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;~~~~~~~~~~~~~~~~~&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">]),</span> <span class="n">myCallback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[19], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler]), myCallback)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>With the details, we see more of what is happening.</p>
+<p>The first document is a <code class="docutils literal notranslate"><span class="pre">start</span></code> and it says what is happening and how it will be identified. The identifier (named <code class="docutils literal notranslate"><span class="pre">uid</span></code>) is a <a class="reference external" href="https://docs.python.org/3.6/library/uuid.html">UUID</a> (specifically, a <a class="reference external" href="https://docs.python.org/3.6/library/uuid.html#uuid.uuid4">uuid4</a>). This looks tedious and random. The one good thing is that these are unique and often can be referred to by the first few characters (6-8 are enough to be <em>probably</em> unique). The <code class="docutils literal notranslate"><span class="pre">uid</span></code> from the <code class="docutils literal notranslate"><span class="pre">start</span></code> document is what
+the RunEngine reports when the scan stops.</p>
+<p>The second document is a <code class="docutils literal notranslate"><span class="pre">descriptor</span></code> and it says what, exactly, will be measured. It also includes a reference to <code class="docutils literal notranslate"><span class="pre">start</span></code>’s <code class="docutils literal notranslate"><span class="pre">uid</span></code>. We can follow the chain back to <code class="docutils literal notranslate"><span class="pre">start</span></code> this way.</p>
+<p>The third document is an <code class="docutils literal notranslate"><span class="pre">event</span></code> and it provides the data reading when the scaler was counted. The data is read according to the <code class="docutils literal notranslate"><span class="pre">descriptor</span></code> document (just actual values for the <em>named</em> channels).</p>
+<p>The last document is a <code class="docutils literal notranslate"><span class="pre">stop</span></code> document that describes how things ended. It also says there was only one stream of event documents named <em>primary</em>.</p>
+<p>Let’s repeat that plan, this time asking to <code class="docutils literal notranslate"><span class="pre">count</span></code> the scaler three times. This is the <code class="docutils literal notranslate"><span class="pre">num=3</span></code> addition to the call to <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code>. What’s tricky now is keeping track of the parentheses and square braces.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">3</span><span class="p">),</span> <span class="n">myCallback</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">---------------------------------------------------------------------------</span>
+<span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
+Cell <span class="ansi-green-fg">In[20], line 1</span>
+<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">3</span>), myCallback)
+
+<span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
+</pre></div></div>
+</div>
+<p>Mostly the same but now there are three <code class="docutils literal notranslate"><span class="pre">event</span></code> documents.</p>
+</section>
+</section>
+<section id="Summary">
+<h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this heading">#</a></h2>
+<p>We’ll show this code as a python program:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env python
+
+&quot;&quot;&quot;Basic : scaler and count&quot;&quot;&quot;
+
+from ophyd.scaler import ScalerCH
+from bluesky import RunEngine
+import bluesky.plans as bp
+
+
+def myCallback(key, doc):
+    print(key, len(doc))
+    for k, v in doc.items():
+        print(&quot;\t&quot;, k, v)
+    print(&quot;~~~~~~~~~~~~~~~~~&quot;)
+
+
+RE = RunEngine({})
+
+scaler = ScalerCH(&quot;gp:scaler1&quot;, name=&quot;scaler&quot;)
+scaler.preset_time.put(1.5)
+print(scaler.preset_time.value)
+
+scaler.channels.chan04.chname.put(&quot;scint&quot;)
+scaler.channels.chan07.chname.put(&quot;roi1&quot;)
+
+scaler.match_names()
+scaler.select_channels()
+print(scaler.read())
+print(RE(bp.count([scaler], num=3), myCallback))
+</pre></div>
+</div>
+</section>
+<section id="Quit-the-jupyter-notebook">
+<h2>Quit the jupyter notebook<a class="headerlink" href="#Quit-the-jupyter-notebook" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p>Save the “lesson1” page if you wish.</p></li>
+<li><p>Press the <strong>Logout</strong> button in the upper right corner of “lesson1” and close the page.</p></li>
+<li><p>Press the <strong>Logout</strong> button in the upper right corner of “Home” and close the page.</p></li>
+<li><p>Type Control-C (^C) twice in the jupyter-notebook console to kill the server.</p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Tutorials</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_basic_b.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Basic, Part B: Motor and Move</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Starting-this-session-in-a-Jupyter-notebook">Starting this session in a Jupyter notebook</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Connect-an-EPICS-scaler">Connect an EPICS scaler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Get,-then-Set-the-count-time-on-the-scaler">Get, then Set the count time on the scaler</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Use-Bluesky-to-count-the-scaler">Use Bluesky to count the scaler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Report-about-the-documents-emitted-from-the-RunEngine">Report about the documents emitted from the RunEngine</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Summary">Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Quit-the-jupyter-notebook">Quit the jupyter notebook</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_basic_a.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

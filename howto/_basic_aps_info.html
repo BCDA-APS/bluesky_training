@@ -1,0 +1,794 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>APS Accelerator Information for Beam Lines &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_basic_aps_info';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Count the scaler" href="_count_scaler.html" />
+    <link rel="prev" title="How-To Guides" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">APS Accelerator Information for Beam Lines</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="APS-Accelerator-Information-for-Beam-Lines">
+<h1>APS Accelerator Information for Beam Lines<a class="headerlink" href="#APS-Accelerator-Information-for-Beam-Lines" title="Permalink to this heading">#</a></h1>
+<p>Show the basic information from the APS accelerator available to all beam lines. Includes:</p>
+<ul class="simple">
+<li><p>storage ring current</p></li>
+<li><p>machine status</p></li>
+<li><p>lifetime</p></li>
+<li><p>fill number</p></li>
+<li><p>operating mode</p></li>
+</ul>
+<p>NOTE: This notebook only works while at the APS with access to storage ring parameters via EPICS.</p>
+<hr class="docutils" />
+<p>First, setup the Bluesky framework.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-09:33:59 - ############################################################ startup
+I Thu-09:33:59 - logging started
+I Thu-09:33:59 - logging level = 10
+I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/collection.py
+I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/mpl/notebook.py
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-09:34:00 - bluesky framework
+I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/check_python.py
+I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/check_bluesky.py
+I Thu-09:34:03 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/initialize.py
+I Thu-09:34:07 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/metadata.py
+I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/callbacks.py
+I Thu-09:34:08 - writing to SPEC file: /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/20200903-093408.dat
+I Thu-09:34:08 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Thu-09:34:08 -    file will be created when bluesky ends its next scan
+I Thu-09:34:08 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+</pre></div></div>
+</div>
+<p>Next, import the standard <code class="docutils literal notranslate"><span class="pre">aps</span></code> object that accesses the information from the APS.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.devices.ideas.aps_source</span> <span class="kn">import</span> <span class="n">aps</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/devices/ideas/aps_source.py
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">aps</span></code> object is an instance of <code class="docutils literal notranslate"><span class="pre">`apstools.devices.ApsMachineParametersDevice</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_devices.html">https://apstools.readthedocs.io/en/latest/source/_devices.html</a>&gt;`__.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listobjects</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+==== ========================== ======== ========
+name ophyd structure            EPICS PV label(s)
+==== ========================== ======== ========
+aps  ApsMachineParametersDevice
+==== ========================== ======== ========
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f5356374610&gt;
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method shows the ophyd structure of the <code class="docutils literal notranslate"><span class="pre">aps</span></code> object. Note the difference in how the names are shown. We’ll describe this later.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aps</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+data keys (* hints)
+-------------------
+ aps_aps_cycle
+ aps_current
+ aps_fill_number
+ aps_global_feedback
+ aps_global_feedback_h
+ aps_global_feedback_v
+ aps_lifetime
+ aps_machine_status
+ aps_operating_mode
+ aps_operator_messages_fill_pattern
+ aps_operator_messages_floor_coordinator
+ aps_operator_messages_last_problem_message
+ aps_operator_messages_last_trip_message
+ aps_operator_messages_message6
+ aps_operator_messages_message7
+ aps_operator_messages_message8
+ aps_operator_messages_operators
+ aps_orbit_correction
+ aps_shutter_permit
+
+read attrs
+----------
+current              EpicsSignalRO       (&#39;aps_current&#39;)
+lifetime             EpicsSignalRO       (&#39;aps_lifetime&#39;)
+aps_cycle            ApsCycleComputedRO  (&#39;aps_aps_cycle&#39;)
+machine_status       EpicsSignalRO       (&#39;aps_machine_status&#39;)
+operating_mode       EpicsSignalRO       (&#39;aps_operating_mode&#39;)
+shutter_permit       EpicsSignalRO       (&#39;aps_shutter_permit&#39;)
+fill_number          EpicsSignalRO       (&#39;aps_fill_number&#39;)
+orbit_correction     EpicsSignalRO       (&#39;aps_orbit_correction&#39;)
+global_feedback      EpicsSignalRO       (&#39;aps_global_feedback&#39;)
+global_feedback_h    EpicsSignalRO       (&#39;aps_global_feedback_h&#39;)
+global_feedback_v    EpicsSignalRO       (&#39;aps_global_feedback_v&#39;)
+operator_messages    ApsOperatorMessagesDevice(&#39;aps_operator_messages&#39;)
+operator_messages.operators EpicsSignalRO       (&#39;aps_operator_messages_operators&#39;)
+operator_messages.floor_coordinator EpicsSignalRO       (&#39;aps_operator_messages_floor_coordinator&#39;)
+operator_messages.fill_pattern EpicsSignalRO       (&#39;aps_operator_messages_fill_pattern&#39;)
+operator_messages.last_problem_message EpicsSignalRO       (&#39;aps_operator_messages_last_problem_message&#39;)
+operator_messages.last_trip_message EpicsSignalRO       (&#39;aps_operator_messages_last_trip_message&#39;)
+operator_messages.message6 EpicsSignalRO       (&#39;aps_operator_messages_message6&#39;)
+operator_messages.message7 EpicsSignalRO       (&#39;aps_operator_messages_message7&#39;)
+operator_messages.message8 EpicsSignalRO       (&#39;aps_operator_messages_message8&#39;)
+
+config keys
+-----------
+
+configuration attrs
+-------------------
+operator_messages    ApsOperatorMessagesDevice(&#39;aps_operator_messages&#39;)
+
+unused attrs
+------------
+
+</pre></div></div>
+</div>
+<p>This is the raw form of the data when the <code class="docutils literal notranslate"><span class="pre">aps</span></code> object is read. We can add this to any Bluesky run as a <em>baseline</em> (recorded at both start and end of run) or <em>monitor</em> (recorded when any content in <code class="docutils literal notranslate"><span class="pre">aps</span></code> changes). Either way, this would be recorded as additional streams of data, separate from the primary measurement.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">aps</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;aps_current&#39;,
+              {&#39;value&#39;: -0.0040169084286680035,
+               &#39;timestamp&#39;: 1599143648.191037}),
+             (&#39;aps_lifetime&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_aps_cycle&#39;,
+              {&#39;value&#39;: &#39;2020-3&#39;, &#39;timestamp&#39;: 1599143648.4272747}),
+             (&#39;aps_machine_status&#39;,
+              {&#39;value&#39;: &#39;MAINTENANCE&#39;, &#39;timestamp&#39;: 1598374801.294999}),
+             (&#39;aps_operating_mode&#39;,
+              {&#39;value&#39;: &#39;MAINTENANCE&#39;, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_shutter_permit&#39;,
+              {&#39;value&#39;: &#39;PERMIT&#39;, &#39;timestamp&#39;: 1598966626.212694}),
+             (&#39;aps_fill_number&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_orbit_correction&#39;,
+              {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_global_feedback&#39;,
+              {&#39;value&#39;: &#39;Off&#39;, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_global_feedback_h&#39;,
+              {&#39;value&#39;: &#39;Off&#39;, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_global_feedback_v&#39;,
+              {&#39;value&#39;: &#39;Off&#39;, &#39;timestamp&#39;: 631152000.0}),
+             (&#39;aps_operator_messages_operators&#39;,
+              {&#39;value&#39;: &#39;Grodecki, Berg&#39;, &#39;timestamp&#39;: 1599134402.993963}),
+             (&#39;aps_operator_messages_floor_coordinator&#39;,
+              {&#39;value&#39;: &#39;(2-0101)&#39;, &#39;timestamp&#39;: 1598961838.681323}),
+             (&#39;aps_operator_messages_fill_pattern&#39;,
+              {&#39;value&#39;: &#39;&#39;, &#39;timestamp&#39;: 1598674048.855485}),
+             (&#39;aps_operator_messages_last_problem_message&#39;,
+              {&#39;value&#39;: &#39;&#39;, &#39;timestamp&#39;: 1598674054.151803}),
+             (&#39;aps_operator_messages_last_trip_message&#39;,
+              {&#39;value&#39;: &#39;&#39;, &#39;timestamp&#39;: 1598373601.725505}),
+             (&#39;aps_operator_messages_message6&#39;,
+              {&#39;value&#39;: &#39;&#39;, &#39;timestamp&#39;: 1598381867.044532}),
+             (&#39;aps_operator_messages_message7&#39;,
+              {&#39;value&#39;: &#39;Linac/PAR: Locks off COB Wed. 9/02/20&#39;,
+               &#39;timestamp&#39;: 1598877651.053522}),
+             (&#39;aps_operator_messages_message8&#39;,
+              {&#39;value&#39;: &#39;Booster: Locks off COB Wed. 9/02/20&#39;,
+               &#39;timestamp&#39;: 1598877694.221879})])
+</pre></div></div>
+</div>
+<p>Load a library with some tools that are more descriptive than <code class="docutils literal notranslate"><span class="pre">.read()</span></code> and <code class="docutils literal notranslate"><span class="pre">/.summary()</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">apstools.utils</span>
+</pre></div>
+</div>
+</div>
+<p>Display the result of <code class="docutils literal notranslate"><span class="pre">.read()</span></code> in a table. The timestamps have been converted to human readable date and time (ISO-8601 format).</p>
+<p>NOTE: The <em>name</em> column here is the name recorded in the data output. This is what you might use to access this information after the run is acquired, such as for data analysis. These are the <em>data keys</em> you would use to access these items for data analysis.</p>
+<p>Also note that some of the time stamps are from 1989. Actually, that is the default time used when the value has not been updated by the EPICS server since the server was last started. Just information, not a problem.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">apstools</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">device_read2table</span><span class="p">(</span><span class="n">aps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+========================================== ===================================== ==========================
+name                                       value                                 timestamp
+========================================== ===================================== ==========================
+aps_current                                -0.0040169084286680035                2020-09-03 09:34:08.191037
+aps_lifetime                               0.0                                   1989-12-31 18:00:00
+aps_aps_cycle                              2020-3                                2020-09-03 09:34:08.427275
+aps_machine_status                         MAINTENANCE                           2020-08-25 12:00:01.294999
+aps_operating_mode                         MAINTENANCE                           1989-12-31 18:00:00
+aps_shutter_permit                         PERMIT                                2020-09-01 08:23:46.212694
+aps_fill_number                            1.0                                   1989-12-31 18:00:00
+aps_orbit_correction                       0.0                                   1989-12-31 18:00:00
+aps_global_feedback                        Off                                   1989-12-31 18:00:00
+aps_global_feedback_h                      Off                                   1989-12-31 18:00:00
+aps_global_feedback_v                      Off                                   1989-12-31 18:00:00
+aps_operator_messages_operators            Grodecki, Berg                        2020-09-03 07:00:02.993963
+aps_operator_messages_floor_coordinator    (2-0101)                              2020-09-01 07:03:58.681323
+aps_operator_messages_fill_pattern                                               2020-08-28 23:07:28.855485
+aps_operator_messages_last_problem_message                                       2020-08-28 23:07:34.151803
+aps_operator_messages_last_trip_message                                          2020-08-25 11:40:01.725505
+aps_operator_messages_message6                                                   2020-08-25 13:57:47.044532
+aps_operator_messages_message7             Linac/PAR: Locks off COB Wed. 9/02/20 2020-08-31 07:40:51.053522
+aps_operator_messages_message8             Booster: Locks off COB Wed. 9/02/20   2020-08-31 07:41:34.221879
+========================================== ===================================== ==========================
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f53563a1a10&gt;
+</pre></div></div>
+</div>
+<p>Display the result of <code class="docutils literal notranslate"><span class="pre">.read()</span></code> in a table, showing EPICS PVs. Ignore the timestamps in this table.</p>
+<p>NOTE: The <em>name</em> column here is the <em>attribute</em> name of the python object. This is what you might use on the command line or when writing a plan. These are the <em>attribute</em> names you would use on the command line or write into a plan for execution by the Bluesky RunEngine.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">apstools</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">object_explorer</span><span class="p">(</span><span class="n">aps</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+====================================== ====================== =====================================
+name                                   PV reference           value
+====================================== ====================== =====================================
+current                                S:SRcurrentAI          -0.0040169084286680035
+fill_number                            S:FillNumber           1.0
+global_feedback                        SRFB:GBL:LoopStatusBI  Off
+global_feedback_h                      SRFB:GBL:HLoopStatusBI Off
+global_feedback_v                      SRFB:GBL:VLoopStatusBI Off
+lifetime                               S:SRlifeTimeHrsCC      0.0
+machine_status                         S:DesiredMode          MAINTENANCE
+operating_mode                         S:ActualMode           MAINTENANCE
+operator_messages.fill_pattern         OPS:message3
+operator_messages.floor_coordinator    OPS:message2           (2-0101)
+operator_messages.last_problem_message OPS:message4
+operator_messages.last_trip_message    OPS:message5
+operator_messages.message6             OPS:message6
+operator_messages.message7             OPS:message7           Linac/PAR: Locks off COB Wed. 9/02/20
+operator_messages.message8             OPS:message8           Booster: Locks off COB Wed. 9/02/20
+operator_messages.operators            OPS:message1           Grodecki, Berg
+orbit_correction                       S:OrbitCorrection:CC   0.0
+shutter_permit                         ACIS:ShutterPermit     PERMIT
+====================================== ====================== =====================================
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f53563a9610&gt;
+</pre></div></div>
+</div>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How-To Guides</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_count_scaler.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Count the scaler</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_basic_aps_info.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

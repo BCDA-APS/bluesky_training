@@ -1,0 +1,2280 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Lesson 7: 4-circle diffractometer &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_lesson7';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Instrument" href="../instrument/index.html" />
+    <link rel="prev" title="Lesson 6: EPICS area detector" href="_lesson6.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Lesson 7: 4-circle diffractometer</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Lesson-7:-4-circle-diffractometer">
+<h1>Lesson 7: 4-circle diffractometer<a class="headerlink" href="#Lesson-7:-4-circle-diffractometer" title="Permalink to this heading">#</a></h1>
+<p>Operate a four-circle diffractometer using the <em>hkl</em> package. The lesson will first show how to setup the diffractometer and demonstrate the basic features of the software. Then, the lesson will setup a diffractometer with a single crystal sample, orient it, and scan along one axis of reciprocal space. Examples are then provided for several different crystals.</p>
+<p>The <a class="reference external" href="https://github.com/bluesky/hklpy">hkl</a> package is a python interface to the C++ <a class="reference external" href="https://repo.or.cz/hkl.git">hkl</a> library, written by Frederic Picca.</p>
+<p>Documentation for the C++ library is here: <a class="reference external" href="https://people.debian.org/~picca/hkl/hkl.html">https://people.debian.org/~picca/hkl/hkl.html</a></p>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this heading">#</a></h2>
+<p>Setup involves starting the bluesky session, importing various support packages, and defining any custom classes or functions as needed.</p>
+<section id="Preparation">
+<h3>Preparation<a class="headerlink" href="#Preparation" title="Permalink to this heading">#</a></h3>
+<p>Import the instrument package as our routine initialization.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Wed-17:24:44 - ############################################################ startup
+I Wed-17:24:44 - logging started
+I Wed-17:24:44 - logging level = 10
+I Wed-17:24:44 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/collection.py
+I Wed-17:24:44 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/mpl/notebook.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+I Wed-17:24:45 - bluesky framework
+I Wed-17:24:45 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/check_python.py
+I Wed-17:24:45 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/check_bluesky.py
+I Wed-17:24:46 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/initialize.py
+I Wed-17:24:47 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/metadata.py
+I Wed-17:24:47 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/callbacks.py
+I Wed-17:24:47 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/20201216-172447.dat
+I Wed-17:24:47 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Wed-17:24:47 -    file will be created when bluesky ends its next scan
+I Wed-17:24:47 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+</pre></div></div>
+</div>
+<p>After starting a bluesky console or notebook session and after importing the instrument package, import the python <a class="reference external" href="https://pygobject.readthedocs.io">gobject-introspection</a> package that is <strong>required</strong> to load the <em>hkl</em> support library. This step <em>must</em> happen before the <em>hkl</em> package is first imported.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">gi</span>
+<span class="n">gi</span><span class="o">.</span><span class="n">require_version</span><span class="p">(</span><span class="s1">&#39;Hkl&#39;</span><span class="p">,</span> <span class="s1">&#39;5.0&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Next, import the desired diffractometer geometry from the <a class="reference external" href="https://github.com/bluesky/hklpy">hklpy</a> package. We pick <code class="docutils literal notranslate"><span class="pre">`E4CV</span></code> &lt;<a class="reference external" href="https://people.debian.org/~picca/hkl/hkl.html#orge78e5c4">https://people.debian.org/~picca/hkl/hkl.html#orge78e5c4</a>&gt;`__ (Eulerian 4-Circle with Vertical scattering geometry) as is typical at synchrotron beam lines.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">hkl.diffract</span> <span class="kn">import</span> <span class="n">E4CV</span>
+<span class="kn">from</span> <span class="nn">hkl.util</span> <span class="kn">import</span> <span class="n">Lattice</span>
+</pre></div>
+</div>
+</div>
+<p>Next, we get additional packages that we may use.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.diffractometer</span> <span class="kn">import</span> <span class="n">Constraint</span>
+<span class="kn">from</span> <span class="nn">apstools.diffractometer</span> <span class="kn">import</span> <span class="n">DiffractometerMixin</span>
+
+<span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">plans</span> <span class="k">as</span> <span class="n">bp</span>
+<span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">plan_stubs</span> <span class="k">as</span> <span class="n">bps</span>
+
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">PseudoSingle</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">SoftPositioner</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="The-diffractometer-object">
+<h3>The diffractometer object<a class="headerlink" href="#The-diffractometer-object" title="Permalink to this heading">#</a></h3>
+<p>Define a 4-circle class for our example with simulated motors. There are attributes for the reciprocal space axes <code class="docutils literal notranslate"><span class="pre">h</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>, &amp; <code class="docutils literal notranslate"><span class="pre">l</span></code> and for the real space axes: <code class="docutils literal notranslate"><span class="pre">phi</span></code>, <code class="docutils literal notranslate"><span class="pre">omega</span></code>, <code class="docutils literal notranslate"><span class="pre">chi</span></code>, &amp; <code class="docutils literal notranslate"><span class="pre">tth</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FourCircleDiffractometer</span><span class="p">(</span><span class="n">DiffractometerMixin</span><span class="p">,</span> <span class="n">E4CV</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PseudoSingle</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;hkl&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PseudoSingle</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;hkl&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PseudoSingle</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;hkl&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">SoftPositioner</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">chi</span> <span class="o">=</span>   <span class="n">Component</span><span class="p">(</span><span class="n">SoftPositioner</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span>   <span class="n">Component</span><span class="p">(</span><span class="n">SoftPositioner</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">tth</span> <span class="o">=</span>   <span class="n">Component</span><span class="p">(</span><span class="n">SoftPositioner</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        start the SoftPositioner objects with initial values</span>
+
+<span class="sd">        Since this diffractometer uses simulated motors,</span>
+<span class="sd">        prime the SoftPositioners (motors) with initial values.</span>
+<span class="sd">        Otherwise, with position == None, then describe(), and</span>
+<span class="sd">        other functions get borked.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">axis</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">real_positioners</span><span class="p">:</span>
+            <span class="n">axis</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<details><p>use EPICS motors instead of simulators</p>
+<p>To use EPICS motors (<code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code>) instead of the <code class="docutils literal notranslate"><span class="pre">ophyd.SoftPositioner</span></code> simulators, redefine the <code class="docutils literal notranslate"><span class="pre">FourCircleDiffractometer</span></code> class (or define a new class) as follows, substituting with the proper motor PVs.</p>
+<p><strong>NOTE</strong>: Unlike the example above with <code class="docutils literal notranslate"><span class="pre">SoftPositioner</span></code> objects as motors, do not need to initialize the motor positions in here since EPICS has already initialized each of the motors.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">FourCircleDiffractometer</span><span class="p">(</span><span class="n">DiffractometerMixin</span><span class="p">,</span> <span class="n">E4CV</span><span class="p">):</span>
+    <span class="n">h</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PseudoSingle</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;hkl&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">k</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PseudoSingle</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;hkl&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PseudoSingle</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;hkl&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+
+    <span class="n">omega</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;ioc:m1&quot;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">chi</span> <span class="o">=</span>   <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;ioc:m2&quot;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">phi</span> <span class="o">=</span>   <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;ioc:m3&quot;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+    <span class="n">tth</span> <span class="o">=</span>   <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;ioc:m4&quot;</span><span class="p">,</span>
+        <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,</span> <span class="s2">&quot;fourc&quot;</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</details><p>Create the diffractometer object:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span> <span class="o">=</span> <span class="n">FourCircleDiffractometer</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;fourc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">fourc.wh()</span></code> method provides a quick summary of the diffractometer:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">wh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===================== ========= =========
+term                  value     axis_type
+===================== ========= =========
+diffractometer        fourc
+sample name           main
+energy (keV)          8.05092
+wavelength (angstrom) 1.54000
+calc engine           hkl
+mode                  bissector
+h                     0.0       pseudo
+k                     0.0       pseudo
+l                     0.0       pseudo
+omega                 0         real
+chi                   0         real
+phi                   0         real
+tth                   0         real
+===================== ========= =========
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e640434f0&gt;
+</pre></div></div>
+</div>
+<p>Print the value of the <code class="docutils literal notranslate"><span class="pre">omega</span></code> axis:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">omega</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SoftPositioner(name=&#39;fourc_omega&#39;, parent=&#39;fourc&#39;, settle_time=0.0, timeout=None, egu=&#39;&#39;, limits=(0, 0), source=&#39;computed&#39;)
+</pre></div></div>
+</div>
+<p>That’s the object. It’s <code class="docutils literal notranslate"><span class="pre">.position</span></code> property shows the position.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">omega</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0
+</pre></div></div>
+</div>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">%mov</span></code> magic command to move a motor:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> fourc.omega 1
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">omega</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+<span class="o">%</span><span class="k">mov</span> fourc.omega 0
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">omega</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+0
+</pre></div></div>
+</div>
+<p>The diffractometer reciprocal-space coordinates are available:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+FourCircleDiffractometerPseudoPos(h=0.0, k=0.0, l=0.0)
+</pre></div></div>
+</div>
+<p>When a diffractometer object is first created, it comes pre-defined with certain defaults:</p>
+<ul class="simple">
+<li><p>operating mode</p></li>
+<li><p>wavelength</p></li>
+<li><p>sample</p></li>
+<li><p>orientation matrix</p></li>
+<li><p>axis constraints</p></li>
+</ul>
+<p>The sections below will cover each of these.</p>
+</section>
+<section id="Operating-mode">
+<h3>Operating mode<a class="headerlink" href="#Operating-mode" title="Permalink to this heading">#</a></h3>
+<p>The default operating mode is <code class="docutils literal notranslate"><span class="pre">bissector</span></code>. This mode constrains <code class="docutils literal notranslate"><span class="pre">tth</span></code> to equal <code class="docutils literal notranslate"><span class="pre">2*omega</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;bissector&#39;
+</pre></div></div>
+</div>
+<p>Print the list of available operating modes:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">modes</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;bissector&#39;, &#39;constant_omega&#39;, &#39;constant_chi&#39;, &#39;constant_phi&#39;, &#39;double_diffraction&#39;, &#39;psi_constant&#39;]
+</pre></div></div>
+</div>
+<p>Change to <code class="docutils literal notranslate"><span class="pre">constant_phi</span></code> mode:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;constant_phi&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+constant_phi
+</pre></div></div>
+</div>
+<p>Change it back:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;bissector&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+bissector
+</pre></div></div>
+</div>
+</section>
+<section id="Wavelength">
+<h3>Wavelength<a class="headerlink" href="#Wavelength" title="Permalink to this heading">#</a></h3>
+<p>The default wavelength is <code class="docutils literal notranslate"><span class="pre">1.54</span></code> angstroms. The units must match the units of the unit cell.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">wavelength</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.54
+</pre></div></div>
+</div>
+<p>Change the wavelength (use angstrom):</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">wavelength</span> <span class="o">=</span> <span class="mf">1.62751693358</span>
+</pre></div>
+</div>
+</div>
+<p><strong>NOTE</strong>: Stick to wavelength, at least for now. Do not specify X-ray photon energy. For the <em>hkl</em> code, specify wavelength in angstrom. While the documentation may state wavelength in <code class="docutils literal notranslate"><span class="pre">nm</span></code>, use <code class="docutils literal notranslate"><span class="pre">angstrom</span></code> since these units <em>must</em> match the units used for the lattice parameters. Also, note that the (internal) calculation of X-ray energy assumes the units were <code class="docutils literal notranslate"><span class="pre">nm</span></code> so its conversion between energy and wavelength is off by a factor of 10.</p>
+</section>
+<section id="Sample">
+<h3>Sample<a class="headerlink" href="#Sample" title="Permalink to this heading">#</a></h3>
+<p>The default sample is named <code class="docutils literal notranslate"><span class="pre">main</span></code> and is a hypothetical cubic lattice with 1.54 angstrom edges.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+HklSample(name=&#39;main&#39;, lattice=LatticeTuple(a=1.54, b=1.54, c=1.54, alpha=90.0, beta=90.0, gamma=90.0), ux=Parameter(name=&#39;None (internally: ux)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uy=Parameter(name=&#39;None (internally: uy)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uz=Parameter(name=&#39;None (internally: uz)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), U=array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]]), UB=array([[ 4.07999046e+00, -2.49827363e-16, -2.49827363e-16],
+       [ 0.00000000e+00,  4.07999046e+00, -2.49827363e-16],
+       [ 0.00000000e+00,  0.00000000e+00,  4.07999046e+00]]), reflections=[])
+</pre></div></div>
+</div>
+<p>The diffractometer support maintains a dictionary of all defined samples (<code class="docutils literal notranslate"><span class="pre">fourc.calc._samples</span></code>). The <code class="docutils literal notranslate"><span class="pre">fourc.calc.sample</span></code> symbol points to one of these. Let’s illustrate by creating a new sample named <code class="docutils literal notranslate"><span class="pre">orthorhombic</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">new_sample</span><span class="p">(</span><span class="s1">&#39;orthorhombic&#39;</span><span class="p">,</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">Lattice</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">90.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+HklSample(name=&#39;orthorhombic&#39;, lattice=LatticeTuple(a=1.0, b=2.0, c=3.0, alpha=90.0, beta=90.0, gamma=90.0), ux=Parameter(name=&#39;None (internally: ux)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uy=Parameter(name=&#39;None (internally: uy)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uz=Parameter(name=&#39;None (internally: uz)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), U=array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]]), UB=array([[ 6.28318531e+00, -1.92367069e-16, -1.28244713e-16],
+       [ 0.00000000e+00,  3.14159265e+00, -1.28244713e-16],
+       [ 0.00000000e+00,  0.00000000e+00,  2.09439510e+00]]), reflections=[])
+</pre></div></div>
+</div>
+<p>Now, there are two samples defined. The <code class="docutils literal notranslate"><span class="pre">fourc.calc.sample</span></code> symbol points to the new one:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+2
+</pre></div></div>
+</div>
+<p>Show the name of the current sample:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+orthorhombic
+</pre></div></div>
+</div>
+<p>Switch back to the <code class="docutils literal notranslate"><span class="pre">main</span></code> sample:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span> <span class="o">=</span> <span class="s2">&quot;main&quot;</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+main
+</pre></div></div>
+</div>
+<p>Let’s create another sample and define an orientation:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">new_sample</span><span class="p">(</span><span class="s1">&#39;EuPtIn4_eh1_ver&#39;</span><span class="p">,</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">Lattice</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="mf">4.542</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">16.955</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">7.389</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">90.0</span><span class="p">))</span>
+<br/></pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+HklSample(name=&#39;EuPtIn4_eh1_ver&#39;, lattice=LatticeTuple(a=4.542, b=16.955, c=7.389, alpha=90.0, beta=90.0, gamma=90.0), ux=Parameter(name=&#39;None (internally: ux)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uy=Parameter(name=&#39;None (internally: uy)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uz=Parameter(name=&#39;None (internally: uz)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), U=array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]]), UB=array([[ 1.38335212e+00, -2.26914856e-17, -5.20684990e-17],
+       [ 0.00000000e+00,  3.70580083e-01, -5.20684990e-17],
+       [ 0.00000000e+00,  0.00000000e+00,  8.50343119e-01]]), reflections=[])
+</pre></div></div>
+</div>
+<p>This is the orientation matrix defined by default:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">U</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">UB</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[ 1.38335212e+00, -2.26914856e-17, -5.20684990e-17],
+       [ 0.00000000e+00,  3.70580083e-01, -5.20684990e-17],
+       [ 0.00000000e+00,  0.00000000e+00,  8.50343119e-01]])
+</pre></div></div>
+</div>
+<p>Change it by providing a new 3x3 array:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">U</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[0., 1., 0.],
+       [0., 0., 1.],
+       [1., 0., 0.]])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">UB</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[ 0.00000000e+00,  3.70580083e-01, -5.20684990e-17],
+       [ 0.00000000e+00,  0.00000000e+00,  8.50343119e-01],
+       [ 1.38335212e+00, -2.26914856e-17, -5.20684990e-17]])
+</pre></div></div>
+</div>
+<p>Set it back:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">U</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[U]:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">U</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;[UB]:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">UB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[U]:
+ [[1. 0. 0.]
+ [0. 1. 0.]
+ [0. 0. 1.]]
+[UB]:
+ [[ 1.38335212e+00 -2.26914856e-17 -5.20684990e-17]
+ [ 0.00000000e+00  3.70580083e-01 -5.20684990e-17]
+ [ 0.00000000e+00  0.00000000e+00  8.50343119e-01]]
+</pre></div></div>
+</div>
+<p>The <em>UB</em> matrix (<code class="docutils literal notranslate"><span class="pre">fourc.calc.sample.UB</span></code>) can be changed in similar fashion.</p>
+<p>The diffractometer reciprocal-space coordinates are available:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+FourCircleDiffractometerPseudoPos(h=0.0, k=0.0, l=0.0)
+</pre></div></div>
+</div>
+<p>Move the diffractometer to the (<em>020</em>) reflection:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+FourCircleDiffractometerPseudoPos(h=1.5121846940302517e-16, k=1.9999999974773768, l=4.6102208393375324e-10)
+</pre></div></div>
+</div>
+</section>
+<section id="Reflections">
+<h3>Reflections<a class="headerlink" href="#Reflections" title="Permalink to this heading">#</a></h3>
+<p>A reflection associates a set of reciprocal-space axes (<em>hkl</em>) with a set of real-space motor positions. Following the method of Busing &amp; Levy (<a class="reference external" href="https://www.psi.ch/sites/default/files/import/sinq/zebra/PracticalsEN/1967-Busing-Levy-3-4-circle-Acta22.pdf">Acta Cryst (1967) 22, pp 457-464</a>), two reflections are used to calculate an orientation matix (<em>UB</em> matrix) which is used to convert between motor positions and <em>hkl</em> values.</p>
+<p>There are no reflections defined by default.</p>
+<p>Define a reflection by associating a known <em>hkl</em> reflection with a set of motor positions.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rp1</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="mf">22.31594</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">89.1377</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tth</span><span class="o">=</span><span class="mf">45.15857</span><span class="p">)</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">add_reflection</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">rp1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Define a second reflection (that is not a multiple of the first reflection):</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rp2</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="mf">34.96232</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">78.3139</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tth</span><span class="o">=</span><span class="mf">71.8007</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">add_reflection</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">rp2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Calculate the <em>UB</em> matrix from these two reflections.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">compute_UB</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">UB</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[[ 1.38058756 -0.00170327 -0.05359029]
+ [ 0.00503279  0.3705342  -0.01301801]
+ [ 0.08726811  0.00557695  0.8485529 ]]
+</pre></div></div>
+</div>
+</section>
+<section id="Forward-Solutions">
+<h3>Forward Solutions<a class="headerlink" href="#Forward-Solutions" title="Permalink to this heading">#</a></h3>
+<p>Forward solutions are the calculated combinations of real-space motor positions given the sample oreitnation matrix, reciprocal-space axes, operating mode, wavelength, and applied constraints. These combinations are presented as a python list which may be empty if there are no solutions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">`DiffractometerMixin</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_diffractometer.html">https://apstools.readthedocs.io/en/latest/source/_diffractometer.html</a>&gt;`__ provides a helper to print the possible forward solutions for a list of <em>hkl</em> reflections. (Each reflection is provided as a python tuple or list.)</p>
+<p>Show default solution for a few reflections (<em>100</em>), (<em>010</em>) and (<em>001</em>):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of reflections - (hkl) tuples</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+========= ======== ========= ========== ========= =========
+(hkl)     solution omega     chi        phi       tth
+========= ======== ========= ========== ========= =========
+(1, 0, 0) 0        -10.32101 -179.79155 86.38310  -20.64202
+(0, 1, 0) 0        -2.75098  -90.90161  -16.98318 -5.50196
+(0, 0, 1) 0        6.32287   -0.87718   -3.61371  12.64574
+========= ======== ========= ========== ========= =========
+
+</pre></div></div>
+</div>
+<p><strong>NOTE</strong>: The method to select the default solution can be changed. See <code class="docutils literal notranslate"><span class="pre">decision_fcn</span></code> in <a class="reference external" href="https://blueskyproject.io/hklpy/master/calc.html#hkl.calc.CalcRecip.forward_iter">https://blueskyproject.io/hklpy/master/calc.html#hkl.calc.CalcRecip.forward_iter</a>.</p>
+<p>Show <em>all</em> the possible solutions by adding the <code class="docutils literal notranslate"><span class="pre">full=True</span></code> keyword:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+========= ======== ========== ========== ========= =========
+(hkl)     solution omega      chi        phi       tth
+========= ======== ========== ========== ========= =========
+(1, 0, 0) 0        -10.32101  -179.79155 86.38310  -20.64202
+(1, 0, 0) 1        -10.32101  -0.20845   -93.61690 -20.64202
+(1, 0, 0) 2        10.32101   0.20845    86.38310  20.64202
+(1, 0, 0) 3        -169.67899 -179.79155 86.38310  20.64202
+(1, 0, 0) 4        -169.67899 -0.20845   -93.61690 20.64202
+(1, 0, 0) 5        10.32101   179.79155  -93.61690 20.64202
+(0, 1, 0) 0        -2.75098   -90.90161  -16.98318 -5.50196
+(0, 1, 0) 1        -2.75098   -89.09839  163.01682 -5.50196
+(0, 1, 0) 2        -177.24902 -90.90161  -16.98318 5.50196
+(0, 1, 0) 3        2.75098    89.09839   -16.98318 5.50196
+(0, 1, 0) 4        -177.24902 -89.09839  163.01682 5.50196
+(0, 1, 0) 5        2.75098    90.90161   163.01682 5.50196
+(0, 0, 1) 0        6.32287    -0.87718   -3.61371  12.64574
+(0, 0, 1) 1        -6.32287   0.87718    176.38629 -12.64574
+(0, 0, 1) 2        -6.32287   179.12282  -3.61371  -12.64574
+(0, 0, 1) 3        6.32287    -179.12282 176.38629 12.64574
+(0, 0, 1) 4        -173.67713 0.87718    176.38629 12.64574
+(0, 0, 1) 5        -173.67713 179.12282  -3.61371  12.64574
+========= ======== ========== ========== ========= =========
+
+</pre></div></div>
+</div>
+<p>For each of the reflections, six solutions were found possible. The first solution is taken as the default. To make a different choice, access the complete list, such as:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">forward</span><span class="p">((</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(PosCalcE4CV(omega=-10.321012305373241, chi=-179.79155096044508, phi=86.38309742089963, tth=-20.642024610746482),
+ PosCalcE4CV(omega=-10.321012305373241, chi=-0.20844903955490512, phi=-93.61690257910038, tth=-20.642024610746482),
+ PosCalcE4CV(omega=10.321012305373241, chi=0.20844903955490512, phi=86.38309742089963, tth=20.642024610746482),
+ PosCalcE4CV(omega=-169.67898769462678, chi=-179.79155096044508, phi=86.38309742089963, tth=20.642024610746482),
+ PosCalcE4CV(omega=-169.67898769462678, chi=-0.20844903955490512, phi=-93.61690257910038, tth=20.642024610746482),
+ PosCalcE4CV(omega=10.321012305373241, chi=179.79155096044508, phi=-93.61690257910038, tth=20.642024610746482))
+</pre></div></div>
+</div>
+<p>Alternatively, apply one or more <a class="reference external" href="#constraints">constraints</a> to restrict the range of allowed solutions.</p>
+<p>If there are no solutions to the forward calculation, the <em>hkl</em> package raises a <code class="docutils literal notranslate"><span class="pre">ValueError</span></code> exception:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>ValueError: Calculation failed (hkl-mode-auto-error-quark: none of the functions were solved !!! (0))
+</pre></div>
+</div>
+<details><p>detailed exception trace</p>
+<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [114]: </span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">forward</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">35</span><span class="p">))</span>
+<span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">Error</span><span class="g g-Whitespace">                                     </span>Traceback (most recent call last)
+<span class="nn">~/.conda/envs/bluesky_2020_9/lib/python3.8/site-packages/hkl/engine.py</span> in <span class="ni">pseudo_positions</span><span class="nt">(self, values)</span>
+<span class="g g-Whitespace">    </span><span class="mi">212</span>         <span class="k">try</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">213</span>             <span class="n">geometry_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span><span class="o">.</span><span class="n">pseudo_axis_values_set</span><span class="p">(</span><span class="n">values</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>                                                                 <span class="bp">self</span><span class="o">.</span><span class="n">_units</span><span class="p">)</span>
+
+<span class="ne">Error</span>: hkl-mode-auto-error-quark: none of the functions were solved !!! (0)
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">ValueError</span><span class="g g-Whitespace">                                </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">114</span><span class="o">-</span><span class="mi">7</span><span class="n">b5743692787</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">forward</span><span class="p">((</span><span class="mi">5</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">35</span><span class="p">))</span>
+
+<span class="nn">~/.conda/envs/bluesky_2020_9/lib/python3.8/site-packages/hkl/calc.py</span> in <span class="ni">wrapped</span><span class="nt">(self, *args, **kwargs)</span>
+<span class="g g-Whitespace">     </span><span class="mi">42</span>             <span class="n">initial_pos</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">physical_positions</span>
+<span class="g g-Whitespace">     </span><span class="mi">43</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">---&gt; </span><span class="mi">44</span>                 <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">     </span><span class="mi">45</span>             <span class="k">finally</span><span class="p">:</span>
+<span class="g g-Whitespace">     </span><span class="mi">46</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">physical_positions</span> <span class="o">=</span> <span class="n">initial_pos</span>
+
+<span class="nn">~/.conda/envs/bluesky_2020_9/lib/python3.8/site-packages/hkl/calc.py</span> in <span class="ni">forward</span><span class="nt">(self, position, engine)</span>
+<span class="g g-Whitespace">    </span><span class="mi">505</span>                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Engine unset&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">506</span>
+<span class="ne">--&gt; </span><span class="mi">507</span>             <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">pseudo_positions</span> <span class="o">=</span> <span class="n">position</span>
+<span class="g g-Whitespace">    </span><span class="mi">508</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">solutions</span>
+<span class="g g-Whitespace">    </span><span class="mi">509</span>
+
+<span class="nn">~/.conda/envs/bluesky_2020_9/lib/python3.8/site-packages/hkl/engine.py</span> in <span class="ni">pseudo_positions</span><span class="nt">(self, values)</span>
+<span class="g g-Whitespace">    </span><span class="mi">214</span>                                                                 <span class="bp">self</span><span class="o">.</span><span class="n">_units</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">215</span>         <span class="k">except</span> <span class="n">GLib</span><span class="o">.</span><span class="n">GError</span> <span class="k">as</span> <span class="n">ex</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">216</span>             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Calculation failed (</span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="n">ex</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">217</span>
+<span class="g g-Whitespace">    </span><span class="mi">218</span>         <span class="n">Position</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_calc</span><span class="o">.</span><span class="n">Position</span>
+
+<span class="ne">ValueError</span>: Calculation failed (hkl-mode-auto-error-quark: none of the functions were solved !!! (0))
+</pre></div>
+</div>
+</details><p>The <code class="docutils literal notranslate"><span class="pre">forwardSolutionsTable</span></code> does not raise an error but displays <code class="docutils literal notranslate"><span class="pre">none</span></code> for any <em>hkl</em> reflection with no solution in the real-space motor positions. To demonstrate, the (<em>5 4 35</em>) reflection is not available at this wavelength:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(</span> <span class="p">[</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">35</span><span class="p">),</span> <span class="p">],</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+========== ======== ===== === === ===
+(hkl)      solution omega chi phi tth
+========== ======== ===== === === ===
+(5, 4, 35) none
+========== ======== ===== === === ===
+
+</pre></div></div>
+</div>
+</section>
+<section id="Constraints">
+<h3>Constraints<a class="headerlink" href="#Constraints" title="Permalink to this heading">#</a></h3>
+<p>Constraints are applied to restrict the motor positions that are allowed to be solutions of the forward calculation from a reflection <em>hkl</em> to motor positions.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== ========= ========== ================== ====
+axis  low_limit high_limit value              fit
+===== ========= ========== ================== ====
+omega -180.0    180.0      -5.50832505964632  True
+chi   -180.0    180.0      -90.00000003030587 True
+phi   -180.0    180.0      0.0                True
+tth   -180.0    180.0      -11.01665011929264 True
+===== ========= ========== ================== ====
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e6403f100&gt;
+</pre></div></div>
+</div>
+<p>Apply a constraint that only allows non-negative values for <code class="docutils literal notranslate"><span class="pre">omega</span></code>. Create a dictionary with the axis constraints to be applied. The dictionary key is the axis name (must be a name in the <code class="docutils literal notranslate"><span class="pre">fourc.calc.physical_axis_names</span></code> list).</p>
+<p>The names of the axes are available:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">physical_axis_names</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&#39;omega&#39;, &#39;chi&#39;, &#39;phi&#39;, &#39;tth&#39;]
+</pre></div></div>
+</div>
+<p>The value is a <code class="docutils literal notranslate"><span class="pre">`Constraint</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_diffractometer.html">https://apstools.readthedocs.io/en/latest/source/_diffractometer.html</a>&gt;`__ object.</p>
+<p><code class="docutils literal notranslate"><span class="pre">Constraint</span></code> Arguments</p>
+<ul class="simple">
+<li><p>low_limit (<em>number</em>) : Limit solutions for this axis to no less than <code class="docutils literal notranslate"><span class="pre">low_limit</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=True</span></code>.</p></li>
+<li><p>high_limit (<em>number</em>) : Limit solutions for this axis to no greater than <code class="docutils literal notranslate"><span class="pre">high_limit</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=True</span></code>.</p></li>
+<li><p>value (<em>number</em>) : Calculate with axis = <code class="docutils literal notranslate"><span class="pre">value</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=False</span></code>.</p></li>
+<li><p>fit (<em>bool</em>) : When <code class="docutils literal notranslate"><span class="pre">True</span></code>, calculate new values for this axis. When <code class="docutils literal notranslate"><span class="pre">False</span></code>, keep this axis fixed at <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p></li>
+</ul>
+<p>In the dictionary, it is only necessary to define the axis constraints to be changed. The other (commented out) constraints will not be changed.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># axis: Constraint(lo_limit, hi_limit, value, fit)</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="c1"># &quot;chi&quot;: Constraint(-180, 180, 0, True),</span>
+    <span class="c1"># &quot;phi&quot;: Constraint(-180, 180, 0, True),</span>
+    <span class="c1"># &quot;tth&quot;: Constraint(-180, 180, 0, True),</span>
+<span class="p">}</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">applyConstraints</span><span class="p">(</span><span class="n">my_constraints</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== ========= ========== ================== ====
+axis  low_limit high_limit value              fit
+===== ========= ========== ================== ====
+omega 0.0       180.0      0.0                True
+chi   -180.0    180.0      -90.00000003030587 True
+phi   -180.0    180.0      0.0                True
+tth   -180.0    180.0      -11.01665011929264 True
+===== ========= ========== ================== ====
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e57b64a30&gt;
+</pre></div></div>
+</div>
+<p>Show all the possible solutions with these constraints (set keyword argument <code class="docutils literal notranslate"><span class="pre">full=True</span></code>):</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[41]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+========= ======== ======== ========= ========= ========
+(hkl)     solution omega    chi       phi       tth
+========= ======== ======== ========= ========= ========
+[1, 0, 0] 0        10.32101 0.20845   86.38310  20.64202
+[1, 0, 0] 1        10.32101 179.79155 -93.61690 20.64202
+[0, 1, 0] 0        2.75098  89.09839  -16.98335 5.50196
+[0, 1, 0] 1        2.75098  90.90161  163.01665 5.50196
+========= ======== ======== ========= ========= ========
+
+</pre></div></div>
+</div>
+<p>Remove the constraint on <code class="docutils literal notranslate"><span class="pre">omega</span></code> and show the solutions:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[42]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">undoLastConstraints</span><span class="p">()</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]],</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n\n</span><span class="s2"> Now, just the default solutions:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">([[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">],[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== ========= ========== ================== ====
+axis  low_limit high_limit value              fit
+===== ========= ========== ================== ====
+omega -180.0    180.0      -5.50832505964632  True
+chi   -180.0    180.0      -90.00000003030587 True
+phi   -180.0    180.0      0.0                True
+tth   -180.0    180.0      -11.01665011929264 True
+===== ========= ========== ================== ====
+
+========= ======== ========== ========== ========= =========
+(hkl)     solution omega      chi        phi       tth
+========= ======== ========== ========== ========= =========
+[1, 0, 0] 0        -10.32101  -179.79155 86.38310  -20.64202
+[1, 0, 0] 1        -10.32101  -0.20845   -93.61690 -20.64202
+[1, 0, 0] 2        10.32101   0.20845    86.38310  20.64202
+[1, 0, 0] 3        -169.67899 -179.79155 86.38310  20.64202
+[1, 0, 0] 4        -169.67899 -0.20845   -93.61690 20.64202
+[1, 0, 0] 5        10.32101   179.79155  -93.61690 20.64202
+[0, 1, 0] 0        -2.75098   -90.90161  -16.98318 -5.50196
+[0, 1, 0] 1        -2.75098   -89.09839  163.01682 -5.50196
+[0, 1, 0] 2        -177.24902 -90.90161  -16.98318 5.50196
+[0, 1, 0] 3        2.75098    89.09839   -16.98318 5.50196
+[0, 1, 0] 4        -177.24902 -89.09839  163.01682 5.50196
+[0, 1, 0] 5        2.75098    90.90161   163.01682 5.50196
+========= ======== ========== ========== ========= =========
+
+
+
+ Now, just the default solutions:
+========= ======== ========= ========== ========= =========
+(hkl)     solution omega     chi        phi       tth
+========= ======== ========= ========== ========= =========
+[1, 0, 0] 0        -10.32101 -179.79155 86.38310  -20.64202
+[0, 1, 0] 0        -2.75098  -90.90161  -16.98318 -5.50196
+========= ======== ========= ========== ========= =========
+
+</pre></div></div>
+</div>
+<hr class="docutils" />
+</section>
+</section>
+<section id="Example---4-circle-with-LNO_LAO-sample">
+<h2>Example - 4-circle with <code class="docutils literal notranslate"><span class="pre">LNO_LAO</span></code> sample<a class="headerlink" href="#Example---4-circle-with-LNO_LAO-sample" title="Permalink to this heading">#</a></h2>
+<p>We have some example information from a SPEC data file (collected at APS beam line 33BM). In summary, the sample and orientation information extracted is:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>term</p></th>
+<th class="head"><p>value(s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sample</p></td>
+<td><p>LNO_LAO</p></td>
+</tr>
+<tr class="row-odd"><td><p>crystal</p></td>
+<td><p>3.781726143 3.791444574 3.79890313 90.2546203 90.01815424 89.89967858</p></td>
+</tr>
+<tr class="row-even"><td><p>geometry</p></td>
+<td><p>fourc</p></td>
+</tr>
+<tr class="row-odd"><td><p>mode</p></td>
+<td><p>0 (Omega equals zero)</p></td>
+</tr>
+<tr class="row-even"><td><p>lambda</p></td>
+<td><p>1.239424258</p></td>
+</tr>
+<tr class="row-odd"><td><p>r1</p></td>
+<td><p>(0, 0, 2) 38.09875 19.1335 90.0135 0</p></td>
+</tr>
+<tr class="row-even"><td><p>r2</p></td>
+<td><p>(1, 1, 3) 65.644 32.82125 115.23625 48.1315</p></td>
+</tr>
+<tr class="row-odd"><td><p>Q</p></td>
+<td><p>(2, 2, 1.9) 67.78225 33.891 145.985 48.22875 -0.001 -0.16</p></td>
+</tr>
+<tr class="row-even"><td><p>UB[0]</p></td>
+<td><p>-1.658712442 0.09820024135 -0.000389705578</p></td>
+</tr>
+<tr class="row-odd"><td><p>UB[1]</p></td>
+<td><p>-0.09554990312 -1.654278629 0.00242844486</p></td>
+</tr>
+<tr class="row-even"><td><p>UB[2]</p></td>
+<td><p>0.0002629818914 0.009815746824 1.653961812</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note</strong>: In SPEC’s fourc geometry, the motors are reported in this order: <code class="docutils literal notranslate"><span class="pre">tth</span> <span class="pre">omega</span> <span class="pre">chi</span> <span class="pre">phi</span></code></p>
+<section id="use-4-circle-geometry">
+<h3>use 4-circle geometry<a class="headerlink" href="#use-4-circle-geometry" title="Permalink to this heading">#</a></h3>
+<p>Reset all the above changes by re-creating the <code class="docutils literal notranslate"><span class="pre">fourc</span></code> object.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span> <span class="o">=</span> <span class="n">FourCircleDiffractometer</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;fourc&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="define-the-sample">
+<h3>define the sample<a class="headerlink" href="#define-the-sample" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">new_sample</span><span class="p">(</span><span class="s1">&#39;LNO_LAO&#39;</span><span class="p">,</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">Lattice</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="mf">3.781726143</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">3.791444574</span> <span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">3.79890313</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">90.2546203</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">90.01815424</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">89.89967858</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+HklSample(name=&#39;LNO_LAO&#39;, lattice=LatticeTuple(a=3.781726143, b=3.791444574, c=3.79890313, alpha=90.2546203, beta=90.01815424, gamma=89.89967858), ux=Parameter(name=&#39;None (internally: ux)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uy=Parameter(name=&#39;None (internally: uy)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), uz=Parameter(name=&#39;None (internally: uz)&#39;, limits=(min=-180.0, max=180.0), value=0.0, fit=True, inverted=False, units=&#39;Degree&#39;), U=array([[1., 0., 0.],
+       [0., 1., 0.],
+       [0., 0., 1.]]), UB=array([[ 1.66146225e+00, -2.89938471e-03,  5.11196668e-04],
+       [ 0.00000000e+00,  1.65721725e+00,  7.34922202e-03],
+       [ 0.00000000e+00,  0.00000000e+00,  1.65394723e+00]]), reflections=[])
+</pre></div></div>
+</div>
+</section>
+<section id="set-wavelength">
+<h3>set wavelength<a class="headerlink" href="#set-wavelength" title="Permalink to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">wavelength</span> <span class="o">=</span> <span class="mf">1.239424258</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="define-two-reflections">
+<h3>define two reflections<a class="headerlink" href="#define-two-reflections" title="Permalink to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rp1</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="mf">19.1335</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">90.0135</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">tth</span><span class="o">=</span><span class="mf">38.09875</span><span class="p">)</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">add_reflection</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">rp1</span><span class="p">)</span>
+<span class="n">rp2</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span><span class="n">omega</span><span class="o">=</span><span class="mf">32.82125</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">115.23625</span><span class="p">,</span> <span class="n">phi</span><span class="o">=</span><span class="mf">48.1315</span><span class="p">,</span> <span class="n">tth</span><span class="o">=</span><span class="mf">65.644</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">add_reflection</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="n">rp2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="calculate-UB-matrix">
+<h3>calculate <em>UB</em> matrix<a class="headerlink" href="#calculate-UB-matrix" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">compute_UB</span><span class="p">(</span><span class="n">r1</span><span class="p">,</span> <span class="n">r2</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">UB</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+array([[-9.55499011e-02, -1.65427863e+00,  2.42844485e-03],
+       [ 2.62981975e-04,  9.81483906e-03,  1.65396181e+00],
+       [-1.65871244e+00,  9.82002396e-02, -3.89705577e-04]])
+</pre></div></div>
+</div>
+<p>Compare this result with the <em>UB</em> matrix computed by SPEC:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>-1.658712442        0.09820024135       -0.000389705578
+-0.09554990312      -1.654278629        0.00242844486
+0.0002629818914     0.009815746824      1.653961812
+</pre></div>
+</div>
+<p>Same numbers, different row order, different order of real-space motors.</p>
+</section>
+<section id="calculate-(hkl)-given-motor-positions">
+<h3>calculate <em>(hkl)</em> given motor positions<a class="headerlink" href="#calculate-(hkl)-given-motor-positions" title="Permalink to this heading">#</a></h3>
+<p>Given these motor positions, confirm this is the (2 2 1.9) reflection.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>axis</p></th>
+<th class="head"><p>value</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>omega</p></td>
+<td><p>33.891</p></td>
+</tr>
+<tr class="row-odd"><td><p>chi</p></td>
+<td><p>145.985</p></td>
+</tr>
+<tr class="row-even"><td><p>phi</p></td>
+<td><p>48.22875</p></td>
+</tr>
+<tr class="row-odd"><td><p>tth</p></td>
+<td><p>67.78225</p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> fourc.omega 33.891 fourc.chi 145.985 fourc.phi 48.22875 fourc.tth 67.78225
+<span class="n">fourc</span><span class="o">.</span><span class="n">wh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===================== ================== =========
+term                  value              axis_type
+===================== ================== =========
+diffractometer        fourc
+sample name           LNO_LAO
+energy (keV)          10.00337
+wavelength (angstrom) 1.23942
+calc engine           hkl
+mode                  bissector
+h                     1.9999956934724616 pseudo
+k                     1.999999875673663  pseudo
+l                     1.900000040364338  pseudo
+omega                 33.891             real
+chi                   145.985            real
+phi                   48.22875           real
+tth                   67.78225           real
+===================== ================== =========
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[48]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e640433a0&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="compute-the-motor-positions-of-the-(2-2-1.9)-reflection">
+<h3>compute the motor positions of the (<em>2 2 1.9</em>) reflection<a class="headerlink" href="#compute-the-motor-positions-of-the-(2-2-1.9)-reflection" title="Permalink to this heading">#</a></h3>
+<p>Observe that <code class="docutils literal notranslate"><span class="pre">tth</span> <span class="pre">~</span> <span class="pre">2*omega</span></code> which is consistent with <code class="docutils literal notranslate"><span class="pre">bissector</span></code> mode. The (<em>2 2 1.9</em>) reflection is not available in <code class="docutils literal notranslate"><span class="pre">constant_omega</span></code> mode with <code class="docutils literal notranslate"><span class="pre">omega=0</span></code>. Need to change modes.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s2">&quot;bissector&quot;</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== ========= ========== ======== ====
+axis  low_limit high_limit value    fit
+===== ========= ========== ======== ====
+omega -180.0    180.0      33.891   True
+chi   -180.0    180.0      145.985  True
+phi   -180.0    180.0      48.22875 True
+tth   -180.0    180.0      67.78225 True
+===== ========= ========== ======== ====
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e668bb700&gt;
+</pre></div></div>
+</div>
+<p>The constraint on <code class="docutils literal notranslate"><span class="pre">omega</span></code> must be removed, then compute the default forward solution.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[50]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">undoLastConstraints</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">],),</span> <span class="n">full</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">  Now, just the default solution.&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(([</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">],)))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=========== ======== ========== ========== ========== =========
+(hkl)       solution omega      chi        phi        tth
+=========== ======== ========== ========== ========== =========
+[2, 2, 1.9] 0        33.89115   145.98503  48.22884   67.78231
+[2, 2, 1.9] 1        33.89115   34.01497   -131.77116 67.78231
+[2, 2, 1.9] 2        -146.10885 -34.01497  48.22884   67.78231
+[2, 2, 1.9] 3        -33.89115  -34.01497  48.22884   -67.78231
+[2, 2, 1.9] 4        -146.10885 -145.98503 -131.77116 67.78231
+[2, 2, 1.9] 5        -33.89115  -145.98503 -131.77116 -67.78231
+=========== ======== ========== ========== ========== =========
+
+
+  Now, just the default solution.
+=========== ======== ======== ========= ======== ========
+(hkl)       solution omega    chi       phi      tth
+=========== ======== ======== ========= ======== ========
+[2, 2, 1.9] 0        33.89115 145.98503 48.22884 67.78231
+=========== ======== ======== ========= ======== ========
+
+</pre></div></div>
+</div>
+<p>Apply constraints such that all motors are not negative, then recompute and show:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># axis: Constraint(lo_limit, hi_limit, value, fit)</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="s2">&quot;chi&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="s2">&quot;phi&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="s2">&quot;tth&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">applyConstraints</span><span class="p">(</span><span class="n">my_constraints</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== ========= ========== ===== ====
+axis  low_limit high_limit value fit
+===== ========= ========== ===== ====
+omega 0.0       180.0      0.0   True
+chi   0.0       180.0      0.0   True
+phi   0.0       180.0      0.0   True
+tth   0.0       180.0      0.0   True
+===== ========= ========== ===== ====
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[51]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e668c6250&gt;
+</pre></div></div>
+</div>
+<p>Summarize the diffractometer settings.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">wh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===================== ================== =========
+term                  value              axis_type
+===================== ================== =========
+diffractometer        fourc
+sample name           LNO_LAO
+energy (keV)          10.00337
+wavelength (angstrom) 1.23942
+calc engine           hkl
+mode                  bissector
+h                     1.9999956934724616 pseudo
+k                     1.999999875673663  pseudo
+l                     1.900000040364338  pseudo
+omega                 33.891             real
+chi                   145.985            real
+phi                   48.22875           real
+tth                   67.78225           real
+===================== ================== =========
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[52]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e668bbf70&gt;
+</pre></div></div>
+</div>
+<p>Print the default solution for <em>(2 2 1.9)</em>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[53]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span>
+    <span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(</span>
+        <span class="p">(</span>
+            <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">],</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=========== ======== ======== ========= ======== ========
+(hkl)       solution omega    chi       phi      tth
+=========== ======== ======== ========= ======== ========
+[2, 2, 1.9] 0        33.89115 145.98503 48.22884 67.78231
+=========== ======== ======== ========= ======== ========
+
+</pre></div></div>
+</div>
+<p>These values match exactly the values from the SPEC data file.</p>
+</section>
+<section id="sample-(2k2)-scan,-near-k=2">
+<h3>sample <em>(2k2)</em> scan, near <code class="docutils literal notranslate"><span class="pre">k=2</span></code><a class="headerlink" href="#sample-(2k2)-scan,-near-k=2" title="Permalink to this heading">#</a></h3>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">fourc</span></code> object as the <em>detector</em> for the scans. Plotting is not necessary.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.framework</span> <span class="kn">import</span> <span class="n">bec</span>
+<span class="n">bec</span><span class="o">.</span><span class="n">disable_plots</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Next, scan <em>(2k2)</em> near <code class="docutils literal notranslate"><span class="pre">k=2</span></code>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">rel_scan</span><span class="p">([</span><span class="n">fourc</span><span class="p">],</span> <span class="n">fourc</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">,</span> <span class="mi">9</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 1     Time: 2020-12-16 17:24:56
+Persistent Unique Scan ID: &#39;9a48a80e-deaa-4c5f-bd9c-2d4fe8d79c5e&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+|   seq_num |       time |    fourc_k |    fourc_h |    fourc_l | fourc_omega |  fourc_chi |  fourc_phi |  fourc_tth |
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+|         1 | 17:24:56.4 |      1.800 |      2.000 |      2.000 |      33.274 |    143.277 |     45.204 |     66.547 |
+|         2 | 17:24:56.4 |      1.850 |      2.000 |      2.000 |      33.578 |    143.613 |     45.988 |     67.157 |
+|         3 | 17:24:56.4 |      1.900 |      2.000 |      2.000 |      33.890 |    143.949 |     46.753 |     67.780 |
+|         4 | 17:24:56.4 |      1.950 |      2.000 |      2.000 |      34.208 |    144.284 |     47.499 |     68.417 |
+|         5 | 17:24:56.4 |      2.000 |      2.000 |      2.000 |      34.534 |    144.617 |     48.227 |     69.067 |
+|         6 | 17:24:56.4 |      2.050 |      2.000 |      2.000 |      34.866 |    144.950 |     48.936 |     69.732 |
+|         7 | 17:24:56.5 |      2.100 |      2.000 |      2.000 |      35.205 |    145.281 |     49.628 |     70.409 |
+|         8 | 17:24:56.5 |      2.150 |      2.000 |      2.000 |      35.550 |    145.610 |     50.303 |     71.100 |
+|         9 | 17:24:56.5 |      2.200 |      2.000 |      2.000 |      35.902 |    145.937 |     50.962 |     71.804 |
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+generator rel_scan [&#39;9a48a80e&#39;] (scan num: 1)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[55]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;9a48a80e-deaa-4c5f-bd9c-2d4fe8d79c5e&#39;,)
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Example---epitaxial-thin-film-on-substrate">
+<h2>Example - <code class="docutils literal notranslate"><span class="pre">epitaxial</span> <span class="pre">thin</span> <span class="pre">film</span> <span class="pre">on</span> <span class="pre">substrate</span></code><a class="headerlink" href="#Example---epitaxial-thin-film-on-substrate" title="Permalink to this heading">#</a></h2>
+<p>Found an example on the web from Rigaku. The sample is an epitaxial thin film of Mn3O4 on MgO substrate.</p>
+<p>ref: <a class="reference external" href="http://www.rigaku.com/downloads/journal/Vol16.1.1999/cguide.pdf">http://www.rigaku.com/downloads/journal/Vol16.1.1999/cguide.pdf</a></p>
+<p>Condense all the setup steps into one cell here.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span> <span class="o">=</span> <span class="n">FourCircleDiffractometer</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;fourc&#39;</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">new_sample</span><span class="p">(</span><span class="s1">&#39;Mn3O4/MgO thin film&#39;</span><span class="p">,</span>
+    <span class="n">lattice</span><span class="o">=</span><span class="n">Lattice</span><span class="p">(</span>
+        <span class="n">a</span><span class="o">=</span><span class="mf">5.72</span><span class="p">,</span> <span class="n">b</span><span class="o">=</span><span class="mf">5.72</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="mf">9.5</span><span class="p">,</span>
+        <span class="n">alpha</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">beta</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span> <span class="n">gamma</span><span class="o">=</span><span class="mf">90.0</span><span class="p">))</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">wavelength</span> <span class="o">=</span> <span class="mf">12.3984244</span> <span class="o">/</span> <span class="mf">8.04</span>   <span class="c1"># Cu Kalpha</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">compute_UB</span><span class="p">(</span>
+    <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">add_reflection</span><span class="p">(</span>
+        <span class="o">-</span><span class="mf">1.998</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.994</span><span class="p">,</span> <span class="mf">4.011</span><span class="p">,</span>
+        <span class="n">position</span><span class="o">=</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span>
+            <span class="n">tth</span><span class="o">=</span><span class="mf">80.8769</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">40.6148</span><span class="p">,</span> <span class="n">chi</span><span class="o">=</span><span class="mf">0.647</span><span class="p">,</span> <span class="n">phi</span><span class="o">=-</span><span class="mf">121.717</span><span class="p">)),</span>
+    <span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">sample</span><span class="o">.</span><span class="n">add_reflection</span><span class="p">(</span>
+        <span class="o">-</span><span class="mf">0.997</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.997</span><span class="p">,</span> <span class="mf">2.009</span><span class="p">,</span>
+        <span class="n">position</span><span class="o">=</span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">Position</span><span class="p">(</span>
+            <span class="n">tth</span><span class="o">=</span><span class="mf">28.695</span><span class="p">,</span> <span class="n">omega</span><span class="o">=</span><span class="mf">14.4651</span><span class="p">,</span> <span class="n">chi</span><span class="o">=-</span><span class="mf">48.8860</span><span class="p">,</span> <span class="n">phi</span><span class="o">=-</span><span class="mf">88.758</span><span class="p">))</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[56]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<p>Apply some constraints</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">my_constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># axis: Constraint(lo_limit, hi_limit, value, fit)</span>
+    <span class="s2">&quot;omega&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="s2">&quot;chi&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="o">-</span><span class="mi">120</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+    <span class="c1"># &quot;phi&quot;: Constraint(-180, 180, 0, True),</span>
+    <span class="s2">&quot;tth&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">120</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">True</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">applyConstraints</span><span class="p">(</span><span class="n">my_constraints</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== =================== ================== ===== ====
+axis  low_limit           high_limit         value fit
+===== =================== ================== ===== ====
+omega -119.99999999999999 119.99999999999999 0.0   True
+chi   -119.99999999999999 119.99999999999999 0.0   True
+phi   -180.0              180.0              0.0   True
+tth   -5.0                119.99999999999999 0.0   True
+===== =================== ================== ===== ====
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[57]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e668f2ca0&gt;
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[58]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">r</span> <span class="o">=</span> <span class="p">[]</span>  <span class="c1"># list of reflections - (hkl) tuples</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">.5</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">))</span>
+<span class="n">r</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mf">1.5</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=========== ======== ======== ======== ========== ========
+(hkl)       solution omega    chi      phi        tth
+=========== ======== ======== ======== ========== ========
+(-3, 0, 5)  0        34.95305 16.93669 -92.56666  69.90610
+(-2, -2, 4) 0        30.05045 0.68945  -121.67536 60.10091
+(-2, 1, 1)  0        18.18911 48.65405 -68.07899  36.37821
+(-1, -1, 2) 0        14.50007 0.68945  -121.67536 29.00014
+(0, 3, 0.5) 0        23.98052 14.97372 -2.28512   47.96104
+(0, 3, 1)   0        24.35942 12.23302 -7.33156   48.71883
+(0, 3, 1.5) 0        24.98135 9.51049  -12.08783  49.96270
+=========== ======== ======== ======== ========== ========
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">wh</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===================== =================== =========
+term                  value               axis_type
+===================== =================== =========
+diffractometer        fourc
+sample name           Mn3O4/MgO thin film
+energy (keV)          8.04000
+wavelength (angstrom) 1.54209
+calc engine           hkl
+mode                  bissector
+h                     0.0                 pseudo
+k                     0.0                 pseudo
+l                     0.0                 pseudo
+omega                 0                   real
+chi                   0                   real
+phi                   0                   real
+tth                   0                   real
+===================== =================== =========
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[59]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;pyRestTable.rest_table.Table at 0x7f7e668bb4c0&gt;
+</pre></div></div>
+</div>
+<p>Scan along the <em>(0kl)</em> direction (down in <em>k</em>, up in <em>l</em>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">fourc</span><span class="p">],</span> <span class="n">fourc</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="n">fourc</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 2     Time: 2020-12-16 17:24:57
+Persistent Unique Scan ID: &#39;b5cff878-570f-4305-b5a1-db69f171b005&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+|   seq_num |       time |    fourc_k |    fourc_l |    fourc_h | fourc_omega |  fourc_chi |  fourc_phi |  fourc_tth |
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+|         1 | 17:24:57.4 |      3.200 |      0.500 |      0.000 |      25.675 |     15.144 |     -1.961 |     51.349 |
+|         2 | 17:24:57.4 |      3.160 |      0.600 |     -0.000 |      25.387 |     14.594 |     -3.003 |     50.775 |
+|         3 | 17:24:57.4 |      3.120 |      0.700 |      0.000 |      25.112 |     14.028 |     -4.062 |     50.224 |
+|         4 | 17:24:57.5 |      3.080 |      0.800 |     -0.000 |      24.849 |     13.446 |     -5.136 |     49.698 |
+|         5 | 17:24:57.5 |      3.040 |      0.900 |     -0.000 |      24.598 |     12.847 |     -6.226 |     49.196 |
+|         6 | 17:24:57.5 |      3.000 |      1.000 |     -0.000 |      24.359 |     12.233 |     -7.332 |     48.719 |
+|         7 | 17:24:57.5 |      2.960 |      1.100 |      0.000 |      24.134 |     11.603 |     -8.452 |     48.268 |
+|         8 | 17:24:57.5 |      2.920 |      1.200 |     -0.000 |      23.921 |     10.958 |     -9.586 |     47.843 |
+|         9 | 17:24:57.5 |      2.880 |      1.300 |      0.000 |      23.722 |     10.298 |    -10.733 |     47.444 |
+|        10 | 17:24:57.5 |      2.840 |      1.400 |     -0.000 |      23.537 |      9.624 |    -11.893 |     47.073 |
+|        11 | 17:24:57.5 |      2.800 |      1.500 |      0.000 |      23.365 |      8.936 |    -13.066 |     46.730 |
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+generator scan [&#39;b5cff878&#39;] (scan num: 2)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[60]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;b5cff878-570f-4305-b5a1-db69f171b005&#39;,)
+</pre></div></div>
+</div>
+<p>Scan again, keeping <code class="docutils literal notranslate"><span class="pre">phi=0</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fourc</span><span class="o">.</span><span class="n">calc</span><span class="o">.</span><span class="n">engine</span><span class="o">.</span><span class="n">mode</span> <span class="o">=</span> <span class="s1">&#39;constant_phi&#39;</span>
+<span class="n">my_constraints</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="c1"># add this one constraint</span>
+    <span class="s2">&quot;phi&quot;</span><span class="p">:</span> <span class="n">Constraint</span><span class="p">(</span><span class="o">-</span><span class="mi">180</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="kc">False</span><span class="p">),</span>
+<span class="p">}</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">applyConstraints</span><span class="p">(</span><span class="n">my_constraints</span><span class="p">)</span>
+<span class="n">fourc</span><span class="o">.</span><span class="n">showConstraints</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> Solutions:&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">fourc</span><span class="o">.</span><span class="n">forwardSolutionsTable</span><span class="p">((</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">],</span>
+    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">],</span>
+<span class="p">)))</span>
+
+<span class="c1"># VERY IMPORTANT, otherwise phi will stay at current position (-13.066 from previous scan)</span>
+<span class="o">%</span><span class="k">mov</span> fourc.phi 0
+
+<span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">fourc</span><span class="p">],</span> <span class="n">fourc</span><span class="o">.</span><span class="n">k</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="mf">2.8</span><span class="p">,</span> <span class="n">fourc</span><span class="o">.</span><span class="n">l</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">11</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+===== =================== ================== ================== =====
+axis  low_limit           high_limit         value              fit
+===== =================== ================== ================== =====
+omega -119.99999999999999 119.99999999999999 23.364811487006858 True
+chi   -119.99999999999999 119.99999999999999 8.936401718625467  True
+phi   -180.0              180.0              0.0                False
+tth   -5.0                119.99999999999999 46.729622974013715 True
+===== =================== ================== ================== =====
+
+
+ Solutions:
+============= ======== ======== ======== ======= ========
+(hkl)         solution omega    chi      phi     tth
+============= ======== ======== ======== ======= ========
+[0, 3.2, 0.5] 0        23.78144 15.15228 0.00000 51.34916
+[0, 2.8, 1.5] 0        10.46066 9.16991  0.00000 46.72962
+============= ======== ======== ======== ======= ========
+
+
+
+Transient Scan ID: 3     Time: 2020-12-16 17:24:58
+Persistent Unique Scan ID: &#39;dc673022-3c4a-4b78-8a22-72e9a3a15e9c&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+|   seq_num |       time |    fourc_k |    fourc_l |    fourc_h | fourc_omega |  fourc_chi |  fourc_phi |  fourc_tth |
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+|         1 | 17:24:58.0 |      3.200 |      0.500 |     -0.000 |      23.781 |     15.152 |      0.000 |     51.349 |
+|         2 | 17:24:58.1 |      3.160 |      0.600 |      0.000 |      22.481 |     14.613 |      0.000 |     50.775 |
+|         3 | 17:24:58.1 |      3.120 |      0.700 |     -0.000 |      21.172 |     14.062 |      0.000 |     50.224 |
+|         4 | 17:24:58.1 |      3.080 |      0.800 |      0.000 |      19.854 |     13.498 |      0.000 |     49.698 |
+|         5 | 17:24:58.1 |      3.040 |      0.900 |     -0.000 |      18.528 |     12.921 |      0.000 |     49.196 |
+|         6 | 17:24:58.1 |      3.000 |      1.000 |      0.000 |      17.195 |     12.331 |      0.000 |     48.719 |
+|         7 | 17:24:58.2 |      2.960 |      1.100 |      0.000 |      15.856 |     11.727 |      0.000 |     48.268 |
+|         8 | 17:24:58.2 |      2.920 |      1.200 |     -0.000 |      14.512 |     11.110 |      0.000 |     47.843 |
+|         9 | 17:24:58.2 |      2.880 |      1.300 |     -0.000 |      13.164 |     10.478 |      0.000 |     47.444 |
+|        10 | 17:24:58.2 |      2.840 |      1.400 |      0.000 |      11.813 |      9.831 |      0.000 |     47.073 |
+|        11 | 17:24:58.2 |      2.800 |      1.500 |     -0.000 |      10.461 |      9.170 |      0.000 |     46.730 |
++-----------+------------+------------+------------+------------+-------------+------------+------------+------------+
+generator scan [&#39;dc673022&#39;] (scan num: 3)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[61]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;dc673022-3c4a-4b78-8a22-72e9a3a15e9c&#39;,)
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_lesson6.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lesson 6: EPICS area detector</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../instrument/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Instrument</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Preparation">Preparation</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#The-diffractometer-object">The diffractometer object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Operating-mode">Operating mode</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Wavelength">Wavelength</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Sample">Sample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Reflections">Reflections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Forward-Solutions">Forward Solutions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Constraints">Constraints</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example---4-circle-with-LNO_LAO-sample">Example - 4-circle with <code class="docutils literal notranslate"><span class="pre">LNO_LAO</span></code> sample</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-4-circle-geometry">use 4-circle geometry</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-the-sample">define the sample</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#set-wavelength">set wavelength</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#define-two-reflections">define two reflections</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-UB-matrix">calculate <em>UB</em> matrix</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#calculate-(hkl)-given-motor-positions">calculate <em>(hkl)</em> given motor positions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#compute-the-motor-positions-of-the-(2-2-1.9)-reflection">compute the motor positions of the (<em>2 2 1.9</em>) reflection</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sample-(2k2)-scan,-near-k=2">sample <em>(2k2)</em> scan, near <code class="docutils literal notranslate"><span class="pre">k=2</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example---epitaxial-thin-film-on-substrate">Example - <code class="docutils literal notranslate"><span class="pre">epitaxial</span> <span class="pre">thin</span> <span class="pre">film</span> <span class="pre">on</span> <span class="pre">substrate</span></code></a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_lesson7.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1087 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Lesson 5, Part A: find a peak and lineup &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_lesson5a';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary" href="_lesson5b.html" />
+    <link rel="prev" title="Lesson 4: Basic scan (&amp; plot) of scaler vs. motor" href="_lesson4.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Lesson 5, Part A: find a peak and lineup</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Lesson-5,-Part-A:-find-a-peak-and-lineup">
+<h1>Lesson 5, Part A: find a peak and lineup<a class="headerlink" href="#Lesson-5,-Part-A:-find-a-peak-and-lineup" title="Permalink to this heading">#</a></h1>
+<p>In this lesson, alignment to a narrow diffraction peak is using capabilities provided by the <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a> package. The simulation consists of a simulated motor and simulated noisy detector.</p>
+<p>The noisy detector is configured to describe a narrow diffraction peak with Gaussian profile based on the value of the motor position. The peak is centered randomly somewhere between motor values -1 and +1. The width is less than 0.05 in the same units. The peak intensity is expected to be approximately 100,000 (counts/sec are typical units).</p>
+<p><strong>Preparation</strong></p>
+<p>Make sure the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is in the same directory as this jupyter notebook. The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package included with this lesson is a brief version of the standard package used with any APS instrument. Since the notebook is for teaching, it does not connect with any mongodb database. The scans are not kept by the databroker. However, every scan is saved to a SPEC data file as described when the instrument package is loaded.</p>
+<section id="Objective">
+<h2>Objective<a class="headerlink" href="#Objective" title="Permalink to this heading">#</a></h2>
+<p>Use <em>Bluesky</em> (the tools provided by the various packages of the <a class="reference external" href="https://blueskyproject.io/">Bluesky framework</a>) to find the center and width of a simulated diffraction peak. Move the motor to the peak center.</p>
+<ol class="arabic simple">
+<li><p>Use interactive ophyd commands to find the peak and assess the width.</p></li>
+<li><p>Use the RunEngine and bluesky plans to find the peak and assess the width.</p></li>
+</ol>
+</section>
+<section id="Advanced">
+<h2>Advanced<a class="headerlink" href="#Advanced" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple" start="3">
+<li><p>Make a custom plan and run it to find the peak center.</p></li>
+<li><p>Add that new plan to the instrument package, then restart the notebook’s kernel and try it.</p></li>
+<li><p>Add the simulated motor and noisy detector to the instrument package, then restart the notebook’s kernel and find the peak again.</p></li>
+</ol>
+<hr class="docutils" />
+</section>
+<section id="Initialize">
+<h2>Initialize<a class="headerlink" href="#Initialize" title="Permalink to this heading">#</a></h2>
+<p>Load the instrument controls (which sets up the Bluesky framework for collection: <code class="docutils literal notranslate"><span class="pre">RE</span></code>, <code class="docutils literal notranslate"><span class="pre">bec</span></code>, <code class="docutils literal notranslate"><span class="pre">bp</span></code>, …). This defines more than we need but works as a simple start, just like regular data acquisition at a beam line.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-11:06:11 - ############################################################ startup
+I Thu-11:06:11 - logging started
+I Thu-11:06:11 - logging level = 10
+I Thu-11:06:11 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\collection.py
+I Thu-11:06:11 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\mpl\notebook.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : c:\Users\Pete\Documents\projects\use_bluesky\lessons\.logs\ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+I Thu-11:06:12 - bluesky framework
+I Thu-11:06:12 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\framework\check_python.py
+I Thu-11:06:12 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\framework\check_bluesky.py
+I Thu-11:06:14 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\framework\initialize.py
+I Thu-11:06:17 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\framework\metadata.py
+I Thu-11:06:17 - c:\Users\Pete\Documents\projects\use_bluesky\lessons\instrument\framework\callbacks.py
+I Thu-11:06:17 - writing to SPEC file: c:\Users\Pete\Documents\projects\use_bluesky\lessons\20200521-110617.dat
+I Thu-11:06:17 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Thu-11:06:17 -    file will be created when bluesky ends its next scan
+I Thu-11:06:17 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+</pre></div></div>
+</div>
+<p>Numpy provides the random number generator we’ll use.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</pre></div>
+</div>
+</div>
+<p>Load the ophyd simulators</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.sim</span> <span class="kn">import</span> <span class="n">motor</span><span class="p">,</span> <span class="n">SynGauss</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Make-a-noisy-detector">
+<h2>Make a noisy detector<a class="headerlink" href="#Make-a-noisy-detector" title="Permalink to this heading">#</a></h2>
+<p>Make a new <code class="docutils literal notranslate"><span class="pre">noisy</span></code>, replacing the one from the simulator.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noisy</span> <span class="o">=</span> <span class="n">SynGauss</span><span class="p">(</span>
+    <span class="s1">&#39;noisy&#39;</span><span class="p">,</span>
+    <span class="n">motor</span><span class="p">,</span> <span class="s1">&#39;motor&#39;</span><span class="p">,</span>
+    <span class="c1"># center somewhere between -1 and 1</span>
+    <span class="n">center</span><span class="o">=</span><span class="mi">2</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="c1"># randomize these parameters</span>
+    <span class="n">Imax</span><span class="o">=</span><span class="mi">100000</span> <span class="o">+</span> <span class="mi">20000</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">noise</span><span class="o">=</span><span class="s1">&#39;poisson&#39;</span><span class="p">,</span>
+    <span class="n">sigma</span><span class="o">=</span><span class="mf">0.016</span> <span class="o">+</span> <span class="mf">0.015</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">noise_multiplier</span><span class="o">=</span><span class="mf">0.1</span> <span class="o">+</span> <span class="mf">0.02</span> <span class="o">*</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span><span class="o">-</span><span class="mf">0.5</span><span class="p">),</span>
+    <span class="n">labels</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;detectors&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<p>TODO: work this into the tutorial</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span> detectors motors
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          0
+motor                          0
+motor_setpoint                 0
+</pre></div></div>
+</div>
+<p>Define the reported precision of the motor and detector.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">motor</span><span class="o">.</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">noisy</span><span class="o">.</span><span class="n">precision</span> <span class="o">=</span> <span class="mi">0</span>
+</pre></div>
+</div>
+</div>
+<p>Print the values just configured</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;motor: </span><span class="si">{</span><span class="n">motor</span><span class="o">.</span><span class="n">position</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;center: </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">center</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;sigma: </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">sigma</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Imax: </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">Imax</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;noise: </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">noise</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;noise_multiplier : </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">noise_multiplier</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="c1"># tell the &quot;detector&quot; to &quot;count&quot; (get a new value based on the motor position)</span>
+<span class="o">%</span><span class="k">ct</span> noisy
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;noisy_det : </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">val</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+motor: 0
+center: -0.9922233044405593
+sigma: 0.02276535181863142
+Imax: 96204.44084875335
+noise: poisson
+noise_multiplier : 0.10293011351852485
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy_det : 0
+</pre></div></div>
+</div>
+</section>
+<section id="1.-Use-ophyd-commands">
+<h2>1. Use <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> commands<a class="headerlink" href="#1.-Use-ophyd-commands" title="Permalink to this heading">#</a></h2>
+<p>The first thing to learn is how to move the motor. As typical of many control systems, there are several ways to do this. We will focus on only two of these since we can apply them to both simulated motors <em>and</em> EPICS motors.</p>
+<p>Different from a real motor, our simulated motor moves immediately, so motor velocity and acceleration are not involved. Since the motor moves immediately, there is no discernable delay due to short or long motor motions.</p>
+<p><strong>tip</strong>: There are several ways to do most things but this tutorial focuses on just a few with the hope that these ways are both simple and reuseable.</p>
+<section id="motor,-move-and-get-position">
+<h3>motor, move and get position<a class="headerlink" href="#motor,-move-and-get-position" title="Permalink to this heading">#</a></h3>
+<p>For a motor named <code class="docutils literal notranslate"><span class="pre">motor</span></code>, any of these commands can be used in an interactive session to move the motor from its current position to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>motor.set(1)
+motor.set(1).wait()
+%mov motor 1
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">%mov</span></code> command is simplest so that is what we will use here.</p>
+<p><strong>tip</strong>: The <code class="docutils literal notranslate"><span class="pre">%mov</span></code> command is absolute move, while <code class="docutils literal notranslate"><span class="pre">%movr</span></code> is a relative move.</p>
+<p>Move the motor from where it is now, to 1, and print its position.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> motor 1
+<span class="nb">print</span><span class="p">(</span><span class="n">motor</span><span class="o">.</span><span class="n">position</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">motor</span><span class="o">.</span><span class="n">readback</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1
+</pre></div></div>
+</div>
+<p>Move the motor to 0 (this time using a relative move).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">movr</span> motor -1
+<span class="n">motor</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0
+</pre></div></div>
+</div>
+</section>
+<section id="detector,-count-and-get-value">
+<h3>detector, count and get value<a class="headerlink" href="#detector,-count-and-get-value" title="Permalink to this heading">#</a></h3>
+<p>Above, we created a detector named <code class="docutils literal notranslate"><span class="pre">noisy</span></code> that simulates a <em>scaler</em> (detector that records a single integer number of detection events, usually the number of X-ray photons received). Real scalers are told to measure for a fixed time interval. Our simulator does not have that feature.</p>
+<p>The simulated noisy detector computes its value for <em>counts</em> based on the position of the configured motor.</p>
+<p>Show the name of the motor configured into the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> detector. Check that its name is <code class="docutils literal notranslate"><span class="pre">motor</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">noisy</span><span class="o">.</span><span class="n">_motor</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SynAxis(prefix=&#39;&#39;, name=&#39;motor&#39;, read_attrs=[&#39;readback&#39;, &#39;setpoint&#39;], configuration_attrs=[&#39;velocity&#39;, &#39;acceleration&#39;])
+</pre></div></div>
+</div>
+<p>The value (number of counts) is kept in <code class="docutils literal notranslate"><span class="pre">noisy.val</span></code>. Show it’s value now.</p>
+<p><strong>tip</strong>: We can drop the <code class="docutils literal notranslate"><span class="pre">print()</span></code> wrapper if the command we use returns the value we’d print anyway. Use this convenient shortcut.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">noisy</span><span class="o">.</span><span class="n">val</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+SynSignal(name=&#39;noisy&#39;, parent=&#39;noisy&#39;, value=0, timestamp=1590077189.4523768)
+</pre></div></div>
+</div>
+<p>We need to tell the detector to acquire data. To acquire data, our simulator will re-compute its value based on the motor position (as with a real detector, the value does not update without something that compels this computation), since that may have changed since the last computation.</p>
+<p>For interactive use with ophyd Devices, the command to call is <code class="docutils literal notranslate"><span class="pre">`%ct</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/magics.html#taking-a-reading-using-ct-post-v1-3-0">https://blueskyproject.io/bluesky/magics.html#taking-a-reading-using-ct-post-v1-3-0</a>&gt;`__. We labeled the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> object as <code class="docutils literal notranslate"><span class="pre">detectors</span></code> so it will be counted when <code class="docutils literal notranslate"><span class="pre">%ct</span></code> is called.</p>
+<p>TODO: improve the labels explanation here.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          0
+</pre></div></div>
+</div>
+</section>
+<section id="Find-the-simulated-peak">
+<h3>Find the simulated peak<a class="headerlink" href="#Find-the-simulated-peak" title="Permalink to this heading">#</a></h3>
+<p>With tools to move the motor and acquire data from the detector, we can try to find the simulated peak. It may take some retries since the peak is narrow. Take big steps first (such as <code class="docutils literal notranslate"><span class="pre">0.1</span></code>) to find non-zero counts, then smaller steps to find the peak.</p>
+<p>First, move to one end of the range, then start stepping until you find non-zero counts. Then use <code class="docutils literal notranslate"><span class="pre">%movr</span></code> and execute the same notebook cell repeatedly. Call the detector’s <code class="docutils literal notranslate"><span class="pre">.get()</span></code> method to only print the number of counts and not the other information.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> motor -1
+<span class="o">%</span><span class="k">ct</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;motor=</span><span class="si">{</span><span class="n">motor</span><span class="o">.</span><span class="n">position</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">  noisy=</span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">val</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          90261
+motor=-1.00000  noisy=90261
+</pre></div></div>
+</div>
+<p>The next cell will probably show a very small step size. Change it to <code class="docutils literal notranslate"><span class="pre">0.1</span></code> and execute the cell repeatedly with . Once you have reached a peak (or passed it), change the sign and make the step size smaller. Repeat until you are satisfied.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">movr</span> motor .1
+<span class="o">%</span><span class="k">ct</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">motor</span><span class="o">.</span><span class="n">position</span><span class="si">:</span><span class="s2">.5f</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">noisy</span><span class="o">.</span><span class="n">val</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          31
+-0.90000, 31
+</pre></div></div>
+</div>
+<p>Compare the peak center you found with the value printed after the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> detector was configured (above). Probably, they will differ by a small amount since the simulator applies random noise to the signal.</p>
+</section>
+</section>
+<section id="2.-Use-RunEngine-and-bluesky-plans">
+<h2>2. Use RunEngine and bluesky plans<a class="headerlink" href="#2.-Use-RunEngine-and-bluesky-plans" title="Permalink to this heading">#</a></h2>
+<p>Here we use the RunEngine (<code class="docutils literal notranslate"><span class="pre">RE</span></code>) and standard <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">bluesky plans</a> to locate the simulated diffraction peak.</p>
+<p>Since we will do a series of scans, let’s make a list to collect the results from each scan. We’ll report that list later.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results</span><span class="o">=</span><span class="p">[]</span>
+</pre></div>
+</div>
+</div>
+<p>Next, some variables are defined which will make calling the scans more consistent.</p>
+<p>The first variable, <em>k</em>, is used to expand (only slightly) the range of the next scan to capture the full width of the peak. We’ll also define <em>n</em> as the number of points in each scan.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">k</span> <span class="o">=</span> <span class="mf">1.5</span>         <span class="c1"># range expansion factor</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">29</span>          <span class="c1"># number of points per scan</span>
+</pre></div>
+</div>
+</div>
+<section id="Locate-the-approximate-peak-position">
+<h3>Locate the approximate peak position<a class="headerlink" href="#Locate-the-approximate-peak-position" title="Permalink to this heading">#</a></h3>
+<p>Scan from -2 to 2 to find the peak. Since it is a Gaussian (which decays rapidly away from the peak), we may need to increase <em>n</em>, the number of points in the scan. All we need is one point above the background to find it!</p>
+<p>Use the <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html?highlight=scan">scan</a> plan from <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> (provided here as <code class="docutils literal notranslate"><span class="pre">bp</span></code>) to locate at least one point on the peak that is above the background of 0 counts.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">noisy</span><span class="p">],</span> <span class="n">motor</span><span class="p">,</span> <span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 1     Time: 2020-05-21 11:10:04
+Persistent Unique Scan ID: &#39;000f574f-cd64-4e2e-9375-3816ffef0146&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |      motor |      noisy |
++-----------+------------+------------+------------+
+|         1 | 11:10:04.7 |   -2.00000 |          0 |
+|         2 | 11:10:04.8 |   -1.85714 |          0 |
+|         3 | 11:10:04.9 |   -1.71429 |          0 |
+|         4 | 11:10:05.0 |   -1.57143 |          0 |
+|         5 | 11:10:05.1 |   -1.42857 |          0 |
+|         6 | 11:10:05.1 |   -1.28571 |          0 |
+|         7 | 11:10:05.2 |   -1.14286 |          0 |
+|         8 | 11:10:05.3 |   -1.00000 |      90943 |
+|         9 | 11:10:05.4 |   -0.85714 |          0 |
+|        10 | 11:10:05.5 |   -0.71429 |          0 |
+|        11 | 11:10:05.6 |   -0.57143 |          0 |
+|        12 | 11:10:05.7 |   -0.42857 |          0 |
+|        13 | 11:10:05.8 |   -0.28571 |          0 |
+|        14 | 11:10:05.9 |   -0.14286 |          0 |
+|        15 | 11:10:06.0 |    0.00000 |          0 |
+|        16 | 11:10:06.1 |    0.14286 |          0 |
+|        17 | 11:10:06.2 |    0.28571 |          0 |
+|        18 | 11:10:06.3 |    0.42857 |          0 |
+|        19 | 11:10:06.3 |    0.57143 |          0 |
+|        20 | 11:10:06.4 |    0.71429 |          0 |
+|        21 | 11:10:06.6 |    0.85714 |          0 |
+|        22 | 11:10:06.7 |    1.00000 |          0 |
+|        23 | 11:10:06.7 |    1.14286 |          0 |
+|        24 | 11:10:06.8 |    1.28571 |          0 |
+|        25 | 11:10:06.9 |    1.42857 |          0 |
+|        26 | 11:10:07.0 |    1.57143 |          0 |
+|        27 | 11:10:07.1 |    1.71429 |          0 |
+|        28 | 11:10:07.2 |    1.85714 |          0 |
+|        29 | 11:10:07.3 |    2.00000 |          0 |
++-----------+------------+------------+------------+
+generator scan [&#39;000f574f&#39;] (scan num: 1)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;000f574f-cd64-4e2e-9375-3816ffef0146&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutor__lesson5a_38_2.svg" src="../_images/tutor__lesson5a_38_2.svg" /></div>
+</div>
+<p>One of the tools that works in the background of the Bluesky framework is the <a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html#best-effort-callback">BestEffortCallback</a>, known here as <code class="docutils literal notranslate"><span class="pre">bec</span></code>. When <code class="docutils literal notranslate"><span class="pre">bec</span></code> is configured (see <code class="docutils literal notranslate"><span class="pre">instrument/framework/initialize.py</span></code>) as part of scanning with the RunEngine, it will assess peak parameters from each scan, where applicable. The parameters are available in <code class="docutils literal notranslate"><span class="pre">bec.peaks</span></code> which we have, for convenience, defined as <code class="docutils literal notranslate"><span class="pre">peaks</span></code>. We access a couple of
+those parameters here for peak center and width.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">peaks</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{
+&#39;com&#39;:
+    {&#39;noisy&#39;: -1.0}
+,
+&#39;cen&#39;:
+    {&#39;noisy&#39;: -1.0}
+,
+&#39;max&#39;:
+    {&#39;noisy&#39;: (-1.0,
+               90943)}
+,
+&#39;min&#39;:
+    {&#39;noisy&#39;: (-2.0,
+               0)}
+,
+&#39;fwhm&#39;:
+    {&#39;noisy&#39;: 0.1428571428571428}
+,
+}
+</pre></div></div>
+</div>
+<p>We’ll grab the values we need from this dictionary. The term <em>sigma</em> is a measure of the peak width apparent from the data available. Since the step size of the scan is large with respect to the width of the peak shown above, this is a low precision finding. We should repeat this scan with finer step size near the peak to make a more precise assessment.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cen</span> <span class="o">=</span> <span class="n">peaks</span><span class="p">[</span><span class="s2">&quot;cen&quot;</span><span class="p">][</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">peaks</span><span class="p">[</span><span class="s2">&quot;fwhm&quot;</span><span class="p">][</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;scan_id&quot;</span><span class="p">],</span> <span class="n">cen</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;center=</span><span class="si">{</span><span class="n">cen</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">,  FWHM=</span><span class="si">{</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+center=-1.0000000,  FWHM=0.1428571
+</pre></div></div>
+</div>
+</section>
+<section id="Refine-the-peak-position">
+<h3>Refine the peak position<a class="headerlink" href="#Refine-the-peak-position" title="Permalink to this heading">#</a></h3>
+<p>Refine the scan to the range of (-sigma .. +sigma) near the center of the previous scan. Repeat as often as necessary (using ) to get the peak center and width. Use the <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.rel_scan.html?highlight=rel_scan">relative scan</a> plan from <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> to find the peak.</p>
+<p><strong>tip</strong>: Look for the plot in the cell above. Replots will be drawn in different colors. The legend indicates the <code class="docutils literal notranslate"><span class="pre">scan_id</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> motor cen
+<span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">rel_scan</span><span class="p">([</span><span class="n">noisy</span><span class="p">],</span> <span class="n">motor</span><span class="p">,</span> <span class="o">-</span><span class="n">k</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">k</span><span class="o">*</span><span class="n">sigma</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span>
+<span class="c1"># TODO: plt.gcf()</span>
+
+<span class="n">cen</span> <span class="o">=</span> <span class="n">peaks</span><span class="p">[</span><span class="s2">&quot;cen&quot;</span><span class="p">][</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span>
+<span class="n">sigma</span> <span class="o">=</span> <span class="n">peaks</span><span class="p">[</span><span class="s2">&quot;fwhm&quot;</span><span class="p">][</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span>
+<span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;scan_id&quot;</span><span class="p">],</span> <span class="n">cen</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;center=</span><span class="si">{</span><span class="n">cen</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">,  FWHM=</span><span class="si">{</span><span class="n">sigma</span><span class="si">:</span><span class="s2">.7f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 4     Time: 2020-05-21 11:12:24
+Persistent Unique Scan ID: &#39;2631ce75-ce77-4da3-acba-4f109b29e29a&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |      motor |      noisy |
++-----------+------------+------------+------------+
+|         1 | 11:12:24.2 |   -1.07724 |         94 |
+|         2 | 11:12:24.3 |   -1.07116 |        250 |
+|         3 | 11:12:24.3 |   -1.06509 |        555 |
+|         4 | 11:12:24.4 |   -1.05902 |       1303 |
+|         5 | 11:12:24.5 |   -1.05294 |       2729 |
+|         6 | 11:12:24.5 |   -1.04687 |       5285 |
+|         7 | 11:12:24.6 |   -1.04080 |       9916 |
+|         8 | 11:12:24.7 |   -1.03472 |      16745 |
+|         9 | 11:12:24.7 |   -1.02865 |      26837 |
+|        10 | 11:12:24.8 |   -1.02258 |      39703 |
+|        11 | 11:12:24.8 |   -1.01651 |      54063 |
+|        12 | 11:12:24.9 |   -1.01043 |      69659 |
+|        13 | 11:12:25.0 |   -1.00436 |      83210 |
+|        14 | 11:12:25.0 |   -0.99829 |      92494 |
+|        15 | 11:12:25.1 |   -0.99221 |      96544 |
+|        16 | 11:12:25.1 |   -0.98614 |      92315 |
+|        17 | 11:12:25.2 |   -0.98007 |      83636 |
+|        18 | 11:12:25.3 |   -0.97399 |      70214 |
+|        19 | 11:12:25.3 |   -0.96792 |      54588 |
+|        20 | 11:12:25.4 |   -0.96185 |      39321 |
+|        21 | 11:12:25.4 |   -0.95578 |      26623 |
+|        22 | 11:12:25.5 |   -0.94970 |      16971 |
+|        23 | 11:12:25.5 |   -0.94363 |      10057 |
+|        24 | 11:12:25.6 |   -0.93756 |       5380 |
+|        25 | 11:12:25.7 |   -0.93148 |       2675 |
+|        26 | 11:12:25.7 |   -0.92541 |       1239 |
+|        27 | 11:12:25.8 |   -0.91934 |        607 |
+|        28 | 11:12:25.8 |   -0.91327 |        249 |
+|        29 | 11:12:25.9 |   -0.90719 |         72 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;2631ce75&#39;] (scan num: 4)
+center=-0.9921816,  FWHM=0.0535156
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutor__lesson5a_44_1.svg" src="../_images/tutor__lesson5a_44_1.svg" /></div>
+</div>
+</section>
+<section id="Report-the-results">
+<h3>Report the results<a class="headerlink" href="#Report-the-results" title="Permalink to this heading">#</a></h3>
+<p>Print a nice table with the results from each of our scans.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tbl</span> <span class="o">=</span> <span class="n">pyRestTable</span><span class="o">.</span><span class="n">Table</span><span class="p">()</span>
+<span class="n">tbl</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;scan ID&quot;</span><span class="p">)</span>
+<span class="n">tbl</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;center&quot;</span><span class="p">)</span>
+<span class="n">tbl</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;sigma&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">sid</span><span class="p">,</span> <span class="n">cen</span><span class="p">,</span> <span class="n">sigma</span> <span class="ow">in</span> <span class="n">results</span><span class="p">:</span>
+    <span class="n">tbl</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="n">sid</span><span class="p">,</span> <span class="n">cen</span><span class="p">,</span> <span class="n">sigma</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">tbl</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+======= =================== ====================
+scan ID center              sigma
+======= =================== ====================
+1       -1.0                0.1428571428571428
+3       -0.9922136823434071 0.05668097101727676
+4       -0.9921815602844319 0.053515606485192824
+======= =================== ====================
+
+</pre></div></div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_lesson4.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_lesson5b.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Objective">Objective</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Advanced">Advanced</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Initialize">Initialize</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Make-a-noisy-detector">Make a noisy detector</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Use-ophyd-commands">1. Use <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> commands</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motor,-move-and-get-position">motor, move and get position</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#detector,-count-and-get-value">detector, count and get value</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Find-the-simulated-peak">Find the simulated peak</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Use-RunEngine-and-bluesky-plans">2. Use RunEngine and bluesky plans</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Locate-the-approximate-peak-position">Locate the approximate peak position</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Refine-the-peak-position">Refine the peak position</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Report-the-results">Report the results</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_lesson5a.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

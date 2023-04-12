@@ -1,0 +1,1220 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Lesson 6: EPICS area detector &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_lesson6';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lesson 7: 4-circle diffractometer" href="_lesson7.html" />
+    <link rel="prev" title="Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary" href="_lesson5b.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Lesson 6: EPICS area detector</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Lesson-6:-EPICS-area-detector">
+<h1>Lesson 6: EPICS area detector<a class="headerlink" href="#Lesson-6:-EPICS-area-detector" title="Permalink to this heading">#</a></h1>
+<p>In this lesson, we’ll show how to use the tools provided with Bluesky to acquire an image from an EPICS Area Detector and show the image in the notebook.</p>
+<p>The EPICS Area Detector supports many different kinds of detector and provides many configuration possibilities for each detector in addition to configuration for handling of the acquired image or image stream via area detector components referred to as <em>plugins</em>. Configuration of bluesky to use an EPICS Area Detector usually requires several steps that are particular to the installation of the detector, specifically the type of camera and the use of the plugin chain.</p>
+<p>The amount of data that comes from imaging devices such as area detectors is much larger than the data involved with other data acquisition devices such as motors, scalers, temperature sensors, etc. Often, the imaging cameras will save the image data direct to a file system such as local storage. EPICS Area Detector has plugins to store the image stream to a file system accessible from the IOC (the camera’s EPICS server computer). The Bluesky framework is designed with these considerations. The
+image data is stored external to the <em>databroker</em> component in bluesky. The <em>databroker</em> stores references to the file and address and provides access routines for the image data that manage ease of use along with efficient use of computing resources (memory, networking, etc.).</p>
+<p>So, instead of reading the image data directly from the area detector, we’ll configure the area detector plugin chain to handle the image data and then, if we choose, use the databroker to process the image further such as visualize.</p>
+<div class="line-block">
+<div class="line"><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as an EPICS AreaDetector <code class="docutils literal notranslate"><span class="pre">`ADSimDetector</span></code> &lt;<a class="github reference external" href="https://github.com/areaDetector/ADSimDetector">areaDetector/ADSimDetector</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">adsky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions:</div>
+<div class="line"><a class="github reference external" href="https://github.com/prjemian/epics-docker/blob/master/n4_areaDetector/README.md">prjemian/epics-docker</a></div>
+</div>
+<hr class="docutils" />
+<p>Define the IOC prefix we’ll use.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_ad_prefix</span> <span class="o">=</span> <span class="s2">&quot;adsky:&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Import the instrument package as our routine initialization.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Sat-13:59:03 - ############################################################ startup
+I Sat-13:59:03 - logging started
+I Sat-13:59:03 - logging level = 10
+I Sat-13:59:03 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/collection.py
+I Sat-13:59:03 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/mpl/notebook.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/use_bluesky/lessons/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+I Sat-13:59:03 - bluesky framework
+I Sat-13:59:03 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/framework/check_python.py
+I Sat-13:59:03 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/framework/check_bluesky.py
+I Sat-13:59:04 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/framework/initialize.py
+I Sat-13:59:05 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/framework/metadata.py
+I Sat-13:59:05 - /home/prjemian/Documents/projects/use_bluesky/lessons/instrument/framework/callbacks.py
+I Sat-13:59:05 - writing to SPEC file: /home/prjemian/Documents/projects/use_bluesky/lessons/20200516-135905.dat
+I Sat-13:59:05 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Sat-13:59:05 -    file will be created when bluesky ends its next scan
+I Sat-13:59:05 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+</pre></div></div>
+</div>
+<p>For this tutorial, we’ll configure the plotting as <em>inline</em> so we can view the graphics if we run the notebook from sessions in JupyterLab. For details, <a class="reference external" href="https://stackoverflow.com/a/51932652">https://stackoverflow.com/a/51932652</a></p>
+<p>We always do this step <em>after</em> the instrument package has been imported.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+</pre></div>
+</div>
+</div>
+<p>The EPICS area detector support in ophyd has many features, some of them specific to the detector make and model. Let’s start with just a few features using the ADSimDetector. We’ll need to import support from ophyd by parts as they are needed.</p>
+<p>As we add features from the area detector plugins or other capabilities, the configuration complexity will increase. So, it is good to start with a simple case where we can control the camera and generate images.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">ImagePlugin</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">SimDetector</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">SingleTrigger</span>
+</pre></div>
+</div>
+</div>
+<p>We need the ophyd <code class="docutils literal notranslate"><span class="pre">SimDetector</span></code> device. That support is flexible, so we must describe <em>how</em> we’ll trigger it for data acquisition. We do that by adding the <code class="docutils literal notranslate"><span class="pre">SingleTrigger</span></code> mixin. Here’s how to do it. This procedure is typical of what we’ll have to do to support almost any EPICS area detector.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySingleTriggerSimDetector</span><span class="p">(</span><span class="n">SingleTrigger</span><span class="p">,</span> <span class="n">SimDetector</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+</div>
+<p>Make an instance of this class and connect it with EPICS.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span> <span class="o">=</span> <span class="n">MySingleTriggerSimDetector</span><span class="p">(</span><span class="n">_ad_prefix</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;adsimdet&#39;</span><span class="p">)</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Staging</strong> is fundamental to data acquisition in the Bluesky framework. Before a device is <em>triggered</em> to acquire data, it is <em>staged</em> to configure it for that specific acquisition. After acquisition is complete, the device is <em>unstaged</em> so that its previous configuration is restored. The <em>RunEngine</em> (<code class="docutils literal notranslate"><span class="pre">RE</span></code>) takes care of staging and unstaging so this all takes place behind the scenes. The <code class="docutils literal notranslate"><span class="pre">RE</span></code> also handles this when acquisition is interrupted.</p>
+<p>Here, we configure <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code> for acquisition. These settings will be applied as part of data acquisition, then the previous settings will be restored. Here:</p>
+<ul class="simple">
+<li><p>take one image per acquisition</p></li>
+<li><p>acquire for exactly 0.1 seconds</p></li>
+<li><p>Each acquisition will return after 0.25 s</p></li>
+</ul>
+<p>Note: if multiple acquisitions, acquire at interval of <code class="docutils literal notranslate"><span class="pre">adsimdet.cam.acquire_period</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;cam.num_images&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;cam.acquire_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;cam.acquire_period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span>
+</pre></div>
+</div>
+</div>
+<p>Show all the settings to be used for data acquisition with this detector.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;cam.acquire&#39;, 0),
+             (&#39;cam.image_mode&#39;, 1),
+             (&#39;cam.num_images&#39;, 1),
+             (&#39;cam.acquire_time&#39;, 0.1),
+             (&#39;cam.acquire_period&#39;, 0.25)])
+</pre></div></div>
+</div>
+<p>This is a python dictionary. We have just added to this. The settings will be applied in the order they have been added, then removed in reverse order after acquisition. Here’s what the first two setting mean. The others were described above.</p>
+<p>:value | :meaning —- | —- <code class="docutils literal notranslate"><span class="pre">cam.acquire</span></code> | turn off any acquisition in progress <code class="docutils literal notranslate"><span class="pre">cam.image_mode</span></code> | use single image mode</p>
+<p>Use the <em>RunEngine</em> to acquire one image.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">adsimdet</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 1     Time: 2020-05-16 13:59:07
+Persistent Unique Scan ID: &#39;931f2b22-4f9c-42f2-9921-122caef4d700&#39;
+New stream: &#39;primary&#39;
++-----------+------------+
+|   seq_num |       time |
++-----------+------------+
+|         1 | 13:59:07.9 |
++-----------+------------+
+generator count [&#39;931f2b22&#39;] (scan num: 1)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;931f2b22-4f9c-42f2-9921-122caef4d700&#39;,)
+</pre></div></div>
+</div>
+<p><strong>Display image from EPICS PV data</strong></p>
+<p>As noted above, we do not load the image data directly from EPICS PVs at this point for visualization. Recommended practice with Bluesky is to handle this large data as an external resource using the <em>databroker</em>. The file name and address within the file are stored with data acquisition, then <em>databroker</em> is used to access the image data.</p>
+<p>These next cells show how one might get the image data directly from EPICS. There are several additional aspects to consider to visualize an image in this way:</p>
+<ul class="simple">
+<li><p>For large image data, it may be necessary to have defined <code class="docutils literal notranslate"><span class="pre">EPICS_CA_ARRAY_BYTES</span></code> before starting the notebook session <em>and</em> having that value set in the IOC.</p></li>
+<li><p>Large images may stretch available resources on the computer that visualizes the data.</p></li>
+<li><p>For multi-frame data, the image data may be 3-dimensional.</p></li>
+<li><p>For a color camera, the image values should consider all colors and data value size.</p></li>
+<li><p>The byte order or bit order may be different.</p></li>
+</ul>
+<p>Use of the plugin chain to handle the image data is recommended to handle all these aspects, simplify client-side software, and avoid writing software that is already written.</p>
+<p>First, we would need to add the <em>image</em> plugin to our area detector configuration, then make an instance with this new definition and repeat the configuration steps:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>class MySingleTriggerSimDetector(SingleTrigger, SimDetector):
+
+    image = Component(ImagePlugin, suffix=&quot;image1:&quot;)
+
+adsimdet = MySingleTriggerSimDetector(_ad_prefix, name=&#39;adsimdet&#39;)
+adsimdet.wait_for_connection()
+adsimdet.stage_sigs[&quot;cam.num_images&quot;] = 1
+adsimdet.stage_sigs[&quot;cam.acquire_time&quot;] = 0.1
+adsimdet.stage_sigs[&quot;cam.acquire_period&quot;] = 0.25
+</pre></div>
+</div>
+<p>The image comes from EPICS AD as a 1-D array, row by row. Here, we know it is a 2-D array (in the general case, we’d to learn that from EPICS). To make it into a 2-D array, we first need to get the number of rows and columns from the image plugin.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>array_size = adsimdet.image.array_size.get()
+shape = (array_size.height, array_size.width)
+</pre></div>
+</div>
+<p>Now, get the image and make it a 2-D array.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>im = adsimdet.image.array_data.get().reshape(shape)
+</pre></div>
+</div>
+<p>Tell MatPlotLib to show the image.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span># show the image
+plt.imshow(im)
+</pre></div>
+</div>
+<p>You could make these steps into a Python function:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>def show_ad_image(det):
+    array_size = det.image.array_size.get()
+    shape = (array_size.height, array_size.width)
+    im = det.image.array_data.get().reshape(shape)
+    plt.imshow(im)
+</pre></div>
+</div>
+<p>and then call that function:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>show_ad_image(adsimdet)
+</pre></div>
+</div>
+<section id="Use-HDF-file-saving-plugin">
+<h2>Use HDF file saving plugin<a class="headerlink" href="#Use-HDF-file-saving-plugin" title="Permalink to this heading">#</a></h2>
+<p>Use the EPICS Area Detector HDF (HDF5) File saving plugin to save image(s) to HDF5 file. We’ll need more tools from the ophyd package to configure the plugin.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">ADComponent</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">EpicsSignalWithRBV</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">HDF5Plugin</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector.filestore_mixins</span> <span class="kn">import</span> <span class="n">FileStoreHDF5IterativeWrite</span>
+</pre></div>
+</div>
+</div>
+<p>The first thing we need to do is to modify the existing support since we had a few problems when developing this tutorial. These steps could be removed when the problems are fixed.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">create_directory_depth</span></code> : Allow access to create subdirectories on demand.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">array_callbacks</span></code> : Reveal in ophyd interface.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">pool_max_buffers</span></code> : remove this attribute (set it to <code class="docutils literal notranslate"><span class="pre">None</span></code> instead of using <code class="docutils literal notranslate"><span class="pre">del</span></code>).</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">get_frames_per_point()</span></code> : needed by databroker, returns the number of frames that were received with a single acquisition.</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MyHDF5Plugin</span><span class="p">(</span><span class="n">HDF5Plugin</span><span class="p">,</span> <span class="n">FileStoreHDF5IterativeWrite</span><span class="p">):</span>
+    <span class="n">create_directory_depth</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalWithRBV</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;CreateDirectory&quot;</span><span class="p">)</span>
+    <span class="n">array_callbacks</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalWithRBV</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;ArrayCallbacks&quot;</span><span class="p">)</span>
+
+    <span class="n">pool_max_buffers</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">get_frames_per_point</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">num_capture</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">stage</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
+        <span class="n">res_kwargs</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;frame_per_point&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_frames_per_point</span><span class="p">()}</span>
+        <span class="c1"># res_kwargs = {&#39;frame_per_point&#39;: self.num_capture.get()}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_generate_resource</span><span class="p">(</span><span class="n">res_kwargs</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We’re using an IOC that writes to a different file system than our notebook. Our IOC is running from a docker container. We tell the HDF5 plugin to write files to <code class="docutils literal notranslate"><span class="pre">/tmp/simdet/YEAR/MONTH/DAY/FILENAME.h5</span></code> in the IOC’s filesystem. Our docker container mounts that filesystem in directory <code class="docutils literal notranslate"><span class="pre">/tmp/iocadsky/tmp</span></code> to this notebook can access the same files as <code class="docutils literal notranslate"><span class="pre">/tmp/iocadsky/tmp/simdet/YEAR/MONTH/DAY/FILENAME.h5</span></code>.</p>
+<p>Databroker is designed to reference the file locations based on a directory path relative to some directory. This allows the collected filesystem to be moved to other directories (such as a copy to take home), yet still be found by databroker. To enable this, the ophyd support must be able to separate the directory path into base and relocatable parts.</p>
+<p>In the setup below, we use three variables to define these parts:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>variable</p></th>
+<th class="head"><p>meaning</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">WRITE_HDF5_FILE_PATH</span></code></p></td>
+<td><p>directory path seen by EPICS area detector IOC</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">READ_HDF5_FILE_PATH</span></code></p></td>
+<td><p>directory path seen by bluesky during data acquisition</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">DATABROKER_ROOT_PATH</span></code></p></td>
+<td><p>base (common part) directory path</p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATABROKER_ROOT_PATH</span> <span class="o">=</span> <span class="s2">&quot;/tmp/&quot;</span>
+
+<span class="c1"># note: AD path MUST, must, MUST have trailing &quot;/&quot;!!!</span>
+<span class="c1">#  ...and... start with the same path defined in root (above)</span>
+
+<span class="c1"># path as seen by detector IOC</span>
+<span class="n">WRITE_HDF5_FILE_PATH</span> <span class="o">=</span> <span class="s2">&quot;/tmp/simdet/%Y/%m/</span><span class="si">%d</span><span class="s2">/&quot;</span>
+<span class="c1">#!!! NOTE !!! This filesystem is on the IOC</span>
+
+<span class="c1"># path as seen by bluesky data acquistion</span>
+<span class="n">READ_HDF5_FILE_PATH</span> <span class="o">=</span> <span class="s2">&quot;/tmp/docker_ioc/iocadsky/tmp/simdet/%Y/%m/</span><span class="si">%d</span><span class="s2">/&quot;</span>
+</pre></div>
+</div>
+</div>
+<p>Re-write our custom detector class to include the HDF File Writing plugin. Use our custom plugin support since we modified the support.</p>
+<p>Also, we have added support for the Image plugin so we can, as is common practice, observe the acquired image with a GUI tool such as ImageJ or caQtDM. However, those GUI tools are not part of this tutorial.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">MySingleTriggerSimDetector</span><span class="p">(</span><span class="n">SingleTrigger</span><span class="p">,</span> <span class="n">SimDetector</span><span class="p">):</span>
+
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">ImagePlugin</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;image1:&quot;</span><span class="p">)</span>
+    <span class="n">hdf1</span> <span class="o">=</span> <span class="n">ADComponent</span><span class="p">(</span>
+        <span class="n">MyHDF5Plugin</span><span class="p">,</span>
+        <span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;HDF1:&#39;</span><span class="p">,</span>
+        <span class="n">root</span><span class="o">=</span><span class="n">DATABROKER_ROOT_PATH</span><span class="p">,</span>
+        <span class="n">write_path_template</span> <span class="o">=</span> <span class="n">WRITE_HDF5_FILE_PATH</span><span class="p">,</span>
+        <span class="n">read_path_template</span> <span class="o">=</span> <span class="n">READ_HDF5_FILE_PATH</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Make an instance of this class. It may not be necessary to add the <code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> command but it is good practice.</p>
+<p>We’ll need to configure the HDF plugin for image per capture (it does not get this automatically from the <code class="docutils literal notranslate"><span class="pre">cam</span></code> module).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span> <span class="o">=</span> <span class="n">MySingleTriggerSimDetector</span><span class="p">(</span><span class="n">_ad_prefix</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;adsimdet&#39;</span><span class="p">)</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;cam.num_images&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;cam.acquire_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;cam.acquire_period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.25</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;num_capture&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+</pre></div>
+</div>
+</div>
+<p>Show the items that will be staged.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">stage_sigs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;cam.acquire&#39;, 0),
+             (&#39;cam.image_mode&#39;, 1),
+             (&#39;cam.num_images&#39;, 1),
+             (&#39;cam.acquire_time&#39;, 0.1),
+             (&#39;cam.acquire_period&#39;, 0.25)])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;enable&#39;, 1),
+             (&#39;auto_increment&#39;, &#39;Yes&#39;),
+             (&#39;array_counter&#39;, 0),
+             (&#39;auto_save&#39;, &#39;Yes&#39;),
+             (&#39;num_capture&#39;, 1),
+             (&#39;file_template&#39;, &#39;%s%s_%6.6d.h5&#39;),
+             (&#39;file_write_mode&#39;, &#39;Stream&#39;),
+             (&#39;capture&#39;, 1),
+             (&#39;blocking_callbacks&#39;, &#39;Yes&#39;),
+             (&#39;parent.cam.array_callbacks&#39;, 1)])
+</pre></div></div>
+</div>
+<p>Just a bit more configuration of the HDF plugin.</p>
+<p>We add it to the <code class="docutils literal notranslate"><span class="pre">adsimdet.read_attrs</span></code> list so that the HDF plugin returns some useful data when <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code> is read during acquistion (by <code class="docutils literal notranslate"><span class="pre">adsimdet.read()</span></code>).</p>
+<p>We allow the HDF plugin to create up to 5 subdirectories when writing the image to an HDF5 file. We need that since we have built the year, month, and date into the file path.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">read_attrs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;hdf1&quot;</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">create_directory_depth</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="c1"># probably not set, so let&#39;s set it now to some default</span>
+    <span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">create_directory_depth</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p><strong>Prime the area detector file writing plugin</strong></p>
+<p>EPICS AreaDetector file-saving plugins (such as the HDF plugin) must be primed before they can be used. Priming must be done in these situations:</p>
+<ul class="simple">
+<li><p>the IOC has just started</p></li>
+<li><p>the image size has changed</p></li>
+</ul>
+<p>If you do not prime the detector and its plugin chain, <em>ophyd</em> will report an <em>UnprimedPlugin</em> error like this if you try to trigger (acquire data from) the detector:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>UnprimedPlugin: The plugin hdf1 on the area detector with name DETECTOR_NAME has not been primed.
+</pre></div>
+</div>
+<p>To prime the HDF plugin, call its <code class="docutils literal notranslate"><span class="pre">warmup()</span></code> method.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">enabled</span> <span class="o">=</span> <span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">enable</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">warmup</span><span class="p">()</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">enable</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">enabled</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Acquire an image and save it to an HDF5 file. Print out the name of the file (on the IOC filesystem).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;frames/point: </span><span class="si">{</span><span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">get_frames_per_point</span><span class="p">()</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">adsimdet</span><span class="p">]))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">full_file_name</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+frames/point: 1
+
+
+Transient Scan ID: 2     Time: 2020-05-16 13:59:12
+Persistent Unique Scan ID: &#39;b761689f-ec6f-44b5-a862-c9b2ceb3d820&#39;
+New stream: &#39;primary&#39;
++-----------+------------+
+|   seq_num |       time |
++-----------+------------+
+|         1 | 13:59:12.9 |
++-----------+------------+
+generator count [&#39;b761689f&#39;] (scan num: 2)
+/tmp/simdet/2020/05/16/ec0e1c0a-6d32-4f06-8606_000000.h5
+</pre></div></div>
+</div>
+</section>
+<section id="Show-the-image">
+<h2>Show the image<a class="headerlink" href="#Show-the-image" title="Permalink to this heading">#</a></h2>
+<p>Now, use <em>databroker</em> to retrieve that data and show the image. We imported the <code class="docutils literal notranslate"><span class="pre">db</span></code> symbol (instance of the <em>databroker</em>) with the instrument package. The most recent data is accessed using a list-style reference. The symbol <code class="docutils literal notranslate"><span class="pre">h</span></code> is customary to use as a run <em>header</em> in reference to the most recent data.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">h</span> <span class="o">=</span> <span class="n">db</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Just to be informative, show all the documents from the most recent data. Look for the <em>resource</em> document that describes the details of the image file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">entry</span> <span class="ow">in</span> <span class="n">h</span><span class="o">.</span><span class="n">documents</span><span class="p">():</span>
+    <span class="n">key</span><span class="p">,</span> <span class="n">doc</span> <span class="o">=</span> <span class="n">entry</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span><span class="o">*</span><span class="mi">40</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+start
+Run Start
+=========
+beamline_id     : APS lesson
+detectors       : [&#39;adsimdet&#39;]
+hints           :
+  dimensions      : [[[&#39;time&#39;], &#39;primary&#39;]]
+login_id        : prjemian@poof
+num_intervals   : 0
+num_points      : 1
+pid             : 31285
+plan_args       :
+  detectors       : [&#34;MySingleTriggerSimDetector(prefix=&#39;adsky:&#39;, name=&#39;adsimdet&#39;, read_attrs=[&#39;hdf1&#39;], configuration_attrs=[&#39;cam&#39;, &#39;cam.acquire_period&#39;, &#39;cam.acquire_time&#39;, &#39;cam.image_mode&#39;, &#39;cam.manufacturer&#39;, &#39;cam.model&#39;, &#39;cam.num_exposures&#39;, &#39;cam.trigger_mode&#39;, &#39;hdf1&#39;])&#34;]
+  num             : 1
+plan_name       : count
+plan_type       : generator
+proposal_id     : testing
+scan_id         : 2
+time            : 1589655552.753227
+uid             : b761689f-ec6f-44b5-a862-c9b2ceb3d820
+versions        :
+  apstools        : 1.2.3
+  bluesky         : 1.6.0
+  databroker      : 1.0.2
+  epics           : 3.4.1
+  matplotlib      : 3.1.3
+  numpy           : 1.18.1
+  ophyd           : 1.5.0
+  pyRestTable     : 2020.0.2
+  spec2nexus      : 2021.1.7
+----------------------------------------
+descriptor
+Event Descriptor
+================
+configuration   :
+      adsimdet_cam_acq: 0.25
+      adsimdet_cam_acq: 0.1
+      adsimdet_cam_ima: 1
+      adsimdet_cam_man: Simulated detector
+      adsimdet_cam_mod: Basic simulator
+      adsimdet_cam_num: 1
+      adsimdet_cam_tri: 0
+      adsimdet_cam_acq: 1589655552.194608
+      adsimdet_cam_acq: 1589655552.194
+      adsimdet_cam_ima: 1589655552.193175
+      adsimdet_cam_man: 1589655512.975452
+      adsimdet_cam_mod: 1589655512.975456
+      adsimdet_cam_num: 1589655512.975577
+      adsimdet_cam_tri: 1589655512.975629
+        source          : PV:adsky:cam1:AcquirePeriod_RBV
+        dtype           : number
+        shape           : []
+        units           :
+        lower_ctrl_limit: 0.0
+        upper_ctrl_limit: 0.0
+        precision       : 3
+        source          : PV:adsky:cam1:AcquireTime_RBV
+        dtype           : number
+        shape           : []
+        units           :
+        lower_ctrl_limit: 0.0
+        upper_ctrl_limit: 0.0
+        precision       : 3
+        source          : PV:adsky:cam1:ImageMode_RBV
+        dtype           : integer
+        shape           : []
+        units           : None
+        lower_ctrl_limit: None
+        upper_ctrl_limit: None
+        enum_strs       : [&#39;Single&#39;, &#39;Multiple&#39;, &#39;Continuous&#39;]
+        source          : PV:adsky:cam1:Manufacturer_RBV
+        dtype           : string
+        shape           : []
+        units           : None
+        lower_ctrl_limit: None
+        upper_ctrl_limit: None
+        source          : PV:adsky:cam1:Model_RBV
+        dtype           : string
+        shape           : []
+        units           : None
+        lower_ctrl_limit: None
+        upper_ctrl_limit: None
+        source          : PV:adsky:cam1:NumExposures_RBV
+        dtype           : integer
+        shape           : []
+        units           :
+        lower_ctrl_limit: 0
+        upper_ctrl_limit: 0
+        source          : PV:adsky:cam1:TriggerMode_RBV
+        dtype           : integer
+        shape           : []
+        units           : None
+        lower_ctrl_limit: None
+        upper_ctrl_limit: None
+        enum_strs       : [&#39;Internal&#39;, &#39;External&#39;]
++----------------+-------+------------+-------------+-----------------+-----------+
+| data keys      | dtype |  external  | object_name |      shape      |   source  |
++----------------+-------+------------+-------------+-----------------+-----------+
+| adsimdet_image | array | FILESTORE: |   adsimdet  | [1024, 1024, 0] | PV:adsky: |
++----------------+-------+------------+-------------+-----------------+-----------+
+hints           :
+    fields          : []
+name            : primary
+object_keys     :
+  adsimdet        : [&#39;adsimdet_image&#39;]
+run_start       : b761689f-ec6f-44b5-a862-c9b2ceb3d820
+time            : 1589655552.9516096
+uid             : 835db081-889b-4b4e-b21e-98950d018b54
+----------------------------------------
+resource
+Resource
+========
+path_semantics  : posix
+resource_kwargs :
+  frame_per_point : 1
+resource_path   : docker_ioc/iocadsky/tmp/simdet/2020/05/16/ec0e1c0a-6d32-4f06-8606_000000.h5
+root            : /tmp
+run_start       : b761689f-ec6f-44b5-a862-c9b2ceb3d820
+spec            : AD_HDF5
+uid             : 43f0b39c-3f34-44c0-b815-ff2cc4c7d167
+----------------------------------------
+resource
+Resource
+========
+path_semantics  : posix
+resource_kwargs :
+  frame_per_point : 1
+resource_path   : docker_ioc/iocadsky/tmp/simdet/2020/05/16/ec0e1c0a-6d32-4f06-8606_000000.h5
+root            : /tmp
+run_start       : b761689f-ec6f-44b5-a862-c9b2ceb3d820
+spec            : AD_HDF5
+uid             : a33d7a48-b751-4a4d-82fd-76bf9f544011
+----------------------------------------
+datum
+Datum
+=====
+datum_id        : a33d7a48-b751-4a4d-82fd-76bf9f544011/0
+datum_kwargs    :
+  point_number    : 0
+resource        : a33d7a48-b751-4a4d-82fd-76bf9f544011
+----------------------------------------
+event
+Event
+=====
+data            :
+  adsimdet_image  : a33d7a48-b751-4a4d-82fd-76bf9f544011/0
+descriptor      : 835db081-889b-4b4e-b21e-98950d018b54
+filled          :
+  adsimdet_image  : False
+seq_num         : 1
+time            : 1589655552.9566658
+timestamps      :
+  adsimdet_image  : 1589655552.7591739
+uid             : e1570df6-c114-48f8-9491-587b541939d8
+----------------------------------------
+stop
+Run Stop
+========
+exit_status     : success
+num_events      :
+  primary         : 1
+reason          :
+run_start       : b761689f-ec6f-44b5-a862-c9b2ceb3d820
+time            : 1589655552.9572377
+uid             : 3a76df5b-502d-48c1-a934-28cd38a02807
+----------------------------------------
+</pre></div></div>
+</div>
+<p>Show the image the last data with matplotlib.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># get the MatPlotLib tool</span>
+<span class="kn">from</span> <span class="nn">instrument.mpl</span> <span class="kn">import</span> <span class="n">plt</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">h</span><span class="o">.</span><span class="n">xarray</span><span class="p">()</span><span class="o">.</span><span class="n">adsimdet_image</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.image.AxesImage at 0x7f5fd049de90&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutor__lesson6_45_1.svg" src="../_images/tutor__lesson6_45_1.svg" /></div>
+</div>
+<p>The structure of the HDF5 file as reported by the punx program (<a class="reference external" href="https://punx.readthedocs.io">https://punx.readthedocs.io</a>):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>entry:NXentry
+  data:NXdata
+    data:NX_UINT8[1,1024,1024] = [ ... ]
+  instrument:NXinstrument
+    NDAttributes:NXcollection
+      NDArrayEpicsTSSec:NX_UINT32 = 958492486
+      NDArrayEpicsTSnSec:NX_UINT32 = 334947107
+      NDArrayTimeStamp:NX_FLOAT64 = 958492486.2348573
+      NDArrayUniqueId:NX_INT32 = 3
+    detector:NXdetector
+      data:NX_UINT8[1,1024,1024] = [ ... ]
+      NDAttributes:NXcollection
+        ColorMode:NX_INT32 = 0
+    performance
+      timestamp:NX_FLOAT64[1,5] = [ ... ]
+</pre></div>
+</div>
+<p>With attributes shown:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>entry:NXentry
+  @NX_class = NXentry
+  data:NXdata
+    @NX_class = NXdata
+    data:NX_UINT8[1,1024,1024] = [ ... ]
+      @NDArrayDimBinning = 1
+      @NDArrayDimOffset = 0
+      @NDArrayDimReverse = 0
+      @NDArrayNumDims = 2
+      @signal = 1
+  instrument:NXinstrument
+    @NX_class = NXinstrument
+    NDAttributes:NXcollection
+      @NX_class = NXcollection
+      @hostname = poof
+      NDArrayEpicsTSSec:NX_UINT32 = 958492486
+        @NDAttrDescription = The NDArray EPICS timestamp seconds past epoch
+        @NDAttrName = NDArrayEpicsTSSec
+        @NDAttrSource = Driver
+        @NDAttrSourceType = NDAttrSourceDriver
+      NDArrayEpicsTSnSec:NX_UINT32 = 334947107
+        @NDAttrDescription = The NDArray EPICS timestamp nanoseconds
+        @NDAttrName = NDArrayEpicsTSnSec
+        @NDAttrSource = Driver
+        @NDAttrSourceType = NDAttrSourceDriver
+      NDArrayTimeStamp:NX_FLOAT64 = 958492486.2348573
+        @NDAttrDescription = The timestamp of the NDArray as float64
+        @NDAttrName = NDArrayTimeStamp
+        @NDAttrSource = Driver
+        @NDAttrSourceType = NDAttrSourceDriver
+      NDArrayUniqueId:NX_INT32 = 3
+        @NDAttrDescription = The unique ID of the NDArray
+        @NDAttrName = NDArrayUniqueId
+        @NDAttrSource = Driver
+        @NDAttrSourceType = NDAttrSourceDriver
+    detector:NXdetector
+      @NX_class = NXdetector
+      data:NX_UINT8[1,1024,1024] = [ ... ]
+        @NDArrayDimBinning = 1
+        @NDArrayDimOffset = 0
+        @NDArrayDimReverse = 0
+        @NDArrayNumDims = 2
+        @signal = 1
+      NDAttributes:NXcollection
+        @NX_class = NXcollection
+        ColorMode:NX_INT32 = 0
+          @NDAttrDescription = Color mode
+          @NDAttrName = ColorMode
+          @NDAttrSource = Driver
+          @NDAttrSourceType = NDAttrSourceDriver
+    performance
+      timestamp:NX_FLOAT64[1,5] = [ ... ]
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_lesson5b.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_lesson7.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lesson 7: 4-circle diffractometer</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Use-HDF-file-saving-plugin">Use HDF file saving plugin</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Show-the-image">Show the image</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_lesson6.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
