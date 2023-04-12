@@ -3,4 +3,5 @@ myst-parser
 nbsphinx
 pandoc
 pydata-sphinx-theme
+pypandoc
 sphinx <6

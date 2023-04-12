@@ -29,29 +29,34 @@ jobs:
       with:
         fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 
-    - name: Install Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: "3.11"
-        # cache: pip
+    - name: show timezone
+      run: date +%z 
 
-    - name: Install Python requirements
-      run: |
-        pip install -r ./docs/requirements.txt
-
-    - name: Diagnostics
-      run: |
-        pip list
-
-    - name: Sphinx
-      run: |
-        make -C docs html
-
-    # - name: Publish (push gh-pages branch) only on demand
-    #   uses: peaceiris/actions-gh-pages@v3
-    #   if: ${{ github.event.inputs.deploy }}
+    # - name: Install Python
+    #   uses: actions/setup-python@v4
     #   with:
-    #     publish_branch: gh-pages
-    #     github_token: ${{ secrets.GITHUB_TOKEN }}
-    #     publish_dir: docs/build/html
-    #     force_orphan: true
+    #     python-version: "3.11"
+    #     # cache: pip
+
+    # - name: Install Python requirements
+    #   run: |
+    #     pip install -r ./docs/requirements.txt
+
+    # - name: pip list
+    #   run: pip list
+
+    # - name: which python
+    #   run: which python
+
+    # # - name: Sphinx
+    # #   run: |
+    # #     make -C docs html
+
+    # # - name: Publish (push gh-pages branch) only on demand
+    # #   uses: peaceiris/actions-gh-pages@v3
+    # #   if: ${{ github.event.inputs.deploy }}
+    # #   with:
+    # #     publish_branch: gh-pages
+    # #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    # #     publish_dir: docs/build/html
+    # #     force_orphan: true
