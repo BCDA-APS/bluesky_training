@@ -24,3 +24,6 @@ mViewer.log
 # local developer Python code
 dev_*.py
 dev_*.ipynb
+
+# Sphinx build products
+build/

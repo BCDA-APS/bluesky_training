@@ -1,0 +1,57 @@
+name: Publish Sphinx docs to GitHub Pages
+# see: https://github.com/marketplace/actions/sphinx-to-github-pages
+
+on:
+  # Build the docs on pushes to main branch, PRs to main branch, and new tags.
+  # Publish only on demand.
+  push:
+    branches:
+      - main
+    tags:
+      - '*'  # all tags
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:   # allow manual triggering
+    inputs:
+      deploy:
+        description: 'Deploy documentation'
+        type: boolean
+        required: true
+        default: false
+
+defaults:
+  run:
+    shell: bash -l {0}
+
+jobs:
+
+  pages:
+
+    runs-on: ubuntu-20.04
+
+    steps:
+
+    - name: Deploy Information
+      if: ${{ github.event.inputs.deploy }}
+      run: |
+        echo "The docs will be published from this workflow run."
+
+    - name: Install pandoc
+      run: |
+        sudo apt-get update && \
+        sudo apt-get -y install pandoc
+
+    - id: deployment
+      uses: sphinx-notes/pages@v3
+      with:
+        documentation_path: ./docs/source
+        publish: false
+        requirements_path: ./docs/requirements.txt
+        cache: true
+
+    - uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.event.inputs.deploy }}
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ${{ steps.deployment.outputs.artifact }}
