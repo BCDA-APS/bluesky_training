@@ -1,5 +1,6 @@
 ipython
 myst-parser
 nbsphinx
+pandoc
 pydata-sphinx-theme
 sphinx <6
