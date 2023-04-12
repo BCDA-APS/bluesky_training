@@ -24,25 +24,34 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    # - name: Checkout
-    #   uses: actions/checkout@master
+    - name: Checkout
+      uses: actions/checkout@master
+      with:
+        fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
+
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        # cache: pip
+
+    - name: Install Python requirements
+      run: |
+        pip install -r ./docs/requirements.txt
+
+    - name: Diagnostics
+      run: |
+        pip list
+
+    - name: Sphinx
+      run: |
+        make -C docs html
+
+    # - name: Publish (push gh-pages branch) only on demand
+    #   uses: peaceiris/actions-gh-pages@v3
+    #   if: ${{ github.event.inputs.deploy }}
     #   with:
-    #     fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-
-    - name: Build and Commit
-      uses: sphinx-notes/pages@v3
-      with:
-        cache: true
-        # path to conf.py directory
-        documentation_path: docs/source
-        publish: false
-        # requirements_path: ./docs/requirements.txt
-
-    - name: Publish (push gh-pages branch) only on demand
-      uses: peaceiris/actions-gh-pages@v3
-      if: ${{ github.event.inputs.deploy }}
-      with:
-        publish_branch: gh-pages
-        github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_dir: ${{ env.TMP_DIR }}
-        force_orphan: true
+    #     publish_branch: gh-pages
+    #     github_token: ${{ secrets.GITHUB_TOKEN }}
+    #     publish_dir: docs/build/html
+    #     force_orphan: true
