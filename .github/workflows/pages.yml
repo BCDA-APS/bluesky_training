@@ -39,10 +39,11 @@ jobs:
     #   with:
     #     timezoneLinux: "US/Chicago"
 
-    - name: Install pandoc
-      run: |
-        sudo apt-get -y update && \
-        sudo apt-get -y install pandoc
+    # TODO: commented for workflow development
+    # - name: Install pandoc
+    #   run: |
+    #     sudo apt-get -y update && \
+    #     sudo apt-get -y install pandoc
 
     - name: Build and Commit
       uses: sphinx-notes/pages@v3
