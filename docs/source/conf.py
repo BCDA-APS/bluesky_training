@@ -27,6 +27,7 @@ extensions = """
     nbsphinx
     myst_parser
 """.split()
+extensions =[]
 
 templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
