@@ -43,11 +43,11 @@ jobs:
     #       "sphinx<6"
 
     - name: Build and Commit
-      uses: sphinx-notes/pages@master
+      uses: sphinx-notes/pages@v3
       with:
         # path to conf.py directory
         documentation_path: docs/source
-        requirements_path: ./docs/docs-requirements.txt
+        requirements_path: ./docs/requirements.txt
 
     - name: Publish (push gh-pages branch) only on demand
       uses: peaceiris/actions-gh-pages@v3
