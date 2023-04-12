@@ -1,17 +1,14 @@
-.. bluesky_training documentation master file, created by
-   sphinx-quickstart on Tue Apr 11 14:58:56 2023.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
-
-Welcome to bluesky_training's documentation!
-============================================
+====================
+APS Bluesky Training
+====================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
-   demo/index
    howto/index
+   tutor/index
+   instrument/index
 
 .. TODO: sections that point to various documentation
    See the top-level README and unload the root directory
@@ -38,6 +35,9 @@ Welcome to bluesky_training's documentation!
    Conda
    Version control
    References
+
+   * https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable
+   * https://diataxis.fr/
 
 
 Indices and tables

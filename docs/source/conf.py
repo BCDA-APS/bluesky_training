@@ -29,7 +29,7 @@ extensions = """
 """.split()
 
 templates_path = ["_templates"]
-source_suffix = [".rst", ".md"]
+source_suffix = ".rst .md".split()
 exclude_patterns = ["**.ipynb_checkpoints"]
 
 today_fmt = "%Y-%m-%d %H:%M"
@@ -39,6 +39,9 @@ today_fmt = "%Y-%m-%d %H:%M"
 
 html_static_path = ['_static']
 html_theme = "pydata_sphinx_theme"
+
+# Ignore errors in notebooks while documenting them
+nbsphinx_allow_errors = True
 
 autodoc_mock_imports = """
     bluesky
