@@ -1,9 +1,28 @@
 name: Publish Sphinx docs to GitHub Pages
 # see: https://github.com/marketplace/actions/sphinx-to-github-pages
 
-on: [push]
-  # push:
-  #   branches: [master] # branch to trigger deployment
+on:
+  # Build the docs on pushes to main branch, PRs to main branch, and new tags.
+  # Publish only on demand.
+  push:
+    branches:
+      - main
+    tags:
+      - '*'  # all tags
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:   # allow manual triggering
+    inputs:
+      deploy:
+        description: 'Deploy documentation'
+        type: boolean
+        required: true
+        default: false
+
+defaults:
+  run:
+    shell: bash -l {0}
 
 jobs:
 
@@ -24,6 +43,7 @@ jobs:
         cache: true
 
     - uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.event.inputs.deploy }}
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
         publish_dir: ${{ steps.deployment.outputs.artifact }}
