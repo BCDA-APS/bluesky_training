@@ -3,8 +3,7 @@ How-To Guides
 =============
 
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :glob:
 
    basic_aps_info
-   demo_dynamic_limits_2motor
