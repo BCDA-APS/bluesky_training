@@ -34,18 +34,20 @@ jobs:
     #   run: |
     #     pip install -e .
 
-    - name: Install Sphinx dependencies
-      run: |
-        pip install \
-          myst-parser \
-          nbsphinx \
-          pydata-sphinx-theme
+    # - name: Install Sphinx dependencies
+    #   run: |
+    #     pip install \
+    #       myst-parser \
+    #       nbsphinx \
+    #       pydata-sphinx-theme \
+    #       "sphinx<6"
 
     - name: Build and Commit
       uses: sphinx-notes/pages@master
       with:
         # path to conf.py directory
         documentation_path: docs/source
+        requirements_path: ./docs/docs-requirements.txt
 
     - name: Publish (push gh-pages branch) only on demand
       uses: peaceiris/actions-gh-pages@v3
