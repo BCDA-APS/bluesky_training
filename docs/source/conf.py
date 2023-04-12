@@ -34,14 +34,14 @@ exclude_patterns = ["**.ipynb_checkpoints"]
 
 today_fmt = "%Y-%m-%d %H:%M"
 
+# Ignore errors in notebooks while documenting them
+nbsphinx_allow_errors = True
+
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
 html_static_path = ['_static']
 html_theme = "pydata_sphinx_theme"
-
-# Ignore errors in notebooks while documenting them
-nbsphinx_allow_errors = True
 
 autodoc_mock_imports = """
     bluesky

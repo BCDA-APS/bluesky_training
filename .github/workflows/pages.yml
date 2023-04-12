@@ -29,13 +29,17 @@ jobs:
       with:
         fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
 
-    - name: Install package
-      run: |
-        pip install -e .
+    # bluesky_training is not a package, so it cannot be installed by pip
+    # - name: Install package
+    #   run: |
+    #     pip install -e .
 
-    - name: Install sphinx-rtd-theme
+    - name: Install Sphinx dependencies
       run: |
-        pip install sphinx-rtd-theme
+        pip install \
+          myst-parser \
+          nbshinx \
+          pydata-sphinx-theme
 
     - name: Build and Commit
       uses: sphinx-notes/pages@master
