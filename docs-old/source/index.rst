@@ -6,7 +6,6 @@ APS Bluesky Training
    :maxdepth: 2
    :caption: Contents:
 
-..
    howto/index
    tutor/index
    instrument/index
