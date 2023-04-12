@@ -37,48 +37,11 @@ jobs:
         documentation_path: docs/source
         requirements_path: ./docs/requirements.txt
 
-# # ---
-#     - name: Checkout
-#       uses: actions/checkout@master
-#       with:
-#         fetch-depth: 0 # otherwise, you will fail to push refs to dest repo
-
-#     - name: show timezone
-#       run: date +%z 
-
-#     - name: Install Python
-#       uses: actions/setup-python@v4
-#       with:
-#         python-version: "3.11"
-#         # cache: pip
-
-#     - name: Install Python requirements
-#       run: |
-#         pip install -r ./docs/requirements.txt
-
-#     - name: pip list
-#       run: pip list
-
-#     - name: which python
-#       run: which python
-
-#     - name: which pandoc
-#       run: which pandoc
-
-#     - name: which sphinx-build
-#       run: which sphinx-build
-
-#     # - name: Sphinx
-#     #   run: |
-#     #     make -C docs html
-#     #     cd ./docs
-#     #     sphinx-build -M html source build
-
-#     # # - name: Publish (push gh-pages branch) only on demand
-#     # #   uses: peaceiris/actions-gh-pages@v3
-#     # #   if: ${{ github.event.inputs.deploy }}
-#     # #   with:
-#     # #     publish_branch: gh-pages
-#     # #     github_token: ${{ secrets.GITHUB_TOKEN }}
-#     # #     publish_dir: docs/build/html
-#     # #     force_orphan: true
+    - name: Publish (push gh-pages branch) only on demand
+      uses: peaceiris/actions-gh-pages@v3
+      if: ${{ github.event.inputs.deploy }}
+      with:
+        publish_branch: gh-pages
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: docs/build/html
+        force_orphan: true
