@@ -38,7 +38,7 @@ jobs:
       run: |
         pip install \
           myst-parser \
-          nbshinx \
+          nbsphinx \
           pydata-sphinx-theme
 
     - name: Build and Commit
