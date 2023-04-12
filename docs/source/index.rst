@@ -5,7 +5,7 @@ APS Bluesky Training
    :maxdepth: 2
    :caption: Contents:
 
-
+   instrument/index
 
 Indices and tables
 ==================
