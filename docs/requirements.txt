@@ -1,5 +1,11 @@
+babel ==2.11.0
+ipykernel
 ipython
+jinja2 >=3.0
+markupsafe ==2.0.1
 myst-parser
 nbsphinx
 pydata-sphinx-theme
+pygments >=2.12
+pygments-ipython-console
 sphinx <6

@@ -10,7 +10,8 @@ APS Bluesky Training
    tutor/index
    instrument/index
 
-.. TODO: sections that point to various documentation
+..
+   TODO: sections that point to various documentation
    See the top-level README and unload the root directory
 
    Introductory
