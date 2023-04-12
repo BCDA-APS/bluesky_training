@@ -23,6 +23,9 @@ jobs:
   pages:
     runs-on: ubuntu-latest
 
+    permissions:
+      id-token: read|write|none
+
     steps:
 
     # - name: Set timezone
