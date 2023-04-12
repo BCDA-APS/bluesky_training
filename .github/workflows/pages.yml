@@ -32,21 +32,21 @@ jobs:
     - name: show timezone
       run: date +%z 
 
-    # - name: Install Python
-    #   uses: actions/setup-python@v4
-    #   with:
-    #     python-version: "3.11"
-    #     # cache: pip
+    - name: Install Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.11"
+        # cache: pip
 
-    # - name: Install Python requirements
-    #   run: |
-    #     pip install -r ./docs/requirements.txt
+    - name: Install Python requirements
+      run: |
+        pip install -r ./docs/requirements.txt
 
-    # - name: pip list
-    #   run: pip list
+    - name: pip list
+      run: pip list
 
-    # - name: which python
-    #   run: which python
+    - name: which python
+      run: which python
 
     # # - name: Sphinx
     # #   run: |
