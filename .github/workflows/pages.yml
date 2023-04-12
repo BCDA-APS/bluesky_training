@@ -31,7 +31,7 @@ jobs:
         sudo apt-get -y install pandoc
 
     - name: Build and Commit
-      uses: sphinx-notes/pages@master
+      uses: sphinx-notes/pages@v3
       with:
         # path to conf.py directory
         documentation_path: docs/source
