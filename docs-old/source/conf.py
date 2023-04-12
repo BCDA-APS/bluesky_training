@@ -6,9 +6,9 @@
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
-project = 'bluesky_training'
-copyright = '2023, APS BCDA'
-author = 'APS BCDA'
+project = "bluesky_training"
+copyright = "2023, APS BCDA"
+author = "APS BCDA"
 
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
@@ -27,7 +27,7 @@ extensions = """
     nbsphinx
     myst_parser
 """.split()
-extensions =[]
+extensions = []
 
 templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
@@ -41,7 +41,7 @@ nbsphinx_allow_errors = True
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_static_path = ['_static']
+html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
 
 autodoc_mock_imports = """
