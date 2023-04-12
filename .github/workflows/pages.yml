@@ -37,7 +37,10 @@ jobs:
       run: |
         echo "The will be published from this workflow run."
 
-    # TODO: install pandoc via apt
+    - name: Install pandoc
+      run: |
+        sudo apt-get update && \
+        sudo apt-get -y install pandoc
 
     - id: deployment
       uses: sphinx-notes/pages@v3
