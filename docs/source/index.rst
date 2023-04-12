@@ -6,11 +6,10 @@ APS Bluesky Training
    :caption: Contents:
 
    howto/index
+   tutor/index
    instrument/index
 
 ..
-   tutor/index
-
    TODO: sections that point to various documentation
    See the top-level README and unload the root directory
 
