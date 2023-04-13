@@ -40,9 +40,10 @@ TODO:  Consider adding additional structure sections that point to various docum
    instrument/index
    reference/index
 
-Indices and tables
-==================
+.. useless, so far:
+   Indices and tables
+   ==================
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   * :ref:`genindex`
+   * :ref:`modindex`
+   * :ref:`search`
