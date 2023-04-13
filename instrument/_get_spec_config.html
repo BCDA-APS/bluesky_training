@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Translate Previous SPEC Configuration &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_get_spec_config';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Test that Bluesky Works" href="_test_it_works.html" />
+    <link rel="prev" title="Recommended Directory Layout" href="_directory_layout.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Translate Previous SPEC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_it_works.html">Test that Bluesky Works</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Translate Previous SPEC Configuration</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="translate-previous-spec-configuration">
+<h1>Translate Previous SPEC Configuration<a class="headerlink" href="#translate-previous-spec-configuration" title="Permalink to this heading">#</a></h1>
+<p>The <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/"><code class="docutils literal notranslate"><span class="pre">apstools</span></code></a> package has an application that will translate most
+of the SPEC config file into ophyd commands.  The output is to the
+console.  Use a pipe to direct the output to a new file:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">INSTRUMENT_DIR</span><span class="o">=</span><span class="si">${</span><span class="nv">BLUESKY_DIR</span><span class="si">}</span>/profile_bluesky/startup/instrument
+spec2ophyd<span class="w"> </span>CONFIG_FILE<span class="w"> </span><span class="p">|</span><span class="w"> </span>tee<span class="w"> </span><span class="si">${</span><span class="nv">INSTRUMENT_DIR</span><span class="si">}</span>/devices/spec.py
+</pre></div>
+</div>
+<p>then make sure to import this file in
+<code class="docutils literal notranslate"><span class="pre">${INSTRUMENT_DIR}/devices/__init__.py</span></code> following the pattern of other
+imports there.</p>
+<details>
+<summary><tt>spec2ophyd</tt> example:</summary>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>bluesky_2022_3<span class="o">)</span><span class="w"> </span>mintadmin@mint-vm:/tmp$<span class="w"> </span>spec2ophyd<span class="w"> </span>/home/mintadmin/Documents/projects/BCDA-APS/apstools/apstools/migration/config
+<span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">ophyd commands from SPEC config file</span>
+
+<span class="s2">file: /home/mintadmin/Documents/projects/BCDA-APS/apstools/apstools/migration/config</span>
+
+<span class="s2">CAUTION: Review the object names below before using them!</span>
+<span class="s2">    Some names may not be valid python identifiers</span>
+<span class="s2">    or may be reserved (such as ``time`` or ``del``)</span>
+<span class="s2">    or may be vulnerable to re-definition because</span>
+<span class="s2">    they are short or common.</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+from<span class="w"> </span>ophyd<span class="w"> </span>import<span class="w"> </span>EpicsMotor,<span class="w"> </span>EpicsSignal
+from<span class="w"> </span>ophyd.scaler<span class="w"> </span>import<span class="w"> </span>ScalerCH
+
+<span class="nv">un0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un0&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused0</span>
+<span class="nv">mx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;mx&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">my</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;my&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">waxsx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;waxsx&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># WAXS X</span>
+<span class="nv">ax</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m5&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;ax&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">gslity</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m6&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;gslity&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># Gslit_Y</span>
+<span class="nv">az</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m7&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;az&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un7</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c0:m8&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un7&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused7</span>
+<span class="nv">msx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;msx&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">msy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;msy&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">art</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;art&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># ART50-100</span>
+<span class="nv">asy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;asy&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">gslitx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m5&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;gslitx&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># Gslit_X</span>
+<span class="nv">tcam</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m6&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;tcam&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">camy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m7&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;camy&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># cam_y</span>
+<span class="nv">tens</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c1:m8&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;tens&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># Tension</span>
+<span class="nv">sx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;sx&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">sy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;sy&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">dx</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;dx&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un19</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un19&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">uslvcen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m5&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;uslvcen&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># uslitvercen</span>
+<span class="nv">uslhcen</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m6&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;uslhcen&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># uslithorcen</span>
+<span class="nv">uslvap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m7&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;uslvap&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># uslitverap</span>
+<span class="nv">uslhap</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:m58:c2:m8&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;uslhap&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># uslithorap</span>
+<span class="nv">pin_x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;pin_x&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">pin_z</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;pin_z&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">gslout</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;gslout&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># GSlit_outb # read_mode=7</span>
+<span class="nv">gslinb</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;gslinb&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># GSlit_inb # read_mode=7</span>
+<span class="nv">gsltop</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m5&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;gsltop&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># GSlit_top # read_mode=7</span>
+<span class="nv">gslbot</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m6&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;gslbot&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># GSlit_bot # read_mode=7</span>
+<span class="nv">un30</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m7&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un30&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused30</span>
+<span class="nv">pin_y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c0:m8&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;pin_y&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">a2rp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:pi:c0:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;a2rp&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># USAXS.a2rp</span>
+<span class="nv">m2rp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:pi:c0:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;m2rp&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># USAXS.m2rp</span>
+<span class="nv">msrp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:pi:c0:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;msrp&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># USAXS.msrp</span>
+<span class="nv">asrp</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:pi:c0:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;asrp&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># USAXS.asrp</span>
+<span class="nv">un36</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un36&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused36</span>
+<span class="nv">un37</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un37&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused37</span>
+<span class="nv">mst</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;mst&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">ast</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;ast&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">msr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m5&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;msr&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">asr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m6&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;asr&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un42</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m7&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un42&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused42</span>
+<span class="nv">un43</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:xps:c0:m8&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un43&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># unused43</span>
+<span class="nv">ar</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:aero:c0:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;ar&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un45</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un45&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un46</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m2&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un46&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un47</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m3&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un47&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un48</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m4&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un48&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un49</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m5&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un49&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un50</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m6&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un50&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un51</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m7&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un51&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">un52</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:mxv:c1:m8&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;un52&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">ay</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:aero:c1:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;ay&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">dy</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:aero:c2:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;dy&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="c1"># Macro Motor: SpecMotor(mne=&#39;en&#39;, config_line=&#39;55&#39;, macro_prefix=&#39;kohzuE&#39;) # read_mode=7</span>
+<span class="nv">InbMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9ida:m43&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;InbMS&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># MonoSl_inb</span>
+<span class="nv">OutMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9ida:m44&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;OutMS&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># MonoSl_out</span>
+<span class="nv">TopMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9ida:m45&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;TopMS&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># MonoSl_top</span>
+<span class="nv">BotMS</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9ida:m46&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;BotMS&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span><span class="w">  </span><span class="c1"># MonoSl_bot</span>
+<span class="nv">mr</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>EpicsMotor<span class="o">(</span><span class="s1">&#39;9idcLAX:aero:c3:m1&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;mr&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;motor&#39;</span>,<span class="o">))</span>
+<span class="nv">c0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>ScalerCH<span class="o">(</span><span class="s1">&#39;9idcLAX:vsc:c0&#39;</span>,<span class="w"> </span><span class="nv">name</span><span class="o">=</span><span class="s1">&#39;c0&#39;</span>,<span class="w"> </span><span class="nv">labels</span><span class="o">=(</span><span class="s1">&#39;detectors&#39;</span>,<span class="o">))</span>
+c0.select_channels<span class="o">(</span>None<span class="o">)</span>
+<span class="nv">sec</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c0.channels.chan01.s
+<span class="nv">I0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c0.channels.chan02.s
+<span class="nv">I00</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c0.channels.chan03.s
+<span class="nv">upd2</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c0.channels.chan04.s
+<span class="nv">trd</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c0.channels.chan05.s
+<span class="nv">I000</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>c0.channels.chan06.s
+</pre></div>
+</div>
+</details>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_directory_layout.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Recommended Directory Layout</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_test_it_works.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Test that Bluesky Works</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/instrument/_get_spec_config.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
