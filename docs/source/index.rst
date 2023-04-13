@@ -1,7 +1,7 @@
 APS Bluesky Training
 ====================
 
-TODO:  Consider adding additional structure sections that point to various documentation
+TODO:  Consider adding highlighting certain docs.
 
 .. code::
 
