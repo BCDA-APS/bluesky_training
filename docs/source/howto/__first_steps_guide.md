@@ -1,21 +1,15 @@
-# Guide: First Steps with Bluesky
+# First Steps with Bluesky
 
 This is a quick-reference guide for those learning how
 to use the Bluesky Framework for data acquisition.
 
-Use these commands to verify the existing configuration works as expected:
+Covered here:
 
-  * motors have values matching EPICS
-  * scaler(s) match EPICS
+- Commands to verify the existing configuration works as expected
+  - motors have values matching EPICS
+  - scaler(s) match EPICS
 
-**Contents**
-- [Guide: First Steps with Bluesky](#guide-first-steps-with-bluesky)
-  - [Read](#read)
-  - [Move](#move)
-  - [Count](#count)
-  - [List, Describe, Summary](#list-describe-summary)
-  - [Bluesky Plans _vs_. Command-line Actions](#bluesky-plans-vs-command-line-actions)
-  - [Log files](#log-files)
+There steps are repeated in a [Jupyter notebook](../reference/_command_review.ipynb).
 
 ## Read
 
@@ -31,16 +25,16 @@ command | description
 <details>
 <summary>Examples:</summary>
 
-```python
-In [10]: m1.user_setpoint.get()
+<pre>
+In [10]: <b>m1.user_setpoint.get()</b>
 Out[10]: 0.0
 
-In [11]: m1.user_setpoint.read()
+In [11]: <b>m1.user_setpoint.read()</b>
 Out[11]: {'m1_user_setpoint': {'value': 0.0, 'timestamp': 1613878949.1092}}
 
-In [12]: listdevice(m1)
+In [12]: <b>listdevice(m1)</b>
 ================ ===== ==========================
-name             value timestamp                 
+name             value timestamp
 ================ ===== ==========================
 m1               0.0   2021-02-20 21:42:29.109200
 m1_user_setpoint 0.0   2021-02-20 21:42:29.109200
@@ -48,10 +42,10 @@ m1_user_setpoint 0.0   2021-02-20 21:42:29.109200
 
 Out[12]: <pyRestTable.rest_table.Table at 0x7fe0649cbd00>
 
-In [13]: m1.position
+In [13]: <b>m1.position</b>
 Out[13]: 0.0
 
-In [14]: m1.summary()
+In [14]: <b>m1.summary()</b>
 data keys (* hints)
 -------------------
 *m1
@@ -95,9 +89,7 @@ home_reverse         EpicsSignal         ('m1_home_reverse')
 soft_limit_lo        EpicsSignal         ('m1_soft_limit_lo')
 soft_limit_hi        EpicsSignal         ('m1_soft_limit_hi')
 steps_per_rev        EpicsSignal         ('m1_steps_per_rev')
-
-
-```
+</pre>
 
 </details>
 
@@ -116,19 +108,19 @@ command | description
 <details>
 <summary>Examples:</summary>
 
-```python
-In [15]: %mov m1 1
-                                                                                                                                            
-In [16]: %movr m1 -1
-                                                                                                                                            
-In [17]: m1.move(.5)
+<pre>
+In [15]: <b>%mov m1 1</b>
+
+In [16]: <b>%movr m1 -1</b>
+
+In [17]: <b>m1.move(.5)</b>
 Out[17]: MoveStatus(done=True, pos=m1, elapsed=0.8, success=True, settle_time=0.0)
 
-In [18]: m1.user_setpoint.put(1)
+In [18]: <b>m1.user_setpoint.put(1)</b>
 
-In [19]: RE(bps.mv(m1, 0))
-Out[19]: ()                                                                                                                                 
-```
+In [19]: <b>RE(bps.mv(m1, 0))</b>
+Out[19]: ()
+</pre>
 
 </details>
 
@@ -151,16 +143,16 @@ area detector | `AD.cam.acquire_time.put(COUNT_TIME_S)`
 <details>
 <summary>Examples:</summary>
 
-```python
-In [20]: scaler.preset_time.get()
+<pre>
+In [20]: <b>scaler.preset_time.get()</b>
 Out[20]: 1.0
 
-In [21]: %mov scaler.preset_time 2.5
+In [21]:<b>%mov scaler.preset_time 2.5</b>
 
-In [22]: scaler.preset_time.get()
+In [22]: <b>scaler.preset_time.get()</b>
 Out[22]: 2.5
 
-In [23]: %ct
+In [23]: <b>%ct</b>
 [This data will not be saved. Use the RunEngine to collect data.]
 noisy                          68.56615083963807
 I0Mon                          12.0
@@ -168,23 +160,22 @@ ROI1                           0.0
 ROI2                           0.0
 scaler_time                    2.6
 
-In [24]: scaler.trigger().wait()
+In [24]: <b>scaler.trigger().wait()</b>
 
-In [25]: scaler.read()
-Out[25]: 
+In [25]: <b>scaler.read()</b>
+Out[25]:
 OrderedDict([('I0Mon', {'value': 12.0, 'timestamp': 1613880362.609086}),
              ('ROI1', {'value': 0.0, 'timestamp': 1613880362.609086}),
              ('ROI2', {'value': 0.0, 'timestamp': 1613880362.609086}),
              ('scaler_time', {'value': 2.6, 'timestamp': 1613880338.961804})])
 
-In [26]: scaler.trigger().wait(); scaler.read()
-Out[26]: 
+In [26]: <b>scaler.trigger().wait(); scaler.read()</b>
+Out[26]:
 OrderedDict([('I0Mon', {'value': 11.0, 'timestamp': 1613880389.315847}),
              ('ROI1', {'value': 0.0, 'timestamp': 1613880389.315847}),
              ('ROI2', {'value': 0.0, 'timestamp': 1613880389.315847}),
              ('scaler_time', {'value': 2.6, 'timestamp': 1613880362.609086})])
-
-```
+</pre>
 
 </details>
 
@@ -201,79 +192,79 @@ command | description
 <details>
 <summary>Examples:</summary>
 
-```python
-In [43]: %wa
+<pre>
+In [43]: <b>%wa</b>
 motor
-  Positioner                     Value       Low Limit   High Limit  Offset     
-  m1                             0.0         -32000.0    32000.0     0.0        
-  m2                             0.0         -32000.0    32000.0     0.0        
-  m3                             0.0         -32000.0    32000.0     0.0        
-  m4                             0.0         -32000.0    32000.0     0.0        
-  m5                             0.0         -32000.0    32000.0     0.0        
-  m6                             0.0         -32000.0    32000.0     0.0        
-  m7                             0.0         -32000.0    32000.0     0.0        
-  m8                             0.0         -32000.0    32000.0     0.0        
+  Positioner                     Value       Low Limit   High Limit  Offset
+  m1                             0.0         -32000.0    32000.0     0.0
+  m2                             0.0         -32000.0    32000.0     0.0
+  m3                             0.0         -32000.0    32000.0     0.0
+  m4                             0.0         -32000.0    32000.0     0.0
+  m5                             0.0         -32000.0    32000.0     0.0
+  m6                             0.0         -32000.0    32000.0     0.0
+  m7                             0.0         -32000.0    32000.0     0.0
+  m8                             0.0         -32000.0    32000.0     0.0
 
   Local variable name                    Ophyd name (to be recorded as metadata)
-  m1                                     m1                                    
-  m2                                     m2                                    
-  m3                                     m3                                    
-  m4                                     m4                                    
-  m5                                     m5                                    
-  m6                                     m6                                    
-  m7                                     m7                                    
-  m8                                     m8                                    
+  m1                                     m1
+  m2                                     m2
+  m3                                     m3
+  m4                                     m4
+  m5                                     m5
+  m6                                     m6
+  m7                                     m7
+  m8                                     m8
 
 detectors
   Local variable name                    Ophyd name (to be recorded as metadata)
-  noisy                                  noisy                                 
-  scaler                                 scaler                                
+  noisy                                  noisy
+  scaler                                 scaler
 
 counter
   Local variable name                    Ophyd name (to be recorded as metadata)
-  I0                                                                           
-  I0Mon                                  I0Mon                                 
-  ROI1                                   ROI1                                  
-  ROI2                                   ROI2                                  
-  clock                                                                        
-  diode                                                                        
-  scaler.channels.chan08.s               I0Mon                                 
-  scaler.channels.chan10.s               ROI1                                  
-  scaler.channels.chan11.s               ROI2                                  
-  scint                                                                        
+  I0
+  I0Mon                                  I0Mon
+  ROI1                                   ROI1
+  ROI2                                   ROI2
+  clock
+  diode
+  scaler.channels.chan08.s               I0Mon
+  scaler.channels.chan10.s               ROI1
+  scaler.channels.chan11.s               ROI2
+  scint
 
 
-In [44]: listobjects()
+In [44]: <b>listobjects()</b>
 ====== =============== =============== =========
-name   ophyd structure EPICS PV        label(s) 
+name   ophyd structure EPICS PV        label(s)
 ====== =============== =============== =========
-I0     EpicsSignalRO   sky:scaler1.S2  counter  
-I0Mon  EpicsSignalRO   sky:scaler1.S8  counter  
-ROI1   EpicsSignalRO   sky:scaler1.S10 counter  
-ROI2   EpicsSignalRO   sky:scaler1.S11 counter  
-_2     EpicsSignal     sky:scaler1.CNT          
-clock  EpicsSignalRO   sky:scaler1.S1  counter  
-diode  EpicsSignalRO   sky:scaler1.S5  counter  
-m1     MyMotor         sky:m1          motor    
-m2     MyMotor         sky:m2          motor    
-m3     MyMotor         sky:m3          motor    
-m4     MyMotor         sky:m4          motor    
-m5     MyMotor         sky:m5          motor    
-m6     MyMotor         sky:m6          motor    
-m7     MyMotor         sky:m7          motor    
-m8     MyMotor         sky:m8          motor    
-mover2 EpicsSignal     IOC:float2               
+I0     EpicsSignalRO   sky:scaler1.S2  counter
+I0Mon  EpicsSignalRO   sky:scaler1.S8  counter
+ROI1   EpicsSignalRO   sky:scaler1.S10 counter
+ROI2   EpicsSignalRO   sky:scaler1.S11 counter
+_2     EpicsSignal     sky:scaler1.CNT
+clock  EpicsSignalRO   sky:scaler1.S1  counter
+diode  EpicsSignalRO   sky:scaler1.S5  counter
+m1     MyMotor         sky:m1          motor
+m2     MyMotor         sky:m2          motor
+m3     MyMotor         sky:m3          motor
+m4     MyMotor         sky:m4          motor
+m5     MyMotor         sky:m5          motor
+m6     MyMotor         sky:m6          motor
+m7     MyMotor         sky:m7          motor
+m8     MyMotor         sky:m8          motor
+mover2 EpicsSignal     IOC:float2
 noisy  EpicsSignalRO   sky:userCalc1   detectors
 scaler ScalerCH        sky:scaler1     detectors
-scint  EpicsSignalRO   sky:scaler1.S3  counter  
+scint  EpicsSignalRO   sky:scaler1.S3  counter
 ====== =============== =============== =========
 
 Out[44]: <pyRestTable.rest_table.Table at 0x7fe064171fd0>
 
-In [45]: listruns()
+In [45]: <b>listruns()</b>
 catalog name: bs2021
 ========= ========================== ======= ======= ========================================
-short_uid date/time                  exit    scan_id command                                 
+short_uid date/time                  exit    scan_id command
 ========= ========================== ======= ======= ========================================
 e070882   2021-02-06 22:50:08.118423 success 131     rel_scan(detectors=['noisy'], num=19 ...
 15621a3   2021-02-06 22:49:58.051389 success 130     rel_scan(detectors=['noisy'], num=19 ...
@@ -288,13 +279,13 @@ e89dbed   2020-12-16 22:08:03.778558 success 122     scan(detectors=['fourc_h', 
 699c827   2020-12-16 22:07:08.838917 success 121     scan(detectors=['fourc_h', 'fourc_k' ...
 978ec2b   2020-12-16 21:00:33.380914 success 120     rel_scan(detectors=['noisy'], num=19 ...
 bb22936   2020-12-16 20:59:58.870435 success 119     scan(detectors=['noisy'], num=19, ar ...
-3c04995   2020-12-16 20:58:43.471627 success 118     count(detectors=['scaler'], num=1)      
+3c04995   2020-12-16 20:58:43.471627 success 118     count(detectors=['scaler'], num=1)
 ========= ========================== ======= ======= ========================================
 
 Out[45]: <pyRestTable.rest_table.Table at 0x7fe064174190>
 
-In [48]: scaler.describe()
-Out[48]: 
+In [48]: <b>scaler.describe()</b>
+Out[48]:
 OrderedDict([('I0Mon',
               {'source': 'PV:sky:scaler1.S8',
                'dtype': 'number',
@@ -328,7 +319,7 @@ OrderedDict([('I0Mon',
                'upper_ctrl_limit': 0.0,
                'precision': 3})])
 
-In [49]: scaler.summary()
+In [49]: <b>scaler.summary()</b>
 data keys (* hints)
 -------------------
 *I0Mon
@@ -395,7 +386,7 @@ count                EpicsSignal         ('scaler_count')
 update_rate          EpicsSignal         ('scaler_update_rate')
 auto_count_update_rate EpicsSignal         ('scaler_auto_count_update_rate')
 
-```
+</pre>
 
 </details>
 
@@ -413,25 +404,39 @@ command line | allowed | use magics (such as `%mov`), `.put()`, and/or `RE(a_pla
 
 <b>plan function</b>
 
-```python
-def _insertFilters_(a, b):
-    """plan: insert the EPICS-specified filters"""
+Write a plan to insert the filters:
+
+```py
+def insertFilters(a, b):
+    """
+    plan: insert the EPICS-specified filters.
+
+    Also, ensure that the two filter positions will be integers.
+    """
     yield from bps.mv(pf4_AlTi.fPosA, int(a), pf4_AlTi.fPosB, int(b))
-    yield from bps.sleep(0.5)       # allow all blades to re-position
+    yield from bps.sleep(0.5)       # allow all filters to re-position
+```
 
-# then call from another plan such as
+Then, call `insertFilters()` from another plan such as
 
-    yield from _insertFilters_(0, 0)
+```py
+    yield from insertFilters(0, 0)
 ```
 
 <b>command line actions</b>
 
-```python
+There are (at least) three different ways to insert the filters from the command
+line:
+
+```py
+# use bluesky Magick command
 %mov pf4_AlTi.fPosA int(a) pf4_AlTi.fPosB int(b)
-# or
+
+# or use ophyd object
 pf4_AlTi.fPosA.put(int(a))
 pf4_AlTi.fPosB.put(int(b))
-# or
+
+# or use the bluesky RunEngine
 RE(bps.mv(pf4_AlTi.fPosA, int(a), pf4_AlTi.fPosB, int(b)))
 ```
 
@@ -456,8 +461,8 @@ In the IPython session, use the `!` to run a linux command:
 <details>
 <summary>Examples:</summary>
 
-```python
-In [50]: !ls -lAFgh .logs
+<pre>
+In [50]: <b>!ls -lAFgh .logs</b>
 total 36K
 -rw-rw-r-- 1 prjemian prjemian 1.6K Feb 20 12:31 ipython_console.log
 -rw-rw-r-- 1 prjemian prjemian  411 Feb 20 12:23 ipython_console.log.001~
@@ -466,7 +471,7 @@ total 36K
 -rw-rw-r-- 1 prjemian prjemian  250 Feb 20 12:17 ipython_console.log.004~
 -rw-rw-r-- 1 prjemian prjemian  13K Feb 20 12:23 ipython_logger.log
 
-In [51]: !head .logs/ipython_console.log
+In [51]: <b>!head .logs/ipython_console.log</b>
 # IPython log file
 
 # Sat, 20 Feb 2021 12:23:20
@@ -478,7 +483,7 @@ listruns()
 # Sat, 20 Feb 2021 12:23:28
 db
 
-In [52]: !head .logs/ipython_logger.log
+In [52]: <b>!head .logs/ipython_logger.log</b>
 |2021-02-20 12:14:55.966|INFO|92929|bluesky-session|session_logs|35|MainThread| - ############################################################ startup
 |2021-02-20 12:14:55.966|INFO|92929|bluesky-session|session_logs|36|MainThread| - logging started
 |2021-02-20 12:14:55.966|INFO|92929|bluesky-session|session_logs|37|MainThread| - logging level = 10
@@ -490,6 +495,6 @@ In [52]: !head .logs/ipython_logger.log
 |2021-02-20 12:14:56.688|INFO|92929|bluesky-session|initialize|15|MainThread| - /home/prjemian/.ipython/profile_bluesky/startup/instrument/framework/initialize.py
 |2021-02-20 12:14:57.281|INFO|92929|bluesky-session|initialize|67|MainThread| - New directory to store RE.md between sessions: /home/prjemian/.config/Bluesky_RunEngine_md
 
-```
+</pre>
 
 </details>

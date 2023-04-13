@@ -9,18 +9,10 @@ Python software.
 There are many ways to define your equipment so consider this guide as a
 reference for ideas rather than a set of requirements.
 
-**Contents**
-- [Instrument Package Guide](#instrument-package-guide)
-  - [Basic Structure](#basic-structure)
-  - [Add Motor(s)](#add-motors)
-  - [Add Scaler(s)](#add-scalers)
-  - [Re-organize into Devices](#re-organize-into-devices)
-  - [Add Area Detector(s)](#add-area-detectors)
-  - [Other Device Support](#other-device-support)
-  - [Implement Custom Plans](#implement-custom-plans)
-  - [Callbacks](#callbacks)
-  - [Review Metadata](#review-metadata)
-  - [Experiment-specific User Code](#experiment-specific-user-code)
+FIXME: needs some advice about
+
+- the `iconfig.yml` file
+- use with the bluesky queueserver
 
 ## Basic Structure
 
@@ -35,6 +27,7 @@ instrument/       <-- all aspects of the equipment
     mpl/          <-- Configure MatPlotLib for pltting in a console or Jupyter notebook
     plans/        <-- your custom measurement actions (_bluesky plans_)
     utils/        <-- (utilities) other Python code that does not fit above
+    iconfig.yml   <-- instrument configuration settings for you to customize
 ```
 
 Each directory has a `__init__.py` file (which _can_ be empty).  The very
@@ -99,7 +92,7 @@ from .motors import *
 ## Add Scaler(s)
 
 Often, an instrument will use a single scaler to collect pulse signals from
-various counting detectors aush as ionization chambers, photodiodes, and
+various counting detectors such as ionization chambers, photodiodes, and
 scintillation counters.  These are coordinated by the EPICS
 [scaler](https://github.com/epics-modules/scaler) record.
 
@@ -237,15 +230,15 @@ A strength of the Bluesky framework is the coordination in a database of
 acquired data with metadata about the acquisition.  This enables a variety of
 data science after the measurement is complete.
 
-The template `instrument` package installed initially
-configures (in `instrument/framework/metadata.py`) some simple information that is added to every
-bluesky run (in dictionary `RE.md`):
+The template `instrument` package installed initially configures (in
+`instrument/framework/metadata.py`) some simple information that is added to
+every bluesky run (in dictionary `RE.md`):
 
 key | meaning
 --- | ---
-`beamline_id` | value of [BEAMLINE](/install/README.md#install-instrument-package)
-`instrument_name` | value of [INSTRUMENT](/install/README.md#install-instrument-package)
-`proposal_id` | (default is `comissioning`) You should modify this for each proposal
+`beamline_id` | set in `iconfig.yml`
+`instrument_name` | set in `iconfig.yml`
+`proposal_id` | (set in `iconfig.yml`) You should modify this for each proposal.
 `pid` | process identifier (for diagnostics and logging)
 `login_id` | user and workstation collecting the data (for diagnostics and logging)
 `versions` | version numbers of various Python packages (for diagnostics and logging)

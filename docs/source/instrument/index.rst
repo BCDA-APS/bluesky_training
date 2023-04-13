@@ -24,6 +24,7 @@ reference for ideas rather than a set of requirements.
    :glob:
 
    instrument_template
+   guide
    _*
 
 ----
