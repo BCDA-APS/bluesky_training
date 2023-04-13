@@ -8,4 +8,4 @@ Template for New Instruments
    :maxdepth: 2
    :glob:
 
-TODO
+   _*
