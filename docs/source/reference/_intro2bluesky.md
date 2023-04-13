@@ -3,12 +3,6 @@
 *Bluesky* is a Python framework for instrument control & scientific data
 acquisition, primarily using EPICS.
 
-- [Bluesky: Brief Introduction](#bluesky-brief-introduction)
-  - [Motivation](#motivation)
-  - [Principal parts of The Bluesky framework](#principal-parts-of-the-bluesky-framework)
-  - [How does it work?](#how-does-it-work)
-  - [How does Bluesky fit in?](#how-does-bluesky-fit-in)
-
 (Based on a [2021 slide set](https://anl.box.com/s/l506pozlzjvy8d5ttjxq3a1fev4q2z6h) prepared for the APS Spectroscopy SIG.  Other slide sets are available in [ANL's Box folder](https://anl.box.com/s/kityevv6n9x7ngll99z53acy76bp64ys).)
 
 <details>
@@ -43,7 +37,7 @@ _A huge part of my job is to set these experiments up for success._
 
 ## Principal parts of The Bluesky framework
 
-![Bluesky Diagram](resources/bluesky-overview-white-no-heading.png)
+![Bluesky Diagram](../_static/bluesky-overview-white-no-heading.png)
 
 - [**ophyd**](https://blueskyproject.io/ophyd/)
   - Hardware Abstraction Layer
@@ -66,6 +60,12 @@ _A huge part of my job is to set these experiments up for success._
 - [**MongoDB**](https://www.mongodb.com/)
   - Database (used by **databroker**) that stores lightweight (non-image) data. metadata, and references to image files.
   - Data is stored as documents in [JSON](https://www.w3schools.com/whatis/whatis_json.asp) (text) format.
+- [**tiled**](https://blueskyproject.io/tiled/)
+  - Data access service (uses **databroker**, URLs, or file systems) for stored (not live) data.
+  - Call by URI, Python, or command line interfaces.
+- [**queueserver**](https://blueskyproject.io/bluesky-queueserver/)
+  - Provides the **bluesky** `RunEngine` as a network service.
+  - Use Python or JSON interface with ZMQ or command line.
 
 info | web address
 --- | ---
@@ -96,7 +96,7 @@ Bluesky is a user interface for data collection using EPICS.  It can
 also interface with other controls (such as native Python, LabView,
 network sockets) but these interfaces will require effort to implement.
 
-![control system overview](resources/control-system-diagram.png)
+![control system overview](../_static/control-system-diagram.png)
 
 - Works with existing EPICS controls (IOCs & PVs)
   - even area detectors

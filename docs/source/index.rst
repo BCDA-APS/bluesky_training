@@ -1,6 +1,40 @@
 APS Bluesky Training
 ====================
 
+-  Wiki (`<https://github.com/BCDA-APS/bluesky_training/wiki>`_):
+   Includes list of APS instruments
+-  `Installation Guide <instrument/_install.md>`__: 
+   Install the components of the Bluesky framework.
+-  `First Steps Guide <howto/__first_steps_guide.md>`__ :
+   First Steps to use Bluesky after installation.
+-  `Instrument Package Guide <instrument/guide.md>`__: 
+   Building the ``instrument`` package.
+-  :ref:`tutorials`: 
+   Jupyter notebooks with lessons, tutorials, examples, other
+
+**Other resources**
+
+* apstools
+   * home: https://bcda-aps.github.io/apstools/latest/
+   * source: https://github.com/BCDA-APS/apstools
+   * PyPI: https://pypi.org/project/apstools/
+   * conda: https://anaconda.org/conda-forge/apstools
+* Bluesky framework
+   * home: https://blueskyproject.io
+   * source: https://github.com/bluesky
+   * conda: all packages available on conda-forge channel
+* MongoDB
+   * home: https://www.mongodb.com/
+* PyDM
+   * home: https://slaclab.github.io/pydm/
+   * source: https://github.com/slaclab/pydm
+   * PyPI: https://pypi.org/project/pydm/
+   * conda: https://anaconda.org/conda-forge/pydm
+* PyEPICS
+   * home: https://pyepics.github.io/pyepics/
+   * PyPI: https://pypi.org/project/pyepics/
+   * source: https://github.com/pyepics/pyepics
+
 TODO:  Consider adding highlighting certain docs.
 
 .. code::

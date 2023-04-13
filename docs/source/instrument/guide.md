@@ -121,7 +121,7 @@ terms of a common structure.  Consider a sample X-Y stage might have motors
 `sample_x` and `sample_y`.  These can be grouped together into an [ophyd
 Device](https://blueskyproject.io/ophyd/device-overview.html).  Also note that a
 Device can contain other Devices, in addition to Signals, such as the
-[ApsMachineParametersDevice](https://apstools.readthedocs.io/en/latest/_modules/apstools/devices.html#ApsMachineParametersDevice).
+[ApsMachineParametersDevice](https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.aps_machine.ApsMachineParametersDevice).
 
 On ophyd Device organizes one or more ophyd Signals and/or Devices into a larger
 structure, for grouping or to provide custom controls.
@@ -176,14 +176,14 @@ from ophyd.
 
 See these examples:
 
-* [Dectris Pilatus](https://apstools.readthedocs.io/en/latest/examples/_ad__pilatus.html) (with explanations)
-* [Perkin-Elmer](https://apstools.readthedocs.io/en/latest/examples/_ad_pe.html) (no explanations, just example code)
+* [Dectris Pilatus](https://bcda-aps.github.io/apstools/latest/examples/de_ad_pilatus.html) (with explanations)
+* [Perkin-Elmer](https://bcda-aps.github.io/apstools/latest/examples/de_ad_pe.html) (no explanations, just example code)
 
 ## Other Device Support
 
 The examples so far only begin to demonstrate the variety of Device
 customizations.  Consult the various instrument configurations on the
-[wiki](https://github.com/BCDA-APS/use_bluesky/wiki) and the
+[wiki](https://github.com/BCDA-APS/bluesky_training/wiki) and the
 [apstools](https://github.com/BCDA-APS/apstools/blob/main/apstools/devices.py)
 package for more device examples.
 
@@ -194,7 +194,7 @@ TIP: Organize your custom Device code into separate files to make it easy to man
 Plans describe your custom sequence of actions.  They can be a complete plan that acquires a _run_ or just part of a measurement sequence.
 
 Consult the various instrument configurations on the
-[wiki](https://github.com/BCDA-APS/use_bluesky/wiki) and the
+[wiki](https://github.com/BCDA-APS/bluesky_training/wiki) and the
 [apstools](https://github.com/BCDA-APS/apstools/blob/main/apstools/plans.py)
 package for more plan examples.
 
@@ -203,8 +203,7 @@ If you are translating PyEpics code to Bluesky plans, consult this
 
 Keep in mind that a plan should not call code that blocks execution of the bluesky
 *RunEngine* from conducting its periodic background actions. One such example is
-the [`sleep()`
-action](https://blueskyproject.io/bluesky/tutorial.html?highlight=blocking)
+the [`sleep()` action](https://blueskyproject.io/bluesky/tutorial.html?highlight=blocking)
 sometimes used to control sequencing of events.  More discussion of _blocking_
 is provided in the context of how the RunEngine processes its
 [Messages](https://blueskyproject.io/bluesky/msg.html?highlight=blocking).
@@ -213,7 +212,7 @@ is provided in the context of how the RunEngine processes its
 
 One custom RunEngine callback has been added to the `instrument` package
 template for the APS.  The [SPEC file writer
-callback](https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback)
+callback](https://bcda-aps.github.io/apstools/latest/api/_filewriters.html#apstools.callbacks.spec_file_writer.SpecWriterCallback)
 (added before the `callbacks/` subpackage was added) is configured in
 `instrument/framework/callbacks.py`.  It writes bluesky runs to a text file in
 the format of the [SPEC data acquisition software](https://certif.com).
