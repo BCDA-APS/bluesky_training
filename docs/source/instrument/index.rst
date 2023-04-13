@@ -10,6 +10,15 @@ like much other Python software.
 There are many ways to define your equipment so consider this guide as a
 reference for ideas rather than a set of requirements.
 
+.. TODO: Many of these documents need review
+
+   instrument_package_guide.md.review_93
+   README.md.review_93
+      both: mostly copied to:
+         _directory_layout.md
+         _get_spec_config.md
+         _test_it_works.md
+
 .. toctree::
    :maxdepth: 2
    :glob:
