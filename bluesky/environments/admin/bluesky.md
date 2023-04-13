@@ -24,24 +24,7 @@ date -Iseconds
 
 ## libmamba
 
-In 2022, a [significant performance
-enhancement](https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community)
-was made available to `conda` by inclusion of the
-[`conda-libmamba-solver`](https://conda.github.io/conda-libmamba-solver/)
-package.  This package is added as part of the [base](./base.md) installation
-instructions here and configured as the default solver.
-
-Confirm which solver is default for your conda:
-
-```bash
-conda config --show solver
-```
-
-Set `libmamba` as the default solver:
-
-```bash
-conda config --set solver libmamba
-```
+Note: content moved to `docs/source/reference/_conda_environment`
 
 ## Initialize shell for this base environment
 

@@ -1,17 +1,5 @@
 # Steps to install a new instrument
 
-Contents
-
-- [Steps to install a new instrument](#steps-to-install-a-new-instrument)
-  - [Setup a bluesky instrument](#setup-a-bluesky-instrument)
-  - [Create the conda environment](#create-the-conda-environment)
-  - [Activate the conda environment](#activate-the-conda-environment)
-  - [Test the new bluesky instrument](#test-the-new-bluesky-instrument)
-  - [Setup your databroker catalog configuration](#setup-your-databroker-catalog-configuration)
-  - [IPython profile](#ipython-profile)
-  - [Start version control](#start-version-control)
-  - [Configure bluesky instrument](#configure-bluesky-instrument)
-
 **Note**:  These *instructions have been written for workstations running the
 Linux operating system*.  They may be used for other operating systems but
 expect some modifications are necessary.  One such modification is that the
@@ -30,9 +18,9 @@ Training](https://github.com/BCDA-APS/bluesky_training) repository template.
 **Note**: APS users can run this program with this command to create a new
 `bluesky` directory in their home directory:
 
-```bash
-python /APSshare/bin/new_bluesky_instrument.py ~/bluesky
-```
+<pre>
+<b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
+</pre>
 
 Workstations on other networks will need to download this program from the URL
 above.
@@ -42,13 +30,13 @@ above.
 
 Here's an example:
 
-```bash
-(base) user@host:~$ python new_bluesky_instrument.py  ./bluesky
+<pre>
+$ <b>python new_bluesky_instrument.py  ./bluesky</b>
 INFO:__main__:Requested installation to: 'bluesky'
 INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
-```
+</pre>
 
 Use `new_bluesky_instrument.py -h` for usage information.
 
@@ -62,23 +50,37 @@ Standard Library.  Rather than add these directly into the system Python
 installation, it is recommended to create a Python virtual environment which has
 the suite of packages (and specific versions) required.
 
-Follow this [guide](./conda_environment.md) to create the `bluesky_2023_2` conda
+Follow this [guide](./_conda_environment.md) to create the `bluesky_2023_2` conda
 environment for data collection with bluesky.
 
 **IMPORTANT**:  You must use `bash` shell.
 
 Here's an example:
 
-```bash
-(base) user@host:~$ cd ~/bluesky
-(base) user@host:~$ conda env create \
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda env create \
     --force \
     -n bluesky_2023_2 \
     -f ./environments/environment_2023_2.yml \
-    --solver=libmamba
-```
+    --solver=libmamba</b>
+</pre>
 
-The [`blueskyStarter.sh`](/bluesky/blueskyStarter.sh) script looks for the
+<details>
+
+In the commands above, a long command has been split over several lines to make
+it clearer to read and also to take less screen width. We could enter the
+<code>conda env</code> command all one one line.  These commands work the same
+as the one above.
+
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
+</pre>
+
+</details>
+
+The [`blueskyStarter.sh`](../instrument/_directory_layout.rst) script looks for the
 `BLUESKY_CONDA_ENV` (bash shell) environment variable to choose the correct
 conda environment for Bluesky.  Suggest setting this in `~/.bash_aliases` (if
 that does not exist, then add it to `~/.bashrc`).
@@ -88,17 +90,17 @@ export BLUESKY_CONDA_ENV=bluesky_2023_2
 alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 ```
 
-More documentation about conda is available
-[elsewhere](../bluesky/environments/README.md) in this repository.
+More documentation about [conda](../reference/_conda_base.md) is available
+[elsewhere](../instrument/_conda_environment.md) in this repository.
 
 ## Activate the conda environment
 
 As shown above, you will need to activate the conda environment in each console
 session when you plan to use it.  Here's an example:
 
-```bash
-(base) user@host:~/bluesky $ conda activate bluesky_2023_2
-```
+<pre>
+$ <b>conda activate bluesky_2023_2</b>
+</pre>
 
 This activation will remain for the duration of the session, at least until you
 change it with a `conda activate` or `conda deactivate` command or start a new
@@ -111,9 +113,9 @@ in which they are installed.
 
 At this point, you have assembled enough of the parts to test the initial
 installation with bluesky. Follow the steps in this
-[guide](./test_new_bluesky_instrument.md) to test the installation.  
+[guide](./_test_new_instrument.md) to test the installation.  
 Additional instructions are available to
-[test](../bluesky/environments/admin/testing.md) the installation with EPICS.
+[test](./_testing.md) the installation with EPICS.
 
 In the remaining steps, we'll configure the instrument for your catalog and
 specific hardware configuration.
@@ -130,22 +132,24 @@ catalog assignment:
 - MongoDB server: `mongoserver.xray.aps.anl.gov`
 - MongoDB collection: `45ida_abcd-bluesky`
 
-See this [guide](./configure_databroker.md) to configure databroker.
+See this [guide](./_configure_databroker.md) to configure databroker.
 
-Confirm that databroker can find the `45ida_abcd` catalog:
+Confirm that databroker can find the `45ida_abcd` catalog (by running the python
+executable and passing the python commands as a command-line option):
 
-```bash
-(bluesky_2023_2) user@host:~/bluesky$ python -c "import databroker; print(list(databroker.catalog))"
+<pre>
+$ <b>python -c "import databroker; print(list(databroker.catalog))"</b>
 ['45ida_abcd']
-```
+</pre>
 
 ## IPython profile
 
 If there is an existing `~/.ipython` directory (perhaps created for other use
 from this account), then choose a unique directory for bluesky.  Typical
-alternative is `~/.ipython-bluesky`.  These commands create the
+alternative is `~/.ipython-bluesky`.  These bash script commands create the
 [IPython profile](https://ipython.readthedocs.io/en/stable/config/intro.html)
-for bluesky, then create a starter script for the `instrument` package within that profile's `startup` directory.
+for bluesky, then create a starter script for the `instrument` package within
+that profile's `startup` directory.
 
 ```bash
 ipython profile create bluesky --ipython-dir="~/.ipython"
@@ -167,9 +171,9 @@ implementations.
 Instructions for using [`git`](https://git-scm.com/) as software version control
 with [GitHub](https://github.com/) or the
 [APS GitLab server](https://git.aps.anl.gov/) are provided in
-[this separate document](./git-help.md#overview).
+[this separate document](../reference/_git-help.rst).
 
 ## Configure bluesky instrument
 
-See this [advice](./configure_bluesky_instrument.md) for configuration of the
+See this [advice](./_configure_bluesky_instrument.md) for configuration of the
 `instrument` package (content in the `instrument/` directory).

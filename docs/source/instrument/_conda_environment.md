@@ -8,11 +8,6 @@ the suite of packages (and specific versions) required.
 A Python virtual environment gives your account control over the suite of
 installed packages and insulates you from any system software updates.
 
-- [Python virtual environment](#python-virtual-environment)
-  - [Conda](#conda)
-  - [Get the `conda` command](#get-the-conda-command)
-  - [Install the environment for bluesky](#install-the-environment-for-bluesky)
-
 ## Conda
 
 Here, we describe the creation of a Python virtual environment managed by
@@ -25,13 +20,15 @@ environments.  See this
 [article](https://medium.com/@balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22)
 for more instruction about conda environment YAML files.
 
-If you need to install your own base environment, please
-See these instructions to [install your own base environment](../bluesky/environments/admin/base.md).
+If you need to install your own base environment, please See these
+[instructions](../reference/_conda_base.md) to install your own base environment.
 
 ## Get the `conda` command
 
 Skip ahead to the next section if you already have a `conda` command available
-in your `bash` shell.
+in your `bash` shell.  (This short
+[Q&A](https://stackoverflow.com/questions/55134440) can help explain the
+difference between a _conda base environment_ and _no environment at all_.)
 
 If your (`bash` shell) command prompt does not start with `(base)` (or some
 other conda aenvironment name), you probably do not have a conda environment
@@ -53,6 +50,33 @@ Follow these steps:
    ```
 
    where `/PATH/TO/CONDA`  is the directory of your conda base installation.  At APS, that location is `/APSshare/miniconda/x86_64`.  For workstations on other networks, you may need to install [Miniconda](https://docs.conda.io/en/latest/miniconda.html) or [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html) for yourself.
+
+### libmamba
+
+In 2022, a [significant performance
+enhancement](https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community)
+was made available to `conda` by inclusion of the
+[`conda-libmamba-solver`](https://conda.github.io/conda-libmamba-solver/)
+package.  This package is added as part of the [base](../reference/_conda_base.md) installation
+instructions here and configured as the default solver.
+
+Install the libmamba solver in your conda environment:
+
+```bash
+conda install -c conda-forge libmamba
+```
+
+Confirm which solver is default for your conda:
+
+```bash
+conda config --show solver
+```
+
+Set `libmamba` as the default solver:
+
+```bash
+conda config --set solver libmamba
+```
 
 ## Install the environment for bluesky
 
@@ -109,8 +133,6 @@ Installation usually takes (at least) a few minutes to complete.
 - The `--solver=libmamba` option will use the (much faster)
   [`conda-libmamba-solver`](https://conda.github.io/conda-libmamba-solver/).
   Either install that in your `base` environment or remove this install option.
-  See these instructions to [install the `libmamba`
-  solver](../bluesky/environments/admin/bluesky.md#libmamba).
 
 Once finished, the installer will report the commands to manage the new
 environment:

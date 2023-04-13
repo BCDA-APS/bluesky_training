@@ -22,7 +22,7 @@ environment directory (such as
 
 Here is an example used with the Bluesky training demonstration:
 
-```yml
+```yaml
 # file: training.yml
 # purpose: Configuration file to connect Bluesky databroker with MongoDB
 # For Bluesky Python Training at APS

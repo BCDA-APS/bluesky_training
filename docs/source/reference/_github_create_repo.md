@@ -1,17 +1,12 @@
-# Create the repository
-
-- [Create the repository](#create-the-repository)
-  - [Create the new repository on GitHub](#create-the-new-repository-on-github)
-    - [Teams](#teams)
-  - [Clone the repo locally](#clone-the-repo-locally)
-
-## Create the new repository on GitHub
+# GitHub Repository
 
 Visit your GitHub organization to create a new repository using the web
 interface.  This is the organization page for the APS High-temperature
 HEDM organization.
 
-![Organization](./organization.png)
+![Organization](/_static/organization.png)
+
+## Create a new repository on GitHub
 
 Click the (green) **New repository** button.
 
@@ -25,7 +20,7 @@ On the new page, fill out the form:
 * *Add a README file*: no, do not check this
 * *Add `.gitignore`*: no, do not add this a license now file
 
-![new repository form](./new-repo.png)
+![new repository form](/_static/new-repo.png)
 
 Once you have filled out the form,
 click the (green) **Create repository** button. [YMMV](https://www.howtogeek.com/693183/)
@@ -34,9 +29,9 @@ Note the repository URL in the *Quick setup* section:
 `https://github.com/aps-ht-hedm/bluesky_instrument.git`, it will be used
 next.
 
-![repository created](./repo-created.png)
+![repository created](/_static/repo-created.png)
 
-### Teams
+### GitHub Teams
 
 If you choose, follow GitHub's prompts to give access to collaborators
 and teams.

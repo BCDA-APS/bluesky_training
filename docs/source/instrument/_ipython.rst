@@ -38,7 +38,7 @@ Add a single Python file to the startup directory
    The files are run in lexical (alphabetical) order.
 
 Python snippet to start instrument for data collection
-++++++++++++++++++++++++++++++++++++++++++++++++++++++
+------------------------------------------------------
 
 This snippet of Python code will start Bluesky for data collection.  Use it in
 the IPython startup script and also in Jupyter notebooks.

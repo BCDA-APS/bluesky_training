@@ -1,27 +1,15 @@
-## Configure bluesky instrument
+# Configure bluesky instrument
 
 Settings for various aspects of data collection are distributed amongst the many
 directories and files of the `instrument/` subdirectory.  We call this directory
 the `instrument` package (it is configured as a Python package for use by an
-`import` statement).  See this [advice](./configure_bluesky_instrument.md) for
+`import` statement).  See this [advice](./_configure_bluesky_instrument.md) for
 configuration of the `instrument` package.
 
 The `instrument/iconfig.yml` file is an effort to gather
 these many configurations into one location, easily found in the root directory
 of the `instrument` package.  The definitions in this file are easily
 (re)configured.
-
-Contents
-
-- [Configure bluesky instrument](#configure-bluesky-instrument)
-- [Initial configuration](#initial-configuration)
-- [Parts of the instrument package](#parts-of-the-instrument-package)
-  - [Framework](#framework)
-  - [matplotlib](#matplotlib)
-  - [Callbacks](#callbacks)
-  - [Devices](#devices)
-  - [Plans](#plans)
-  - [Utils](#utils)
 
 ## Initial configuration
 
@@ -30,31 +18,31 @@ the databroker catalog name is the first.
 
 Change:
 
-```yml
+```yaml
 DATABROKER_CATALOG: &databroker_catalog training
 ```
 
 to (assuming *your* catalog is named `45ida_abcd`):
 
-```yml
+```yaml
 DATABROKER_CATALOG: &databroker_catalog 45ida_abcd
 ```
 
 You should change this line:
 
-```yml
+```yaml
 ALLOW_AREA_DETECTOR_WARMUP: true
 ```
 
 to
 
-```yml
+```yaml
 ALLOW_AREA_DETECTOR_WARMUP: false
 ```
 
 You may comment these lines (used by the training IOCs, not so likely to use them with your instrument):
 
-```yml
+```yaml
 ADSIM_IOC_PREFIX: "ad:"
 GP_IOC_PREFIX: "gp:"
 AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
@@ -88,13 +76,13 @@ SPEC data collection software, then change this line in your
 
 from
 
-```yml
+```yaml
 WRITE_SPEC_DATA_FILES: true
 ```
 
 to
 
-```yml
+```yaml
 WRITE_SPEC_DATA_FILES: false
 ```
 
@@ -103,7 +91,7 @@ NeXus files using a
 [callback](https://github.com/APS-USAXS/usaxs-bluesky/blob/master/instrument/callbacks/nxwriter.py).
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./about_init_files.md) file.  In some cases, the sequence of
+[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.
 
 ### Devices
@@ -120,7 +108,7 @@ hardware. These files are leftovers as used in the bluesky training examples and
 provide ideas for what is possible with your instrument.
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./about_init_files.md) file.  In some cases, the sequence of
+[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.
 
 **Note**: A major principle is that any activities on startup **should not
@@ -139,7 +127,7 @@ The `instrument/plans/` directory contains Python files that define the custom
 Bluesky plans for your instrument.  The existing files serve as examples.
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./about_init_files.md) file.  In some cases, the sequence of
+[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.
 
 ### Utils
@@ -149,5 +137,5 @@ classified as Callbacks, Devices, or Plans.  For example, standard analytical
 routines might be best placed in Utils.
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./about_init_files.md) file.  In some cases, the sequence of
+[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.

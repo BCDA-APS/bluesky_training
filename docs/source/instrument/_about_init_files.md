@@ -1,4 +1,4 @@
-# `__init__.py` files
+# Python `__init__.py` files
 
 In Python, a file directory becomes a Python
 [*package*](https://realpython.com/python-modules-packages/) by the presence of

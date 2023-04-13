@@ -1,4 +1,4 @@
-# testing
+# Testing
 
 You may want to test the software in a conda environment.
 
