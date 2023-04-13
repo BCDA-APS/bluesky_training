@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Translate Previous SPEC Configuration" href="_get_spec_config.html" />
-    <link rel="prev" title="Instrument" href="index.html" />
+    <link rel="prev" title="Setup your databroker catalog configuration" href="_configure_databroker.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -149,6 +149,13 @@
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
       
@@ -246,6 +253,13 @@ document.write(`
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
         
@@ -275,9 +289,20 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Recommended Directory Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_it_works.html">Test that Bluesky Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
 </ul>
 </div>
 </nav></div>
@@ -339,64 +364,52 @@ document.write(`
 <h1>Recommended Directory Layout<a class="headerlink" href="#recommended-directory-layout" title="Permalink to this heading">#</a></h1>
 <section id="starter-script">
 <h2>Starter script<a class="headerlink" href="#starter-script" title="Permalink to this heading">#</a></h2>
+<p>An example starter script (for the Linux bash shell) is supplied:
+<a class="reference download internal" download="" href="../_downloads/cd7b73161af0856e39b6bd5e9556b1ba/blueskyStarter.sh"><code class="xref download docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code></a>. You might
+link this script to a directory on the executable path, such as:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>~/bin/blueskyStarter.sh  --&gt; ~/bluesky/blueskyStarter.sh
 </pre></div>
 </div>
+<p><strong>TIP</strong>: You might rename <cite>~/bin/blueskyStarter.sh</cite> to something appropriate for
+your instrument name, such as this hypothetical example: <cite>blueskyFemtoScanner.sh</cite>.</p>
 <details>
-<summary>Install the Starter Script</summary>
-<p>The commands and settings to configure the local environment to begin a
-Bluesky session can be arranged by a simple shell script that starts the
-session.  A sample starter script has been provided:
-<a class="reference download internal" download="" href="../_downloads/cd7b73161af0856e39b6bd5e9556b1ba/blueskyStarter.sh"><span class="xref download myst"><code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code></span></a>.</p>
-<p>To allow this starter script to be called from any directory (such
-as the user’s data directory), the starter script can be placed in a
-directory on the user’s executable path.</p>
-<p>It is useful to create a local directory (such as <code class="docutils literal notranslate"><span class="pre">~/bin</span></code>) for custom
-starter scripts and executable file links.  Use these steps to configure
-your account. Add this line to <code class="docutils literal notranslate"><span class="pre">~/.bash_aliases</span></code>:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="s2">&quot;~/bin:</span><span class="si">${</span><span class="nv">PATH</span><span class="si">}</span><span class="s2">&quot;</span>
-</pre></div>
-</div>
-<p>and create the directory:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>mkdir<span class="w"> </span>~/bin
-</pre></div>
-</div>
-<p><strong>TIP</strong>: You might rename <code class="docutils literal notranslate"><span class="pre">~/bin/blueskyStarter.sh</span></code> to something appropriate for
-your instrument name, such as the hypothetical example above:
-<code class="docutils literal notranslate"><span class="pre">blueskyFemtoScanner.sh</span></code></p>
-</details>
-</section>
+   <summary>Install the Starter Script</summary>
+
+   <p>
+   The commands and settings to configure the local environment to begin a
+   Bluesky session can be arranged by a simple shell script that starts the
+   session.
+
+   <p>
+   To allow this starter script to be called from any directory (such as
+   the user's data directory), the starter script can be placed in a
+   directory on the user's executable path.
+
+   <p>
+   It is useful to create a local directory (such as <code>~/bin</code>) for custom
+   starter scripts and executable file links. Use these steps to configure
+   your account. Add this line to <code>~/.bash_aliases</code>:
+
+   <pre>export PATH="~/bin:${PATH}"</pre>
+
+   and create the directory:
+
+   <pre>mkdir ~/bin</pre>
+
+</details></section>
 <section id="the-bluesky-directory">
 <h2>The <em>bluesky</em> directory<a class="headerlink" href="#the-bluesky-directory" title="Permalink to this heading">#</a></h2>
 <p>Contains the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package and other support:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  bluesky/
-    blueskyStarter.sh
-    console/
-      __start_bluesky_instrument__.py
-    instrument/
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>bluesky/
+<span class="linenos">2</span>   blueskyStarter.sh
+<span class="linenos">3</span>   console/
+<span class="linenos">4</span>   __start_bluesky_instrument__.py
+<span class="linenos">5</span>   instrument/
 </pre></div>
 </div>
-<details>
-<summary>Install the _bluesky_ directory</summary>
-<p>TODO:</p>
-</details>
-</section>
-<section id="ipython-profile">
-<h2>IPython profile<a class="headerlink" href="#ipython-profile" title="Permalink to this heading">#</a></h2>
-<p>for console sessions</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>  .ipython-bluesky/
-    profile_bluesky/
-      startup/
-        __start_bluesky_instrument__.py --&gt; ~/bluesky/console/__start_bluesky_instrument__.py
-</pre></div>
-</div>
-<p>and <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/console/__start_bluesky_instrument__.py"><code class="docutils literal notranslate"><span class="pre">__start_bluesky_instrument__.py</span></code></a> is summarized by:</p>
-<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
-<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
-<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
-</pre></div>
-</div>
-</section>
+<details><summary><p>Install the <em>bluesky</em> directory</p>
+</summary><p>TODO:</p>
+</details></section>
 <section id="start-bluesky">
 <h2>Start Bluesky<a class="headerlink" href="#start-bluesky" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -421,12 +434,12 @@ your instrument name, such as the hypothetical example above:
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="_configure_databroker.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Instrument</p>
+        <p class="prev-next-title">Setup your databroker catalog configuration</p>
       </div>
     </a>
     <a class="right-next"
@@ -458,14 +471,13 @@ your instrument name, such as the hypothetical example above:
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#starter-script">Starter script</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-bluesky-directory">The <em>bluesky</em> directory</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython-profile">IPython profile</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-bluesky">Start Bluesky</a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../_sources/instrument/_directory_layout.md.txt">
+    <a href="../_sources/instrument/_directory_layout.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

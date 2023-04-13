@@ -68,7 +68,7 @@
    "source": [
     "We start with two motor axes defined in EPICS.  Here, we run the docker image [`prjemian/synApps`](https://hub.docker.com/r/prjemian/synapps) to make the [EPICS IOC simulator run in a docker container](https://github.com/prjemian/epics-docker/#custom-synappshttps://github.com/prjemian/epics-docker/#custom-synapps) with IOC prefix `gp:`.  These are motor PVs: `gp:m1` and `gp:m2` as shown.\n",
     "\n",
-    "![EPICS motor GUI screens](resources/demo_dynamic_limits_motors.png)"
+    "![EPICS motor GUI screens](/_static/demo_dynamic_limits_motors.png)"
    ]
   },
   {
@@ -88,7 +88,7 @@
     "\n",
     "The calculated result (in `gp:userCalc1.VAL`, `gp:userCalc1` for short) once either of the motors move.\n",
     "\n",
-    "![motion permit calculation](resources/demo_dynamic_limits_permit_calc.png)"
+    "![motion permit calculation](/_static/demo_dynamic_limits_permit_calc.png)"
    ]
   },
   {
@@ -98,7 +98,7 @@
    "source": [
     "To scan, we want a \"detector\".  Let's use another *userCalc* (`gp:userCalc2`) to simulate a noisy detector with a random number generator.  We'll update this detector only when either motor moves (same as with the permit calculation) setting its `.SCAN` to *I/O Intr*.  The setup is shown in the next screen view image:\n",
     "\n",
-    "![noisy detector simulation](resources/demo_dynamic_limits_permit_noisy.png)"
+    "![noisy detector simulation](/_static/demo_dynamic_limits_permit_noisy.png)"
    ]
   },
   {

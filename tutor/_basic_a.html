@@ -152,6 +152,13 @@
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
       
@@ -246,6 +253,13 @@ document.write(`
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../instrument/index.html">
                         Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
                       </a>
                     </li>
                 
@@ -357,12 +371,11 @@ document.write(`
 <section id="Starting-this-session-in-a-Jupyter-notebook">
 <h2>Starting this session in a Jupyter notebook<a class="headerlink" href="#Starting-this-session-in-a-Jupyter-notebook" title="Permalink to this heading">#</a></h2>
 <p>This session was started from the linux command line:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jemian@otz ~ $ source /APSshare/anaconda3/Bluesky/bin/activate
-(base) jemian@otz ~ $ jupyter-notebook
-</pre></div>
-</div>
-<p>This command produced the following console output and then started my default web browser with a one-time-token-authenticated connection to the Jupyter Notebook server (still running in the console):</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>[I 15:16:57.546 NotebookApp] Serving notebooks from local directory: /home/oxygen18/JEMIAN
+<pre>
+$ <b>source /APSshare/anaconda3/Bluesky/bin/activate</b>
+(base) $ <b>jupyter-notebook</b>
+</pre><p>This command produced the following console output and then started my default web browser with a one-time-token-authenticated connection to the Jupyter Notebook server (still running in the console):</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>[I 15:16:57.546 NotebookApp] Serving notebooks from local directory: /home/oxygen18/JEMIAN
 [I 15:16:57.546 NotebookApp] 0 active kernels
 [I 15:16:57.546 NotebookApp] The Jupyter Notebook is running at:
 [I 15:16:57.546 NotebookApp] http://localhost:8888/?token=e6a7584762c731a7c64f8f71246b3e616d779f7b4852c9d9
@@ -381,7 +394,7 @@ document.write(`
 <section id="Connect-an-EPICS-scaler">
 <h2>Connect an EPICS scaler<a class="headerlink" href="#Connect-an-EPICS-scaler" title="Permalink to this heading">#</a></h2>
 <p>We have a synApps (v6.1) <em>XXX</em>-style IOC with the prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. It has a <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/std/R3-4-1/documentation/scalerRecord.html">scaler</a>, at least 16 soft channel <a class="reference external" href="https://github.com/epics-modules/motor">motor</a>s, and some other support we’ll ignore in this lesson. Here is a typical display screen for the scaler:</p>
-<p><img alt="16-channel scaler" src="../_images/scaler1.png" /></p>
+<p><img alt="example 16-channel scaler screen" src="../_images/scaler.png" /></p>
 <p>The scaler is <code class="docutils literal notranslate"><span class="pre">gp:scaler1</span></code>. We’ll connect to that first. To make the connection, we need to import the <code class="docutils literal notranslate"><span class="pre">`ScalerCH</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/ophyd/builtin-devices.html#epicsscaler">http://nsls-ii.github.io/ophyd/builtin-devices.html#epicsscaler</a>&gt;`__ device from the <code class="docutils literal notranslate"><span class="pre">`ophyd.scaler</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/ophyd/">http://nsls-ii.github.io/ophyd/</a>&gt;`__ library.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:

@@ -46,7 +46,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Recommended Directory Layout" href="_directory_layout.html" />
+    <link rel="next" title="Template for New Bluesky Instruments" href="instrument_template.html" />
     <link rel="prev" title="Lesson 7: 4-circle diffractometer" href="../tutor/_lesson7.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -149,6 +149,13 @@
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
       
@@ -246,6 +253,13 @@ document.write(`
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
         
@@ -275,9 +289,20 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_it_works.html">Test that Bluesky Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
 </ul>
 </div>
 </nav></div>
@@ -334,20 +359,86 @@ document.write(`
                   
   <section id="instrument">
 <h1>Instrument<a class="headerlink" href="#instrument" title="Permalink to this heading">#</a></h1>
-<p>Template for New Instruments</p>
+<p>The instrument package defines the features of your equipment for use with data
+acquisition using the Bluesky framework.  It is structured as a Python package
+<a class="footnote-reference brackets" href="#package" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> so that it will be easy to use with the Python <code class="docutils literal notranslate"><span class="pre">import</span></code> command,
+like much other Python software.</p>
+<p>There are many ways to define your equipment so consider this guide as a
+reference for ideas rather than a set of requirements.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#basic-structure">Basic Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#add-motor-s">Add Motor(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#add-scaler-s">Add Scaler(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#re-organize-into-devices">Re-organize into Devices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#add-area-detector-s">Add Area Detector(s)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#other-device-support">Other Device Support</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#implement-custom-plans">Implement Custom Plans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#callbacks">Callbacks</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#review-metadata">Review Metadata</a></li>
+<li class="toctree-l2"><a class="reference internal" href="guide.html#experiment-specific-user-code">Experiment-specific User Code</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_about_init_files.html#instrument-collection-py"><code class="docutils literal notranslate"><span class="pre">instrument/collection.py</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_about_init_files.html#instrument-queueserver-py"><code class="docutils literal notranslate"><span class="pre">instrument/queueserver.py</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Python virtual environment</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_conda_environment.html#conda">Conda</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_conda_environment.html#get-the-conda-command">Get the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_conda_environment.html#install-the-environment-for-bluesky">Install the environment for bluesky</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_configure_bluesky_instrument.html#initial-configuration">Initial configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_configure_bluesky_instrument.html#parts-of-the-instrument-package">Parts of the instrument package</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_directory_layout.html#starter-script">Starter script</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_directory_layout.html#the-bluesky-directory">The <em>bluesky</em> directory</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_directory_layout.html#ipython-profile">IPython profile</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_directory_layout.html#start-bluesky">Start Bluesky</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_it_works.html">Test that Bluesky Works</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#setup-a-bluesky-instrument">Setup a bluesky instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#create-the-conda-environment">Create the conda environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#activate-the-conda-environment">Activate the conda environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#test-the-new-bluesky-instrument">Test the new bluesky instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#setup-your-databroker-catalog-configuration">Setup your databroker catalog configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#ipython-profile">IPython profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#start-version-control">Start version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_install_new_instrument.html#configure-bluesky-instrument">Configure bluesky instrument</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_ipython.html#create-ipython-profile-for-bluesky">Create IPython Profile for Bluesky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_ipython.html#add-a-single-python-file-to-the-startup-directory">Add a single Python file to the startup directory</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_ipython.html#python-snippet-to-start-instrument-for-data-collection">Python snippet to start instrument for data collection</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_testing.html#ophyd">ophyd</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_testing.html#aps-data-management">APS Data Management</a></li>
+</ul>
+</li>
 </ul>
 </div>
+<hr class="docutils" />
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="package" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html">https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html</a></p>
+</aside>
+</aside>
 </section>
 
 
@@ -371,11 +462,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="_directory_layout.html"
+       href="instrument_template.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Recommended Directory Layout</p>
+        <p class="prev-next-title">Template for New Bluesky Instruments</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

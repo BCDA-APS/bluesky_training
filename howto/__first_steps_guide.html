@@ -1,0 +1,1038 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>First Steps with Bluesky &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/__first_steps_guide';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APS Accelerator Information for Beam Lines" href="_basic_aps_info.html" />
+    <link rel="prev" title="How-To Guides" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">First Steps with Bluesky</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="first-steps-with-bluesky">
+<h1>First Steps with Bluesky<a class="headerlink" href="#first-steps-with-bluesky" title="Permalink to this heading">#</a></h1>
+<p>This is a quick-reference guide for those learning how
+to use the Bluesky Framework for data acquisition.</p>
+<p>Covered here:</p>
+<ul class="simple">
+<li><p>Commands to verify the existing configuration works as expected</p>
+<ul>
+<li><p>motors have values matching EPICS</p></li>
+<li><p>scaler(s) match EPICS</p></li>
+</ul>
+</li>
+</ul>
+<p>There steps are repeated in a <a class="reference internal" href="../reference/_command_review.html"><span class="std std-doc">Jupyter notebook</span></a>.</p>
+<section id="read">
+<h2>Read<a class="headerlink" href="#read" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.get()</span></code></p></td>
+<td><p>low-level command to show value of ophyd <em>Signal</em> named <code class="docutils literal notranslate"><span class="pre">OBJECT</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.read()</span></code></p></td>
+<td><p>data acquisition command, includes timestamp</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">listdevice(OBJECT)</span></code></p></td>
+<td><p>table-version of <code class="docutils literal notranslate"><span class="pre">.read()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.position</span></code></p></td>
+<td><p>get readback, only for motor objects</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.user_readback.get()</span></code></p></td>
+<td><p>alternative to <code class="docutils literal notranslate"><span class="pre">MOTOR.position</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.summary()</span></code></p></td>
+<td><p>more information about <code class="docutils literal notranslate"><span class="pre">OBJECT</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Examples:</summary>
+<pre>
+In [10]: <b>m1.user_setpoint.get()</b>
+Out[10]: 0.0
+
+In [11]: <b>m1.user_setpoint.read()</b>
+Out[11]: {'m1_user_setpoint': {'value': 0.0, 'timestamp': 1613878949.1092}}
+
+In [12]: <b>listdevice(m1)</b>
+================ ===== ==========================
+name             value timestamp
+================ ===== ==========================
+m1               0.0   2021-02-20 21:42:29.109200
+m1_user_setpoint 0.0   2021-02-20 21:42:29.109200
+================ ===== ==========================
+
+Out[12]: <pyRestTable.rest_table.Table at 0x7fe0649cbd00>
+
+In [13]: <b>m1.position</b>
+Out[13]: 0.0
+
+In [14]: <b>m1.summary()</b>
+data keys (* hints)
+-------------------
+*m1
+ m1_user_setpoint
+
+read attrs
+----------
+user_readback        EpicsSignalRO       ('m1')
+user_setpoint        EpicsSignal         ('m1_user_setpoint')
+
+config keys
+-----------
+m1_acceleration
+m1_motor_egu
+m1_user_offset
+m1_user_offset_dir
+m1_velocity
+
+configuration attrs
+-------------------
+user_offset          EpicsSignal         ('m1_user_offset')
+user_offset_dir      EpicsSignal         ('m1_user_offset_dir')
+velocity             EpicsSignal         ('m1_velocity')
+acceleration         EpicsSignal         ('m1_acceleration')
+motor_egu            EpicsSignal         ('m1_motor_egu')
+
+unused attrs
+------------
+offset_freeze_switch EpicsSignal         ('m1_offset_freeze_switch')
+set_use_switch       EpicsSignal         ('m1_set_use_switch')
+motor_is_moving      EpicsSignalRO       ('m1_motor_is_moving')
+motor_done_move      EpicsSignalRO       ('m1_motor_done_move')
+high_limit_switch    EpicsSignalRO       ('m1_high_limit_switch')
+low_limit_switch     EpicsSignalRO       ('m1_low_limit_switch')
+high_limit_travel    EpicsSignal         ('m1_high_limit_travel')
+low_limit_travel     EpicsSignal         ('m1_low_limit_travel')
+direction_of_travel  EpicsSignal         ('m1_direction_of_travel')
+motor_stop           EpicsSignal         ('m1_motor_stop')
+home_forward         EpicsSignal         ('m1_home_forward')
+home_reverse         EpicsSignal         ('m1_home_reverse')
+soft_limit_lo        EpicsSignal         ('m1_soft_limit_lo')
+soft_limit_hi        EpicsSignal         ('m1_soft_limit_hi')
+steps_per_rev        EpicsSignal         ('m1_steps_per_rev')
+</pre>
+</details>
+</section>
+<section id="move">
+<h2>Move<a class="headerlink" href="#move" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%mov</span> <span class="pre">MOTOR</span> <span class="pre">value</span></code></p></td>
+<td><p>interactive command move MOTOR to value (command line only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%movr</span> <span class="pre">MOTOR</span> <span class="pre">value</span></code></p></td>
+<td><p>interactive command relative move (command line only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.move(value)</span></code></p></td>
+<td><p>ophyd command to <code class="docutils literal notranslate"><span class="pre">%mov</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.user_setpoint.put(value)</span></code></p></td>
+<td><p>ophyd to set motor <code class="docutils literal notranslate"><span class="pre">.VAL</span></code> field but not wait</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bps.mv(MOTOR,</span> <span class="pre">value)</span></code></p></td>
+<td><p>bluesky plan command to move and wait for completion</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bps.mv(MOTOR.user_setpoint,</span> <span class="pre">value)</span></code></p></td>
+<td><p>bluesky plan command, same</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bps.mvr(MOTOR,</span> <span class="pre">value)</span></code></p></td>
+<td><p>bluesky plan command, relative move</p></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Examples:</summary>
+<pre>
+In [15]: <b>%mov m1 1</b>
+
+In [16]: <b>%movr m1 -1</b>
+
+In [17]: <b>m1.move(.5)</b>
+Out[17]: MoveStatus(done=True, pos=m1, elapsed=0.8, success=True, settle_time=0.0)
+
+In [18]: <b>m1.user_setpoint.put(1)</b>
+
+In [19]: <b>RE(bps.mv(m1, 0))</b>
+Out[19]: ()
+</pre>
+</details>
+</section>
+<section id="count">
+<h2>Count<a class="headerlink" href="#count" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%ct</span></code></p></td>
+<td><p>count <em>all</em> objects with label <code class="docutils literal notranslate"><span class="pre">detectors</span></code> and format output (command line only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SCALER.trigger().wait();</span> <span class="pre">SCALER.read()</span></code></p></td>
+<td><p>ophyd command to count SCALER</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bp.count([SCALER])</span></code></p></td>
+<td><p>bluesky plan to count</p></td>
+</tr>
+</tbody>
+</table>
+<p>Count time setting is different for various types of detectors:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>detector</p></th>
+<th class="head"><p>set count time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>scaler</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SCALER.preset_time.put(COUNT_TIME_S)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>area detector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AD.cam.acquire_time.put(COUNT_TIME_S)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Examples:</summary>
+<pre>
+In [20]: <b>scaler.preset_time.get()</b>
+Out[20]: 1.0
+
+In [21]:<b>%mov scaler.preset_time 2.5</b>
+
+In [22]: <b>scaler.preset_time.get()</b>
+Out[22]: 2.5
+
+In [23]: <b>%ct</b>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          68.56615083963807
+I0Mon                          12.0
+ROI1                           0.0
+ROI2                           0.0
+scaler_time                    2.6
+
+In [24]: <b>scaler.trigger().wait()</b>
+
+In [25]: <b>scaler.read()</b>
+Out[25]:
+OrderedDict([('I0Mon', {'value': 12.0, 'timestamp': 1613880362.609086}),
+             ('ROI1', {'value': 0.0, 'timestamp': 1613880362.609086}),
+             ('ROI2', {'value': 0.0, 'timestamp': 1613880362.609086}),
+             ('scaler_time', {'value': 2.6, 'timestamp': 1613880338.961804})])
+
+In [26]: <b>scaler.trigger().wait(); scaler.read()</b>
+Out[26]:
+OrderedDict([('I0Mon', {'value': 11.0, 'timestamp': 1613880389.315847}),
+             ('ROI1', {'value': 0.0, 'timestamp': 1613880389.315847}),
+             ('ROI2', {'value': 0.0, 'timestamp': 1613880389.315847}),
+             ('scaler_time', {'value': 2.6, 'timestamp': 1613880362.609086})])
+</pre>
+</details>
+</section>
+<section id="list-describe-summary">
+<h2>List, Describe, Summary<a class="headerlink" href="#list-describe-summary" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">wa</span></code></p></td>
+<td><p>show all labeled objects</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">listobjects()</span></code></p></td>
+<td><p>table of all global objects</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">listruns()</span></code></p></td>
+<td><p>table of runs (default: last 20)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.describe()</span></code></p></td>
+<td><p>OBJECT metadata: PV, type, units, limits, precision, … (written as part of a run)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.summary()</span></code></p></td>
+<td><p>OBJECT details in human readable terms</p></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Examples:</summary>
+<pre>
+In [43]: <b>%wa</b>
+motor
+  Positioner                     Value       Low Limit   High Limit  Offset
+  m1                             0.0         -32000.0    32000.0     0.0
+  m2                             0.0         -32000.0    32000.0     0.0
+  m3                             0.0         -32000.0    32000.0     0.0
+  m4                             0.0         -32000.0    32000.0     0.0
+  m5                             0.0         -32000.0    32000.0     0.0
+  m6                             0.0         -32000.0    32000.0     0.0
+  m7                             0.0         -32000.0    32000.0     0.0
+  m8                             0.0         -32000.0    32000.0     0.0
+
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  m1                                     m1
+  m2                                     m2
+  m3                                     m3
+  m4                                     m4
+  m5                                     m5
+  m6                                     m6
+  m7                                     m7
+  m8                                     m8
+
+detectors
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  noisy                                  noisy
+  scaler                                 scaler
+
+counter
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  I0
+  I0Mon                                  I0Mon
+  ROI1                                   ROI1
+  ROI2                                   ROI2
+  clock
+  diode
+  scaler.channels.chan08.s               I0Mon
+  scaler.channels.chan10.s               ROI1
+  scaler.channels.chan11.s               ROI2
+  scint
+
+
+In [44]: <b>listobjects()</b>
+====== =============== =============== =========
+name   ophyd structure EPICS PV        label(s)
+====== =============== =============== =========
+I0     EpicsSignalRO   sky:scaler1.S2  counter
+I0Mon  EpicsSignalRO   sky:scaler1.S8  counter
+ROI1   EpicsSignalRO   sky:scaler1.S10 counter
+ROI2   EpicsSignalRO   sky:scaler1.S11 counter
+_2     EpicsSignal     sky:scaler1.CNT
+clock  EpicsSignalRO   sky:scaler1.S1  counter
+diode  EpicsSignalRO   sky:scaler1.S5  counter
+m1     MyMotor         sky:m1          motor
+m2     MyMotor         sky:m2          motor
+m3     MyMotor         sky:m3          motor
+m4     MyMotor         sky:m4          motor
+m5     MyMotor         sky:m5          motor
+m6     MyMotor         sky:m6          motor
+m7     MyMotor         sky:m7          motor
+m8     MyMotor         sky:m8          motor
+mover2 EpicsSignal     IOC:float2
+noisy  EpicsSignalRO   sky:userCalc1   detectors
+scaler ScalerCH        sky:scaler1     detectors
+scint  EpicsSignalRO   sky:scaler1.S3  counter
+====== =============== =============== =========
+
+Out[44]: <pyRestTable.rest_table.Table at 0x7fe064171fd0>
+
+In [45]: <b>listruns()</b>
+catalog name: bs2021
+========= ========================== ======= ======= ========================================
+short_uid date/time                  exit    scan_id command
+========= ========================== ======= ======= ========================================
+e070882   2021-02-06 22:50:08.118423 success 131     rel_scan(detectors=['noisy'], num=19 ...
+15621a3   2021-02-06 22:49:58.051389 success 130     rel_scan(detectors=['noisy'], num=19 ...
+7322f2f   2021-02-06 22:47:39.789684 success 129     rel_scan(detectors=['noisy'], num=19 ...
+02732c2   2021-02-06 22:47:28.456452 success 128     rel_scan(detectors=['noisy'], num=19 ...
+1a7f0ce   2020-12-29 22:54:57.604267 success 127     scan(detectors=['fourc'], num=41, ar ...
+7dd58eb   2020-12-29 22:46:09.629373 success 126     scan(detectors=['fourc'], num=41, ar ...
+d1f5f4f   2020-12-29 22:36:20.358277 success 125     scan(detectors=['fourc'], num=41, ar ...
+0f6eac8   2020-12-29 22:34:22.757687 success 124     scan(detectors=['fourc'], num=41, ar ...
+23a642d   2020-12-16 22:08:17.257659 success 123     scan(detectors=['fourc_h', 'fourc_k' ...
+e89dbed   2020-12-16 22:08:03.778558 success 122     scan(detectors=['fourc_h', 'fourc_k' ...
+699c827   2020-12-16 22:07:08.838917 success 121     scan(detectors=['fourc_h', 'fourc_k' ...
+978ec2b   2020-12-16 21:00:33.380914 success 120     rel_scan(detectors=['noisy'], num=19 ...
+bb22936   2020-12-16 20:59:58.870435 success 119     scan(detectors=['noisy'], num=19, ar ...
+3c04995   2020-12-16 20:58:43.471627 success 118     count(detectors=['scaler'], num=1)
+========= ========================== ======= ======= ========================================
+
+Out[45]: <pyRestTable.rest_table.Table at 0x7fe064174190>
+
+In [48]: <b>scaler.describe()</b>
+Out[48]:
+OrderedDict([('I0Mon',
+              {'source': 'PV:sky:scaler1.S8',
+               'dtype': 'number',
+               'shape': [],
+               'units': '',
+               'lower_ctrl_limit': 0.0,
+               'upper_ctrl_limit': 0.0,
+               'precision': 0}),
+             ('ROI1',
+              {'source': 'PV:sky:scaler1.S10',
+               'dtype': 'number',
+               'shape': [],
+               'units': '',
+               'lower_ctrl_limit': 0.0,
+               'upper_ctrl_limit': 0.0,
+               'precision': 0}),
+             ('ROI2',
+              {'source': 'PV:sky:scaler1.S11',
+               'dtype': 'number',
+               'shape': [],
+               'units': '',
+               'lower_ctrl_limit': 0.0,
+               'upper_ctrl_limit': 0.0,
+               'precision': 0}),
+             ('scaler_time',
+              {'source': 'PV:sky:scaler1.T',
+               'dtype': 'number',
+               'shape': [],
+               'units': '',
+               'lower_ctrl_limit': 0.0,
+               'upper_ctrl_limit': 0.0,
+               'precision': 3})])
+
+In [49]: <b>scaler.summary()</b>
+data keys (* hints)
+-------------------
+*I0Mon
+*ROI1
+*ROI2
+ scaler_time
+
+read attrs
+----------
+channels             Channels            ('scaler_channels')
+channels.chan08      ScalerChannel       ('scaler_channels_chan08')
+channels.chan08.s    EpicsSignalRO       ('I0Mon')
+channels.chan10      ScalerChannel       ('scaler_channels_chan10')
+channels.chan10.s    EpicsSignalRO       ('ROI1')
+channels.chan11      ScalerChannel       ('scaler_channels_chan11')
+channels.chan11.s    EpicsSignalRO       ('ROI2')
+time                 EpicsSignal         ('scaler_time')
+
+config keys
+-----------
+scaler_auto_count_delay
+scaler_auto_count_time
+scaler_channels_chan08_chname
+scaler_channels_chan08_gate
+scaler_channels_chan08_preset
+scaler_channels_chan10_chname
+scaler_channels_chan10_gate
+scaler_channels_chan10_preset
+scaler_channels_chan11_chname
+scaler_channels_chan11_gate
+scaler_channels_chan11_preset
+scaler_count_mode
+scaler_delay
+scaler_egu
+scaler_freq
+scaler_preset_time
+
+configuration attrs
+-------------------
+channels             Channels            ('scaler_channels')
+channels.chan08      ScalerChannel       ('scaler_channels_chan08')
+channels.chan08.chname EpicsSignal         ('scaler_channels_chan08_chname')
+channels.chan08.preset EpicsSignal         ('scaler_channels_chan08_preset')
+channels.chan08.gate EpicsSignal         ('scaler_channels_chan08_gate')
+channels.chan10      ScalerChannel       ('scaler_channels_chan10')
+channels.chan10.chname EpicsSignal         ('scaler_channels_chan10_chname')
+channels.chan10.preset EpicsSignal         ('scaler_channels_chan10_preset')
+channels.chan10.gate EpicsSignal         ('scaler_channels_chan10_gate')
+channels.chan11      ScalerChannel       ('scaler_channels_chan11')
+channels.chan11.chname EpicsSignal         ('scaler_channels_chan11_chname')
+channels.chan11.preset EpicsSignal         ('scaler_channels_chan11_preset')
+channels.chan11.gate EpicsSignal         ('scaler_channels_chan11_gate')
+count_mode           EpicsSignal         ('scaler_count_mode')
+delay                EpicsSignal         ('scaler_delay')
+auto_count_delay     EpicsSignal         ('scaler_auto_count_delay')
+freq                 EpicsSignal         ('scaler_freq')
+preset_time          EpicsSignal         ('scaler_preset_time')
+auto_count_time      EpicsSignal         ('scaler_auto_count_time')
+egu                  EpicsSignal         ('scaler_egu')
+
+unused attrs
+------------
+count                EpicsSignal         ('scaler_count')
+update_rate          EpicsSignal         ('scaler_update_rate')
+auto_count_update_rate EpicsSignal         ('scaler_auto_count_update_rate')
+
+</pre>
+</details>
+</section>
+<section id="bluesky-plans-vs-command-line-actions">
+<h2>Bluesky Plans <em>vs</em>. Command-line Actions<a class="headerlink" href="#bluesky-plans-vs-command-line-actions" title="Permalink to this heading">#</a></h2>
+<p>There is a difference in the commands to use depending on the context.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>context</p></th>
+<th class="head"><p>blocking?</p></th>
+<th class="head"><p>command style</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>plan function</p></td>
+<td><p>NOT allowed</p></td>
+<td><p>call Bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">plans</a> written as <a class="reference external" href="https://wiki.python.org/moin/Generators">generator</a> functions using <code class="docutils literal notranslate"><span class="pre">yield</span> <span class="pre">from</span> <span class="pre">a_plan()</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>command line</p></td>
+<td><p>allowed</p></td>
+<td><p>use magics (such as <code class="docutils literal notranslate"><span class="pre">%mov</span></code>), <code class="docutils literal notranslate"><span class="pre">.put()</span></code>, and/or <code class="docutils literal notranslate"><span class="pre">RE(a_plan())</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<details>
+<summary>Examples:</summary>
+<p><b>plan function</b></p>
+<p>Write a plan to insert the filters:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insertFilters</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    plan: insert the EPICS-specified filters.</span>
+
+<span class="sd">    Also, ensure that the two filter positions will be integers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosA</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosB</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>       <span class="c1"># allow all filters to re-position</span>
+</pre></div>
+</div>
+<p>Then, call <code class="docutils literal notranslate"><span class="pre">insertFilters()</span></code> from another plan such as</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span>    <span class="k">yield from</span> <span class="n">insertFilters</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><b>command line actions</b></p>
+<p>There are (at least) three different ways to insert the filters from the command
+line:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="c1"># use bluesky Magick command</span>
+<span class="o">%</span><span class="n">mov</span> <span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosA</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosB</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+
+<span class="c1"># or use ophyd object</span>
+<span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosA</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+<span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosB</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">))</span>
+
+<span class="c1"># or use the bluesky RunEngine</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosA</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">pf4_AlTi</span><span class="o">.</span><span class="n">fPosB</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)))</span>
+</pre></div>
+</div>
+<p>NOTE: On the command line, we can ignore the 0.5 s sleep needed by automated
+procedures.</p>
+</details>
+<p>If you are translating PyEpics code to Bluesky plans, consult this
+<a class="reference external" href="https://blueskyproject.io/bluesky/from-pyepics-to-bluesky.html?highlight=blocking">guide</a>.</p>
+</section>
+<section id="log-files">
+<h2>Log files<a class="headerlink" href="#log-files" title="Permalink to this heading">#</a></h2>
+<p>In the working directory, the log files are written to a <code class="docutils literal notranslate"><span class="pre">./.logs</span></code> subdirectory.
+There are two kinds of file, one that records user commands and the python
+result, the other records items sent to the
+<a class="reference external" href="https://github.com/prjemian/stdlogpj#example-directing-logs-to-a-specific-directory">customized</a>
+Python <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> package.</p>
+<p>In the IPython session, use the <code class="docutils literal notranslate"><span class="pre">!</span></code> to run a linux command:</p>
+<details>
+<summary>Examples:</summary>
+<pre>
+In [50]: <b>!ls -lAFgh .logs</b>
+total 36K
+-rw-rw-r-- 1 prjemian prjemian 1.6K Feb 20 12:31 ipython_console.log
+-rw-rw-r-- 1 prjemian prjemian  411 Feb 20 12:23 ipython_console.log.001~
+-rw-rw-r-- 1 prjemian prjemian  832 Feb 20 12:19 ipython_console.log.002~
+-rw-rw-r-- 1 prjemian prjemian  154 Feb 20 12:17 ipython_console.log.003~
+-rw-rw-r-- 1 prjemian prjemian  250 Feb 20 12:17 ipython_console.log.004~
+-rw-rw-r-- 1 prjemian prjemian  13K Feb 20 12:23 ipython_logger.log
+
+In [51]: <b>!head .logs/ipython_console.log</b>
+# IPython log file
+
+# Sat, 20 Feb 2021 12:23:20
+listobjects()
+#[Out]# <pyRestTable.rest_table.Table at 0x7f65265a9ee0>
+# Sat, 20 Feb 2021 12:23:26
+listruns()
+#[Out]# <pyRestTable.rest_table.Table at 0x7f64b9e912b0>
+# Sat, 20 Feb 2021 12:23:28
+db
+
+In [52]: <b>!head .logs/ipython_logger.log</b>
+|2021-02-20 12:14:55.966|INFO|92929|bluesky-session|session_logs|35|MainThread| - ############################################################ startup
+|2021-02-20 12:14:55.966|INFO|92929|bluesky-session|session_logs|36|MainThread| - logging started
+|2021-02-20 12:14:55.966|INFO|92929|bluesky-session|session_logs|37|MainThread| - logging level = 10
+|2021-02-20 12:14:55.966|INFO|92929|bluesky-session|collection|7|MainThread| - /home/prjemian/.ipython/profile_bluesky/startup/instrument/collection.py
+|2021-02-20 12:14:55.966|INFO|92929|bluesky-session|console|11|MainThread| - /home/prjemian/.ipython/profile_bluesky/startup/instrument/mpl/console.py
+|2021-02-20 12:14:56.182|INFO|92929|bluesky-session|collection|11|MainThread| - bluesky framework
+|2021-02-20 12:14:56.183|INFO|92929|bluesky-session|check_python|9|MainThread| - /home/prjemian/.ipython/profile_bluesky/startup/instrument/framework/check_python.py
+|2021-02-20 12:14:56.183|INFO|92929|bluesky-session|check_bluesky|9|MainThread| - /home/prjemian/.ipython/profile_bluesky/startup/instrument/framework/check_bluesky.py
+|2021-02-20 12:14:56.688|INFO|92929|bluesky-session|initialize|15|MainThread| - /home/prjemian/.ipython/profile_bluesky/startup/instrument/framework/initialize.py
+|2021-02-20 12:14:57.281|INFO|92929|bluesky-session|initialize|67|MainThread| - New directory to store RE.md between sessions: /home/prjemian/.config/Bluesky_RunEngine_md
+
+</pre>
+</details>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">How-To Guides</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_basic_aps_info.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">APS Accelerator Information for Beam Lines</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read">Read</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#move">Move</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#count">Count</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#list-describe-summary">List, Describe, Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bluesky-plans-vs-command-line-actions">Bluesky Plans <em>vs</em>. Command-line Actions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#log-files">Log files</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/__first_steps_guide.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

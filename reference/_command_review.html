@@ -1,0 +1,1404 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Review of commands &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/_command_review';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Conda Base Environment" href="_conda_base.html" />
+    <link rel="prev" title="Reference" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Review of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_git-help.html">Using git for version control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Review of commands</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Review-of-commands">
+<h1>Review of commands<a class="headerlink" href="#Review-of-commands" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>In this notebook, the commands described in <a class="reference internal" href="../howto/__first_steps_guide.html"><span class="doc">First Steps with Bluesky</span></a>, are demonstrated using the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package.</p>
+<section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/prjemian/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/reference/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-14:38:42 - ############################################################ startup
+I Thu-14:38:42 - logging started
+I Thu-14:38:42 - logging level = 10
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/session_logs.py
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/collection.py
+I Thu-14:38:42 - CONDA_PREFIX = /home/prjemian/.conda/envs/bluesky_2023_2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception reporting mode: Minimal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-14:38:42 - xmode exception level: &#39;Minimal&#39;
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/mpl/notebook.py
+I Thu-14:38:42 - #### Bluesky Framework ####
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/framework/check_python.py
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/framework/check_bluesky.py
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/framework/initialize.py
+I Thu-14:38:42 - RunEngine metadata saved in directory: /home/prjemian/Bluesky_RunEngine_md
+I Thu-14:38:42 - using databroker catalog &#39;training&#39;
+I Thu-14:38:42 - using ophyd control layer: pyepics
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/framework/metadata.py
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/epics_signal_config.py
+I Thu-14:38:42 - Using RunEngine metadata for scan_id
+I Thu-14:38:42 - #### Devices ####
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/devices/area_detector.py
+I Thu-14:38:42 - /home/prjemian/bluesky/instrument/devices/calculation_records.py
+I Thu-14:38:44 - /home/prjemian/bluesky/instrument/devices/fourc_diffractometer.py
+I Thu-14:38:44 - /home/prjemian/bluesky/instrument/devices/ioc_stats.py
+I Thu-14:38:44 - /home/prjemian/bluesky/instrument/devices/kohzu_monochromator.py
+I Thu-14:38:44 - /home/prjemian/bluesky/instrument/devices/motors.py
+I Thu-14:38:45 - /home/prjemian/bluesky/instrument/devices/noisy_detector.py
+I Thu-14:38:45 - /home/prjemian/bluesky/instrument/devices/scaler.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/devices/shutter_simulator.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/devices/simulated_fourc.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/devices/simulated_kappa.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/devices/slits.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/devices/sixc_diffractometer.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/devices/temperature_signal.py
+I Thu-14:38:46 - #### Callbacks ####
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Thu-14:38:46 - #### Plans ####
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/plans/lup_plan.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/plans/peak_finder_example.py
+I Thu-14:38:46 - /home/prjemian/bluesky/instrument/utils/image_analysis.py
+I Thu-14:38:46 - #### Utilities ####
+I Thu-14:38:46 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/reference/20230413-143846.dat
+I Thu-14:38:46 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Thu-14:38:46 -    file will be created when bluesky ends its next scan
+I Thu-14:38:46 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Thu-14:38:46 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+</section>
+<section id="List,-Describe,-Summary">
+<h2>List, Describe, Summary<a class="headerlink" href="#List,-Describe,-Summary" title="Permalink to this heading">#</a></h2>
+<p>On the command line, there is an <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html#built-in-magic-commands">IPython magic</a> command from the <a class="reference external" href="https://blueskyproject.io/bluesky/">bluesky</a> package to print the current value of <a class="reference external" href="https://blueskyproject.io/bluesky/magics.html?highlight=label">labeled</a> items: <code class="docutils literal notranslate"><span class="pre">`%wa</span></code> &lt;&gt;`__</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">wa</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+area_detector
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  adsimdet                               adsimdet
+
+motor
+  Positioner                     Value       Low Limit   High Limit  Offset
+  dcm_m_theta                    0.0         -1000.0     1000.0      0.0
+  dcm_m_y                        0.0         -1000.0     1000.0      0.0
+  dcm_m_z                        0.0         -1000.0     1000.0      0.0
+  fourc_chi                      0.0         -1000.0     1000.0      0.0
+  fourc_omega                    0.0         -1000.0     1000.0      0.0
+  fourc_phi                      0.0         -1000.0     1000.0      0.0
+  fourc_tth                      0.0         -1000.0     1000.0      0.0
+  m1                             1.0         -1000.0     1000.0      0.0
+  m10                            0.0         -1000.0     1000.0      0.0
+  m11                            0.0         -1000.0     1000.0      0.0
+  m12                            0.0         -1000.0     1000.0      0.0
+  m13                            0.0         -1000.0     1000.0      0.0
+  m14                            0.0         -1000.0     1000.0      0.0
+  m15                            0.0         -1000.0     1000.0      0.0
+  m16                            0.0         -1000.0     1000.0      0.0
+  m2                             6.0         -1000.0     1000.0      0.0
+  m3                             0.0         -1000.0     1000.0      0.0
+  m4                             0.0         -1000.0     1000.0      0.0
+  m7                             0.0         -1000.0     1000.0      0.0
+  m8                             0.0         -1000.0     1000.0      0.0
+  m9                             0.0         -1000.0     1000.0      0.0
+  sixc_chi                       0.0         -1000.0     1000.0      0.0
+  sixc_delta                     0.0         -1000.0     1000.0      0.0
+  sixc_gamma                     0.0         -1000.0     1000.0      0.0
+  sixc_mu                        0.0         -1000.0     1000.0      0.0
+  sixc_omega                     0.0         -1000.0     1000.0      0.0
+  sixc_phi                       0.0         -1000.0     1000.0      0.0
+
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  dcm.m_theta                            dcm_m_theta
+  dcm.m_y                                dcm_m_y
+  dcm.m_z                                dcm_m_z
+  fourc.chi                              fourc_chi
+  fourc.omega                            fourc_omega
+  fourc.phi                              fourc_phi
+  fourc.tth                              fourc_tth
+  m1                                     m1
+  m10                                    m10
+  m11                                    m11
+  m12                                    m12
+  m13                                    m13
+  m14                                    m14
+  m15                                    m15
+  m16                                    m16
+  m2                                     m2
+  m3                                     m3
+  m4                                     m4
+  m7                                     m7
+  m8                                     m8
+  m9                                     m9
+  sixc.chi                               sixc_chi
+  sixc.delta                             sixc_delta
+  sixc.gamma                             sixc_gamma
+  sixc.mu                                sixc_mu
+  sixc.omega                             sixc_omega
+  sixc.phi                               sixc_phi
+
+detectors
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  noisy                                  noisy
+  scaler1                                scaler1
+
+simulator
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  noisy                                  noisy
+
+scalers
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  scaler1                                scaler1
+
+counter
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  I0                                     I0
+  I00                                    I00
+  I000                                   I000
+  diode                                  scint
+  scaler1.channels.chan01.s              timebase
+  scaler1.channels.chan02.s              I0
+  scaler1.channels.chan04.s              scint
+  scaler1.channels.chan05.s              I000
+  scaler1.channels.chan06.s              I00
+  scint                                  scint
+  timebase                               timebase
+
+channel
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  I0                                     I0
+  I00                                    I00
+  I000                                   I000
+  diode                                  scint
+  scaler1.channels.chan01.s              timebase
+  scaler1.channels.chan02.s              I0
+  scaler1.channels.chan04.s              scint
+  scaler1.channels.chan05.s              I000
+  scaler1.channels.chan06.s              I00
+  scint                                  scint
+  timebase                               timebase
+
+shutters
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  shutter                                shutter
+
+</pre></div></div>
+</div>
+<p>Might be a good idea to know now what ophyd symbols are available. The <a class="reference external" href="https://apstools.readthedocs.io/en/latest/">apstools</a> package provides a <code class="docutils literal notranslate"><span class="pre">`listobjects()</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_utils.html?highlight=listobjects#apstools.utils.listobjects">https://apstools.readthedocs.io/en/latest/source/_utils.html?highlight=listobjects#apstools.utils.listobjects</a>&gt;`__ command that prints a table of all the known objects (in the global namespace of the session). The columns provide the ophyd name (the name you use to call this in Python), the name of the ophyd structure, the EPICS PV
+(if relevant), and any labels (as used in <code class="docutils literal notranslate"><span class="pre">%wa</span></code> above).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listobjects</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=========== ================================ ============== ===================
+name        class                            PV (or prefix) label(s)
+=========== ================================ ============== ===================
+I0          EpicsSignalRO                    gp:scaler1.S2  counter channel
+I00         EpicsSignalRO                    gp:scaler1.S6  counter channel
+I000        EpicsSignalRO                    gp:scaler1.S5  counter channel
+adsimdet    SimDetector_V34                  ad:            area_detector
+calcouts    UserCalcoutDevice                gp:
+calcs       UserCalcsDevice                  gp:
+dcm         MyKohzu                          gp:
+diode       EpicsSignalRO                    gp:scaler1.S4  counter channel
+fourc       FourCircle                       gp:
+gp_stats    IocInfoDevice                    gp:
+m1          MyEpicsMotor                     gp:m1          motor
+m10         MyEpicsMotor                     gp:m10         motor
+m11         MyEpicsMotor                     gp:m11         motor
+m12         MyEpicsMotor                     gp:m12         motor
+m13         MyEpicsMotor                     gp:m13         motor
+m14         MyEpicsMotor                     gp:m14         motor
+m15         MyEpicsMotor                     gp:m15         motor
+m16         MyEpicsMotor                     gp:m16         motor
+m2          MyEpicsMotor                     gp:m2          motor
+m3          MyEpicsMotor                     gp:m3          motor
+m4          MyEpicsMotor                     gp:m4          motor
+m7          MyEpicsMotor                     gp:m7          motor
+m8          MyEpicsMotor                     gp:m8          motor
+m9          MyEpicsMotor                     gp:m9          motor
+noisy       EpicsSignalRO                    gp:userCalc1   detectors simulator
+scaler1     ScalerCH                         gp:scaler1     detectors scalers
+scint       EpicsSignalRO                    gp:scaler1.S3  counter channel
+shutter     SimulatedApsPssShutterWithStatus                shutters
+sim4c       SimulatedE4CV
+simk4c      SimulatedK4CV
+simk6c      SimulatedK6C
+sixc        SixCircle                        gp:
+slit1       Optics2Slit2D_HV                 gp:Slit1
+temperature MyPvPositioner                   gp:userCalc8
+timebase    EpicsSignalRO                    gp:scaler1.S1  counter channel
+=========== ================================ ============== ===================
+</pre></div></div>
+</div>
+</section>
+<section id="Read">
+<h2>Read<a class="headerlink" href="#Read" title="Permalink to this heading">#</a></h2>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">m1</span></code> objects to demonstrate the various commands described in the quick-reference <a class="reference external" href="https://github.com/BCDA-APS/use_bluesky/blob/main/first_steps_guide.md">Guide: First Steps with Bluesky</a></p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.summary()</span></code></p></td>
+<td><p>more information about <code class="docutils literal notranslate"><span class="pre">OBJECT</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.get()</span></code></p></td>
+<td><p>low-level command to show value of ophyd <em>Signal</em> named <code class="docutils literal notranslate"><span class="pre">OBJECT</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">OBJECT.read()</span></code></p></td>
+<td><p>data acquisition command, includes timestamp</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">listdevice(OBJECT)</span></code></p></td>
+<td><p>table-version of <code class="docutils literal notranslate"><span class="pre">.read()</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.position</span></code></p></td>
+<td><p>get readback, only for motor objects</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.user_readback.get()</span></code></p></td>
+<td><p>alternative to <code class="docutils literal notranslate"><span class="pre">MOTOR.position</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<section id="temperature">
+<h3>temperature<a class="headerlink" href="#temperature" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+data keys (* hints)
+-------------------
+*temperature
+ temperature_calculation
+ temperature_description
+ temperature_done
+ temperature_max_change
+ temperature_noise
+ temperature_previous_value_pv
+ temperature_scanning_rate
+ temperature_setpoint
+ temperature_tolerance
+
+read attrs
+----------
+setpoint             EpicsSignal         (&#39;temperature_setpoint&#39;)
+readback             EpicsSignal         (&#39;temperature&#39;)
+done                 Signal              (&#39;temperature_done&#39;)
+calculation          EpicsSignal         (&#39;temperature_calculation&#39;)
+description          EpicsSignal         (&#39;temperature_description&#39;)
+max_change           EpicsSignal         (&#39;temperature_max_change&#39;)
+noise                EpicsSignal         (&#39;temperature_noise&#39;)
+previous_value_pv    EpicsSignal         (&#39;temperature_previous_value_pv&#39;)
+scanning_rate        EpicsSignal         (&#39;temperature_scanning_rate&#39;)
+tolerance            EpicsSignal         (&#39;temperature_tolerance&#39;)
+
+config keys
+-----------
+
+configuration attrs
+-------------------
+
+unused attrs
+------------
+report_dmov_changes  Signal              (&#39;temperature_report_dmov_changes&#39;)
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">readback</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+25.0
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;temperature_setpoint&#39;,
+              {&#39;value&#39;: 25.0, &#39;timestamp&#39;: 1681414726.718176}),
+             (&#39;temperature&#39;, {&#39;value&#39;: 25.0, &#39;timestamp&#39;: 1681414726.721922}),
+             (&#39;temperature_done&#39;,
+              {&#39;value&#39;: True, &#39;timestamp&#39;: 1681414726.7284272}),
+             (&#39;temperature_calculation&#39;,
+              {&#39;value&#39;: &#39;A+max(-D,min(D,(B-A)))+C*(RNDM-0.5)&#39;,
+               &#39;timestamp&#39;: 1681414726.723668}),
+             (&#39;temperature_description&#39;,
+              {&#39;value&#39;: &#39;temperature&#39;, &#39;timestamp&#39;: 1681414726.716164}),
+             (&#39;temperature_max_change&#39;,
+              {&#39;value&#39;: 2.0, &#39;timestamp&#39;: 1681414726.7226}),
+             (&#39;temperature_noise&#39;,
+              {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1681414726.721922}),
+             (&#39;temperature_previous_value_pv&#39;,
+              {&#39;value&#39;: &#39;gp:userCalc8.VAL&#39;, &#39;timestamp&#39;: 1681414726.716164}),
+             (&#39;temperature_scanning_rate&#39;,
+              {&#39;value&#39;: 5, &#39;timestamp&#39;: 1681414726.723668}),
+             (&#39;temperature_tolerance&#39;,
+              {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1681414726.723668})])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listdevice</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=============================== =================================== ==========================
+data name                       value                               timestamp
+=============================== =================================== ==========================
+temperature_setpoint            25.0                                2023-04-13 14:38:46.718176
+temperature                     25.0                                2023-04-13 14:38:46.721922
+temperature_done                True                                2023-04-13 14:38:46.728427
+temperature_calculation         A+max(-D,min(D,(B-A)))+C*(RNDM-0.5) 2023-04-13 14:38:46.723668
+temperature_description         temperature                         2023-04-13 14:38:46.716164
+temperature_max_change          2.0                                 2023-04-13 14:38:46.722600
+temperature_noise               1.0                                 2023-04-13 14:38:46.721922
+temperature_previous_value_pv   gp:userCalc8.VAL                    2023-04-13 14:38:46.716164
+temperature_scanning_rate       5                                   2023-04-13 14:38:46.723668
+temperature_tolerance           1.0                                 2023-04-13 14:38:46.723668
+temperature_report_dmov_changes False                               2023-04-13 14:38:46.717620
+=============================== =================================== ==========================
+</pre></div></div>
+</div>
+</section>
+<section id="motor">
+<h3>motor<a class="headerlink" href="#motor" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.0
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">user_readback</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.0
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Move">
+<h2>Move<a class="headerlink" href="#Move" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>mode</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%mov</span> <span class="pre">MOTOR</span> <span class="pre">value</span></code></p></td>
+<td><p>command line</p></td>
+<td><p>interactive command move MOTOR to value (command line only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">%movr</span> <span class="pre">MOTOR</span> <span class="pre">value</span></code></p></td>
+<td><p>command line</p></td>
+<td><p>interactive command relative move (command line only)</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.move(value)</span></code></p></td>
+<td><p>ophyd command</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">%mov</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">MOTOR.user_setpoint.put(value)</span></code></p></td>
+<td><p>ophyd</p></td>
+<td><p>set motor <code class="docutils literal notranslate"><span class="pre">.VAL</span></code> field but not wait</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bps.mv(MOTOR,</span> <span class="pre">value)</span></code></p></td>
+<td><p>bluesky plan</p></td>
+<td><p>move and wait for completion</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">bps.mv(MOTOR.user_setpoint,</span> <span class="pre">value)</span></code></p></td>
+<td><p>bluesky plan</p></td>
+<td><p>same</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bps.mvr(MOTOR,</span> <span class="pre">value)</span></code></p></td>
+<td><p>bluesky plan</p></td>
+<td><p>relative move</p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> m1 1.55
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+m1:  35%|█████████▎                 | 0.1905/0.55 [00:00&lt;00:00,  1.71degrees/s]
+m1:  70%|███████████████████        | 0.3873/0.55 [00:00&lt;00:00,  1.83degrees/s]
+m1:  94%|█████████████████████████▎ | 0.5158/0.55 [00:00&lt;00:00,  1.64degrees/s]
+m1: 100%|█████████████████████████████| 0.55/0.55 [00:00&lt;00:00,  1.33degrees/s]
+m1 [In progress. No progress bar available.]
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.55
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">movr</span> m1 -.1
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+m1: 100%|███████████████████████████▉| 0.0999/0.1 [00:00&lt;00:00,  1.63s/degrees]
+m1: 100%|███████████████████████████████| 0.1/0.1 [00:00&lt;00:00,  2.63s/degrees]
+m1 [In progress. No progress bar available.]
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.4500000000000002
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mf">.5</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">user_setpoint</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(0.5, 0.0)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> temperature 26
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+temperature:  58%|█████████████▊          | 0.396/0.687 [00:01&lt;00:00,  2.78s/C]
+temperature [In progress. No progress bar available.]
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">movr</span> temperature -1  m1 .2
+<span class="n">temperature</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+m1:  81%|██████████████████████▌     | 0.1616/0.2 [00:00&lt;00:00,  1.27degrees/s]
+
+m1: 100%|███████████████████████████████| 0.2/0.2 [00:00&lt;00:00,  1.15s/degrees]
+
+m1 [In progress. No progress bar available.]
+
+m1 [In progress. No progress bar available.]
+temperature: 100%|████████████████████████████| 1.0/1.0 [00:01&lt;00:00,  1.93s/C]
+m1 [In progress. No progress bar available.]
+temperature [In progress. No progress bar available.]
+
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(24.23994811932555, 0.2)
+</pre></div></div>
+</div>
+<section id="bluesky">
+<h3>bluesky<a class="headerlink" href="#bluesky" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.0
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">mvr</span><span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="mf">.1</span><span class="p">))</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+1.1
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">user_setpoint</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">temperature</span><span class="o">.</span><span class="n">setpoint</span><span class="p">,</span> <span class="mi">25</span><span class="p">))</span>
+<span class="n">m1</span><span class="o">.</span><span class="n">position</span><span class="p">,</span> <span class="n">temperature</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(1.1, 24.23994811932555)
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Count">
+<h2>Count<a class="headerlink" href="#Count" title="Permalink to this heading">#</a></h2>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>command</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">%ct</span></code></p></td>
+<td><p>count <em>all</em> objects with label <code class="docutils literal notranslate"><span class="pre">detectors</span></code> and format output (command line only)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">SCALER.trigger().wait();</span> <span class="pre">SCALER.read()</span></code></p></td>
+<td><p>ophyd command to count SCALER</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">bp.count([SCALER])</span></code></p></td>
+<td><p>bluesky plan to count</p></td>
+</tr>
+</tbody>
+</table>
+<p>Count time setting is different for various types of detectors:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>detector</p></th>
+<th class="head"><p>set count time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>scaler</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">SCALER.preset_time.put(COUNT_TIME_S)</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>area detector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">AD.cam.acquire_time.put(COUNT_TIME_S)</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+noisy                          34560.47582292199
+timebase                       16000000.0
+I0                             9.0
+scint                          6.0
+I000                           8.0
+I00                            5.0
+roi1                           7.0
+scaler1_time                   1.6
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span> scalers
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+timebase                       16000000.0
+I0                             8.0
+scint                          4.0
+I000                           9.0
+I00                            9.0
+roi1                           8.0
+scaler1_time                   1.6
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span><span class="o">.</span><span class="n">wait</span><span class="p">();</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;timebase&#39;,
+              {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1681414738.568649}),
+             (&#39;I0&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1681414738.568649}),
+             (&#39;scint&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1681414738.568649}),
+             (&#39;I000&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1681414738.568649}),
+             (&#39;I00&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1681414738.568649}),
+             (&#39;roi1&#39;, {&#39;value&#39;: 5.0, &#39;timestamp&#39;: 1681414738.568649}),
+             (&#39;scaler1_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1681414736.984263})])
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler1</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 935     Time: 2023-04-13 14:38:58
+Persistent Unique Scan ID: &#39;8cfb6fe7-0338-42af-9288-b3c4e2c7cb63&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time |   timebase |         I0 |      scint |       I000 |        I00 |       roi1 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 14:39:00.5 |   16000000 |          8 |          9 |          8 |          8 |          9 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+generator count [&#39;8cfb6fe7&#39;] (scan num: 935)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;8cfb6fe7-0338-42af-9288-b3c4e2c7cb63&#39;,)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_plan</span><span class="p">():</span>
+    <span class="k">yield from</span> <span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler1</span><span class="p">])</span>
+
+<span class="n">RE</span><span class="p">(</span><span class="n">my_plan</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 936     Time: 2023-04-13 14:39:00
+Persistent Unique Scan ID: &#39;3718e73c-d07a-4591-a41d-5979c3cd1b66&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time |   timebase |         I0 |      scint |       I000 |        I00 |       roi1 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 14:39:02.5 |   16000000 |          7 |          7 |          8 |          8 |          7 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+generator count [&#39;3718e73c&#39;] (scan num: 936)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;3718e73c-d07a-4591-a41d-5979c3cd1b66&#39;,)
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Reference</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_conda_base.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Conda Base Environment</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#List,-Describe,-Summary">List, Describe, Summary</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Read">Read</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature">temperature</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motor">motor</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Move">Move</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bluesky">bluesky</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Count">Count</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/reference/_command_review.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,608 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Using git for version control &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/_git-help';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="GitHub Repository" href="_github_create_repo.html" />
+    <link rel="prev" title="Conda Base Environment" href="_conda_base.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using git for version control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Reference</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Using git for version control</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="using-git-for-version-control">
+<h1>Using git for version control<a class="headerlink" href="#using-git-for-version-control" title="Permalink to this heading">#</a></h1>
+<p>While version control is optional, it is _highly recommended <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
+that you place your bluesky instrument directory under some form of
+software version control. <a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
+At minimum, this can provide some form of backup protection. It also
+helps others to collaborate with similar bluesky instruments by sharing
+your instrument’s implementations.</p>
+<p>There are many <a class="reference external" href="#guides">guides available online</a> to learn about
+<code class="docutils literal notranslate"><span class="pre">git</span></code> and GitHub or GitLab. This document will not attempt to cover
+that material. Rather, this document will describe the steps to place
+the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory and its contents under <code class="docutils literal notranslate"><span class="pre">git</span></code> version control
+and push to a GitHub repository.</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="id4" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p>Why use version control?
+<a class="reference external" href="https://www.git-tower.com/learn/git/ebook/en/desktop-gui/basics/why-use-version-control">https://www.git-tower.com/learn/git/ebook/en/desktop-gui/basics/why-use-version-control</a></p>
+</aside>
+<aside class="footnote brackets" id="id5" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
+<p>Why use version control?
+<a class="reference external" href="https://about.gitlab.com/topics/version-control/#why-use-version-control">https://about.gitlab.com/topics/version-control/#why-use-version-control</a></p>
+</aside>
+<aside class="footnote brackets" id="id6" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
+<p>software version control guide
+<a class="reference external" href="https://www.software.com/devops-guides/version-control-guide">https://www.software.com/devops-guides/version-control-guide</a></p>
+</aside>
+</aside>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Identify the web host for the repository</p>
+<ol class="arabic simple">
+<li><p>Possible web hosts include:</p>
+<ol class="arabic simple">
+<li><p><a class="reference external" href="#github">GitHub</a></p></li>
+<li><p><a class="reference external" href="#aps-gitlab">APS GitLab</a></p></li>
+<li><p>others not described here</p></li>
+</ol>
+</li>
+<li><p>Use or create an <a class="reference external" href="#beam-line-github-organizations">organization for the beam
+line</a>.</p></li>
+<li><p>Create a new repository for the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory</p></li>
+</ol>
+</li>
+<li><p>Make the <code class="docutils literal notranslate"><span class="pre">bluesky/</span></code> directory into a <code class="docutils literal notranslate"><span class="pre">git</span></code> repository - either</p>
+<ul class="simple">
+<li><p>clone the repository from the web host</p></li>
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">`git</span> <span class="pre">init</span></code> &lt;<a class="github reference external" href="https://github.com/git-guides/git-init">git-guides/git-init</a>&gt;`__ in
+the <code class="docutils literal notranslate"><span class="pre">bluesky/</span></code> directory</p></li>
+</ul>
+</li>
+<li><p>Create a <code class="docutils literal notranslate"><span class="pre">`.gitignore</span></code>
+file &lt;<a class="reference external" href="https://git-scm.com/docs/gitignore">https://git-scm.com/docs/gitignore</a>&gt;`__, such as this
+<a class="reference external" href="https://github.com/APS-USAXS/usaxs-bluesky/blob/master/.gitignore">example</a></p></li>
+<li><p><a class="reference external" href="https://git-scm.com/docs/git-add">Add</a> content and
+<a class="reference external" href="https://git-scm.com/docs/git-commit">commit</a> with <a class="reference external" href="https://www.freecodecamp.org/news/git-best-practices-commits-and-code-reviews/">a meaningful
+commit
+message</a>
+(see these
+<a class="reference external" href="https://github.com/bluesky/databroker/blob/main/.github/CONTRIBUTING.md#writing-the-commit-message">hints</a>
+for relevant prefixes)</p></li>
+<li><p><a class="reference external" href="https://git-scm.com/docs/git-push">Push</a> content to web host</p></li>
+</ol>
+<section id="github">
+<h3>GitHub<a class="headerlink" href="#github" title="Permalink to this heading">#</a></h3>
+<p>Most beam lines will use <a class="reference external" href="https://github.com">GitHub</a> to host their
+<code class="docutils literal notranslate"><span class="pre">bluesky</span></code> repositories. These are publicly-accessible (read-only) so
+do not place any content there that should not be publicly-accessible.</p>
+<p>See this document to learn more about:</p>
+<ul class="simple">
+<li><p>GitHub
+<a class="reference external" href="https://support.github.com/features/organizations">organizations</a></p></li>
+<li><p>GitHub
+<a class="reference external" href="https://support.github.com/features/repositories">repositories</a></p></li>
+</ul>
+<p>GitHub organizes repositories using this pattern:
+<code class="docutils literal notranslate"><span class="pre">https://github.com/ORGANIZATION/REPOSITORY</span></code></p>
+<p>In <code class="docutils literal notranslate"><span class="pre">ORGANIZATION</span></code> is either a single user’s account or a named
+orgnization (created by some GitHub user).</p>
+<p>Note that GitHub now uses multi-factor authentication
+(<a class="reference external" href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">MFA</a>).</p>
+<section id="beam-line-github-organizations">
+<h4>Beam line GitHub organizations<a class="headerlink" href="#beam-line-github-organizations" title="Permalink to this heading">#</a></h4>
+<p>Use GitHub organizations to provide version control for various software
+projects used by a beam line. This naming convention is recommended for
+the beam line organization:</p>
+<ul class="simple">
+<li><p>create a GitHub <em>organization</em> with a name like this :
+<code class="docutils literal notranslate"><span class="pre">APS-SSS-GGG</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">SSS</span></code> : sector, beam line, and station (such as <code class="docutils literal notranslate"><span class="pre">32IDC</span></code>)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">GGG</span></code> : operating group (such as <code class="docutils literal notranslate"><span class="pre">MIC</span></code> for the XSD/Microscopy
+group)</p></li>
+<li><p>Within each organization, create a <em>repository</em> :
+<code class="docutils literal notranslate"><span class="pre">bluesky-INSTRUMENT</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">INSTRUMENT</span></code> : the name of the sintrument, such as <code class="docutils literal notranslate"><span class="pre">USAXS</span></code></p></li>
+</ul>
+</section>
+</section>
+<section id="aps-gitlab">
+<h3>APS GitLab<a class="headerlink" href="#aps-gitlab" title="Permalink to this heading">#</a></h3>
+<p>When there is content that requires access restrictions (thus, not
+publicly-accessible), the <a class="reference external" href="https://git.aps.anl.gov/">APS GitLab</a>
+server, managed by the APS IT group, is available to host that content.
+The server provides <a class="reference external" href="https://git.aps.anl.gov/help">online help</a>
+comparable to that provided by GitHub.</p>
+<p>GitLab organizes repositories using this pattern:
+<code class="docutils literal notranslate"><span class="pre">https://git.aps.anl.gov/ORGANIZATION/SUBGROUP/REPOSITORY</span></code></p>
+<p>The <code class="docutils literal notranslate"><span class="pre">SUBGROUP</span></code> level is optional.</p>
+</section>
+</section>
+<section id="create-a-github-repository">
+<h2>Create a GitHub repository<a class="headerlink" href="#create-a-github-repository" title="Permalink to this heading">#</a></h2>
+<p>We took notes when creating a repository for the APS 6-ID-D <a class="reference external" href="https://github.com/aps-ht-hedm/bluesky_instrument.git">HEDM
+bluesky
+instrument</a>.
+Once you have a GitHub organization, follow the notes
+<a class="reference external" href="./create_github_repo.md">here</a>.</p>
+</section>
+<section id="guides">
+<h2>Guides<a class="headerlink" href="#guides" title="Permalink to this heading">#</a></h2>
+<p>This is a sampling of How-To guides explaining git and GitHub
+repositories.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github</a></p></li>
+<li><p><a class="reference external" href="https://dzone.com/articles/ten-easy-steps-to-start-using-git-and-github">https://dzone.com/articles/ten-easy-steps-to-start-using-git-and-github</a></p></li>
+<li><p><a class="reference external" href="https://www.freecodecamp.org/news/introduction-to-git-and-github/">https://www.freecodecamp.org/news/introduction-to-git-and-github/</a></p></li>
+<li><p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github">https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github</a></p></li>
+<li><p><a class="reference external" href="https://www.geeksforgeeks.org/how-to-push-folders-from-local-pc-to-github-using-git-commands/">https://www.geeksforgeeks.org/how-to-push-folders-from-local-pc-to-github-using-git-commands/</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_conda_base.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Conda Base Environment</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_github_create_repo.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">GitHub Repository</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github">GitHub</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beam-line-github-organizations">Beam line GitHub organizations</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aps-gitlab">APS GitLab</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-github-repository">Create a GitHub repository</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guides">Guides</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/reference/_git-help.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

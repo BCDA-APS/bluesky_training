@@ -8,6 +8,10 @@ APS Bluesky Training
    howto/index
    tutor/index
    instrument/index
+   reference/index
+
+.. TODO
+   edit and relocate *.md.use_bluesky
 
 ..
    TODO: sections that point to various documentation
