@@ -1,23 +1,23 @@
-# Test the new bluesky instrument
+# Test the New Bluesky Instrument
 
 At this point, you have assembled enough of the parts to test the initial
 installation with bluesky. Follow these steps:
 
-```bash
-(base) user@host:~ $ cd ~/bluesky
-(base) user@host:~/bluesky $ conda activate bluesky_2023_2
-(bluesky_2023_2) user@host:~/bluesky $ ipython
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda activate bluesky_2023_2</b>
+$ <b>ipython</b>
 Python 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:20:04) [GCC 11.3.0]
 Type 'copyright', 'credits' or 'license' for more information
 IPython 8.11.0 -- An enhanced Interactive Python. Type '?' for help.
 
 In [1]:
-```
+</pre>
 
 Load the `instrument` package for data collection activities.  The name of each module is logged as it is loaded.
 
-```py
-In [1]: from instrument.collection import *
+<pre>
+In [1]: <b>from instrument.collection import *</b>
 /home/user/bluesky/instrument/_iconfig.py
 Activating auto-logging. Current session state plus future input saved.
 Filename       : /home/user/bluesky/.logs/ipython_console.log
@@ -58,7 +58,7 @@ I Mon-14:43:30 -    to change SPEC file, use command:   newSpecFile('title')
 I Mon-14:43:30 - #### Startup is complete. ####
 
 In [2]:
-```
+</pre>
 
 The time-stamped lines that start with `I ` are `Information` log messages from the logger.  The logger levels are:
 
@@ -73,19 +73,19 @@ The logger output to the terminal is intentionally terse.  Greater detail may be
 
 Load the `Hello, World!` example from the `user/` code directory:
 
-```py
-In [2]: %run -i user/quick_hello.py
+<pre>
+In [2]: <b>%run -i user/quick_hello.py</b>
 Loading 'Hello, World!' example.
 
 In [3]: 
-```
+</pre>
 
 **Note**: The `Loading 'Hello, World!' example.` text came from a `print()` statement in the file.
 
 This also loads `hello_world()`, a demonstration bluesky *plan*.  Run that plan with the bluesky RunEngine instance `RE`:
 
-```py
-In [3]: RE(hello_world())
+<pre>
+In [3]: <b>RE(hello_world())</b>
 
 
 Transient Scan ID: 877     Time: 2023-03-13 14:51:21
@@ -100,21 +100,21 @@ generator count ['76e1f4c4'] (scan num: 877)
 Out[3]: ('76e1f4c4-5e46-47ee-bfb2-729b183f3367',)
 
 In [4]: 
-```
+</pre>
 
 We're using a temporary databroker catalog (as logged in the startup above). The
 data from this run is available until we quite the IPython session. Let's take a
 look at the data.  First, get a reference to the *run* from the databroker
 catalog reference `cat`:
 
-```py
-In [4]: run = cat[-1]
-```
+<pre>
+In [4]: <b>run = cat[-1]</b>
+</pre>
 
 Show a brief description of that `run`:
 
-```py
-In [5]: run
+<pre>
+In [5]: <b>run</b>
 Out[5]: 
 BlueskyRun
   uid='76e1f4c4-5e46-47ee-bfb2-729b183f3367'
@@ -122,20 +122,20 @@ BlueskyRun
   2023-03-13 14:51:21.874 -- 2023-03-13 14:51:21.880
   Streams:
     * primary
-```
+</pre>
 
 The run's data is in the `primary` stream.  Show it:
 
-```py
-In [6]: run.primary.read()
+<pre>
+In [6]: <b>run.primary.read()</b>
 Out[6]: 
-<xarray.Dataset>
+&lt;xarray.Dataset>
 Dimensions:     (time: 1)
 Coordinates:
   * time        (time) float64 1.679e+09
 Data variables:
     hello       (time) int64 1
-    hello_text  (time) <U13 'Hello, World!'
-```
+    hello_text  (time) &lt;U13 'Hello, World!'
+</pre>
 
 Congratulations!  You've tested your new bluesky instrument.

@@ -32,8 +32,16 @@ Add a single Python file to the startup directory
          startup/
            __start_bluesky_instrument__.py --> ~/bluesky/console/__start_bluesky_instrument__.py
 
-where :download:`__start_bluesky_instrument__.py <../../../bluesky/console/__start_bluesky_instrument__.py>`
-is summarized (there are additional features) by:
+.. tip:: when IPython starts ...
+
+   **Every** Python file in the startup directory is run when IPython starts.
+   The files are run in lexical (alphabetical) order.
+
+Python snippet to start instrument for data collection
+++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+This snippet of Python code will start Bluesky for data collection.  Use it in
+the IPython startup script and also in Jupyter notebooks.
 
 .. code-block:: py
    :linenos:
@@ -41,3 +49,6 @@ is summarized (there are additional features) by:
    import pathlib, sys
    sys.path.append(str(pathlib.Path.home() / "bluesky"))
    from instrument.collection import *
+
+A slightly more robust version of this snippet is supplied by this ``bluesky_training`` repository:
+:download:`__start_bluesky_instrument__.py <../../../bluesky/console/__start_bluesky_instrument__.py>`
