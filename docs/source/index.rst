@@ -9,6 +9,9 @@ APS Bluesky Training
    tutor/index
    instrument/index
 
+.. TODO
+   edit and relocate *.md.use_bluesky
+
 ..
    TODO: sections that point to various documentation
    See the top-level README and unload the root directory
