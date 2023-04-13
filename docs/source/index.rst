@@ -1,21 +1,9 @@
 APS Bluesky Training
 ====================
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+TODO:  Consider adding additional structure sections that point to various documentation
 
-   howto/index
-   tutor/index
-   instrument/index
-   reference/index
-
-.. TODO
-   edit and relocate *.md.use_bluesky
-
-..
-   TODO: sections that point to various documentation
-   See the top-level README and unload the root directory
+.. code::
 
    Introductory
       Bluesky Hello, World!
@@ -40,8 +28,17 @@ APS Bluesky Training
    Version control
    References
 
-   * https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable
-   * https://diataxis.fr/
+* https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable
+* https://diataxis.fr/
+
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   howto/index
+   tutor/index
+   instrument/index
+   reference/index
 
 Indices and tables
 ==================
