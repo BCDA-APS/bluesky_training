@@ -1,0 +1,1219 @@
+{
+ "cells": [
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Images, Darks, & whites with EPICS area detector, ophyd, and Bluesky\n",
+    "\n",
+    "In some scientific data acquisition processes, an area detector acquires a\n",
+    "sequence of image frames and stores them as a sequence in a data file.  In\n",
+    "tomography and other processes, the frames are associated with certain imaging\n",
+    "conditions, such as when the illumination is on and the sample is in view (known\n",
+    "as an *image* or *data* frame) or the sample is not in view (a *flat*, *flood*,\n",
+    "or *white* frame) or when the illumination is off (a *dark* or *background*\n",
+    "frame).\n",
+    "\n",
+    "This document describes how to configure the [Bluesky](https://blueskyproject.io/) software to write such [HDF5](https://www.hdfgroup.org/solutions/hdf5/) files when using [EPICS](https://epics-controls.org/) and the [Area Detector](https://areadetector.github.io/areaDetector/) support.\n",
+    "\n",
+    "The HDF5 File Writer\n",
+    "[plugin](https://areadetector.github.io/areaDetector/ADCore/NDFileHDF5.html) can\n",
+    "be configured to save image frames into separate datasets within the same HDF5\n",
+    "data file.  The selection of frame type (image frame, background/dark frame,\n",
+    "white/flat frame) is made by use of an existing PV in area detector:\n",
+    "`$(P):cam1:FrameType` which is an\n",
+    "[*mbbo*](https://epics.anl.gov/base/R7-0/6-docs/mbboRecord.html) record.  In\n",
+    "ophyd, the readback version of this PV: `$(P):cam1:FrameType_RBV` is used to\n",
+    "define operational values for the ophyd device.  Be sure to configure the\n",
+    "readback PV with the same values.\n",
+    "\n",
+    "meaning | PV value | PV field | default | [dxchange](https://www.aps.anl.gov/Science/Scientific-Software/DataExchange) | [NeXus](https://manual.nexusformat.org/rules.html#content-of-a-raw-data-nxentry-group)\n",
+    "--- | --- | --- | --- | --- | ---\n",
+    "image frame | 0 | `ZRST` | `Normal` | `/exchange/data` | `/entry/data/data`\n",
+    "background/dark frame | 1 | `ONST` | `Background` | `/exchange/data_dark` | `/entry/data/dark`\n",
+    "white/flat frame | 2 | `TWST` | `FlatField` | `/exchange/data_white` | `/entry/data/white`\n",
+    "not used | 3 | `THST` | `DblCorrelation` | `\"\"` | `\"\"`\n",
+    "not used | 4 | `FRST` | `\"\"` | `\"\"` | `\"\"`\n",
+    "\n",
+    "The values will be used as the HDF5 addresses to store that type of frame. With\n",
+    "the chosen format (dxchange or NeXus), set the fields of **both** these PVs\n",
+    "(`$(P):cam1:FrameType` and `$(P):cam1:FrameType_RBV`).\n",
+    "\n",
+    "In NeXus, detector data is stored within the\n",
+    "[`instrument`](https://manual.nexusformat.org/classes/base_classes/NXinstrument.html#nxinstrument-detector-group)\n",
+    "group, traditionally at `/entry/instrument/detector/`.  We then hard link the\n",
+    "field `data`, `dark`, and `white` fields to the `/entry/data/` group.  The hard\n",
+    "links provide a shorter HDF5 address.  We use this shorter address in EPICS, to\n",
+    "fit within the maximum 25 characters allowed by the EPICS *mbbo* record.  We\n",
+    "write the data into the `/entry/data` group and hard link it (in the\n",
+    "`layout.xml` file) to the instrument group.\n",
+    "\n",
+    "**Tip**:  Whether you use dxchange or NeXus, be sure the fields of the\n",
+    "`cam1:FrameType` PV are put in the IOC's\n",
+    "[autosave](https://epics.anl.gov/bcda/synApps/autosave/autosave.html)\n",
+    "configuration so they are restored when the IOC is restarted!\n",
+    "\n",
+    "The [area detector attributes XML file](#xml-attributes-file) needs the\n",
+    "`cam1:FrameType` selection PV included in its list.  We'll call it\n",
+    "`HDF5FrameLocation` so we can use the same name in the layout file:\n",
+    "\n",
+    "    <Attribute \n",
+    "        name=\"HDF5FrameLocation\"\n",
+    "        type=\"EPICS_PV\"\n",
+    "        source=\"13SIM1:cam1:FrameType\"\n",
+    "        dbrtype=\"DBR_STRING\"\n",
+    "        description=\"HDF5 address for this frame\"/>\n",
+    "\n",
+    "The HDF5 layout XML file will refer to this `HDF5FrameLocation` attribute in the\n",
+    "setup (add this to the XML file just after the opening `hdf5_layout` and before\n",
+    "the first `group` element).\n",
+    "\n",
+    "    <global name=\"detector_data_destination\" ndattribute=\"HDF5FrameLocation\" />\n",
+    "\n",
+    "The name `detector_data_destination` is hard-coded in the source code of the\n",
+    "HDF5 file writer.\n",
+    "\n",
+    "In the Bluesky plan, write the frame type **before acquisition** with a value\n",
+    "from this table:\n",
+    "\n",
+    "use this value | which means a frame of this type\n",
+    "--- | ----\n",
+    "`0` | image\n",
+    "`1` | dark\n",
+    "`2` | white\n",
+    "\n",
+    "In any following acquisition(s), the HDF5 file writer will direct the image\n",
+    "frame to the dataset as specified by the ZRST, ONST, or TWST field,\n",
+    "respectively."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Setup\n",
+    "\n",
+    "Try acquiring three different frame types into the same\n",
+    "[HDF5](https://www.hdfgroup.org/solutions/hdf5/) file with the\n",
+    "[ADSimDetector](https://areadetector.github.io/master/ADSimDetector/simDetector.html)\n",
+    "IOC.  Use the [NeXus](https://manual.nexusformat.org/user_manual.html) format.\n",
+    "The procedures are similar for the [data\n",
+    "exchange](https://www.aps.anl.gov/Science/Scientific-Software/DataExchange)\n",
+    "format."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Notebook-specific details\n",
+    "\n",
+    "These details are specific to the area detector running for *this* notebook.\n",
+    "\n",
+    "variable | comments\n",
+    "--- | ---\n",
+    "`ad_prefix` | IOC prefix for the ADSimdetector IOC\n",
+    "`IOC_MOUNT_POINT` | root directory of **this** IOC  as mounted on the workstation for this notebook"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import pathlib\n",
+    "\n",
+    "ad_prefix = \"ad:\"\n",
+    "IOC_MOUNT_POINT = pathlib.Path(\"/tmp/docker_ioc/iocad\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### XML Attributes File\n",
+    "\n",
+    "Here, we create the custom `/tmp/attributes.xml` (starting from the XML layout\n",
+    "file supplied with the ADSimDetector).  Rather than use an XML library to write\n",
+    "this file, we'll create all the content here as text and write the file with the\n",
+    "usual text file tools. Then, we'll check that the file exists.\n",
+    "\n",
+    "Note: This is the part of the file that connects the `cam1:FrameType` PV with an\n",
+    "attribute to be used in the [layout](#xml-layout-file) file.  We can choose any\n",
+    "unique name for this attribute (within the names allowed by XML) but we must use\n",
+    "the same name in both the attributes and layout XML files.  Here, we choose the name `HDF5FrameLocation` .\n",
+    "\n",
+    "```xml\n",
+    "    <Attribute\n",
+    "        name=\"HDF5FrameLocation\"\n",
+    "        type=\"EPICS_PV\"\n",
+    "        source=\"{ad_prefix}cam1:FrameType\"\n",
+    "        dbrtype=\"DBR_STRING\"\n",
+    "        description=\"HDF5 address for this frame\"\n",
+    "        />\n",
+    "```\n",
+    "\n",
+    "In a [later step](#install-support-for-custom-frame-types), we'll tell the HDF5\n",
+    "plugin to use it.\n",
+    "\n",
+    "**NOTE**: Very important that you set the attributes file in the `cam`, and not the `hdf1` plugin!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "xml_file.exists()=True\n",
+      "xml_file=PosixPath('/tmp/docker_ioc/iocad/tmp/attributes.xml')\n"
+     ]
+    }
+   ],
+   "source": [
+    "xml_file = IOC_MOUNT_POINT / \"tmp\" / \"attributes.xml\"  # IOC sees: /tmp/attributes.xml\n",
+    "XML_ATTRIBUTES = f\"\"\"\n",
+    "<?xml version=\"1.0\" standalone=\"no\" ?>\n",
+    "<Attributes\n",
+    "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n",
+    "    xsi:noNamespaceSchemaLocation=\"../../../../../ADCore/XML_schema/NDAttributes.xsd\"\n",
+    "    >\n",
+    "    <Attribute name=\"AcquireTime\"         type=\"EPICS_PV\" source=\"{ad_prefix}cam1:AcquireTime\"  dbrtype=\"DBR_NATIVE\"  description=\"Camera acquire time\"/>\n",
+    "    <Attribute name=\"HDF5FrameLocation\"   type=\"EPICS_PV\" source=\"{ad_prefix}cam1:FrameType\"    dbrtype=\"DBR_STRING\"  description=\"HDF5 address for this frame\"/>\n",
+    "    <Attribute name=\"ImageCounter\"        type=\"PARAM\"    source=\"ARRAY_COUNTER\"                datatype=\"INT\"        description=\"Image counter\"/>\n",
+    "    <Attribute name=\"AttributesFileParam\" type=\"PARAM\"    source=\"ND_ATTRIBUTES_FILE\"           datatype=\"STRING\"     description=\"Attributes file param\"/>\n",
+    "    <Attribute name=\"CameraModel\"         type=\"PARAM\"    source=\"MODEL\"                        datatype=\"STRING\"     description=\"Camera model\"/>\n",
+    "    <Attribute name=\"CameraManufacturer\"  type=\"PARAM\"    source=\"MANUFACTURER\"                 datatype=\"STRING\"     description=\"Camera manufacturer\"/>\n",
+    "</Attributes>\n",
+    "\"\"\"\n",
+    "\n",
+    "with open(xml_file, \"w\") as f:\n",
+    "    f.write(XML_ATTRIBUTES.strip())\n",
+    "print(f\"{xml_file.exists()=}\\n{xml_file=}\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### XML Layout File\n",
+    "\n",
+    "Here, we create the custom `/tmp/layout.xml` (starting from the XML layout file\n",
+    "supplied with the ADSimDetector).  Rather than use an XML library to write this\n",
+    "file, we'll create all the content here as text and write the file with the\n",
+    "usual text file tools. Then, we'll check that the file exists.\n",
+    "\n",
+    "Note: This is the part of the file that directs each frame type to its configured field:\n",
+    "\n",
+    "```xml\n",
+    "  <global name=\"detector_data_destination\" ndattribute=\"HDF5FrameLocation\" />\n",
+    "```\n",
+    "\n",
+    "The `detector_data_destination` name is compiled into the HDF5 writer plugin and\n",
+    "is required for proper operation.  The `HDF5FrameLocation` coordinates with the\n",
+    "same name in the [attributes](#xml-attributes-file) above.\n",
+    "\n",
+    "In a [later step](#install-support-for-custom-frame-types), we'll tell the HDF5\n",
+    "plugin to use it."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "xml_file.exists()=True\n",
+      "xml_file=PosixPath('/tmp/docker_ioc/iocad/tmp/layout.xml')\n"
+     ]
+    }
+   ],
+   "source": [
+    "xml_file = IOC_MOUNT_POINT / \"tmp\" / \"layout.xml\"  # IOC sees: /tmp/layout.xml\n",
+    "XML_LAYOUT2 = \"\"\"\n",
+    "<?xml version=\"1.0\" standalone=\"no\" ?>\n",
+    "<hdf5_layout\n",
+    "    xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n",
+    "    xsi:noNamespaceSchemaLocation=\"../../../../../ADCore/XML_schema/hdf5_xml_layout_schema.xsd\"\n",
+    "    >\n",
+    "  <global name=\"detector_data_destination\" ndattribute=\"HDF5FrameLocation\" />\n",
+    "  <group name=\"entry\">\n",
+    "    <attribute name=\"NX_class\" source=\"constant\" value=\"NXentry\" type=\"string\" />\n",
+    "    <attribute name=\"default\" source=\"constant\" value=\"data\" type=\"string\" />\n",
+    "    <group name=\"data\">\n",
+    "        <attribute name=\"NX_class\" source=\"constant\" value=\"NXdata\" type=\"string\" />\n",
+    "        <attribute name=\"signal\" source=\"constant\" value=\"data\" type=\"string\" />\n",
+    "        <dataset name=\"data\" source=\"detector\">\n",
+    "          <attribute name=\"units\" source=\"constant\" value=\"counts\" type=\"string\" />\n",
+    "          <attribute name=\"description\" source=\"constant\" value=\"image frame(s)\" type=\"string\" />\n",
+    "          <attribute name=\"target\" source=\"constant\" value=\"/entry/data/data\" type=\"string\" />\n",
+    "        </dataset>\n",
+    "        <dataset name=\"dark\" source=\"detector\">\n",
+    "          <attribute name=\"units\" source=\"constant\" value=\"counts\" type=\"string\" />\n",
+    "          <attribute name=\"description\" source=\"constant\" value=\"dark (background) frame(s)\" type=\"string\" />\n",
+    "          <attribute name=\"target\" source=\"constant\" value=\"/entry/data/dark\" type=\"string\" />\n",
+    "        </dataset>\n",
+    "        <dataset name=\"white\" source=\"detector\">\n",
+    "          <attribute name=\"units\" source=\"constant\" value=\"counts\" type=\"string\" />\n",
+    "          <attribute name=\"description\" source=\"constant\" value=\"white (flat) frame(s)\" type=\"string\" />\n",
+    "          <attribute name=\"target\" source=\"constant\" value=\"/entry/data/white\" type=\"string\" />\n",
+    "        </dataset>\n",
+    "    </group>              <!-- end group data -->\n",
+    "    <group name=\"instrument\">\n",
+    "      <attribute name=\"NX_class\" source=\"constant\" value=\"NXinstrument\" type=\"string\" />\n",
+    "      <group name=\"detector\">\n",
+    "        <attribute name=\"NX_class\" source=\"constant\" value=\"NXdetector\" type=\"string\" />\n",
+    "        <hardlink name=\"data\" target=\"/entry/data/data\" />\n",
+    "        <hardlink name=\"dark\" target=\"/entry/data/dark\" />\n",
+    "        <hardlink name=\"white\" target=\"/entry/data/white\" />\n",
+    "      </group>            <!-- end group detector -->\n",
+    "      <group name=\"NDAttributes\" ndattr_default=\"true\">\n",
+    "        <attribute name=\"NX_class\" source=\"constant\" value=\"NXcollection\" type=\"string\" />\n",
+    "      </group>            <!-- end group NDAttribute (default) -->\n",
+    "    </group>              <!-- end group instrument -->\n",
+    "  </group>                <!-- end group entry -->\n",
+    "</hdf5_layout>\n",
+    "\"\"\"\n",
+    "\n",
+    "with open(xml_file, \"w\") as f:\n",
+    "    f.write(XML_LAYOUT2.strip())\n",
+    "print(f\"{xml_file.exists()=}\\n{xml_file=}\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Ophyd Device Setup"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from apstools.devices import CamMixin_V34\n",
+    "from apstools.devices import SingleTrigger_V34\n",
+    "from ophyd import Component\n",
+    "from ophyd import Device\n",
+    "from ophyd import EpicsSignal\n",
+    "from ophyd import EpicsSignalRO\n",
+    "from ophyd import EpicsSignalWithRBV\n",
+    "from ophyd import SimDetector\n",
+    "from ophyd.areadetector import SimDetectorCam\n",
+    "from ophyd.areadetector.plugins import HDF5Plugin_V34\n",
+    "from ophyd.areadetector.plugins import ImagePlugin_V34\n",
+    "from ophyd.areadetector.plugins import PvaPlugin_V34\n",
+    "\n",
+    "class MySimDetectorCam(CamMixin_V34, SimDetectorCam):\n",
+    "    nd_attr_status = Component(EpicsSignalRO, \"NDAttributesStatus\", kind=\"omitted\", string=True)\n",
+    "\n",
+    "class MyHDF5Plugin(HDF5Plugin_V34):\n",
+    "    layout_filename = Component(EpicsSignal, \"XMLFileName\", kind=\"config\", string=True)\n",
+    "    layout_filename_valid = Component(EpicsSignal, \"XMLValid_RBV\", kind=\"omitted\", string=True)\n",
+    "    nd_attr_status = Component(EpicsSignal, \"NDAttributesStatus\", kind=\"omitted\", string=True)\n",
+    "\n",
+    "class MyDetector(SingleTrigger_V34, SimDetector):\n",
+    "    cam = Component(MySimDetectorCam, suffix=\"cam1:\")\n",
+    "    hdf1 = Component(MyHDF5Plugin, suffix=\"HDF1:\")\n",
+    "    image = Component(ImagePlugin_V34, suffix=\"image1:\")\n",
+    "    pva1 = Component(PvaPlugin_V34, suffix=\"Pva1:\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Support Functions"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import h5py\n",
+    "\n",
+    "IMAGE = 0\n",
+    "DARK = 1\n",
+    "WHITE = 2\n",
+    "\n",
+    "def set_ad_count_time(det, exposure=1, period=1):\n",
+    "    det.cam.stage_sigs[\"acquire_time\"] = exposure\n",
+    "    det.cam.stage_sigs[\"acquire_period\"] = period\n",
+    "\n",
+    "def ad_setup(det, nframes=1):\n",
+    "    \"\"\"Make this a function.  We'll use again later.\"\"\"\n",
+    "    det.cam.acquire.put(0)\n",
+    "    det.cam.frame_type.kind = \"config\"\n",
+    "    det.hdf1.capture.put(0)\n",
+    "    det.hdf1.compression.put(\"zlib\")  # better than `\"None\"` (default)\n",
+    "    det.hdf1.create_directory.put(-5)\n",
+    "    det.hdf1.file_name.put(\"test_image\")\n",
+    "    det.hdf1.file_path.put(\"/tmp\")\n",
+    "    det.hdf1.kind = 3  # config | normal\n",
+    "\n",
+    "    if \"compression\" in det.hdf1.stage_sigs:\n",
+    "        det.hdf1.stage_sigs.pop(\"create_directory\")\n",
+    "\n",
+    "    # The plugins do not block, the cam must wait for the plugins to finish.\n",
+    "    for nm in det.component_names:\n",
+    "        obj = getattr(det, nm)\n",
+    "        if \"blocking_callbacks\" in dir(obj):  # is it a plugin?\n",
+    "            obj.stage_sigs[\"blocking_callbacks\"] = \"No\"\n",
+    "    det.cam.stage_sigs[\"wait_for_plugins\"] = \"Yes\"\n",
+    "\n",
+    "    det.cam.stage_sigs[\"num_images\"] = nframes\n",
+    "    det.hdf1.stage_sigs[\"num_capture\"] = 0  # capture ALL frames received\n",
+    "    det.hdf1.stage_sigs[\"auto_increment\"] = \"Yes\"\n",
+    "    det.hdf1.stage_sigs[\"auto_save\"] = \"Yes\"\n",
+    "    det.hdf1.stage_sigs[\"file_template\"] = \"%s%s_%4.4d.h5\"\n",
+    "    det.hdf1.stage_sigs[\"file_write_mode\"] = \"Stream\"\n",
+    "    det.hdf1.stage_sigs[\"store_attr\"] = \"Yes\"  # need in this notebook\n",
+    "    det.hdf1.stage_sigs[\"store_perform\"] = \"No\"  # optional\n",
+    "    det.hdf1.stage_sigs[\"auto_increment\"] = \"Yes\"\n",
+    "    det.hdf1.stage_sigs[\"capture\"] = 1  # ALWAYS last\n",
+    "    det.hdf1.stage_sigs.move_to_end(\"capture\")  # ... just in case\n",
+    "\n",
+    "    # Clear these settings __for this demo__.\n",
+    "    det.hdf1.layout_filename.put(\"\")\n",
+    "    det.cam.nd_attributes_file.put(\"\")\n",
+    "\n",
+    "def check_adplugin_primed(plugin, allow_priming=True):\n",
+    "    from apstools.devices import AD_plugin_primed\n",
+    "    from apstools.devices import AD_prime_plugin2\n",
+    "\n",
+    "    # this step is needed for ophyd\n",
+    "    if not AD_plugin_primed(plugin):\n",
+    "        if allow_priming:\n",
+    "            print(f\"Priming {plugin.dotted_name}\")\n",
+    "            AD_prime_plugin2(plugin)\n",
+    "        else:\n",
+    "            raise RuntimeError(\n",
+    "                f\"Detector plugin '{plugin.dotted_name}' must be primed first.\"\n",
+    "            )\n",
+    "\n",
+    "def dict_to_table(d, printing=True):\n",
+    "    import pyRestTable\n",
+    "\n",
+    "    if len(d) == 0:\n",
+    "        return\n",
+    "\n",
+    "    table = pyRestTable.Table()\n",
+    "    table.labels = \"key value\".split()\n",
+    "    table.rows = [[k, v] for k, v in d.items()]\n",
+    "\n",
+    "    if printing:\n",
+    "        print(table)\n",
+    "    else:\n",
+    "        return table\n",
+    "\n",
+    "def readings_to_table(d, printing=True):\n",
+    "    import pyRestTable\n",
+    "\n",
+    "    if len(d) == 0:\n",
+    "        return\n",
+    "\n",
+    "    labels = sorted(set([k for v in d.values() for k in v.keys()]))\n",
+    "    table = pyRestTable.Table()\n",
+    "    # fmt: off\n",
+    "    table.labels = [ \"name\", ] + list(labels)\n",
+    "    for k, reading in d.items():\n",
+    "        row = [k, ] + [reading.get(r, \"\") for r in labels]\n",
+    "        table.addRow(row)\n",
+    "    # fmt: on\n",
+    "\n",
+    "    if printing:\n",
+    "        print(table)\n",
+    "    else:\n",
+    "        return table\n",
+    "\n",
+    "def print_overview(device):\n",
+    "    cfg = device.describe_configuration()\n",
+    "    for k, readings in device.read_configuration().items():\n",
+    "        if k not in cfg:\n",
+    "            cfg[k] = readings\n",
+    "        else:\n",
+    "            cfg[k].update(readings)\n",
+    "\n",
+    "    if len(cfg) > 0:\n",
+    "        print(f\"'{device.name}' configuration:\")\n",
+    "    readings_to_table(cfg)\n",
+    "\n",
+    "def practice_device_staging(device):\n",
+    "    print(f\"Before staging '{device.name}'\")\n",
+    "    device.stage()\n",
+    "    print(f\"Device '{device.name}' staged\")\n",
+    "    device.unstage()\n",
+    "    print(f\"Device '{device.name}' unstaged\")\n",
+    "\n",
+    "def local_h5_file(det):\n",
+    "    ioc_file = det.hdf1.full_file_name.get()\n",
+    "    return IOC_MOUNT_POINT / ioc_file.lstrip(\"/\")\n",
+    "\n",
+    "def check_h5_file(det):\n",
+    "    hfile = local_h5_file(det)\n",
+    "    print(f\"{hfile.exists()=} {hfile.name=}\")\n",
+    "    addr = \"/entry/instrument/NDAttributes\"\n",
+    "    with h5py.File(hfile, \"r\") as root:\n",
+    "        group = root[addr]\n",
+    "        print(f\"{len(group)=}  {group=}\")\n",
+    "        print(f\"members: {[k for k in group]}\")\n",
+    "\n",
+    "def h5_overview(det):\n",
+    "    h5_file = local_h5_file(det)\n",
+    "    print(f\"{h5_file=}\")\n",
+    "    with h5py.File(h5_file, \"r\") as NeXus_data:\n",
+    "        print(f\"{('/entry/data' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/data/dark' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/data/data' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/data/white' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument/detector' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument/detector/dark' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument/detector/data' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument/detector/white' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument/NDAttributes' in NeXus_data)=}\")\n",
+    "        print(f\"{('/entry/instrument/NDAttributes/HDF5FrameLocation' in NeXus_data)=}\")\n",
+    "        for addr in \"dark data white\".split():\n",
+    "            try:\n",
+    "                ds = NeXus_data[f\"/entry/data/{addr}\"]\n",
+    "                print(f\"{ds=}  {ds.shape=}\")\n",
+    "            except KeyError:\n",
+    "                pass\n",
+    "    frame_type = det.cam.frame_type.get()\n",
+    "    print(\n",
+    "        f\"frame_type: PV='{det.cam.frame_type.pvname}'\"\n",
+    "        f\"\\n    value={frame_type}\"\n",
+    "        f\" ({det.cam.frame_type.enum_strs[frame_type]})\"\n",
+    "        f\"\\n    choices={det.cam.frame_type.enum_strs}\"\n",
+    "    )\n",
+    "    print(f\"{h5_file=}\")\n",
+    "\n",
+    "def setup_frame_type():\n",
+    "    class FrameType(Device):\n",
+    "        zero = Component(EpicsSignal, \".ZRST\", string=True)\n",
+    "        one = Component(EpicsSignal, \".ONST\", string=True)\n",
+    "        two = Component(EpicsSignal, \".TWST\", string=True)\n",
+    "        three = Component(EpicsSignal, \".THST\", string=True)\n",
+    "\n",
+    "    for pv in (\"FrameType\", ):\n",
+    "        o = FrameType(f\"{ad_prefix}cam1:{pv}\", name=\"o\")\n",
+    "        o.wait_for_connection()\n",
+    "        o.zero.put(\"/entry/data/data\")\n",
+    "        o.one.put(\"/entry/data/dark\")\n",
+    "        o.two.put(\"/entry/data/white\")\n",
+    "        o.three.put(\"\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Configure PV for the Frame Type\n",
+    "\n",
+    "Configure our PV(s) for the *NeXus* addresses we want to use.  We **must**\n",
+    "reconnect our ophyd object after our change to the EPICS PVs to pick up this\n",
+    "change.  (The choices that the Python objects sees are only updated when the\n",
+    "`cam1:FrameType` PV is first connected.)\n",
+    "\n",
+    "Must call `setup_frame_type()` *before* creating detector object, so the Python\n",
+    "detector object picks up on the different string values.  The EPICS IOC gets the\n",
+    "correct string directly from the `cam1:FrameType` PV."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "setup_frame_type()"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Create Detector Object\n",
+    "\n",
+    "... and connect with the Area Detector IOC.  Set the counting time per frame\n",
+    "(something short).  *Prime* (push an image frame from the camera to the plugin)\n",
+    "the HDF5 plugin, if found necessary."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Priming hdf1\n"
+     ]
+    }
+   ],
+   "source": [
+    "adsimdet = MyDetector(ad_prefix, name=\"det\")\n",
+    "adsimdet.wait_for_connection()\n",
+    "\n",
+    "NUM_FRAMES = 5\n",
+    "set_ad_count_time(adsimdet, exposure=0.02, period=0.1)\n",
+    "ad_setup(adsimdet, nframes=NUM_FRAMES)\n",
+    "check_adplugin_primed(adsimdet.hdf1)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Create RunEngine"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import apstools\n",
+    "import bluesky\n",
+    "import databroker\n",
+    "from bluesky import plans as bp\n",
+    "\n",
+    "cat = databroker.temp().v2\n",
+    "RE = bluesky.RunEngine()\n",
+    "RE.subscribe(cat.v1.insert)\n",
+    "\n",
+    "RE.md[\"title\"] = \"images, darks, & flats\"\n",
+    "RE.md[\"versions\"][\"apstools\"] = apstools.__version__\n",
+    "RE.md[\"repository\"] = \"bluesky_training\"\n",
+    "RE.md[\"notebook\"] = \"images_darks_flats\""
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Review the Configurations"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 9,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "RunEngine metadata\n",
+      "========== =============================================================\n",
+      "key        value                                                        \n",
+      "========== =============================================================\n",
+      "versions   {'ophyd': '1.7.0', 'bluesky': '1.10.0', 'apstools': '1.6.15'}\n",
+      "title      images, darks, & flats                                       \n",
+      "repository bluesky_training                                             \n",
+      "notebook   images_darks_flats                                           \n",
+      "========== =============================================================\n",
+      "\n",
+      "'adsimdet.stage_sigs' stage_sigs\n",
+      "============== =====\n",
+      "key            value\n",
+      "============== =====\n",
+      "cam.acquire    0    \n",
+      "cam.image_mode 1    \n",
+      "============== =====\n",
+      "\n",
+      "'adsimdet.cam.stage_sigs' stage_sigs\n",
+      "================ =====\n",
+      "key              value\n",
+      "================ =====\n",
+      "acquire_time     0.02 \n",
+      "acquire_period   0.1  \n",
+      "wait_for_plugins Yes  \n",
+      "num_images       5    \n",
+      "================ =====\n",
+      "\n",
+      "'adsimdet.hdf1.stage_sigs' stage_sigs\n",
+      "========================== =============\n",
+      "key                        value        \n",
+      "========================== =============\n",
+      "enable                     1            \n",
+      "blocking_callbacks         No           \n",
+      "parent.cam.array_callbacks 1            \n",
+      "num_capture                0            \n",
+      "auto_increment             Yes          \n",
+      "auto_save                  Yes          \n",
+      "file_template              %s%s_%4.4d.h5\n",
+      "file_write_mode            Stream       \n",
+      "store_attr                 Yes          \n",
+      "store_perform              No           \n",
+      "capture                    1            \n",
+      "========================== =============\n",
+      "\n",
+      "'det' configuration:\n",
+      "====================== ======= ======================================================= ================ ========= ===== ============================ ================= ===== ================ ==================\n",
+      "name                   dtype   enum_strs                                               lower_ctrl_limit precision shape source                       timestamp         units upper_ctrl_limit value             \n",
+      "====================== ======= ======================================================= ================ ========= ===== ============================ ================= ===== ================ ==================\n",
+      "det_cam_acquire_period number                                                          0.0              3         []    PV:ad:cam1:AcquirePeriod_RBV 1681423107.715916       0.0              0.005             \n",
+      "det_cam_acquire_time   number                                                          0.0              3         []    PV:ad:cam1:AcquireTime_RBV   1681423107.818108       0.0              0.001             \n",
+      "det_cam_frame_type     integer ('Normal', 'Background', 'FlatField', 'DblCorrelation') None                       []    PV:ad:cam1:FrameType_RBV     1681423053.905152 None  None             0                 \n",
+      "det_cam_image_mode     integer ('Single', 'Multiple', 'Continuous')                    None                       []    PV:ad:cam1:ImageMode_RBV     1681423108.021729 None  None             2                 \n",
+      "det_cam_manufacturer   string                                                          None                       []    PV:ad:cam1:Manufacturer_RBV  1681423053.904149 None  None             Simulated detector\n",
+      "det_cam_model          string                                                          None                       []    PV:ad:cam1:Model_RBV         1681423053.904223 None  None             Basic simulator   \n",
+      "det_cam_num_exposures  integer                                                         0                          []    PV:ad:cam1:NumExposures_RBV  1681423053.90519        0                1                 \n",
+      "det_cam_num_images     integer                                                         0                          []    PV:ad:cam1:NumImages_RBV     1681423053.904953       0                100               \n",
+      "det_cam_trigger_mode   integer ('Internal', 'External')                                None                       []    PV:ad:cam1:TriggerMode_RBV   1681423053.90516  None  None             0                 \n",
+      "====================== ======= ======================================================= ================ ========= ===== ============================ ================= ===== ================ ==================\n",
+      "\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(\"RunEngine metadata\")\n",
+    "dict_to_table(RE.md)\n",
+    "\n",
+    "for o in [adsimdet, adsimdet.cam, adsimdet.hdf1]:\n",
+    "    nm = f\"adsimdet.{o.attr_name}\".rstrip(\".\")\n",
+    "    print(f\"'{nm}.stage_sigs' stage_sigs\")\n",
+    "    dict_to_table(o.stage_sigs)\n",
+    "\n",
+    "print_overview(adsimdet)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Acquire Images with Standard `bp.count()` Plan\n",
+    "\n",
+    "To understand what the custom frame type support will do for us, we first\n",
+    "demonstrate image acquisition when the custom support is not yet installed.\n",
+    "When a custom layout file is not configured in the HDF5 plugin, the standard\n",
+    "layout (NeXus schema) writes all image frames into the `/entry/data/data` field\n",
+    "of the HDF5 file."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "('adb1a4a5-19ce-4302-b18b-76eb1c7a4289',)"
+      ]
+     },
+     "execution_count": 10,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "RE(bp.count([adsimdet]))"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "After the acquisition, check the output file.  This is not a great test since we\n",
+    "are only writing a single image type.  Just check that `HDF5FrameLocation` is\n",
+    "found in the list of `members` and that the expected data group is present. Only\n",
+    "the test results for the `data` frames should be `True` (tests for the paths to\n",
+    "those components should also be `True`)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "/tmp/docker_ioc/iocad/tmp/test_image_0000.h5\n",
+      "hfile.exists()=True hfile.name='test_image_0000.h5'\n",
+      "len(group)=4  group=<HDF5 group \"/entry/instrument/NDAttributes\" (4 members)>\n",
+      "members: ['NDArrayEpicsTSSec', 'NDArrayEpicsTSnSec', 'NDArrayTimeStamp', 'NDArrayUniqueId']\n",
+      "h5_file=PosixPath('/tmp/docker_ioc/iocad/tmp/test_image_0000.h5')\n",
+      "('/entry/data' in NeXus_data)=True\n",
+      "('/entry/data/dark' in NeXus_data)=False\n",
+      "('/entry/data/data' in NeXus_data)=True\n",
+      "('/entry/data/white' in NeXus_data)=False\n",
+      "('/entry/instrument' in NeXus_data)=True\n",
+      "('/entry/instrument/detector' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/dark' in NeXus_data)=False\n",
+      "('/entry/instrument/detector/data' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/white' in NeXus_data)=False\n",
+      "('/entry/instrument/NDAttributes' in NeXus_data)=True\n",
+      "('/entry/instrument/NDAttributes/HDF5FrameLocation' in NeXus_data)=False\n",
+      "ds=<HDF5 dataset \"data\": shape (5, 1024, 1024), type \"|u1\">  ds.shape=(5, 1024, 1024)\n",
+      "frame_type: PV='ad:cam1:FrameType_RBV'\n",
+      "    value=0 (Normal)\n",
+      "    choices=('Normal', 'Background', 'FlatField', 'DblCorrelation')\n",
+      "h5_file=PosixPath('/tmp/docker_ioc/iocad/tmp/test_image_0000.h5')\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"{local_h5_file(adsimdet)}\")\n",
+    "check_h5_file(adsimdet)\n",
+    "h5_overview(adsimdet)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Use Ophyd to Acquire Image Frames\n",
+    "\n",
+    "Test the acquisition of the different frame types."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Install Support for Custom Frame Types\n",
+    "\n",
+    "Previously we wrote [attributes](#xml-attributes-file) and\n",
+    "[layout](#xml-layout-file) files for the IOC to use.  Configure the IOC to use\n",
+    "these files now.  With these files, the HDF5 writer will use the\n",
+    "`cam1:FrameType` PV, configured [above](#configure-pv-for-the-frame-type), to\n",
+    "direct each frame to its configured HDF5 address in the file.\n",
+    "\n",
+    "**NOTE**: Very important that you set the [attributes](#xml-attributes-file) file in the `cam`, and not the `hdf1` plugin!"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "adsimdet.cam.nd_attr_status.get() = 'Attributes file OK'\n",
+      "adsimdet.hdf1.layout_filename_valid.get()='Yes'\n"
+     ]
+    }
+   ],
+   "source": [
+    "adsimdet.cam.nd_attributes_file.put(\"/tmp/attributes.xml\")\n",
+    "print(f\"{adsimdet.cam.nd_attr_status.get() = }\")\n",
+    "\n",
+    "adsimdet.hdf1.layout_filename.put(\"/tmp/layout.xml\")\n",
+    "print(f\"{adsimdet.hdf1.layout_filename_valid.get()=}\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Start Data Acquisition\n",
+    "\n",
+    "In staging, ophyd sets the various detector PVs to the values to be used for the\n",
+    "next data acquisition.  The configuration is stored in the various `stage_sigs`\n",
+    "dictionaries printed [above](#review-the-configurations)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "adsimdet.stage()\n",
+    "adsimdet.cam.image_mode.put(\"Multiple\")"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Collect Different Frame Types\n",
+    "\n",
+    "Since execution by the RunEngine may appear to be opaque to the user, let's\n",
+    "bypass the RunEngine and collect the different frame types using pure ophyd\n",
+    "commands.\n",
+    "\n",
+    "For the different image types, first set the frame type, then tell the camera to\n",
+    "acquire.  The camera has been configured to wait for all plugins to finish\n",
+    "before it sets detector state to idle.  The `responder()` function is subscribed\n",
+    "to any updates of the detector state PV.  A `Status()` object is used to wait\n",
+    "for the PV to reach the value of `\"Idle\"` (or `0`)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from ophyd.status import Status\n",
+    "\n",
+    "def acquire(det, frame_type, nframes):\n",
+    "    acquisition = Status()\n",
+    "\n",
+    "    def responder(**kwargs):\n",
+    "        \"\"\"Called when subscribed signal changes.\"\"\"\n",
+    "        if kwargs.get(\"value\") in (0, \"Idle\") and not acquisition.done:\n",
+    "            acquisition.set_finished()\n",
+    "\n",
+    "    det.cam.frame_type.put(frame_type)\n",
+    "    det.cam.num_images.put(nframes)\n",
+    "    det.cam.acquire.put(1)\n",
+    "    det.cam.detector_state.subscribe(responder)\n",
+    "    acquisition.wait()\n",
+    "    det.cam.detector_state.unsubscribe(responder)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We mix up the sequence of images, darks, and whites to demonstrate that the order\n",
+    "of these does not matter.  Each image type will be directed to the corresponding\n",
+    "HDF5 dataset as it is collected."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Collect one *image* frame"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "acquire(adsimdet, IMAGE, 1)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Collect two *white* frames"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "acquire(adsimdet, WHITE, 2)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Collect three *dark* frames"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "acquire(adsimdet, DARK, 3)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Collect five more *image* frames"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "acquire(adsimdet, IMAGE, 5)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### End Data Acquisition\n",
+    "\n",
+    "*Unstaging* reverses the `stage()` step above, restoring PVs to their prior values."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "h5_file=PosixPath('/tmp/docker_ioc/iocad/tmp/test_image_0001.h5')\n",
+      "('/entry/data' in NeXus_data)=True\n",
+      "('/entry/data/dark' in NeXus_data)=True\n",
+      "('/entry/data/data' in NeXus_data)=True\n",
+      "('/entry/data/white' in NeXus_data)=True\n",
+      "('/entry/instrument' in NeXus_data)=True\n",
+      "('/entry/instrument/detector' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/dark' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/data' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/white' in NeXus_data)=True\n",
+      "('/entry/instrument/NDAttributes' in NeXus_data)=True\n",
+      "('/entry/instrument/NDAttributes/HDF5FrameLocation' in NeXus_data)=False\n",
+      "ds=<HDF5 dataset \"dark\": shape (3, 1024, 1024), type \"|u1\">  ds.shape=(3, 1024, 1024)\n",
+      "ds=<HDF5 dataset \"data\": shape (6, 1024, 1024), type \"|u1\">  ds.shape=(6, 1024, 1024)\n",
+      "ds=<HDF5 dataset \"white\": shape (2, 1024, 1024), type \"|u1\">  ds.shape=(2, 1024, 1024)\n",
+      "frame_type: PV='ad:cam1:FrameType_RBV'\n",
+      "    value=0 (Normal)\n",
+      "    choices=('Normal', 'Background', 'FlatField', 'DblCorrelation')\n",
+      "h5_file=PosixPath('/tmp/docker_ioc/iocad/tmp/test_image_0001.h5')\n"
+     ]
+    }
+   ],
+   "source": [
+    "adsimdet.unstage()\n",
+    "h5_overview(adsimdet)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We're looking for 3 darks, 6 data, and 2 white frames.\n",
+    "All the test results should be `True`."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Use Bluesky to Acquire Image Frames\n",
+    "\n",
+    "Here, we collect image frames with a custom plan using the bluesky RunEngine\n",
+    "(`RE`)."
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Custom Bluesky Plan"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import bluesky.plan_stubs as bps\n",
+    "\n",
+    "def frame_set(det, frame_type=0, num_frames=1, sleep=0.25):\n",
+    "    frame_name = \"image background white\".split()[frame_type]\n",
+    "    print(f\"{frame_type=}  {frame_name=}  {num_frames=}\")\n",
+    "    yield from bps.mv(\n",
+    "        det.cam.frame_type, frame_type,\n",
+    "        det.cam.num_images, num_frames,\n",
+    "    )\n",
+    "    if sleep > 0:\n",
+    "        yield from bps.sleep(sleep)\n",
+    "    yield from bps.mv(det.cam.acquire, 1)  # waits for acquire=0\n",
+    "    while det.cam.acquire_busy.get(use_monitor=False) != 0:\n",
+    "        yield from bps.sleep(0.01)\n",
+    "\n",
+    "def series(det, sequence, sleep=1):\n",
+    "    total = sum([item[1] for item in sequence])\n",
+    "    print(\"total frames:\", total)\n",
+    "\n",
+    "    print(\"setup\")\n",
+    "    yield from bps.mv(\n",
+    "        det.hdf1.auto_save, \"Yes\",\n",
+    "        det.hdf1.num_capture, 0,\n",
+    "        det.cam.image_mode, \"Multiple\",\n",
+    "    )\n",
+    "    yield from bps.mv(det.hdf1.file_write_mode, 'Stream')  # TODO: or Capture\n",
+    "    yield from bps.stage(det)\n",
+    "\n",
+    "    for frame_specification in sequence:\n",
+    "        frame_type, num_frames = frame_specification\n",
+    "        yield from frame_set(det, frame_type, num_frames, sleep=sleep)\n",
+    "\n",
+    "    yield from bps.mv(det.hdf1.capture, 0)  # before file_write_mode = 'Single\n",
+    "    yield from bps.unstage(det)\n",
+    "    yield from bps.mv(\n",
+    "        det.cam.frame_type, IMAGE,\n",
+    "        det.hdf1.file_write_mode, 'Single',\n",
+    "    )"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Acquire Image Frames with Bluesky\n",
+    "\n",
+    "Describe a sequence of acquisitions with different frame types and number of frames to collect with each.\n",
+    "\n",
+    "Run this sequence with the custom plan (in the RunEngine), then print an overview of the HDF5 file."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "total frames: 9\n",
+      "setup\n",
+      "frame_type=1  frame_name='background'  num_frames=1\n",
+      "frame_type=2  frame_name='white'  num_frames=1\n",
+      "frame_type=0  frame_name='image'  num_frames=1\n",
+      "frame_type=0  frame_name='image'  num_frames=1\n",
+      "frame_type=1  frame_name='background'  num_frames=1\n",
+      "frame_type=0  frame_name='image'  num_frames=2\n",
+      "frame_type=2  frame_name='white'  num_frames=1\n",
+      "frame_type=1  frame_name='background'  num_frames=1\n",
+      "h5_file=PosixPath('/tmp/docker_ioc/iocad/tmp/test_image_0002.h5')\n",
+      "('/entry/data' in NeXus_data)=True\n",
+      "('/entry/data/dark' in NeXus_data)=True\n",
+      "('/entry/data/data' in NeXus_data)=True\n",
+      "('/entry/data/white' in NeXus_data)=True\n",
+      "('/entry/instrument' in NeXus_data)=True\n",
+      "('/entry/instrument/detector' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/dark' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/data' in NeXus_data)=True\n",
+      "('/entry/instrument/detector/white' in NeXus_data)=True\n",
+      "('/entry/instrument/NDAttributes' in NeXus_data)=True\n",
+      "('/entry/instrument/NDAttributes/HDF5FrameLocation' in NeXus_data)=True\n",
+      "ds=<HDF5 dataset \"dark\": shape (3, 1024, 1024), type \"|u1\">  ds.shape=(3, 1024, 1024)\n",
+      "ds=<HDF5 dataset \"data\": shape (4, 1024, 1024), type \"|u1\">  ds.shape=(4, 1024, 1024)\n",
+      "ds=<HDF5 dataset \"white\": shape (2, 1024, 1024), type \"|u1\">  ds.shape=(2, 1024, 1024)\n",
+      "frame_type: PV='ad:cam1:FrameType_RBV'\n",
+      "    value=0 (Normal)\n",
+      "    choices=('Normal', 'Background', 'FlatField', 'DblCorrelation')\n",
+      "h5_file=PosixPath('/tmp/docker_ioc/iocad/tmp/test_image_0002.h5')\n"
+     ]
+    }
+   ],
+   "source": [
+    "SEQUENCE = [\n",
+    "    (DARK, 1),\n",
+    "    (WHITE, 1),\n",
+    "    (IMAGE, 1),\n",
+    "    (IMAGE, 1),\n",
+    "    (DARK, 1),\n",
+    "    (IMAGE, 2),\n",
+    "    (WHITE, 1),\n",
+    "    (DARK, 1),\n",
+    "]\n",
+    "\n",
+    "RE(series(adsimdet, SEQUENCE, sleep=0.0))\n",
+    "h5_overview(adsimdet)"
+   ]
+  },
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We are looking for this structure in the HDF5 data file (other structure has been omitted, for clarity):\n",
+    "\n",
+    "```\n",
+    "  entry:NXentry\n",
+    "    data:NXdata\n",
+    "      dark:NX_UINT8[3,1024,1024] = [ ... ]\n",
+    "      data:NX_UINT8[4,1024,1024] = [ ... ]\n",
+    "      white:NX_UINT8[2,1024,1024] = [ ... ]\n",
+    "    instrument:NXinstrument\n",
+    "      NDAttributes:NXcollection\n",
+    "        HDF5FrameLocation:NX_CHAR[256] = /entry/data/data\n",
+    "      detector:NXdetector\n",
+    "        dark --> /entry/data/dark\n",
+    "        data --> /entry/data/data\n",
+    "        white --> /entry/data/white\n",
+    "```\n",
+    "\n",
+    "All the test results should be `True`."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "bluesky_2023_2",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.10"
+  },
+  "orig_nbformat": 4
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

@@ -152,6 +152,13 @@
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
       
@@ -249,6 +256,13 @@ document.write(`
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
         
@@ -278,6 +292,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_aps101.html">APS Bluesky 101</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
@@ -468,7 +483,7 @@ Cell <span class="ansi-green-fg">In[4], line 1</span>
 </pre></div></div>
 </div>
 <p>By default, the ophyd <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> object shows data for only the channels with names defined in EPICS. Except for one channel (probably a bug in the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> code). To fix that, we’ll load another support library. (Loading additional support as we need it will be a common theme in these lessons. Rather than loading all the libraries first, as is common in python code files, we’ll load support code as the need arises.)</p>
-<p>The new support code is <code class="docutils literal notranslate"><span class="pre">use_EPICS_scaler_channels</span></code> from <code class="docutils literal notranslate"><span class="pre">`apstools.devices</span></code> &lt;<a class="reference external" href="http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels">http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels</a>&gt;`__.</p>
+<p>The new support code is <code class="docutils literal notranslate"><span class="pre">use_EPICS_scaler_channels</span></code> from <code class="docutils literal notranslate"><span class="pre">`apstools.devices</span></code> &lt;<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.scaler_support.use_EPICS_scaler_channels">https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.scaler_support.use_EPICS_scaler_channels</a>&gt;`__.</p>
 <p>Our scaler only has a few channels in use (that is, channels where the name of the channel has been specified in the GUI screen). Let’s focus on just those channels.</p>
 <p>To read just the <em>named</em> channels, we call the scaler’s <code class="docutils literal notranslate"><span class="pre">select_channels()</span></code> method and name the scaler channels we wish to see. To see all channels with names defined in EPICS, use <code class="docutils literal notranslate"><span class="pre">None</span></code> as shown:</p>
 <div class="nbinput docutils container">

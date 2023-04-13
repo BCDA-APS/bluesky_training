@@ -465,7 +465,7 @@ terms of a common structure.  Consider a sample X-Y stage might have motors
 <code class="docutils literal notranslate"><span class="pre">sample_x</span></code> and <code class="docutils literal notranslate"><span class="pre">sample_y</span></code>.  These can be grouped together into an <a class="reference external" href="https://blueskyproject.io/ophyd/device-overview.html">ophyd
 Device</a>.  Also note that a
 Device can contain other Devices, in addition to Signals, such as the
-<a class="reference external" href="https://apstools.readthedocs.io/en/latest/_modules/apstools/devices.html#ApsMachineParametersDevice">ApsMachineParametersDevice</a>.</p>
+<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.aps_machine.ApsMachineParametersDevice">ApsMachineParametersDevice</a>.</p>
 <p>On ophyd Device organizes one or more ophyd Signals and/or Devices into a larger
 structure, for grouping or to provide custom controls.</p>
 <details>
@@ -537,15 +537,15 @@ labeled in the data.  (There’s a reason for this difference beyond this scope.
 from ophyd.</p>
 <p>See these examples:</p>
 <ul class="simple">
-<li><p><a class="reference external" href="https://apstools.readthedocs.io/en/latest/examples/_ad__pilatus.html">Dectris Pilatus</a> (with explanations)</p></li>
-<li><p><a class="reference external" href="https://apstools.readthedocs.io/en/latest/examples/_ad_pe.html">Perkin-Elmer</a> (no explanations, just example code)</p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/apstools/latest/examples/de_ad_pilatus.html">Dectris Pilatus</a> (with explanations)</p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/apstools/latest/examples/de_ad_pe.html">Perkin-Elmer</a> (no explanations, just example code)</p></li>
 </ul>
 </section>
 <section id="other-device-support">
 <h2>Other Device Support<a class="headerlink" href="#other-device-support" title="Permalink to this heading">#</a></h2>
 <p>The examples so far only begin to demonstrate the variety of Device
 customizations.  Consult the various instrument configurations on the
-<a class="reference external" href="https://github.com/BCDA-APS/use_bluesky/wiki">wiki</a> and the
+<a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/wiki">wiki</a> and the
 <a class="reference external" href="https://github.com/BCDA-APS/apstools/blob/main/apstools/devices.py">apstools</a>
 package for more device examples.</p>
 <p>TIP: Organize your custom Device code into separate files to make it easy to manage.  Don’t forget to edit the <code class="docutils literal notranslate"><span class="pre">__add__</span></code> symbol and also edit the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file so the new code is imported automatically.</p>
@@ -554,15 +554,14 @@ package for more device examples.</p>
 <h2>Implement Custom Plans<a class="headerlink" href="#implement-custom-plans" title="Permalink to this heading">#</a></h2>
 <p>Plans describe your custom sequence of actions.  They can be a complete plan that acquires a <em>run</em> or just part of a measurement sequence.</p>
 <p>Consult the various instrument configurations on the
-<a class="reference external" href="https://github.com/BCDA-APS/use_bluesky/wiki">wiki</a> and the
+<a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/wiki">wiki</a> and the
 <a class="reference external" href="https://github.com/BCDA-APS/apstools/blob/main/apstools/plans.py">apstools</a>
 package for more plan examples.</p>
 <p>If you are translating PyEpics code to Bluesky plans, consult this
 <a class="reference external" href="https://blueskyproject.io/bluesky/from-pyepics-to-bluesky.html?highlight=blocking">guide</a>.</p>
 <p>Keep in mind that a plan should not call code that blocks execution of the bluesky
 <em>RunEngine</em> from conducting its periodic background actions. One such example is
-the <a class="reference external" href="https://blueskyproject.io/bluesky/tutorial.html?highlight=blocking"><code class="docutils literal notranslate"><span class="pre">sleep()</span></code>
-action</a>
+the <a class="reference external" href="https://blueskyproject.io/bluesky/tutorial.html?highlight=blocking"><code class="docutils literal notranslate"><span class="pre">sleep()</span></code> action</a>
 sometimes used to control sequencing of events.  More discussion of <em>blocking</em>
 is provided in the context of how the RunEngine processes its
 <a class="reference external" href="https://blueskyproject.io/bluesky/msg.html?highlight=blocking">Messages</a>.</p>
@@ -570,7 +569,7 @@ is provided in the context of how the RunEngine processes its
 <section id="callbacks">
 <h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h2>
 <p>One custom RunEngine callback has been added to the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package
-template for the APS.  The <a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">SPEC file writer
+template for the APS.  The <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_filewriters.html#apstools.callbacks.spec_file_writer.SpecWriterCallback">SPEC file writer
 callback</a>
 (added before the <code class="docutils literal notranslate"><span class="pre">callbacks/</span></code> subpackage was added) is configured in
 <code class="docutils literal notranslate"><span class="pre">instrument/framework/callbacks.py</span></code>.  It writes bluesky runs to a text file in

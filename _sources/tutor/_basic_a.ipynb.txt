@@ -121,12 +121,13 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
     "By default, the ophyd `ScalerCH` object shows data for only the channels with names defined in EPICS.  Except for one channel (probably a bug in the `ScalerCH` code).  To fix that, we'll load another support library.  (Loading additional support as we need it will be a common theme in these lessons.  Rather than loading all the libraries first, as is common in python code files, we'll load support code as the need arises.)\n",
     "\n",
-    "The new support code is `use_EPICS_scaler_channels` from [`apstools.devices`](http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels)."
+    "The new support code is `use_EPICS_scaler_channels` from [`apstools.devices`](https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.scaler_support.use_EPICS_scaler_channels)."
    ]
   },
   {
@@ -201,10 +202,11 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Since `scaler.preset_time` is an [`EpicsSignal`](https://github.com/NSLS-II/ophyd/blob/master/ophyd/signal.py#L647), ([Signal](http://nsls-ii.github.io/ophyd/signals.html) is a fundamental ophyd structure), we print its `.value`."
+    "Since `scaler.preset_time` is an [`EpicsSignal`](https://github.com/NSLS-II/ophyd/blob/master/ophyd/signal.py#L647), ([Signal](http://nsls-ii.github.io/ophyd/signals.html) is a fundamental ophyd structure), we print its value using `.get()`."
    ]
   },
   {
@@ -446,7 +448,7 @@
     "\n",
     "scaler = ScalerCH(\"gp:scaler1\", name=\"scaler\")\n",
     "scaler.preset_time.put(1.5)\n",
-    "print(scaler.preset_time.value)\n",
+    "print(scaler.preset_time.get())\n",
     "\n",
     "scaler.channels.chan04.chname.put(\"scint\")\n",
     "scaler.channels.chan07.chname.put(\"roi1\")\n",

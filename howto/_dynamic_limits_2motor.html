@@ -49,7 +49,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_dynamic_limits_2motor';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Plot \((x,y)\) data from a databroker run" href="_plot_x_y_databroker.html" />
+    <link rel="next" title="Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky" href="_images_darks_flats.html" />
     <link rel="prev" title="Call Shell Command &amp; Wait for Finish" href="_doodle.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -297,7 +297,13 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sscan_1d_flyer.html">sscan as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
 </ul>
 </div>
 </nav></div>
@@ -382,7 +388,7 @@ At least one suspender has tripped. The plan will begin when all suspenders are 
 Suspending... To get to the prompt, hit Ctrl-C twice to pause.
 </pre></div>
 </div>
-<p>We might need to write our own suspender if none of the <a class="reference external" href="https://blueskyproject.io/bluesky/state-machine.html#built-in-suspenders">provided suspenders</a> will do the job we want. There is <a class="reference external" href="https://github.com/BCDA-APS/apstools/blob/master/apstools/suspenders.py#L25">an example</a> of a custom suspender in <a class="reference external" href="https://apstools.readthedocs.io">apstools</a>.</p>
+<p>We might need to write our own suspender if none of the <a class="reference external" href="https://blueskyproject.io/bluesky/state-machine.html#built-in-suspenders">provided suspenders</a> will do the job we want.</p>
 </details></section>
 <section id="Summary">
 <h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this heading">#</a></h2>
@@ -1115,11 +1121,11 @@ timeout with a <code class="docutils literal notranslate"><span class="pre">Fail
       </div>
     </a>
     <a class="right-next"
-       href="_plot_x_y_databroker.html"
+       href="_images_darks_flats.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</p>
+        <p class="prev-next-title">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

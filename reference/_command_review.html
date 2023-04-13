@@ -296,6 +296,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_git-help.html">Using git for version control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
 </ul>
 </div>
 </nav></div>
@@ -580,8 +581,8 @@ shutters
 
 </pre></div></div>
 </div>
-<p>Might be a good idea to know now what ophyd symbols are available. The <a class="reference external" href="https://apstools.readthedocs.io/en/latest/">apstools</a> package provides a <code class="docutils literal notranslate"><span class="pre">`listobjects()</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_utils.html?highlight=listobjects#apstools.utils.listobjects">https://apstools.readthedocs.io/en/latest/source/_utils.html?highlight=listobjects#apstools.utils.listobjects</a>&gt;`__ command that prints a table of all the known objects (in the global namespace of the session). The columns provide the ophyd name (the name you use to call this in Python), the name of the ophyd structure, the EPICS PV
-(if relevant), and any labels (as used in <code class="docutils literal notranslate"><span class="pre">%wa</span></code> above).</p>
+<p>Might be a good idea to know now what ophyd symbols are available. The <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/">apstools</a> package provides a <code class="docutils literal notranslate"><span class="pre">`listobjects()</span></code> &lt;<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_utils.html#apstools.utils.misc.listobjects">https://bcda-aps.github.io/apstools/latest/api/_utils.html#apstools.utils.misc.listobjects</a>&gt;`__ command that prints a table of all the known objects (in the global namespace of the session). The columns provide the ophyd name (the name you use to call this in Python), the name of the ophyd structure, the EPICS PV (if relevant),
+and any labels (as used in <code class="docutils literal notranslate"><span class="pre">%wa</span></code> above).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -640,7 +641,7 @@ timebase    EpicsSignalRO                    gp:scaler1.S1  counter channel
 </section>
 <section id="Read">
 <h2>Read<a class="headerlink" href="#Read" title="Permalink to this heading">#</a></h2>
-<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">m1</span></code> objects to demonstrate the various commands described in the quick-reference <a class="reference external" href="https://github.com/BCDA-APS/use_bluesky/blob/main/first_steps_guide.md">Guide: First Steps with Bluesky</a></p>
+<p>We’ll use the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> and <code class="docutils literal notranslate"><span class="pre">m1</span></code> objects to demonstrate the various commands described in the quick-reference <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/howto/__first_steps_guide.html">First Steps with Bluesky</a></p>
 <table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>command</p></th>

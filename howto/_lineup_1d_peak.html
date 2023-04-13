@@ -1,0 +1,996 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Lineup a 1-D peak : scan detector v motor &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_lineup_1d_peak';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Locate peak on 2-D area detector image" href="_locate_image_peak.html" />
+    <link rel="prev" title="Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky" href="_images_darks_flats.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="__first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sscan_1d_flyer.html">sscan as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Lineup a 1-D peak : scan detector <em>v</em> motor</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Lineup-a-1-D-peak-:-scan-detector-v-motor">
+<h1>Lineup a 1-D peak : scan detector <em>v</em> motor<a class="headerlink" href="#Lineup-a-1-D-peak-:-scan-detector-v-motor" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>Line up a motor <code class="docutils literal notranslate"><span class="pre">m1</span></code> to a simulated diffraction peak <code class="docutils literal notranslate"><span class="pre">noisy</span></code>. Also monitor a simulated <code class="docutils literal notranslate"><span class="pre">temperature</span></code> signal in a separate stream.</p>
+<section id="About-the-noisy-peak">
+<h2>About the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> peak<a class="headerlink" href="#About-the-noisy-peak" title="Permalink to this heading">#</a></h2>
+<p>In this lesson, alignment to a narrow diffraction peak is using capabilities provided by the <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a> package. The simulation consists of a simulated motor and simulated noisy detector.</p>
+<p>The noisy detector is configured to describe a narrow diffraction peak with Gaussian profile based on the value of the motor position. The peak is centered randomly somewhere between motor values -1 and +1. The width is less than 0.05 in the same units. The peak intensity is expected to be approximately 100,000 (counts/sec are typical units).</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">noisy</span></code> peak simulation (computed using EPICS PV <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>) has these parameters:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>parameter</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>peak shape</p></td>
+<td><p>Lorentzian as function of <code class="docutils literal notranslate"><span class="pre">m1.position</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>center</p></td>
+<td><p>randomly-placed between -1 .. +1</p></td>
+</tr>
+<tr class="row-even"><td><p>width</p></td>
+<td><p>randomly-selected, at most 0.15 (motor units)</p></td>
+</tr>
+<tr class="row-odd"><td><p>scale (height)</p></td>
+<td><p>randomly-selected, between 10,000 .. 100,000 (counts)</p></td>
+</tr>
+<tr class="row-even"><td><p>counting noise</p></td>
+<td><p>randomly-selected, between .01 .. .09 of scale (counts)</p></td>
+</tr>
+</tbody>
+</table>
+<p>The calculation updates <code class="docutils literal notranslate"><span class="pre">noisy</span></code> when a new <code class="docutils literal notranslate"><span class="pre">m1.position</span></code> (<code class="docutils literal notranslate"><span class="pre">gp:m1.RBV</span></code>) value is reported to <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>.</p>
+<p>Since this detector is actually an EPICS calculation using the <em>swait</em> record, the concept of counting time was not built into the simulation.</p>
+<p>Since we know the peak is somewhere between -1 .. +1, we can limit the scan range. To ensure the scan crosses the peak, we increase the scan range a bit, to -2 .. 2.</p>
+<p>Normally, we’d simulate a more narrow diffraction peak but the resolution of these motors is the limiting factor.</p>
+</section>
+<section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/prjemian/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-17:00:57 - ############################################################ startup
+I Thu-17:00:57 - logging started
+I Thu-17:00:57 - logging level = 10
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/session_logs.py
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/collection.py
+I Thu-17:00:57 - CONDA_PREFIX = /home/prjemian/.conda/envs/bluesky_2023_2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception reporting mode: Minimal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-17:00:57 - xmode exception level: &#39;Minimal&#39;
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/mpl/notebook.py
+I Thu-17:00:57 - #### Bluesky Framework ####
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/framework/check_python.py
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/framework/check_bluesky.py
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/framework/initialize.py
+I Thu-17:00:57 - RunEngine metadata saved in directory: /home/prjemian/Bluesky_RunEngine_md
+I Thu-17:00:57 - using databroker catalog &#39;training&#39;
+I Thu-17:00:57 - using ophyd control layer: pyepics
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/framework/metadata.py
+I Thu-17:00:57 - /home/prjemian/bluesky/instrument/epics_signal_config.py
+I Thu-17:00:57 - Using RunEngine metadata for scan_id
+I Thu-17:00:58 - #### Devices ####
+I Thu-17:00:58 - /home/prjemian/bluesky/instrument/devices/area_detector.py
+I Thu-17:00:58 - /home/prjemian/bluesky/instrument/devices/calculation_records.py
+I Thu-17:01:00 - /home/prjemian/bluesky/instrument/devices/fourc_diffractometer.py
+I Thu-17:01:00 - /home/prjemian/bluesky/instrument/devices/ioc_stats.py
+I Thu-17:01:00 - /home/prjemian/bluesky/instrument/devices/kohzu_monochromator.py
+I Thu-17:01:00 - /home/prjemian/bluesky/instrument/devices/motors.py
+I Thu-17:01:00 - /home/prjemian/bluesky/instrument/devices/noisy_detector.py
+I Thu-17:01:01 - /home/prjemian/bluesky/instrument/devices/scaler.py
+I Thu-17:01:01 - /home/prjemian/bluesky/instrument/devices/shutter_simulator.py
+I Thu-17:01:01 - /home/prjemian/bluesky/instrument/devices/simulated_fourc.py
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/devices/simulated_kappa.py
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/devices/slits.py
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/devices/sixc_diffractometer.py
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/devices/temperature_signal.py
+I Thu-17:01:02 - #### Callbacks ####
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Thu-17:01:02 - #### Plans ####
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/plans/lup_plan.py
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/plans/peak_finder_example.py
+I Thu-17:01:02 - /home/prjemian/bluesky/instrument/utils/image_analysis.py
+I Thu-17:01:02 - #### Utilities ####
+I Thu-17:01:02 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/20230413-170102.dat
+I Thu-17:01:02 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Thu-17:01:02 -    file will be created when bluesky ends its next scan
+I Thu-17:01:02 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Thu-17:01:02 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+<p>Let’s also monitor the simulated temperature during these scans.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sd</span><span class="o">.</span><span class="n">monitors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="2-pass-scan">
+<h2>2-pass scan<a class="headerlink" href="#2-pass-scan" title="Permalink to this heading">#</a></h2>
+<p>Find the peak of noisy v. m1 in the range of +/- 2. This is a 2 scan procedure. First scan passes through the full range. Second scan is centered on the peak and width of the first scan.</p>
+<p>We know the peak of the simulated noisy detector is positioned somewhere between -1 to +1. Overscan that range to find both sides of the peak.</p>
+<p>The plan used here comes from our instrument package, <code class="docutils literal notranslate"><span class="pre">instrument/plans/peak_finder_example.py</span></code>. It’s a custom plan that, among other activities, calls the standard bluesky plan for a scan relative to the current position. The <code class="docutils literal notranslate"><span class="pre">bp.rel_scan()</span></code> is called twice in this custom plan.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">two_pass_scan</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;motive&quot;</span><span class="p">:</span> <span class="s2">&quot;two_pass_scan&quot;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 937     Time: 2023-04-13 17:01:15
+Persistent Unique Scan ID: &#39;d3d48c63-299b-4105-b71c-d7f76d384610&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;temperature_monitor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |         m1 |      noisy |
++-----------+------------+------------+------------+
+|         1 | 17:01:18.2 |    -2.0000 |  157.59212 |
+|         2 | 17:01:18.7 |    -1.8182 |  198.25932 |
+|         3 | 17:01:19.2 |    -1.6364 |  247.01842 |
+|         4 | 17:01:19.7 |    -1.4546 |  338.79833 |
+|         5 | 17:01:20.2 |    -1.2727 |  463.20949 |
+|         6 | 17:01:20.7 |    -1.0909 |  664.81482 |
+|         7 | 17:01:21.2 |    -0.9091 | 1029.39208 |
+|         8 | 17:01:21.7 |    -0.7273 | 1876.34456 |
+|         9 | 17:01:22.2 |    -0.5454 | 4261.73803 |
+|        10 | 17:01:22.7 |    -0.3636 | 16701.77848 |
+|        11 | 17:01:23.2 |    -0.1818 | 82311.60621 |
+|        12 | 17:01:23.7 |     0.0000 | 10604.00156 |
+|        13 | 17:01:24.2 |     0.1818 | 3347.12140 |
+|        14 | 17:01:24.7 |     0.3636 | 1547.41780 |
+|        15 | 17:01:25.2 |     0.5454 |  901.41541 |
+|        16 | 17:01:25.7 |     0.7273 |  586.56298 |
+|        17 | 17:01:26.2 |     0.9091 |  404.69955 |
+|        18 | 17:01:26.7 |     1.0909 |  309.28576 |
+|        19 | 17:01:27.2 |     1.2727 |  239.25274 |
+|        20 | 17:01:27.7 |     1.4546 |  188.78387 |
+|        21 | 17:01:28.2 |     1.6364 |  155.08798 |
+|        22 | 17:01:28.7 |     1.8182 |  128.29261 |
+|        23 | 17:01:29.2 |     2.0000 |  107.78115 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;d3d48c63&#39;] (scan num: 937)
+
+
+Transient Scan ID: 938     Time: 2023-04-13 17:01:32
+Persistent Unique Scan ID: &#39;773ec7fe-cee1-42c5-9f9f-a71e5fbbba74&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;temperature_monitor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |         m1 |      noisy |
++-----------+------------+------------+------------+
+|         1 | 17:01:33.0 |    -0.4484 | 7904.46212 |
+|         2 | 17:01:33.1 |    -0.4246 | 9524.20099 |
+|         3 | 17:01:33.3 |    -0.4008 | 11769.89338 |
+|         4 | 17:01:33.5 |    -0.3770 | 14749.11678 |
+|         5 | 17:01:33.7 |    -0.3532 | 19493.29960 |
+|         6 | 17:01:33.9 |    -0.3294 | 25858.24056 |
+|         7 | 17:01:34.2 |    -0.3056 | 34818.95318 |
+|         8 | 17:01:34.3 |    -0.2818 | 47345.90678 |
+|         9 | 17:01:34.6 |    -0.2580 | 62548.96813 |
+|        10 | 17:01:34.8 |    -0.2343 | 80809.72645 |
+|        11 | 17:01:35.0 |    -0.2105 | 90355.73829 |
+|        12 | 17:01:35.2 |    -0.1867 | 84500.97257 |
+|        13 | 17:01:35.4 |    -0.1629 | 68930.86411 |
+|        14 | 17:01:35.5 |    -0.1391 | 48903.47788 |
+|        15 | 17:01:35.7 |    -0.1153 | 36644.26066 |
+|        16 | 17:01:35.9 |    -0.0915 | 27533.02424 |
+|        17 | 17:01:36.2 |    -0.0677 | 20668.16407 |
+|        18 | 17:01:36.3 |    -0.0439 | 16073.17176 |
+|        19 | 17:01:36.5 |    -0.0201 | 12742.72471 |
+|        20 | 17:01:36.7 |     0.0037 | 10125.59796 |
+|        21 | 17:01:37.0 |     0.0275 | 8580.01046 |
+|        22 | 17:01:37.2 |     0.0513 | 6969.20370 |
+|        23 | 17:01:37.3 |     0.0751 | 5982.47230 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;773ec7fe&#39;] (scan num: 938)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;d3d48c63-299b-4105-b71c-d7f76d384610&#39;,
+ &#39;773ec7fe-cee1-42c5-9f9f-a71e5fbbba74&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__lineup_1d_peak_5_2.png" src="../_images/howto__lineup_1d_peak_5_2.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__lineup_1d_peak_5_3.png" src="../_images/howto__lineup_1d_peak_5_3.png" />
+</div>
+</div>
+</section>
+<section id="Multi-pass-scan">
+<h2>Multi-pass scan<a class="headerlink" href="#Multi-pass-scan" title="Permalink to this heading">#</a></h2>
+<p>Scan up to 4 times across the peak (in the same direction) starting with range of -2 .. +2, then reducing the range of the next scan based on the measured FWHM and centering on the measured center position (centroid).</p>
+<p>After all scans are complete, report the computed peak centroid and FWHM for each scan in a table. The motor will be positioned at the last centroid after the last scan.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">findpeak_multipass</span></code> is also from our insturment package. It calls <code class="docutils literal notranslate"><span class="pre">bp.rel_scan()</span></code> inside a loop for the desired number of iterations.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">findpeak_multipass</span><span class="p">(</span><span class="n">md</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;motive&quot;</span><span class="p">:</span> <span class="s2">&quot;findpeak_multipass&quot;</span><span class="p">}))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m1</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> now at </span><span class="si">{</span><span class="n">m1</span><span class="o">.</span><span class="n">position</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 939     Time: 2023-04-13 17:01:55
+Persistent Unique Scan ID: &#39;841f1016-f954-4f9d-9f1f-984417c01d69&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;temperature_monitor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |         m1 |      noisy |
++-----------+------------+------------+------------+
+|         1 | 17:01:57.7 |    -2.1000 |  141.70330 |
+|         2 | 17:01:58.2 |    -1.9091 |  180.10604 |
+|         3 | 17:01:58.7 |    -1.7182 |  220.01310 |
+|         4 | 17:01:59.2 |    -1.5273 |  297.27020 |
+|         5 | 17:01:59.7 |    -1.3364 |  399.82872 |
+|         6 | 17:02:00.2 |    -1.1455 |  580.57415 |
+|         7 | 17:02:00.7 |    -0.9546 |  925.49621 |
+|         8 | 17:02:01.2 |    -0.7636 | 1594.46591 |
+|         9 | 17:02:01.7 |    -0.5727 | 3625.38025 |
+|        10 | 17:02:02.2 |    -0.3818 | 14003.98883 |
+|        11 | 17:02:02.7 |    -0.1909 | 87128.55953 |
+|        12 | 17:02:03.2 |     0.0000 | 10781.74360 |
+|        13 | 17:02:03.7 |     0.1909 | 3151.01669 |
+|        14 | 17:02:04.2 |     0.3818 | 1474.58822 |
+|        15 | 17:02:04.7 |     0.5727 |  860.73083 |
+|        16 | 17:02:05.2 |     0.7636 |  557.77404 |
+|        17 | 17:02:05.7 |     0.9546 |  386.27086 |
+|        18 | 17:02:06.2 |     1.1455 |  278.80271 |
+|        19 | 17:02:06.7 |     1.3364 |  210.42662 |
+|        20 | 17:02:07.2 |     1.5273 |  175.16166 |
+|        21 | 17:02:07.7 |     1.7182 |  137.03429 |
+|        22 | 17:02:08.2 |     1.9091 |  115.49049 |
+|        23 | 17:02:08.7 |     2.1000 |   96.98126 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;841f1016&#39;] (scan num: 939)
+
+
+Transient Scan ID: 940     Time: 2023-04-13 17:02:11
+Persistent Unique Scan ID: &#39;9a544ec5-36b1-43ec-8364-2daccf62ab4f&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;temperature_monitor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |         m1 |      noisy |
++-----------+------------+------------+------------+
+|         1 | 17:02:12.5 |    -0.4602 | 7228.56248 |
+|         2 | 17:02:12.7 |    -0.4360 | 8710.12161 |
+|         3 | 17:02:12.9 |    -0.4117 | 10910.88638 |
+|         4 | 17:02:13.1 |    -0.3874 | 13381.24817 |
+|         5 | 17:02:13.4 |    -0.3632 | 17270.12555 |
+|         6 | 17:02:13.7 |    -0.3389 | 22573.96343 |
+|         7 | 17:02:14.0 |    -0.3146 | 30758.95023 |
+|         8 | 17:02:14.3 |    -0.2904 | 41349.69255 |
+|         9 | 17:02:14.5 |    -0.2661 | 57975.44508 |
+|        10 | 17:02:14.7 |    -0.2418 | 74679.24117 |
+|        11 | 17:02:14.9 |    -0.2176 | 91613.35872 |
+|        12 | 17:02:15.1 |    -0.1933 | 86654.05662 |
+|        13 | 17:02:15.3 |    -0.1691 | 74681.03816 |
+|        14 | 17:02:15.5 |    -0.1448 | 52992.45140 |
+|        15 | 17:02:15.7 |    -0.1205 | 38576.68641 |
+|        16 | 17:02:15.9 |    -0.0963 | 29362.35466 |
+|        17 | 17:02:16.1 |    -0.0720 | 22195.94876 |
+|        18 | 17:02:16.3 |    -0.0477 | 16870.37138 |
+|        19 | 17:02:16.5 |    -0.0235 | 12863.75950 |
+|        20 | 17:02:16.7 |     0.0008 | 10872.18860 |
+|        21 | 17:02:16.9 |     0.0251 | 8739.44338 |
+|        22 | 17:02:17.1 |     0.0493 | 7125.04495 |
+|        23 | 17:02:17.4 |     0.0736 | 6019.72705 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;9a544ec5&#39;] (scan num: 940)
+
+
+Transient Scan ID: 941     Time: 2023-04-13 17:02:18
+Persistent Unique Scan ID: &#39;2f671579-4ca2-499f-b6d6-61f9e981ee43&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;temperature_monitor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |         m1 |      noisy |
++-----------+------------+------------+------------+
+|         1 | 17:02:19.0 |    -0.3787 | 14399.84182 |
+|         2 | 17:02:19.1 |    -0.3632 | 17536.27942 |
+|         3 | 17:02:19.3 |    -0.3478 | 20784.29981 |
+|         4 | 17:02:19.5 |    -0.3323 | 24533.51947 |
+|         5 | 17:02:19.7 |    -0.3168 | 29518.74018 |
+|         6 | 17:02:19.9 |    -0.3014 | 34729.46943 |
+|         7 | 17:02:20.2 |    -0.2859 | 42741.67328 |
+|         8 | 17:02:20.5 |    -0.2705 | 54270.10986 |
+|         9 | 17:02:20.7 |    -0.2550 | 67470.90664 |
+|        10 | 17:02:20.9 |    -0.2395 | 79750.20383 |
+|        11 | 17:02:21.1 |    -0.2241 | 88410.00755 |
+|        12 | 17:02:21.3 |    -0.2086 | 94729.82146 |
+|        13 | 17:02:21.5 |    -0.1932 | 90374.69658 |
+|        14 | 17:02:21.7 |    -0.1777 | 77382.72138 |
+|        15 | 17:02:21.9 |    -0.1622 | 69850.84615 |
+|        16 | 17:02:22.1 |    -0.1468 | 55975.70555 |
+|        17 | 17:02:22.3 |    -0.1313 | 44631.50376 |
+|        18 | 17:02:22.5 |    -0.1159 | 38118.60161 |
+|        19 | 17:02:22.7 |    -0.1004 | 30890.33051 |
+|        20 | 17:02:22.9 |    -0.0849 | 24882.10213 |
+|        21 | 17:02:23.1 |    -0.0695 | 20989.25822 |
+|        22 | 17:02:23.4 |    -0.0540 | 18319.92818 |
+|        23 | 17:02:23.5 |    -0.0386 | 15567.73558 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;2f671579&#39;] (scan num: 941)
+
+
+Transient Scan ID: 942     Time: 2023-04-13 17:02:24
+Persistent Unique Scan ID: &#39;ac664dc7-504f-4425-8fe4-489adbae7fdd&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;temperature_monitor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+
+|   seq_num |       time |         m1 |      noisy |
++-----------+------------+------------+------------+
+|         1 | 17:02:24.8 |    -0.3578 | 18569.97283 |
+|         2 | 17:02:25.1 |    -0.3441 | 21728.44437 |
+|         3 | 17:02:25.3 |    -0.3305 | 25226.32175 |
+|         4 | 17:02:25.5 |    -0.3168 | 28941.51480 |
+|         5 | 17:02:25.7 |    -0.3031 | 34314.24493 |
+|         6 | 17:02:25.9 |    -0.2895 | 40531.42738 |
+|         7 | 17:02:26.1 |    -0.2758 | 49028.60617 |
+|         8 | 17:02:26.2 |    -0.2621 | 60024.30969 |
+|         9 | 17:02:26.5 |    -0.2485 | 68583.11363 |
+|        10 | 17:02:26.7 |    -0.2348 | 83210.76279 |
+|        11 | 17:02:26.9 |    -0.2211 | 88905.13543 |
+|        12 | 17:02:27.1 |    -0.2075 | 91254.82153 |
+|        13 | 17:02:27.3 |    -0.1938 | 91395.55793 |
+|        14 | 17:02:27.5 |    -0.1802 | 80290.89715 |
+|        15 | 17:02:27.8 |    -0.1665 | 71926.05508 |
+|        16 | 17:02:28.0 |    -0.1528 | 60632.25445 |
+|        17 | 17:02:28.2 |    -0.1392 | 50935.77565 |
+|        18 | 17:02:28.4 |    -0.1255 | 41194.65347 |
+|        19 | 17:02:28.6 |    -0.1118 | 35045.20416 |
+|        20 | 17:02:28.8 |    -0.0982 | 30070.29286 |
+|        21 | 17:02:29.0 |    -0.0845 | 25524.63241 |
+|        22 | 17:02:29.2 |    -0.0708 | 21599.11847 |
+|        23 | 17:02:29.4 |    -0.0572 | 18357.45299 |
++-----------+------------+------------+------------+
+generator rel_scan [&#39;ac664dc7&#39;] (scan num: 942)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-17:02:30 - iterative results:
+======= ==================== ===================
+scan_id center               FWHM
+======= ==================== ===================
+939     -0.19330745175234704 0.2224228216416789
+940     -0.20861123128447245 0.14171756691442283
+941     -0.20747604249899584 0.12525759324435487
+942     -0.20662333630889465 0.12382359689785855
+======= ==================== ===================
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+m1 now at -0.2066
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__lineup_1d_peak_7_3.png" src="../_images/howto__lineup_1d_peak_7_3.png" />
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__lineup_1d_peak_7_4.png" src="../_images/howto__lineup_1d_peak_7_4.png" />
+</div>
+</div>
+<p>Show how to re-plot the data from the catalog <code class="docutils literal notranslate"><span class="pre">cat</span></code>. We’ll show the plots of the last three runs. The measured data is always in the <code class="docutils literal notranslate"><span class="pre">primary</span></code> stream.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;noisy&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;noisy&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
+<span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;noisy&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PathCollection at 0x7f9c327f8d60&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__lineup_1d_peak_9_1.png" src="../_images/howto__lineup_1d_peak_9_1.png" />
+</div>
+</div>
+<p>Plot the monitored temperature <em>v</em> time. (See the table of data printed during the scan, the <code class="docutils literal notranslate"><span class="pre">temperature_monitor</span></code> stream was listed near the top of the table.)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># temperature_monitor</span>
+<span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">4</span><span class="p">]</span><span class="o">.</span><span class="n">temperature_monitor</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">temperature_monitor</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">temperature_monitor</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">)</span>
+<span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">temperature_monitor</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.collections.PathCollection at 0x7f9c32681450&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__lineup_1d_peak_11_1.png" src="../_images/howto__lineup_1d_peak_11_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_images_darks_flats.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_locate_image_peak.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Locate peak on 2-D area detector image</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#About-the-noisy-peak">About the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> peak</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2-pass-scan">2-pass scan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Multi-pass-scan">Multi-pass scan</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_lineup_1d_peak.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

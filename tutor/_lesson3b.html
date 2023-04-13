@@ -152,6 +152,13 @@
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
       
@@ -249,6 +256,13 @@ document.write(`
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
         
@@ -278,6 +292,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_aps101.html">APS Bluesky 101</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
@@ -349,15 +364,13 @@ document.write(`
                   
   <section id="Lesson-3,-Part-B:-Show-Data---Concise-Summary">
 <h1>Lesson 3, Part B: Show Data - Concise Summary<a class="headerlink" href="#Lesson-3,-Part-B:-Show-Data---Concise-Summary" title="Permalink to this heading">#</a></h1>
-<p><a class="reference external" href="https://github.com/BCDA-APS/use_bluesky/blob/master/notebooks/lesson3.ipynb">Lesson 3</a> demonstrated how bluesky can show data as it is acquired. This notebook provides a concise summary, which should be a good general starting point for users.</p>
+<p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/_lesson3a.html">Lesson 3</a> demonstrated how bluesky can show data as it is acquired. This notebook provides a concise summary, which should be a good general starting point for users.</p>
 <p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">sky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/blob/master/n3_synApps/README.md">prjemian/epics-docker</a></p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">from</span> <span class="nn">bluesky.utils</span> <span class="kn">import</span> <span class="n">install_nb_kicker</span>
-<span class="n">install_nb_kicker</span><span class="p">()</span>
 
 <span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
 <span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
@@ -385,7 +398,7 @@ document.write(`
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">({})</span>
 <span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">BestEffortCallback</span><span class="p">())</span>
 
-<span class="n">P</span> <span class="o">=</span> <span class="s2">&quot;sky:&quot;</span>     <span class="c1"># use your IOC&#39;s PV prefix here</span>
+<span class="n">P</span> <span class="o">=</span> <span class="s2">&quot;gp:&quot;</span>  <span class="c1"># or use your IOC&#39;s PV prefix here</span>
 
 <span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2">m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
 <span class="n">scaler</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">P</span><span class="si">}</span><span class="s2">scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler&quot;</span><span class="p">)</span>
@@ -411,19 +424,19 @@ document.write(`
 <div class="highlight"><pre>
 
 
-Transient Scan ID: 1     Time: 2020-12-04 14:13:00
-Persistent Unique Scan ID: &#39;df825efe-b7b2-4bdd-a495-1a14dd0516c1&#39;
+Transient Scan ID: 1     Time: 2023-04-13 16:25:56
+Persistent Unique Scan ID: &#39;acfc04de-dc2d-461b-9f7e-a19dd7f9535d&#39;
 New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+------------+------------+------------+------------+------------+
-|   seq_num |       time |      clock |         I0 |      scint |      diode |      I0Mon |       ROI1 |       ROI2 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+------------+
-|         1 | 14:13:01.7 |   11000000 |          5 |          5 |          4 |          4 |          0 |          0 |
-|         2 | 14:13:04.3 |   11000000 |          4 |          7 |          5 |          6 |          0 |          0 |
-|         3 | 14:13:06.7 |   11000000 |          5 |          5 |          5 |          5 |          0 |          0 |
-|         4 | 14:13:09.1 |   11000000 |          6 |          4 |          5 |          4 |          0 |          0 |
-|         5 | 14:13:11.5 |   11000000 |          5 |          2 |          5 |          4 |          0 |          0 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+------------+
-generator count [&#39;df825efe&#39;] (scan num: 1)
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time |   timebase |         I0 |      scint |       I000 |        I00 |       roi1 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 16:25:58.3 |   16000000 |          7 |          9 |          5 |          7 |          5 |
+|         2 | 16:26:00.7 |   15000000 |          7 |          6 |          7 |          6 |          8 |
+|         3 | 16:26:03.3 |   16000000 |          6 |          8 |          8 |          7 |          8 |
+|         4 | 16:26:05.7 |   15000000 |          6 |          8 |          6 |          7 |          6 |
+|         5 | 16:26:08.2 |   16000000 |          8 |         10 |          8 |          8 |          8 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+generator count [&#39;acfc04de&#39;] (scan num: 1)
 
 
 
@@ -435,14 +448,15 @@ generator count [&#39;df825efe&#39;] (scan num: 1)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;df825efe-b7b2-4bdd-a495-1a14dd0516c1&#39;,)
+(&#39;acfc04de-dc2d-461b-9f7e-a19dd7f9535d&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutor__lesson3b_5_2.svg" src="../_images/tutor__lesson3b_5_2.svg" /></div>
+<img alt="../_images/tutor__lesson3b_5_2.png" src="../_images/tutor__lesson3b_5_2.png" />
+</div>
 </div>
 <p>Scan the scaler <em>vs.</em> the motor with 5 data points.</p>
 <div class="nbinput docutils container">
@@ -460,19 +474,19 @@ generator count [&#39;df825efe&#39;] (scan num: 1)
 <div class="highlight"><pre>
 
 
-Transient Scan ID: 2     Time: 2020-12-04 14:13:29
-Persistent Unique Scan ID: &#39;b8c781bd-fa78-4b7f-8ec3-54a4c74b8cd3&#39;
+Transient Scan ID: 2     Time: 2023-04-13 16:26:10
+Persistent Unique Scan ID: &#39;7fb88d29-9b8e-45a7-8d8b-55a48ab6e288&#39;
 New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-|   seq_num |       time |         m1 |      clock |         I0 |      scint |      diode |      I0Mon |       ROI1 |       ROI2 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-|         1 | 14:13:32.3 |    1.00000 |   11000000 |          5 |          3 |          5 |          4 |          0 |          0 |
-|         2 | 14:13:36.0 |    2.00000 |   11000000 |          6 |          5 |          4 |          4 |          0 |          0 |
-|         3 | 14:13:39.7 |    3.00000 |   10000000 |          5 |          5 |          5 |          4 |          0 |          0 |
-|         4 | 14:13:43.3 |    4.00000 |   10000000 |          4 |          6 |          5 |          5 |          0 |          0 |
-|         5 | 14:13:46.9 |    5.00000 |   11000000 |          3 |          6 |          6 |          5 |          0 |          0 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
-generator scan [&#39;b8c781bd&#39;] (scan num: 2)
++-----------+------------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time |         m1 |   timebase |         I0 |      scint |       I000 |        I00 |       roi1 |
++-----------+------------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 16:26:14.9 |     1.0000 |   16000000 |          8 |         10 |          7 |          7 |          7 |
+|         2 | 16:26:18.3 |     2.0000 |   16000000 |          8 |          8 |          7 |          8 |          8 |
+|         3 | 16:26:21.6 |     3.0000 |   16000000 |          7 |          9 |          7 |          6 |          8 |
+|         4 | 16:26:24.9 |     4.0000 |   16000000 |          7 |          9 |          7 |          6 |          9 |
+|         5 | 16:26:28.1 |     5.0000 |   15000000 |          6 |          7 |          6 |          9 |          7 |
++-----------+------------+------------+------------+------------+------------+------------+------------+------------+
+generator scan [&#39;7fb88d29&#39;] (scan num: 2)
 
 
 
@@ -484,14 +498,28 @@ generator scan [&#39;b8c781bd&#39;] (scan num: 2)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;b8c781bd-fa78-4b7f-8ec3-54a4c74b8cd3&#39;,)
+(&#39;7fb88d29-9b8e-45a7-8d8b-55a48ab6e288&#39;,)
 </pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/tutor__lesson3b_7_2.png" src="../_images/tutor__lesson3b_7_2.png" />
+</div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
-<div class="output_area docutils container">
-<img alt="../_images/tutor__lesson3b_7_2.svg" src="../_images/tutor__lesson3b_7_2.svg" /></div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+CA.Client.Exception...............................................
+    Warning: &#34;Virtual circuit disconnect&#34;
+    Context: &#34;zap:5064&#34;
+    Source File: ../cac.cpp line 1237
+    Current Time: Thu Apr 13 2023 16:55:30.734052240
+..................................................................
+</pre></div></div>
 </div>
 </section>
 

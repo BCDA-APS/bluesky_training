@@ -1,0 +1,1456 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_images_darks_flats';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lineup a 1-D peak : scan detector v motor" href="_lineup_1d_peak.html" />
+    <link rel="prev" title="Dynamic Limits for Two Motors" href="_dynamic_limits_2motor.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="__first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_sscan_1d_flyer.html">sscan as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Images,-Darks,-&amp;-whites-with-EPICS-area-detector,-ophyd,-and-Bluesky">
+<h1>Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky<a class="headerlink" href="#Images,-Darks,-&-whites-with-EPICS-area-detector,-ophyd,-and-Bluesky" title="Permalink to this heading">#</a></h1>
+<p>In some scientific data acquisition processes, an area detector acquires a sequence of image frames and stores them as a sequence in a data file. In tomography and other processes, the frames are associated with certain imaging conditions, such as when the illumination is on and the sample is in view (known as an <em>image</em> or <em>data</em> frame) or the sample is not in view (a <em>flat</em>, <em>flood</em>, or <em>white</em> frame) or when the illumination is off (a <em>dark</em> or <em>background</em> frame).</p>
+<p>This document describes how to configure the <a class="reference external" href="https://blueskyproject.io/">Bluesky</a> software to write such <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5</a> files when using <a class="reference external" href="https://epics-controls.org/">EPICS</a> and the <a class="reference external" href="https://areadetector.github.io/areaDetector/">Area Detector</a> support.</p>
+<p>The HDF5 File Writer <a class="reference external" href="https://areadetector.github.io/areaDetector/ADCore/NDFileHDF5.html">plugin</a> can be configured to save image frames into separate datasets within the same HDF5 data file. The selection of frame type (image frame, background/dark frame, white/flat frame) is made by use of an existing PV in area detector: <code class="docutils literal notranslate"><span class="pre">$(P):cam1:FrameType</span></code> which is an <a class="reference external" href="https://epics.anl.gov/base/R7-0/6-docs/mbboRecord.html">mbbo</a> record. In ophyd, the readback version of this PV:
+<code class="docutils literal notranslate"><span class="pre">$(P):cam1:FrameType_RBV</span></code> is used to define operational values for the ophyd device. Be sure to configure the readback PV with the same values.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>meaning</p></th>
+<th class="head"><p>PV value</p></th>
+<th class="head"><p>PV field</p></th>
+<th class="head"><p>default</p></th>
+<th class="head"><p><a class="reference external" href="https://www.aps.anl.gov/Science/Scientific-Software/DataExchange">dxchange</a></p></th>
+<th class="head"><p><a class="reference external" href="https://manual.nexusformat.org/rules.html#content-of-a-raw-data-nxentry-group">NeXus</a></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>image frame</p></td>
+<td><p>0</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ZRST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Normal</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/exchange/data</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/entry/data/data</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>background/dark frame</p></td>
+<td><p>1</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ONST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">Background</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/exchange/data_dark</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/entry/data/dark</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>white/flat frame</p></td>
+<td><p>2</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">TWST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FlatField</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/exchange/data_white</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">/entry/data/white</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>not used</p></td>
+<td><p>3</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">THST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">DblCorrelation</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p>not used</p></td>
+<td><p>4</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">FRST</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code></p></td>
+</tr>
+</tbody>
+</table>
+<p>The values will be used as the HDF5 addresses to store that type of frame. With the chosen format (dxchange or NeXus), set the fields of <strong>both</strong> these PVs (<code class="docutils literal notranslate"><span class="pre">$(P):cam1:FrameType</span></code> and <code class="docutils literal notranslate"><span class="pre">$(P):cam1:FrameType_RBV</span></code>).</p>
+<p>In NeXus, detector data is stored within the <code class="docutils literal notranslate"><span class="pre">`instrument</span></code> &lt;<a class="reference external" href="https://manual.nexusformat.org/classes/base_classes/NXinstrument.html#nxinstrument-detector-group">https://manual.nexusformat.org/classes/base_classes/NXinstrument.html#nxinstrument-detector-group</a>&gt;`__ group, traditionally at <code class="docutils literal notranslate"><span class="pre">/entry/instrument/detector/</span></code>. We then hard link the field <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">dark</span></code>, and <code class="docutils literal notranslate"><span class="pre">white</span></code> fields to the <code class="docutils literal notranslate"><span class="pre">/entry/data/</span></code> group. The hard links provide a shorter HDF5 address. We use this shorter address in EPICS, to fit within the maximum 25 characters allowed by the EPICS <em>mbbo</em> record. We write the data
+into the <code class="docutils literal notranslate"><span class="pre">/entry/data</span></code> group and hard link it (in the <code class="docutils literal notranslate"><span class="pre">layout.xml</span></code> file) to the instrument group.</p>
+<p><strong>Tip</strong>: Whether you use dxchange or NeXus, be sure the fields of the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV are put in the IOC’s <a class="reference external" href="https://epics.anl.gov/bcda/synApps/autosave/autosave.html">autosave</a> configuration so they are restored when the IOC is restarted!</p>
+<p>The <a class="reference external" href="#xml-attributes-file">area detector attributes XML file</a> needs the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> selection PV included in its list. We’ll call it <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> so we can use the same name in the layout file:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Attribute
+    name=&quot;HDF5FrameLocation&quot;
+    type=&quot;EPICS_PV&quot;
+    source=&quot;13SIM1:cam1:FrameType&quot;
+    dbrtype=&quot;DBR_STRING&quot;
+    description=&quot;HDF5 address for this frame&quot;/&gt;
+</pre></div>
+</div>
+<p>The HDF5 layout XML file will refer to this <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> attribute in the setup (add this to the XML file just after the opening <code class="docutils literal notranslate"><span class="pre">hdf5_layout</span></code> and before the first <code class="docutils literal notranslate"><span class="pre">group</span></code> element).</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;global name=&quot;detector_data_destination&quot; ndattribute=&quot;HDF5FrameLocation&quot; /&gt;
+</pre></div>
+</div>
+<p>The name <code class="docutils literal notranslate"><span class="pre">detector_data_destination</span></code> is hard-coded in the source code of the HDF5 file writer.</p>
+<p>In the Bluesky plan, write the frame type <strong>before acquisition</strong> with a value from this table:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>use this value</p></th>
+<th class="head"><p>which means a frame of this type</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">0</span></code></p></td>
+<td><p>image</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">1</span></code></p></td>
+<td><p>dark</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">2</span></code></p></td>
+<td><p>white</p></td>
+</tr>
+</tbody>
+</table>
+<p>In any following acquisition(s), the HDF5 file writer will direct the image frame to the dataset as specified by the ZRST, ONST, or TWST field, respectively.</p>
+<section id="Setup">
+<h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this heading">#</a></h2>
+<p>Try acquiring three different frame types into the same <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5</a> file with the <a class="reference external" href="https://areadetector.github.io/master/ADSimDetector/simDetector.html">ADSimDetector</a> IOC. Use the <a class="reference external" href="https://manual.nexusformat.org/user_manual.html">NeXus</a> format. The procedures are similar for the <a class="reference external" href="https://www.aps.anl.gov/Science/Scientific-Software/DataExchange">data exchange</a> format.</p>
+<section id="Notebook-specific-details">
+<h3>Notebook-specific details<a class="headerlink" href="#Notebook-specific-details" title="Permalink to this heading">#</a></h3>
+<p>These details are specific to the area detector running for <em>this</em> notebook.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>variable</p></th>
+<th class="head"><p>comments</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ad_prefix</span></code></p></td>
+<td><p>IOC prefix for the ADSimdetector IOC</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">IOC_MOUNT_POINT</span></code></p></td>
+<td><p>root directory of <strong>this</strong> IOC as mounted on the workstation for this notebook</p></td>
+</tr>
+</tbody>
+</table>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span>
+
+<span class="n">ad_prefix</span> <span class="o">=</span> <span class="s2">&quot;ad:&quot;</span>
+<span class="n">IOC_MOUNT_POINT</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="s2">&quot;/tmp/docker_ioc/iocad&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="XML-Attributes-File">
+<h3>XML Attributes File<a class="headerlink" href="#XML-Attributes-File" title="Permalink to this heading">#</a></h3>
+<p>Here, we create the custom <code class="docutils literal notranslate"><span class="pre">/tmp/attributes.xml</span></code> (starting from the XML layout file supplied with the ADSimDetector). Rather than use an XML library to write this file, we’ll create all the content here as text and write the file with the usual text file tools. Then, we’ll check that the file exists.</p>
+<p>Note: This is the part of the file that connects the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV with an attribute to be used in the <a class="reference external" href="#xml-layout-file">layout</a> file. We can choose any unique name for this attribute (within the names allowed by XML) but we must use the same name in both the attributes and layout XML files. Here, we choose the name <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> .</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Attribute</span>
+<span class="w">    </span><span class="na">name=</span><span class="s">&quot;HDF5FrameLocation&quot;</span>
+<span class="w">    </span><span class="na">type=</span><span class="s">&quot;EPICS_PV&quot;</span>
+<span class="w">    </span><span class="na">source=</span><span class="s">&quot;{ad_prefix}cam1:FrameType&quot;</span>
+<span class="w">    </span><span class="na">dbrtype=</span><span class="s">&quot;DBR_STRING&quot;</span>
+<span class="w">    </span><span class="na">description=</span><span class="s">&quot;HDF5 address for this frame&quot;</span>
+<span class="w">    </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>In a <a class="reference external" href="#install-support-for-custom-frame-types">later step</a>, we’ll tell the HDF5 plugin to use it.</p>
+<p><strong>NOTE</strong>: Very important that you set the attributes file in the <code class="docutils literal notranslate"><span class="pre">cam</span></code>, and not the <code class="docutils literal notranslate"><span class="pre">hdf1</span></code> plugin!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xml_file</span> <span class="o">=</span> <span class="n">IOC_MOUNT_POINT</span> <span class="o">/</span> <span class="s2">&quot;tmp&quot;</span> <span class="o">/</span> <span class="s2">&quot;attributes.xml&quot;</span>  <span class="c1"># IOC sees: /tmp/attributes.xml</span>
+<span class="n">XML_ATTRIBUTES</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot; ?&gt;</span>
+<span class="s2">&lt;Attributes</span>
+<span class="s2">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="s2">    xsi:noNamespaceSchemaLocation=&quot;../../../../../ADCore/XML_schema/NDAttributes.xsd&quot;</span>
+<span class="s2">    &gt;</span>
+<span class="s2">    &lt;Attribute name=&quot;AcquireTime&quot;         type=&quot;EPICS_PV&quot; source=&quot;</span><span class="si">{</span><span class="n">ad_prefix</span><span class="si">}</span><span class="s2">cam1:AcquireTime&quot;  dbrtype=&quot;DBR_NATIVE&quot;  description=&quot;Camera acquire time&quot;/&gt;</span>
+<span class="s2">    &lt;Attribute name=&quot;HDF5FrameLocation&quot;   type=&quot;EPICS_PV&quot; source=&quot;</span><span class="si">{</span><span class="n">ad_prefix</span><span class="si">}</span><span class="s2">cam1:FrameType&quot;    dbrtype=&quot;DBR_STRING&quot;  description=&quot;HDF5 address for this frame&quot;/&gt;</span>
+<span class="s2">    &lt;Attribute name=&quot;ImageCounter&quot;        type=&quot;PARAM&quot;    source=&quot;ARRAY_COUNTER&quot;                datatype=&quot;INT&quot;        description=&quot;Image counter&quot;/&gt;</span>
+<span class="s2">    &lt;Attribute name=&quot;AttributesFileParam&quot; type=&quot;PARAM&quot;    source=&quot;ND_ATTRIBUTES_FILE&quot;           datatype=&quot;STRING&quot;     description=&quot;Attributes file param&quot;/&gt;</span>
+<span class="s2">    &lt;Attribute name=&quot;CameraModel&quot;         type=&quot;PARAM&quot;    source=&quot;MODEL&quot;                        datatype=&quot;STRING&quot;     description=&quot;Camera model&quot;/&gt;</span>
+<span class="s2">    &lt;Attribute name=&quot;CameraManufacturer&quot;  type=&quot;PARAM&quot;    source=&quot;MANUFACTURER&quot;                 datatype=&quot;STRING&quot;     description=&quot;Camera manufacturer&quot;/&gt;</span>
+<span class="s2">&lt;/Attributes&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">xml_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">XML_ATTRIBUTES</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">xml_file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">=}</span><span class="se">\n</span><span class="si">{</span><span class="n">xml_file</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+xml_file.exists()=True
+xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/attributes.xml&#39;)
+</pre></div></div>
+</div>
+</section>
+<section id="XML-Layout-File">
+<h3>XML Layout File<a class="headerlink" href="#XML-Layout-File" title="Permalink to this heading">#</a></h3>
+<p>Here, we create the custom <code class="docutils literal notranslate"><span class="pre">/tmp/layout.xml</span></code> (starting from the XML layout file supplied with the ADSimDetector). Rather than use an XML library to write this file, we’ll create all the content here as text and write the file with the usual text file tools. Then, we’ll check that the file exists.</p>
+<p>Note: This is the part of the file that directs each frame type to its configured field:</p>
+<div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;global</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;detector_data_destination&quot;</span><span class="w"> </span><span class="na">ndattribute=</span><span class="s">&quot;HDF5FrameLocation&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">detector_data_destination</span></code> name is compiled into the HDF5 writer plugin and is required for proper operation. The <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> coordinates with the same name in the <a class="reference external" href="#xml-attributes-file">attributes</a> above.</p>
+<p>In a <a class="reference external" href="#install-support-for-custom-frame-types">later step</a>, we’ll tell the HDF5 plugin to use it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xml_file</span> <span class="o">=</span> <span class="n">IOC_MOUNT_POINT</span> <span class="o">/</span> <span class="s2">&quot;tmp&quot;</span> <span class="o">/</span> <span class="s2">&quot;layout.xml&quot;</span>  <span class="c1"># IOC sees: /tmp/layout.xml</span>
+<span class="n">XML_LAYOUT2</span> <span class="o">=</span> <span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">&lt;?xml version=&quot;1.0&quot; standalone=&quot;no&quot; ?&gt;</span>
+<span class="s2">&lt;hdf5_layout</span>
+<span class="s2">    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</span>
+<span class="s2">    xsi:noNamespaceSchemaLocation=&quot;../../../../../ADCore/XML_schema/hdf5_xml_layout_schema.xsd&quot;</span>
+<span class="s2">    &gt;</span>
+<span class="s2">  &lt;global name=&quot;detector_data_destination&quot; ndattribute=&quot;HDF5FrameLocation&quot; /&gt;</span>
+<span class="s2">  &lt;group name=&quot;entry&quot;&gt;</span>
+<span class="s2">    &lt;attribute name=&quot;NX_class&quot; source=&quot;constant&quot; value=&quot;NXentry&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">    &lt;attribute name=&quot;default&quot; source=&quot;constant&quot; value=&quot;data&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">    &lt;group name=&quot;data&quot;&gt;</span>
+<span class="s2">        &lt;attribute name=&quot;NX_class&quot; source=&quot;constant&quot; value=&quot;NXdata&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">        &lt;attribute name=&quot;signal&quot; source=&quot;constant&quot; value=&quot;data&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">        &lt;dataset name=&quot;data&quot; source=&quot;detector&quot;&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;units&quot; source=&quot;constant&quot; value=&quot;counts&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;description&quot; source=&quot;constant&quot; value=&quot;image frame(s)&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;target&quot; source=&quot;constant&quot; value=&quot;/entry/data/data&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">        &lt;/dataset&gt;</span>
+<span class="s2">        &lt;dataset name=&quot;dark&quot; source=&quot;detector&quot;&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;units&quot; source=&quot;constant&quot; value=&quot;counts&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;description&quot; source=&quot;constant&quot; value=&quot;dark (background) frame(s)&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;target&quot; source=&quot;constant&quot; value=&quot;/entry/data/dark&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">        &lt;/dataset&gt;</span>
+<span class="s2">        &lt;dataset name=&quot;white&quot; source=&quot;detector&quot;&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;units&quot; source=&quot;constant&quot; value=&quot;counts&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;description&quot; source=&quot;constant&quot; value=&quot;white (flat) frame(s)&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">          &lt;attribute name=&quot;target&quot; source=&quot;constant&quot; value=&quot;/entry/data/white&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">        &lt;/dataset&gt;</span>
+<span class="s2">    &lt;/group&gt;              &lt;!-- end group data --&gt;</span>
+<span class="s2">    &lt;group name=&quot;instrument&quot;&gt;</span>
+<span class="s2">      &lt;attribute name=&quot;NX_class&quot; source=&quot;constant&quot; value=&quot;NXinstrument&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">      &lt;group name=&quot;detector&quot;&gt;</span>
+<span class="s2">        &lt;attribute name=&quot;NX_class&quot; source=&quot;constant&quot; value=&quot;NXdetector&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">        &lt;hardlink name=&quot;data&quot; target=&quot;/entry/data/data&quot; /&gt;</span>
+<span class="s2">        &lt;hardlink name=&quot;dark&quot; target=&quot;/entry/data/dark&quot; /&gt;</span>
+<span class="s2">        &lt;hardlink name=&quot;white&quot; target=&quot;/entry/data/white&quot; /&gt;</span>
+<span class="s2">      &lt;/group&gt;            &lt;!-- end group detector --&gt;</span>
+<span class="s2">      &lt;group name=&quot;NDAttributes&quot; ndattr_default=&quot;true&quot;&gt;</span>
+<span class="s2">        &lt;attribute name=&quot;NX_class&quot; source=&quot;constant&quot; value=&quot;NXcollection&quot; type=&quot;string&quot; /&gt;</span>
+<span class="s2">      &lt;/group&gt;            &lt;!-- end group NDAttribute (default) --&gt;</span>
+<span class="s2">    &lt;/group&gt;              &lt;!-- end group instrument --&gt;</span>
+<span class="s2">  &lt;/group&gt;                &lt;!-- end group entry --&gt;</span>
+<span class="s2">&lt;/hdf5_layout&gt;</span>
+<span class="s2">&quot;&quot;&quot;</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">xml_file</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">XML_LAYOUT2</span><span class="o">.</span><span class="n">strip</span><span class="p">())</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">xml_file</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">=}</span><span class="se">\n</span><span class="si">{</span><span class="n">xml_file</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+xml_file.exists()=True
+xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/layout.xml&#39;)
+</pre></div></div>
+</div>
+</section>
+<section id="Ophyd-Device-Setup">
+<h3>Ophyd Device Setup<a class="headerlink" href="#Ophyd-Device-Setup" title="Permalink to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">CamMixin_V34</span>
+<span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">SingleTrigger_V34</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Device</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignal</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignalRO</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignalWithRBV</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">SimDetector</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector</span> <span class="kn">import</span> <span class="n">SimDetectorCam</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector.plugins</span> <span class="kn">import</span> <span class="n">HDF5Plugin_V34</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector.plugins</span> <span class="kn">import</span> <span class="n">ImagePlugin_V34</span>
+<span class="kn">from</span> <span class="nn">ophyd.areadetector.plugins</span> <span class="kn">import</span> <span class="n">PvaPlugin_V34</span>
+
+<span class="k">class</span> <span class="nc">MySimDetectorCam</span><span class="p">(</span><span class="n">CamMixin_V34</span><span class="p">,</span> <span class="n">SimDetectorCam</span><span class="p">):</span>
+    <span class="n">nd_attr_status</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;NDAttributesStatus&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyHDF5Plugin</span><span class="p">(</span><span class="n">HDF5Plugin_V34</span><span class="p">):</span>
+    <span class="n">layout_filename</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;XMLFileName&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">layout_filename_valid</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;XMLValid_RBV&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">nd_attr_status</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;NDAttributesStatus&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">MyDetector</span><span class="p">(</span><span class="n">SingleTrigger_V34</span><span class="p">,</span> <span class="n">SimDetector</span><span class="p">):</span>
+    <span class="n">cam</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">MySimDetectorCam</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;cam1:&quot;</span><span class="p">)</span>
+    <span class="n">hdf1</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">MyHDF5Plugin</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;HDF1:&quot;</span><span class="p">)</span>
+    <span class="n">image</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">ImagePlugin_V34</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;image1:&quot;</span><span class="p">)</span>
+    <span class="n">pva1</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">PvaPlugin_V34</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="s2">&quot;Pva1:&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Support-Functions">
+<h3>Support Functions<a class="headerlink" href="#Support-Functions" title="Permalink to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">h5py</span>
+
+<span class="n">IMAGE</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">DARK</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">WHITE</span> <span class="o">=</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">set_ad_count_time</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">exposure</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;acquire_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">exposure</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;acquire_period&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">period</span>
+
+<span class="k">def</span> <span class="nf">ad_setup</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">nframes</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Make this a function.  We&#39;ll use again later.&quot;&quot;&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">acquire</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="o">.</span><span class="n">kind</span> <span class="o">=</span> <span class="s2">&quot;config&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">capture</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">compression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;zlib&quot;</span><span class="p">)</span>  <span class="c1"># better than `&quot;None&quot;` (default)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">create_directory</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">file_name</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;test_image&quot;</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">file_path</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/tmp&quot;</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">kind</span> <span class="o">=</span> <span class="mi">3</span>  <span class="c1"># config | normal</span>
+
+    <span class="k">if</span> <span class="s2">&quot;compression&quot;</span> <span class="ow">in</span> <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">:</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;create_directory&quot;</span><span class="p">)</span>
+
+    <span class="c1"># The plugins do not block, the cam must wait for the plugins to finish.</span>
+    <span class="k">for</span> <span class="n">nm</span> <span class="ow">in</span> <span class="n">det</span><span class="o">.</span><span class="n">component_names</span><span class="p">:</span>
+        <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">nm</span><span class="p">)</span>
+        <span class="k">if</span> <span class="s2">&quot;blocking_callbacks&quot;</span> <span class="ow">in</span> <span class="nb">dir</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>  <span class="c1"># is it a plugin?</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;blocking_callbacks&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;No&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;wait_for_plugins&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;num_images&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">nframes</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;num_capture&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># capture ALL frames received</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;auto_increment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;auto_save&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;file_template&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">%s%s</span><span class="s2">_</span><span class="si">%4.4d</span><span class="s2">.h5&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;file_write_mode&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Stream&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;store_attr&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>  <span class="c1"># need in this notebook</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;store_perform&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;No&quot;</span>  <span class="c1"># optional</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;auto_increment&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Yes&quot;</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;capture&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>  <span class="c1"># ALWAYS last</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">stage_sigs</span><span class="o">.</span><span class="n">move_to_end</span><span class="p">(</span><span class="s2">&quot;capture&quot;</span><span class="p">)</span>  <span class="c1"># ... just in case</span>
+
+    <span class="c1"># Clear these settings __for this demo__.</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">layout_filename</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">nd_attributes_file</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_adplugin_primed</span><span class="p">(</span><span class="n">plugin</span><span class="p">,</span> <span class="n">allow_priming</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">AD_plugin_primed</span>
+    <span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">AD_prime_plugin2</span>
+
+    <span class="c1"># this step is needed for ophyd</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">AD_plugin_primed</span><span class="p">(</span><span class="n">plugin</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">allow_priming</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Priming </span><span class="si">{</span><span class="n">plugin</span><span class="o">.</span><span class="n">dotted_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="n">AD_prime_plugin2</span><span class="p">(</span><span class="n">plugin</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Detector plugin &#39;</span><span class="si">{</span><span class="n">plugin</span><span class="o">.</span><span class="n">dotted_name</span><span class="si">}</span><span class="s2">&#39; must be primed first.&quot;</span>
+            <span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">dict_to_table</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">printing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">pyRestTable</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pyRestTable</span><span class="o">.</span><span class="n">Table</span><span class="p">()</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="s2">&quot;key value&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">rows</span> <span class="o">=</span> <span class="p">[[</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+    <span class="k">if</span> <span class="n">printing</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">table</span>
+
+<span class="k">def</span> <span class="nf">readings_to_table</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">printing</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="kn">import</span> <span class="nn">pyRestTable</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">d</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+
+    <span class="n">labels</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">([</span><span class="n">k</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">values</span><span class="p">()</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">keys</span><span class="p">()]))</span>
+    <span class="n">table</span> <span class="o">=</span> <span class="n">pyRestTable</span><span class="o">.</span><span class="n">Table</span><span class="p">()</span>
+    <span class="c1"># fmt: off</span>
+    <span class="n">table</span><span class="o">.</span><span class="n">labels</span> <span class="o">=</span> <span class="p">[</span> <span class="s2">&quot;name&quot;</span><span class="p">,</span> <span class="p">]</span> <span class="o">+</span> <span class="nb">list</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">reading</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">row</span> <span class="o">=</span> <span class="p">[</span><span class="n">k</span><span class="p">,</span> <span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">reading</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">labels</span><span class="p">]</span>
+        <span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+    <span class="c1"># fmt: on</span>
+
+    <span class="k">if</span> <span class="n">printing</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">table</span>
+
+<span class="k">def</span> <span class="nf">print_overview</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
+    <span class="n">cfg</span> <span class="o">=</span> <span class="n">device</span><span class="o">.</span><span class="n">describe_configuration</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">readings</span> <span class="ow">in</span> <span class="n">device</span><span class="o">.</span><span class="n">read_configuration</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">cfg</span><span class="p">:</span>
+            <span class="n">cfg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">readings</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cfg</span><span class="p">[</span><span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">readings</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; configuration:&quot;</span><span class="p">)</span>
+    <span class="n">readings_to_table</span><span class="p">(</span><span class="n">cfg</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">practice_device_staging</span><span class="p">(</span><span class="n">device</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Before staging &#39;</span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="n">device</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device &#39;</span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; staged&quot;</span><span class="p">)</span>
+    <span class="n">device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Device &#39;</span><span class="si">{</span><span class="n">device</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&#39; unstaged&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">local_h5_file</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
+    <span class="n">ioc_file</span> <span class="o">=</span> <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">full_file_name</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">IOC_MOUNT_POINT</span> <span class="o">/</span> <span class="n">ioc_file</span><span class="o">.</span><span class="n">lstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">check_h5_file</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
+    <span class="n">hfile</span> <span class="o">=</span> <span class="n">local_h5_file</span><span class="p">(</span><span class="n">det</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">hfile</span><span class="o">.</span><span class="n">exists</span><span class="p">()</span><span class="si">=}</span><span class="s2"> </span><span class="si">{</span><span class="n">hfile</span><span class="o">.</span><span class="n">name</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">addr</span> <span class="o">=</span> <span class="s2">&quot;/entry/instrument/NDAttributes&quot;</span>
+    <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">hfile</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">root</span><span class="p">:</span>
+        <span class="n">group</span> <span class="o">=</span> <span class="n">root</span><span class="p">[</span><span class="n">addr</span><span class="p">]</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">group</span><span class="p">)</span><span class="si">=}</span><span class="s2">  </span><span class="si">{</span><span class="n">group</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;members: </span><span class="si">{</span><span class="p">[</span><span class="n">k</span><span class="w"> </span><span class="k">for</span><span class="w"> </span><span class="n">k</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">group</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">h5_overview</span><span class="p">(</span><span class="n">det</span><span class="p">):</span>
+    <span class="n">h5_file</span> <span class="o">=</span> <span class="n">local_h5_file</span><span class="p">(</span><span class="n">det</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">h5_file</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">h5py</span><span class="o">.</span><span class="n">File</span><span class="p">(</span><span class="n">h5_file</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">NeXus_data</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/data&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/data/dark&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/data/data&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/data/white&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument/detector&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument/detector/dark&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument/detector/data&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument/detector/white&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument/NDAttributes&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="p">(</span><span class="s1">&#39;/entry/instrument/NDAttributes/HDF5FrameLocation&#39;</span><span class="w"> </span><span class="ow">in</span><span class="w"> </span><span class="n">NeXus_data</span><span class="p">)</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">addr</span> <span class="ow">in</span> <span class="s2">&quot;dark data white&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ds</span> <span class="o">=</span> <span class="n">NeXus_data</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;/entry/data/</span><span class="si">{</span><span class="n">addr</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ds</span><span class="si">=}</span><span class="s2">  </span><span class="si">{</span><span class="n">ds</span><span class="o">.</span><span class="n">shape</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">KeyError</span><span class="p">:</span>
+                <span class="k">pass</span>
+    <span class="n">frame_type</span> <span class="o">=</span> <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;frame_type: PV=&#39;</span><span class="si">{</span><span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="o">.</span><span class="n">pvname</span><span class="si">}</span><span class="s2">&#39;&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    value=</span><span class="si">{</span><span class="n">frame_type</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot; (</span><span class="si">{</span><span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="o">.</span><span class="n">enum_strs</span><span class="p">[</span><span class="n">frame_type</span><span class="p">]</span><span class="si">}</span><span class="s2">)&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">    choices=</span><span class="si">{</span><span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="o">.</span><span class="n">enum_strs</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">h5_file</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">setup_frame_type</span><span class="p">():</span>
+    <span class="k">class</span> <span class="nc">FrameType</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+        <span class="n">zero</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.ZRST&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">one</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.ONST&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">two</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.TWST&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">three</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.THST&quot;</span><span class="p">,</span> <span class="n">string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">pv</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;FrameType&quot;</span><span class="p">,</span> <span class="p">):</span>
+        <span class="n">o</span> <span class="o">=</span> <span class="n">FrameType</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ad_prefix</span><span class="si">}</span><span class="s2">cam1:</span><span class="si">{</span><span class="n">pv</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+        <span class="n">o</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+        <span class="n">o</span><span class="o">.</span><span class="n">zero</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/entry/data/data&quot;</span><span class="p">)</span>
+        <span class="n">o</span><span class="o">.</span><span class="n">one</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/entry/data/dark&quot;</span><span class="p">)</span>
+        <span class="n">o</span><span class="o">.</span><span class="n">two</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/entry/data/white&quot;</span><span class="p">)</span>
+        <span class="n">o</span><span class="o">.</span><span class="n">three</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Configure-PV-for-the-Frame-Type">
+<h3>Configure PV for the Frame Type<a class="headerlink" href="#Configure-PV-for-the-Frame-Type" title="Permalink to this heading">#</a></h3>
+<p>Configure our PV(s) for the <em>NeXus</em> addresses we want to use. We <strong>must</strong> reconnect our ophyd object after our change to the EPICS PVs to pick up this change. (The choices that the Python objects sees are only updated when the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV is first connected.)</p>
+<p>Must call <code class="docutils literal notranslate"><span class="pre">setup_frame_type()</span></code> <em>before</em> creating detector object, so the Python detector object picks up on the different string values. The EPICS IOC gets the correct string directly from the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">setup_frame_type</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Create-Detector-Object">
+<h3>Create Detector Object<a class="headerlink" href="#Create-Detector-Object" title="Permalink to this heading">#</a></h3>
+<p>… and connect with the Area Detector IOC. Set the counting time per frame (something short). <em>Prime</em> (push an image frame from the camera to the plugin) the HDF5 plugin, if found necessary.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span> <span class="o">=</span> <span class="n">MyDetector</span><span class="p">(</span><span class="n">ad_prefix</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;det&quot;</span><span class="p">)</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+<span class="n">NUM_FRAMES</span> <span class="o">=</span> <span class="mi">5</span>
+<span class="n">set_ad_count_time</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">exposure</span><span class="o">=</span><span class="mf">0.02</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">ad_setup</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">nframes</span><span class="o">=</span><span class="n">NUM_FRAMES</span><span class="p">)</span>
+<span class="n">check_adplugin_primed</span><span class="p">(</span><span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Priming hdf1
+</pre></div></div>
+</div>
+</section>
+<section id="Create-RunEngine">
+<h3>Create RunEngine<a class="headerlink" href="#Create-RunEngine" title="Permalink to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">apstools</span>
+<span class="kn">import</span> <span class="nn">bluesky</span>
+<span class="kn">import</span> <span class="nn">databroker</span>
+<span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">plans</span> <span class="k">as</span> <span class="n">bp</span>
+
+<span class="n">cat</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">temp</span><span class="p">()</span><span class="o">.</span><span class="n">v2</span>
+<span class="n">RE</span> <span class="o">=</span> <span class="n">bluesky</span><span class="o">.</span><span class="n">RunEngine</span><span class="p">()</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">insert</span><span class="p">)</span>
+
+<span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;title&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;images, darks, &amp; flats&quot;</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;versions&quot;</span><span class="p">][</span><span class="s2">&quot;apstools&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">apstools</span><span class="o">.</span><span class="n">__version__</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;repository&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bluesky_training&quot;</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;notebook&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;images_darks_flats&quot;</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Review-the-Configurations">
+<h3>Review the Configurations<a class="headerlink" href="#Review-the-Configurations" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;RunEngine metadata&quot;</span><span class="p">)</span>
+<span class="n">dict_to_table</span><span class="p">(</span><span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">o</span> <span class="ow">in</span> <span class="p">[</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">adsimdet</span><span class="o">.</span><span class="n">cam</span><span class="p">,</span> <span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="p">]:</span>
+    <span class="n">nm</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;adsimdet.</span><span class="si">{</span><span class="n">o</span><span class="o">.</span><span class="n">attr_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&#39;</span><span class="si">{</span><span class="n">nm</span><span class="si">}</span><span class="s2">.stage_sigs&#39; stage_sigs&quot;</span><span class="p">)</span>
+    <span class="n">dict_to_table</span><span class="p">(</span><span class="n">o</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">)</span>
+
+<span class="n">print_overview</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+RunEngine metadata
+========== =============================================================
+key        value
+========== =============================================================
+versions   {&#39;ophyd&#39;: &#39;1.7.0&#39;, &#39;bluesky&#39;: &#39;1.10.0&#39;, &#39;apstools&#39;: &#39;1.6.15&#39;}
+title      images, darks, &amp; flats
+repository bluesky_training
+notebook   images_darks_flats
+========== =============================================================
+
+&#39;adsimdet.stage_sigs&#39; stage_sigs
+============== =====
+key            value
+============== =====
+cam.acquire    0
+cam.image_mode 1
+============== =====
+
+&#39;adsimdet.cam.stage_sigs&#39; stage_sigs
+================ =====
+key              value
+================ =====
+acquire_time     0.02
+acquire_period   0.1
+wait_for_plugins Yes
+num_images       5
+================ =====
+
+&#39;adsimdet.hdf1.stage_sigs&#39; stage_sigs
+========================== =============
+key                        value
+========================== =============
+enable                     1
+blocking_callbacks         No
+parent.cam.array_callbacks 1
+num_capture                0
+auto_increment             Yes
+auto_save                  Yes
+file_template              %s%s_%4.4d.h5
+file_write_mode            Stream
+store_attr                 Yes
+store_perform              No
+capture                    1
+========================== =============
+
+&#39;det&#39; configuration:
+====================== ======= ======================================================= ================ ========= ===== ============================ ================= ===== ================ ==================
+name                   dtype   enum_strs                                               lower_ctrl_limit precision shape source                       timestamp         units upper_ctrl_limit value
+====================== ======= ======================================================= ================ ========= ===== ============================ ================= ===== ================ ==================
+det_cam_acquire_period number                                                          0.0              3         []    PV:ad:cam1:AcquirePeriod_RBV 1681423107.715916       0.0              0.005
+det_cam_acquire_time   number                                                          0.0              3         []    PV:ad:cam1:AcquireTime_RBV   1681423107.818108       0.0              0.001
+det_cam_frame_type     integer (&#39;Normal&#39;, &#39;Background&#39;, &#39;FlatField&#39;, &#39;DblCorrelation&#39;) None                       []    PV:ad:cam1:FrameType_RBV     1681423053.905152 None  None             0
+det_cam_image_mode     integer (&#39;Single&#39;, &#39;Multiple&#39;, &#39;Continuous&#39;)                    None                       []    PV:ad:cam1:ImageMode_RBV     1681423108.021729 None  None             2
+det_cam_manufacturer   string                                                          None                       []    PV:ad:cam1:Manufacturer_RBV  1681423053.904149 None  None             Simulated detector
+det_cam_model          string                                                          None                       []    PV:ad:cam1:Model_RBV         1681423053.904223 None  None             Basic simulator
+det_cam_num_exposures  integer                                                         0                          []    PV:ad:cam1:NumExposures_RBV  1681423053.90519        0                1
+det_cam_num_images     integer                                                         0                          []    PV:ad:cam1:NumImages_RBV     1681423053.904953       0                100
+det_cam_trigger_mode   integer (&#39;Internal&#39;, &#39;External&#39;)                                None                       []    PV:ad:cam1:TriggerMode_RBV   1681423053.90516  None  None             0
+====================== ======= ======================================================= ================ ========= ===== ============================ ================= ===== ================ ==================
+
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Acquire-Images-with-Standard-bp.count()-Plan">
+<h2>Acquire Images with Standard <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> Plan<a class="headerlink" href="#Acquire-Images-with-Standard-bp.count()-Plan" title="Permalink to this heading">#</a></h2>
+<p>To understand what the custom frame type support will do for us, we first demonstrate image acquisition when the custom support is not yet installed. When a custom layout file is not configured in the HDF5 plugin, the standard layout (NeXus schema) writes all image frames into the <code class="docutils literal notranslate"><span class="pre">/entry/data/data</span></code> field of the HDF5 file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">adsimdet</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;adb1a4a5-19ce-4302-b18b-76eb1c7a4289&#39;,)
+</pre></div></div>
+</div>
+<p>After the acquisition, check the output file. This is not a great test since we are only writing a single image type. Just check that <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> is found in the list of <code class="docutils literal notranslate"><span class="pre">members</span></code> and that the expected data group is present. Only the test results for the <code class="docutils literal notranslate"><span class="pre">data</span></code> frames should be <code class="docutils literal notranslate"><span class="pre">True</span></code> (tests for the paths to those components should also be <code class="docutils literal notranslate"><span class="pre">True</span></code>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">local_h5_file</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">check_h5_file</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">)</span>
+<span class="n">h5_overview</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/tmp/docker_ioc/iocad/tmp/test_image_0000.h5
+hfile.exists()=True hfile.name=&#39;test_image_0000.h5&#39;
+len(group)=4  group=&lt;HDF5 group &#34;/entry/instrument/NDAttributes&#34; (4 members)&gt;
+members: [&#39;NDArrayEpicsTSSec&#39;, &#39;NDArrayEpicsTSnSec&#39;, &#39;NDArrayTimeStamp&#39;, &#39;NDArrayUniqueId&#39;]
+h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0000.h5&#39;)
+(&#39;/entry/data&#39; in NeXus_data)=True
+(&#39;/entry/data/dark&#39; in NeXus_data)=False
+(&#39;/entry/data/data&#39; in NeXus_data)=True
+(&#39;/entry/data/white&#39; in NeXus_data)=False
+(&#39;/entry/instrument&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/dark&#39; in NeXus_data)=False
+(&#39;/entry/instrument/detector/data&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/white&#39; in NeXus_data)=False
+(&#39;/entry/instrument/NDAttributes&#39; in NeXus_data)=True
+(&#39;/entry/instrument/NDAttributes/HDF5FrameLocation&#39; in NeXus_data)=False
+ds=&lt;HDF5 dataset &#34;data&#34;: shape (5, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(5, 1024, 1024)
+frame_type: PV=&#39;ad:cam1:FrameType_RBV&#39;
+    value=0 (Normal)
+    choices=(&#39;Normal&#39;, &#39;Background&#39;, &#39;FlatField&#39;, &#39;DblCorrelation&#39;)
+h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0000.h5&#39;)
+</pre></div></div>
+</div>
+</section>
+<section id="Use-Ophyd-to-Acquire-Image-Frames">
+<h2>Use Ophyd to Acquire Image Frames<a class="headerlink" href="#Use-Ophyd-to-Acquire-Image-Frames" title="Permalink to this heading">#</a></h2>
+<p>Test the acquisition of the different frame types.</p>
+<section id="Install-Support-for-Custom-Frame-Types">
+<h3>Install Support for Custom Frame Types<a class="headerlink" href="#Install-Support-for-Custom-Frame-Types" title="Permalink to this heading">#</a></h3>
+<p>Previously we wrote <a class="reference external" href="#xml-attributes-file">attributes</a> and <a class="reference external" href="#xml-layout-file">layout</a> files for the IOC to use. Configure the IOC to use these files now. With these files, the HDF5 writer will use the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV, configured <a class="reference external" href="#configure-pv-for-the-frame-type">above</a>, to direct each frame to its configured HDF5 address in the file.</p>
+<p><strong>NOTE</strong>: Very important that you set the <a class="reference external" href="#xml-attributes-file">attributes</a> file in the <code class="docutils literal notranslate"><span class="pre">cam</span></code>, and not the <code class="docutils literal notranslate"><span class="pre">hdf1</span></code> plugin!</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">nd_attributes_file</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/tmp/attributes.xml&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">adsimdet</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">nd_attr_status</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">layout_filename</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;/tmp/layout.xml&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">adsimdet</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">layout_filename_valid</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+adsimdet.cam.nd_attr_status.get() = &#39;Attributes file OK&#39;
+adsimdet.hdf1.layout_filename_valid.get()=&#39;Yes&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Start-Data-Acquisition">
+<h3>Start Data Acquisition<a class="headerlink" href="#Start-Data-Acquisition" title="Permalink to this heading">#</a></h3>
+<p>In staging, ophyd sets the various detector PVs to the values to be used for the next data acquisition. The configuration is stored in the various <code class="docutils literal notranslate"><span class="pre">stage_sigs</span></code> dictionaries printed <a class="reference external" href="#review-the-configurations">above</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
+<span class="n">adsimdet</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">image_mode</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;Multiple&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Collect-Different-Frame-Types">
+<h3>Collect Different Frame Types<a class="headerlink" href="#Collect-Different-Frame-Types" title="Permalink to this heading">#</a></h3>
+<p>Since execution by the RunEngine may appear to be opaque to the user, let’s bypass the RunEngine and collect the different frame types using pure ophyd commands.</p>
+<p>For the different image types, first set the frame type, then tell the camera to acquire. The camera has been configured to wait for all plugins to finish before it sets detector state to idle. The <code class="docutils literal notranslate"><span class="pre">responder()</span></code> function is subscribed to any updates of the detector state PV. A <code class="docutils literal notranslate"><span class="pre">Status()</span></code> object is used to wait for the PV to reach the value of <code class="docutils literal notranslate"><span class="pre">&quot;Idle&quot;</span></code> (or <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.status</span> <span class="kn">import</span> <span class="n">Status</span>
+
+<span class="k">def</span> <span class="nf">acquire</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">frame_type</span><span class="p">,</span> <span class="n">nframes</span><span class="p">):</span>
+    <span class="n">acquisition</span> <span class="o">=</span> <span class="n">Status</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">responder</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Called when subscribed signal changes.&quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Idle&quot;</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">acquisition</span><span class="o">.</span><span class="n">done</span><span class="p">:</span>
+            <span class="n">acquisition</span><span class="o">.</span><span class="n">set_finished</span><span class="p">()</span>
+
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">frame_type</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">num_images</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">nframes</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">acquire</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">detector_state</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">responder</span><span class="p">)</span>
+    <span class="n">acquisition</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+    <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">detector_state</span><span class="o">.</span><span class="n">unsubscribe</span><span class="p">(</span><span class="n">responder</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>We mix up the sequence of images, darks, and whites to demonstrate that the order of these does not matter. Each image type will be directed to the corresponding HDF5 dataset as it is collected.</p>
+<p>Collect one <em>image</em> frame</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acquire</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">IMAGE</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Collect two <em>white</em> frames</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acquire</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">WHITE</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Collect three <em>dark</em> frames</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acquire</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">DARK</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Collect five more <em>image</em> frames</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">acquire</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">IMAGE</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="End-Data-Acquisition">
+<h3>End Data Acquisition<a class="headerlink" href="#End-Data-Acquisition" title="Permalink to this heading">#</a></h3>
+<p><em>Unstaging</em> reverses the <code class="docutils literal notranslate"><span class="pre">stage()</span></code> step above, restoring PVs to their prior values.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+<span class="n">h5_overview</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0001.h5&#39;)
+(&#39;/entry/data&#39; in NeXus_data)=True
+(&#39;/entry/data/dark&#39; in NeXus_data)=True
+(&#39;/entry/data/data&#39; in NeXus_data)=True
+(&#39;/entry/data/white&#39; in NeXus_data)=True
+(&#39;/entry/instrument&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/dark&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/data&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/white&#39; in NeXus_data)=True
+(&#39;/entry/instrument/NDAttributes&#39; in NeXus_data)=True
+(&#39;/entry/instrument/NDAttributes/HDF5FrameLocation&#39; in NeXus_data)=False
+ds=&lt;HDF5 dataset &#34;dark&#34;: shape (3, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(3, 1024, 1024)
+ds=&lt;HDF5 dataset &#34;data&#34;: shape (6, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(6, 1024, 1024)
+ds=&lt;HDF5 dataset &#34;white&#34;: shape (2, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(2, 1024, 1024)
+frame_type: PV=&#39;ad:cam1:FrameType_RBV&#39;
+    value=0 (Normal)
+    choices=(&#39;Normal&#39;, &#39;Background&#39;, &#39;FlatField&#39;, &#39;DblCorrelation&#39;)
+h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0001.h5&#39;)
+</pre></div></div>
+</div>
+<p>We’re looking for 3 darks, 6 data, and 2 white frames. All the test results should be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</section>
+</section>
+<section id="Use-Bluesky-to-Acquire-Image-Frames">
+<h2>Use Bluesky to Acquire Image Frames<a class="headerlink" href="#Use-Bluesky-to-Acquire-Image-Frames" title="Permalink to this heading">#</a></h2>
+<p>Here, we collect image frames with a custom plan using the bluesky RunEngine (<code class="docutils literal notranslate"><span class="pre">RE</span></code>).</p>
+<section id="Custom-Bluesky-Plan">
+<h3>Custom Bluesky Plan<a class="headerlink" href="#Custom-Bluesky-Plan" title="Permalink to this heading">#</a></h3>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bluesky.plan_stubs</span> <span class="k">as</span> <span class="nn">bps</span>
+
+<span class="k">def</span> <span class="nf">frame_set</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">frame_type</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_frames</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mf">0.25</span><span class="p">):</span>
+    <span class="n">frame_name</span> <span class="o">=</span> <span class="s2">&quot;image background white&quot;</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="n">frame_type</span><span class="p">]</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">frame_type</span><span class="si">=}</span><span class="s2">  </span><span class="si">{</span><span class="n">frame_name</span><span class="si">=}</span><span class="s2">  </span><span class="si">{</span><span class="n">num_frames</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="p">,</span> <span class="n">frame_type</span><span class="p">,</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">num_images</span><span class="p">,</span> <span class="n">num_frames</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">sleep</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">sleep</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">acquire</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>  <span class="c1"># waits for acquire=0</span>
+    <span class="k">while</span> <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">acquire_busy</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">use_monitor</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.01</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">series</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">sequence</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">total</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">])</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;total frames:&quot;</span><span class="p">,</span> <span class="n">total</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;setup&quot;</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">auto_save</span><span class="p">,</span> <span class="s2">&quot;Yes&quot;</span><span class="p">,</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">num_capture</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">image_mode</span><span class="p">,</span> <span class="s2">&quot;Multiple&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">file_write_mode</span><span class="p">,</span> <span class="s1">&#39;Stream&#39;</span><span class="p">)</span>  <span class="c1"># TODO: or Capture</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">stage</span><span class="p">(</span><span class="n">det</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">frame_specification</span> <span class="ow">in</span> <span class="n">sequence</span><span class="p">:</span>
+        <span class="n">frame_type</span><span class="p">,</span> <span class="n">num_frames</span> <span class="o">=</span> <span class="n">frame_specification</span>
+        <span class="k">yield from</span> <span class="n">frame_set</span><span class="p">(</span><span class="n">det</span><span class="p">,</span> <span class="n">frame_type</span><span class="p">,</span> <span class="n">num_frames</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="n">sleep</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">capture</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>  <span class="c1"># before file_write_mode = &#39;Single</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">unstage</span><span class="p">(</span><span class="n">det</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">cam</span><span class="o">.</span><span class="n">frame_type</span><span class="p">,</span> <span class="n">IMAGE</span><span class="p">,</span>
+        <span class="n">det</span><span class="o">.</span><span class="n">hdf1</span><span class="o">.</span><span class="n">file_write_mode</span><span class="p">,</span> <span class="s1">&#39;Single&#39;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Acquire-Image-Frames-with-Bluesky">
+<h3>Acquire Image Frames with Bluesky<a class="headerlink" href="#Acquire-Image-Frames-with-Bluesky" title="Permalink to this heading">#</a></h3>
+<p>Describe a sequence of acquisitions with different frame types and number of frames to collect with each.</p>
+<p>Run this sequence with the custom plan (in the RunEngine), then print an overview of the HDF5 file.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">SEQUENCE</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="n">DARK</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">WHITE</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IMAGE</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IMAGE</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">DARK</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">IMAGE</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">WHITE</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="n">DARK</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">]</span>
+
+<span class="n">RE</span><span class="p">(</span><span class="n">series</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">,</span> <span class="n">SEQUENCE</span><span class="p">,</span> <span class="n">sleep</span><span class="o">=</span><span class="mf">0.0</span><span class="p">))</span>
+<span class="n">h5_overview</span><span class="p">(</span><span class="n">adsimdet</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+total frames: 9
+setup
+frame_type=1  frame_name=&#39;background&#39;  num_frames=1
+frame_type=2  frame_name=&#39;white&#39;  num_frames=1
+frame_type=0  frame_name=&#39;image&#39;  num_frames=1
+frame_type=0  frame_name=&#39;image&#39;  num_frames=1
+frame_type=1  frame_name=&#39;background&#39;  num_frames=1
+frame_type=0  frame_name=&#39;image&#39;  num_frames=2
+frame_type=2  frame_name=&#39;white&#39;  num_frames=1
+frame_type=1  frame_name=&#39;background&#39;  num_frames=1
+h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0002.h5&#39;)
+(&#39;/entry/data&#39; in NeXus_data)=True
+(&#39;/entry/data/dark&#39; in NeXus_data)=True
+(&#39;/entry/data/data&#39; in NeXus_data)=True
+(&#39;/entry/data/white&#39; in NeXus_data)=True
+(&#39;/entry/instrument&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/dark&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/data&#39; in NeXus_data)=True
+(&#39;/entry/instrument/detector/white&#39; in NeXus_data)=True
+(&#39;/entry/instrument/NDAttributes&#39; in NeXus_data)=True
+(&#39;/entry/instrument/NDAttributes/HDF5FrameLocation&#39; in NeXus_data)=True
+ds=&lt;HDF5 dataset &#34;dark&#34;: shape (3, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(3, 1024, 1024)
+ds=&lt;HDF5 dataset &#34;data&#34;: shape (4, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(4, 1024, 1024)
+ds=&lt;HDF5 dataset &#34;white&#34;: shape (2, 1024, 1024), type &#34;|u1&#34;&gt;  ds.shape=(2, 1024, 1024)
+frame_type: PV=&#39;ad:cam1:FrameType_RBV&#39;
+    value=0 (Normal)
+    choices=(&#39;Normal&#39;, &#39;Background&#39;, &#39;FlatField&#39;, &#39;DblCorrelation&#39;)
+h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0002.h5&#39;)
+</pre></div></div>
+</div>
+<p>We are looking for this structure in the HDF5 data file (other structure has been omitted, for clarity):</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>entry:NXentry
+  data:NXdata
+    dark:NX_UINT8[3,1024,1024] = [ ... ]
+    data:NX_UINT8[4,1024,1024] = [ ... ]
+    white:NX_UINT8[2,1024,1024] = [ ... ]
+  instrument:NXinstrument
+    NDAttributes:NXcollection
+      HDF5FrameLocation:NX_CHAR[256] = /entry/data/data
+    detector:NXdetector
+      dark --&gt; /entry/data/dark
+      data --&gt; /entry/data/data
+      white --&gt; /entry/data/white
+</pre></div>
+</div>
+<p>All the test results should be <code class="docutils literal notranslate"><span class="pre">True</span></code>.</p>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_dynamic_limits_2motor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dynamic Limits for Two Motors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_lineup_1d_peak.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lineup a 1-D peak : scan detector <em>v</em> motor</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup">Setup</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Notebook-specific-details">Notebook-specific details</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#XML-Attributes-File">XML Attributes File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#XML-Layout-File">XML Layout File</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Ophyd-Device-Setup">Ophyd Device Setup</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Support-Functions">Support Functions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Configure-PV-for-the-Frame-Type">Configure PV for the Frame Type</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-Detector-Object">Create Detector Object</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Create-RunEngine">Create RunEngine</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Review-the-Configurations">Review the Configurations</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Acquire-Images-with-Standard-bp.count()-Plan">Acquire Images with Standard <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> Plan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Use-Ophyd-to-Acquire-Image-Frames">Use Ophyd to Acquire Image Frames</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Install-Support-for-Custom-Frame-Types">Install Support for Custom Frame Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-Data-Acquisition">Start Data Acquisition</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Collect-Different-Frame-Types">Collect Different Frame Types</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#End-Data-Acquisition">End Data Acquisition</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Use-Bluesky-to-Acquire-Image-Frames">Use Bluesky to Acquire Image Frames</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Custom-Bluesky-Plan">Custom Bluesky Plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Acquire-Image-Frames-with-Bluesky">Acquire Image Frames with Bluesky</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_images_darks_flats.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Basic, Part B: Motor and Move" href="_basic_b.html" />
-    <link rel="prev" title="Tutorials" href="index.html" />
+    <link rel="prev" title="APS Bluesky 101" href="_aps101.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -292,6 +292,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_aps101.html">APS Bluesky 101</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic, Part A: Scaler and Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
@@ -484,7 +485,7 @@ Cell <span class="ansi-green-fg">In[4], line 1</span>
 </pre></div></div>
 </div>
 <p>By default, the ophyd <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> object shows data for only the channels with names defined in EPICS. Except for one channel (probably a bug in the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> code). To fix that, we’ll load another support library. (Loading additional support as we need it will be a common theme in these lessons. Rather than loading all the libraries first, as is common in python code files, we’ll load support code as the need arises.)</p>
-<p>The new support code is <code class="docutils literal notranslate"><span class="pre">use_EPICS_scaler_channels</span></code> from <code class="docutils literal notranslate"><span class="pre">`apstools.devices</span></code> &lt;<a class="reference external" href="http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels">http://apstools.readthedocs.io/en/latest/source_code/devices.html#apstools.devices.use_EPICS_scaler_channels</a>&gt;`__.</p>
+<p>The new support code is <code class="docutils literal notranslate"><span class="pre">use_EPICS_scaler_channels</span></code> from <code class="docutils literal notranslate"><span class="pre">`apstools.devices</span></code> &lt;<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.scaler_support.use_EPICS_scaler_channels">https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.scaler_support.use_EPICS_scaler_channels</a>&gt;`__.</p>
 <p>Our scaler only has a few channels in use (that is, channels where the name of the channel has been specified in the GUI screen). Let’s focus on just those channels.</p>
 <p>To read just the <em>named</em> channels, we call the scaler’s <code class="docutils literal notranslate"><span class="pre">select_channels()</span></code> method and name the scaler channels we wish to see. To see all channels with names defined in EPICS, leave out the argument to <code class="docutils literal notranslate"><span class="pre">select_channels()</span></code> as shown:</p>
 <div class="nbinput docutils container">
@@ -583,7 +584,7 @@ Cell <span class="ansi-green-fg">In[8], line 1</span>
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
 </div>
-<p>Since <code class="docutils literal notranslate"><span class="pre">scaler.preset_time</span></code> is an <code class="docutils literal notranslate"><span class="pre">`EpicsSignal</span></code> &lt;<a class="github reference external" href="https://github.com/NSLS-II/ophyd/blob/master/ophyd/signal.py#L647">NSLS-II/ophyd</a>&gt;`__, (<a class="reference external" href="http://nsls-ii.github.io/ophyd/signals.html">Signal</a> is a fundamental ophyd structure), we print its <code class="docutils literal notranslate"><span class="pre">.value</span></code>.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">scaler.preset_time</span></code> is an <code class="docutils literal notranslate"><span class="pre">`EpicsSignal</span></code> &lt;<a class="github reference external" href="https://github.com/NSLS-II/ophyd/blob/master/ophyd/signal.py#L647">NSLS-II/ophyd</a>&gt;`__, (<a class="reference external" href="http://nsls-ii.github.io/ophyd/signals.html">Signal</a> is a fundamental ophyd structure), we print its value using <code class="docutils literal notranslate"><span class="pre">.get()</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -866,7 +867,7 @@ RE = RunEngine({})
 
 scaler = ScalerCH(&quot;gp:scaler1&quot;, name=&quot;scaler&quot;)
 scaler.preset_time.put(1.5)
-print(scaler.preset_time.value)
+print(scaler.preset_time.get())
 
 scaler.channels.chan04.chname.put(&quot;scint&quot;)
 scaler.channels.chan07.chname.put(&quot;roi1&quot;)
@@ -901,12 +902,12 @@ print(RE(bp.count([scaler], num=3), myCallback))
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="index.html"
+       href="_aps101.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Tutorials</p>
+        <p class="prev-next-title">APS Bluesky 101</p>
       </div>
     </a>
     <a class="right-next"

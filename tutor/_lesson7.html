@@ -152,6 +152,13 @@
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
       
@@ -249,6 +256,13 @@ document.write(`
                       </a>
                     </li>
                 
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
   </ul>
 </nav></div>
         
@@ -278,6 +292,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_aps101.html">APS Bluesky 101</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
@@ -1052,7 +1067,7 @@ FourCircleDiffractometerPseudoPos(h=1.5121846940302517e-16, k=1.9999999974773768
 <section id="Forward-Solutions">
 <h3>Forward Solutions<a class="headerlink" href="#Forward-Solutions" title="Permalink to this heading">#</a></h3>
 <p>Forward solutions are the calculated combinations of real-space motor positions given the sample oreitnation matrix, reciprocal-space axes, operating mode, wavelength, and applied constraints. These combinations are presented as a python list which may be empty if there are no solutions.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">`DiffractometerMixin</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_diffractometer.html">https://apstools.readthedocs.io/en/latest/source/_diffractometer.html</a>&gt;`__ provides a helper to print the possible forward solutions for a list of <em>hkl</em> reflections. (Each reflection is provided as a python tuple or list.)</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">`DiffractometerMixin</span></code> &lt;???&gt;`__ (FIXME: Not in apstools, maybe hklpy?) provides a helper to print the possible forward solutions for a list of <em>hkl</em> reflections. (Each reflection is provided as a python tuple or list.)</p>
 <p>Show default solution for a few reflections (<em>100</em>), (<em>010</em>) and (<em>001</em>):</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
@@ -1268,7 +1283,7 @@ tth   -180.0    180.0      -11.01665011929264 True
 [&#39;omega&#39;, &#39;chi&#39;, &#39;phi&#39;, &#39;tth&#39;]
 </pre></div></div>
 </div>
-<p>The value is a <code class="docutils literal notranslate"><span class="pre">`Constraint</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_diffractometer.html">https://apstools.readthedocs.io/en/latest/source/_diffractometer.html</a>&gt;`__ object.</p>
+<p>The value is a <code class="docutils literal notranslate"><span class="pre">`Constraint</span></code> &lt;???&gt;`__ object. (FIXME: Not in apstools, maybe hklpy?)</p>
 <p><code class="docutils literal notranslate"><span class="pre">Constraint</span></code> Arguments</p>
 <ul class="simple">
 <li><p>low_limit (<em>number</em>) : Limit solutions for this axis to no less than <code class="docutils literal notranslate"><span class="pre">low_limit</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=True</span></code>.</p></li>
