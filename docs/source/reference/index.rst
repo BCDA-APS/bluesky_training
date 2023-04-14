@@ -1,3 +1,5 @@
+.. index:: Reference, Explain
+
 =========
 Reference
 =========

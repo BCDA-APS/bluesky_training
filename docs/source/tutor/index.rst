@@ -1,3 +1,5 @@
+.. index:: Lesson, Tutorial
+
 .. _tutorials:
 
 =========

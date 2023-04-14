@@ -12,48 +12,53 @@ line.
    files which do not start with a "_" are added explicitly to the toctree in
    the `index.rst` file of that folder.
 
--  Wiki (`<https://github.com/BCDA-APS/bluesky_training/wiki>`_):
-   Includes list of APS instruments
--  `Installation Guide <instrument/_install.md>`__: 
-   Install the components of the Bluesky framework.
--  `First Steps Guide <howto/first_steps_guide.md>`__ :
-   First Steps to use Bluesky after installation.
--  `Instrument Package Guide <instrument/guide.md>`__: 
-   Building the ``instrument`` package.
--  :ref:`tutorials`: 
-   Jupyter notebooks with lessons, tutorials, examples, other
--  `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/instrument>`_
-   for a bluesky ``instrument``
+- How-to Guides
+   -  `First Steps Guide <howto/first_steps_guide.md>`__ :
+      First Steps to use Bluesky after installation.
+- Tutorials
+   -  :ref:`tutorials`: 
+      Jupyter notebooks with lessons, tutorials, examples, other
+- Reference documentation
+   -  Wiki (`<https://github.com/BCDA-APS/bluesky_training/wiki>`_):
+      Includes list of APS instruments
+- Installation
+   -  `Installation Guide <instrument/_install.md>`__: 
+      Install the components of the Bluesky framework.
+   -  `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/instrument>`_
+      for a bluesky ``instrument``
+   -  `Instrument Package Guide <instrument/guide.md>`__: 
+      Building the ``instrument`` package.
 
-TODO:  This structure might be easier to implement in the repository README.md.
+..
+   TODO:  This structure might be easier to implement in the repository README.md.
 
-.. code::
+   .. code::
 
-   Introductory
-      Bluesky Hello, World!
-      Connect with EPICS
-      APS 101
-   Basic hardware configuration and measurement
-      scaler
-      motor
-      step scan
-   Measurement using the instrument package
-      area detector
-      count a scaler
-      watch a temperature
-      lineup 1-D peak
-      locate 2-D peak on area detector image
-      custom bluesky plans
-      bluesky for SPEC users
-   After the measurement: processing, reduction, analysis, export or copy data
-   Training
-   Instrument template
-   Conda
-   Version control
-   References
+      Introductory
+         Bluesky Hello, World!
+         Connect with EPICS
+         APS 101
+      Basic hardware configuration and measurement
+         scaler
+         motor
+         step scan
+      Measurement using the instrument package
+         area detector
+         count a scaler
+         watch a temperature
+         lineup 1-D peak
+         locate 2-D peak on area detector image
+         custom bluesky plans
+         bluesky for SPEC users
+      After the measurement: processing, reduction, analysis, export or copy data
+      Training
+      Instrument template
+      Conda
+      Version control
+      References
 
-* https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable
-* https://diataxis.fr/
+   * https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable
+   * https://diataxis.fr/
 
 .. toctree::
    :maxdepth: 2
@@ -88,7 +93,7 @@ Other resources
    * PyPI: https://pypi.org/project/pyepics/
    * source: https://github.com/pyepics/pyepics
 
-Indices and tables
+Index
 ==================
 
 * :ref:`genindex`

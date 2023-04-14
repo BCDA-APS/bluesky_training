@@ -1,3 +1,5 @@
+.. index:: How-to, Example, Demonstration, Guide
+
 =============
 How-To Guides
 =============
