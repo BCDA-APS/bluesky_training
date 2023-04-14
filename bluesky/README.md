@@ -1,4 +1,4 @@
-# Bluesky Training Repository
+# Bluesky Instrument Template
 
 Contains:
 
@@ -8,7 +8,6 @@ Introduction | [`intro2bluesky.md`](intro2bluesky.md)
 IPython console startup | [`console/`](console/README.md)
 Bluesky queueserver support | [introduction](qserver.md), `*qs*`
 Instrument configuration | `instrument/`
-Jupyter notebooks | `*.ipynb`
-PNG files used in notebooks | `resources/`
 Conda environments | [`environments/`](./environments/README.md)
 Unit tests | [`tests/`](./tests/README.md)
+Documentation | [How-to, examples, tutorials, reference](https://bcda-aps.github.io/bluesky_training)

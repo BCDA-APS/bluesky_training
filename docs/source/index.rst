@@ -65,8 +65,9 @@ line.
    :caption: Contents:
 
    howto/index
-   tutor/index
    instrument/index
+   example/index
+   tutor/index
    reference/index
 
 Other resources
