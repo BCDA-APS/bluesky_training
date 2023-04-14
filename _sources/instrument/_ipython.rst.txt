@@ -4,6 +4,32 @@ IPython Profile
 An IPython profile [#profile]_ is used to enable the console interface for a bluesky
 session.
 
+.. index:: startup; snippet
+
+.. _startup_snippet:
+
+Python snippet to start instrument for data collection
+------------------------------------------------------
+
+.. This snippet is so useful, it has been promoted to the
+   top of this file so it can be found more easily.
+
+This snippet of Python code will start Bluesky for data collection.  Use it in
+the IPython startup script and also in Jupyter notebooks.  First, it puts the
+parent directory of the ``instrument`` package on the exectuable path, then it
+starts the instrument.
+
+.. code-block:: py
+   :linenos:
+
+   import pathlib, sys
+   sys.path.append(str(pathlib.Path.home() / "bluesky"))
+   from instrument.collection import *
+
+.. tip:: Use this snippet in Jupyter notebooks to start the ``instrument``.
+
+A slightly more robust version of this snippet is supplied by this ``bluesky_training`` repository:
+:download:`__start_bluesky_instrument__.py <../../../bluesky/console/__start_bluesky_instrument__.py>`
 
 Create IPython Profile for Bluesky
 ----------------------------------
@@ -36,19 +62,3 @@ Add a single Python file to the startup directory
 
    **Every** Python file in the startup directory is run when IPython starts.
    The files are run in lexical (alphabetical) order.
-
-Python snippet to start instrument for data collection
-------------------------------------------------------
-
-This snippet of Python code will start Bluesky for data collection.  Use it in
-the IPython startup script and also in Jupyter notebooks.
-
-.. code-block:: py
-   :linenos:
-
-   import pathlib, sys
-   sys.path.append(str(pathlib.Path.home() / "bluesky"))
-   from instrument.collection import *
-
-A slightly more robust version of this snippet is supplied by this ``bluesky_training`` repository:
-:download:`__start_bluesky_instrument__.py <../../../bluesky/console/__start_bluesky_instrument__.py>`

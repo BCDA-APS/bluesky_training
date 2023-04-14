@@ -308,19 +308,118 @@ document.write(`
                   
   <section id="aps-bluesky-training">
 <h1>APS Bluesky Training<a class="headerlink" href="#aps-bluesky-training" title="Permalink to this heading">#</a></h1>
+<p>This repository demonstrates use of the Bluesky framework at a typical APS beam
+line.</p>
 <ul class="simple">
-<li><p>Wiki (<a class="github reference external" href="https://github.com/BCDA-APS/bluesky_training/wiki">BCDA-APS/bluesky_training</a>):
-Includes list of APS instruments</p></li>
-<li><p><a class="reference internal" href="instrument/_install.html"><span class="doc">Installation Guide</span></a>:
-Install the components of the Bluesky framework.</p></li>
-<li><p><a class="reference internal" href="howto/__first_steps_guide.html"><span class="doc">First Steps Guide</span></a> :
+<li><dl class="simple">
+<dt>How-to Guides</dt><dd><ul>
+<li><p><a class="reference internal" href="howto/first_steps_guide.html"><span class="doc">First Steps Guide</span></a> :
 First Steps to use Bluesky after installation.</p></li>
-<li><p><a class="reference internal" href="instrument/guide.html"><span class="doc">Instrument Package Guide</span></a>:
-Building the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Tutorials</dt><dd><ul>
 <li><p><a class="reference internal" href="tutor/index.html#tutorials"><span class="std std-ref">Tutorials</span></a>:
 Jupyter notebooks with lessons, tutorials, examples, other</p></li>
 </ul>
-<p><strong>Other resources</strong></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Reference documentation</dt><dd><ul>
+<li><p>Wiki (<a class="github reference external" href="https://github.com/BCDA-APS/bluesky_training/wiki">BCDA-APS/bluesky_training</a>):
+Includes list of APS instruments</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Installation</dt><dd><ul>
+<li><p><a class="reference internal" href="instrument/_install.html"><span class="doc">Installation Guide</span></a>:
+Install the components of the Bluesky framework.</p></li>
+<li><p><a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/instrument">Template</a>
+for a bluesky <code class="docutils literal notranslate"><span class="pre">instrument</span></code></p></li>
+<li><p><a class="reference internal" href="instrument/guide.html"><span class="doc">Instrument Package Guide</span></a>:
+Building the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<div class="toctree-wrapper compound">
+<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="howto/index.html">How-To Guides</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="howto/first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_after_measurement.html">Accessing data later, after the measurement</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_export_bluesky_data.html">Exporting data from Bluesky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_export_to_csv.html">Export bluesky data to CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="howto/_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="tutor/index.html">Tutorials</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="tutor/connect_epics.html">Connect Bluesky with EPICS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/aps101.html">APS Bluesky 101</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="instrument/index.html">Instrument</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="instrument/instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/guide.html">Instrument Package Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_conda_environment.html">Python virtual environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_configure_databroker.html">Setup your databroker catalog configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_directory_layout.html">Recommended Directory Layout</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_install.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_install_new_instrument.html">Steps to install a new instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_ipython.html">IPython Profile</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_quick_hello_world.html">Test with Hello, World</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
+<li class="toctree-l2"><a class="reference internal" href="instrument/_testing.html">Testing</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="reference/_command_review.html">Review of commands</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/_conda_base.html">Conda Base Environment</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/_git-help.html">Using git for version control</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/_github_create_repo.html">GitHub Repository</a></li>
+<li class="toctree-l2"><a class="reference internal" href="reference/_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</section>
+<section id="other-resources">
+<h1>Other resources<a class="headerlink" href="#other-resources" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
 <li><dl class="simple">
 <dt>apstools</dt><dd><ul>
@@ -368,96 +467,12 @@ Jupyter notebooks with lessons, tutorials, examples, other</p></li>
 </dl>
 </li>
 </ul>
-<p>TODO:  Consider adding highlighting certain docs.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>Introductory
-   Bluesky Hello, World!
-   Connect with EPICS
-   APS 101
-Basic hardware configuration and measurement
-   scaler
-   motor
-   step scan
-Measurement using the instrument package
-   area detector
-   count a scaler
-   watch a temperature
-   lineup 1-D peak
-   locate 2-D peak on area detector image
-   custom bluesky plans
-   bluesky for SPEC users
-After the measurement: processing, reduction, analysis, export or copy data
-Training
-Instrument template
-Conda
-Version control
-References
-</pre></div>
-</div>
+</section>
+<section id="index">
+<h1>Index<a class="headerlink" href="#index" title="Permalink to this heading">#</a></h1>
 <ul class="simple">
-<li><p><a class="reference external" href="https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable">https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable</a></p></li>
-<li><p><a class="reference external" href="https://diataxis.fr/">https://diataxis.fr/</a></p></li>
+<li><p><a class="reference internal" href="genindex.html"><span class="std std-ref">Index</span></a></p></li>
 </ul>
-<div class="toctree-wrapper compound">
-<p aria-level="2" class="caption" role="heading"><span class="caption-text">Contents:</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="howto/index.html">How-To Guides</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="howto/__first_steps_guide.html">First Steps with Bluesky</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_count_scaler.html">Count the scaler</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_sscan_1d_flyer.html">sscan as 1D Flyer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
-<li class="toctree-l2"><a class="reference internal" href="howto/_xafs_scan.html">XAFS scan</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="tutor/index.html">Tutorials</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_aps101.html">APS Bluesky 101</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_basic_a.html">Basic, Part A: Scaler and Count</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_basic_b.html">Basic, Part B: Motor and Move</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson1.html">Lesson 1: scaler and count</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson2.html">Lesson 2: motor and scan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson6.html">Lesson 6: EPICS area detector</a></li>
-<li class="toctree-l2"><a class="reference internal" href="tutor/_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="instrument/index.html">Instrument</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="instrument/instrument_template.html">Template for New Bluesky Instruments</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/guide.html">Instrument Package Guide</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_conda_environment.html">Python virtual environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_configure_databroker.html">Setup your databroker catalog configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_directory_layout.html">Recommended Directory Layout</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_install.html">Installation</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_install_new_instrument.html">Steps to install a new instrument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_ipython.html">IPython Profile</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
-<li class="toctree-l2"><a class="reference internal" href="instrument/_testing.html">Testing</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="reference/index.html">Reference</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="reference/_command_review.html">Review of commands</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/_conda_base.html">Conda Base Environment</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/_git-help.html">Using git for version control</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/_github_create_repo.html">GitHub Repository</a></li>
-<li class="toctree-l2"><a class="reference internal" href="reference/_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
-</ul>
-</li>
-</ul>
-</div>
 </section>
 
 
@@ -491,6 +506,19 @@ References
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#">APS Bluesky Training</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#other-resources">Other resources</a></li>
+<li class="toc-h1 nav-item toc-entry"><a class="reference internal nav-link" href="#index">Index</a></li>
+</ul>
+
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">

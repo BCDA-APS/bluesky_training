@@ -1,0 +1,1253 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Accessing data later, after the measurement &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_after_measurement';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="APS Accelerator Information for Beam Lines" href="_basic_aps_info.html" />
+    <link rel="prev" title="First Steps with Bluesky" href="first_steps_guide.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Accessing data later, after the measurement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Accessing data later, after the measurement</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Accessing-data-later,-after-the-measurement">
+<h1>Accessing data later, after the measurement<a class="headerlink" href="#Accessing-data-later,-after-the-measurement" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>Get the data from previous <em>run(s)</em> and work with it.</p>
+<section id="Skip-the-instrument-package">
+<h2>Skip the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Skip-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>There is no need to import the instrument package since we won’t measure anything in this notebook.</p>
+</section>
+<section id="Access-the-database">
+<h2>Access the database<a class="headerlink" href="#Access-the-database" title="Permalink to this heading">#</a></h2>
+<p>In the instrument package (in file <code class="docutils literal notranslate"><span class="pre">instrument/framework/initialize.py</span></code>), we connected databroker with the MongoDB server using the <code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code> <em>catalog</em>. Get that catalog now. We’ll need to import some tools first.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.utils</span> <span class="kn">import</span> <span class="n">listruns</span><span class="p">,</span> <span class="n">quantify_md_key_use</span>
+<span class="kn">import</span> <span class="nn">databroker</span>
+<span class="kn">from</span> <span class="nn">databroker.queries</span> <span class="kn">import</span> <span class="n">TimeRange</span>
+
+<span class="n">db</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">catalog</span><span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">]</span>
+<span class="n">listruns</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+catalog: training
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>scan_id</th>
+      <th>time</th>
+      <th>plan_name</th>
+      <th>detectors</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>4</td>
+      <td>2021-08-19 14:03:33</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3</td>
+      <td>2021-08-19 14:03:10</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>2021-08-19 14:02:58</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1</td>
+      <td>2021-08-19 14:02:41</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>39</td>
+      <td>2021-08-19 13:39:12</td>
+      <td>scan</td>
+      <td>[noisy]</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>38</td>
+      <td>2021-08-19 11:45:29</td>
+      <td>scan</td>
+      <td>[scaler1]</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>37</td>
+      <td>2021-08-19 11:40:40</td>
+      <td>scan</td>
+      <td>[noisy]</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>36</td>
+      <td>2021-08-19 11:39:38</td>
+      <td>scan</td>
+      <td>[noisy]</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>4</td>
+      <td>2021-08-19 11:04:45</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3</td>
+      <td>2021-08-19 11:04:08</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>2</td>
+      <td>2021-08-19 11:00:56</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>1</td>
+      <td>2021-08-19 10:58:39</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>12</th>
+      <td>2</td>
+      <td>2021-08-19 10:57:09</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>13</th>
+      <td>1</td>
+      <td>2021-08-19 10:53:19</td>
+      <td>scan</td>
+      <td>[vsc16]</td>
+    </tr>
+    <tr>
+      <th>14</th>
+      <td>35</td>
+      <td>2021-04-13 12:19:15</td>
+      <td>count</td>
+      <td>[temperature]</td>
+    </tr>
+    <tr>
+      <th>15</th>
+      <td>34</td>
+      <td>2021-04-13 12:18:54</td>
+      <td>count</td>
+      <td>[temperature]</td>
+    </tr>
+    <tr>
+      <th>16</th>
+      <td>33</td>
+      <td>2021-04-13 12:18:51</td>
+      <td>count</td>
+      <td>[temperature]</td>
+    </tr>
+    <tr>
+      <th>17</th>
+      <td>32</td>
+      <td>2021-04-13 12:18:51</td>
+      <td>count</td>
+      <td>[temperature]</td>
+    </tr>
+    <tr>
+      <th>18</th>
+      <td>31</td>
+      <td>2021-04-11 14:15:20</td>
+      <td>count</td>
+      <td>[temperature]</td>
+    </tr>
+    <tr>
+      <th>19</th>
+      <td>30</td>
+      <td>2021-04-11 14:14:58</td>
+      <td>count</td>
+      <td>[temperature]</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>Our temperature count measurement is one of those listed, but which one? Recall how we started our run: <code class="docutils literal notranslate"><span class="pre">RE(bp.count([temperature],</span> <span class="pre">num=50,</span> <span class="pre">delay=0.1,</span> <span class="pre">md={&quot;motive&quot;:</span> <span class="pre">&quot;tscan&quot;}))</span></code>.</p>
+<p>In case some other type of run is more recent, we’ll search for the most recent run with this metadata. First, find any recent (since Feb 2021) runs with this metadata. We need to do this search with the <code class="docutils literal notranslate"><span class="pre">v2</span></code> version of databroker catalogs. The result of the search is another catalog.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">v2</span><span class="o">.</span><span class="n">search</span><span class="p">(</span><span class="n">TimeRange</span><span class="p">(</span><span class="n">since</span><span class="o">=</span><span class="s2">&quot;2021-02-02&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">search</span><span class="p">({</span><span class="s2">&quot;motive&quot;</span><span class="p">:</span> <span class="s2">&quot;tscan&quot;</span><span class="p">})</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Search for runs with motive=&#39;tscan&#39; metadata found </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span><span class="si">}</span><span class="s2"> run(s).&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Search for runs with motive=&#39;tscan&#39; metadata found 5 run(s).
+</pre></div></div>
+</div>
+<p>Show the run’s metadata.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">cat</span><span class="p">):</span>
+    <span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="k">raise</span> <span class="ne">KeyError</span><span class="p">(</span><span class="s2">&quot;No runs found with `motive=&#39;tscan&#39;`&quot;</span><span class="p">)</span>
+
+<span class="n">run</span><span class="o">.</span><span class="n">metadata</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+{&#39;start&#39;: Start({&#39;beamline_id&#39;: &#39;APS EPICS/Python/Bluesky training VM&#39;,
+ &#39;detectors&#39;: [&#39;temperature&#39;],
+ &#39;hints&#39;: {&#39;dimensions&#39;: [[[&#39;time&#39;], &#39;primary&#39;]]},
+ &#39;instrument_name&#39;: &#39;training&#39;,
+ &#39;login_id&#39;: &#39;apsu@apsu-sim&#39;,
+ &#39;motive&#39;: &#39;tscan&#39;,
+ &#39;notebook&#39;: &#39;watch_temperature&#39;,
+ &#39;num_intervals&#39;: 49,
+ &#39;num_points&#39;: 50,
+ &#39;pid&#39;: 3432,
+ &#39;plan_args&#39;: {&#39;detectors&#39;: [&#34;MyPvPositioner(prefix=&#39;gp:userCalc8&#39;, &#34;
+                             &#34;name=&#39;temperature&#39;, settle_time=0.0, &#34;
+                             &#34;timeout=None, read_attrs=[&#39;setpoint&#39;, &#34;
+                             &#34;&#39;readback&#39;], configuration_attrs=[&#39;calculation&#39;, &#34;
+                             &#34;&#39;description&#39;, &#39;max_change&#39;, &#39;noise&#39;, &#34;
+                             &#34;&#39;previous_value_pv&#39;, &#39;scanning_rate&#39;, &#34;
+                             &#34;&#39;tolerance&#39;], limits=(-20, 255), egu=&#39;C&#39;)&#34;],
+               &#39;num&#39;: 50},
+ &#39;plan_name&#39;: &#39;count&#39;,
+ &#39;plan_type&#39;: &#39;generator&#39;,
+ &#39;proposal_id&#39;: &#39;training-2021-04&#39;,
+ &#39;scan_id&#39;: 35,
+ &#39;time&#39;: 1618334355.5878208,
+ &#39;uid&#39;: &#39;c0bbb846-43ae-46c2-b9e4-319a4c162812&#39;,
+ &#39;versions&#39;: {&#39;apstools&#39;: &#39;1.5.0&#39;,
+              &#39;bluesky&#39;: &#39;1.6.7&#39;,
+              &#39;databroker&#39;: &#39;1.2.3&#39;,
+              &#39;epics&#39;: &#39;3.4.3&#39;,
+              &#39;h5py&#39;: &#39;2.10.0&#39;,
+              &#39;intake&#39;: &#39;0.6.2&#39;,
+              &#39;matplotlib&#39;: &#39;3.3.4&#39;,
+              &#39;numpy&#39;: &#39;1.19.2&#39;,
+              &#39;ophyd&#39;: &#39;1.6.1&#39;,
+              &#39;pyRestTable&#39;: &#39;2020.0.3&#39;,
+              &#39;spec2nexus&#39;: &#39;2021.1.8&#39;}}),
+ &#39;stop&#39;: Stop({&#39;exit_status&#39;: &#39;success&#39;,
+ &#39;num_events&#39;: {&#39;baseline&#39;: 2, &#39;primary&#39;: 50},
+ &#39;reason&#39;: &#39;&#39;,
+ &#39;run_start&#39;: &#39;c0bbb846-43ae-46c2-b9e4-319a4c162812&#39;,
+ &#39;time&#39;: 1618334361.5295637,
+ &#39;uid&#39;: &#39;38f1deba-2c64-4faf-a0b7-30a50c6869ca&#39;}),
+ &#39;catalog_dir&#39;: None}
+</pre></div></div>
+</div>
+</section>
+<section id="Read-the-primary-data-stream-of-the-run">
+<h2>Read the primary data stream of the run<a class="headerlink" href="#Read-the-primary-data-stream-of-the-run" title="Permalink to this heading">#</a></h2>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2 {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:               (time: 50)
+Coordinates:
+  * time                  (time) float64 1.618e+09 1.618e+09 ... 1.618e+09
+Data variables:
+    temperature_setpoint  (time) float64 35.0 35.0 35.0 35.0 ... 35.0 35.0 35.0
+    temperature           (time) float64 34.89 35.01 35.19 ... 35.02 34.62 35.38</pre><div class='xr-wrap' hidden><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-d51a71b1-d4f3-4106-95ba-bbae05f4f72e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-d51a71b1-d4f3-4106-95ba-bbae05f4f72e' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 50</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-dc2aecd3-f5ed-4390-bccb-df13db15eb4c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-dc2aecd3-f5ed-4390-bccb-df13db15eb4c' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.618e+09 1.618e+09 ... 1.618e+09</div><input id='attrs-51ed0f83-0a3d-4b7a-8963-0440220bc421' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-51ed0f83-0a3d-4b7a-8963-0440220bc421' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0288218f-d5ae-42a9-bc29-52395912ffe6' class='xr-var-data-in' type='checkbox'><label for='data-0288218f-d5ae-42a9-bc29-52395912ffe6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09,
+       1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09, 1.618334e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-eeecbd08-0bec-43e3-b8c7-3325ddbaa148' class='xr-section-summary-in' type='checkbox'  checked><label for='section-eeecbd08-0bec-43e3-b8c7-3325ddbaa148' class='xr-section-summary' >Data variables: <span>(2)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>temperature_setpoint</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>35.0 35.0 35.0 ... 35.0 35.0 35.0</div><input id='attrs-c8dd7f1e-06b2-4c49-bce3-6f233ee6fce6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c8dd7f1e-06b2-4c49-bce3-6f233ee6fce6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d614dd63-4df2-43b8-a92c-d9c66f515c0b' class='xr-var-data-in' type='checkbox'><label for='data-d614dd63-4df2-43b8-a92c-d9c66f515c0b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>temperature</dd></dl></div><div class='xr-var-data'><pre>array([35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35.,
+       35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35.,
+       35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35.,
+       35., 35., 35., 35., 35., 35., 35., 35., 35., 35., 35.])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>temperature</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>34.89 35.01 35.19 ... 34.62 35.38</div><input id='attrs-a896b679-868c-4232-a86f-699b474e7013' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a896b679-868c-4232-a86f-699b474e7013' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6e5e2809-d3f4-41a2-9d1f-af807ded91e8' class='xr-var-data-in' type='checkbox'><label for='data-6e5e2809-d3f4-41a2-9d1f-af807ded91e8' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>temperature</dd></dl></div><div class='xr-var-data'><pre>array([34.8896849 , 35.01305409, 35.19233234, 35.0216907 , 35.43205158,
+       34.5056611 , 35.37074083, 34.51771572, 34.85019455, 34.82137026,
+       35.3455024 , 34.82780957, 35.21680781, 34.54200809, 35.08982223,
+       34.87608911, 35.03902495, 35.00504311, 35.42178225, 34.76303502,
+       34.91893645, 34.9121767 , 34.5496376 , 34.78567941, 34.63224994,
+       35.42848096, 35.0320058 , 35.24485389, 35.22823682, 35.06241703,
+       34.86455329, 34.54406806, 35.24770733, 34.91025406, 34.60228122,
+       35.48713664, 34.94979019, 35.21024643, 34.94386969, 35.1342565 ,
+       35.12812238, 34.58931106, 34.60415808, 35.36431678, 34.6698024 ,
+       34.99550622, 35.29185168, 35.02181277, 34.61917296, 35.3817731 ])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cbc48871-480c-4bf9-a8b8-6ac7d2a84815' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cbc48871-480c-4bf9-a8b8-6ac7d2a84815' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+</div>
+<p>Let’s get the values as a 1-D numpy array.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Compute-the-statistics">
+<h2>Compute the statistics<a class="headerlink" href="#Compute-the-statistics" title="Permalink to this heading">#</a></h2>
+<p>Use the methods of numpy arrays to compute maximum, mean, standard deviation, and minimum. Looks nicer in a table.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyRestTable</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">pyRestTable</span><span class="o">.</span><span class="n">Table</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">min</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+======= ===================
+measure value
+======= ===================
+max     35.48713664454108
+mean    34.98192172121767
+dev     0.28183495874527975
+min     34.50566109712368
+#       50
+======= ===================
+
+</pre></div></div>
+</div>
+<p>Let’s replot that data for comparison.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;purple&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x7fb18671baf0&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__after_measurement_14_1.png" src="../_images/howto__after_measurement_14_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="first_steps_guide.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">First Steps with Bluesky</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_basic_aps_info.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">APS Accelerator Information for Beam Lines</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Skip-the-instrument-package">Skip the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Access-the-database">Access the database</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Read-the-primary-data-stream-of-the-run">Read the primary data stream of the run</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-the-statistics">Compute the statistics</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_after_measurement.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

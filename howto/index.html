@@ -46,7 +46,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'howto/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="First Steps with Bluesky" href="__first_steps_guide.html" />
+    <link rel="next" title="First Steps with Bluesky" href="first_steps_guide.html" />
     <link rel="prev" title="APS Bluesky Training" href="../index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -289,16 +289,21 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="__first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sscan_1d_flyer.html">sscan as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
 </ul>
@@ -356,21 +361,35 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="how-to-guides">
-<h1>How-To Guides<a class="headerlink" href="#how-to-guides" title="Permalink to this heading">#</a></h1>
+<span id="index-0"></span><h1>How-To Guides<a class="headerlink" href="#how-to-guides" title="Permalink to this heading">#</a></h1>
 <p>How-to guides are directions that take the reader through the steps required to
 solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
 <div class="toctree-wrapper compound">
 <ul>
-<li class="toctree-l1"><a class="reference internal" href="__first_steps_guide.html">First Steps with Bluesky</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="__first_steps_guide.html#read">Read</a></li>
-<li class="toctree-l2"><a class="reference internal" href="__first_steps_guide.html#move">Move</a></li>
-<li class="toctree-l2"><a class="reference internal" href="__first_steps_guide.html#count">Count</a></li>
-<li class="toctree-l2"><a class="reference internal" href="__first_steps_guide.html#list-describe-summary">List, Describe, Summary</a></li>
-<li class="toctree-l2"><a class="reference internal" href="__first_steps_guide.html#bluesky-plans-vs-command-line-actions">Bluesky Plans <em>vs</em>. Command-line Actions</a></li>
-<li class="toctree-l2"><a class="reference internal" href="__first_steps_guide.html#log-files">Log files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="first_steps_guide.html#read">Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_steps_guide.html#move">Move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_steps_guide.html#count">Count</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_steps_guide.html#list-describe-summary">List, Describe, Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_steps_guide.html#bluesky-plans-vs-command-line-actions">Bluesky Plans <em>vs</em>. Command-line Actions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="first_steps_guide.html#log-files">Log files</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_after_measurement.html#Skip-the-instrument-package">Skip the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_after_measurement.html#Access-the-database">Access the database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_after_measurement.html#Read-the-primary-data-stream-of-the-run">Read the primary data stream of the run</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_after_measurement.html#Compute-the-statistics">Compute the statistics</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_bluesky_queueserver.html#one-time-setup">One-time setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_bluesky_queueserver.html#start-a-monitor-on-a-qserver">Start a monitor on a qserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_bluesky_queueserver.html#run-plans-on-the-qserver">Run plans on the qserver</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_bluesky_queueserver.html#shutdown-the-queue-server">Shutdown the queue server</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_count_scaler.html#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_count_scaler.html#A-closer-look-at-the-EPICS-scaler">A closer look at the EPICS scaler</a></li>
@@ -395,6 +414,21 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
 <li class="toctree-l2"><a class="reference internal" href="_dynamic_limits_2motor.html#Conclusion">Conclusion</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#choices">Choices</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#databroker-pack">databroker-pack</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#identify-experiment-data-in-databroker">Identify experiment data in databroker</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#file-export">file export</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#callbacks">Callbacks</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_export_to_csv.html#Export-one-run-to-CSV">Export one run to CSV</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_to_csv.html#Search-for-runs-by-time">Search for runs by time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_to_csv.html#Export-a-list-of-runs">Export a list of runs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_export_to_csv.html#Export-run-to-JSON-file">Export run to JSON file</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_images_darks_flats.html#Setup">Setup</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_images_darks_flats.html#Acquire-Images-with-Standard-bp.count()-Plan">Acquire Images with Standard <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> Plan</a></li>
@@ -414,7 +448,7 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
 <li class="toctree-l2"><a class="reference internal" href="_locate_image_peak.html#View-the-image">View the image</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a><ul>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#1.-Show-what-data-catalogs-are-available">1. Show what data catalogs are available</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#2.-Choose-a-specific-run-from-a-catalog">2. Choose a specific run from a catalog</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#3.-Show-the-(primary)-data">3. Show the (primary) data</a></li>
@@ -423,12 +457,17 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#6.-Plot-(x,y)-using-matplotlib">6. Plot <span class="math notranslate nohighlight">\((x,y)\)</span> using matplotlib</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_sscan_1d_flyer.html">sscan as 1D Flyer</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_sscan_1d_flyer.html#Overview">Overview</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_sscan_1d_flyer.html#References">References</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_sscan_1d_flyer.html#Bluesky-step-scan">Bluesky step scan</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_sscan_1d_flyer.html#sscan-as-Bluesky-Flyer">sscan as Bluesky Flyer</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_sscan_1d_flyer.html#id1">References</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_busy.html#arbitrary-operation">arbitrary operation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_busy.html#positioner-movement">positioner movement</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_sscan_1d_flyer.html#Overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_sscan_1d_flyer.html#References">References</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_sscan_1d_flyer.html#Bluesky-step-scan">Bluesky step scan</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_sscan_1d_flyer.html#sscan-as-Bluesky-Flyer">sscan as Bluesky Flyer</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_synapps_sscan_1d_flyer.html#id1">References</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a><ul>
@@ -477,7 +516,7 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
       </div>
     </a>
     <a class="right-next"
-       href="__first_steps_guide.html"
+       href="first_steps_guide.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>

@@ -1,0 +1,1618 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>The instrument package for Bluesky Data Acquisition &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/describe_instrument';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Instrument Package Guide" href="guide.html" />
+    <link rel="prev" title="Template for New Bluesky Instruments" href="instrument_template.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_quick_hello_world.html">Test with Hello, World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="The-instrument-package-for-Bluesky-Data-Acquisition">
+<h1>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition<a class="headerlink" href="#The-instrument-package-for-Bluesky-Data-Acquisition" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>In this notebook, we describe the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for a simulated X-ray instrument at a user facility such as the Advanced Photon Source. The goal is to use EPICS as much as possible to provide the control system features and to use Bluesky (providing the data acquisition framework) as a thin layer on top of EPICS.</p>
+<p><strong>Overview</strong></p>
+<p>This notebook uses two EPICS servers (IOCs), one, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;gp:&quot;</span></code>, providing (simulated) general beam line equipment such as motors, slits, shutter, counters, … The other IOC, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;ad:&quot;</span></code>, provides a simulated EPICS area detector. This notebook will acquaint you with some of the features provided by our Python <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package which uses these IOCs.</p>
+<details><p>IOC details</p>
+<p>This simulated instrument is provided using <a class="reference external" href="https://www.docker.com/">docker</a> images for <a class="reference external" href="https://www.aps.anl.gov/epics">EPICS base</a>, the <a class="reference external" href="https://www.aps.anl.gov/BCDA/synApps">synApps</a> <a class="reference external" href="https://github.com/epics-modules/xxx">xxx</a> module, and <a class="reference external" href="https://areadetector.github.io/master/index.html">EPICS area detector</a> <a class="reference external" href="https://areadetector.github.io/master/ADSimDetector/simDetector.html?highlight=adsimdetector">ADSimDetector</a>. The images are based on these software versions:</p>
+<ul class="simple">
+<li><p>Ubuntu 20.04</p></li>
+<li><p>EPICS base 7.0.5</p></li>
+<li><p>synApps 6.2</p></li>
+<li><p>area detector 3.10</p></li>
+</ul>
+<p>Two EPICS IOCs are provided:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>prefix</p></th>
+<th class="head"><p>description</p></th>
+<th class="head"><p>docker image</p></th>
+<th class="head"><p>documentation</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ad:</span></code></p></td>
+<td><p>area detector IOC</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">`prjemian/custom-synapps-6.2-ad-3.10</span></code> &lt;<a class="reference external" href="https://hub.docker.com/r/prjemian/custom-synapps-6.2-ad-3.10">https://hub.docker.com/r/prjemian/custom-synapps-6.2-ad-3.10</a>&gt;`__</p></td>
+<td><p><a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n6_custom_areaDetector">prjemian/epics-docker</a></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gp:</span></code></p></td>
+<td><p>general purpose IOC</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">`prjemian/prjemian/custom-synapps-6.2</span></code> &lt;<a class="reference external" href="https://hub.docker.com/r/prjemian/custom-synapps-6.2">https://hub.docker.com/r/prjemian/custom-synapps-6.2</a>&gt;`__</p></td>
+<td><p><a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps">prjemian/epics-docker</a></p></td>
+</tr>
+</tbody>
+</table>
+</details><section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>To start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code>, use this Python startup <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_ipython.html#python-snippet-to-start-instrument-for-data-collection">snippet</a>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/prjemian/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/instrument/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Fri-11:15:53 - ############################################################ startup
+I Fri-11:15:53 - logging started
+I Fri-11:15:53 - logging level = 10
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/session_logs.py
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/collection.py
+I Fri-11:15:53 - CONDA_PREFIX = /opt/miniconda3
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception reporting mode: Minimal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Fri-11:15:53 - xmode exception level: &#39;Minimal&#39;
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/mpl/notebook.py
+I Fri-11:15:53 - #### Bluesky Framework ####
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/framework/check_python.py
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/framework/check_bluesky.py
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/framework/initialize.py
+I Fri-11:15:53 - RunEngine metadata saved in directory: /home/prjemian/Bluesky_RunEngine_md
+I Fri-11:15:53 - using databroker catalog &#39;training&#39;
+I Fri-11:15:53 - using ophyd control layer: pyepics
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/framework/metadata.py
+I Fri-11:15:53 - /home/prjemian/bluesky/instrument/epics_signal_config.py
+I Fri-11:15:53 - Using RunEngine metadata for scan_id
+I Fri-11:15:54 - #### Devices ####
+I Fri-11:15:54 - /home/prjemian/bluesky/instrument/devices/area_detector.py
+I Fri-11:15:54 - /home/prjemian/bluesky/instrument/devices/calculation_records.py
+I Fri-11:15:56 - /home/prjemian/bluesky/instrument/devices/fourc_diffractometer.py
+I Fri-11:15:56 - /home/prjemian/bluesky/instrument/devices/ioc_stats.py
+I Fri-11:15:56 - /home/prjemian/bluesky/instrument/devices/kohzu_monochromator.py
+I Fri-11:15:56 - /home/prjemian/bluesky/instrument/devices/motors.py
+I Fri-11:15:56 - /home/prjemian/bluesky/instrument/devices/noisy_detector.py
+I Fri-11:15:56 - /home/prjemian/bluesky/instrument/devices/scaler.py
+I Fri-11:15:57 - /home/prjemian/bluesky/instrument/devices/shutter_simulator.py
+I Fri-11:15:57 - /home/prjemian/bluesky/instrument/devices/simulated_fourc.py
+I Fri-11:15:57 - /home/prjemian/bluesky/instrument/devices/simulated_kappa.py
+I Fri-11:15:57 - /home/prjemian/bluesky/instrument/devices/slits.py
+I Fri-11:15:57 - /home/prjemian/bluesky/instrument/devices/sixc_diffractometer.py
+I Fri-11:15:58 - /home/prjemian/bluesky/instrument/devices/temperature_signal.py
+I Fri-11:15:58 - #### Callbacks ####
+I Fri-11:15:58 - /home/prjemian/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Fri-11:15:58 - #### Plans ####
+I Fri-11:15:58 - /home/prjemian/bluesky/instrument/plans/lup_plan.py
+I Fri-11:15:58 - /home/prjemian/bluesky/instrument/plans/peak_finder_example.py
+I Fri-11:15:58 - /home/prjemian/bluesky/instrument/utils/image_analysis.py
+I Fri-11:15:58 - #### Utilities ####
+I Fri-11:15:58 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/instrument/20230414-111558.dat
+I Fri-11:15:58 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Fri-11:15:58 -    file will be created when bluesky ends its next scan
+I Fri-11:15:58 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Fri-11:15:58 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+</section>
+<section id="Description">
+<h2>Description<a class="headerlink" href="#Description" title="Permalink to this heading">#</a></h2>
+<p>Might be a good idea to know now what this instrument package provides.</p>
+<p>Notably, the table includes:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>ophyd name(s)</p></th>
+<th class="head"><p>Description</p></th>
+<th class="head"><p>label(s)</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">adsimdet</span></code></p></td>
+<td><p>simulated EPICS area detector</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">area_detector</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">calcs</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">calcouts</span></code></p></td>
+<td><p>calculation support</p></td>
+<td></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gp_stats</span></code></p></td>
+<td><p>details about the general purpose IOC</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">I0</span></code>, <code class="docutils literal notranslate"><span class="pre">diode</span></code>, …</p></td>
+<td><p>named scaler channels</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">counter</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">iconfig</span></code></p></td>
+<td><p>instrument configuration parameters</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">m1</span></code> .. <code class="docutils literal notranslate"><span class="pre">m16</span></code></p></td>
+<td><p>16 simulated EPICS motors</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">motor</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">noisy</span></code></p></td>
+<td><p>simulated diffraction peak</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">scaler1</span></code></p></td>
+<td><p>simulated 16-channel EPICS scaler</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">scalers</span></code></p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">shutter</span></code></p></td>
+<td><p>simulated shutter</p></td>
+<td></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">temperature</span></code></p></td>
+<td><p>simulated temperature controller</p></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<section id="iconfig">
+<h3><code class="docutils literal notranslate"><span class="pre">iconfig</span></code><a class="headerlink" href="#iconfig" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">iconfig</span></code>, a Python dictionary, contains the instrument’s configuration details defined in one place for the user to control. These details, defined in <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/iconfig.yml">instrument/iconfig.yml</a>, are used in various places in the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package. Any changes to the <code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code> file will take effect the <em>next</em> time the instrument is started.</p>
+</section>
+<section id="adsimdet">
+<h3><code class="docutils literal notranslate"><span class="pre">adsimdet</span></code><a class="headerlink" href="#adsimdet" title="Permalink to this heading">#</a></h3>
+<p>The EPICS Area Detector ADSimDetector is included with this instrument as <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code>. The detector is a monochrome 1k x 1k frame. The image is written to an HDF5 file and made available to the <code class="docutils literal notranslate"><span class="pre">`databroker</span></code> &lt;#databroker&gt;`__ via a shared volume from the docker container. <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code> can be used as a detector.</p>
+<p>The image is a simulated diffraction spot with center randomly-chosen between 100..900 on both axes. The width is also random as is the peak intensity and noise level. Furthermore, to simulate realistic conditions, the center position of both axes is adjusted by a few pixels using a pair of <em>swait</em> records (<code class="docutils literal notranslate"><span class="pre">gp:userCalc9</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">gp:userCalc10</span></code>) updating from random numbers.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">adsimdet</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+data keys (* hints)
+-------------------
+
+read attrs
+----------
+hdf1                 MyHDF5Plugin        (&#39;adsimdet_hdf1&#39;)
+
+config keys
+-----------
+adsimdet_cam_acquire_period
+adsimdet_cam_acquire_time
+adsimdet_cam_image_mode
+adsimdet_cam_manufacturer
+adsimdet_cam_model
+adsimdet_cam_num_exposures
+adsimdet_cam_num_images
+adsimdet_cam_trigger_mode
+
+configuration attrs
+-------------------
+cam                  SimDetectorCam_V34  (&#39;adsimdet_cam&#39;)
+cam.acquire_period   EpicsSignalWithRBV  (&#39;adsimdet_cam_acquire_period&#39;)
+cam.acquire_time     EpicsSignalWithRBV  (&#39;adsimdet_cam_acquire_time&#39;)
+cam.image_mode       EpicsSignalWithRBV  (&#39;adsimdet_cam_image_mode&#39;)
+cam.manufacturer     EpicsSignalRO       (&#39;adsimdet_cam_manufacturer&#39;)
+cam.model            EpicsSignalRO       (&#39;adsimdet_cam_model&#39;)
+cam.num_exposures    EpicsSignalWithRBV  (&#39;adsimdet_cam_num_exposures&#39;)
+cam.num_images       EpicsSignalWithRBV  (&#39;adsimdet_cam_num_images&#39;)
+cam.trigger_mode     EpicsSignalWithRBV  (&#39;adsimdet_cam_trigger_mode&#39;)
+hdf1                 MyHDF5Plugin        (&#39;adsimdet_hdf1&#39;)
+
+unused attrs
+------------
+configuration_names  ArrayAttributeSignal(&#39;adsimdet_configuration_names&#39;)
+image                ImagePlugin_V34     (&#39;adsimdet_image&#39;)
+pva                  PvaPlugin_V34       (&#39;adsimdet_pva&#39;)
+
+</pre></div></div>
+</div>
+</section>
+<section id="scaler1">
+<h3><code class="docutils literal notranslate"><span class="pre">scaler1</span></code><a class="headerlink" href="#scaler1" title="Permalink to this heading">#</a></h3>
+<p>A simulated 16-channel scaler is configured with several channels of pulse counters, typical of a synchrotron beam line. <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> can be used as a detector.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+data keys (* hints)
+-------------------
+*I0
+*I00
+*I000
+*roi1
+ scaler1_time
+*scint
+*timebase
+
+read attrs
+----------
+channels             Channels            (&#39;scaler1_channels&#39;)
+channels.chan01      ScalerChannel       (&#39;scaler1_channels_chan01&#39;)
+channels.chan01.s    EpicsSignalRO       (&#39;timebase&#39;)
+channels.chan02      ScalerChannel       (&#39;scaler1_channels_chan02&#39;)
+channels.chan02.s    EpicsSignalRO       (&#39;I0&#39;)
+channels.chan04      ScalerChannel       (&#39;scaler1_channels_chan04&#39;)
+channels.chan04.s    EpicsSignalRO       (&#39;scint&#39;)
+channels.chan05      ScalerChannel       (&#39;scaler1_channels_chan05&#39;)
+channels.chan05.s    EpicsSignalRO       (&#39;I000&#39;)
+channels.chan06      ScalerChannel       (&#39;scaler1_channels_chan06&#39;)
+channels.chan06.s    EpicsSignalRO       (&#39;I00&#39;)
+channels.chan07      ScalerChannel       (&#39;scaler1_channels_chan07&#39;)
+channels.chan07.s    EpicsSignalRO       (&#39;roi1&#39;)
+time                 EpicsSignal         (&#39;scaler1_time&#39;)
+
+config keys
+-----------
+scaler1_auto_count_delay
+scaler1_auto_count_time
+scaler1_channels_chan01_chname
+scaler1_channels_chan01_gate
+scaler1_channels_chan01_preset
+scaler1_channels_chan02_chname
+scaler1_channels_chan02_gate
+scaler1_channels_chan02_preset
+scaler1_channels_chan04_chname
+scaler1_channels_chan04_gate
+scaler1_channels_chan04_preset
+scaler1_channels_chan05_chname
+scaler1_channels_chan05_gate
+scaler1_channels_chan05_preset
+scaler1_channels_chan06_chname
+scaler1_channels_chan06_gate
+scaler1_channels_chan06_preset
+scaler1_channels_chan07_chname
+scaler1_channels_chan07_gate
+scaler1_channels_chan07_preset
+scaler1_count_mode
+scaler1_delay
+scaler1_egu
+scaler1_freq
+scaler1_preset_time
+
+configuration attrs
+-------------------
+channels             Channels            (&#39;scaler1_channels&#39;)
+channels.chan01      ScalerChannel       (&#39;scaler1_channels_chan01&#39;)
+channels.chan01.chname EpicsSignal         (&#39;scaler1_channels_chan01_chname&#39;)
+channels.chan01.preset EpicsSignal         (&#39;scaler1_channels_chan01_preset&#39;)
+channels.chan01.gate EpicsSignal         (&#39;scaler1_channels_chan01_gate&#39;)
+channels.chan02      ScalerChannel       (&#39;scaler1_channels_chan02&#39;)
+channels.chan02.chname EpicsSignal         (&#39;scaler1_channels_chan02_chname&#39;)
+channels.chan02.preset EpicsSignal         (&#39;scaler1_channels_chan02_preset&#39;)
+channels.chan02.gate EpicsSignal         (&#39;scaler1_channels_chan02_gate&#39;)
+channels.chan04      ScalerChannel       (&#39;scaler1_channels_chan04&#39;)
+channels.chan04.chname EpicsSignal         (&#39;scaler1_channels_chan04_chname&#39;)
+channels.chan04.preset EpicsSignal         (&#39;scaler1_channels_chan04_preset&#39;)
+channels.chan04.gate EpicsSignal         (&#39;scaler1_channels_chan04_gate&#39;)
+channels.chan05      ScalerChannel       (&#39;scaler1_channels_chan05&#39;)
+channels.chan05.chname EpicsSignal         (&#39;scaler1_channels_chan05_chname&#39;)
+channels.chan05.preset EpicsSignal         (&#39;scaler1_channels_chan05_preset&#39;)
+channels.chan05.gate EpicsSignal         (&#39;scaler1_channels_chan05_gate&#39;)
+channels.chan06      ScalerChannel       (&#39;scaler1_channels_chan06&#39;)
+channels.chan06.chname EpicsSignal         (&#39;scaler1_channels_chan06_chname&#39;)
+channels.chan06.preset EpicsSignal         (&#39;scaler1_channels_chan06_preset&#39;)
+channels.chan06.gate EpicsSignal         (&#39;scaler1_channels_chan06_gate&#39;)
+channels.chan07      ScalerChannel       (&#39;scaler1_channels_chan07&#39;)
+channels.chan07.chname EpicsSignal         (&#39;scaler1_channels_chan07_chname&#39;)
+channels.chan07.preset EpicsSignal         (&#39;scaler1_channels_chan07_preset&#39;)
+channels.chan07.gate EpicsSignal         (&#39;scaler1_channels_chan07_gate&#39;)
+count_mode           EpicsSignal         (&#39;scaler1_count_mode&#39;)
+delay                EpicsSignal         (&#39;scaler1_delay&#39;)
+auto_count_delay     EpicsSignal         (&#39;scaler1_auto_count_delay&#39;)
+freq                 EpicsSignal         (&#39;scaler1_freq&#39;)
+preset_time          EpicsSignal         (&#39;scaler1_preset_time&#39;)
+auto_count_time      EpicsSignal         (&#39;scaler1_auto_count_time&#39;)
+egu                  EpicsSignal         (&#39;scaler1_egu&#39;)
+
+unused attrs
+------------
+count                EpicsSignal         (&#39;scaler1_count&#39;)
+update_rate          EpicsSignal         (&#39;scaler1_update_rate&#39;)
+auto_count_update_rate EpicsSignal         (&#39;scaler1_auto_count_update_rate&#39;)
+
+</pre></div></div>
+</div>
+<p>The timebase is always shown. The additional channels (using names from the scaler GUI screen) are shown output of <code class="docutils literal notranslate"><span class="pre">listdevice(scaler1)</span></code> below.</p>
+<p>Note that in the instrument package, the channel names were assigned on startup. An operating beam line would not do define the names here but instead, let the instrument team name these channels in the GUI screen at the time the cables from the pulse detectors are connected physically to the scaler.</p>
+<p>Count the scaler from the command line:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span> scalers
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+timebase                       16000000.0
+I0                             8.0
+scint                          7.0
+I000                           6.0
+I00                            8.0
+roi1                           6.0
+scaler1_time                   1.6
+</pre></div></div>
+</div>
+<p>NOTE: the actual counts are random numbers. Also, the EPICS soft scaler seems to add 0.1s to the counting time. Might be a bug with the EPICS scaler code.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listdevice</span><span class="p">(</span><span class="n">scaler1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+============================== ========== ==========================
+data name                      value      timestamp
+============================== ========== ==========================
+scaler1_channels_chan01_chname timebase   2023-04-14 10:58:36.645292
+timebase                       16000000.0 2023-04-14 11:16:00.339417
+scaler1_channels_chan01_preset 15000000.0 2023-04-14 10:58:36.645292
+scaler1_channels_chan01_gate   Y          2023-04-14 10:58:36.645292
+scaler1_channels_chan02_chname I0         2023-04-14 10:58:36.645292
+I0                             8.0        2023-04-14 11:16:00.339417
+scaler1_channels_chan02_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan02_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan03_chname scint      2023-04-14 10:58:36.645292
+scint                          7.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan03_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan03_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan04_chname scint      2023-04-14 10:58:36.645292
+scint                          7.0        2023-04-14 11:16:00.339417
+scaler1_channels_chan04_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan04_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan05_chname I000       2023-04-14 10:58:36.645292
+I000                           6.0        2023-04-14 11:16:00.339417
+scaler1_channels_chan05_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan05_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan06_chname I00        2023-04-14 10:58:36.645292
+I00                            8.0        2023-04-14 11:16:00.339417
+scaler1_channels_chan06_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan06_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan07_chname roi1       2023-04-14 10:58:36.645292
+roi1                           6.0        2023-04-14 11:16:00.339417
+scaler1_channels_chan07_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan07_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan08_chname            2023-04-14 10:58:36.645292
+                               8.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan08_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan08_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan09_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan09_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan09_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan10_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan10_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan10_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan11_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan11_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan11_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan12_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan12_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan12_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan13_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan13_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan13_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan14_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan14_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan14_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan15_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan15_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan15_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan16_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan16_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan16_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan17_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan17_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan17_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan18_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan18_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan18_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan19_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan19_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan19_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan20_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan20_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan20_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan21_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan21_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan21_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan22_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan22_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan22_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan23_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan23_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan23_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan24_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan24_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan24_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan25_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan25_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan25_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan26_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan26_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan26_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan27_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan27_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan27_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan28_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan28_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan28_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan29_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan29_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan29_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan30_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan30_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan30_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan31_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan31_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan31_gate   N          2023-04-14 10:58:36.645292
+scaler1_channels_chan32_chname            2023-04-14 10:58:36.645292
+                               0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan32_preset 0.0        2023-04-14 10:58:36.645292
+scaler1_channels_chan32_gate   N          2023-04-14 10:58:36.645292
+scaler1_count                  0          2023-04-14 10:58:36.645292
+scaler1_count_mode             OneShot    2023-04-14 10:58:36.645292
+scaler1_delay                  0.0        2023-04-14 10:58:36.645292
+scaler1_auto_count_delay       0.0        2023-04-14 10:58:36.645292
+scaler1_time                   1.6        2023-04-14 10:58:36.645292
+scaler1_freq                   10000000.0 2023-04-14 10:58:36.645292
+scaler1_preset_time            1.5        2023-04-14 10:58:36.645292
+scaler1_auto_count_time        1.0        2023-04-14 10:58:36.645292
+scaler1_update_rate            10.0       2023-04-14 10:58:36.645292
+scaler1_auto_count_update_rate 0.0        2023-04-14 10:58:36.645292
+scaler1_egu                               2023-04-14 10:58:36.645292
+============================== ========== ==========================
+</pre></div></div>
+</div>
+<p>As an added convenience, shortcut names for these channels were also assigned to local Python symbols (since the object path to the channels is easy to forget) in <code class="docutils literal notranslate"><span class="pre">instrument/devices/scaler.py</span></code> with these lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">timebase</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan01</span><span class="o">.</span><span class="n">s</span>
+<span class="n">I0</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">s</span>
+<span class="n">scint</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan03</span><span class="o">.</span><span class="n">s</span>
+<span class="n">diode</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan04</span><span class="o">.</span><span class="n">s</span>
+</pre></div>
+</div>
+<p>This command: <code class="docutils literal notranslate"><span class="pre">scaler1.select_channels()</span></code> configures <code class="docutils literal notranslate"><span class="pre">scaler</span></code> to use just the channels with non-empty names. To limit data collection to a subset of these channels, name the channels in a list argument, such as: <code class="docutils literal notranslate"><span class="pre">scaler1.select_channels(['I0',</span> <span class="pre">'diode'])</span></code></p>
+</section>
+<section id="temperature">
+<h3><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Permalink to this heading">#</a></h3>
+<p>The temperature simulator, implemented in <code class="docutils literal notranslate"><span class="pre">gp:userCalc8</span></code> works like a temperature controller, with setpoint and readback values. <code class="docutils literal notranslate"><span class="pre">temperature</span></code> can be used as a detector <strong>and</strong> as a positioner (like a motor).</p>
+<p>Additional controls for noise, update interval, maximum change per update, in-position tolerance, and done are provided, either through EPICS or in Python. Once a new setpoint is entered, the readback will progress towards it, limited by the max change and the update interval. Once at the setpoint, noise continues to be added to the temperature to provide realism.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">listdevice</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+data keys (* hints)
+-------------------
+*temperature
+ temperature_calculation
+ temperature_description
+ temperature_done
+ temperature_max_change
+ temperature_noise
+ temperature_previous_value_pv
+ temperature_scanning_rate
+ temperature_setpoint
+ temperature_tolerance
+
+read attrs
+----------
+setpoint             EpicsSignal         (&#39;temperature_setpoint&#39;)
+readback             EpicsSignal         (&#39;temperature&#39;)
+done                 Signal              (&#39;temperature_done&#39;)
+calculation          EpicsSignal         (&#39;temperature_calculation&#39;)
+description          EpicsSignal         (&#39;temperature_description&#39;)
+max_change           EpicsSignal         (&#39;temperature_max_change&#39;)
+noise                EpicsSignal         (&#39;temperature_noise&#39;)
+previous_value_pv    EpicsSignal         (&#39;temperature_previous_value_pv&#39;)
+scanning_rate        EpicsSignal         (&#39;temperature_scanning_rate&#39;)
+tolerance            EpicsSignal         (&#39;temperature_tolerance&#39;)
+
+config keys
+-----------
+
+configuration attrs
+-------------------
+
+unused attrs
+------------
+report_dmov_changes  Signal              (&#39;temperature_report_dmov_changes&#39;)
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=============================== =================================== ==========================
+data name                       value                               timestamp
+=============================== =================================== ==========================
+temperature_setpoint            25.0                                2023-04-14 11:15:58.067527
+temperature                     25.07474631876097                   2023-04-14 11:16:00.268549
+temperature_done                True                                2023-04-14 11:16:00.274526
+temperature_calculation         A+max(-D,min(D,(B-A)))+C*(RNDM-0.5) 2023-04-14 11:15:58.071359
+temperature_description         temperature                         2023-04-14 11:15:58.065403
+temperature_max_change          2.0                                 2023-04-14 11:15:58.070733
+temperature_noise               1.0                                 2023-04-14 11:15:58.070030
+temperature_previous_value_pv   gp:userCalc8.VAL                    2023-04-14 11:15:58.065403
+temperature_scanning_rate       5                                   2023-04-14 11:15:58.071359
+temperature_tolerance           1.0                                 2023-04-14 11:15:58.071359
+temperature_report_dmov_changes False                               2023-04-14 11:15:58.066705
+=============================== =================================== ==========================
+</pre></div></div>
+</div>
+</section>
+<section id="motors">
+<h3>motors<a class="headerlink" href="#motors" title="Permalink to this heading">#</a></h3>
+<p>There are 16 soft motor channels: <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> .. <code class="docutils literal notranslate"><span class="pre">gp:m16</span></code>. Any motor can be used as a detector <strong>and</strong> as a positioner.</p>
+<p>The first motor, <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code>, is used to compute a simulated 1-D diffraction peak (<code class="docutils literal notranslate"><span class="pre">`noisy</span></code> &lt;#noisy&gt;`__) using <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>.</p>
+<p>To make it easier to change the motor step size, a custom <code class="docutils literal notranslate"><span class="pre">MyEpicsMotor</span></code> class was made, subclassing from <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code> and adding a component to access the motor’s <code class="docutils literal notranslate"><span class="pre">.SREV</span></code> (steps/revolution) field. The default motor step size is 0.01 (with SREV=200). For only <code class="docutils literal notranslate"><span class="pre">m1</span></code>, the step size has been changed to 0.001 by setting SREV=2000.</p>
+<p>NOTE: Changing SREV (in this simulator* seems to affect the soft motor’s simulated hardware limit. Be careful if you adjust SREV to higher numbers (smaller step sizes) that the expected range of motion remains sufficient for your measurements. Again, another thing to change in the EPICS support.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">m1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">listdevice</span><span class="p">(</span><span class="n">m1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+data keys (* hints)
+-------------------
+*m1
+ m1_user_setpoint
+
+read attrs
+----------
+user_readback        EpicsSignalRO       (&#39;m1&#39;)
+user_setpoint        EpicsSignal         (&#39;m1_user_setpoint&#39;)
+
+config keys
+-----------
+m1_acceleration
+m1_motor_egu
+m1_user_offset
+m1_user_offset_dir
+m1_velocity
+
+configuration attrs
+-------------------
+user_offset          EpicsSignal         (&#39;m1_user_offset&#39;)
+user_offset_dir      EpicsSignal         (&#39;m1_user_offset_dir&#39;)
+velocity             EpicsSignal         (&#39;m1_velocity&#39;)
+acceleration         EpicsSignal         (&#39;m1_acceleration&#39;)
+motor_egu            EpicsSignal         (&#39;m1_motor_egu&#39;)
+
+unused attrs
+------------
+offset_freeze_switch EpicsSignal         (&#39;m1_offset_freeze_switch&#39;)
+set_use_switch       EpicsSignal         (&#39;m1_set_use_switch&#39;)
+motor_is_moving      EpicsSignalRO       (&#39;m1_motor_is_moving&#39;)
+motor_done_move      EpicsSignalRO       (&#39;m1_motor_done_move&#39;)
+high_limit_switch    EpicsSignalRO       (&#39;m1_high_limit_switch&#39;)
+low_limit_switch     EpicsSignalRO       (&#39;m1_low_limit_switch&#39;)
+high_limit_travel    EpicsSignal         (&#39;m1_high_limit_travel&#39;)
+low_limit_travel     EpicsSignal         (&#39;m1_low_limit_travel&#39;)
+direction_of_travel  EpicsSignal         (&#39;m1_direction_of_travel&#39;)
+motor_stop           EpicsSignal         (&#39;m1_motor_stop&#39;)
+home_forward         EpicsSignal         (&#39;m1_home_forward&#39;)
+home_reverse         EpicsSignal         (&#39;m1_home_reverse&#39;)
+steps_per_revolution EpicsSignal         (&#39;m1_steps_per_revolution&#39;)
+
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+======================= ======= ==========================
+data name               value   timestamp
+======================= ======= ==========================
+m1                      0.0     2023-04-14 10:58:33.041083
+m1_user_setpoint        0.0     2023-04-14 10:58:33.041083
+m1_user_offset          0.0     2023-04-14 10:58:33.041083
+m1_user_offset_dir      0       2023-04-14 10:58:33.041083
+m1_offset_freeze_switch 0       2023-04-14 10:58:33.041083
+m1_set_use_switch       0       2023-04-14 10:58:33.041083
+m1_velocity             1.0     2023-04-14 10:58:33.041083
+m1_acceleration         0.2     2023-04-14 10:58:33.041083
+m1_motor_egu            degrees 2023-04-14 10:58:33.041083
+m1_motor_is_moving      0       2023-04-14 10:58:33.041083
+m1_motor_done_move      1       2023-04-14 10:58:33.041083
+m1_high_limit_switch    0       2023-04-14 10:58:33.041083
+m1_low_limit_switch     0       2023-04-14 10:58:33.041083
+m1_high_limit_travel    1000.0  2023-04-14 10:58:33.041083
+m1_low_limit_travel     -1000.0 2023-04-14 10:58:33.041083
+m1_direction_of_travel  0       2023-04-14 10:58:33.041083
+m1_motor_stop           0       2023-04-14 10:58:33.041083
+m1_home_forward         0       2023-04-14 10:58:33.041083
+m1_home_reverse         0       2023-04-14 10:58:33.041083
+m1_steps_per_revolution 2000    2023-04-14 10:58:33.041083
+======================= ======= ==========================
+</pre></div></div>
+</div>
+</section>
+<section id="noisy">
+<h3><code class="docutils literal notranslate"><span class="pre">noisy</span></code><a class="headerlink" href="#noisy" title="Permalink to this heading">#</a></h3>
+<p>A simulated diffraction peak is computed in 1-D using a Lorentzian function in EPICS PV <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>. The simulation uses the position of motor <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> and random choices for center, width, noise, and peak intensity (scale factor). <code class="docutils literal notranslate"><span class="pre">noisy</span></code> can be used as a detector.</p>
+<p>NOTE: <code class="docutils literal notranslate"><span class="pre">noisy</span></code> is an <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsSignal</span></code> (variant), thus it lacks the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method that <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> objects have.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listdevice</span><span class="p">(</span><span class="n">noisy</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+========= ================= ==========================
+data name value             timestamp
+========= ================= ==========================
+noisy     685.3703376927396 2023-04-14 11:15:56.876793
+========= ================= ==========================
+</pre></div></div>
+</div>
+</section>
+<section id="plans">
+<h3>plans<a class="headerlink" href="#plans" title="Permalink to this heading">#</a></h3>
+<p>Several examples of user plan are provided in file <code class="docutils literal notranslate"><span class="pre">instrument/plans/peak_finder_example.py</span></code>. These plans are described and used in the notebook <a class="reference external" href="https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/lineup_1d_peak.ipynb">Lineup a 1-D peak</a>.</p>
+</section>
+</section>
+<section id="Log-files">
+<h2>Log files<a class="headerlink" href="#Log-files" title="Permalink to this heading">#</a></h2>
+<p>For diagnostic and general support, log files are created to record activity. In the working directory, the log files are written to a <code class="docutils literal notranslate"><span class="pre">./.logs</span></code> subdirectory.</p>
+<p>There are two kinds of file, one that records user commands and the python result, the other records items sent to the <a class="reference external" href="https://github.com/prjemian/stdlogpj#example-directing-logs-to-a-specific-directory">customized</a> Python <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> package.</p>
+<p>In the IPython session, use the <code class="docutils literal notranslate"><span class="pre">!</span></code> to run a linux command:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>ls<span class="w"> </span>-lAFgh<span class="w"> </span>.logs
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+total 7.5M
+-rw-rw-r-- 1 prjemian  15K Apr 14 11:16 ipython_console.log
+-rw-rw-r-- 1 prjemian  15K Apr 14 10:58 ipython_console.log.001~
+-rw-rw-r-- 1 prjemian  16K Apr 14 10:57 ipython_console.log.002~
+-rw-rw-r-- 1 prjemian 5.8K Apr 14 11:15 ipython_logger.log
+-rw-rw-r-- 1 prjemian 455K Apr 14 11:16 ophyd.control_layer.log
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 11:15 ophyd.control_layer.log.1
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 11:12 ophyd.control_layer.log.2
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 11:06 ophyd.control_layer.log.3
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 11:01 ophyd.control_layer.log.4
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 10:58 ophyd.control_layer.log.5
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 10:55 ophyd.control_layer.log.6
+-rw-rw-r-- 1 prjemian 1.0M Apr 14 10:49 ophyd.control_layer.log.7
+</pre></div></div>
+</div>
+<p>Let’s take a look at a few lines of each type of file, to get a feel for the information logged.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ipython_console.log</span></code> file is created for every session (every time IPython is started or every time the Jupyter kernel is started). It records the commands that were entered and the output, if any, from each command. It does not record anything that was sent to the console by <code class="docutils literal notranslate"><span class="pre">print()</span></code> statements. The older log files are numbered, higher number is older (each new session shifts these numbers by 1).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head<span class="w"> </span>.logs/ipython_console.log
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+# IPython log file
+
+# Fri, 14 Apr 2023 11:15:58
+adsimdet.summary()
+# Fri, 14 Apr 2023 11:15:58
+scaler1.summary()
+# Fri, 14 Apr 2023 11:15:58
+get_ipython().run_line_magic(&#39;ct&#39;, &#39;scalers&#39;)
+# Fri, 14 Apr 2023 11:16:00
+listdevice(scaler1)
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">ipython_logger.log</span></code> file(s) contain the output from calls to the <code class="docutils literal notranslate"><span class="pre">logger</span></code>. The files are appended with new logger reports until the file reaches ca. 1 MB. (Larger files are slow to append.) Then the file is given a number and a new logger file is created. Higher numbers are older. At most, 9 numbered files are retained (to avoid filling disk storage with unnecessary diagnostics).</p>
+<p>A single <em>logger</em> file may contain reports from several sessions. The third piece of information is the <code class="docutils literal notranslate"><span class="pre">pid</span></code> (process identifier) of the session. The PID is assigned by the operating system when the session is started.</p>
+<p>The logger file contains a full report while the report’s representation is more terse. (Users do not always want the full details. Just remember they are available in the logger file.) Here’s the last few logger lines as shown on the console:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>I Wed-00:24:52 - /home/mintadmin/Documents/projects/BCDA-APS/bluesky_instrument_training/instrument/devices/temperature_signal.py
+I Wed-00:24:52 - /home/mintadmin/Documents/projects/BCDA-APS/bluesky_instrument_training/instrument/plans/peak_finder_example.py
+I Wed-00:24:52 - Startup is complete.
+</pre></div>
+</div>
+<p>Those same lines appear in the logger file as:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>|2021-02-24 00:24:52.091|INFO|25986|bluesky-session|temperature_signal|11|MainThread| - /home/mintadmin/Documents/projects/BCDA-APS/bluesky_instrument_training/instrument/devices/temperature_signal.py
+|2021-02-24 00:24:52.165|INFO|25986|bluesky-session|peak_finder_example|15|MainThread| - /home/mintadmin/Documents/projects/BCDA-APS/bluesky_instrument_training/instrument/plans/peak_finder_example.py
+|2021-02-24 00:24:52.179|INFO|25986|bluesky-session|collection|23|MainThread| - Startup is complete.
+</pre></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>tail<span class="w"> </span>.logs/ipython_logger.log
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+|2023-04-14 11:15:53.916|INFO|3701168|bluesky-session|collection|29|MainThread| - #### Bluesky Framework ####
+|2023-04-14 11:15:54.025|INFO|3701168|bluesky-session|collection|32|MainThread| - #### Devices ####
+|2023-04-14 11:15:58.072|INFO|3701168|bluesky-session|collection|35|MainThread| - #### Callbacks ####
+|2023-04-14 11:15:58.079|INFO|3701168|bluesky-session|collection|38|MainThread| - #### Plans ####
+|2023-04-14 11:15:58.130|INFO|3701168|bluesky-session|collection|41|MainThread| - #### Utilities ####
+|2023-04-14 11:15:58.131|INFO|3701168|bluesky-session|collection|49|MainThread| - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/instrument/20230414-111558.dat
+|2023-04-14 11:15:58.133|INFO|3701168|bluesky-session|collection|50|MainThread| -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+|2023-04-14 11:15:58.136|INFO|3701168|bluesky-session|collection|51|MainThread| -    file will be created when bluesky ends its next scan
+|2023-04-14 11:15:58.137|INFO|3701168|bluesky-session|collection|52|MainThread| -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+|2023-04-14 11:15:58.138|INFO|3701168|bluesky-session|collection|56|MainThread| - #### Startup is complete. ####
+</pre></div></div>
+</div>
+</section>
+<section id="SPEC-data-files">
+<h2>SPEC data files<a class="headerlink" href="#SPEC-data-files" title="Permalink to this heading">#</a></h2>
+<p>A <a class="reference external" href="https://certif.com">SPEC</a> data file records a copy of the scan data (area detector images are not stored in SPEC files). By default, the file is created in the present working directory using a name constructed from the date and time with a <code class="docutils literal notranslate"><span class="pre">.dat</span></code> file extension. Unlike SPEC, new data is written <em>at the end of a scan</em>. It is also possible to use the <code class="docutils literal notranslate"><span class="pre">`SpecWriterCallback</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback</a>&gt;`__ to
+write data extracted from the database after the experiment is done.</p>
+<p>The 2021-03 training does not cover the use of these files. You are free to examine them yourselves.</p>
+<p>Example SPEC data file from a bluesky session:</p>
+<details><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#F /home/mintadmin/Documents/projects/BCDA-APS/bluesky_training/20210723-205451.dat
+#E 1627091691
+#D Fri Jul 23 20:54:51 2021
+#C Bluesky  user = mintadmin  host = mint-vm
+#O0
+#o0
+
+#S 344  scan(detectors=[&#39;noisy&#39;, &#39;th_tth_permit&#39;], num=11, args=&#39;[&#39;theta&#39;, 4.5, 3.0, &#39;ttheta&#39;, 9, 6]&#39;, per_step=&#39;None&#39;)
+#D Fri Jul 23 20:55:57 2021
+#C Fri Jul 23 20:55:57 2021.  plan_type = generator
+#C Fri Jul 23 20:55:57 2021.  uid = 17ebe732-8cff-458e-8ebd-f7c5207b2e46
+#MD uid = 17ebe732-8cff-458e-8ebd-f7c5207b2e46
+#MD beamline_id = Bluesky_training
+#MD detectors = [&#39;noisy&#39;, &#39;th_tth_permit&#39;]
+#MD instrument_name = Bluesky Case Studies
+#MD login_id = mintadmin@mint-vm
+#MD motors = (&#39;theta&#39;, &#39;ttheta&#39;)
+#MD notebook = UB_autosave
+#MD num_intervals = 10
+#MD num_points = 11
+#MD objective = Demonstrate UB matrix save &amp; restore
+#MD pid = 10389
+#MD plan_pattern = inner_product
+#MD plan_pattern_args = {&#39;num&#39;: 11, &#39;args&#39;: [&quot;EpicsMotor(prefix=&#39;gp:m1&#39;, name=&#39;theta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 4.5, 3.0, &quot;EpicsMotor(prefix=&#39;gp:m2&#39;, name=&#39;ttheta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 9, 6]}
+#MD plan_pattern_module = bluesky.plan_patterns
+#MD proposal_id = training
+#MD versions = {&#39;apstools&#39;: &#39;1.5.1&#39;, &#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;databroker&#39;: &#39;1.2.3&#39;, &#39;epics&#39;: &#39;3.5.0&#39;, &#39;h5py&#39;: &#39;3.2.1&#39;, &#39;intake&#39;: &#39;0.6.2&#39;, &#39;matplotlib&#39;: &#39;3.3.4&#39;, &#39;numpy&#39;: &#39;1.20.3&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;, &#39;pyRestTable&#39;: &#39;2020.0.3&#39;, &#39;spec2nexus&#39;: &#39;2021.1.8&#39;}
+#P0
+#N 8
+#L theta  ttheta  Epoch_float  Epoch  ttheta_user_setpoint  theta_user_setpoint  noisy  th_tth_permit
+4.5 9.0 9.998106479644775 10 9.0 4.5 0.0 31963.763745860513
+4.3500000000000005 8.700000000000001 10.893603086471558 11 8.7 4.35 0.0 34611.37532330056
+4.2 8.4 11.595271110534668 12 8.4 4.2 0.0 35180.93342784417
+4.05 8.1 12.299082040786743 12 8.1 4.05 0.0 37694.92329152548
+3.9 7.8 13.00736141204834 13 7.8 3.9 0.0 39442.76049515945
+3.75 7.5 13.71463131904602 14 7.5 3.75 0.0 42096.21324791565
+3.6 7.2 14.41884994506836 14 7.2 3.6 0.0 44406.552389513294
+3.45 6.9 15.12493348121643 15 6.9 3.45 0.0 45977.709130280506
+3.3000000000000003 6.6000000000000005 15.830729246139526 16 6.6 3.3 0.0 48881.20001936124
+3.15 6.3 16.53253173828125 17 6.300000000000001 3.1500000000000004 0.0 51082.06178377704
+3.0 6.0 17.24329447746277 17 6.0 3.0 0.0 53210.29908657747
+#C Fri Jul 23 20:56:14 2021.  num_events_baseline = 2
+#C Fri Jul 23 20:56:14 2021.  num_events_primary = 11
+#C Fri Jul 23 20:56:14 2021.  exit_status = success
+
+#S 345  scan(detectors=[&#39;noisy&#39;, &#39;th_tth_permit&#39;], num=4, args=&#39;[&#39;theta&#39;, 3.5, 3.0, &#39;ttheta&#39;, 7, 6]&#39;, per_step=&#39;None&#39;)
+#D Fri Jul 23 20:57:50 2021
+#C Fri Jul 23 20:57:50 2021.  plan_type = generator
+#C Fri Jul 23 20:57:50 2021.  uid = 5761047b-ac05-428a-8b9c-6601b0aba2c0
+#MD uid = 5761047b-ac05-428a-8b9c-6601b0aba2c0
+#MD beamline_id = Bluesky_training
+#MD detectors = [&#39;noisy&#39;, &#39;th_tth_permit&#39;]
+#MD instrument_name = Bluesky Case Studies
+#MD login_id = mintadmin@mint-vm
+#MD motors = (&#39;theta&#39;, &#39;ttheta&#39;)
+#MD notebook = UB_autosave
+#MD num_intervals = 3
+#MD num_points = 4
+#MD objective = Demonstrate UB matrix save &amp; restore
+#MD pid = 10389
+#MD plan_pattern = inner_product
+#MD plan_pattern_args = {&#39;num&#39;: 4, &#39;args&#39;: [&quot;MyMotor(prefix=&#39;gp:m1&#39;, name=&#39;theta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 3.5, 3.0, &quot;MyMotor(prefix=&#39;gp:m2&#39;, name=&#39;ttheta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 7, 6]}
+#MD plan_pattern_module = bluesky.plan_patterns
+#MD proposal_id = training
+#MD versions = {&#39;apstools&#39;: &#39;1.5.1&#39;, &#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;databroker&#39;: &#39;1.2.3&#39;, &#39;epics&#39;: &#39;3.5.0&#39;, &#39;h5py&#39;: &#39;3.2.1&#39;, &#39;intake&#39;: &#39;0.6.2&#39;, &#39;matplotlib&#39;: &#39;3.3.4&#39;, &#39;numpy&#39;: &#39;1.20.3&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;, &#39;pyRestTable&#39;: &#39;2020.0.3&#39;, &#39;spec2nexus&#39;: &#39;2021.1.8&#39;}
+#P0
+#N 12
+#L theta  ttheta  Epoch_float  Epoch  theta_user_setpoint  theta_backlash  theta_backlash_velocity  ttheta_user_setpoint  ttheta_backlash  ttheta_backlash_velocity  noisy  th_tth_permit
+3.5 7.0 4.44653844833374 4 3.5 0.0 1.0 7.0 0.5 0.2 0.0 46002.45836582881
+3.333 6.67 8.672361612319946 9 3.3333333333333335 0.0 1.0 6.666666666666667 0.5 0.2 0.0 46875.28455439954
+3.1670000000000003 6.33 12.796637535095215 13 3.1666666666666665 0.0 1.0 6.333333333333333 0.5 0.2 0.0 50480.82899166115
+3.0 6.0 16.955684661865234 17 3.0 0.0 1.0 6.0 0.5 0.2 0.0 54033.337551435354
+#C Fri Jul 23 20:58:08 2021.  num_events_baseline = 2
+#C Fri Jul 23 20:58:08 2021.  num_events_primary = 4
+#C Fri Jul 23 20:58:08 2021.  exit_status = success
+
+#S 346  scan(detectors=[&#39;noisy&#39;, &#39;th_tth_permit&#39;], num=4, args=&#39;[&#39;theta&#39;, 4.0, 3.0, &#39;ttheta&#39;, 8, 6]&#39;, per_step=&#39;None&#39;)
+#D Fri Jul 23 20:58:28 2021
+#C Fri Jul 23 20:58:28 2021.  plan_type = generator
+#C Fri Jul 23 20:58:28 2021.  uid = 14e4398d-42b5-40cf-b082-e2f7e4fd07fd
+#MD uid = 14e4398d-42b5-40cf-b082-e2f7e4fd07fd
+#MD beamline_id = Bluesky_training
+#MD detectors = [&#39;noisy&#39;, &#39;th_tth_permit&#39;]
+#MD instrument_name = Bluesky Case Studies
+#MD login_id = mintadmin@mint-vm
+#MD motors = (&#39;theta&#39;, &#39;ttheta&#39;)
+#MD notebook = UB_autosave
+#MD num_intervals = 3
+#MD num_points = 4
+#MD objective = Demonstrate UB matrix save &amp; restore
+#MD pid = 10389
+#MD plan_pattern = inner_product
+#MD plan_pattern_args = {&#39;num&#39;: 4, &#39;args&#39;: [&quot;MyMotor(prefix=&#39;gp:m1&#39;, name=&#39;theta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 4.0, 3.0, &quot;MyMotor(prefix=&#39;gp:m2&#39;, name=&#39;ttheta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 8, 6]}
+#MD plan_pattern_module = bluesky.plan_patterns
+#MD proposal_id = training
+#MD versions = {&#39;apstools&#39;: &#39;1.5.1&#39;, &#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;databroker&#39;: &#39;1.2.3&#39;, &#39;epics&#39;: &#39;3.5.0&#39;, &#39;h5py&#39;: &#39;3.2.1&#39;, &#39;intake&#39;: &#39;0.6.2&#39;, &#39;matplotlib&#39;: &#39;3.3.4&#39;, &#39;numpy&#39;: &#39;1.20.3&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;, &#39;pyRestTable&#39;: &#39;2020.0.3&#39;, &#39;spec2nexus&#39;: &#39;2021.1.8&#39;}
+#P0
+#N 12
+#L theta  ttheta  Epoch_float  Epoch  theta_user_setpoint  theta_backlash  theta_backlash_velocity  ttheta_user_setpoint  ttheta_backlash  ttheta_backlash_velocity  noisy  th_tth_permit
+4.0 8.0 5.639213562011719 6 4.0 0.0 1.0 8.0 0.5 0.2 0.0 37946.01826904763
+3.6670000000000003 7.33 10.168693780899048 10 3.6666666666666665 0.0 1.0 7.333333333333333 0.5 0.2 0.0 43240.06624621665
+3.333 6.67 14.600727081298828 15 3.3333333333333335 0.0 1.0 6.666666666666667 0.5 0.2 0.0 47339.97568055583
+3.0 6.0 19.046493530273438 19 3.0 0.0 1.0 6.0 0.5 0.2 0.0 52702.49931930254
+#C Fri Jul 23 20:58:48 2021.  num_events_baseline = 2
+#C Fri Jul 23 20:58:48 2021.  num_events_primary = 4
+#C Fri Jul 23 20:58:48 2021.  exit_status = success
+
+#S 347  scan(detectors=[&#39;noisy&#39;, &#39;th_tth_permit&#39;], num=4, args=&#39;[&#39;theta&#39;, 4.0, 3.0, &#39;ttheta&#39;, 8, 6]&#39;, per_step=&#39;None&#39;)
+#D Fri Jul 23 21:03:30 2021
+#C Fri Jul 23 21:03:30 2021.  plan_type = generator
+#C Fri Jul 23 21:03:30 2021.  uid = 8869043f-56fc-4b3b-ad75-bc024694e6d6
+#MD uid = 8869043f-56fc-4b3b-ad75-bc024694e6d6
+#MD beamline_id = Bluesky_training
+#MD detectors = [&#39;noisy&#39;, &#39;th_tth_permit&#39;]
+#MD instrument_name = Bluesky Case Studies
+#MD login_id = mintadmin@mint-vm
+#MD motors = (&#39;theta&#39;, &#39;ttheta&#39;)
+#MD notebook = UB_autosave
+#MD num_intervals = 3
+#MD num_points = 4
+#MD objective = Demonstrate UB matrix save &amp; restore
+#MD pid = 10389
+#MD plan_pattern = inner_product
+#MD plan_pattern_args = {&#39;num&#39;: 4, &#39;args&#39;: [&quot;MyMotor(prefix=&#39;gp:m1&#39;, name=&#39;theta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 4.0, 3.0, &quot;MyMotor(prefix=&#39;gp:m2&#39;, name=&#39;ttheta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 8, 6]}
+#MD plan_pattern_module = bluesky.plan_patterns
+#MD proposal_id = training
+#MD versions = {&#39;apstools&#39;: &#39;1.5.1&#39;, &#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;databroker&#39;: &#39;1.2.3&#39;, &#39;epics&#39;: &#39;3.5.0&#39;, &#39;h5py&#39;: &#39;3.2.1&#39;, &#39;intake&#39;: &#39;0.6.2&#39;, &#39;matplotlib&#39;: &#39;3.3.4&#39;, &#39;numpy&#39;: &#39;1.20.3&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;, &#39;pyRestTable&#39;: &#39;2020.0.3&#39;, &#39;spec2nexus&#39;: &#39;2021.1.8&#39;}
+#P0
+#N 12
+#L theta  ttheta  Epoch_float  Epoch  theta_user_setpoint  theta_backlash  theta_backlash_velocity  ttheta_user_setpoint  ttheta_backlash  ttheta_backlash_velocity  noisy  th_tth_permit
+4.0 8.0 5.540862798690796 6 4.0 0.0 1.0 8.0 0.5 0.2 0.0 37996.6450939875
+3.6670000000000003 7.33 9.968387842178345 10 3.6666666666666665 0.0 1.0 7.333333333333333 0.5 0.2 0.0 42649.32391462264
+3.333 6.67 14.498717546463013 14 3.3333333333333335 0.0 1.0 6.666666666666667 0.5 0.2 0.0 46995.88551308093
+3.0 6.0 19.0245144367218 19 3.0 0.0 1.0 6.0 0.5 0.2 0.0 54150.34088276983
+#C Fri Jul 23 21:03:49 2021.  num_events_baseline = 2
+#C Fri Jul 23 21:03:49 2021.  num_events_primary = 4
+#C Fri Jul 23 21:03:49 2021.  exit_status = success
+
+#S 348  scan(detectors=[&#39;noisy&#39;, &#39;th_tth_permit&#39;], num=4, args=&#39;[&#39;theta&#39;, 4.0, 3.0, &#39;ttheta&#39;, 8, 6]&#39;, per_step=&#39;None&#39;)
+#D Fri Jul 23 21:04:04 2021
+#C Fri Jul 23 21:04:04 2021.  plan_type = generator
+#C Fri Jul 23 21:04:04 2021.  uid = e9498d10-8fb7-41c4-aaba-f5204db32761
+#MD uid = e9498d10-8fb7-41c4-aaba-f5204db32761
+#MD beamline_id = Bluesky_training
+#MD detectors = [&#39;noisy&#39;, &#39;th_tth_permit&#39;]
+#MD instrument_name = Bluesky Case Studies
+#MD login_id = mintadmin@mint-vm
+#MD motors = (&#39;theta&#39;, &#39;ttheta&#39;)
+#MD notebook = UB_autosave
+#MD num_intervals = 3
+#MD num_points = 4
+#MD objective = Demonstrate UB matrix save &amp; restore
+#MD pid = 10389
+#MD plan_pattern = inner_product
+#MD plan_pattern_args = {&#39;num&#39;: 4, &#39;args&#39;: [&quot;MyMotor(prefix=&#39;gp:m1&#39;, name=&#39;theta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 4.0, 3.0, &quot;MyMotor(prefix=&#39;gp:m2&#39;, name=&#39;ttheta&#39;, settle_time=0.0, timeout=None, read_attrs=[&#39;user_readback&#39;, &#39;user_setpoint&#39;, &#39;backlash&#39;, &#39;backlash_velocity&#39;], configuration_attrs=[&#39;user_offset&#39;, &#39;user_offset_dir&#39;, &#39;velocity&#39;, &#39;acceleration&#39;, &#39;motor_egu&#39;])&quot;, 8, 6]}
+#MD plan_pattern_module = bluesky.plan_patterns
+#MD proposal_id = training
+#MD versions = {&#39;apstools&#39;: &#39;1.5.1&#39;, &#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;databroker&#39;: &#39;1.2.3&#39;, &#39;epics&#39;: &#39;3.5.0&#39;, &#39;h5py&#39;: &#39;3.2.1&#39;, &#39;intake&#39;: &#39;0.6.2&#39;, &#39;matplotlib&#39;: &#39;3.3.4&#39;, &#39;numpy&#39;: &#39;1.20.3&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;, &#39;pyRestTable&#39;: &#39;2020.0.3&#39;, &#39;spec2nexus&#39;: &#39;2021.1.8&#39;}
+#P0
+#N 12
+#L theta  ttheta  Epoch_float  Epoch  theta_user_setpoint  theta_backlash  theta_backlash_velocity  ttheta_user_setpoint  ttheta_backlash  ttheta_backlash_velocity  noisy  th_tth_permit
+4.0 8.0 5.37143349647522 5 4.0 0.0 1.0 8.0 0.5 0.2 0.0 38949.839143231766
+3.6670000000000003 7.33 9.859706163406372 10 3.6666666666666665 0.0 1.0 7.333333333333333 0.5 0.2 0.0 43461.79736667226
+3.333 6.67 14.294379949569702 14 3.3333333333333335 0.0 1.0 6.666666666666667 0.5 0.2 0.0 47545.930496638146
+3.0 6.0 18.838080167770386 19 3.0 0.0 1.0 6.0 0.5 0.2 0.0 53464.77967307891
+#C Fri Jul 23 21:04:23 2021.  num_events_baseline = 2
+#C Fri Jul 23 21:04:23 2021.  num_events_primary = 4
+#C Fri Jul 23 21:04:23 2021.  exit_status = success
+</pre></div>
+</div>
+</details></section>
+<section id="User-Code-File">
+<h2>User Code File<a class="headerlink" href="#User-Code-File" title="Permalink to this heading">#</a></h2>
+<p>A common request from instruments is to allow the user to write some python code that can be loaded into the current session. Since development of this <em>user code</em> is often iterative, it must be possible to reload the code without requiring the session to exit and restart.</p>
+<p>The local file <code class="docutils literal notranslate"><span class="pre">`quick_hello.py</span></code> &lt;../../../bluesky/user/quick_hello.py&gt;`__ provides an example of such a user code file. Load this file with the command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%run -im user.quick_hello
+</pre></div>
+</div>
+<details><p>The <code class="docutils literal notranslate"><span class="pre">%run</span></code> is an <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">IPython Magic</a> command. <em>Magic</em> commands are only available from the <em>interactive</em> IPython command line (either in a console or Jupyter notebook). You can’t use them in your Python files, functions, classes, etc.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">user/</span></code> directory must be on the import path, which we did as part of starting the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package (above). Also, <code class="docutils literal notranslate"><span class="pre">user/</span></code> <em>must</em> contain a file named <code class="docutils literal notranslate"><span class="pre">`__init__.py</span></code> &lt;./_about_init_files.md&gt;`__ so that <code class="docutils literal notranslate"><span class="pre">user</span></code> is an importable Python package.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">m</span></code> (as module) command option was added so it is not necessary to give the Python extension <code class="docutils literal notranslate"><span class="pre">.py</span></code>.</p>
+<p>Alternatively, we could use the command:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%run -i user/quick_hello.py
+</pre></div>
+</div>
+<p>which loads a Python file from a directory.</p>
+<details><p>SPEC users</p>
+<p>For SPEC users, the <code class="docutils literal notranslate"><span class="pre">%run</span> <span class="pre">-i</span> <span class="pre">directory/file</span></code> syntax is the IPython (and Jupyter notebook) equivalent of SPEC’s <code class="docutils literal notranslate"><span class="pre">qdo</span> <span class="pre">spec_macro.mac</span></code> command.</p>
+</details></details><p>This file demonstrates the quintessential <a class="reference external" href="https://en.wikipedia.org/wiki/%22Hello,_World!%22_program">Hello, World!</a> demonstration in the context of the Bluesky framework. It defines an ophyd <code class="docutils literal notranslate"><span class="pre">HelloDevice</span></code> class which is used to create a Python object for control: <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>. Finally, it creates a <code class="docutils literal notranslate"><span class="pre">hello_world()</span></code> (bluesky) plan which can be used with the bluesky RunEngine to run the <em>Hello, World!</em> demonstration.</p>
+<p>First, load the code from this file:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">run</span> -im user.quick_hello
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Loading &#39;Hello, World!&#39; example.
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">findpv</span><span class="p">(</span><span class="s2">&quot;gp:userCalc8.CALC&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+<span class="ansi-red-fg">NameError</span><span class="ansi-red-fg">:</span> name &#39;findpv&#39; is not defined
+
+</pre></div></div>
+</div>
+<p>Observe that the same <code class="docutils literal notranslate"><span class="pre">.calculation</span></code> is both readable and writable from two different ophyd objects: <code class="docutils literal notranslate"><span class="pre">calcs.calc8</span></code> and <code class="docutils literal notranslate"><span class="pre">temperature</span></code>.</p>
+</section>
+<section id="databroker">
+<h2>databroker<a class="headerlink" href="#databroker" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">`databroker</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/databroker">https://blueskyproject.io/databroker</a>&gt;`__ package provides a Python interface to the database with the experiment data, including references to the large file content such as area detector images. A <a class="reference external" href="https://yaml.org">YAML</a> configuration file connects databroker with a specific repository in the MongoDB database server. In the example here (<code class="docutils literal notranslate"><span class="pre">`bluesky_class.yml</span></code> &lt;./bluesky_class.yml&gt;`__), the name of the <em>catalog</em> entry in this file is <code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code>. It makes two
+connections to a MongoDB server running on the same workstation <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. Both connections are to the same MongoDB collection: <code class="docutils literal notranslate"><span class="pre">class_2021_03-bluesky</span></code>. The name of the file is not important as long as it is placed in a directory searched by <code class="docutils literal notranslate"><span class="pre">databroker.catalog</span></code>.</p>
+<p><strong>Example</strong></p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: bluesky_class.yml</span>
+<span class="c1"># purpose: Configuration file to connect Bluesky databroker with MongoDB</span>
+<span class="c1"># For 2021-03 Python Training at APS</span>
+
+<span class="c1"># Copy to: ~/.local/share/intake/bluesky_class.yml</span>
+<span class="c1"># Create subdirectories as needed</span>
+
+<span class="nt">sources</span><span class="p">:</span>
+<span class="w">  </span><span class="nt">class_2021_03</span><span class="p">:</span>
+<span class="w">    </span><span class="nt">args</span><span class="p">:</span>
+<span class="w">      </span><span class="nt">asset_registry_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb://localhost:27017/class_2021_03-bluesky</span>
+<span class="w">      </span><span class="nt">metadatastore_db</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">mongodb://localhost:27017/class_2021_03-bluesky</span>
+<span class="w">    </span><span class="nt">driver</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">bluesky-mongo-normalized-catalog</span>
+</pre></div>
+</div>
+<p>When the bluesky session starts, this <code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code> catalog is referenced when creating the <code class="docutils literal notranslate"><span class="pre">db</span></code> object in the instrument package, in <code class="docutils literal notranslate"><span class="pre">instrument.framework.initialize.py</span></code> by these lines:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">catalog_name</span> <span class="o">=</span> <span class="s2">&quot;class_2021_03&quot;</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">catalog</span><span class="p">[</span><span class="n">catalog_name</span><span class="p">]</span><span class="o">.</span><span class="n">v1</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;using databroker catalog &#39;</span><span class="si">{</span><span class="n">catalog_name</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="instrument_template.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Template for New Bluesky Instruments</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="guide.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Instrument Package Guide</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Description">Description</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iconfig"><code class="docutils literal notranslate"><span class="pre">iconfig</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#adsimdet"><code class="docutils literal notranslate"><span class="pre">adsimdet</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaler1"><code class="docutils literal notranslate"><span class="pre">scaler1</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#temperature"><code class="docutils literal notranslate"><span class="pre">temperature</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motors">motors</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#noisy"><code class="docutils literal notranslate"><span class="pre">noisy</span></code></a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plans">plans</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Log-files">Log files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#SPEC-data-files">SPEC data files</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#User-Code-File">User Code File</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databroker">databroker</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/instrument/describe_instrument.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

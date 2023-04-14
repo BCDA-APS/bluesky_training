@@ -47,7 +47,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Python __init__.py files" href="_about_init_files.html" />
-    <link rel="prev" title="Template for New Bluesky Instruments" href="instrument_template.html" />
+    <link rel="prev" title="The instrument package for Bluesky Data Acquisition" href="describe_instrument.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -290,6 +290,7 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Instrument Package Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Python virtual environment</a></li>
@@ -300,6 +301,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_quick_hello_world.html">Test with Hello, World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
@@ -388,7 +390,7 @@ these directories may contain python file(s).</p>
     <span class="n">iconfig</span><span class="o">.</span><span class="n">yml</span>   <span class="o">&lt;--</span> <span class="n">instrument</span> <span class="n">configuration</span> <span class="n">settings</span> <span class="k">for</span> <span class="n">you</span> <span class="n">to</span> <span class="n">customize</span>
 </pre></div>
 </div>
-<p>Each directory has a <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file (which <em>can</em> be empty).  The very
+<p>Each directory has a <a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></span></a> file (which <em>can</em> be empty).  The very
 existence of this file informs Python that the directory is a Python <em>package</em>
 which means that it can be imported.  The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file can be used to control
 what is imported and the order in which that import is sequenced.</p>
@@ -397,6 +399,14 @@ what is imported and the order in which that import is sequenced.</p>
 that identifies which Python symbols from that file will be imported by default.
 (Any Python symbol may be imported by name, this just controls the more general
 case.)</p>
+<section id="iconfig">
+<h3><code class="docutils literal notranslate"><span class="pre">iconfig</span></code><a class="headerlink" href="#iconfig" title="Permalink to this heading">#</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">iconfig</span></code>, a Python dictionary, contains the instrument’s configuration details
+defined in one place for the user to control.  These details, defined in
+<a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/iconfig.yml">instrument/iconfig.yml</a>,
+are used in various places in the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package.  Any changes to the
+<code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code> file will take effect the <em>next</em> time the instrument is started.</p>
+</section>
 </section>
 <section id="add-motor-s">
 <h2>Add Motor(s)<a class="headerlink" href="#add-motor-s" title="Permalink to this heading">#</a></h2>
@@ -528,7 +538,9 @@ components provides the remaining part of the EPICS PV.</p>
 </table>
 <p>Use the ophyd name in your Python code.  The <em>data name</em> is how the values are
 labeled in the data.  (There’s a reason for this difference beyond this scope.)</p>
-<p>NOTE:  Once you have used a PV in a custom Device, remove it from any other file such as <code class="docutils literal notranslate"><span class="pre">motors.py</span></code>.  The adminition from the ophyd developers is that you <em>connect a PV once and only once</em>.</p>
+<p><strong>NOTE</strong>:  Once you have used a PV in a custom Device, remove it from any other file
+such as <code class="docutils literal notranslate"><span class="pre">motors.py</span></code>.  The admonition from the ophyd developers is that you
+<em>connect a PV once and only once</em>.</p>
 </details>
 </section>
 <section id="add-area-detector-s">
@@ -707,12 +719,12 @@ In [1]:
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="instrument_template.html"
+       href="describe_instrument.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Template for New Bluesky Instruments</p>
+        <p class="prev-next-title">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</p>
       </div>
     </a>
     <a class="right-next"
@@ -742,7 +754,10 @@ In [1]:
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-structure">Basic Structure</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#basic-structure">Basic Structure</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#iconfig"><code class="docutils literal notranslate"><span class="pre">iconfig</span></code></a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-motor-s">Add Motor(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-scaler-s">Add Scaler(s)</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#re-organize-into-devices">Re-organize into Devices</a></li>

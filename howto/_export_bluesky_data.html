@@ -1,0 +1,750 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Exporting data from Bluesky &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_export_bluesky_data';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Export bluesky data to CSV" href="_export_to_csv.html" />
+    <link rel="prev" title="Dynamic Limits for Two Motors" href="_dynamic_limits_2motor.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Exporting data from Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Exporting data from Bluesky</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="exporting-data-from-bluesky">
+<h1>Exporting data from Bluesky<a class="headerlink" href="#exporting-data-from-bluesky" title="Permalink to this heading">#</a></h1>
+<p>An instrument scientist asks:</p>
+<blockquote>
+<div><p>How to export experiment data for a user?
+How do I get the data out of the databroker to send it to my user?</p>
+</div></blockquote>
+<section id="choices">
+<h2>Choices<a class="headerlink" href="#choices" title="Permalink to this heading">#</a></h2>
+<p>First, you have some choices:</p>
+<ul class="simple">
+<li><p>How frequently do you want to do this?</p>
+<ul>
+<li><p><em>one-time</em>: learn a set of Python commands</p></li>
+<li><p><em>occasional</em>: build Python command (or <em>callback</em>) to expedite the steps <em>for your users</em>.</p></li>
+<li><p><em>always</em>: write file as data is acquired using a Bluesky
+<a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html?highlight=callback#overview-of-callbacks"><code class="docutils literal notranslate"><span class="pre">callback</span></code></a> (to the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>)</p></li>
+</ul>
+</li>
+<li><p>What tool(s) will the user(s) be using to <strong><em>read</em></strong> the data received?</p>
+<ul>
+<li><p><em>python</em>: <a class="reference external" href="https://blueskyproject.io/databroker/"><code class="docutils literal notranslate"><span class="pre">databroker</span></code></a></p></li>
+<li><p><em>file(s)</em>: What file format to use?</p>
+<ul>
+<li><p><em>text</em>:
+<a class="reference external" href="https://docs.python.org/3/library/csv.html">CSV</a>,
+<a class="reference external" href="https://docs.python.org/3/library/json.html">JSON</a>,
+<a class="reference external" href="https://certif.com/spec_manual/idx.html">SPEC</a></p></li>
+<li><p><em>HDF5</em>:
+<a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/HDF5">raw</a>,
+<a class="reference external" href="https://www.nexusformat.org/">NeXus</a>,
+<a class="reference external" href="https://www.aps.anl.gov/Science/Scientific-Software/DataExchange">DX</a></p></li>
+<li><p><em>other</em>: image files?</p></li>
+</ul>
+</li>
+<li><p><em>network</em>:</p>
+<ul>
+<li><p><em><a class="reference external" href="https://www.globus.org/data-transfer">globus</a></em>:
+high-performance data transfers between systems within and across organizations</p></li>
+<li><p><em><a class="reference external" href="https://blueskyproject.io/tiled/"><code class="docutils literal notranslate"><span class="pre">tiled</span></code></a></em>:
+Bluesky <strong>data access</strong> service for data-aware portals and data science tools.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</section>
+<section id="databroker-pack">
+<h2>databroker-pack<a class="headerlink" href="#databroker-pack" title="Permalink to this heading">#</a></h2>
+<p>The <a class="reference external" href="https://blueskyproject.io/databroker-pack/"><code class="docutils literal notranslate"><span class="pre">databroker-pack</span></code></a> package
+is used as part of the process to move a subset of a databroker catalog (or the entire catalog).</p>
+<blockquote>
+<div><p>The utility <code class="docutils literal notranslate"><span class="pre">databroker-pack</span></code> boxes up Bluesky Runs as a directory of
+files which can be archived or transferred to other systems. At their
+destination, a user can point <code class="docutils literal notranslate"><span class="pre">databroker</span></code> at this directory of files
+and use it like any other data store.</p>
+</div></blockquote>
+<blockquote>
+<div><p>The utility <code class="docutils literal notranslate"><span class="pre">databroker-unpack</span></code> installs a configuration file that
+makes this directory easily “discoverable” so the recipient can access
+it using <code class="docutils literal notranslate"><span class="pre">databroker.catalog[&quot;SOME_CATALOG_NAME&quot;]</span></code>.</p>
+</div></blockquote>
+<p>The APS bluesky training has an example of the
+<a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/README.md">pack</a>
+and
+<a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/README.md#unpack-the-data">unpack</a>
+processes. Once unpacked, the data can be used, as shown in <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb">this
+example Jupyter
+notebook</a>.</p>
+</section>
+<section id="identify-experiment-data-in-databroker">
+<h2>Identify experiment data in databroker<a class="headerlink" href="#identify-experiment-data-in-databroker" title="Permalink to this heading">#</a></h2>
+<p>To access your experiment’s data, you need to get it from your <em>catalog</em>
+(usually <code class="docutils literal notranslate"><span class="pre">cat</span></code> where <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">=</span> <span class="pre">databroker.catalog[CATALOG_NAME]</span></code>).  You can
+access by providing a reference.  The reference is one of these:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">scan_id</span></code> (some positive integer)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">uid</span></code> (a hexadecimal text string)</p></li>
+<li><p>Python reference to a recent scan (a negative integer such <code class="docutils literal notranslate"><span class="pre">-1</span></code> for
+the most recent run).</p></li>
+</ul>
+<p>Take this example for the fictious <code class="docutils literal notranslate"><span class="pre">45id</span></code> catalog:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">databroker</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">catalog</span><span class="p">[</span><span class="s2">&quot;45id&quot;</span><span class="p">]</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="mi">554</span><span class="p">]</span>  <span class="c1"># access by scan_id</span>
+<span class="n">ds</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>  <span class="c1"># all data from the stream named: primary</span>
+<span class="n">md</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">metadata</span>  <span class="c1"># the run&#39;s metadata</span>
+</pre></div>
+</div>
+<p>NOTE: the run’s metadata is here: <code class="docutils literal notranslate"><span class="pre">run.metadata</span></code>.
+This is a Python dictionary with <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">stop</span></code> keys for the respective document’s metadata.</p>
+<p>A summary of the run is shown by just typing <code class="docutils literal notranslate"><span class="pre">run</span></code> on the command line:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">12</span><span class="p">]:</span> <span class="n">run</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">12</span><span class="p">]:</span>
+<span class="n">BlueskyRun</span>
+  <span class="n">uid</span><span class="o">=</span><span class="s1">&#39;c6b461f7-53aa-4941-9e38-ce842f08bf2d&#39;</span>
+  <span class="n">exit_status</span><span class="o">=</span><span class="s1">&#39;success&#39;</span>
+  <span class="mi">2021</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">06</span> <span class="mi">15</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mf">36.397</span> <span class="o">--</span> <span class="mi">2021</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">06</span> <span class="mi">15</span><span class="p">:</span><span class="mi">46</span><span class="p">:</span><span class="mf">40.430</span>
+  <span class="n">Streams</span><span class="p">:</span>
+    <span class="o">*</span> <span class="n">baseline</span>
+    <span class="o">*</span> <span class="n">PeakStats</span>
+    <span class="o">*</span> <span class="n">primary</span>
+</pre></div>
+</div>
+<p>Similarly, the primary data can be seen in a table:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">13</span><span class="p">]:</span> <span class="n">ds</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">13</span><span class="p">]:</span>
+<span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">Dataset</span><span class="o">&gt;</span>
+<span class="n">Dimensions</span><span class="p">:</span>           <span class="p">(</span><span class="n">time</span><span class="p">:</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">time</span>              <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="n">float64</span> <span class="mf">1.639e+09</span> <span class="mf">1.639e+09</span> <span class="o">...</span> <span class="mf">1.639e+09</span> <span class="mf">1.639e+09</span>
+<span class="n">Data</span> <span class="n">variables</span><span class="p">:</span>
+    <span class="n">noisy</span>             <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="n">float64</span> <span class="mf">1.783e+04</span> <span class="mf">2.009e+04</span> <span class="o">...</span> <span class="mf">1.974e+04</span> <span class="mf">1.745e+04</span>
+    <span class="n">m1</span>                <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="n">float64</span> <span class="o">-</span><span class="mf">0.679</span> <span class="o">-</span><span class="mf">0.69</span> <span class="o">-</span><span class="mf">0.702</span> <span class="o">...</span> <span class="o">-</span><span class="mf">1.004</span> <span class="o">-</span><span class="mf">1.015</span>
+    <span class="n">m1_user_setpoint</span>  <span class="p">(</span><span class="n">time</span><span class="p">)</span> <span class="n">float64</span> <span class="o">-</span><span class="mf">0.6792</span> <span class="o">-</span><span class="mf">0.6904</span> <span class="o">-</span><span class="mf">0.7016</span> <span class="o">...</span> <span class="o">-</span><span class="mf">1.004</span> <span class="o">-</span><span class="mf">1.015</span>
+</pre></div>
+</div>
+<p>Before plotting, tell matplotlib how to render the plot image:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib</span>
+<span class="c1"># for IPython console sessions</span>
+<span class="o">%</span> <span class="n">matplotlib</span>
+
+<span class="c1"># for notebooks, either of these</span>
+<span class="o">%</span> <span class="n">matplotlib</span> <span class="n">notebook</span>
+<span class="o">%</span> <span class="n">matplotlib</span> <span class="n">inline</span>
+</pre></div>
+</div>
+<p>Knowing that the independent data (x) name is <code class="docutils literal notranslate"><span class="pre">m1</span></code> and the dependent data (y) name is <code class="docutils literal notranslate"><span class="pre">noisy</span></code>, this data can be plotted:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="n">ds</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="s2">&quot;noisy&quot;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">11</span><span class="p">]:</span> <span class="o">&lt;</span><span class="n">matplotlib</span><span class="o">.</span><span class="n">collections</span><span class="o">.</span><span class="n">PathCollection</span> <span class="n">at</span> <span class="mh">0x7f52602fc640</span><span class="o">&gt;</span>
+</pre></div>
+</div>
+<p><img alt="scan_id=554 plotted" src="../_images/554-plot-scatter.png" /></p>
+</section>
+<section id="file-export">
+<h2>file export<a class="headerlink" href="#file-export" title="Permalink to this heading">#</a></h2>
+<p>For one-time (or occasional) use, it might be simpler to export a data
+stream to a file.  For simple data, text is very easy.  For more
+structured data, you  might consider SPEC or NeXus at this time.</p>
+<section id="text-files">
+<h3>text files<a class="headerlink" href="#text-files" title="Permalink to this heading">#</a></h3>
+<p>Text files represent an easy way to inspect the data contents outside of
+any specific data analyasis software.  But it helps to have some kind of
+structure (schema) to the content.  That’s the purpose of CSV, JSON,
+SPEC, or some other schema.</p>
+<section id="csv">
+<h4>CSV<a class="headerlink" href="#csv" title="Permalink to this heading">#</a></h4>
+<p>A <a class="reference internal" href="_export_to_csv.html"><span class="std std-doc">notebook</span></a> shows how to export data to CSV files.</p>
+<p>The xarray structure of <code class="docutils literal notranslate"><span class="pre">ds</span></code> does not have a method to export to CSV,
+but <code class="docutils literal notranslate"><span class="pre">pandas</span></code> does and <code class="docutils literal notranslate"><span class="pre">ds</span></code> has a <code class="docutils literal notranslate"><span class="pre">to_pandas()</span></code> exporter:
+<code class="docutils literal notranslate"><span class="pre">ds.to_pandas().to_csv()</span></code>.  Each stream can be written to a CSV file
+(perhaps all together in one file but that looks complicated and is
+against the objective keeping it simple).  Here is an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/run_554-primary.csv&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">to_pandas</span><span class="p">()</span><span class="o">.</span><span class="n">to_csv</span><span class="p">())</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.to_csv()</span></code> method has many options for formatting.</p>
+<p>Since <code class="docutils literal notranslate"><span class="pre">md</span></code> is a dictionary structure, it is not so easy to write into a CSV file.</p>
+</section>
+<section id="json">
+<h4>JSON<a class="headerlink" href="#json" title="Permalink to this heading">#</a></h4>
+<p>While Python provides a
+<a class="reference external" href="https://docs.python.org/3/library/json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a> package to
+read/write a JSON file, it may be easier to use the <code class="docutils literal notranslate"><span class="pre">xarray</span></code> structure
+returned by the <code class="docutils literal notranslate"><span class="pre">databroker</span></code> from <code class="docutils literal notranslate"><span class="pre">run.primary.read()</span></code> (where  <code class="docutils literal notranslate"><span class="pre">primary</span></code>
+is the name of the document stream named <em>primary</em>).  Export the data to
+JSON strings.  These, in turn may be written to a file.  Here is an
+example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">json</span>
+
+<span class="n">data</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;metadata&quot;</span><span class="p">:</span> <span class="n">md</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">stream_name</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">run</span><span class="p">):</span>  <span class="c1"># get ALL the streams</span>
+    <span class="c1"># such as data[&quot;primary&quot;] = run.primary.read().to_dict()</span>
+    <span class="n">data</span><span class="p">[</span><span class="n">stream_name</span><span class="p">]</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">run</span><span class="p">,</span> <span class="n">stream_name</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">&quot;/tmp/run_554.json&quot;</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">indent</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</section>
+<section id="spec">
+<h4>SPEC<a class="headerlink" href="#spec" title="Permalink to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is configured to write SPEC files automatically
+using the SPEC file writer callback (see <em>SPEC: SpecWriterCallback</em> section
+below).  The <code class="docutils literal notranslate"><span class="pre">WRITE_SPEC_DATA_FILES</span></code> key in the <code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code>
+<a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/iconfig.yml">file</a>
+can be set to <code class="docutils literal notranslate"><span class="pre">false</span></code> if you wish to disable this.</p>
+</section>
+</section>
+<section id="hdf5-files">
+<h3>HDF5 files<a class="headerlink" href="#hdf5-files" title="Permalink to this heading">#</a></h3>
+<p>Python support for the HDF5 format is usally provided through use of the
+<a class="reference external" href="https://www.h5py.org/"><code class="docutils literal notranslate"><span class="pre">h5py</span></code></a> package.  NeXus is an example of a specific</p>
+<section id="raw">
+<h4>raw<a class="headerlink" href="#raw" title="Permalink to this heading">#</a></h4>
+<p>HDF5 is a hierarchical data format, allowing much structure in how the
+data is stored in an HDF5 data file.  Refer to the <a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/HDF5">HDF5
+documentation</a> and/or the
+<a class="reference external" href="https://www.h5py.org/">h5py documentation</a> for details in how to write
+raw data to this format.</p>
+</section>
+<section id="nexus">
+<h4>NeXus<a class="headerlink" href="#nexus" title="Permalink to this heading">#</a></h4>
+<p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is not configured to write NeXus files by default.  See
+the <em>NeXus - NXWriterAPS</em> section below if you wish to write NeXus files.</p>
+</section>
+<section id="dx-data-exchange">
+<h4>DX : Data Exchange<a class="headerlink" href="#dx-data-exchange" title="Permalink to this heading">#</a></h4>
+<p>not supported yet</p>
+<p>Since there is no bluesky code yet to write data in the DX format, you
+must refer to the <a class="reference external" href="https://www.aps.anl.gov/Science/Scientific-Software/DataExchange">Data
+Exchange</a>
+documentation for details.</p>
+</section>
+</section>
+</section>
+<section id="callbacks">
+<h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h2>
+<p>In the context of data for bluesky, a <em>callback</em> is python code that
+subscribes to the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code> and receives documents during a
+run.  The callback should handle each of those documents to pwrite the
+data according to the terms of the file format.</p>
+<section id="apstools">
+<h3>apstools<a class="headerlink" href="#apstools" title="Permalink to this heading">#</a></h3>
+<p>The
+<a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html"><code class="docutils literal notranslate"><span class="pre">apstools</span></code></a>
+package supports automatic data export to NeXus or SPEC data files via
+callbacks.  The support is provided in python <code class="docutils literal notranslate"><span class="pre">class</span></code> definitions that
+handle each of the document types from the <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>.</p>
+<section id="nexus-nxwriteraps">
+<h4>NeXus - NXWriterAPS<a class="headerlink" href="#nexus-nxwriteraps" title="Permalink to this heading">#</a></h4>
+<p>The
+<a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html#apstools.filewriters.NXWriterAPS">documentation</a>
+is brief.  It may be more interesting to see the setup for the <a class="reference external" href="https://github.com/APS-USAXS/ipython-usaxs/blob/master/profile_bluesky/startup/instrument/callbacks/nxwriter_usaxs.py">USAXS
+instrument</a></p>
+</section>
+<section id="spec-specwritercallback">
+<h4>SPEC: SpecWriterCallback<a class="headerlink" href="#spec-specwritercallback" title="Permalink to this heading">#</a></h4>
+<p>The
+<a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">documentation</a>
+is brief.  It may be more interesting to see the setup for the <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/callbacks/spec_data_file_writer.py">bluesky
+training
+instrument</a>.</p>
+</section>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_dynamic_limits_2motor.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Dynamic Limits for Two Motors</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_export_to_csv.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Export bluesky data to CSV</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#choices">Choices</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#databroker-pack">databroker-pack</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#identify-experiment-data-in-databroker">Identify experiment data in databroker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-export">file export</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#text-files">text files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#csv">CSV</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#json">JSON</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spec">SPEC</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hdf5-files">HDF5 files</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#raw">raw</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nexus">NeXus</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#dx-data-exchange">DX : Data Exchange</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">Callbacks</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#apstools">apstools</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#nexus-nxwriteraps">NeXus - NXWriterAPS</a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#spec-specwritercallback">SPEC: SpecWriterCallback</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_export_bluesky_data.md.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
