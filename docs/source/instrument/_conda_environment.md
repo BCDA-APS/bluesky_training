@@ -32,13 +32,18 @@ tasks, such as creating new, local environments for user.
 
 ### Bluesky environment
 
-See the _Create the conda environment_ [section](./_install_new_instrument.md)
-to install a conda environment for Bluesky.
-
 It is likely that you will have more than one conda environment available.  Each
 of these has a complete installation of Python with a suite of packages.  The
 suite may differ between the environments, as well as the package versions.
 Even the Python version itself may be different.
+
+<details>
+
+Follow these
+[steps](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#create-the-conda-environment)
+to create a conda environment for data collection with bluesky.
+
+</details>
 
 When you install or update package(s) in one environment, this will not affect
 any of the other environments.  This makes it easy to control which software is

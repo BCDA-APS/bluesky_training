@@ -52,12 +52,12 @@ Standard Library.  Rather than add these directly into the system Python
 installation, it is recommended to create a Python virtual environment which has
 the suite of packages (and specific versions) required.
 
-Follow this [guide](./_conda_environment.md) to create the `bluesky_2023_2` conda
-environment for data collection with bluesky.
+Follow these steps to create a conda environment for data collection with
+bluesky.
 
 **IMPORTANT**:  You must use `bash` shell.
 
-Here's an example:
+Here's an example for the `bluesky_2023_2` environment:
 
 <pre>
 $ <b>cd ~/bluesky</b>
