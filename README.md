@@ -45,9 +45,7 @@ Also take note of
     - [Post-measurement (such as Analysis)](#post-measurement-such-as-analysis)
       - [Data Processing, Reduction, and/or Analysis](#data-processing-reduction-andor-analysis)
     - [Review](#review)
-  - [Installation](#installation)
-    - [Install for Training](#install-for-training)
-    - [Install as Bluesky `instrument` package](#install-as-bluesky-instrument-package)
+  - [Install as Bluesky `instrument` package](#install-as-bluesky-instrument-package)
 
 ## References
 
@@ -133,16 +131,10 @@ folders (created by tools from Bluesky's
 - [Command Review](https://bcda-aps.github.io/bluesky_training/reference/_command_review.html)
 - [Overview of the `instrument` package](https://bcda-aps.github.io/bluesky_training/instrument/describe_instrument.html)
 
-## Installation
+## Install as Bluesky `instrument` package
 
-### Install for Training
-
-Instructions are available for [installation on Linux workstations](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html).
-The steps are similar on Mac OS and Windows but details are not provided here.
-
-### Install as Bluesky `instrument` package
-
-Parts of this repository (under the `bluesky`) also serve as a template for
+Parts of this repository (in the `bluesky/` directory) also serve as a template for
 creating a new bluesky `instrument` package.  See these
 [instructions](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument) for the _Steps to install a
 new instrument_.
+The steps are similar on Mac OS and Windows but details are not provided here.
