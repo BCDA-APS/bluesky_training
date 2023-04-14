@@ -1,0 +1,511 @@
+{
+ "cells": [
+  {
+   "attachments": {},
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Demo the spec file writer callback"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from bluesky import RunEngine\n",
+    "RE = RunEngine()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from ophyd import EpicsMotor, EpicsSignal\n",
+    "\n",
+    "m1 = EpicsMotor(\"gp:m1\", name=\"m1\")\n",
+    "signal = EpicsSignal(\"gp:userCalc8\", name=\"signal\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "m1.position=0.00000\n",
+      "signal.get()=24.514\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"{m1.position=:.5f}\")\n",
+    "print(f\"{signal.get()=:.3f}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from apstools.callbacks import SpecWriterCallback\n",
+    "specwriter = SpecWriterCallback()"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "0"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "RE.subscribe(specwriter.receiver)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from bluesky import plans as bp"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "PosixPath('20230329-141656.dat')"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "specwriter.spec_filename"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "Error: no such file, variable, URL, history range or macro\n"
+     ]
+    }
+   ],
+   "source": [
+    "%pycat 20230329-141656.dat"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "('fca1c869-5d28-4ecf-b14a-e829678ae17b',)"
+      ]
+     },
+     "execution_count": 23,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "RE(bp.count([signal]))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[0;31m#F 20230329-141656.dat\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#E 1680117416\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:16:56 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Bluesky  user = prjemian  host = zap\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#O0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#o0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#S 1  count(detectors=['signal'], num=1)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:19:27 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:19:27 2023.  plan_type = generator\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:19:27 2023.  uid = fca1c869-5d28-4ecf-b14a-e829678ae17b\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD uid = fca1c869-5d28-4ecf-b14a-e829678ae17b\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD detectors = ['signal']\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_intervals = 0\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_points = 1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD versions = {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#P0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#N 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#L Epoch_float  Epoch  signal\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;36m0.00418853759765625\u001b[0m \u001b[0;36m0\u001b[0m \u001b[0;36m25.26832227054246\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:19:27 2023.  num_events_primary = 1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:19:27 2023.  exit_status = success\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n"
+     ]
+    }
+   ],
+   "source": [
+    "%pycat 20230329-141656.dat"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "PosixPath('/tmp/spec_file_demo.spec')"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "specwriter.newfile(\"/tmp/spec_file_demo.spec\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "('4ea2058d-8b78-4b93-a61e-77a6178f525a',)"
+      ]
+     },
+     "execution_count": 29,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "RE(bp.scan([signal], m1, -1, 0, 3))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[0;31m#F /tmp/spec_file_demo.spec\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#E 1680117763\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:22:43 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Bluesky  user = prjemian  host = zap\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#O0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#o0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#S 3  scan(detectors=['signal'], num=3, args='['m1', -1, 0]', per_step='None')\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:22:50 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:50 2023.  plan_type = generator\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:50 2023.  uid = 4ea2058d-8b78-4b93-a61e-77a6178f525a\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD uid = 4ea2058d-8b78-4b93-a61e-77a6178f525a\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD detectors = ['signal']\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD motors = ('m1',)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_intervals = 2\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_points = 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern = inner_product\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern_args = {'num': 3, 'args': [\"EpicsMotor(prefix='gp:m1', name='m1', settle_time=0.0, timeout=None, read_attrs=['user_readback', 'user_setpoint'], configuration_attrs=['user_offset', 'user_offset_dir', 'velocity', 'acceleration', 'motor_egu'])\", -1, 0]}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern_module = bluesky.plan_patterns\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD versions = {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#P0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#N 5\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#L m1  Epoch_float  Epoch  m1_user_setpoint  signal\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m1.0\u001b[0m \u001b[0;36m1.2423996925354004\u001b[0m \u001b[0;36m1\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m1.0\u001b[0m \u001b[0;36m24.68619058518349\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m0.5\u001b[0m \u001b[0;36m2.030499219894409\u001b[0m \u001b[0;36m2\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m0.5\u001b[0m \u001b[0;36m24.613359273670557\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;36m0.0\u001b[0m \u001b[0;36m2.8312039375305176\u001b[0m \u001b[0;36m3\u001b[0m \u001b[0;36m0.0\u001b[0m \u001b[0;36m24.613359273670557\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:52 2023.  num_events_primary = 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:52 2023.  exit_status = success\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n"
+     ]
+    }
+   ],
+   "source": [
+    "%pycat /tmp/spec_file_demo.spec"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 31,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def my_plan(count_time=1):\n",
+    "    print(f\"{count_time=}\")\n",
+    "    yield from bp.count([signal])"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 32,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "count_time=3.14\n"
+     ]
+    },
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[0;31m#F /tmp/spec_file_demo.spec\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#E 1680117763\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:22:43 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Bluesky  user = prjemian  host = zap\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#O0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#o0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#S 3  scan(detectors=['signal'], num=3, args='['m1', -1, 0]', per_step='None')\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:22:50 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:50 2023.  plan_type = generator\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:50 2023.  uid = 4ea2058d-8b78-4b93-a61e-77a6178f525a\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD uid = 4ea2058d-8b78-4b93-a61e-77a6178f525a\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD detectors = ['signal']\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD motors = ('m1',)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_intervals = 2\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_points = 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern = inner_product\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern_args = {'num': 3, 'args': [\"EpicsMotor(prefix='gp:m1', name='m1', settle_time=0.0, timeout=None, read_attrs=['user_readback', 'user_setpoint'], configuration_attrs=['user_offset', 'user_offset_dir', 'velocity', 'acceleration', 'motor_egu'])\", -1, 0]}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern_module = bluesky.plan_patterns\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD versions = {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#P0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#N 5\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#L m1  Epoch_float  Epoch  m1_user_setpoint  signal\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m1.0\u001b[0m \u001b[0;36m1.2423996925354004\u001b[0m \u001b[0;36m1\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m1.0\u001b[0m \u001b[0;36m24.68619058518349\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m0.5\u001b[0m \u001b[0;36m2.030499219894409\u001b[0m \u001b[0;36m2\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m0.5\u001b[0m \u001b[0;36m24.613359273670557\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;36m0.0\u001b[0m \u001b[0;36m2.8312039375305176\u001b[0m \u001b[0;36m3\u001b[0m \u001b[0;36m0.0\u001b[0m \u001b[0;36m24.613359273670557\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:52 2023.  num_events_primary = 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:52 2023.  exit_status = success\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#S 4  count(detectors=['signal'], num=1)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:26:44 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  plan_type = generator\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  uid = a984dffc-55b1-49ca-9fe9-5843c95eac8c\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD uid = a984dffc-55b1-49ca-9fe9-5843c95eac8c\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD detectors = ['signal']\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_intervals = 0\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_points = 1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD versions = {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#P0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#N 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#L Epoch_float  Epoch  signal\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;36m0.003344297409057617\u001b[0m \u001b[0;36m0\u001b[0m \u001b[0;36m24.523498893720912\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  num_events_primary = 1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  exit_status = success\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n"
+     ]
+    }
+   ],
+   "source": [
+    "RE(my_plan(3.14))"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 33,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\u001b[0;31m#F /tmp/spec_file_demo.spec\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#E 1680117763\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:22:43 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Bluesky  user = prjemian  host = zap\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#O0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#o0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#S 3  scan(detectors=['signal'], num=3, args='['m1', -1, 0]', per_step='None')\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:22:50 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:50 2023.  plan_type = generator\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:50 2023.  uid = 4ea2058d-8b78-4b93-a61e-77a6178f525a\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD uid = 4ea2058d-8b78-4b93-a61e-77a6178f525a\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD detectors = ['signal']\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD motors = ('m1',)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_intervals = 2\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_points = 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern = inner_product\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern_args = {'num': 3, 'args': [\"EpicsMotor(prefix='gp:m1', name='m1', settle_time=0.0, timeout=None, read_attrs=['user_readback', 'user_setpoint'], configuration_attrs=['user_offset', 'user_offset_dir', 'velocity', 'acceleration', 'motor_egu'])\", -1, 0]}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD plan_pattern_module = bluesky.plan_patterns\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD versions = {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#P0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#N 5\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#L m1  Epoch_float  Epoch  m1_user_setpoint  signal\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m1.0\u001b[0m \u001b[0;36m1.2423996925354004\u001b[0m \u001b[0;36m1\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m1.0\u001b[0m \u001b[0;36m24.68619058518349\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m0.5\u001b[0m \u001b[0;36m2.030499219894409\u001b[0m \u001b[0;36m2\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0;36m0.5\u001b[0m \u001b[0;36m24.613359273670557\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;36m0.0\u001b[0m \u001b[0;36m2.8312039375305176\u001b[0m \u001b[0;36m3\u001b[0m \u001b[0;36m0.0\u001b[0m \u001b[0;36m24.613359273670557\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:52 2023.  num_events_primary = 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:22:52 2023.  exit_status = success\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#S 4  count(detectors=['signal'], num=1)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#D Wed Mar 29 14:26:44 2023\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  plan_type = generator\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  uid = a984dffc-55b1-49ca-9fe9-5843c95eac8c\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD uid = a984dffc-55b1-49ca-9fe9-5843c95eac8c\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD detectors = ['signal']\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_intervals = 0\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD num_points = 1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#MD versions = {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#P0 \u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#N 3\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#L Epoch_float  Epoch  signal\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;36m0.003344297409057617\u001b[0m \u001b[0;36m0\u001b[0m \u001b[0;36m24.523498893720912\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  num_events_primary = 1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m#C Wed Mar 29 14:26:44 2023.  exit_status = success\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n"
+     ]
+    }
+   ],
+   "source": [
+    "%pycat /tmp/spec_file_demo.spec"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 39,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "gp:m1  gp:m1.VAL\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(f\"{m1.prefix}  {m1.user_setpoint.pvname}\")"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 37,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "======================= ========== ======== ==========================\n",
+       "data name               PV         value    timestamp                 \n",
+       "======================= ========== ======== ==========================\n",
+       "m1                      gp:m1.RBV  0.0      2023-03-29 14:22:52.958127\n",
+       "m1_user_setpoint        gp:m1.VAL  0.0      2023-03-29 14:22:52.160880\n",
+       "m1_user_offset          gp:m1.OFF  0.0      2023-03-29 11:48:42.736747\n",
+       "m1_user_offset_dir      gp:m1.DIR  0        2023-03-29 11:48:42.736747\n",
+       "m1_offset_freeze_switch gp:m1.FOFF 0        2023-03-29 11:48:42.736747\n",
+       "m1_set_use_switch       gp:m1.SET  0        2023-03-29 11:48:42.736747\n",
+       "m1_velocity             gp:m1.VELO 1.0      2023-03-29 11:48:42.736747\n",
+       "m1_acceleration         gp:m1.ACCL 0.2      2023-03-29 11:48:42.736747\n",
+       "m1_motor_egu            gp:m1.EGU  degrees  2023-03-29 11:48:42.736747\n",
+       "m1_motor_is_moving      gp:m1.MOVN 0        2023-03-29 14:22:52.958127\n",
+       "m1_motor_done_move      gp:m1.DMOV 1        2023-03-29 14:22:52.958127\n",
+       "m1_high_limit_switch    gp:m1.HLS  0        2023-03-29 11:48:42.736747\n",
+       "m1_low_limit_switch     gp:m1.LLS  0        2023-03-29 11:48:42.736747\n",
+       "m1_high_limit_travel    gp:m1.HLM  32000.0  2023-03-29 11:48:42.736747\n",
+       "m1_low_limit_travel     gp:m1.LLM  -32000.0 2023-03-29 11:48:42.736747\n",
+       "m1_direction_of_travel  gp:m1.TDIR 0        2023-03-29 14:22:52.958127\n",
+       "m1_motor_stop           gp:m1.STOP 0        2023-03-29 14:22:52.961634\n",
+       "m1_home_forward         gp:m1.HOMF 0        2023-03-29 11:48:42.736747\n",
+       "m1_home_reverse         gp:m1.HOMR 0        2023-03-29 11:48:42.736747\n",
+       "======================= ========== ======== =========================="
+      ]
+     },
+     "execution_count": 37,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "from apstools.utils import listdevice\n",
+    "listdevice(m1, show_pv=True)"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 43,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "'degrees'"
+      ]
+     },
+     "execution_count": 43,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "m1.motor_egu.get()"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "bluesky_2023_2",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.10.10"
+  },
+  "orig_nbformat": 4
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

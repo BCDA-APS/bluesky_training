@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Python virtual environment &#8212; APS Bluesky Training  documentation</title>
+    <title>Conda virtual environment &#8212; APS Bluesky Training  documentation</title>
   
   
   
@@ -136,16 +136,23 @@
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
-                        Instrument
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -240,16 +247,23 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
-                        Instrument
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -290,16 +304,17 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Python virtual environment</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Conda virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_quick_hello_world.html">Test with Hello, World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
@@ -343,7 +358,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Python virtual environment</li>
+    <li class="breadcrumb-item active" aria-current="page">Conda virtual environment</li>
   </ul>
 </nav>
 </div>
@@ -360,14 +375,64 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="python-virtual-environment">
-<h1>Python virtual environment<a class="headerlink" href="#python-virtual-environment" title="Permalink to this heading">#</a></h1>
+  <section id="conda-virtual-environment">
+<h1>Conda virtual environment<a class="headerlink" href="#conda-virtual-environment" title="Permalink to this heading">#</a></h1>
+<p>One way to control the versions of the packages used by your Python software is
+to use Python virtual environments (<code class="docutils literal notranslate"><span class="pre">venv</span></code>s) or conda environments. This
+document will describe the use of conda environments.</p>
 <p>A bluesky instrument uses many Python packages not included in the Python
 Standard Library.  Rather than add these directly into the system Python
 installation, it is recommended to create a Python virtual environment which has
 the suite of packages (and specific versions) required.</p>
 <p>A Python virtual environment gives your account control over the suite of
 installed packages and insulates you from any system software updates.</p>
+<section id="conda-environment-names">
+<h2>Conda environment names<a class="headerlink" href="#conda-environment-names" title="Permalink to this heading">#</a></h2>
+<p>Each conda environment has a name, which corresponds to the file directory in
+which the environments packages, libraries, and other resources are stored.  See
+the table below for an example.</p>
+<section id="base-environment">
+<h3>base environment<a class="headerlink" href="#base-environment" title="Permalink to this heading">#</a></h3>
+<p>You might need to install a conda base environment (such a
+<a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>) if one is not
+already available.  See <a class="reference internal" href="../reference/_conda_base.html"><span class="std std-doc">these instructions</span></a> for
+the installation steps.</p>
+<p>Often, the base environment is installed read-only for normal users so they
+cannot modify it directly.  Miniconda provides an ideal base environment since
+it installs a minimal suite of Python packages, useful only the most basic
+tasks, such as creating new, local environments for user.</p>
+</section>
+<section id="bluesky-environment">
+<h3>Bluesky environment<a class="headerlink" href="#bluesky-environment" title="Permalink to this heading">#</a></h3>
+<p>See the <em>Create the conda environment</em> <a class="reference internal" href="_install_new_instrument.html"><span class="std std-doc">section</span></a>
+to install a conda environment for Bluesky.</p>
+<p>It is likely that you will have more than one conda environment available.  Each
+of these has a complete installation of Python with a suite of packages.  The
+suite may differ between the environments, as well as the package versions.
+Even the Python version itself may be different.</p>
+<p>When you install or update package(s) in one environment, this will not affect
+any of the other environments.  This makes it easy to control which software is
+installed.</p>
+<p>You can list the conda environments available (such as this example listing):</p>
+<pre>
+$ <b>conda env list</b>
+# conda environments:
+#
+bluesky_2022_3           /home/prjemian/.conda/envs/bluesky_2022_3
+bluesky_2023_1           /home/prjemian/.conda/envs/bluesky_2023_1
+bluesky_2023_2        *  /home/prjemian/.conda/envs/bluesky_2023_2
+c2dv                     /home/prjemian/.conda/envs/c2dv
+measComp                 /home/prjemian/.conda/envs/measComp
+queue_server             /home/prjemian/.conda/envs/queue_server
+test                     /home/prjemian/.conda/envs/test
+training_2022            /home/prjemian/.conda/envs/training_2022
+base                     /opt/miniconda3
+</pre>
+<p>The environment with the <code class="docutils literal notranslate"><span class="pre">*</span></code> is the active one.  The full command prompt (not
+shown here) will also be prefixed with the environment name, such as
+<code class="docutils literal notranslate"><span class="pre">(bluesky_2023_2)</span> </code>.</p>
+</section>
+</section>
 <section id="conda">
 <h2>Conda<a class="headerlink" href="#conda" title="Permalink to this heading">#</a></h2>
 <p>Here, we describe the creation of a Python virtual environment managed by
@@ -388,24 +453,44 @@ for more instruction about conda environment YAML files.</p>
 in your <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell.  (This short
 <a class="reference external" href="https://stackoverflow.com/questions/55134440">Q&amp;A</a> can help explain the
 difference between a <em>conda base environment</em> and <em>no environment at all</em>.)</p>
+<details>
 <p>If your (<code class="docutils literal notranslate"><span class="pre">bash</span></code> shell) command prompt does not start with <code class="docutils literal notranslate"><span class="pre">(base)</span></code> (or some
 other conda aenvironment name), you probably do not have a conda environment
 activated and probably do not have a <code class="docutils literal notranslate"><span class="pre">conda</span></code> command available.</p>
 <p>Follow these steps:</p>
 <ol class="arabic">
-<li><p>Use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>bash
+<li><p>Use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell (sometimes, the comand prompt will change for bash):</p>
+<pre>
+$ <b>bash</b>
 user@host:~$
-</pre></div>
-</div>
+</pre>
 </li>
 <li><p>Activate the <code class="docutils literal notranslate"><span class="pre">conda</span></code> base environment:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>user@host:~$<span class="w"> </span><span class="nb">source</span><span class="w"> </span>/PATH/TO/CONDA/bin/activate
-</pre></div>
-</div>
-<p>where <code class="docutils literal notranslate"><span class="pre">/PATH/TO/CONDA</span></code>  is the directory of your conda base installation.  At APS, that location is <code class="docutils literal notranslate"><span class="pre">/APSshare/miniconda/x86_64</span></code>.  For workstations on other networks, you may need to install <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> or <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a> for yourself.</p>
+<pre>
+$ <b>source /PATH/TO/CONDA/bin/activate</b>
+</pre>
+<p>where <code class="docutils literal notranslate"><span class="pre">/PATH/TO/CONDA</span></code>  is the directory of your conda base installation.  At
+APS, that location is <code class="docutils literal notranslate"><span class="pre">/APSshare/miniconda/x86_64</span></code>.  For workstations on
+other networks, you may need to install
+<a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> or
+<a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">conda</a>
+for yourself.</p>
 </li>
 </ol>
+<section id="conda-channels">
+<h3>conda channels<a class="headerlink" href="#conda-channels" title="Permalink to this heading">#</a></h3>
+<p>Conda channels are names (which are shortcuts to URLs) that provide conda
+packages for installation.</p>
+<p>Show your default conda channels:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--show<span class="w"> </span>channels
+</pre></div>
+</div>
+<p>Add more conda channels:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--append<span class="w"> </span>channels<span class="w"> </span>conda-forge<span class="w"> </span>
+conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w"> </span>--append<span class="w"> </span>channels<span class="w"> </span>apsu
+</pre></div>
+</div>
+</section>
 <section id="libmamba">
 <h3>libmamba<a class="headerlink" href="#libmamba" title="Permalink to this heading">#</a></h3>
 <p>In 2022, a <a class="reference external" href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">significant performance
@@ -426,20 +511,23 @@ instructions here and configured as the default solver.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>config<span class="w"> </span>--set<span class="w"> </span>solver<span class="w"> </span>libmamba
 </pre></div>
 </div>
+</details>
 </section>
 </section>
 <section id="install-the-environment-for-bluesky">
 <h2>Install the environment for bluesky<a class="headerlink" href="#install-the-environment-for-bluesky" title="Permalink to this heading">#</a></h2>
-<p>Using the new instrument as setup above (where the installation directory was
-<code class="docutils literal notranslate"><span class="pre">~/bluesky</span></code>), then look for the latest installation configuration file in the
-<code class="docutils literal notranslate"><span class="pre">~bluesky/environments/</span></code> directory.  At this time, the latest file is
-<code class="docutils literal notranslate"><span class="pre">environment_2023_2.yml</span></code>.</p>
+<p>Using the new instrument as <a class="reference internal" href="_install_new_instrument.html"><span class="std std-doc">setup</span></a> above (with
+<code class="docutils literal notranslate"><span class="pre">~/bluesky/</span></code> as the installation directory), look for the latest installation
+configuration file in the <code class="docutils literal notranslate"><span class="pre">~bluesky/environments/</span></code> directory.  At this time, the
+latest file is <code class="docutils literal notranslate"><span class="pre">environment_2023_2.yml</span></code>.</p>
+<details>
 <p>We create different versions of the YAML file, named for the APS operating cycle
 (2021-1, 2023-2, …), as the suite of packages for a working installation may
 change over time.  By keeping all these files in a <code class="docutils literal notranslate"><span class="pre">environments/</span></code> subdirectory,
 we can restore any of these environments with a simple command.</p>
-<p>The instruction to (re)create the conda environment
-is in (a comment in) the first few lines of the file:</p>
+</details>
+<p>The instruction to (re)create the conda environment is in (a comment in) the
+first few lines of the file:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>base<span class="o">)</span><span class="w"> </span>user@host:~/bluesky/environments<span class="w"> </span>$<span class="w"> </span>head<span class="w"> </span>environment_2023_2.yml
 name:<span class="w"> </span>bluesky_2023_2
 
@@ -463,8 +551,8 @@ command.  Line breaks have been added for this documentation.</p>
 <span class="w">    </span>--solver<span class="o">=</span>libmamba
 </pre></div>
 </div>
-<p>Installation usually takes (at least) a few minutes to complete.</p>
-<p><strong>Notes</strong>:</p>
+<details>
+<summary>Notes</summary>
 <ul class="simple">
 <li><p>The <code class="docutils literal notranslate"><span class="pre">--force</span></code> option will replace any existing environment by this name
 <strong>without asking for confirmation</strong>.
@@ -477,6 +565,8 @@ the <code class="docutils literal notranslate"><span class="pre">./</span></code
 <a class="reference external" href="https://conda.github.io/conda-libmamba-solver/"><code class="docutils literal notranslate"><span class="pre">conda-libmamba-solver</span></code></a>.
 Either install that in your <code class="docutils literal notranslate"><span class="pre">base</span></code> environment or remove this install option.</p></li>
 </ul>
+</details>
+<p>Installation usually takes (at least) a few minutes to complete.</p>
 <p>Once finished, the installer will report the commands to manage the new
 environment:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1">#</span>
@@ -489,6 +579,22 @@ environment:</p>
 <span class="c1">#     $ conda deactivate</span>
 </pre></div>
 </div>
+</section>
+<section id="testing">
+<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h2>
+<p>You may wish to <a class="reference internal" href="_testing.html"><span class="std std-doc">test</span></a> that your conda environment is working.</p>
+</section>
+<section id="other-reading">
+<h2>Other reading<a class="headerlink" href="#other-reading" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html">Getting started with conda</a></p></li>
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html">conda environments - User Guide</a></p></li>
+<li><p><a class="reference external" href="https://towardsdatascience.com/a-guide-to-conda-environments-bc6180fc533">conda environments - Independent Guide</a></p></li>
+<li><p><a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html">Managing conda environments</a></p></li>
+<li><p><a class="reference external" href="https://stackoverflow.com/questions/55134440/">difference between base environment and no environment at all</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">venv</span></code>: <a class="reference external" href="https://realpython.com/python-virtual-environments-a-primer/">Python virtual environments</a></p></li>
+<li><p><a class="reference external" href="https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html">micromamba environments</a></p></li>
+</ul>
 </section>
 </section>
 
@@ -539,12 +645,20 @@ environment:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-environment-names">Conda environment names</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#base-environment">base environment</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bluesky-environment">Bluesky environment</a></li>
+</ul>
+</li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#conda">Conda</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#get-the-conda-command">Get the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#conda-channels">conda channels</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#libmamba">libmamba</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-environment-for-bluesky">Install the environment for bluesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-reading">Other reading</a></li>
 </ul>
   </nav></div>
 

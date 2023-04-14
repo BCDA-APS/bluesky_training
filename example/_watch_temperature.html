@@ -1,0 +1,1009 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Watch a temperature : scan temperature v time &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example/_watch_temperature';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="XAFS scan" href="_xafs_scan.html" />
+    <link rel="prev" title="Demo the spec file writer callback" href="_specwriter.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_specwriter.html">Demo the spec file writer callback</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Watch a temperature : scan temperature <em>v</em> time</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Watch-a-temperature-:-scan-temperature-v-time">
+<h1>Watch a temperature : scan temperature <em>v</em> time<a class="headerlink" href="#Watch-a-temperature-:-scan-temperature-v-time" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>Measure the temperature for a short period and compute basics measures of the collected readings.</p>
+<section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/prjemian/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-17:54:44 - ############################################################ startup
+I Thu-17:54:44 - logging started
+I Thu-17:54:44 - logging level = 10
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/session_logs.py
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/collection.py
+I Thu-17:54:44 - CONDA_PREFIX = /home/prjemian/.conda/envs/bluesky_2023_2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception reporting mode: Minimal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-17:54:44 - xmode exception level: &#39;Minimal&#39;
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/mpl/notebook.py
+I Thu-17:54:44 - #### Bluesky Framework ####
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/framework/check_python.py
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/framework/check_bluesky.py
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/framework/initialize.py
+I Thu-17:54:44 - RunEngine metadata saved in directory: /home/prjemian/Bluesky_RunEngine_md
+I Thu-17:54:44 - using databroker catalog &#39;training&#39;
+I Thu-17:54:44 - using ophyd control layer: pyepics
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/framework/metadata.py
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/epics_signal_config.py
+I Thu-17:54:44 - Using RunEngine metadata for scan_id
+I Thu-17:54:44 - #### Devices ####
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/devices/area_detector.py
+I Thu-17:54:44 - /home/prjemian/bluesky/instrument/devices/calculation_records.py
+I Thu-17:54:47 - /home/prjemian/bluesky/instrument/devices/fourc_diffractometer.py
+I Thu-17:54:47 - /home/prjemian/bluesky/instrument/devices/ioc_stats.py
+I Thu-17:54:47 - /home/prjemian/bluesky/instrument/devices/kohzu_monochromator.py
+I Thu-17:54:47 - /home/prjemian/bluesky/instrument/devices/motors.py
+I Thu-17:54:47 - /home/prjemian/bluesky/instrument/devices/noisy_detector.py
+I Thu-17:54:47 - /home/prjemian/bluesky/instrument/devices/scaler.py
+I Thu-17:54:48 - /home/prjemian/bluesky/instrument/devices/shutter_simulator.py
+I Thu-17:54:48 - /home/prjemian/bluesky/instrument/devices/simulated_fourc.py
+I Thu-17:54:48 - /home/prjemian/bluesky/instrument/devices/simulated_kappa.py
+I Thu-17:54:48 - /home/prjemian/bluesky/instrument/devices/slits.py
+I Thu-17:54:48 - /home/prjemian/bluesky/instrument/devices/sixc_diffractometer.py
+I Thu-17:54:49 - /home/prjemian/bluesky/instrument/devices/temperature_signal.py
+I Thu-17:54:49 - #### Callbacks ####
+I Thu-17:54:49 - /home/prjemian/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Thu-17:54:49 - #### Plans ####
+I Thu-17:54:49 - /home/prjemian/bluesky/instrument/plans/lup_plan.py
+I Thu-17:54:49 - /home/prjemian/bluesky/instrument/plans/peak_finder_example.py
+I Thu-17:54:49 - /home/prjemian/bluesky/instrument/utils/image_analysis.py
+I Thu-17:54:49 - #### Utilities ####
+I Thu-17:54:49 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/20230413-175449.dat
+I Thu-17:54:49 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Thu-17:54:49 -    file will be created when bluesky ends its next scan
+I Thu-17:54:49 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Thu-17:54:49 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+</section>
+<section id="Describe">
+<h2>Describe<a class="headerlink" href="#Describe" title="Permalink to this heading">#</a></h2>
+<p>Note the initial settings of the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> (controller). It’s actually an EPICS <em>swait</em> record that simulates a temperature sensor and controller. It has a setpoint, a readback, and a few other support attributes as shown. A Random noise level is part of the simulation. We’ll compute that noise level from the standard deviation of the measurements.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">listdevice</span><span class="p">(</span><span class="n">temperature</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+=============================== =================================== ==========================
+data name                       value                               timestamp
+=============================== =================================== ==========================
+temperature_setpoint            25.0                                2023-04-13 17:54:49.157724
+temperature                     0.0                                 2023-04-13 17:54:49.159466
+temperature_done                False                               2023-04-13 17:54:49.178146
+temperature_calculation         A+max(-D,min(D,(B-A)))+C*(RNDM-0.5) 2023-04-13 17:54:49.160429
+temperature_description         temperature                         2023-04-13 17:54:49.154181
+temperature_max_change          2.0                                 2023-04-13 17:54:49.160349
+temperature_noise               1.0                                 2023-04-13 17:54:49.159466
+temperature_previous_value_pv   gp:userCalc8.VAL                    2023-04-13 17:54:49.157188
+temperature_scanning_rate       5                                   2023-04-13 17:54:49.160429
+temperature_tolerance           1.0                                 2023-04-13 17:54:49.160429
+temperature_report_dmov_changes False                               2023-04-13 17:54:49.156380
+=============================== =================================== ==========================
+</pre></div></div>
+</div>
+</section>
+<section id="Count">
+<h2>Count<a class="headerlink" href="#Count" title="Permalink to this heading">#</a></h2>
+<p>Use the bluesky RunEngine, <code class="docutils literal notranslate"><span class="pre">RE</span></code>, and a standard plan, <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code>, to <em>count</em> the temperature. The <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> plan triggers (typically a scaler) and then reads from the detector. In this case, the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> device’s <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method does not do anything, yet it is still <em>countable</em>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">temperature</span><span class="p">]))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 958     Time: 2023-04-13 17:54:49
+Persistent Unique Scan ID: &#39;cd24d583-6fd9-43ce-9ea3-583b104c2a6d&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+-------------+
+|   seq_num |       time | temperature |
++-----------+------------+-------------+
+|         1 | 17:54:49.4 |     0.00000 |
++-----------+------------+-------------+
+generator count [&#39;cd24d583&#39;] (scan num: 958)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;cd24d583-6fd9-43ce-9ea3-583b104c2a6d&#39;,)
+</pre></div></div>
+</div>
+<p>Take ten readings by adding the <code class="docutils literal notranslate"><span class="pre">num=10</span></code> keyword argument (a.k.a. <em>kwarg</em>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">temperature</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 959     Time: 2023-04-13 17:54:49
+Persistent Unique Scan ID: &#39;8b99ba9a-1361-4b5d-8910-3a7b1e0566e2&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+-------------+
+|   seq_num |       time | temperature |
++-----------+------------+-------------+
+|         1 | 17:54:49.8 |     0.00000 |
+|         2 | 17:54:49.8 |     0.00000 |
+|         3 | 17:54:49.8 |     0.00000 |
+|         4 | 17:54:49.9 |     2.24478 |
+|         5 | 17:54:49.9 |     2.24478 |
+|         6 | 17:54:49.9 |     2.24478 |
+|         7 | 17:54:50.0 |     2.24478 |
+|         8 | 17:54:50.0 |     2.24478 |
+|         9 | 17:54:50.0 |     2.24478 |
+|        10 | 17:54:50.0 |     2.24478 |
++-----------+------------+-------------+
+generator count [&#39;8b99ba9a&#39;] (scan num: 959)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;8b99ba9a-1361-4b5d-8910-3a7b1e0566e2&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__watch_temperature_7_2.png" src="../_images/example__watch_temperature_7_2.png" />
+</div>
+</div>
+<p>Do all the readings look the same? Perhaps there are only two different values (first one, then the other)? That’s because our measurements were only <em>reading</em> the temperature without waiting for it to update. (If there are two different values, we caught the moment when EPICS updated the calculation.) The table above showed <code class="docutils literal notranslate"><span class="pre">temperature_scanning_rate</span> <span class="pre">5</span></code> which means EPICS is only updating every 2 seconds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">scanning_rate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">as_string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;2 second&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Adjust-the-measurement-interval">
+<h2>Adjust the measurement interval<a class="headerlink" href="#Adjust-the-measurement-interval" title="Permalink to this heading">#</a></h2>
+<p>We need to slow down the measurement to this interval by adding the <code class="docutils literal notranslate"><span class="pre">delay=2</span></code> kwarg, sampling every 2 seconds.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">temperature</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 960     Time: 2023-04-13 17:54:50
+Persistent Unique Scan ID: &#39;b55776f1-0a02-464c-9762-fe807c90c014&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+-------------+
+|   seq_num |       time | temperature |
++-----------+------------+-------------+
+|         1 | 17:54:50.6 |     2.24478 |
+|         2 | 17:54:52.6 |     4.66694 |
+|         3 | 17:54:54.6 |     6.66461 |
+|         4 | 17:54:56.6 |     8.64790 |
+|         5 | 17:54:58.6 |    10.99491 |
+|         6 | 17:55:00.6 |    13.23049 |
+|         7 | 17:55:02.6 |    15.09944 |
+|         8 | 17:55:04.6 |    17.26870 |
+|         9 | 17:55:06.6 |    19.20524 |
+|        10 | 17:55:08.6 |    21.33919 |
++-----------+------------+-------------+
+generator count [&#39;b55776f1&#39;] (scan num: 960)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;b55776f1-0a02-464c-9762-fe807c90c014&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__watch_temperature_11_2.png" src="../_images/example__watch_temperature_11_2.png" />
+</div>
+</div>
+<p>Let’s reduce the update interval that EPICS uses, to the shortest interval EPICS provides, so our measurements do not take so long.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># print the list of possible values</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">temperature</span><span class="o">.</span><span class="n">scanning_rate</span><span class="o">.</span><span class="n">enum_strs</span><span class="p">)</span>
+
+<span class="c1"># set the shortest interval, by name</span>
+<span class="n">temperature</span><span class="o">.</span><span class="n">scanning_rate</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;.1 second&quot;</span><span class="p">)</span>
+<span class="n">temperature</span><span class="o">.</span><span class="n">scanning_rate</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">as_string</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;Passive&#39;, &#39;Event&#39;, &#39;I/O Intr&#39;, &#39;10 second&#39;, &#39;5 second&#39;, &#39;2 second&#39;, &#39;1 second&#39;, &#39;.5 second&#39;, &#39;.2 second&#39;, &#39;.1 second&#39;)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&#39;2 second&#39;
+</pre></div></div>
+</div>
+</section>
+<section id="Collect-our-measurements">
+<h2>Collect our measurements<a class="headerlink" href="#Collect-our-measurements" title="Permalink to this heading">#</a></h2>
+<p>Repeat the measurement, this time with more observations.</p>
+<p>Also, we’ll add a metadata key:value pair so that later we can find this data more easily in the database. Most plans take a <code class="docutils literal notranslate"><span class="pre">md={}</span></code> kwarg where the value is a Python dictionary with the key:value pair(s) to add to the run’s metadata.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">temperature</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;motive&quot;</span><span class="p">:</span> <span class="s2">&quot;tscan&quot;</span><span class="p">}))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 961     Time: 2023-04-13 17:55:11
+Persistent Unique Scan ID: &#39;51779bd1-f506-4622-8a89-f6002f281de4&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+-------------+
+|   seq_num |       time | temperature |
++-----------+------------+-------------+
+|         1 | 17:55:11.1 |    24.67653 |
+|         2 | 17:55:11.2 |    25.31126 |
+|         3 | 17:55:11.3 |    25.33679 |
+|         4 | 17:55:11.4 |    25.47115 |
+|         5 | 17:55:11.5 |    25.43527 |
+|         6 | 17:55:11.6 |    25.44133 |
+|         7 | 17:55:11.7 |    24.72783 |
+|         8 | 17:55:11.8 |    24.95423 |
+|         9 | 17:55:11.9 |    25.01724 |
+|        10 | 17:55:12.0 |    24.70978 |
+|        11 | 17:55:12.1 |    25.28183 |
+|        12 | 17:55:12.2 |    25.21415 |
+|        13 | 17:55:12.3 |    25.47186 |
+|        14 | 17:55:12.4 |    24.53467 |
+|        15 | 17:55:12.5 |    24.83840 |
+|        16 | 17:55:12.6 |    25.45067 |
+|        17 | 17:55:12.7 |    25.04357 |
+|        18 | 17:55:12.8 |    24.97578 |
+|        19 | 17:55:12.9 |    25.04635 |
+|        20 | 17:55:13.0 |    25.32997 |
+|        21 | 17:55:13.1 |    25.01504 |
+|        22 | 17:55:13.2 |    25.23326 |
+|        23 | 17:55:13.3 |    24.75829 |
+|        24 | 17:55:13.4 |    24.64411 |
+|        25 | 17:55:13.5 |    24.60384 |
+|        26 | 17:55:13.6 |    24.87308 |
+|        27 | 17:55:13.7 |    24.62004 |
+|        28 | 17:55:13.8 |    24.71509 |
+|        29 | 17:55:13.9 |    25.42215 |
+|        30 | 17:55:14.0 |    25.08979 |
+|        31 | 17:55:14.1 |    24.82930 |
+|        32 | 17:55:14.2 |    24.50919 |
+|        33 | 17:55:14.3 |    25.06507 |
+|        34 | 17:55:14.4 |    24.93471 |
+|        35 | 17:55:14.5 |    25.09922 |
+|        36 | 17:55:14.6 |    25.28540 |
+|        37 | 17:55:14.7 |    24.68781 |
+|        38 | 17:55:14.8 |    24.59773 |
+|        39 | 17:55:14.9 |    24.75489 |
+|        40 | 17:55:15.0 |    25.42776 |
+|        41 | 17:55:15.1 |    24.93259 |
+|        42 | 17:55:15.2 |    24.84777 |
+|        43 | 17:55:15.3 |    24.81318 |
+|        44 | 17:55:15.4 |    24.78414 |
+|        45 | 17:55:15.5 |    25.26970 |
+|        46 | 17:55:15.6 |    24.61772 |
+|        47 | 17:55:15.7 |    25.15956 |
+|        48 | 17:55:15.8 |    24.77626 |
+|        49 | 17:55:15.9 |    24.84089 |
++-----------+------------+-------------+
+|   seq_num |       time | temperature |
++-----------+------------+-------------+
+|        50 | 17:55:16.0 |    25.26352 |
++-----------+------------+-------------+
+generator count [&#39;51779bd1&#39;] (scan num: 961)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;51779bd1-f506-4622-8a89-f6002f281de4&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__watch_temperature_15_2.png" src="../_images/example__watch_temperature_15_2.png" />
+</div>
+</div>
+</section>
+<section id="Get-the-data-(from-the-database)">
+<h2>Get the data (from the database)<a class="headerlink" href="#Get-the-data-(from-the-database)" title="Permalink to this heading">#</a></h2>
+<p>Let’s get the measured data from the database now. It’s the most recent bluesky run, so an index of <code class="docutils literal notranslate"><span class="pre">-1</span></code> will identify it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Let’s get the values as a 1-D numpy array.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">T</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Compute-the-statistics">
+<h2>Compute the statistics<a class="headerlink" href="#Compute-the-statistics" title="Permalink to this heading">#</a></h2>
+<p>Use the methods of numpy arrays to compute maximum, mean, standard deviation, and minimum. Looks nicer in a table.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyRestTable</span>
+
+<span class="n">table</span> <span class="o">=</span> <span class="n">pyRestTable</span><span class="o">.</span><span class="n">Table</span><span class="p">()</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;measure&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addLabel</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">)</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;max&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">max</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;mean&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">mean</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;dev&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">std</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;min&quot;</span><span class="p">,</span> <span class="n">T</span><span class="o">.</span><span class="n">min</span><span class="p">()))</span>
+<span class="n">table</span><span class="o">.</span><span class="n">addRow</span><span class="p">((</span><span class="s2">&quot;#&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">table</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+======= ==================
+measure value
+======= ==================
+max     25.471862363622492
+mean    24.994794842450602
+dev     0.2892339831470962
+min     24.50918593118181
+#       50
+======= ==================
+
+</pre></div></div>
+</div>
+<p>Let’s replot that data for comparison.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;temperature&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[&lt;matplotlib.lines.Line2D at 0x7f6b49565bd0&gt;]
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__watch_temperature_23_1.png" src="../_images/example__watch_temperature_23_1.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_specwriter.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Demo the spec file writer callback</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_xafs_scan.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">XAFS scan</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Describe">Describe</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Count">Count</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Adjust-the-measurement-interval">Adjust the measurement interval</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Collect-our-measurements">Collect our measurements</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Get-the-data-(from-the-database)">Get the data (from the database)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Compute-the-statistics">Compute the statistics</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/example/_watch_temperature.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

@@ -1,0 +1,1479 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>Minimal: Scan scaler vs motor &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_basic_motor_scaler_scan';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="First steps with bluesky-queueserver" href="_bluesky_queueserver.html" />
+    <link rel="prev" title="APS Accelerator Information for Beam Lines" href="_basic_aps_info.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Minimal: Scan scaler <em>vs</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Minimal: Scan scaler <em>vs</em> motor</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Minimal:-Scan-scaler-vs-motor">
+<h1>Minimal: Scan scaler <em>vs</em> motor<a class="headerlink" href="#Minimal:-Scan-scaler-vs-motor" title="Permalink to this heading">#</a></h1>
+<p><em>APS Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>Connect an EPICS motor PV, an EPICS scaler PV, and scan using the bluesky <em>RunEngine</em> with the <em>BestEffortCallback</em> to visualize the acquired data.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>EPICS PV</p></th>
+<th class="head"><p>Python object name</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gp:m1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">xpos</span></code></p></td>
+<td><p>motor PV (simulates a stepper motor)</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gp:scaler1</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">vsc16</span></code></p></td>
+<td><p>scaler PV (simulates a Joerger VSC16 scaler)</p></td>
+</tr>
+</tbody>
+</table>
+<section id="Connect-the-motor">
+<h2>Connect the motor<a class="headerlink" href="#Connect-the-motor" title="Permalink to this heading">#</a></h2>
+<p>First, import the <code class="docutils literal notranslate"><span class="pre">`ophyd.EpicsMotor</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/generated/ophyd.epics_motor.EpicsMotor.html?highlight=epicsmotor#ophyd.epics_motor.EpicsMotor">https://blueskyproject.io/ophyd/generated/ophyd.epics_motor.EpicsMotor.html?highlight=epicsmotor#ophyd.epics_motor.EpicsMotor</a>&gt;`__ (class) definition. This Python class from <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> is the best representation of the synApps <a class="reference external" href="https://github.com/epics-modules/motor">motor</a> record.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
+</pre></div>
+</div>
+</div>
+<p>Then, define the <code class="docutils literal notranslate"><span class="pre">xpos</span></code> object. The EPICS PV is the first argument. The <code class="docutils literal notranslate"><span class="pre">name=&quot;xpos&quot;</span></code> is required. Make the value of this keyword argument match the name of the Python object being assigned. The <code class="docutils literal notranslate"><span class="pre">labels=(&quot;motor&quot;,)</span></code> keyword argument enables certain features for the user interface that will be described later.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xpos</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="s2">&quot;gp:m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;xpos&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;motor&quot;</span><span class="p">,))</span>
+</pre></div>
+</div>
+</div>
+<p>Wait for that to connect with EPICS</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xpos</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Show the position of the <code class="docutils literal notranslate"><span class="pre">xpos</span></code> motor now.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xpos</span><span class="o">.</span><span class="n">position</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+-0.3
+</pre></div></div>
+</div>
+<p>Try to move <code class="docutils literal notranslate"><span class="pre">xpos</span></code> using the IPython magic command: <code class="docutils literal notranslate"><span class="pre">%mov</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wrap in a try..except handler so notebook can run past this point</span>
+<span class="k">try</span><span class="p">:</span>
+    <span class="o">%</span><span class="k">mov</span> xpos 1
+<span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Exception: </span><span class="si">{</span><span class="n">exc</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception: Line magic function `%mov` not found.
+</pre></div></div>
+</div>
+<p>Note this command fails since the IPython magic commands are not loaded automatically. As an alternative, use the motor’s <code class="docutils literal notranslate"><span class="pre">.move(SETPOINT)</span></code> method to move the motor to the new <em>SETPOINT</em> value. Here, move <code class="docutils literal notranslate"><span class="pre">xpos</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xpos</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MoveStatus(done=True, pos=xpos, elapsed=1.5, success=True, settle_time=0.0)
+</pre></div></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.move()</span></code> method returns a status object. The status object may be used to report about the move or to wait for the motor to complete its move.</p>
+<p>Next, load the IPython <em>Magic</em> commands provided by <code class="docutils literal notranslate"><span class="pre">bluesky</span></code>. These are helpers to make the command line use easier. Use them at your choice.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.magics</span> <span class="kn">import</span> <span class="n">BlueskyMagics</span>
+<span class="n">get_ipython</span><span class="p">()</span><span class="o">.</span><span class="n">register_magics</span><span class="p">(</span><span class="n">BlueskyMagics</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Repeat the move of <code class="docutils literal notranslate"><span class="pre">xpos</span></code> by sending it to <code class="docutils literal notranslate"><span class="pre">0</span></code> using the magic command.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> xpos 0
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+xpos:   9%|██▌                         | 0.09/1.0 [00:00&lt;00:01,  1.46s/degrees]
+xpos:  19%|█████▎                      | 0.19/1.0 [00:00&lt;00:00,  1.22s/degrees]
+xpos:  29%|███████▊                   | 0.291/1.0 [00:00&lt;00:00,  1.15s/degrees]
+xpos:  39%|██████████▌                | 0.391/1.0 [00:00&lt;00:00,  1.11s/degrees]
+xpos:  49%|█████████████▎             | 0.491/1.0 [00:00&lt;00:00,  1.09s/degrees]
+xpos:  59%|███████████████▉           | 0.592/1.0 [00:00&lt;00:00,  1.07s/degrees]
+xpos:  69%|██████████████████▋        | 0.692/1.0 [00:00&lt;00:00,  1.06s/degrees]
+xpos:  79%|█████████████████████▍     | 0.793/1.0 [00:00&lt;00:00,  1.05s/degrees]
+xpos:  89%|████████████████████████▏  | 0.894/1.0 [00:00&lt;00:00,  1.05s/degrees]
+xpos:  97%|███████████████████████████▏| 0.97/1.0 [00:01&lt;00:00,  1.07s/degrees]
+xpos: 100%|██████████████████████████▉| 0.999/1.0 [00:01&lt;00:00,  1.14s/degrees]
+xpos: 100%|█████████████████████████████| 1.0/1.0 [00:01&lt;00:00,  1.24s/degrees]
+xpos [In progress. No progress bar available.]
+
+</pre></div></div>
+</div>
+</section>
+<section id="Connect-the-scaler">
+<h2>Connect the scaler<a class="headerlink" href="#Connect-the-scaler" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> package provides two representations of the synApps <a class="reference external" href="https://github.com/epics-modules/scaler">scaler</a> record (<code class="docutils literal notranslate"><span class="pre">`EpicsScaler</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#epicsscaler">https://blueskyproject.io/ophyd/reference/builtin-devices.html#epicsscaler</a>&gt;`__ and <code class="docutils literal notranslate"><span class="pre">`ScalerCH</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#scalerch">https://blueskyproject.io/ophyd/reference/builtin-devices.html#scalerch</a>&gt;`__). My <em>opinion</em> is that the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> class provides the representation most compatible with use at the APS.</p>
+<p>As before, import the ophyd class:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+</pre></div>
+</div>
+</div>
+<p>Then, connect with the EPICS PV. This is similar to how the motor was connected (above). Make the <code class="docutils literal notranslate"><span class="pre">name=</span></code> keyword match with the Python object name being created. The <code class="docutils literal notranslate"><span class="pre">labels=(&quot;scalers&quot;,</span> <span class="pre">&quot;detectors&quot;)</span></code> keyword argument enables certain features for the user interface that will be described later.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="s2">&quot;gp:scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;vsc16&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;scalers&quot;</span><span class="p">,</span> <span class="s2">&quot;detectors&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Configure the Python object to ignore the channels with no name defined (in the <code class="docutils literal notranslate"><span class="pre">.NMnn</span></code> field of the scaler PV).</p>
+<p>In this example control screen for our scaler, only a few of the channels are named:</p>
+<p><img alt="``scaler`` GUI" src="../_images/scaler.png" /></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">select_channels</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Show the value for each of the named channels in <strong>our</strong> scaler. This will also include the most recent count time.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;timebase&#39;,
+              {&#39;value&#39;: 6000000.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;I0&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;scint&#39;, {&#39;value&#39;: 2.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;diode&#39;, {&#39;value&#39;: 3.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;I00&#39;, {&#39;value&#39;: 3.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;vsc16_time&#39;, {&#39;value&#39;: 0.6, &#39;timestamp&#39;: 1629391538.435033})])
+</pre></div></div>
+</div>
+<p>If <em>no</em> channels are shown, such as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;vsc16_time&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">631152000.0</span><span class="p">})])</span>
+</pre></div>
+</div>
+<p>then we want to name some channels here for our simulator. We can do this directly from Python (although you would not usually want to do this at a real, operating instrument, since the channels are named as a result of hardware connections with real detectors). We’ll take channels 1-5 for <code class="docutils literal notranslate"><span class="pre">timebase</span></code>, <code class="docutils literal notranslate"><span class="pre">I0</span></code>, <code class="docutils literal notranslate"><span class="pre">scint</span></code>, <code class="docutils literal notranslate"><span class="pre">diode</span></code>, &amp; <code class="docutils literal notranslate"><span class="pre">I00</span></code>, then skip a few channels to 11 &amp; 12 and call them <code class="docutils literal notranslate"><span class="pre">roi1</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">roi2</span></code>, respectively.</p>
+<p>It’s OK to have empty (that is, unnamed) channels. It’s not OK to have white space in these names since the names will be used as Python objects within bluesky. That also means no other characters (such as math symbols and such) that cannot be used as a <a class="reference external" href="https://www.python.org/dev/peps/pep-0008/#naming-conventions">Python object name</a>. Also, do not use the same name in two different scaler channels.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan01</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;timebase&quot;</span><span class="p">)</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;I0&quot;</span><span class="p">)</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan03</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;scint&quot;</span><span class="p">)</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan04</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;diode&quot;</span><span class="p">)</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan05</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;I00&quot;</span><span class="p">)</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan11</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;roi1&quot;</span><span class="p">)</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan12</span><span class="o">.</span><span class="n">chname</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;roi2&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Then select the named channels and read again:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">select_channels</span><span class="p">()</span>
+<span class="n">vsc16</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;timebase&#39;,
+              {&#39;value&#39;: 6000000.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;I0&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;scint&#39;, {&#39;value&#39;: 2.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;diode&#39;, {&#39;value&#39;: 3.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;I00&#39;, {&#39;value&#39;: 3.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1629391538.435033}),
+             (&#39;vsc16_time&#39;, {&#39;value&#39;: 0.6, &#39;timestamp&#39;: 1629391538.435033})])
+</pre></div></div>
+</div>
+<section id="Set-the-scaler's-counting-time">
+<h3>Set the scaler’s counting time<a class="headerlink" href="#Set-the-scaler's-counting-time" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> class defines the count time as the <code class="docutils literal notranslate"><span class="pre">preset_time</span></code> attribute. Show it’s value:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5
+</pre></div></div>
+</div>
+<p>Set the counting time to 0.5 s using the <code class="docutils literal notranslate"><span class="pre">%mov</span></code> magic command (same command that moves a motor).</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">mov</span> vsc16.preset_time 0.5
+</pre></div>
+</div>
+</div>
+<p>Use the IPython <code class="docutils literal notranslate"><span class="pre">%ct</span></code> magic command to count each object with the <code class="docutils literal notranslate"><span class="pre">detectors</span></code> label keyword.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0.5
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ct</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+timebase                       6000000.0
+I0                             2.0
+scint                          3.0
+diode                          2.0
+I00                            2.0
+roi1                           0.0
+roi2                           0.0
+vsc16_time                     0.6
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">ct</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+[This data will not be saved. Use the RunEngine to collect data.]
+timebase                       6000000.0
+I0                             3.0
+scint                          2.0
+diode                          3.0
+I00                            2.0
+roi1                           0.0
+roi2                           0.0
+vsc16_time                     0.6
+</pre></div></div>
+</div>
+</section>
+<section id="labels-and-the-%wa-magic-command">
+<h3><code class="docutils literal notranslate"><span class="pre">labels</span></code> and the <code class="docutils literal notranslate"><span class="pre">%wa</span></code> magic command<a class="headerlink" href="#labels-and-the-%wa-magic-command" title="Permalink to this heading">#</a></h3>
+<p>As noted above, the <code class="docutils literal notranslate"><span class="pre">labels=LIST</span></code> keyword argument used when the motor and scaler objects were create enable certain features. For example, the <code class="docutils literal notranslate"><span class="pre">%ct</span></code> magic command will count all the <code class="docutils literal notranslate"><span class="pre">detectors</span></code>.</p>
+<p>Actually, <code class="docutils literal notranslate"><span class="pre">detectors</span></code> is the default argument for the <code class="docutils literal notranslate"><span class="pre">%ct</span></code> magic. If an arument is supplied, it is the name of a label to be matched. This is why the additional label of <code class="docutils literal notranslate"><span class="pre">scalers</span></code> was included. Thus, we could count <em>only</em> <code class="docutils literal notranslate"><span class="pre">scalers</span></code> with the command <code class="docutils literal notranslate"><span class="pre">%ct</span> <span class="pre">scalers</span></code>.</p>
+<p>Use the <code class="docutils literal notranslate"><span class="pre">labels</span></code> keyword liberally to group similar objects.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">%wa</span></code> magic shows relevant information for all labeled objects (or, for the named label if supplied). For example:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">wa</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+motor
+  Positioner                     Value       Low Limit   High Limit  Offset
+  xpos                           0.0         -32000.0    32000.0     0.0
+
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  xpos                                   xpos
+
+scalers
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  vsc16                                  vsc16
+
+detectors
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  vsc16                                  vsc16
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[21]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">wa</span> motor
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+motor
+  Positioner                     Value       Low Limit   High Limit  Offset
+  xpos                           0.0         -32000.0    32000.0     0.0
+
+  Local variable name                    Ophyd name (to be recorded as metadata)
+  xpos                                   xpos
+
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Prepare-to-scan">
+<h2>Prepare to scan<a class="headerlink" href="#Prepare-to-scan" title="Permalink to this heading">#</a></h2>
+<p>Before we can run our first bluesky scan, we have to import various software tools.</p>
+<p>First is the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine()</span></code>, which will manage the various activities for the scan (move motor, wait, trigger scaler, wait, collect channel data, publish to data subscribers, …).</p>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">RunEngine()</span></code> object. The argument here is a dictionary (empty in this training session). (For routine operations at an instrument, the dictionary is filled with information saved from the previous session.)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bluesky</span>
+<span class="n">RE</span> <span class="o">=</span> <span class="n">bluesky</span><span class="o">.</span><span class="n">RunEngine</span><span class="p">({})</span>
+</pre></div>
+</div>
+</div>
+<p>To save the acquired data, we connect with a MongoDB database using a preconfigured datafile that describes our <em>training</em> catalog. Using the IPython <code class="docutils literal notranslate"><span class="pre">!</span></code> technique to issue a Linux command from an IPython session, we <code class="docutils literal notranslate"><span class="pre">cat</span></code> (concatenate) the contents of that file to the output here:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>~/.local/share/intake/training.yml
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+# file: training.yml
+# purpose: Configuration file to connect Bluesky databroker with MongoDB
+# For Bluesky Python Training at APS
+
+# Copy to: ~/.local/share/intake/training.yml
+# Create subdirectories as needed
+
+sources:
+  training:
+    args:
+      asset_registry_db: mongodb://localhost:27017/training-bluesky
+      metadatastore_db: mongodb://localhost:27017/training-bluesky
+    driver: bluesky-mongo-normalized-catalog
+</pre></div></div>
+</div>
+<p>To connect, we need the <em>training</em> catalog. This name is provided by the line indented after the <code class="docutils literal notranslate"><span class="pre">sources:</span></code> line in the above <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file. (The name of the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> file does not matter. The <code class="docutils literal notranslate"><span class="pre">databroker.catalog</span></code> software will look through all <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files in this directory for the<code class="docutils literal notranslate"><span class="pre">training</span></code> configuration.)</p>
+<p>We’ll use the reference to our databroker catalog frequently, so we give it a short name.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">databroker</span>
+<span class="n">db</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">catalog</span><span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>How many (bluesky data collection) <em>runs</em> are recorded in this catalog? Get its <em>length</em>:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">db</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+68
+</pre></div></div>
+</div>
+<p>Configure <code class="docutils literal notranslate"><span class="pre">RE</span></code> to publish the run data to our <code class="docutils literal notranslate"><span class="pre">db</span></code> object. We must use the <code class="docutils literal notranslate"><span class="pre">.v1</span></code> software interface for legacy reasons.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">insert</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+0
+</pre></div></div>
+</div>
+<p>A progress bar can be helpful to show that long operations are actually progressing. These steps load a progress bar and configure <code class="docutils literal notranslate"><span class="pre">RE</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.utils</span> <span class="kn">import</span> <span class="n">ProgressBarManager</span>
+<span class="n">pbar_manager</span> <span class="o">=</span> <span class="n">ProgressBarManager</span><span class="p">()</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">waiting_hook</span> <span class="o">=</span> <span class="n">pbar_manager</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">BestEffortCallback</span></code> provides easy visualization of data (tables, plots, peaks statistics) as it is acquired by the <code class="docutils literal notranslate"><span class="pre">RE</span></code>. Subscribe it to the <code class="docutils literal notranslate"><span class="pre">RE</span></code> so it receives data during a <code class="docutils literal notranslate"><span class="pre">RE()</span></code> run.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[28]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.callbacks.best_effort</span> <span class="kn">import</span> <span class="n">BestEffortCallback</span>
+<span class="n">bec</span> <span class="o">=</span> <span class="n">BestEffortCallback</span><span class="p">()</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">bec</span><span class="p">)</span>
+<span class="n">peaks</span> <span class="o">=</span> <span class="n">bec</span><span class="o">.</span><span class="n">peaks</span>
+</pre></div>
+</div>
+</div>
+<p>Supplemental <em>baseline</em> data is recorded before and after each run. Additionally, EPICS Channel Access monitors can update PVs asynchronous to the primary data acquisition. These <em>monitor</em>s can be saved as additional data streams in a run. Prepare to use this feature.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">SupplementalData</span>
+<span class="n">sd</span> <span class="o">=</span> <span class="n">SupplementalData</span><span class="p">()</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">preprocessors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sd</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Add the name of this notebook as metadata to every run. This is done by adding to the RunEngine’s metadata dictionary (<code class="docutils literal notranslate"><span class="pre">RE.md</span></code>), content that will be added to the <em>start</em> document of every run. The metadata is useful documentation about a run and can be used for several purposes, such as to record a general condition (such as the name of this notebook) or to identify these runs from a database search.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[30]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="o">.</span><span class="n">md</span><span class="p">[</span><span class="s2">&quot;notebook&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;basic-motor-scaler-scan&quot;</span>
+</pre></div>
+</div>
+</div>
+<section id="Summary-of-preparations-for-scanning">
+<h3>Summary of preparations for scanning<a class="headerlink" href="#Summary-of-preparations-for-scanning" title="Permalink to this heading">#</a></h3>
+<ul class="simple">
+<li><p>EPICS connections to motor and scaler</p></li>
+<li><p>databroker</p></li>
+<li><p>RunEngine</p></li>
+<li><p>subscriptions</p>
+<ul>
+<li><p>databroker</p></li>
+<li><p>ProgressBarManager</p></li>
+<li><p>BestEffortCallback (tables and plots)</p></li>
+<li><p>supplemental data (monitors and baselines)</p></li>
+</ul>
+</li>
+<li><p>metadata</p></li>
+</ul>
+</section>
+</section>
+<section id="First-scan">
+<h2>First scan<a class="headerlink" href="#First-scan" title="Permalink to this heading">#</a></h2>
+<p>The standard plans provided in <code class="docutils literal notranslate"><span class="pre">`bluesky.plans</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans">https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans</a>&gt;`__ are sufficient for many needs, so import them and, in the same command, give the package a short name (<code class="docutils literal notranslate"><span class="pre">bp</span></code>) since it is used frequently.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">plans</span> <span class="k">as</span> <span class="n">bp</span>
+</pre></div>
+</div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">`scan()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan">https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan</a>&gt;`__ plan is flexible and will be used here to scan scaler <em>vs.</em> motor. The first argument is the <em>list</em> of detectors to be recorded. Here, we give the scaler object <code class="docutils literal notranslate"><span class="pre">vsc16</span></code>. The next argument is the positioner object, then start and end positions, finally, the number of points to be collected.</p>
+<p>Observe that we do not run the scan directly, but rather give the scan to the <code class="docutils literal notranslate"><span class="pre">RE()</span></code> object. The <code class="docutils literal notranslate"><span class="pre">RE()</span></code> object will run the scan, performing each of the actions defined by the scan, but also handle the additional tasks of managing the data acquisition process, publishing data to all subscribers (here: databroker and BestEffortCallback) and checking for updates from EPICS and checking if the run must be interrupted either by user request or some other observation. (We have not configured any
+of those other observations in this simple example.)</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">vsc16</span><span class="p">],</span> <span class="n">xpos</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 1     Time: 2021-08-19 14:02:41
+Persistent Unique Scan ID: &#39;fb41419c-0aef-4ff4-8992-7aa2b62f9931&#39;
+xpos:   9%|██▍                        | 0.091/1.0 [00:00&lt;00:01,  1.97s/degrees]
+xpos:  19%|█████▎                      | 0.19/1.0 [00:00&lt;00:01,  1.47s/degrees]
+xpos:  29%|████████                    | 0.29/1.0 [00:00&lt;00:00,  1.31s/degrees]
+xpos:  39%|██████████▉                 | 0.39/1.0 [00:00&lt;00:00,  1.23s/degrees]
+xpos:  49%|█████████████▎             | 0.491/1.0 [00:00&lt;00:00,  1.18s/degrees]
+xpos:  59%|███████████████▉           | 0.591/1.0 [00:00&lt;00:00,  1.15s/degrees]
+xpos:  69%|██████████████████▋        | 0.691/1.0 [00:00&lt;00:00,  1.13s/degrees]
+xpos:  79%|█████████████████████▍     | 0.792/1.0 [00:00&lt;00:00,  1.11s/degrees]
+xpos:  89%|████████████████████████   | 0.892/1.0 [00:00&lt;00:00,  1.10s/degrees]
+xpos:  97%|██████████████████████████▏| 0.968/1.0 [00:01&lt;00:00,  1.12s/degrees]
+xpos: 100%|██████████████████████████▉| 0.999/1.0 [00:01&lt;00:00,  1.18s/degrees]
+xpos: 100%|█████████████████████████████| 1.0/1.0 [00:01&lt;00:00,  1.28s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time |       xpos |   timebase |         I0 |      scint |      diode |        I00 |       roi1 |       roi2 |
++-----------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 14:02:43.7 |   -1.00000 |    6000000 |          3 |          2 |          1 |          3 |          0 |          0 |
+xpos:  27%|██████▎                | 0.091/0.33333 [00:00&lt;00:00,  1.79s/degrees]
+xpos:  57%|█████████████▋          | 0.19/0.33333 [00:00&lt;00:00,  1.38s/degrees]
+xpos:  84%|████████████████████▏   | 0.28/0.33333 [00:00&lt;00:00,  1.29s/degrees]
+xpos:  98%|██████████████████████▌| 0.327/0.33333 [00:00&lt;00:00,  1.42s/degrees]
+xpos: 100%|██████████████████████▉| 0.333/0.33333 [00:00&lt;00:00,  1.69s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+|         2 | 14:02:45.8 |   -0.66700 |    6000000 |          3 |          3 |          3 |          2 |          0 |          0 |
+xpos:  27%|██████▎                | 0.091/0.33367 [00:00&lt;00:00,  2.07s/degrees]
+xpos:  57%|█████████████▏         | 0.191/0.33367 [00:00&lt;00:00,  1.52s/degrees]
+xpos:  84%|███████████████████▎   | 0.281/0.33367 [00:00&lt;00:00,  1.39s/degrees]
+xpos:  98%|██████████████████████▌| 0.327/0.33367 [00:00&lt;00:00,  1.50s/degrees]
+xpos: 100%|█████████████████████| 0.33367/0.33367 [00:00&lt;00:00,  1.77s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+|         3 | 14:02:48.0 |   -0.33300 |    6000000 |          2 |          2 |          2 |          3 |          0 |          0 |
+xpos:  27%|██████▊                  | 0.091/0.333 [00:00&lt;00:00,  1.42s/degrees]
+xpos:  57%|██████████████▎          | 0.191/0.333 [00:00&lt;00:00,  1.20s/degrees]
+xpos:  84%|█████████████████████▊    | 0.28/0.333 [00:00&lt;00:00,  1.18s/degrees]
+xpos:  98%|████████████████████████▌| 0.327/0.333 [00:00&lt;00:00,  1.32s/degrees]
+xpos: 100%|█████████████████████████| 0.333/0.333 [00:00&lt;00:00,  1.60s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+|         4 | 14:02:50.1 |    0.00000 |    6000000 |          1 |          3 |          1 |          2 |          0 |          0 |
+xpos:  27%|██████▍                 | 0.09/0.33333 [00:00&lt;00:00,  1.35s/degrees]
+xpos:  57%|█████████████▋          | 0.19/0.33333 [00:00&lt;00:00,  1.16s/degrees]
+xpos:  84%|████████████████████▏   | 0.28/0.33333 [00:00&lt;00:00,  1.15s/degrees]
+xpos:  98%|██████████████████████▌| 0.327/0.33333 [00:00&lt;00:00,  1.29s/degrees]
+xpos: 100%|██████████████████████▉| 0.333/0.33333 [00:00&lt;00:00,  1.57s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+|         5 | 14:02:52.1 |    0.33300 |    6000000 |          3 |          2 |          3 |          3 |          0 |          0 |
+xpos:  27%|██████▎                | 0.091/0.33367 [00:00&lt;00:00,  1.26s/degrees]
+xpos:  57%|█████████████▏         | 0.191/0.33367 [00:00&lt;00:00,  1.13s/degrees]
+xpos:  84%|███████████████████▎   | 0.281/0.33367 [00:00&lt;00:00,  1.13s/degrees]
+xpos:  98%|██████████████████████▌| 0.327/0.33367 [00:00&lt;00:00,  1.27s/degrees]
+xpos: 100%|█████████████████████| 0.33367/0.33367 [00:00&lt;00:00,  1.55s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+|         6 | 14:02:54.2 |    0.66700 |    6000000 |          3 |          3 |          3 |          3 |          0 |          0 |
+xpos:  27%|███████                   | 0.09/0.333 [00:00&lt;00:00,  1.90s/degrees]
+xpos:  57%|██████████████▊           | 0.19/0.333 [00:00&lt;00:00,  1.43s/degrees]
+xpos:  84%|█████████████████████▊    | 0.28/0.333 [00:00&lt;00:00,  1.33s/degrees]
+xpos:  98%|████████████████████████▌| 0.327/0.333 [00:00&lt;00:00,  1.45s/degrees]
+xpos: 100%|█████████████████████████| 0.333/0.333 [00:00&lt;00:00,  1.72s/degrees]
+xpos [In progress. No progress bar available.]
+
+vsc16 [In progress. No progress bar available.]
+vsc16 [In progress. No progress bar available.]
+
+|         7 | 14:02:56.3 |    1.00000 |    6000000 |          3 |          4 |          3 |          2 |          0 |          0 |
++-----------+------------+------------+------------+------------+------------+------------+------------+------------+------------+
+generator scan [&#39;fb41419c&#39;] (scan num: 1)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+/home/apsu/Apps/miniconda3/envs/bluesky_2021_1/lib/python3.8/site-packages/bluesky/callbacks/fitting.py:165: RuntimeWarning: invalid value encountered in double_scalars
+  np.sum(input * grids[dir].astype(float), labels, index) / normalizer
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[32]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;fb41419c-0aef-4ff4-8992-7aa2b62f9931&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__basic_motor_scaler_scan_62_4.png" src="../_images/howto__basic_motor_scaler_scan_62_4.png" />
+</div>
+</div>
+<p>The scan ran, data was collected and printed at each step of the scan. Finally, plots were made of the scaler channel <em>vs</em> motor position for each active channel.</p>
+</section>
+<section id="Fix-a-few-problems">
+<h2>Fix a few <em>problems</em><a class="headerlink" href="#Fix-a-few-problems" title="Permalink to this heading">#</a></h2>
+<p>There were some problems. First is that an error was reported after the scan (<code class="docutils literal notranslate"><span class="pre">...</span> <span class="pre">callbacks/fitting.py:165:</span> <span class="pre">RuntimeWarning:</span> <span class="pre">invalid</span> <span class="pre">value</span> <span class="pre">encountered</span> <span class="pre">in</span> <span class="pre">double_scalars</span></code>). This error is because the scalers showed no peak during the scan. The scaler is a simulator with no real data. We’ll ignore that error here.</p>
+<p>Another problem is that all <em>named</em> scaler channels are shown. Let’s reduce that list to <code class="docutils literal notranslate"><span class="pre">I0</span></code> and <code class="docutils literal notranslate"><span class="pre">scint</span></code> just to show how it is done. (Set back to default: <code class="docutils literal notranslate"><span class="pre">vsc16.select_channels()</span></code>)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[33]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">select_channels</span><span class="p">([</span><span class="s1">&#39;I0&#39;</span><span class="p">,</span> <span class="s1">&#39;scint&#39;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<p>Another problem is that the scaler counts for 0.1s longer than we have configured. This is a problem with the underlying EPICS support for a simulated (a.k.a. <em>soft channel</em>) scaler. We’ll ignore that error here.</p>
+<p>Next problem is that the progress bar is a nuisance in this notebook so we’ll remove it.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="o">.</span><span class="n">waiting_hook</span> <span class="o">=</span> <span class="kc">None</span>
+</pre></div>
+</div>
+</div>
+<p>Then, repeat the same scan.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">vsc16</span><span class="p">],</span> <span class="n">xpos</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 2     Time: 2021-08-19 14:02:58
+Persistent Unique Scan ID: &#39;b5f76f7c-78f2-45a5-8264-e0af2ba540bf&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+
+|   seq_num |       time |       xpos |         I0 |      scint |
++-----------+------------+------------+------------+------------+
+|         1 | 14:03:01.6 |   -1.00000 |          2 |          2 |
+|         2 | 14:03:03.0 |   -0.66700 |          3 |          3 |
+|         3 | 14:03:04.4 |   -0.33300 |          2 |          2 |
+|         4 | 14:03:05.8 |    0.00000 |          1 |          1 |
+|         5 | 14:03:07.2 |    0.33300 |          2 |          2 |
+|         6 | 14:03:08.5 |    0.66700 |          1 |          1 |
+|         7 | 14:03:09.9 |    1.00000 |          4 |          1 |
++-----------+------------+------------+------------+------------+
+generator scan [&#39;b5f76f7c&#39;] (scan num: 2)
+
+
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[35]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;b5f76f7c-78f2-45a5-8264-e0af2ba540bf&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__basic_motor_scaler_scan_68_2.png" src="../_images/howto__basic_motor_scaler_scan_68_2.png" />
+</div>
+</div>
+</section>
+<section id="Scan-with-a-different-counting-time-:-staging">
+<h2>Scan with a <em>different</em> counting time : <em>staging</em><a class="headerlink" href="#Scan-with-a-different-counting-time-:-staging" title="Permalink to this heading">#</a></h2>
+<p>Suppose that we wish to use a different counting time, we could change the <code class="docutils literal notranslate"><span class="pre">vsc16.preset_time</span></code> value before running the scan. Another way is to use the <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> concept of <a class="reference external" href="https://blueskyproject.io/ophyd/device-overview.html?highlight=staging#stage-and-unstage">stage &amp; unstage</a>.</p>
+<p><em>Staging</em> is the action of preparing an ophyd device for operation, then resetting it afterwards to its previous values. For our scaler, we could <em>stage</em> a different counting time that would be used during the run, then removed after the run is complete. The <code class="docutils literal notranslate"><span class="pre">stage()</span></code> and <code class="docutils literal notranslate"><span class="pre">unstage()</span></code> methods are controlled by an <code class="docutils literal notranslate"><span class="pre">OrderedDictionary</span></code> where the keys are the attributes of the Python object and the values are used during the run. The <code class="docutils literal notranslate"><span class="pre">RE()</span></code> takes care of calling <code class="docutils literal notranslate"><span class="pre">stage()</span></code> and <code class="docutils literal notranslate"><span class="pre">unstage()</span></code>
+during the scan.</p>
+<p>Here we show staging of a 2.0s <code class="docutils literal notranslate"><span class="pre">preset_time</span></code> for the run. Also shown are the <code class="docutils literal notranslate"><span class="pre">preset_time</span></code> value before and after the run.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[36]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">vsc16</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+vsc16.preset_time.get() = 0.5
+</pre></div></div>
+</div>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[37]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vsc16</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;preset_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mf">2.0</span>
+</pre></div>
+</div>
+</div>
+<p>Repeat the same scan.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">vsc16</span><span class="p">],</span> <span class="n">xpos</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 3     Time: 2021-08-19 14:03:10
+Persistent Unique Scan ID: &#39;04dd2069-cca5-4b55-9ff2-7d4d474cb2e6&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+
+|   seq_num |       time |       xpos |         I0 |      scint |
++-----------+------------+------------+------------+------------+
+|         1 | 14:03:15.2 |   -1.00000 |         10 |         12 |
+|         2 | 14:03:18.2 |   -0.66700 |          9 |          8 |
+|         3 | 14:03:21.1 |   -0.33300 |         10 |          9 |
+|         4 | 14:03:24.0 |    0.00000 |         11 |         12 |
+|         5 | 14:03:26.9 |    0.33300 |         11 |          9 |
+|         6 | 14:03:29.8 |    0.66700 |          8 |         11 |
+|         7 | 14:03:32.7 |    1.00000 |         11 |         12 |
++-----------+------------+------------+------------+------------+
+generator scan [&#39;04dd2069&#39;] (scan num: 3)
+
+
+
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;04dd2069-cca5-4b55-9ff2-7d4d474cb2e6&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__basic_motor_scaler_scan_73_2.png" src="../_images/howto__basic_motor_scaler_scan_73_2.png" />
+</div>
+</div>
+</section>
+<section id="Custom-plan-with-configurable-count-time">
+<h2>Custom plan with configurable count time<a class="headerlink" href="#Custom-plan-with-configurable-count-time" title="Permalink to this heading">#</a></h2>
+<p>It is common to want to set the count time at the time the scan is started. For this feature, a custom scan plan is needed, where we will repeat the steps just shown. This plan will use similar arguments as the <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> used above, but add an optional keyword argument <code class="docutils literal notranslate"><span class="pre">ct</span></code> for the count time with a default of 1.0 second. For housekeeping, we’ll remove the staging configuration from the scaler after the scan.</p>
+<p>A bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">plan</a> is a <a class="reference external" href="https://duckduckgo.com/?t=ffsb&amp;q=Python+generator+function&amp;ia=web">Python generator function</a>. The <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> call is the part that makes this a generator function. Briefly, a bluesky plan defers execution of the actual scan until the <code class="docutils literal notranslate"><span class="pre">RE()</span></code> calls for it. This indirection allows the <code class="docutils literal notranslate"><span class="pre">RE()</span></code> to manage the plan’s execution when the beam dumps or other interruptions occur. (A function becomes a generator by the
+presence of one or more <code class="docutils literal notranslate"><span class="pre">yield</span></code> commands.)</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[39]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tscan</span><span class="p">(</span><span class="n">scaler</span><span class="p">,</span> <span class="n">pos</span><span class="p">,</span> <span class="n">pStart</span><span class="p">,</span> <span class="n">pEnd</span><span class="p">,</span> <span class="n">nPts</span><span class="p">,</span> <span class="n">ct</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">scaler</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;preset_time&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ct</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scaler</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">pos</span><span class="p">,</span> <span class="n">pStart</span><span class="p">,</span> <span class="n">pEnd</span><span class="p">,</span> <span class="n">nPts</span><span class="p">)</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scaler</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">del</span> <span class="n">scaler</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;preset_time&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<p>Run the custom plan with 2 seconds count time per point (so we can see this in the <code class="docutils literal notranslate"><span class="pre">time</span></code> axis).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">tscan</span><span class="p">(</span><span class="n">vsc16</span><span class="p">,</span> <span class="n">xpos</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+scaler.preset_time.get() = 0.5
+
+
+Transient Scan ID: 4     Time: 2021-08-19 14:03:33
+Persistent Unique Scan ID: &#39;6a8d542f-46b4-4fa4-a322-a9a81f2d7de9&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+
+|   seq_num |       time |       xpos |         I0 |      scint |
++-----------+------------+------------+------------+------------+
+|         1 | 14:03:37.9 |   -1.00000 |          9 |         10 |
+|         2 | 14:03:40.9 |   -0.66700 |         10 |         10 |
+|         3 | 14:03:43.8 |   -0.33300 |          9 |          8 |
+|         4 | 14:03:46.7 |    0.00000 |         12 |         12 |
+|         5 | 14:03:49.6 |    0.33300 |          9 |          8 |
+|         6 | 14:03:52.5 |    0.66700 |         12 |         11 |
+|         7 | 14:03:55.4 |    1.00000 |         11 |          9 |
++-----------+------------+------------+------------+------------+
+generator scan [&#39;6a8d542f&#39;] (scan num: 4)
+
+
+
+scaler.preset_time.get() = 0.5
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[40]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;6a8d542f-46b4-4fa4-a322-a9a81f2d7de9&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__basic_motor_scaler_scan_77_2.png" src="../_images/howto__basic_motor_scaler_scan_77_2.png" />
+</div>
+</div>
+</section>
+<section id="Challenges">
+<h2>Challenges<a class="headerlink" href="#Challenges" title="Permalink to this heading">#</a></h2>
+<p>Try these additional modifications or activities.</p>
+<ol class="arabic">
+<li><p>Use <code class="docutils literal notranslate"><span class="pre">logger</span></code> to report at various places.</p>
+<p><em>Hint</em>: <code class="docutils literal notranslate"><span class="pre">logger.info(&quot;text:</span> <span class="pre">%s</span>&#160; <span class="pre">value:</span> <span class="pre">%g&quot;,</span> <span class="pre">s1,</span> <span class="pre">v2,</span> <span class="pre">...)</span></code></p>
+<p>Consider examples as used in <code class="docutils literal notranslate"><span class="pre">`peak_finder_example.py</span></code> &lt;instrument/plans/peak_finder_example.py&gt;`__. See the <a class="reference external" href="https://docs.python.org/3/howto/logging.html">Python logging tutorial</a> for more information.</p>
+</li>
+<li><p>Write a custom plan that accepts user-provided metadata.</p>
+<p><em>Hint</em>: <code class="docutils literal notranslate"><span class="pre">`bp.scan()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan">https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan</a>&gt;`__ has the <code class="docutils literal notranslate"><span class="pre">md</span></code> keyword argument (<em>kwarg</em>) that accepts a dictionary of <em>key: value</em> pairs as the metadata when the plan is run. Your custom plan should accept the same kwarg and pass this to <code class="docutils literal notranslate"><span class="pre">bp.scan(md=the_dictionary)</span></code>, possibly after adding some of its own keys to the metadata.</p>
+</li>
+</ol>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_basic_aps_info.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">APS Accelerator Information for Beam Lines</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_bluesky_queueserver.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">First steps with bluesky-queueserver</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Connect-the-motor">Connect the motor</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Connect-the-scaler">Connect the scaler</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Set-the-scaler's-counting-time">Set the scaler’s counting time</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#labels-and-the-%wa-magic-command"><code class="docutils literal notranslate"><span class="pre">labels</span></code> and the <code class="docutils literal notranslate"><span class="pre">%wa</span></code> magic command</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Prepare-to-scan">Prepare to scan</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Summary-of-preparations-for-scanning">Summary of preparations for scanning</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#First-scan">First scan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Fix-a-few-problems">Fix a few <em>problems</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Scan-with-a-different-counting-time-:-staging">Scan with a <em>different</em> counting time : <em>staging</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Custom-plan-with-configurable-count-time">Custom plan with configurable count time</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Challenges">Challenges</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_basic_motor_scaler_scan.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

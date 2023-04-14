@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>XAFS scan &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example/_xafs_scan';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorials" href="../tutor/index.html" />
+    <link rel="prev" title="Watch a temperature : scan temperature v time" href="_watch_temperature.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_specwriter.html">Demo the spec file writer callback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">XAFS scan</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="XAFS-scan">
+<h1>XAFS scan<a class="headerlink" href="#XAFS-scan" title="Permalink to this heading">#</a></h1>
+<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
+<p><strong>Objective</strong></p>
+<p>Example multi-segment XAFS scan. A full scan might be divided into:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>region</p></th>
+<th class="head"><p>steps</p></th>
+<th class="head"><p>units</p></th>
+<th class="head"><p>count time</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pre-edge</p></td>
+<td><p>constant energy</p></td>
+<td><p>keV</p></td>
+<td><p>constant</p></td>
+</tr>
+<tr class="row-odd"><td><p>near-edge</p></td>
+<td><p>constant energy</p></td>
+<td><p>eV</p></td>
+<td><p>constant</p></td>
+</tr>
+<tr class="row-even"><td><p>low <em>k</em></p></td>
+<td><p>constant k</p></td>
+<td><p>1/angstrom</p></td>
+<td><p>constant</p></td>
+</tr>
+<tr class="row-odd"><td><p>higher <em>k</em></p></td>
+<td><p>constant k</p></td>
+<td><p>1/angstrom</p></td>
+<td><p>scales with <em>k</em></p></td>
+</tr>
+</tbody>
+</table>
+<p>For the higher <em>k</em> region, the count time is computed as:</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>preset_time = requested_time * (1 + factor*k**exponent)
+</pre></div>
+</div>
+<p>where <code class="docutils literal notranslate"><span class="pre">exponent=0.5</span></code>, <code class="docutils literal notranslate"><span class="pre">factor=2.0</span></code>, and <code class="docutils literal notranslate"><span class="pre">requested_time</span></code> is the time specified by the caller.</p>
+<p>note: We are connected to <em>simulated</em> hardware. The simulated scalers generate random pulses. All detector data is random numbers.</p>
+<section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+
+<span class="n">RE</span><span class="o">.</span><span class="n">waiting_hook</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># disable the progress bar, looks awful in notebooks</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/prjemian/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-18:16:30 - ############################################################ startup
+I Thu-18:16:30 - logging started
+I Thu-18:16:30 - logging level = 10
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/session_logs.py
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/collection.py
+I Thu-18:16:30 - CONDA_PREFIX = /home/prjemian/.conda/envs/bluesky_2023_2
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception reporting mode: Minimal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-18:16:30 - xmode exception level: &#39;Minimal&#39;
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/mpl/notebook.py
+I Thu-18:16:30 - #### Bluesky Framework ####
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/framework/check_python.py
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/framework/check_bluesky.py
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/framework/initialize.py
+I Thu-18:16:30 - RunEngine metadata saved in directory: /home/prjemian/Bluesky_RunEngine_md
+I Thu-18:16:30 - using databroker catalog &#39;training&#39;
+I Thu-18:16:30 - using ophyd control layer: pyepics
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/framework/metadata.py
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/epics_signal_config.py
+I Thu-18:16:30 - Using RunEngine metadata for scan_id
+I Thu-18:16:30 - #### Devices ####
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/devices/area_detector.py
+I Thu-18:16:30 - /home/prjemian/bluesky/instrument/devices/calculation_records.py
+I Thu-18:16:33 - /home/prjemian/bluesky/instrument/devices/fourc_diffractometer.py
+I Thu-18:16:33 - /home/prjemian/bluesky/instrument/devices/ioc_stats.py
+I Thu-18:16:33 - /home/prjemian/bluesky/instrument/devices/kohzu_monochromator.py
+I Thu-18:16:33 - /home/prjemian/bluesky/instrument/devices/motors.py
+I Thu-18:16:33 - /home/prjemian/bluesky/instrument/devices/noisy_detector.py
+I Thu-18:16:34 - /home/prjemian/bluesky/instrument/devices/scaler.py
+I Thu-18:16:34 - /home/prjemian/bluesky/instrument/devices/shutter_simulator.py
+I Thu-18:16:34 - /home/prjemian/bluesky/instrument/devices/simulated_fourc.py
+I Thu-18:16:34 - /home/prjemian/bluesky/instrument/devices/simulated_kappa.py
+I Thu-18:16:34 - /home/prjemian/bluesky/instrument/devices/slits.py
+I Thu-18:16:34 - /home/prjemian/bluesky/instrument/devices/sixc_diffractometer.py
+I Thu-18:16:35 - /home/prjemian/bluesky/instrument/devices/temperature_signal.py
+I Thu-18:16:35 - #### Callbacks ####
+I Thu-18:16:35 - /home/prjemian/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Thu-18:16:35 - #### Plans ####
+I Thu-18:16:35 - /home/prjemian/bluesky/instrument/plans/lup_plan.py
+I Thu-18:16:35 - /home/prjemian/bluesky/instrument/plans/peak_finder_example.py
+I Thu-18:16:35 - /home/prjemian/bluesky/instrument/utils/image_analysis.py
+I Thu-18:16:35 - #### Utilities ####
+I Thu-18:16:35 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/20230413-181635.dat
+I Thu-18:16:35 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Thu-18:16:35 -    file will be created when bluesky ends its next scan
+I Thu-18:16:35 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Thu-18:16:35 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+<p>We’ll use these later. Import now.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignalRO</span>
+
+<span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Energy-&amp;-k">
+<h2>Energy &amp; <em>k</em><a class="headerlink" href="#Energy-&-k" title="Permalink to this heading">#</a></h2>
+<p>The Kohzu monochromator support expects energy in <em>keV</em> and wavelength in <em>1/angstrom</em>. XAFS is similar, <em>k</em> in <em>1/angstrom</em>, but also uses <em>eV</em> sometimes for energy. We need to be flexible.</p>
+<p>Fundamental physical constants are provided by the <a class="reference external" href="https://www.scipy.org/">scipy</a> package. The Python <a class="reference external" href="https://pint.readthedocs.io/">pint</a> package is used to provide unit conversions that will help to convert between energy and <em>k</em> coordinates. With these two packages, our software provides flexibility for the units a caller must use. And the code we use documents itself about our choice of units.</p>
+<p>Here we define routines to convert between energy and <em>k</em>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pint</span>
+<span class="kn">import</span> <span class="nn">scipy.constants</span>
+
+<span class="n">ureg</span> <span class="o">=</span> <span class="n">pint</span><span class="o">.</span><span class="n">UnitRegistry</span><span class="p">()</span>
+<span class="n">Qty</span> <span class="o">=</span> <span class="n">ureg</span><span class="o">.</span><span class="n">Quantity</span>  <span class="c1"># a shortcut</span>
+
+<span class="n">hbar</span> <span class="o">=</span> <span class="n">Qty</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">hbar</span><span class="p">,</span> <span class="s2">&quot;J Hz^-1&quot;</span><span class="p">)</span>
+<span class="n">electron_mass</span> <span class="o">=</span> <span class="n">Qty</span><span class="p">(</span><span class="n">scipy</span><span class="o">.</span><span class="n">constants</span><span class="o">.</span><span class="n">m_e</span><span class="p">,</span> <span class="s2">&quot;kg&quot;</span><span class="p">)</span>
+<span class="n">TWO_M_OVER_HBAR_SQR</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">electron_mass</span> <span class="o">/</span> <span class="p">(</span><span class="n">hbar</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">energy_to_k</span><span class="p">(</span><span class="n">E</span><span class="p">,</span> <span class="n">E0</span><span class="p">):</span>
+    <span class="n">energy_difference</span> <span class="o">=</span> <span class="n">Qty</span><span class="p">(</span><span class="n">E</span> <span class="o">-</span> <span class="n">E0</span><span class="p">,</span> <span class="s2">&quot;keV&quot;</span><span class="p">)</span>
+    <span class="n">kSqr</span> <span class="o">=</span> <span class="p">(</span><span class="n">TWO_M_OVER_HBAR_SQR</span> <span class="o">*</span> <span class="n">energy_difference</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;1/angstrom^2&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">kSqr</span><span class="o">.</span><span class="n">magnitude</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">k_to_energy</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">E0</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    k = sqrt( (2m(E-E0)) / hbar^2) = sqrt( const * (E-E0))</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">k_with_units</span> <span class="o">=</span> <span class="n">Qty</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="s2">&quot;1/angstrom&quot;</span><span class="p">)</span>
+    <span class="n">edge_keV</span> <span class="o">=</span> <span class="n">Qty</span><span class="p">(</span><span class="n">E0</span><span class="p">,</span> <span class="s2">&quot;keV&quot;</span><span class="p">)</span>
+    <span class="n">energy_difference</span> <span class="o">=</span> <span class="p">(</span><span class="n">k_with_units</span><span class="o">**</span><span class="mi">2</span> <span class="o">/</span> <span class="n">TWO_M_OVER_HBAR_SQR</span><span class="p">)</span><span class="o">.</span><span class="n">to</span><span class="p">(</span><span class="s2">&quot;keV&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">energy_difference</span> <span class="o">+</span> <span class="n">edge_keV</span><span class="p">)</span><span class="o">.</span><span class="n">magnitude</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Multiple-segments">
+<h2>Multiple segments<a class="headerlink" href="#Multiple-segments" title="Permalink to this heading">#</a></h2>
+<p>XAFS scans measure signals from two or more detectors as the incident X-ray energy is varied. One method is to step the energy where the step size is different depending on the region of the scan. Steps could be in constant units of energy or <em>k</em> (see above).</p>
+<p>We define here a default list of four regions (known here as <code class="docutils literal notranslate"><span class="pre">segments</span></code>), each showing a different feature of units or count time weighting. This default list is used in the <code class="docutils literal notranslate"><span class="pre">xafs()</span></code> scan below if the caller chooses. The <code class="docutils literal notranslate"><span class="pre">get_energies_and_times()</span></code> function parses the supplied list of segments and returns a list of <code class="docutils literal notranslate"><span class="pre">(energy_keV,</span> <span class="pre">count_time)</span></code> pairs for use in a
+<code class="docutils literal notranslate"><span class="pre">`bluesky</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/">https://blueskyproject.io/bluesky/</a>&gt;`__.<code class="docutils literal notranslate"><span class="pre">`plans</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">https://blueskyproject.io/bluesky/plans.html</a>&gt;`__.<code class="docutils literal notranslate"><span class="pre">`list_scan()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan">https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan</a>&gt;`__.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">XAFS_SCAN_SEGMENTS_VARIETY</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># X could be keV, eV, k, or kwt (k-weighted count time)</span>
+    <span class="c1"># axis, start, end, step, count_time</span>
+    <span class="p">(</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">.015</span><span class="p">,</span> <span class="mf">.02</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;kwt&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="n">DEFAULT_XAFS_SCAN_SEGMENTS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="c1"># here, only keV and kwt</span>
+    <span class="c1"># axis, start, end, step, count_time</span>
+    <span class="p">(</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.02</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.015</span><span class="p">,</span> <span class="mf">0.005</span><span class="p">,</span> <span class="mf">0.0015</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;kwt&quot;</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">parse_segments</span><span class="p">(</span><span class="n">edge_keV</span><span class="p">,</span> <span class="n">segments</span><span class="p">):</span>
+    <span class="n">accepted</span> <span class="o">=</span> <span class="s2">&quot;keV eV k kwt&quot;</span>
+
+    <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">seg</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">segments</span><span class="p">):</span>
+        <span class="c1"># error checking</span>
+        <span class="k">if</span> <span class="n">seg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">accepted</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">.</span><span class="n">split</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;Cannot scan in </span><span class="si">{</span><span class="n">seg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2"> now (segment </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">).&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;  Only one of these: </span><span class="si">{</span><span class="n">accepted</span><span class="o">.</span><span class="n">split</span><span class="p">()</span><span class="si">}</span><span class="s2">.&quot;</span>
+            <span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seg</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">5</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+                <span class="s2">&quot;Each segment must have 5 arguments:&quot;</span>
+                <span class="s2">&quot; X, start, end, step, time&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;  Received: </span><span class="si">{</span><span class="n">seg</span><span class="si">}</span><span class="s2"> in segment </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+        <span class="n">axis_type</span> <span class="o">=</span> <span class="n">seg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">preset_time</span> <span class="o">=</span> <span class="n">seg</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="n">position_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="o">*</span><span class="n">seg</span><span class="p">[</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">axis_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;kev&quot;</span><span class="p">:</span>
+            <span class="c1"># count time is constant across this segment</span>
+            <span class="n">time_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">position_array</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">seg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">axis_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;ev&quot;</span><span class="p">:</span>
+            <span class="n">position_array</span> <span class="o">/=</span> <span class="mf">1000.0</span>  <span class="c1"># convert to keV</span>
+            <span class="c1"># count time is constant across this segment</span>
+            <span class="n">time_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">position_array</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">seg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">axis_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;k&quot;</span><span class="p">:</span>
+            <span class="n">position_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                <span class="n">k_to_energy</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">edge_keV</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">position_array</span>
+            <span class="p">])</span> <span class="o">-</span> <span class="n">edge_keV</span>
+            <span class="c1"># count time is constant across this segment</span>
+            <span class="n">time_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">position_array</span><span class="p">),</span> <span class="n">fill_value</span><span class="o">=</span><span class="n">seg</span><span class="p">[</span><span class="mi">4</span><span class="p">])</span>
+        <span class="k">elif</span> <span class="n">axis_type</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;kwt&quot;</span><span class="p">:</span>
+            <span class="c1"># k-axis, k-weighted time</span>
+            <span class="n">k_array</span> <span class="o">=</span> <span class="n">position_array</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+            <span class="n">position_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                <span class="n">k_to_energy</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">edge_keV</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">position_array</span>
+            <span class="p">])</span> <span class="o">-</span> <span class="n">edge_keV</span>
+            <span class="c1"># count time varies with k across this segment</span>
+            <span class="c1"># time = preset*(1 + factor * k**exponent)</span>
+            <span class="n">factor</span> <span class="o">=</span> <span class="mi">2</span>
+            <span class="n">exponent</span> <span class="o">=</span> <span class="mf">.5</span>
+            <span class="n">time_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+                <span class="n">preset_time</span> <span class="o">*</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">factor</span> <span class="o">*</span> <span class="n">k</span><span class="o">**</span><span class="n">exponent</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">k_array</span>
+            <span class="p">])</span>
+
+        <span class="n">results</span> <span class="o">+=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">edge_keV</span> <span class="o">+</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">v</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">position_array</span><span class="p">,</span> <span class="n">time_array</span><span class="p">)</span>
+        <span class="p">]</span>
+
+    <span class="n">e_arr</span><span class="p">,</span> <span class="n">t_arr</span> <span class="o">=</span> <span class="p">[],</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">e</span><span class="p">,</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">results</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">e</span> <span class="ow">in</span> <span class="n">e_arr</span><span class="p">:</span>
+            <span class="k">continue</span>  <span class="c1"># no duplicates</span>
+        <span class="n">e_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+        <span class="n">t_arr</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">e_arr</span><span class="p">,</span> <span class="n">t_arr</span>
+<br/></pre></div>
+</div>
+</div>
+<p>Make a plot of count time <em>v</em> energy using the <code class="docutils literal notranslate"><span class="pre">DEFAULT_XAFS_SCAN_SEGMENTS</span></code>. See how the count time changes throughout the post-edge region due to use of <code class="docutils literal notranslate"><span class="pre">kwt</span></code> (<em>k</em>-weighted count time) axis.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e_arr</span><span class="p">,</span> <span class="n">t_arr</span> <span class="o">=</span> <span class="n">parse_segments</span><span class="p">(</span><span class="mf">7.1125</span><span class="p">,</span> <span class="n">DEFAULT_XAFS_SCAN_SEGMENTS</span><span class="p">)</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">energy</span><span class="o">=</span><span class="n">e_arr</span><span class="p">,</span> <span class="n">count_time</span><span class="o">=</span><span class="n">t_arr</span><span class="p">))</span>
+<span class="n">df</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="s2">&quot;energy&quot;</span><span class="p">,</span> <span class="s2">&quot;count_time&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;Axes: xlabel=&#39;energy&#39;, ylabel=&#39;count_time&#39;&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__xafs_scan_10_1.png" src="../_images/example__xafs_scan_10_1.png" />
+</div>
+</div>
+</section>
+<section id="real-time-computation-of-absorption-coefficient">
+<h2>real-time computation of absorption coefficient<a class="headerlink" href="#real-time-computation-of-absorption-coefficient" title="Permalink to this heading">#</a></h2>
+<p>The absorption coefficient is computed from the ratio of two scaler channels. We could compute that either in Python or EPICS. Here, we choose an EPICS <em>userCalc</em> because its setup is more familiar to people experienced with EPICS. The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package already provides support for 10 userCalcs. We’ll pick userCalc2 (since userCalc1 is already used by the simulated temperature controller).</p>
+<p>The computation will update when it gets new values for either scaler channel. In our <code class="docutils literal notranslate"><span class="pre">xafs()</span></code> scan below, we’ll connect (separately, so we don’t get all the other data provided by the userCalc support) with the calculated value (<em>log(I00/I0)</em>) as an additional <em>detector</em>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_absorption_calc</span><span class="p">(</span><span class="n">absorption</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Use a userCalc to compute ln(I00/I0) for real-time plots in collection.</span>
+
+<span class="sd">    PARAMETERS</span>
+
+<span class="sd">    absorption</span>
+<span class="sd">        obj: instance of apstools.synApps.SwaitRecord()</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">absorption</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">absorption</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>  <span class="c1"># I0</span>
+        <span class="n">absorption</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">B</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">s</span><span class="o">.</span><span class="n">chan06</span><span class="o">.</span><span class="n">s</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>  <span class="c1"># I00</span>
+        <span class="n">absorption</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;ln(B/A)&quot;</span><span class="p">,</span>  <span class="c1"># ln(I00/I0)</span>
+        <span class="n">absorption</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="xafs()-plan">
+<h2><code class="docutils literal notranslate"><span class="pre">xafs()</span></code> plan<a class="headerlink" href="#xafs()-plan" title="Permalink to this heading">#</a></h2>
+<p>With all the pieces defined, it is time to write a plan to measure the XAFS. The caller must provide the absorption edge energy (in keV). A list of segments is optional (will default to <code class="docutils literal notranslate"><span class="pre">DEFAULT_XAFS_SCAN_SEGMENTS</span></code> as defined above) so only the absorption edge energy is required. Once the inputs are checked for correctness, the absorption calculation is setup in an EPICS userCalc (<code class="docutils literal notranslate"><span class="pre">`SwaitRecord</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/synApps/_swait.html#synapps-swait-record">https://apstools.readthedocs.io/en/latest/source/synApps/_swait.html#synapps-swait-record</a>&gt;`__).
+Finally, the 1-D step scan is run by calling <code class="docutils literal notranslate"><span class="pre">`bp.list_scan()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan">https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan</a>&gt;`__ with lists of energy and count time values for each step.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">xafs</span><span class="p">(</span><span class="n">edge_keV</span><span class="p">,</span> <span class="n">segments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">detectors</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Scan an edge: (keV</span>
+
+<span class="sd">    EXAMPLE::</span>
+
+<span class="sd">        RE(xafs(7.1125))  # scan iron K edge</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">detectors</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">detectors</span> <span class="o">=</span> <span class="p">[</span><span class="n">scaler1</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">segments</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">DEFAULT_XAFS_SCAN_SEGMENTS</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>  <span class="c1"># nothing to do</span>
+
+    <span class="c1"># use userCalc2 to calculate absorption</span>
+    <span class="n">absorption</span> <span class="o">=</span> <span class="n">calcs</span><span class="o">.</span><span class="n">calc2</span>
+    <span class="k">yield from</span> <span class="n">prep_absorption_calc</span><span class="p">(</span><span class="n">absorption</span><span class="p">)</span>
+
+    <span class="c1"># override: just get the one signal</span>
+    <span class="n">absorption</span> <span class="o">=</span> <span class="n">EpicsSignalRO</span><span class="p">(</span>
+        <span class="n">calcs</span><span class="o">.</span><span class="n">calc2</span><span class="o">.</span><span class="n">calculated_value</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">name</span><span class="o">=</span><span class="s2">&quot;absorption&quot;</span><span class="p">,</span>
+        <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span>
+    <span class="p">)</span>
+    <span class="n">detectors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">absorption</span><span class="p">)</span>
+
+    <span class="n">scaler1</span><span class="o">.</span><span class="n">select_channels</span><span class="p">((</span><span class="s2">&quot;I0&quot;</span><span class="p">,</span> <span class="s2">&quot;I00&quot;</span><span class="p">))</span>
+
+    <span class="n">energy_list</span><span class="p">,</span> <span class="n">count_time_list</span> <span class="o">=</span> <span class="n">parse_segments</span><span class="p">(</span><span class="n">edge_keV</span><span class="p">,</span> <span class="n">segments</span><span class="p">)</span>
+
+    <span class="n">comment</span> <span class="o">=</span> <span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;xafs of </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span><span class="si">}</span><span class="s2"> segments (combined) near </span><span class="si">{</span><span class="n">edge_keV</span><span class="si">}</span><span class="s2"> keV&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">energy_list</span><span class="p">)</span><span class="si">}</span><span class="s2"> points total&quot;</span>
+    <span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="n">comment</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bp</span><span class="o">.</span><span class="n">list_scan</span><span class="p">(</span>
+        <span class="n">detectors</span><span class="p">,</span>
+        <span class="n">dcm</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">energy_list</span><span class="p">,</span>
+        <span class="n">scaler1</span><span class="o">.</span><span class="n">preset_time</span><span class="p">,</span> <span class="n">count_time_list</span><span class="p">,</span>
+        <span class="n">md</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span>
+            <span class="n">purpose</span><span class="o">=</span><span class="n">comment</span><span class="p">,</span>
+            <span class="n">plan_name</span><span class="o">=</span><span class="s2">&quot;xafs&quot;</span>
+        <span class="p">)</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>If the IOC was just started, the motor positions may not allow the monochromator code to operate. Let’s check it and move the motors only if necessary.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">if</span> <span class="p">(</span>
+    <span class="n">dcm</span><span class="o">.</span><span class="n">wavelength</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="ow">and</span> <span class="n">dcm</span><span class="o">.</span><span class="n">theta</span><span class="o">.</span><span class="n">position</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="ow">and</span> <span class="n">dcm</span><span class="o">.</span><span class="n">y1</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="ow">and</span> <span class="n">dcm</span><span class="o">.</span><span class="n">z2</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span>
+<span class="p">):</span>
+    <span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">dcm</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is not initialized.  Moving motors to start position.&quot;</span><span class="p">)</span>
+    <span class="c1"># The DCM controls do not allow operation of the underlying motors directly.</span>
+    <span class="c1"># Let&#39;s move them anyway, just from this code.</span>
+    <span class="n">ioc</span> <span class="o">=</span> <span class="n">iconfig</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;GP_IOC_PREFIX&quot;</span><span class="p">)</span>
+    <span class="n">m_th</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ioc</span><span class="si">}</span><span class="s2">m45&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_th&quot;</span><span class="p">)</span>
+    <span class="n">m_y1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ioc</span><span class="si">}</span><span class="s2">m46&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_y1&quot;</span><span class="p">)</span>
+    <span class="n">m_z2</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ioc</span><span class="si">}</span><span class="s2">m47&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m_z2&quot;</span><span class="p">)</span>
+    <span class="n">m_th</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+    <span class="n">m_y1</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+    <span class="n">m_z2</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+    <span class="c1"># we can&#39;t use Magicks so use RE to move them together</span>
+    <span class="c1"># These settings are ~3.7 keV, where th &amp; z2 are comparable</span>
+    <span class="c1"># which means it takes roughly the same time to reach this position.</span>
+    <span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">m_th</span><span class="p">,</span> <span class="mf">32.3</span><span class="p">,</span> <span class="n">m_y1</span><span class="p">,</span> <span class="o">-</span><span class="mf">20.7</span><span class="p">,</span> <span class="n">m_z2</span><span class="p">,</span> <span class="mf">32.7</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Initial </span><span class="si">{</span><span class="n">dcm</span><span class="o">.</span><span class="n">energy</span><span class="o">.</span><span class="n">position</span><span class="si">=:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> keV&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Initial dcm.energy.position=7.4563 keV
+</pre></div></div>
+</div>
+</section>
+<section id="XAFS-scan-with-bluesky">
+<h2>XAFS scan with bluesky<a class="headerlink" href="#XAFS-scan-with-bluesky" title="Permalink to this heading">#</a></h2>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># move near the starting point</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">dcm</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+
+<span class="n">my_segments</span> <span class="o">=</span> <span class="p">(</span>  <span class="c1"># faster than above, just for the demo</span>
+    <span class="c1"># X could be keV, eV, k, or kwt (k-weighted count time)</span>
+    <span class="c1"># axis, start, end, step, count_time</span>
+    <span class="p">(</span><span class="s2">&quot;keV&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mf">.2</span><span class="p">,</span> <span class="o">-</span><span class="mf">.015</span><span class="p">,</span> <span class="mf">.02</span><span class="p">,</span> <span class="mf">.6</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;eV&quot;</span><span class="p">,</span> <span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">2.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;k&quot;</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">.2</span><span class="p">,</span> <span class="mf">0.4</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;kwt&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">.5</span><span class="p">,</span> <span class="mf">.5</span><span class="p">),</span>
+<span class="p">)</span>
+
+<span class="c1"># start the scan</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">xafs</span><span class="p">(</span><span class="mf">7.1125</span><span class="p">,</span> <span class="n">segments</span><span class="o">=</span><span class="n">my_segments</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Thu-18:20:05 - xafs of 4 segments (combined) near 7.1125 keV: 44 points total
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 965     Time: 2023-04-13 18:20:05
+Persistent Unique Scan ID: &#39;13d5ecf4-55dd-41d8-9a96-4231230e6200&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+------------+
+|   seq_num |       time | dcm_energy |         I0 |        I00 | absorption |
++-----------+------------+------------+------------+------------+------------+
+|         1 | 18:20:07.9 |     6.9125 |          4 |          2 |   -0.69315 |
+|         2 | 18:20:09.6 |     6.9325 |          3 |          3 |    0.00000 |
+|         3 | 18:20:11.4 |     6.9525 |          4 |          3 |   -0.28768 |
+|         4 | 18:20:13.1 |     6.9725 |          3 |          3 |    0.00000 |
+|         5 | 18:20:14.9 |     6.9925 |          3 |          4 |    0.28768 |
+|         6 | 18:20:16.7 |     7.0125 |          4 |          2 |   -0.69315 |
+|         7 | 18:20:18.4 |     7.0325 |          2 |          3 |    0.40547 |
+|         8 | 18:20:20.1 |     7.0525 |          3 |          4 |    0.28768 |
+|         9 | 18:20:21.9 |     7.0725 |          2 |          3 |    0.40547 |
+|        10 | 18:20:23.7 |     7.0925 |          4 |          2 |   -0.69315 |
+|        11 | 18:20:25.2 |     7.0975 |          3 |          2 |   -0.40547 |
+|        12 | 18:20:26.6 |     7.1000 |          3 |          3 |    0.00000 |
+|        13 | 18:20:28.0 |     7.1025 |          3 |          3 |    0.00000 |
+|        14 | 18:20:29.3 |     7.1050 |          2 |          3 |    0.40547 |
+|        15 | 18:20:30.7 |     7.1075 |          4 |          2 |   -0.69315 |
+|        16 | 18:20:32.1 |     7.1092 |          2 |          3 |    0.40547 |
+|        17 | 18:20:33.5 |     7.1125 |          3 |          3 |    0.00000 |
+|        18 | 18:20:34.8 |     7.1135 |          3 |          1 |   -1.09861 |
+|        19 | 18:20:36.2 |     7.1144 |          2 |          3 |    0.40547 |
+|        20 | 18:20:37.5 |     7.1150 |          2 |          3 |    0.40547 |
+|        21 | 18:20:38.7 |     7.1156 |          4 |          2 |   -0.69315 |
+|        22 | 18:20:40.0 |     7.1171 |          2 |          1 |   -0.69315 |
+|        23 | 18:20:41.3 |     7.1175 |          2 |          4 |    0.69315 |
+|        24 | 18:20:42.7 |     7.1189 |          2 |          3 |    0.40547 |
+|        25 | 18:20:44.2 |     7.1200 |          2 |          2 |    0.00000 |
+|        26 | 18:20:45.6 |     7.1211 |          2 |          2 |    0.00000 |
+|        27 | 18:20:47.0 |     7.1235 |          2 |          2 |    0.00000 |
+|        28 | 18:20:48.4 |     7.1263 |          1 |          2 |    0.69315 |
+|        29 | 18:20:51.3 |     7.1277 |          9 |          7 |   -0.25131 |
+|        30 | 18:20:54.5 |     7.1363 |         12 |         10 |   -0.18232 |
+|        31 | 18:20:57.9 |     7.1468 |         10 |         12 |    0.18232 |
+|        32 | 18:21:01.4 |     7.1582 |         13 |         13 |    0.00000 |
+|        33 | 18:21:05.1 |     7.1734 |         13 |         14 |    0.07411 |
+|        34 | 18:21:09.0 |     7.1896 |         12 |         12 |    0.00000 |
+|        35 | 18:21:13.0 |     7.2078 |         11 |         13 |    0.16705 |
+|        36 | 18:21:17.1 |     7.2278 |         14 |         16 |    0.13353 |
+|        37 | 18:21:21.4 |     7.2497 |         15 |         16 |    0.06454 |
+|        38 | 18:21:25.8 |     7.2735 |         15 |         13 |   -0.14310 |
+|        39 | 18:21:30.2 |     7.2992 |         14 |         19 |    0.30538 |
+|        40 | 18:21:34.9 |     7.3268 |         14 |         20 |    0.35667 |
+|        41 | 18:21:39.7 |     7.3563 |         15 |         20 |    0.28768 |
+|        42 | 18:21:44.6 |     7.3878 |         16 |         19 |    0.17185 |
+|        43 | 18:21:49.5 |     7.4211 |         16 |         19 |    0.17185 |
+|        44 | 18:21:54.5 |     7.4563 |         19 |         18 |   -0.05407 |
++-----------+------------+------------+------------+------------+------------+
+generator xafs [&#39;13d5ecf4&#39;] (scan num: 965)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;13d5ecf4-55dd-41d8-9a96-4231230e6200&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__xafs_scan_18_3.png" src="../_images/example__xafs_scan_18_3.png" />
+</div>
+</div>
+</section>
+<section id="Challenges">
+<h2>Challenges<a class="headerlink" href="#Challenges" title="Permalink to this heading">#</a></h2>
+<ol class="arabic simple">
+<li><p>Scan XAFS with 3 segments (below-edge, near-edge, above-edge regions).</p></li>
+<li><p>Explain why we can’t we scan in negative <em>k</em>-space.</p></li>
+<li><p>Modify the software to allow the user to control the <em>k</em> weighting terms: <code class="docutils literal notranslate"><span class="pre">factor</span></code> and <code class="docutils literal notranslate"><span class="pre">exponent</span></code>.</p></li>
+<li><p>Modify the <code class="docutils literal notranslate"><span class="pre">xafs()</span></code> plan to accept user metadata. (hint: provide for a <code class="docutils literal notranslate"><span class="pre">md</span></code> keyword argument that will be a dictionary. See <code class="docutils literal notranslate"><span class="pre">bp.list_scan??</span></code> for an example.)</p></li>
+</ol>
+</section>
+<section id="References">
+<h2>References<a class="headerlink" href="#References" title="Permalink to this heading">#</a></h2>
+<ul class="simple">
+<li><p><a class="reference external" href="https://docs.xrayabsorption.org/tutorials/XAFS_Fundamentals.pdf">https://docs.xrayabsorption.org/tutorials/XAFS_Fundamentals.pdf</a></p></li>
+<li><p><a class="reference external" href="https://docs.xrayabsorption.org/Workshops/IIT2013/Newville_Theory.pdf">https://docs.xrayabsorption.org/Workshops/IIT2013/Newville_Theory.pdf</a></p></li>
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/X-ray_absorption_fine_structure">https://en.wikipedia.org/wiki/X-ray_absorption_fine_structure</a></p></li>
+<li><p>web tool: <a class="reference external" href="https://nbeaver.github.io/k-space-calculator/">https://nbeaver.github.io/k-space-calculator/</a></p></li>
+<li><p><a class="github reference external" href="https://github.com/nbeaver/k-space-calculator">nbeaver/k-space-calculator</a></p></li>
+</ul>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_watch_temperature.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Watch a temperature : scan temperature <em>v</em> time</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tutor/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tutorials</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Energy-&amp;-k">Energy &amp; <em>k</em></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Multiple-segments">Multiple segments</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#real-time-computation-of-absorption-coefficient">real-time computation of absorption coefficient</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#xafs()-plan"><code class="docutils literal notranslate"><span class="pre">xafs()</span></code> plan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#XAFS-scan-with-bluesky">XAFS scan with bluesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Challenges">Challenges</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#References">References</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/example/_xafs_scan.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
