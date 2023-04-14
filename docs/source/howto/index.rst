@@ -16,4 +16,5 @@ solve a real-world problem. How-to guides are *goal-oriented*.
    :maxdepth: 2
    :glob:
 
+   first_steps_guide
    _*

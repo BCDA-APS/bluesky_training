@@ -23,4 +23,6 @@ to complete a project of some kind. Tutorials are *learning-oriented*.
    :maxdepth: 2
    :glob:
 
+   connect_epics
+   aps101
    _*

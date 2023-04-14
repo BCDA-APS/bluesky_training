@@ -1,11 +1,19 @@
 APS Bluesky Training
 ====================
 
+.. for documentation authors:
+   Documentation may be created in restructured text (.rst), markdown (.md)
+   of Jupyter notebooks (.ipynb).  Add new documents to the appropriate folder
+   (howto, instrument, reference, tutor).  Start the file name with a leading
+   `_` (underline) so that it will be included automatically.  The select few
+   files which do not start with a "_" are added explicitly to the toctree in
+   the `index.rst` file of that folder.
+
 -  Wiki (`<https://github.com/BCDA-APS/bluesky_training/wiki>`_):
    Includes list of APS instruments
 -  `Installation Guide <instrument/_install.md>`__: 
    Install the components of the Bluesky framework.
--  `First Steps Guide <howto/__first_steps_guide.md>`__ :
+-  `First Steps Guide <howto/first_steps_guide.md>`__ :
    First Steps to use Bluesky after installation.
 -  `Instrument Package Guide <instrument/guide.md>`__: 
    Building the ``instrument`` package.
@@ -74,10 +82,10 @@ TODO:  Consider adding highlighting certain docs.
    instrument/index
    reference/index
 
-.. useless, so far:
-   Indices and tables
-   ==================
+Indices and tables
+==================
 
-   * :ref:`genindex`
-   * :ref:`modindex`
-   * :ref:`search`
+* :ref:`genindex`
+
+.. * :ref:`modindex`
+.. * :ref:`search`

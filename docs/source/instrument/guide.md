@@ -30,7 +30,7 @@ instrument/       <-- all aspects of the equipment
     iconfig.yml   <-- instrument configuration settings for you to customize
 ```
 
-Each directory has a `__init__.py` file (which _can_ be empty).  The very
+Each directory has a [`__init__.py`](./_about_init_files.md) file (which _can_ be empty).  The very
 existence of this file informs Python that the directory is a Python *package*
 which means that it can be imported.  The `__init__.py` file can be used to control
 what is imported and the order in which that import is sequenced.
@@ -40,6 +40,14 @@ In any of the Python files, the
 that identifies which Python symbols from that file will be imported by default.
 (Any Python symbol may be imported by name, this just controls the more general
 case.)
+
+### `iconfig`
+
+`iconfig`, a Python dictionary, contains the instrument's configuration details
+defined in one place for the user to control.  These details, defined in
+[instrument/iconfig.yml](https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/iconfig.yml),
+are used in various places in the `instrument` package.  Any changes to the
+`iconfig.yml` file will take effect the _next_ time the instrument is started.
 
 ## Add Motor(s)
 
@@ -165,7 +173,9 @@ sample y motion | `ioc:m12` | `sample_stage.y` | `sample_stage_y`
 Use the ophyd name in your Python code.  The _data name_ is how the values are
 labeled in the data.  (There's a reason for this difference beyond this scope.)
 
-NOTE:  Once you have used a PV in a custom Device, remove it from any other file such as `motors.py`.  The adminition from the ophyd developers is that you _connect a PV once and only once_.
+**NOTE**:  Once you have used a PV in a custom Device, remove it from any other file
+such as `motors.py`.  The admonition from the ophyd developers is that you
+_connect a PV once and only once_.
 
 </details>
 
