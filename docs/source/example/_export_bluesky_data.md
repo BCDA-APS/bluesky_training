@@ -46,14 +46,6 @@ is used as part of the process to move a subset of a databroker catalog (or the 
 > makes this directory easily "discoverable" so the recipient can access
 > it using `databroker.catalog["SOME_CATALOG_NAME"]`.
 
-The APS bluesky training has an example of the
-[pack](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/README.md)
-and
-[unpack](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/README.md#unpack-the-data)
-processes. Once unpacked, the data can be used, as shown in [this
-example Jupyter
-notebook](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/example-data/demonstrate.ipynb).
-
 ## Identify experiment data in databroker
 
 To access your experiment's data, you need to get it from your _catalog_

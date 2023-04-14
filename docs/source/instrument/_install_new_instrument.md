@@ -13,7 +13,7 @@ x86_64 host architectures.
 ## Setup a bluesky instrument
 
 Use the `new_bluesky_instrument.py`
-[program](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/new_bluesky_instrument.py)
+[program](https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py)
 to install a new bluesky instrument configuration from the online [APS Bluesky
 Training](https://github.com/BCDA-APS/bluesky_training) repository template.
 
