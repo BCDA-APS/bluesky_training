@@ -22,29 +22,8 @@ line.
    Building the ``instrument`` package.
 -  :ref:`tutorials`: 
    Jupyter notebooks with lessons, tutorials, examples, other
-
-**Other resources**
-
-* apstools
-   * home: https://bcda-aps.github.io/apstools/latest/
-   * source: https://github.com/BCDA-APS/apstools
-   * PyPI: https://pypi.org/project/apstools/
-   * conda: https://anaconda.org/conda-forge/apstools
-* Bluesky framework
-   * home: https://blueskyproject.io
-   * source: https://github.com/bluesky
-   * conda: all packages available on conda-forge channel
-* MongoDB
-   * home: https://www.mongodb.com/
-* PyDM
-   * home: https://slaclab.github.io/pydm/
-   * source: https://github.com/slaclab/pydm
-   * PyPI: https://pypi.org/project/pydm/
-   * conda: https://anaconda.org/conda-forge/pydm
-* PyEPICS
-   * home: https://pyepics.github.io/pyepics/
-   * PyPI: https://pypi.org/project/pyepics/
-   * source: https://github.com/pyepics/pyepics
+-  `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/instrument>`_
+   for a bluesky ``instrument``
 
 TODO:  This structure might be easier to implement in the repository README.md.
 
@@ -84,6 +63,30 @@ TODO:  This structure might be easier to implement in the repository README.md.
    tutor/index
    instrument/index
    reference/index
+
+Other resources
+==================
+
+* apstools
+   * home: https://bcda-aps.github.io/apstools/latest/
+   * source: https://github.com/BCDA-APS/apstools
+   * PyPI: https://pypi.org/project/apstools/
+   * conda: https://anaconda.org/conda-forge/apstools
+* Bluesky framework
+   * home: https://blueskyproject.io
+   * source: https://github.com/bluesky
+   * conda: all packages available on conda-forge channel
+* MongoDB
+   * home: https://www.mongodb.com/
+* PyDM
+   * home: https://slaclab.github.io/pydm/
+   * source: https://github.com/slaclab/pydm
+   * PyPI: https://pypi.org/project/pydm/
+   * conda: https://anaconda.org/conda-forge/pydm
+* PyEPICS
+   * home: https://pyepics.github.io/pyepics/
+   * PyPI: https://pypi.org/project/pyepics/
+   * source: https://github.com/pyepics/pyepics
 
 Indices and tables
 ==================
