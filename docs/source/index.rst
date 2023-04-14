@@ -1,6 +1,9 @@
 APS Bluesky Training
 ====================
 
+This repository demonstrates use of the Bluesky framework at a typical APS beam
+line.
+
 .. for documentation authors:
    Documentation may be created in restructured text (.rst), markdown (.md)
    of Jupyter notebooks (.ipynb).  Add new documents to the appropriate folder
@@ -43,7 +46,7 @@ APS Bluesky Training
    * PyPI: https://pypi.org/project/pyepics/
    * source: https://github.com/pyepics/pyepics
 
-TODO:  Consider adding highlighting certain docs.
+TODO:  This structure might be easier to implement in the repository README.md.
 
 .. code::
 
