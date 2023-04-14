@@ -136,16 +136,23 @@
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
-                        Instrument
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -240,16 +247,23 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
-                        Instrument
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -290,15 +304,16 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Python virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Conda virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_install.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Steps to install a new instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_hello_world.html">Hello, World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Test that Bluesky Works at APS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
@@ -377,69 +392,68 @@ Might still need more…</p>
 <p>We need to wait for those PVs to connect (could call
 <code class="docutils literal notranslate"><span class="pre">aps.wait_for_connections()</span></code>). Check that <code class="docutils literal notranslate"><span class="pre">aps.connected</span></code> returns <code class="docutils literal notranslate"><span class="pre">True</span></code>
 before continuing.  Test by looking at the APS storage ring current:</p>
-<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>aps.current.get()
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">aps</span><span class="o">.</span><span class="n">current</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
 </pre></div>
 </div>
 <details>
 <summary><tt>aps.summary()</tt>: complete structure</summary>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="n">aps</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
-<span class="n">data</span> <span class="n">keys</span> <span class="p">(</span><span class="o">*</span> <span class="n">hints</span><span class="p">)</span>
-<span class="o">-------------------</span>
- <span class="n">aps_aps_cycle</span>
- <span class="n">aps_current</span>
- <span class="n">aps_fill_number</span>
- <span class="n">aps_global_feedback</span>
- <span class="n">aps_global_feedback_h</span>
- <span class="n">aps_global_feedback_v</span>
- <span class="n">aps_lifetime</span>
- <span class="n">aps_machine_status</span>
- <span class="n">aps_operating_mode</span>
- <span class="n">aps_operator_messages_fill_pattern</span>
- <span class="n">aps_operator_messages_floor_coordinator</span>
- <span class="n">aps_operator_messages_last_problem_message</span>
- <span class="n">aps_operator_messages_last_trip_message</span>
- <span class="n">aps_operator_messages_message6</span>
- <span class="n">aps_operator_messages_message7</span>
- <span class="n">aps_operator_messages_message8</span>
- <span class="n">aps_operator_messages_operators</span>
- <span class="n">aps_orbit_correction</span>
- <span class="n">aps_shutter_permit</span>
+<pre>
+In [1]: <b>aps.summary()</b>
+data keys (* hints)
+-------------------
+ aps_aps_cycle
+ aps_current
+ aps_fill_number
+ aps_global_feedback
+ aps_global_feedback_h
+ aps_global_feedback_v
+ aps_lifetime
+ aps_machine_status
+ aps_operating_mode
+ aps_operator_messages_fill_pattern
+ aps_operator_messages_floor_coordinator
+ aps_operator_messages_last_problem_message
+ aps_operator_messages_last_trip_message
+ aps_operator_messages_message6
+ aps_operator_messages_message7
+ aps_operator_messages_message8
+ aps_operator_messages_operators
+ aps_orbit_correction
+ aps_shutter_permit
 
-<span class="n">read</span> <span class="n">attrs</span>
-<span class="o">----------</span>
-<span class="n">current</span>              <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_current&#39;</span><span class="p">)</span>
-<span class="n">lifetime</span>             <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_lifetime&#39;</span><span class="p">)</span>
-<span class="n">aps_cycle</span>            <span class="n">ApsCycleComputedRO</span>  <span class="p">(</span><span class="s1">&#39;aps_aps_cycle&#39;</span><span class="p">)</span>
-<span class="n">machine_status</span>       <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_machine_status&#39;</span><span class="p">)</span>
-<span class="n">operating_mode</span>       <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operating_mode&#39;</span><span class="p">)</span>
-<span class="n">shutter_permit</span>       <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_shutter_permit&#39;</span><span class="p">)</span>
-<span class="n">fill_number</span>          <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_fill_number&#39;</span><span class="p">)</span>
-<span class="n">orbit_correction</span>     <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_orbit_correction&#39;</span><span class="p">)</span>
-<span class="n">global_feedback</span>      <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_global_feedback&#39;</span><span class="p">)</span>
-<span class="n">global_feedback_h</span>    <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_global_feedback_h&#39;</span><span class="p">)</span>
-<span class="n">global_feedback_v</span>    <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_global_feedback_v&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span>    <span class="n">ApsOperatorMessagesDevice</span><span class="p">(</span><span class="s1">&#39;aps_operator_messages&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">operators</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_operators&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">floor_coordinator</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_floor_coordinator&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">fill_pattern</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_fill_pattern&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">last_problem_message</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_last_problem_message&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">last_trip_message</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_last_trip_message&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">message6</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_message6&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">message7</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_message7&#39;</span><span class="p">)</span>
-<span class="n">operator_messages</span><span class="o">.</span><span class="n">message8</span> <span class="n">EpicsSignalRO</span>       <span class="p">(</span><span class="s1">&#39;aps_operator_messages_message8&#39;</span><span class="p">)</span>
+read attrs
+----------
+current              EpicsSignalRO       ('aps_current')
+lifetime             EpicsSignalRO       ('aps_lifetime')
+aps_cycle            ApsCycleComputedRO  ('aps_aps_cycle')
+machine_status       EpicsSignalRO       ('aps_machine_status')
+operating_mode       EpicsSignalRO       ('aps_operating_mode')
+shutter_permit       EpicsSignalRO       ('aps_shutter_permit')
+fill_number          EpicsSignalRO       ('aps_fill_number')
+orbit_correction     EpicsSignalRO       ('aps_orbit_correction')
+global_feedback      EpicsSignalRO       ('aps_global_feedback')
+global_feedback_h    EpicsSignalRO       ('aps_global_feedback_h')
+global_feedback_v    EpicsSignalRO       ('aps_global_feedback_v')
+operator_messages    ApsOperatorMessagesDevice('aps_operator_messages')
+operator_messages.operators EpicsSignalRO       ('aps_operator_messages_operators')
+operator_messages.floor_coordinator EpicsSignalRO       ('aps_operator_messages_floor_coordinator')
+operator_messages.fill_pattern EpicsSignalRO       ('aps_operator_messages_fill_pattern')
+operator_messages.last_problem_message EpicsSignalRO       ('aps_operator_messages_last_problem_message')
+operator_messages.last_trip_message EpicsSignalRO       ('aps_operator_messages_last_trip_message')
+operator_messages.message6 EpicsSignalRO       ('aps_operator_messages_message6')
+operator_messages.message7 EpicsSignalRO       ('aps_operator_messages_message7')
+operator_messages.message8 EpicsSignalRO       ('aps_operator_messages_message8')
 
-<span class="n">config</span> <span class="n">keys</span>
-<span class="o">-----------</span>
+config keys
+-----------
 
-<span class="n">configuration</span> <span class="n">attrs</span>
-<span class="o">-------------------</span>
-<span class="n">operator_messages</span>    <span class="n">ApsOperatorMessagesDevice</span><span class="p">(</span><span class="s1">&#39;aps_operator_messages&#39;</span><span class="p">)</span>
+configuration attrs
+-------------------
+operator_messages    ApsOperatorMessagesDevice('aps_operator_messages')
 
-<span class="n">unused</span> <span class="n">attrs</span>
-<span class="o">------------</span>
-
-</pre></div>
-</div>
+unused attrs
+------------
+</pre>
 </details>
 <details>
 <summary><tt>aps.read()</tt>: current timestamped values</summary>

@@ -49,7 +49,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'tutor/_lesson7';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Instrument" href="../instrument/index.html" />
+    <link rel="next" title="Reference" href="../reference/index.html" />
     <link rel="prev" title="Lesson 6: EPICS area detector" href="_lesson6.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -139,16 +139,23 @@
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
-                        Tutorials
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -243,16 +250,23 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
-                        Tutorials
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -292,7 +306,8 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="_aps101.html">APS Bluesky 101</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connect_epics.html">Connect Bluesky with EPICS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aps101.html">APS Bluesky 101</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
@@ -389,22 +404,22 @@ document.write(`
 I Wed-17:24:44 - ############################################################ startup
 I Wed-17:24:44 - logging started
 I Wed-17:24:44 - logging level = 10
-I Wed-17:24:44 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/collection.py
-I Wed-17:24:44 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/mpl/notebook.py
+I Wed-17:24:44 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/collection.py
+I Wed-17:24:44 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/mpl/notebook.py
 Activating auto-logging. Current session state plus future input saved.
-Filename       : /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/.logs/ipython_console.log
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/.logs/ipython_console.log
 Mode           : rotate
 Output logging : True
 Raw input log  : False
 Timestamping   : True
 State          : active
 I Wed-17:24:45 - bluesky framework
-I Wed-17:24:45 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/check_python.py
-I Wed-17:24:45 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/check_bluesky.py
-I Wed-17:24:46 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/initialize.py
-I Wed-17:24:47 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/metadata.py
-I Wed-17:24:47 - /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/instrument/framework/callbacks.py
-I Wed-17:24:47 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/use_bluesky/lessons/20201216-172447.dat
+I Wed-17:24:45 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/check_python.py
+I Wed-17:24:45 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/check_bluesky.py
+I Wed-17:24:46 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/initialize.py
+I Wed-17:24:47 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/metadata.py
+I Wed-17:24:47 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/callbacks.py
+I Wed-17:24:47 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/20201216-172447.dat
 I Wed-17:24:47 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
 I Wed-17:24:47 -    file will be created when bluesky ends its next scan
 I Wed-17:24:47 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
@@ -2180,11 +2195,11 @@ generator scan [&#39;dc673022&#39;] (scan num: 3)
       </div>
     </a>
     <a class="right-next"
-       href="../instrument/index.html"
+       href="../reference/index.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Instrument</p>
+        <p class="prev-next-title">Reference</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

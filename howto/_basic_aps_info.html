@@ -49,8 +49,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_basic_aps_info';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Count the scaler" href="_count_scaler.html" />
-    <link rel="prev" title="First Steps with Bluesky" href="__first_steps_guide.html" />
+    <link rel="next" title="Minimal: Scan scaler vs motor" href="_basic_motor_scaler_scan.html" />
+    <link rel="prev" title="Accessing data later, after the measurement" href="_after_measurement.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -140,15 +140,22 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -244,15 +251,22 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -292,18 +306,23 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="__first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_busy.html">synApps <em>busy</em> record</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_sscan_1d_flyer.html">sscan as 1D Flyer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
 </ul>
 </div>
 </nav></div>
@@ -390,8 +409,8 @@ document.write(`
 I Thu-09:33:59 - ############################################################ startup
 I Thu-09:33:59 - logging started
 I Thu-09:33:59 - logging level = 10
-I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/collection.py
-I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/mpl/notebook.py
+I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/collection.py
+I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/mpl/notebook.py
 </pre></div></div>
 </div>
 <div class="nboutput docutils container">
@@ -400,7 +419,7 @@ I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/inst
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 Activating auto-logging. Current session state plus future input saved.
-Filename       : /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/.logs/ipython_console.log
+Filename       : /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/.logs/ipython_console.log
 Mode           : rotate
 Output logging : True
 Raw input log  : False
@@ -414,12 +433,12 @@ State          : active
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
 I Thu-09:34:00 - bluesky framework
-I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/check_python.py
-I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/check_bluesky.py
-I Thu-09:34:03 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/initialize.py
-I Thu-09:34:07 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/metadata.py
-I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/callbacks.py
-I Thu-09:34:08 - writing to SPEC file: /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/20200903-093408.dat
+I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/check_python.py
+I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/check_bluesky.py
+I Thu-09:34:03 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/initialize.py
+I Thu-09:34:07 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/metadata.py
+I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/callbacks.py
+I Thu-09:34:08 - writing to SPEC file: /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/20200903-093408.dat
 I Thu-09:34:08 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
 I Thu-09:34:08 -    file will be created when bluesky ends its next scan
 I Thu-09:34:08 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
@@ -439,7 +458,7 @@ I Thu-09:34:08 -    to change SPEC file, use command:   newSpecFile(&#39;title&#
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/devices/ideas/aps_source.py
+I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/devices/ideas/aps_source.py
 </pre></div></div>
 </div>
 <p>The <code class="docutils literal notranslate"><span class="pre">aps</span></code> object is an instance of <code class="docutils literal notranslate"><span class="pre">`apstools.devices.ApsMachineParametersDevice</span></code> &lt;<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.aps_machine.ApsMachineParametersDevice">https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.aps_machine.ApsMachineParametersDevice</a>&gt;`__.</p>
@@ -723,20 +742,20 @@ shutter_permit                         ACIS:ShutterPermit     PERMIT
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="__first_steps_guide.html"
+       href="_after_measurement.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">First Steps with Bluesky</p>
+        <p class="prev-next-title">Accessing data later, after the measurement</p>
       </div>
     </a>
     <a class="right-next"
-       href="_count_scaler.html"
+       href="_basic_motor_scaler_scan.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Count the scaler</p>
+        <p class="prev-next-title">Minimal: Scan scaler <em>vs</em> motor</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

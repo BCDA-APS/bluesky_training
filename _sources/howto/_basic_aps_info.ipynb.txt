@@ -38,8 +38,8 @@
       "I Thu-09:33:59 - ############################################################ startup\n",
       "I Thu-09:33:59 - logging started\n",
       "I Thu-09:33:59 - logging level = 10\n",
-      "I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/collection.py\n",
-      "I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/mpl/notebook.py\n"
+      "I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/collection.py\n",
+      "I Thu-09:33:59 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/mpl/notebook.py\n"
      ]
     },
     {
@@ -47,7 +47,7 @@
      "output_type": "stream",
      "text": [
       "Activating auto-logging. Current session state plus future input saved.\n",
-      "Filename       : /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/.logs/ipython_console.log\n",
+      "Filename       : /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/.logs/ipython_console.log\n",
       "Mode           : rotate\n",
       "Output logging : True\n",
       "Raw input log  : False\n",
@@ -60,12 +60,12 @@
      "output_type": "stream",
      "text": [
       "I Thu-09:34:00 - bluesky framework\n",
-      "I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/check_python.py\n",
-      "I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/check_bluesky.py\n",
-      "I Thu-09:34:03 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/initialize.py\n",
-      "I Thu-09:34:07 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/metadata.py\n",
-      "I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/framework/callbacks.py\n",
-      "I Thu-09:34:08 - writing to SPEC file: /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/20200903-093408.dat\n",
+      "I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/check_python.py\n",
+      "I Thu-09:34:00 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/check_bluesky.py\n",
+      "I Thu-09:34:03 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/initialize.py\n",
+      "I Thu-09:34:07 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/metadata.py\n",
+      "I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/framework/callbacks.py\n",
+      "I Thu-09:34:08 - writing to SPEC file: /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/20200903-093408.dat\n",
       "I Thu-09:34:08 -    >>>>   Using default SPEC file name   <<<<\n",
       "I Thu-09:34:08 -    file will be created when bluesky ends its next scan\n",
       "I Thu-09:34:08 -    to change SPEC file, use command:   newSpecFile('title')\n"
@@ -94,7 +94,7 @@
      "name": "stderr",
      "output_type": "stream",
      "text": [
-      "I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/use_bluesky/lessons/instrument/devices/ideas/aps_source.py\n"
+      "I Thu-09:34:08 - /home/beams1/JEMIAN/Documents/projects/bluesky_training/lessons/instrument/devices/ideas/aps_source.py\n"
      ]
     }
    ],

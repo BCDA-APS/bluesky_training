@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Call Shell Command &amp; Wait for Finish &#8212; APS Bluesky Training  documentation</title>
+    <title>Linux Command &amp; Wait for Finish &#8212; APS Bluesky Training  documentation</title>
   
   
   
@@ -50,7 +50,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dynamic Limits for Two Motors" href="_dynamic_limits_2motor.html" />
-    <link rel="prev" title="Count the scaler" href="_count_scaler.html" />
+    <link rel="prev" title="Custom bluesky plan" href="_custom_plan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -140,6 +140,20 @@
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../tutor/index.html">
                         Tutorials
                       </a>
@@ -147,8 +161,8 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
                       </a>
                     </li>
                 
@@ -237,6 +251,20 @@ document.write(`
                 
 
                     <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
                       <a class="nav-link nav-internal" href="../tutor/index.html">
                         Tutorials
                       </a>
@@ -244,8 +272,8 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
                       </a>
                     </li>
                 
@@ -278,11 +306,23 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_busy.html">synApps <em>busy</em> record</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
+
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot <span class="math notranslate nohighlight">\((x,y)\)</span> data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
 </ul>
 </div>
 </nav></div>
@@ -323,7 +363,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Call Shell Command &amp; Wait for Finish</li>
+    <li class="breadcrumb-item active" aria-current="page">Linux Command &amp; Wait for Finish</li>
   </ul>
 </nav>
 </div>
@@ -340,9 +380,9 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="Call-Shell-Command-&amp;-Wait-for-Finish">
-<h1>Call Shell Command &amp; Wait for Finish<a class="headerlink" href="#Call-Shell-Command-&-Wait-for-Finish" title="Permalink to this heading">#</a></h1>
-<p>Demonstrate how to launch a (Linux bash) shell command and wait for it to finish.</p>
+  <section id="Linux-Command-&amp;-Wait-for-Finish">
+<h1>Linux Command &amp; Wait for Finish<a class="headerlink" href="#Linux-Command-&-Wait-for-Finish" title="Permalink to this heading">#</a></h1>
+<p>Demonstrate how to launch a (Linux bash) shell command from Python and wait for it to finish.</p>
 <p>This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> is for setting and reading one value. The <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> can provide the multiple values needed.</p>
 <p>This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> is for setting and reading only one value. First we show how a <code class="docutils literal notranslate"><span class="pre">Signal</span></code>-based implementation would behave. Then, we show how the <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> can provide the multiple values needed.</p>
 <p>To simulate a Linux command to be run, a bash shell script (<code class="docutils literal notranslate"><span class="pre">doodle.sh</span></code>) was created that runs a 5 second countdown printing to stdout (the terminal console).</p>
@@ -934,12 +974,12 @@ Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_count_scaler.html"
+       href="_custom_plan.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Count the scaler</p>
+        <p class="prev-next-title">Custom bluesky plan</p>
       </div>
     </a>
     <a class="right-next"

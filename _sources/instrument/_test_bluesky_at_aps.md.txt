@@ -19,14 +19,15 @@ We need to wait for those PVs to connect (could call
 `aps.wait_for_connections()`). Check that `aps.connected` returns `True`
 before continuing.  Test by looking at the APS storage ring current:
 
-    aps.current.get()
-
+```py
+aps.current.get()
+```
 
 <details>
 <summary><tt>aps.summary()</tt>: complete structure</summary>
 
-```
-In [1]: aps.summary()
+<pre>
+In [1]: <b>aps.summary()</b>
 data keys (* hints)
 -------------------
  aps_aps_cycle
@@ -81,8 +82,7 @@ operator_messages    ApsOperatorMessagesDevice('aps_operator_messages')
 
 unused attrs
 ------------
-
-```
+</pre>
 
 </details>
 
