@@ -4,7 +4,7 @@ IPython Profile
 An IPython profile [#profile]_ is used to enable the console interface for a bluesky
 session.
 
-.. index:: startup, snippet
+.. index:: startup; snippet
 
 .. _startup_snippet:
 
