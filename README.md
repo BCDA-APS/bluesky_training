@@ -4,6 +4,38 @@ This repository, via [Jupyter](https://jupyter.org/) notebooks, demonstrates use
 of the Bluesky framework at a typical beam line scenario for a BCDA-sponsored
 class.
 
+<!-- consider this new structure
+
+      Introductory
+         Bluesky Hello, World!
+         Connect with EPICS
+         APS 101
+      Basic hardware configuration and measurement
+         scaler
+         motor
+         step scan
+      Measurement using the instrument package
+         area detector
+         count a scaler
+         watch a temperature
+         lineup 1-D peak
+         locate 2-D peak on area detector image
+         custom bluesky plans
+         bluesky for SPEC users
+      After the measurement: processing, reduction, analysis, export or copy data
+      Training
+      Instrument template
+      Conda
+      Version control
+      References
+
+Also take note of
+
+   * https://diataxis.fr/
+   * https://stackoverflow.com/questions/42843288/is-there-any-way-to-make-markdown-tables-sortable
+-->
+
+
 - [README.md](#readmemd)
   - [Notebooks](#notebooks)
     - [Introductory](#introductory)

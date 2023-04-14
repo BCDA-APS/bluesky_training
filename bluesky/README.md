@@ -1,5 +1,10 @@
 # Bluesky Instrument Template
 
+**Caution**:  If you will use the bluesky queueserver (QS), note that _every_
+Python file in this directory will be executed when QS starts the RunEngine.
+Don't add extra Python files to this directory.  Instead, put them in `user/` or
+somewhere else.
+
 Contains:
 
 description | item(s)

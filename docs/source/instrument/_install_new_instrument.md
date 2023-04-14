@@ -1,4 +1,6 @@
-# Steps to install a new instrument
+# Installation
+
+Describes the steps to install a new instrument.
 
 **Note**:  These *instructions have been written for workstations running the
 Linux operating system*.  They may be used for other operating systems but
@@ -10,8 +12,8 @@ x86_64 host architectures.
 
 ## Setup a bluesky instrument
 
-Use the program
-[`new_bluesky_instrument.py`](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/new_bluesky_instrument.py)
+Use the `new_bluesky_instrument.py`
+[program](https://github.com/BCDA-APS/bluesky_training/blob/main/resources/new_bluesky_instrument.py)
 to install a new bluesky instrument configuration from the online [APS Bluesky
 Training](https://github.com/BCDA-APS/bluesky_training) repository template.
 
@@ -92,6 +94,17 @@ alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 
 More documentation about [conda](../reference/_conda_base.md) is available
 [elsewhere](../instrument/_conda_environment.md) in this repository.
+
+### bash environment variables
+
+The `blueskyStarter.sh` script looks for the `BLUESKY_CONDA_ENV` (bash shell)
+environment variable to choose the correct conda environment for Bluesky.
+Suggest setting this in `~/.bash_aliases` (if that does not exist, then add it
+to `~/.bashrc`).
+
+```bash
+export BLUESKY_CONDA_ENV=bluesky_2023_2
+```
 
 ## Activate the conda environment
 
