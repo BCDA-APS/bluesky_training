@@ -36,18 +36,15 @@ Also take note of
 -->
 
 - [README.md](#readmemd)
-  - [References](#references)
-    - [Introductory](#introductory)
-    - [Basic hardware configuration and measurement](#basic-hardware-configuration-and-measurement)
-      - [Hardware Configuration - Advanced](#hardware-configuration---advanced)
-    - [Measurement using the `instrument` package](#measurement-using-the-instrument-package)
-      - [Measurement - Advanced](#measurement---advanced)
-    - [Post-measurement (such as Analysis)](#post-measurement-such-as-analysis)
-      - [Data Processing, Reduction, and/or Analysis](#data-processing-reduction-andor-analysis)
-    - [Review](#review)
+  - [Introductory](#introductory)
+  - [Basic hardware configuration and measurement](#basic-hardware-configuration-and-measurement)
+    - [Hardware Configuration - Advanced](#hardware-configuration---advanced)
+  - [Measurement using the `instrument` package](#measurement-using-the-instrument-package)
+    - [Measurement - Advanced](#measurement---advanced)
+  - [Post-measurement (such as Analysis)](#post-measurement-such-as-analysis)
+    - [Data Processing, Reduction, and/or Analysis](#data-processing-reduction-andor-analysis)
+  - [Review](#review)
   - [Install as Bluesky `instrument` package](#install-as-bluesky-instrument-package)
-
-## References
 
 name | URL
 --- | ---
@@ -63,7 +60,7 @@ apstools | https://BCDA-APS.github.io/apstools
 APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
 License | [![license: ANL](https://img.shields.io/badge/license-ANL-brightgreen)](LICENSE.txt)
 
-### Introductory
+## Introductory
 
 The [APS Bluesky 101](https://bcda-aps.github.io/bluesky_training/tutor/aps101.html)
 introductory course covers these two notebooks as well as scanning with scaler _v._ motor.
@@ -71,7 +68,7 @@ introductory course covers these two notebooks as well as scanning with scaler _
 - [Bluesky *Hello, World!*](https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html)
 - [Connect with EPICS](https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html)
 
-### Basic hardware configuration and measurement
+## Basic hardware configuration and measurement
 
 These notebooks demonstrate the basics of hardware configuration
 ([ophyd](https://blueskyproject.io/ophyd)) and custom measurement plans
@@ -82,12 +79,12 @@ activities.
 1. [motor](https://bcda-aps.github.io/bluesky_training/tutor/_basic_b.html)
 1. [step scan](https://bcda-aps.github.io/bluesky_training/tutor/_basic_c.html)
 
-#### Hardware Configuration - Advanced
+### Hardware Configuration - Advanced
 
 - [Run a Linux command as an `ophyd.Device`](https://bcda-aps.github.io/bluesky_training/howto/_doodle.html)
 - [Store Images, Darks, and Flats frames separately in HDF5 files](https://bcda-aps.github.io/bluesky_training/howto/_images_darks_flats.html)
 
-### Measurement using the `instrument` package
+## Measurement using the `instrument` package
 
 As the configuration of a system becomes more complex, it may be easier to
 describe (and startup) by making the steps into Python package that can be
@@ -102,14 +99,14 @@ IOC.
 1. [Plot $(x,y)$ data from a databroker run](https://bcda-aps.github.io/bluesky_training/howto/_plot_x_y_databroker.html)
 1. [Custom bluesky plan](https://bcda-aps.github.io/bluesky_training/howto/_custom_plan.html)
 
-#### Measurement - Advanced
+### Measurement - Advanced
 
 - [Move 2 motors with dynamic limits](https://bcda-aps.github.io/bluesky_training/howto/_dynamic_limits_2motor.html)
   : EPICS : Demo of dynamic limit signal to avoid collision of two motors
 - [XAFS scan, multi-segment](https://bcda-aps.github.io/bluesky_training/example/_xafs_scan.html)
   :  step scan (note: detector data is random numbers)
 
-### Post-measurement (such as Analysis)
+## Post-measurement (such as Analysis)
 
 Typically, measurement data is sent to Bluesky's
 [databroker](https://blueskyproject.io/databroker) package for storage in a
@@ -118,7 +115,7 @@ These notebooks use data recorded previously and stored in a structured set of
 folders (created by tools from Bluesky's
 [databroker-pack](https://blueskyproject.io/databroker-pack/) package.)
 
-#### Data Processing, Reduction, and/or Analysis
+### Data Processing, Reduction, and/or Analysis
 
 - [Access data later, after the measurement](https://bcda-aps.github.io/bluesky_training/howto/_after_measurement.html)
   using Data Broker
@@ -126,7 +123,7 @@ folders (created by tools from Bluesky's
 - [Plot $(x,y)$ data from a databroker run](https://bcda-aps.github.io/bluesky_training/howto/_plot_x_y_databroker.html)
   using Data Broker
 
-### Review
+## Review
 
 - [Command Review](https://bcda-aps.github.io/bluesky_training/reference/_command_review.html)
 - [Overview of the `instrument` package](https://bcda-aps.github.io/bluesky_training/instrument/describe_instrument.html)
