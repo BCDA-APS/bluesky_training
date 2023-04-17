@@ -1,5 +1,7 @@
 .. index:: How-to, Demonstration, Guide
 
+.. _howto:
+
 =============
 How-To Guides
 =============

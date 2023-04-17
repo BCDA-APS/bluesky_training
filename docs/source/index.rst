@@ -12,26 +12,31 @@ line.
    files which do not start with a "_" are added explicitly to the toctree in
    the `index.rst` file of that folder.
 
-- How-to Guides
+- :ref:`howto`
    -  `First Steps Guide <howto/first_steps_guide.md>`__ :
       First Steps to use Bluesky after installation.
-- Tutorials
-   -  :ref:`tutorials`:
-      Jupyter notebooks with lessons, tutorials, examples, other
-- Reference documentation
-   -  Wiki (`<https://github.com/BCDA-APS/bluesky_training/wiki>`_):
-      Includes list of APS instruments
-- Installation
+- :ref:`instrument`
    -  `Installation Guide <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html>`_:
       Install the components of the Bluesky framework.
    -  `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/instrument>`_
       for a bluesky ``instrument``
    -  `Instrument Package Guide <instrument/guide.md>`__:
       Building the ``instrument`` package.
+   - `About the instrument package <file:///home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/build/html/instrument/describe_instrument.html>`_
+- :ref:`examples`
+   - `XAFS scan <https://bcda-aps.github.io/bluesky_training/example/_xafs_scan.html>`_ : Example multi-segment XAFS scan.
+- :ref:`tutorials and lessons <tutorials>`
+   - `APS Bluesky 101 <https://bcda-aps.github.io/bluesky_training/tutor/aps101.html>`_
+   - `Connect Bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html>`_
+   - `Hello, World <https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html>`_
+- :ref:`reference`
+   -  `bluesky training wiki <https://github.com/BCDA-APS/bluesky_training/wiki>`_:
+      Includes list of APS instruments
+   -  `General Bluesky Documentation (for APS) <https://wiki-ext.aps.anl.gov/blc/index.php?title=Controls_Software_Documentation#Bluesky>`_
 
 .. toctree::
-   :maxdepth: 2
-   :caption: Contents:
+   :maxdepth: 1
+   :hidden:
 
    howto/index
    instrument/index
@@ -60,8 +65,9 @@ Other resources
    * conda: https://anaconda.org/conda-forge/pydm
 * PyEPICS
    * home: https://pyepics.github.io/pyepics/
-   * PyPI: https://pypi.org/project/pyepics/
    * source: https://github.com/pyepics/pyepics
+   * PyPI: https://pypi.org/project/pyepics/
+   * conda: https://anaconda.org/conda-forge/pyepics
 
 Index
 ==================

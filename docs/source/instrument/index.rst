@@ -1,5 +1,7 @@
 .. index:: instrument package
 
+.. _instrument:
+
 ==========
 Instrument
 ==========

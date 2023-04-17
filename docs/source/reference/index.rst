@@ -1,5 +1,7 @@
 .. index:: Reference, Explain
 
+.. _reference:
+
 =========
 Reference
 =========
