@@ -1,126 +1,0 @@
-
-Writing Documents:   0%|          | 0/59 [00:00<?, ?it/s]0it [00:00, ?it/s]/home/prjemian/Apps/miniconda3/envs/bluesky_2021_1/lib/python3.8/site-packages/databroker/core.py:1116: UserWarning: The method canonical has been renamed documents. This alias may be removed in a future release.
-  warnings.warn(
-27it [00:00, 310.69it/s]
-
-Writing Documents:   2%|▏         | 1/59 [00:00<00:11,  5.11it/s]0it [00:00, ?it/s]17it [00:00, 205.88it/s]
-
-Writing Documents:   3%|▎         | 2/59 [00:00<00:09,  6.09it/s]0it [00:00, ?it/s]2it [00:00, 15.12it/s]17it [00:00, 127.19it/s]
-
-Writing Documents:   5%|▌         | 3/59 [00:00<00:09,  5.64it/s]0it [00:00, ?it/s]11it [00:00, 130.87it/s]
-
-Writing Documents:   7%|▋         | 4/59 [00:00<00:09,  6.09it/s]0it [00:00, ?it/s]2it [00:00, 14.30it/s]29it [00:00, 205.18it/s]
-
-Writing Documents:   8%|▊         | 5/59 [00:00<00:09,  5.64it/s]0it [00:00, ?it/s]29it [00:00, 342.08it/s]
-
-Writing Documents:  10%|█         | 6/59 [00:01<00:08,  6.02it/s]0it [00:00, ?it/s]29it [00:00, 346.04it/s]
-
-Writing Documents:  12%|█▏        | 7/59 [00:01<00:08,  6.29it/s]0it [00:00, ?it/s]2it [00:00, 13.70it/s]29it [00:00, 196.56it/s]
-
-Writing Documents:  14%|█▎        | 8/59 [00:01<00:08,  5.73it/s]0it [00:00, ?it/s]9it [00:00, 111.10it/s]
-
-Writing Documents:  15%|█▌        | 9/59 [00:01<00:08,  6.13it/s]0it [00:00, ?it/s]9it [00:00, 112.00it/s]
-
-Writing Documents:  17%|█▋        | 10/59 [00:01<00:07,  6.43it/s]0it [00:00, ?it/s]2it [00:00, 13.18it/s]9it [00:00, 58.64it/s]
-
-Writing Documents:  19%|█▊        | 11/59 [00:01<00:08,  5.79it/s]0it [00:00, ?it/s]9it [00:00, 111.60it/s]
-
-Writing Documents:  20%|██        | 12/59 [00:02<00:07,  5.93it/s]0it [00:00, ?it/s]9it [00:00, 113.54it/s]
-
-Writing Documents:  22%|██▏       | 13/59 [00:02<00:07,  6.29it/s]0it [00:00, ?it/s]9it [00:00, 110.18it/s]
-
-Writing Documents:  24%|██▎       | 14/59 [00:02<00:06,  6.52it/s]0it [00:00, ?it/s]2it [00:00, 12.55it/s]9it [00:00, 55.90it/s]
-
-Writing Documents:  25%|██▌       | 15/59 [00:02<00:07,  5.78it/s]0it [00:00, ?it/s]9it [00:00, 110.18it/s]
-
-Writing Documents:  27%|██▋       | 16/59 [00:02<00:06,  6.15it/s]0it [00:00, ?it/s]9it [00:00, 110.05it/s]
-
-Writing Documents:  29%|██▉       | 17/59 [00:02<00:06,  6.42it/s]0it [00:00, ?it/s]9it [00:00, 109.99it/s]
-
-Writing Documents:  31%|███       | 18/59 [00:02<00:06,  6.60it/s]0it [00:00, ?it/s]9it [00:00, 110.55it/s]
-
-Writing Documents:  32%|███▏      | 19/59 [00:03<00:07,  5.69it/s]0it [00:00, ?it/s]9it [00:00, 110.23it/s]
-
-Writing Documents:  34%|███▍      | 20/59 [00:03<00:06,  6.07it/s]0it [00:00, ?it/s]9it [00:00, 110.92it/s]
-
-Writing Documents:  36%|███▌      | 21/59 [00:03<00:05,  6.36it/s]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (1 failures):  37%|███▋      | 22/59 [00:05<00:28,  1.30it/s]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (2 failures):  39%|███▉      | 23/59 [00:07<00:44,  1.24s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (3 failures):  41%|████      | 24/59 [00:10<00:53,  1.54s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (4 failures):  42%|████▏     | 25/59 [00:12<00:59,  1.74s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (5 failures):  44%|████▍     | 26/59 [00:14<01:01,  1.88s/it]0it [00:00, ?it/s]2it [00:00, 10.34it/s]2it [00:02,  1.12s/it]
-
-Writing Documents (6 failures):  46%|████▌     | 27/59 [00:16<01:04,  2.01s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (7 failures):  47%|████▋     | 28/59 [00:19<01:04,  2.07s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (8 failures):  49%|████▉     | 29/59 [00:21<01:03,  2.11s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (9 failures):  51%|█████     | 30/59 [00:23<01:01,  2.14s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (10 failures):  53%|█████▎    | 31/59 [00:25<01:00,  2.16s/it]0it [00:00, ?it/s]2it [00:00,  9.76it/s]2it [00:02,  1.13s/it]
-
-Writing Documents (11 failures):  54%|█████▍    | 32/59 [00:28<00:59,  2.21s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (12 failures):  56%|█████▌    | 33/59 [00:30<00:57,  2.21s/it]0it [00:00, ?it/s]56it [00:00, 694.40it/s]
-
-Writing Documents (12 failures):  58%|█████▊    | 34/59 [00:30<00:40,  1.60s/it]0it [00:00, ?it/s]16it [00:00, 201.92it/s]
-
-Writing Documents (12 failures):  59%|█████▉    | 35/59 [00:30<00:27,  1.16s/it]0it [00:00, ?it/s]16it [00:00, 195.41it/s]
-
-Writing Documents (12 failures):  61%|██████    | 36/59 [00:30<00:19,  1.17it/s]0it [00:00, ?it/s]7it [00:00, 89.42it/s]
-
-Writing Documents (12 failures):  63%|██████▎   | 37/59 [00:30<00:14,  1.56it/s]0it [00:00, ?it/s]2it [00:00,  9.05it/s]2it [00:02,  1.14s/it]
-
-Writing Documents (13 failures):  64%|██████▍   | 38/59 [00:33<00:24,  1.15s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (14 failures):  66%|██████▌   | 39/59 [00:35<00:29,  1.47s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (15 failures):  68%|██████▊   | 40/59 [00:37<00:32,  1.69s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (16 failures):  69%|██████▉   | 41/59 [00:39<00:33,  1.84s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (17 failures):  71%|███████   | 42/59 [00:42<00:33,  1.96s/it]0it [00:00, ?it/s]2it [00:02,  1.07s/it]
-
-Writing Documents (18 failures):  73%|███████▎  | 43/59 [00:44<00:32,  2.03s/it]0it [00:00, ?it/s]2it [00:00,  8.25it/s]21it [00:00, 86.12it/s]
-
-Writing Documents (18 failures):  75%|███████▍  | 44/59 [00:44<00:22,  1.51s/it]0it [00:00, ?it/s]21it [00:00, 249.05it/s]
-
-Writing Documents (18 failures):  76%|███████▋  | 45/59 [00:44<00:15,  1.10s/it]0it [00:00, ?it/s]21it [00:00, 242.32it/s]
-
-Writing Documents (18 failures):  78%|███████▊  | 46/59 [00:44<00:10,  1.23it/s]0it [00:00, ?it/s]306it [00:00, 3501.59it/s]
-
-Writing Documents (18 failures):  80%|███████▉  | 47/59 [00:45<00:07,  1.60it/s]0it [00:00, ?it/s]306it [00:00, 3471.53it/s]
-
-Writing Documents (18 failures):  81%|████████▏ | 48/59 [00:45<00:05,  2.08it/s]0it [00:00, ?it/s]32it [00:00, 390.97it/s]
-
-Writing Documents (18 failures):  83%|████████▎ | 49/59 [00:45<00:03,  2.64it/s]0it [00:00, ?it/s]16it [00:00, 194.47it/s]
-
-Writing Documents (18 failures):  85%|████████▍ | 50/59 [00:45<00:02,  3.25it/s]0it [00:00, ?it/s]2it [00:00,  8.78it/s]5it [00:00, 21.84it/s]
-
-Writing Documents (18 failures):  86%|████████▋ | 51/59 [00:45<00:02,  3.31it/s]0it [00:00, ?it/s]12it [00:00, 142.83it/s]
-
-Writing Documents (18 failures):  88%|████████▊ | 52/59 [00:45<00:01,  3.93it/s]0it [00:00, ?it/s]12it [00:00, 142.86it/s]
-
-Writing Documents (18 failures):  90%|████████▉ | 53/59 [00:46<00:01,  4.47it/s]0it [00:00, ?it/s]5it [00:00, 96.53it/s]
-
-Writing Documents (18 failures):  92%|█████████▏| 54/59 [00:46<00:00,  5.26it/s]0it [00:00, ?it/s]7it [00:00, 83.66it/s]
-
-Writing Documents (18 failures):  93%|█████████▎| 55/59 [00:46<00:00,  5.67it/s]0it [00:00, ?it/s]9it [00:00, 108.26it/s]
-
-Writing Documents (18 failures):  95%|█████████▍| 56/59 [00:46<00:00,  5.95it/s]0it [00:00, ?it/s]26it [00:00, 327.25it/s]
-
-Writing Documents (18 failures):  97%|█████████▋| 57/59 [00:46<00:00,  6.30it/s]0it [00:00, ?it/s]26it [00:00, 331.41it/s]
-
-Writing Documents (18 failures):  98%|█████████▊| 58/59 [00:46<00:00,  6.58it/s]0it [00:00, ?it/s]2it [00:00,  7.11it/s]26it [00:00, 91.91it/s]
-
-Writing Documents (18 failures): 100%|██████████| 59/59 [00:47<00:00,  4.80it/s]Writing Documents (18 failures): 100%|██████████| 59/59 [00:47<00:00,  1.25it/s]
-Copying external files:   0%|          | 0/13 [00:00<?, ?it/s]Copying external files: 100%|██████████| 13/13 [00:00<00:00, 494.41it/s]
-18 Runs failed to pack.
-See /tmp/tmp1vobbw97 for a list of uids of Runs that failed.
-See /tmp/tmp5nxup2h0 for error logs with more information.

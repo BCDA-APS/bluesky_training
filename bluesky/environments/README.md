@@ -4,16 +4,10 @@ This directory contains the [YAML](https://yaml.org) files that define the
 package requirements (and possibly the acceptable versions) for a conda
 environment.
 
-CONTENTS
-
-- [Environment Definitions](#environment-definitions)
-  - [YAML files](#yaml-files)
-  - [Managing environments](#managing-environments)
-
 ## YAML files
 
 This directory contains the master source for these YAML files.
-The repository is: https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/environments
+The repository is: https://github.com/BCDA-APS/bluesky_training/
 
 version | file
 --- | ---
@@ -32,11 +26,9 @@ repository.
 
 ## Managing environments
 
-Some advice is provided for [managing conda environments](./admin/README.md)
-with these files, such as [creating a new Bluesky environment](./admin/bluesky.md).
-
-First you must activate the environment you will use (if not already activated).
-Such as:
+First you must activate the conda
+[environment](https://bcda-aps.github.io/bluesky_training/instrument/_conda_environment.html)
+you will use (if not already activated). Such as:
 
 ```bash
 (base) prjemian@zap:~$ conda activate bluesky_2023_2
