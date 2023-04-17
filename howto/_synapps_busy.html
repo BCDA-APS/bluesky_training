@@ -140,15 +140,22 @@
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -244,15 +251,22 @@ document.write(`
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../tutor/index.html">
-                        Tutorials
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
                       </a>
                     </li>
                 
 
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
-                        Instrument
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
                       </a>
                     </li>
                 
@@ -295,20 +309,19 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="first_steps_guide.html">First Steps with Bluesky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Call Shell Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">synApps <em>busy</em> record</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
 </ul>
 </div>
 </nav></div>
@@ -368,8 +381,6 @@ document.write(`
                   
   <section id="synApps-busy-record">
 <h1>synApps <em>busy</em> record<a class="headerlink" href="#synApps-busy-record" title="Permalink to this heading">#</a></h1>
-<p><strong>Work-in-Progress</strong></p>
-<p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>In this notebook, we show how to use the EPICS <em>busy</em> record.</p>
 <p>The synApps <a class="reference external" href="https://epics.anl.gov/bcda/synApps/busy/busyRecord.html">busy record</a> is used to signal the completion of an operation. Generally, the <em>busy</em> record is used for operations that have no inherent means of reporting that a long or complex operation has completed. Two cases come to mind immediately, both involving waiting for completion of some operation):</p>
