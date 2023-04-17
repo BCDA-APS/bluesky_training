@@ -27,7 +27,7 @@ line.
    - `About the instrument package <file:///home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/build/html/instrument/describe_instrument.html>`_
 - :ref:`examples`
    - `XAFS scan <https://bcda-aps.github.io/bluesky_training/example/_xafs_scan.html>`_ : Example multi-segment XAFS scan.
-- :ref:`Tutorials and Lessons <tutorials>`
+- :ref:`Tutorials and Lessons <tutorials>` 
    - `APS Bluesky 101 <https://bcda-aps.github.io/bluesky_training/tutor/aps101.html>`_
    - `Connect Bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html>`_
    - `Hello, World <https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html>`_
