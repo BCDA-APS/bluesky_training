@@ -93,7 +93,7 @@ preconfigured to use the general purpose `gp:` IOC and the area detector `ad:`
 IOC.
 
 1. [Count the scaler](https://bcda-aps.github.io/bluesky_training/howto/_count_scaler.html)
-1. [Watch a temperature](https://bcda-aps.github.io/bluesky_training/howto/_watch_temperature.html)
+1. [Watch a temperature](https://bcda-aps.github.io/bluesky_training/example/_watch_temperature.html)
 1. [Lineup a 1-D peak](https://bcda-aps.github.io/bluesky_training/howto/_lineup_1d_peak.html)
 1. [Locate peak on 2-D area detector image](https://bcda-aps.github.io/bluesky_training/howto/_locate_image_peak.html)
 1. [Plot $(x,y)$ data from a databroker run](https://bcda-aps.github.io/bluesky_training/howto/_plot_x_y_databroker.html)
