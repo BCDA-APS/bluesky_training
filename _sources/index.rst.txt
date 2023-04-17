@@ -13,8 +13,10 @@ line.
    the `index.rst` file of that folder.
 
 - :ref:`howto`
-   -  `First Steps Guide <howto/first_steps_guide.md>`__ :
+   -  `First Steps Guide <howto/first_steps_guide.md>`_:
       First Steps to use Bluesky after installation.
+   -  `Plot x, y data from a databroker run <https://bcda-aps.github.io/bluesky_training/howto/_plot_x_y_databroker.html>`_
+   -  `Working with data after the measurement <https://bcda-aps.github.io/bluesky_training/howto/_after_measurement.html>`_
 - :ref:`instrument`
    -  `Installation Guide <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html>`_:
       Install the components of the Bluesky framework.
@@ -25,7 +27,7 @@ line.
    - `About the instrument package <file:///home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/build/html/instrument/describe_instrument.html>`_
 - :ref:`examples`
    - `XAFS scan <https://bcda-aps.github.io/bluesky_training/example/_xafs_scan.html>`_ : Example multi-segment XAFS scan.
-- :ref:`tutorials and lessons <tutorials>`
+- :ref:`Tutorials and Lessons <tutorials>`
    - `APS Bluesky 101 <https://bcda-aps.github.io/bluesky_training/tutor/aps101.html>`_
    - `Connect Bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html>`_
    - `Hello, World <https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html>`_
