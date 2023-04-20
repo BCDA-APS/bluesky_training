@@ -30,7 +30,7 @@ line.
 - :ref:`Tutorials and Lessons <tutorials>`
    - `APS Bluesky 101 <https://bcda-aps.github.io/bluesky_training/tutor/aps101.html>`_
    - `Connect Bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html>`_
-   - `Hello, World <https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html>`_
+   - `Hello, World <https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html>`_
 - :ref:`reference`
    -  `bluesky training wiki <https://github.com/BCDA-APS/bluesky_training/wiki>`_:
       Includes list of APS instruments
