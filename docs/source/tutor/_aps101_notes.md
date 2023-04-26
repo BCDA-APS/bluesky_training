@@ -1,8 +1,9 @@
-# APS Bluesky 101
+# APS Bluesky 101 - Presenter's Notes
+
+<u>Note</u>: The following content are notes for the presenter from 2021, not
+the training itself.
 
 ## Overview
-
-<u>Note</u>: The following content are notes for the presenter, not the training itself.
 
 The *APS Bluesky 101* class provides a basic, yet
 hands-on, introduction to using the [Bluesky framework](https://blueskyproject.io).
