@@ -1,6 +1,6 @@
 # Installation
 
-Describes the steps to install a new bluesky instrument.
+Describes the steps to install a new instrument.
 
 **Note**:  These *instructions have been written for workstations running the
 Linux operating system*.  They may be used for other operating systems but
@@ -10,62 +10,80 @@ x86_64 host architectures.
 
 **IMPORTANT**: In Linux, use the `bash` command shell.
 
-<details>
-<summary>What is <b>bash</b>?</summary>
-
- Bash is a type of shell, which is a program that provides a user interface for accessing the operating system's services.
-
-To determine if you're using Bash, you can open up a terminal or command prompt on your computer and type in the following command:
-
-<pre>
-$ <b>echo $SHELL</b>
-</pre>
- If the output is "/bin/bash" or something similar, then you're using the Bash shell.
-
-If bash is not your default shell, type in the following command in a terminal to start a new instance of the Bash shell:
-
-<pre>
-$ <b>bash</b>
-</pre>
-
- Press enter, and you should see a new prompt indicating that you're now using the Bash shell. You can now type in Bash commands. 
- Note that any changes you make to your environment variables or other system settings within this Bash session will only apply to this session and will not persist after you close the session. To change your default shell, contact your IT support. 
-
-</details>
-
 ## Setup a bluesky instrument
 
 Use the `new_bluesky_instrument.py`
 [program](https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py)
 to install a new bluesky instrument configuration from the online [APS Bluesky
-Training](https://github.com/BCDA-APS/bluesky_training) repository template.
+Training](https://github.com/BCDA-APS/bluesky_training) repository template. The program creates a new
+`bluesky` directory in the home directory. 
+Use `new_bluesky_instrument.py -h` for usage information.
 
-**Note**: APS users can run this program with this command to create a new
-`bluesky` directory in their home directory:
 
-<pre>
-<b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
-</pre>
-
-Workstations on other networks will need to download this program from the URL
-above.
-
-`new_bluesky_instrument.py` only needs Python 3.6+ and the
+The `new_bluesky_instrument.py` program requires Python 3.6+ and the
 [requests](https://docs.python-requests.org/en/latest/index.html) package.
 
-Here's an example:
+<details>
+<summary>How can I tell the python version I am using?</summary>
+Type the following command:
 
 <pre>
-$ <b>python new_bluesky_instrument.py  ./bluesky</b>
+$ <b>python --version</b>
+</pre>
+This will print the version of Python currently installed on your system. If you need to upgrade python, see [here](https://www.python.org/downloads/). 
+
+</details>
+
+<details>
+<summary>How can I tell if the <b>requests</b> pacakage is installed?</summary>
+
+In a terminal, launch Python by typing `python` or `python3` followed by Enter.
+
+Type the following command and press Enter:
+<pre>
+$ <b>import requests</b>
+</pre>
+If the command runs without any errors, then you have the Requests package installed. If you don't have the package installed, you'll see an error message like `"ModuleNotFoundError: No module named 'requests'"`. 
+
+
+</details>
+<br>
+
+To run the program:
+
+<details>
+<summary>On an APS machine with access to APSshare</summary>
+
+This command can be run directly from a terminal:
+<pre>
+$ <b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
+</pre>
+</details>
+
+<details>
+<summary>On a machine with no access to APSshare</summary>
+Workstations on other networks will need to download this program from the URL
+above. Navigate to the directory where the program was downlowded and run the following command:
+
+<pre>
+$ <b>python new_bluesky_instrument.py ~/bluesky</b>
+</pre>
+
+</details>
+<br>
+
+
+
+When run successfully, the program output should look like this:
+
+<pre>
 INFO:__main__:Requested installation to: 'bluesky'
 INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
 </pre>
 
-Use `new_bluesky_instrument.py -h` for usage information.
-
-The installer will download the ZIP file from the GitHub training repository if
+The installer downloads the ZIP file from the GitHub training repository if
 it's not already present in the `/tmp` directory or if the existing file is old.
 
 ## Create the conda environment
