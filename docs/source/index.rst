@@ -28,8 +28,8 @@ line.
 - :ref:`examples`
    - `XAFS scan <https://bcda-aps.github.io/bluesky_training/example/_xafs_scan.html>`_ : Example multi-segment XAFS scan.
 - :ref:`Tutorials and Lessons <tutorials>`
-   - `Hello, World <https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html>`_
    - `Connect Bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html>`_
+   - `Hello, World <https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html>`_
 - :ref:`reference`
    -  `bluesky training wiki <https://github.com/BCDA-APS/bluesky_training/wiki>`_:
       Includes list of APS instruments
