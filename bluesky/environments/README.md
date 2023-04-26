@@ -11,8 +11,8 @@ The repository is: https://github.com/BCDA-APS/bluesky_training/
 
 version | file
 --- | ---
-2023-2 (developing) | [`environment_2023_2.yml`](./environment_2023_2.yml)
-2023-1 (latest) | [`environment_2023_1.yml`](./environment_2023_1.yml)
+2023-2 (latest) | [`environment_2023_2.yml`](./environment_2023_2.yml)
+2023-1 | [`environment_2023_1.yml`](./environment_2023_1.yml)
 2022_3 | [`environment_2022_3.yml`](./environment_2022_3.yml)
 2022_2 | [`environment_2022_2.yml`](./environment_2022_2.yml)
 2022_1 | [`environment_2022_1.yml`](./environment_2022_1.yml)
