@@ -1,18 +1,38 @@
 # Test the New Bluesky Instrument
 
-At this point, you have assembled enough of the parts to test the initial
-installation with bluesky. Follow these steps:
+Test the new bluesky instrument package.
+
+<details>
+<summary>How to install a new instrument?</summary>
+
+Visit <a href=https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html> Bluesky Installation</a>.
+</details>
+
+<details>
+<summary>How to test my Bluesky installation?</summary>
+Visit <a href=https://bcda-aps.github.io/bluesky_training/tutor/_hello_word.html> Hello World</a>.
+</details>
+
+<br>
+
+Navigate to the in the `~/bluesky` directory:
 
 <pre>
 $ <b>cd ~/bluesky</b>
-$ <b>conda activate bluesky_2023_2</b>
-$ <b>ipython</b>
-Python 3.10.9 | packaged by conda-forge | (main, Feb  2 2023, 20:20:04) [GCC 11.3.0]
-Type 'copyright', 'credits' or 'license' for more information
-IPython 8.11.0 -- An enhanced Interactive Python. Type '?' for help.
-
-In [1]:
 </pre>
+
+and start a Bluesky session (TODO add link).
+
+
+
+
+
+<details>
+<summary>What does the (~) means in <b>~/bluesky</b>?</summary>
+The tilde (~) character represents the current user's home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.
+</details>
+
+<br>
 
 Load the `instrument` package for data collection activities.  The name of each module is logged as it is loaded.
 
@@ -60,7 +80,10 @@ I Mon-14:43:30 - #### Startup is complete. ####
 In [2]:
 </pre>
 
-The time-stamped lines that start with `I ` are `Information` log messages from the logger.  The logger levels are:
+The time-stamped lines that start with `I ` are `Information` log messages from the logger.
+<details>
+<summary>More about the logger</summary>
+The logger levels are:
 
 starting | meaning
 --- | ---
@@ -71,71 +94,15 @@ starting | meaning
 
 The logger output to the terminal is intentionally terse.  Greater detail may be available in log files in the `.logs/` subdirectory.
 
-Load the `Hello, World!` example from the `user/` code directory:
+</details>
 
-<pre>
-In [2]: <b>%run -i user/quick_hello.py</b>
-Loading 'Hello, World!' example.
+<br>
 
-In [3]: 
+The IPython output should end with  the message: 
+
+<pre>#### Startup is complete. ####
 </pre>
 
-**Note**: The `Loading 'Hello, World!' example.` text came from a `print()` statement in the file.
 
-This also loads `hello_world()`, a demonstration bluesky *plan*.  Run that plan with the bluesky RunEngine instance `RE`:
-
-<pre>
-In [3]: <b>RE(hello_world())</b>
-
-
-Transient Scan ID: 877     Time: 2023-03-13 14:51:21
-Persistent Unique Scan ID: '76e1f4c4-5e46-47ee-bfb2-729b183f3367'
-New stream: 'primary'
-+-----------+------------+------------+
-|   seq_num |       time |      hello |
-+-----------+------------+------------+
-|         1 | 14:51:21.8 |          1 |
-+-----------+------------+------------+
-generator count ['76e1f4c4'] (scan num: 877)
-Out[3]: ('76e1f4c4-5e46-47ee-bfb2-729b183f3367',)
-
-In [4]: 
-</pre>
-
-We're using a temporary databroker catalog (as logged in the startup above). The
-data from this run is available until we quite the IPython session. Let's take a
-look at the data.  First, get a reference to the *run* from the databroker
-catalog reference `cat`:
-
-<pre>
-In [4]: <b>run = cat[-1]</b>
-</pre>
-
-Show a brief description of that `run`:
-
-<pre>
-In [5]: <b>run</b>
-Out[5]: 
-BlueskyRun
-  uid='76e1f4c4-5e46-47ee-bfb2-729b183f3367'
-  exit_status='success'
-  2023-03-13 14:51:21.874 -- 2023-03-13 14:51:21.880
-  Streams:
-    * primary
-</pre>
-
-The run's data is in the `primary` stream.  Show it:
-
-<pre>
-In [6]: <b>run.primary.read()</b>
-Out[6]: 
-&lt;xarray.Dataset>
-Dimensions:     (time: 1)
-Coordinates:
-  * time        (time) float64 1.679e+09
-Data variables:
-    hello       (time) int64 1
-    hello_text  (time) &lt;U13 'Hello, World!'
-</pre>
 
 Congratulations!  You've tested your new bluesky instrument.
