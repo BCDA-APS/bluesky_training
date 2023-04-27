@@ -37,6 +37,6 @@ This is a list of commonly asked questions concerning Bluesky.
 
 .. _faq-linux-tilde:
 
-4. What does the (~) means in a path?
+4. What does the (~) mean in a path?
 
     The tilde (~) character represents the current user's home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.
