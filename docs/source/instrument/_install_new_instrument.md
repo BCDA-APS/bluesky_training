@@ -8,31 +8,7 @@ expect some modifications are necessary.  One such modification is that the
 `libhkl` library, needed for diffractometer support, is only available for Linux
 x86_64 host architectures.
 
-**IMPORTANT**: In Linux, use the `bash` command shell.
-
-<details>
-<summary>What is <b>bash</b>?</summary>
-
- Bash is a type of shell, which is a program that provides a user interface for accessing the operating system's services.
-
-To determine if you're using Bash, you can open up a terminal or command prompt on your computer and type in the following command:
-
-<pre>
-$ <b>echo $SHELL</b>
-</pre>
- If the output is "/bin/bash" or something similar, then you're using the Bash shell.
-
-If bash is not your default shell, type in the following command in a terminal to start a new instance of the Bash shell:
-
-<pre>
-$ <b>bash</b>
-</pre>
-
- Press enter, and you should see a new prompt indicating that you're now using the Bash shell. You can now type in Bash commands. 
- Note that any changes you make to your environment variables or other system settings within this Bash session will only apply to this session and will not persist after you close the session. To change your default shell, contact your IT support. 
-
-</details>
-<br>
+**IMPORTANT**: In Linux, use the `bash` command shell. For more info see [what is bash?](https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash).
 
 ## Setup a bluesky instrument
 
