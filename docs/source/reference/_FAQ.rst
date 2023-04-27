@@ -18,7 +18,7 @@ This is a list of commonly asked questions concerning Bluesky.
 
 #. How to start a Bluesky session? 
 
-    Visit this page (TODO).
+    Visit `Getting started <https://bcda-aps.github.io/bluesky_training/tutor/_start_bluesky_session.html>`_
 
 #. In python, what are classes, objects, methods and instances??
 
