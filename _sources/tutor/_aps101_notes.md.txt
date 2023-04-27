@@ -1,4 +1,7 @@
-# APS Bluesky 101
+# APS Bluesky 101 - Presenter's Notes
+
+<u>Note</u>: The following content are notes for the presenter from 2021, not
+the training itself.
 
 ## Overview
 
@@ -17,7 +20,7 @@ graphical text editors, MongoDB database server, and Python infrastructure.
 
 ## Syllabus
 
-note: time spans are estimates
+<u>Note</u>: time spans are estimates
 
 - half-hour
   - Welcome
