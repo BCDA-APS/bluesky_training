@@ -48,7 +48,7 @@ alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 More documentation about [conda](../reference/_conda_base.md) is available
 [elsewhere](../instrument/_conda_environment.md) in this repository.
 
-### bash environment variables
+## bash environment variables
 
 The `blueskyStarter.sh` script looks for the `BLUESKY_CONDA_ENV` (bash shell)
 environment variable to choose the correct conda environment for Bluesky.
