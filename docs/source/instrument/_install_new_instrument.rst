@@ -178,9 +178,9 @@ Activate the bluesky conda environment
 
 
 
-The prompt changes to displays ``(base)``. Now you can use
-``conda env list`` to see the environments you have and the directories
-in which they are installed.
+   The prompt changes to displays ``(base)``. Now you can use
+   ``conda env list`` to see the environments you have and the directories
+   in which they are installed.
 
 
 
