@@ -85,9 +85,10 @@ workstation at APS with access to the ``/APSshare`` file server):
 
    .. tab:: not at APS
 
-      Workstations on other networks (with no access to APSshare) need to
-      download this program from the URL above. Navigate to the directory where
-      the program was downloaded and run the following command:
+      Workstations on other networks (with no access to APSshare) need to <a
+      href="https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/new_bluesky_instrument.py">download
+      this program</a>. Navigate to the directory where the program was
+      downloaded and run the following command:
 
       .. raw:: html
 
