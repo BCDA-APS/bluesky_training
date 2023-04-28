@@ -9,3 +9,4 @@ pydata-sphinx-theme
 pygments >=2.12
 pygments-ipython-console
 sphinx <6
+sphinx-tabs
