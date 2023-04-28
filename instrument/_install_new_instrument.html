@@ -387,7 +387,7 @@ modification is that the <code class="docutils literal notranslate"><span class=
 support, is only available for Linux x86_64 host architectures.</p>
 <p><strong>IMPORTANT</strong>: In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell. For more info
 see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash">what is
-bash?</a>.</p>
+bash?</a></p>
 <section id="setup-a-bluesky-instrument">
 <h2>Setup a bluesky instrument<a class="headerlink" href="#setup-a-bluesky-instrument" title="Permalink to this heading">#</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code>
@@ -434,7 +434,7 @@ you'll see an error message like:
 <br /><p>Run the installer program (instructions are different if you are using a
 workstation at APS with access to the <code class="docutils literal notranslate"><span class="pre">/APSshare</span></code> file server):</p>
 <div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">at APS</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">not at APS</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>On an APS machine with access to APSshare,
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">At APS</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">Not at APS</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>On an APS machine with access to APSshare,
 run this command from a terminal session:</p>
 <pre>
 $ <b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
@@ -451,10 +451,7 @@ INFO:__main__:Requested installation to: 'bluesky'
 INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
-</pre><p>The installer checks the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory for the ZIP file from the GitHub
-repository.  A fresh ZIP file is downloaded if the file is not found or is older
-than a day.</p>
-</section>
+</pre></section>
 <section id="activate-the-bluesky-conda-environment">
 <h2>Activate the bluesky conda environment<a class="headerlink" href="#activate-the-bluesky-conda-environment" title="Permalink to this heading">#</a></h2>
 <details>
@@ -469,36 +466,23 @@ See <a href="https://bcda-aps.github.io/bluesky_training/instrument/_create_cond
 Since we're inside a raw html block, NONE of the rst syntax will work properly.
 
 Switch back to rst here by unindenting these blocks.
---><p>First, check that you have the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command.  Type this command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">which</span> <span class="n">conda</span>
-</pre></div>
-</div>
-<p>If this prints a (directory and) file, you have the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command. If
-nothing is printed, you do not have the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command.  Load it with these
-next instructions.</p>
-<div class="sphinx-tabs docutils container">
-<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">at APS</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">not at APS</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>On a machine with access to APSshare, type the command:</p>
+--><div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">At APS</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">Not at APS</button><button aria-controls="panel-1-1-2" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-2" name="1-2" role="tab" tabindex="-1">Need to install conda?</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>On a machine with access to APSshare, type the command:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="o">/</span><span class="n">APSshare</span><span class="o">/</span><span class="n">miniconda</span><span class="o">/</span><span class="n">x86_64</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
 </pre></div>
 </div>
-</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>On a machine with no access to APSshare, type the command:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">activate</span>
+<p>If you are getting an error, contact the Bluesky support team.</p>
+</div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>On a machine with no access to APSshare, you first need to check that you have the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command.  Type this command:
+<code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">conda</span></code>. If this prints the path to conda, you can activate it by using:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">conda</span> <span class="n">activate</span>
 </pre></div>
 </div>
-<div class="admonition tip">
-<p class="admonition-title">Tip</p>
-<p>You might need to supply the complete path to the <code class="docutils literal notranslate"><span class="pre">activate</span></code> script,
-such as shown in the <em>at APS</em> tab.</p>
-</div>
-</div></div>
-<p>The prompt changes to displays <code class="docutils literal notranslate"><span class="pre">(base)</span></code>. Now you can use
-<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code> to see the environments you have and the directories
-in which they are installed.</p>
-<p>If you are getting an error message (<code class="docutils literal notranslate"><span class="pre">bash:</span> <span class="pre">conda:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code>
+<p>Otherwise, see the conda installation tab.</p>
+</div><div aria-labelledby="tab-1-1-2" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-2" name="1-2" role="tabpanel" tabindex="0"><p>If the command <code class="docutils literal notranslate"><span class="pre">which</span> <span class="pre">conda</span></code> does not return anything, or if you are getting an error message (<code class="docutils literal notranslate"><span class="pre">bash:</span> <span class="pre">conda:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code>
 or <code class="docutils literal notranslate"><span class="pre">bash:</span> <span class="pre">activate:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code>), conda is not
 installed on your computer or it is not added to the system’s PATH
 environment variable.</p>
-<p>You can try to install conda by following the installation instructions
+<p>You can install conda by following the installation instructions
 for your operating system. You can find the instructions for Windows,
 macOS, and Linux on the official conda documentation
 <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">website</a>.</p>
@@ -507,6 +491,10 @@ or command prompt and typing <code class="docutils literal notranslate"><span cl
 the same error message, you may need to add the conda installation
 directory to your system’s PATH environment variable manually. You can
 find instructions on how to do this in the Conda documentation.</p>
+</div><p>The prompt changes to displays <code class="docutils literal notranslate"><span class="pre">(base)</span></code>. Now you can use
+<code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code> to see the environments you have and the directories
+in which they are installed.</p>
+</div>
 </details>
 <br /><p>To use bluesky, you need to activate the bluesky conda environment.
 Here’s an example:</p>
