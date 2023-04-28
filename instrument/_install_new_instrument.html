@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Installation &#8212; APS Bluesky Training  documentation</title>
   
@@ -31,6 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -43,7 +44,6 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_install_new_instrument';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="IPython Profile" href="_ipython.html" />
@@ -310,10 +310,12 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Conda virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_create_conda_env.html">Create the conda environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_tab_example.html">Example of tabs</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
@@ -376,101 +378,92 @@ document.write(`
                   
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Permalink to this heading">#</a></h1>
-<p>Describes the steps to install a new instrument.</p>
+<p>Describes the steps to install a new bluesky instrument.</p>
 <p><strong>Note</strong>:  These <em>instructions have been written for workstations running the
 Linux operating system</em>.  They may be used for other operating systems but
 expect some modifications are necessary.  One such modification is that the
 <code class="docutils literal notranslate"><span class="pre">libhkl</span></code> library, needed for diffractometer support, is only available for Linux
 x86_64 host architectures.</p>
-<p><strong>IMPORTANT</strong>: In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell.</p>
+<p><strong>IMPORTANT</strong>: In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell. For more info see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash">what is bash?</a>.</p>
 <section id="setup-a-bluesky-instrument">
 <h2>Setup a bluesky instrument<a class="headerlink" href="#setup-a-bluesky-instrument" title="Permalink to this heading">#</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code>
 <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py">program</a>
 to install a new bluesky instrument configuration from the online <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training">APS Bluesky
-Training</a> repository template.</p>
-<p><strong>Note</strong>: APS users can run this program with this command to create a new
-<code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory in their home directory:</p>
-<pre>
-<b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
-</pre>
-<p>Workstations on other networks will need to download this program from the URL
-above.</p>
-<p><code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code> only needs Python 3.6+ and the
+Training</a> repository template. The program creates a new
+<code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory in the home directory.
+Use <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span> <span class="pre">-h</span></code> for usage information.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code> program requires Python 3.6+ and the
 <a class="reference external" href="https://docs.python-requests.org/en/latest/index.html">requests</a> package.</p>
-<p>Here’s an example:</p>
+<details>
+<summary>How can I tell the <b>python</b> version I am using?</summary>
+Type the following command:
 <pre>
-$ <b>python new_bluesky_instrument.py  ./bluesky</b>
+$ <b>python --version</b>
+</pre>
+<p>This will print the version of Python currently installed on your system. If you need to upgrade python, see <a class="reference external" href="https://www.python.org/downloads/">here</a>.</p>
+</details>
+<details>
+<summary>How can I tell if the <b>requests</b> pacakage is installed?</summary>
+<p>In a terminal, launch Python by typing <code class="docutils literal notranslate"><span class="pre">python</span></code> or <code class="docutils literal notranslate"><span class="pre">python3</span></code> followed by Enter.</p>
+<p>Type the following command and press Enter:</p>
+<pre>
+$ <b>import requests</b>
+</pre>
+<p>If the command runs without any errors, then you have the Requests package installed. If you don’t have the package installed, you’ll see an error message like <code class="docutils literal notranslate"><span class="pre">&quot;ModuleNotFoundError:</span> <span class="pre">No</span> <span class="pre">module</span> <span class="pre">named</span> <span class="pre">'requests'&quot;</span></code>.</p>
+</details>
+<br>
+<p>To run the program:</p>
+<details>
+<summary>On an APS machine with access to APSshare</summary>
+<p>This command can be run directly from a terminal:</p>
+<pre>
+$ <b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
+</pre>
+</details>
+<details>
+<summary>On a machine with no access to APSshare</summary>
+Workstations on other networks will need to download this program from the URL
+above. Navigate to the directory where the program was downlowded and run the following command:
+<pre>
+$ <b>python new_bluesky_instrument.py ~/bluesky</b>
+</pre>
+</details>
+<br>
+<p>When run successfully, the program output should look like this:</p>
+<pre>
 INFO:__main__:Requested installation to: 'bluesky'
 INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
 </pre>
-<p>Use <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span> <span class="pre">-h</span></code> for usage information.</p>
-<p>The installer will download the ZIP file from the GitHub training repository if
+<p>The installer downloads the ZIP file from the GitHub training repository if
 it’s not already present in the <code class="docutils literal notranslate"><span class="pre">/tmp</span></code> directory or if the existing file is old.</p>
 </section>
-<section id="create-the-conda-environment">
-<h2>Create the conda environment<a class="headerlink" href="#create-the-conda-environment" title="Permalink to this heading">#</a></h2>
-<p>A bluesky instrument uses many Python packages not included in the Python
-Standard Library.  Rather than add these directly into the system Python
-installation, it is recommended to create a Python virtual environment which has
-the suite of packages (and specific versions) required.</p>
-<p>Follow these steps to create a conda environment for data collection with
-bluesky.</p>
-<p><strong>IMPORTANT</strong>:  You must use <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell.</p>
-<p>Here’s an example for the <code class="docutils literal notranslate"><span class="pre">bluesky_2023_2</span></code> environment:</p>
-<pre>
-$ <b>cd ~/bluesky</b>
-$ <b>conda env create \
-    --force \
-    -n bluesky_2023_2 \
-    -f ./environments/environment_2023_2.yml \
-    --solver=libmamba</b>
-</pre>
+<section id="activate-the-bluesky-conda-environment">
+<h2>Activate the bluesky conda environment<a class="headerlink" href="#activate-the-bluesky-conda-environment" title="Permalink to this heading">#</a></h2>
 <details>
-<p>In the commands above, a long command has been split over several lines to make
-it clearer to read and also to take less screen width. We could enter the
-<code>conda env</code> command all one one line.  These commands work the same
-as the one above.</p>
-<pre>
-$ <b>cd ~/bluesky</b>
-$ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
-</pre>
+<summary> How to create a conda environment for bluesky?</summary>
+<p>See <a class="reference internal" href="_create_conda_env.html"><span class="std std-doc">here</span></a>.</p>
 </details>
-<p>The <a class="reference internal" href="_directory_layout.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code></span></a> script looks for the
-<code class="docutils literal notranslate"><span class="pre">BLUESKY_CONDA_ENV</span></code> (bash shell) environment variable to choose the correct
-conda environment for Bluesky.  Suggest setting this in <code class="docutils literal notranslate"><span class="pre">~/.bash_aliases</span></code> (if
-that does not exist, then add it to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">BLUESKY_CONDA_ENV</span><span class="o">=</span>bluesky_2023_2
-<span class="nb">alias</span><span class="w"> </span><span class="nv">become_bluesky</span><span class="o">=</span><span class="s1">&#39;conda activate ${BLUESKY_CONDA_ENV}&#39;</span>
-</pre></div>
-</div>
-<p>More documentation about <a class="reference internal" href="../reference/_conda_base.html"><span class="std std-doc">conda</span></a> is available
-<a class="reference internal" href="_conda_environment.html"><span class="std std-doc">elsewhere</span></a> in this repository.</p>
-<section id="bash-environment-variables">
-<h3>bash environment variables<a class="headerlink" href="#bash-environment-variables" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> script looks for the <code class="docutils literal notranslate"><span class="pre">BLUESKY_CONDA_ENV</span></code> (bash shell)
-environment variable to choose the correct conda environment for Bluesky.
-Suggest setting this in <code class="docutils literal notranslate"><span class="pre">~/.bash_aliases</span></code> (if that does not exist, then add it
-to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>).</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">BLUESKY_CONDA_ENV</span><span class="o">=</span>bluesky_2023_2
-</pre></div>
-</div>
-</section>
-</section>
-<section id="activate-the-conda-environment">
-<h2>Activate the conda environment<a class="headerlink" href="#activate-the-conda-environment" title="Permalink to this heading">#</a></h2>
-<p>As shown above, you will need to activate the conda environment in each console
-session when you plan to use it.  Here’s an example:</p>
+<details>
+<summary> How do I know if I have a conda environment for bluesky?</summary>
+<ul class="simple">
+<li><p><strong>On a machine with access to APSshare:</strong> Type the command <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">/APSshare/miniconda/x86_64/bin/activate</span></code></p></li>
+<li><p><strong>On a machine with no access to APSshare:</strong> Type the command <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code>. If you are using an older version of conda, you may need to use the <code class="docutils literal notranslate"><span class="pre">source</span></code> command instead: <code class="docutils literal notranslate"><span class="pre">source</span> <span class="pre">activate</span></code>.</p></li>
+</ul>
+<p>The prompt changes to displays <code class="docutils literal notranslate"><span class="pre">(base)</span></code>. Now you can use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code> to see the environments you have and the directories in which they are installed.</p>
+<p>If you are getting an error message (<code class="docutils literal notranslate"><span class="pre">bash:</span> <span class="pre">conda:</span> <span class="pre">command</span> <span class="pre">not</span> <span class="pre">found</span></code> or <code class="docutils literal notranslate"><span class="pre">bash:</span> <span class="pre">activate:</span> <span class="pre">No</span> <span class="pre">such</span> <span class="pre">file</span> <span class="pre">or</span> <span class="pre">directory</span></code>), conda is not installed on your computer or it is not added to the system’s PATH environment variable.</p>
+<p>You can try to install conda by following the installation instructions for your operating system. You can find the instructions for Windows, macOS, and Linux on the official conda documentation <a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html">website</a>.</p>
+<p>Once conda is installed, you can activate it by opening a new terminal or command prompt and typing <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code>. If you still encounter the same error message, you may need to add the conda installation directory to your system’s PATH environment variable manually. You can find instructions on how to do this in the Conda documentation.</p>
+</details>
+<br>
+To use bluesky, you need to activate the bluesky conda environment.  Here's an example:
 <pre>
 $ <b>conda activate bluesky_2023_2</b>
 </pre>
-<p>This activation will remain for the duration of the session, at least until you
-change it with a <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">activate</span></code> or <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code> command or start a new
-shell.</p>
-<p>Use <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">env</span> <span class="pre">list</span></code> to discover the environments you have and the directories
-in which they are installed.</p>
+<p>The prompt changes to display <code class="docutils literal notranslate"><span class="pre">(bluesky_2023_2)</span></code> .</p>
+<p>This activation will remain  in effect for the duration of the session (<em>i.e.</em> as long as the terminal stays open), unless you activate a different environment or deactivate it using the <code class="docutils literal notranslate"><span class="pre">conda</span> <span class="pre">deactivate</span></code> command.</p>
 </section>
 <section id="test-the-new-bluesky-instrument">
 <h2>Test the new bluesky instrument<a class="headerlink" href="#test-the-new-bluesky-instrument" title="Permalink to this heading">#</a></h2>
@@ -585,11 +578,7 @@ with <a class="reference external" href="https://github.com/">GitHub</a> or the
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-a-bluesky-instrument">Setup a bluesky instrument</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-the-conda-environment">Create the conda environment</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#bash-environment-variables">bash environment variables</a></li>
-</ul>
-</li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-conda-environment">Activate the conda environment</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-bluesky-conda-environment">Activate the bluesky conda environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-new-bluesky-instrument">Test the new bluesky instrument</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-your-databroker-catalog-configuration">Setup your databroker catalog configuration</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ipython-profile">IPython profile</a></li>

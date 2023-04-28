@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Lesson 4: Basic scan (&amp; plot) of scaler vs. motor &#8212; APS Bluesky Training  documentation</title>
+    <title>Create the conda environment &#8212; APS Bluesky Training  documentation</title>
   
   
   
@@ -44,12 +44,10 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Lesson 5, Part A: find a peak and lineup" href="_lesson5a.html" />
-    <link rel="prev" title="Lesson 3, Part B: Show Data - Concise Summary" href="_lesson3b.html" />
+    <link rel="next" title="Recommended Directory Layout" href="_directory_layout.html" />
+    <link rel="prev" title="Setup your databroker catalog configuration" href="_configure_databroker.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -138,8 +136,8 @@
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Instrument
                       </a>
                     </li>
@@ -152,8 +150,8 @@
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
                         Tutorials
                       </a>
                     </li>
@@ -249,8 +247,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Instrument
                       </a>
                     </li>
@@ -263,8 +261,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
                         Tutorials
                       </a>
                     </li>
@@ -305,22 +303,22 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="connect_epics.html">Connect Bluesky with EPICS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_aps101_notes.html">APS Bluesky 101 - Presenter’s Notes</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_hello_world.html">Hello, World</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_start_bluesky_session.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
+<li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
+<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Conda virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Create the conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_tab_example.html">Example of tabs</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
 </ul>
 </div>
 </nav></div>
@@ -359,9 +357,9 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</li>
+    <li class="breadcrumb-item active" aria-current="page">Create the conda environment</li>
   </ul>
 </nav>
 </div>
@@ -378,144 +376,54 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="Lesson-4:-Basic-scan-(&amp;-plot)-of-scaler-vs.-motor">
-<h1>Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor<a class="headerlink" href="#Lesson-4:-Basic-scan-(&-plot)-of-scaler-vs.-motor" title="Permalink to this heading">#</a></h1>
-<p><strong>Preparation</strong></p>
-<p><em>``instrument`` package</em></p>
-<p>Make sure the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is in the same directory as this jupyter notebook. The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package included with this lesson is a brief version of the standard package used with any APS instrument. Since the notebook is for teaching, it does not connect with any mongodb database. The scans are not kept by the databroker. However, every scan is saved to a SPEC data file as described when the instrument package is loaded.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+  <section id="create-the-conda-environment">
+<h1>Create the conda environment<a class="headerlink" href="#create-the-conda-environment" title="Permalink to this heading">#</a></h1>
+<p>A bluesky instrument uses many Python packages not included in the Python
+Standard Library.  Rather than add these directly into the system Python
+installation, it is recommended to create a Python virtual environment which has
+the suite of packages (and specific versions) required.</p>
+<p>Follow these steps to create a conda environment for data collection with
+bluesky.</p>
+<p><strong>IMPORTANT</strong>:  You must use <code class="docutils literal notranslate"><span class="pre">bash</span></code> shell.</p>
+<p>Here’s an example for the <code class="docutils literal notranslate"><span class="pre">bluesky_2023_2</span></code> environment:</p>
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda env create \
+    --force \
+    -n bluesky_2023_2 \
+    -f ./environments/environment_2023_2.yml \
+    --solver=libmamba</b>
+</pre>
+<details>
+<p>In the commands above, a long command has been split over several lines to make
+it clearer to read and also to take less screen width. We could enter the
+<code>conda env</code> command all one one line.  These commands work the same
+as the one above.</p>
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
+</pre>
+</details>
+<p>The <a class="reference internal" href="_directory_layout.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code></span></a> script looks for the
+<code class="docutils literal notranslate"><span class="pre">BLUESKY_CONDA_ENV</span></code> (bash shell) environment variable to choose the correct
+conda environment for Bluesky.  Suggest setting this in <code class="docutils literal notranslate"><span class="pre">~/.bash_aliases</span></code> (if
+that does not exist, then add it to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">BLUESKY_CONDA_ENV</span><span class="o">=</span>bluesky_2023_2
+<span class="nb">alias</span><span class="w"> </span><span class="nv">become_bluesky</span><span class="o">=</span><span class="s1">&#39;conda activate ${BLUESKY_CONDA_ENV}&#39;</span>
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+<p>More documentation about <a class="reference internal" href="../reference/_conda_base.html"><span class="std std-doc">conda</span></a> is available
+<a class="reference internal" href="_conda_environment.html"><span class="std std-doc">elsewhere</span></a> in this repository.</p>
+<section id="bash-environment-variables">
+<h2>bash environment variables<a class="headerlink" href="#bash-environment-variables" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> script looks for the <code class="docutils literal notranslate"><span class="pre">BLUESKY_CONDA_ENV</span></code> (bash shell)
+environment variable to choose the correct conda environment for Bluesky.
+Suggest setting this in <code class="docutils literal notranslate"><span class="pre">~/.bash_aliases</span></code> (if that does not exist, then add it
+to <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code>).</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">BLUESKY_CONDA_ENV</span><span class="o">=</span>bluesky_2023_2
 </pre></div>
 </div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-I Wed-13:14:37 - ############################################################ startup
-I Wed-13:14:37 - logging started
-I Wed-13:14:37 - logging level = 10
-I Wed-13:14:37 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/collection.py
-I Wed-13:14:37 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/mpl/notebook.py
-Activating auto-logging. Current session state plus future input saved.
-Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/.logs/ipython_console.log
-Mode           : rotate
-Output logging : True
-Raw input log  : False
-Timestamping   : True
-State          : active
-I Wed-13:14:37 - bluesky framework
-I Wed-13:14:37 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/check_python.py
-I Wed-13:14:37 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/check_bluesky.py
-I Wed-13:14:38 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/initialize.py
-I Wed-13:14:39 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/metadata.py
-I Wed-13:14:39 - /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/instrument/framework/callbacks.py
-I Wed-13:14:40 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/lessons/20201216-131440.dat
-I Wed-13:14:40 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
-I Wed-13:14:40 -    file will be created when bluesky ends its next scan
-I Wed-13:14:40 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
-</pre></div></div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># for jupyterlab ...</span>
-<span class="c1"># https://stackoverflow.com/a/51932652</span>
-<span class="o">%</span><span class="k">matplotlib</span> inline
-</pre></div>
-</div>
-</div>
-<p>get a motor and scaler from the ophyd simulators</p>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd.sim</span> <span class="kn">import</span> <span class="n">motor</span> <span class="k">as</span> <span class="n">m1</span>
-<span class="kn">from</span> <span class="nn">ophyd.sim</span> <span class="kn">import</span> <span class="n">det</span> <span class="k">as</span> <span class="n">scaler</span>
-</pre></div>
-</div>
-</div>
-<p>scan the scaler <em>v.</em> the motor</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">scan</span><span class="p">([</span><span class="n">scaler</span><span class="p">],</span> <span class="n">m1</span><span class="p">,</span> <span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">35</span><span class="p">))</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-
-
-Transient Scan ID: 1     Time: 2020-12-16 13:14:40
-Persistent Unique Scan ID: &#39;61993812-94b5-4701-be35-6c2f06f7e238&#39;
-New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+
-|   seq_num |       time |      motor |        det |
-+-----------+------------+------------+------------+
-|         1 | 13:14:40.4 |     -5.000 |      0.000 |
-|         2 | 13:14:40.5 |     -4.706 |      0.000 |
-|         3 | 13:14:40.5 |     -4.412 |      0.000 |
-|         4 | 13:14:40.6 |     -4.118 |      0.000 |
-|         5 | 13:14:40.6 |     -3.824 |      0.001 |
-|         6 | 13:14:40.7 |     -3.529 |      0.002 |
-|         7 | 13:14:40.7 |     -3.235 |      0.005 |
-|         8 | 13:14:40.8 |     -2.941 |      0.013 |
-|         9 | 13:14:40.8 |     -2.647 |      0.030 |
-|        10 | 13:14:40.8 |     -2.353 |      0.063 |
-|        11 | 13:14:40.9 |     -2.059 |      0.120 |
-|        12 | 13:14:40.9 |     -1.765 |      0.211 |
-|        13 | 13:14:41.0 |     -1.471 |      0.339 |
-|        14 | 13:14:41.0 |     -1.176 |      0.501 |
-|        15 | 13:14:41.1 |     -0.882 |      0.678 |
-|        16 | 13:14:41.1 |     -0.588 |      0.841 |
-|        17 | 13:14:41.1 |     -0.294 |      0.958 |
-|        18 | 13:14:41.2 |      0.000 |      1.000 |
-|        19 | 13:14:41.2 |      0.294 |      0.958 |
-|        20 | 13:14:41.2 |      0.588 |      0.841 |
-|        21 | 13:14:41.3 |      0.882 |      0.678 |
-|        22 | 13:14:41.3 |      1.176 |      0.501 |
-|        23 | 13:14:41.3 |      1.471 |      0.339 |
-|        24 | 13:14:41.4 |      1.765 |      0.211 |
-|        25 | 13:14:41.4 |      2.059 |      0.120 |
-|        26 | 13:14:41.4 |      2.353 |      0.063 |
-|        27 | 13:14:41.5 |      2.647 |      0.030 |
-|        28 | 13:14:41.5 |      2.941 |      0.013 |
-|        29 | 13:14:41.5 |      3.235 |      0.005 |
-|        30 | 13:14:41.6 |      3.529 |      0.002 |
-|        31 | 13:14:41.6 |      3.824 |      0.001 |
-|        32 | 13:14:41.6 |      4.118 |      0.000 |
-|        33 | 13:14:41.7 |      4.412 |      0.000 |
-|        34 | 13:14:41.7 |      4.706 |      0.000 |
-|        35 | 13:14:41.7 |      5.000 |      0.000 |
-+-----------+------------+------------+------------+
-generator scan [&#39;61993812&#39;] (scan num: 1)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-(&#39;61993812-94b5-4701-be35-6c2f06f7e238&#39;,)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<img alt="../_images/tutor__lesson4_6_2.svg" src="../_images/tutor__lesson4_6_2.svg" /></div>
-</div>
+</section>
 </section>
 
 
@@ -530,20 +438,20 @@ generator scan [&#39;61993812&#39;] (scan num: 1)
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_lesson3b.html"
+       href="_configure_databroker.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Lesson 3, Part B: Show Data - Concise Summary</p>
+        <p class="prev-next-title">Setup your databroker catalog configuration</p>
       </div>
     </a>
     <a class="right-next"
-       href="_lesson5a.html"
+       href="_directory_layout.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Lesson 5, Part A: find a peak and lineup</p>
+        <p class="prev-next-title">Recommended Directory Layout</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -560,8 +468,18 @@ generator scan [&#39;61993812&#39;] (scan num: 1)
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
   <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#bash-environment-variables">bash environment variables</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../_sources/tutor/_lesson4.ipynb.txt">
+    <a href="../_sources/instrument/_create_conda_env.md.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

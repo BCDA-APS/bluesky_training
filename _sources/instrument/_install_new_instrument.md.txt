@@ -1,6 +1,6 @@
 # Installation
 
-Describes the steps to install a new instrument.
+Describes the steps to install a new bluesky instrument.
 
 **Note**:  These *instructions have been written for workstations running the
 Linux operating system*.  They may be used for other operating systems but
@@ -8,119 +8,120 @@ expect some modifications are necessary.  One such modification is that the
 `libhkl` library, needed for diffractometer support, is only available for Linux
 x86_64 host architectures.
 
-**IMPORTANT**: In Linux, use the `bash` command shell.
+**IMPORTANT**: In Linux, use the `bash` command shell. For more info see [what is bash?](https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash).
 
 ## Setup a bluesky instrument
 
 Use the `new_bluesky_instrument.py`
 [program](https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py)
 to install a new bluesky instrument configuration from the online [APS Bluesky
-Training](https://github.com/BCDA-APS/bluesky_training) repository template.
+Training](https://github.com/BCDA-APS/bluesky_training) repository template. The program creates a new
+`bluesky` directory in the home directory. 
+Use `new_bluesky_instrument.py -h` for usage information.
 
-**Note**: APS users can run this program with this command to create a new
-`bluesky` directory in their home directory:
 
-<pre>
-<b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
-</pre>
-
-Workstations on other networks will need to download this program from the URL
-above.
-
-`new_bluesky_instrument.py` only needs Python 3.6+ and the
+The `new_bluesky_instrument.py` program requires Python 3.6+ and the
 [requests](https://docs.python-requests.org/en/latest/index.html) package.
 
-Here's an example:
+<details>
+<summary>How can I tell the <b>python</b> version I am using?</summary>
+Type the following command:
 
 <pre>
-$ <b>python new_bluesky_instrument.py  ./bluesky</b>
+$ <b>python --version</b>
+</pre>
+This will print the version of Python currently installed on your system. If you need to upgrade python, see [here](https://www.python.org/downloads/). 
+
+</details>
+
+<details>
+<summary>How can I tell if the <b>requests</b> pacakage is installed?</summary>
+
+In a terminal, launch Python by typing `python` or `python3` followed by Enter.
+
+Type the following command and press Enter:
+<pre>
+$ <b>import requests</b>
+</pre>
+If the command runs without any errors, then you have the Requests package installed. If you don't have the package installed, you'll see an error message like `"ModuleNotFoundError: No module named 'requests'"`. 
+
+
+</details>
+<br>
+
+To run the program:
+
+<details>
+<summary>On an APS machine with access to APSshare</summary>
+
+This command can be run directly from a terminal:
+<pre>
+$ <b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
+</pre>
+</details>
+
+<details>
+<summary>On a machine with no access to APSshare</summary>
+Workstations on other networks will need to download this program from the URL
+above. Navigate to the directory where the program was downlowded and run the following command:
+
+<pre>
+$ <b>python new_bluesky_instrument.py ~/bluesky</b>
+</pre>
+
+</details>
+<br>
+
+
+
+When run successfully, the program output should look like this:
+
+<pre>
 INFO:__main__:Requested installation to: 'bluesky'
 INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
 </pre>
 
-Use `new_bluesky_instrument.py -h` for usage information.
-
-The installer will download the ZIP file from the GitHub training repository if
+The installer downloads the ZIP file from the GitHub training repository if
 it's not already present in the `/tmp` directory or if the existing file is old.
 
-## Create the conda environment
 
-A bluesky instrument uses many Python packages not included in the Python
-Standard Library.  Rather than add these directly into the system Python
-installation, it is recommended to create a Python virtual environment which has
-the suite of packages (and specific versions) required.
-
-Follow these steps to create a conda environment for data collection with
-bluesky.
-
-**IMPORTANT**:  You must use `bash` shell.
-
-Here's an example for the `bluesky_2023_2` environment:
-
-<pre>
-$ <b>cd ~/bluesky</b>
-$ <b>conda env create \
-    --force \
-    -n bluesky_2023_2 \
-    -f ./environments/environment_2023_2.yml \
-    --solver=libmamba</b>
-</pre>
+## Activate the bluesky conda environment
 
 <details>
+<summary> How to create a conda environment for bluesky?</summary>
 
-In the commands above, a long command has been split over several lines to make
-it clearer to read and also to take less screen width. We could enter the
-<code>conda env</code> command all one one line.  These commands work the same
-as the one above.
+See [here](./_create_conda_env.md).
+</details>
 
-<pre>
-$ <b>cd ~/bluesky</b>
-$ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
-</pre>
+<details>
+<summary> How do I know if I have a conda environment for bluesky?</summary>
+
+- **On a machine with access to APSshare:** Type the command `source /APSshare/miniconda/x86_64/bin/activate`
+- **On a machine with no access to APSshare:** Type the command `conda activate`. If you are using an older version of conda, you may need to use the `source` command instead: `source activate`.
+
+The prompt changes to displays `(base)`. Now you can use `conda env list` to see the environments you have and the directories in which they are installed.
+
+If you are getting an error message (`bash: conda: command not found` or `bash: activate: No such file or directory`), conda is not installed on your computer or it is not added to the system's PATH environment variable.
+
+You can try to install conda by following the installation instructions for your operating system. You can find the instructions for Windows, macOS, and Linux on the official conda documentation [website](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+Once conda is installed, you can activate it by opening a new terminal or command prompt and typing `conda activate`. If you still encounter the same error message, you may need to add the conda installation directory to your system's PATH environment variable manually. You can find instructions on how to do this in the Conda documentation. 
 
 </details>
 
-The [`blueskyStarter.sh`](../instrument/_directory_layout.rst) script looks for the
-`BLUESKY_CONDA_ENV` (bash shell) environment variable to choose the correct
-conda environment for Bluesky.  Suggest setting this in `~/.bash_aliases` (if
-that does not exist, then add it to `~/.bashrc`).
-
-```bash
-export BLUESKY_CONDA_ENV=bluesky_2023_2
-alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
-```
-
-More documentation about [conda](../reference/_conda_base.md) is available
-[elsewhere](../instrument/_conda_environment.md) in this repository.
-
-### bash environment variables
-
-The `blueskyStarter.sh` script looks for the `BLUESKY_CONDA_ENV` (bash shell)
-environment variable to choose the correct conda environment for Bluesky.
-Suggest setting this in `~/.bash_aliases` (if that does not exist, then add it
-to `~/.bashrc`).
-
-```bash
-export BLUESKY_CONDA_ENV=bluesky_2023_2
-```
-
-## Activate the conda environment
-
-As shown above, you will need to activate the conda environment in each console
-session when you plan to use it.  Here's an example:
+<br>
+To use bluesky, you need to activate the bluesky conda environment.  Here's an example:
 
 <pre>
 $ <b>conda activate bluesky_2023_2</b>
 </pre>
+The prompt changes to display `(bluesky_2023_2)` . 
 
-This activation will remain for the duration of the session, at least until you
-change it with a `conda activate` or `conda deactivate` command or start a new
-shell.
+This activation will remain  in effect for the duration of the session (*i.e.* as long as the terminal stays open), unless you activate a different environment or deactivate it using the `conda deactivate` command.
 
-Use `conda env list` to discover the environments you have and the directories
-in which they are installed.
+
 
 ## Test the new bluesky instrument
 
