@@ -4,6 +4,10 @@ This repository, via [Jupyter](https://jupyter.org/) notebooks, demonstrates use
 of the Bluesky framework at a typical beam line scenario for a BCDA-sponsored
 class.
 
+Unit Tests | License | GH tag
+--- | --- | ---
+[![Unit Tests](https://github.com/BCDA-APS/bluesky_training/workflows/Unit%20Tests/badge.svg)](https://github.com/BCDA-APS/bluesky_training/actions/workflows/unit_tests.yml) | [![license: ANL](https://img.shields.io/badge/license-ANL-brightgreen)](/LICENSE.txt) | [![tag](https://img.shields.io/github/tag/BCDA-APS/bluesky_training.svg)](https://github.com/BCDA-APS/bluesky_training/tags)
+
 <!-- consider this new structure
 
       Introductory
@@ -58,7 +62,6 @@ databroker | https://blueskyproject.io/databroker
 databroker-pack | https://blueskyproject.io/databroker-pack
 apstools | https://BCDA-APS.github.io/apstools
 APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
-License | [![license: ANL](https://img.shields.io/badge/license-ANL-brightgreen)](LICENSE.txt)
 
 ## Introductory
 

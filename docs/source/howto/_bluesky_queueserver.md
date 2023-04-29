@@ -45,6 +45,8 @@ Here, the `training` catalog is subscribed to the RunEngine, in addition to a 0M
 
 <pre>
 $ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
+<pre>
+$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
 INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at 'tcp://*:60615'
 INFO:bluesky_queueserver.manager.manager:ZMQ control channels: encryption disabled
 INFO:bluesky_queueserver.manager.manager:Starting RE Manager process
@@ -86,9 +88,9 @@ Add a plan to count from two detectors (from the ophyd simulators):
 qserver queue add plan '{"name": "count", "args": [["det1", "det2"]], "kwargs": {"num": 10, "delay": 1, "md": {"purpose": "test bluesky-queueserver"}}}'
 ```
 
-The monitor shows this response:
-
 <details>
+
+The monitor shows this response:
 
 ```text
 INFO:bluesky_queueserver.manager.manager:Adding new item to the queue ...
@@ -218,7 +220,7 @@ Coordinates:
 Data variables:
     det1     (time) float64 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0
     det2     (time) float64 1.765 1.765 1.765 1.765 ... 1.765 1.765 1.765 1.765
-<pre>
+</pre>
 
 </details>
 
@@ -300,7 +302,7 @@ INFO:bluesky_queueserver.manager.manager:Wait for RE Worker process to close (jo
 INFO:bluesky_queueserver.manager.start_manager:Joining RE Worker ...
 INFO:bluesky_queueserver.manager.manager:RE Manager was stopped by ZMQ command.
 INFO:bluesky_queueserver.manager.start_manager:RE Watchdog is stopped
-(qserver) prjemian@zap:~$
+$
 ```
 
 </details>

@@ -56,7 +56,7 @@ dependencies:
   # --- Bluesky framework packages
   - apstools >=1.6.15
   - area-detector-handlers
-  - bluesky-queueserver <0.0.18
+  - bluesky-queueserver
   - bluesky-queueserver-api
   - bluesky-widgets
   - bluesky >=1.8.1
