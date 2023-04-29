@@ -7,7 +7,7 @@ import time
 
 RM = REManagerAPI()
 RM.user = "bluesky_training"
-RM.user_group = "admin"
+RM.user_group = "primary"
 
 
 def test_env_open():
