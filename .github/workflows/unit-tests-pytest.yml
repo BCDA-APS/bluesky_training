@@ -156,7 +156,7 @@ jobs:
           pip3 install --upgrade coveralls
           # debug mode: output prepared json and reported files list to stdout
           # https://coveralls-python.readthedocs.io/en/latest/troubleshooting.html
-          coveralls debug
+          # coveralls debug --service=github
           coveralls --service=github --finish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
