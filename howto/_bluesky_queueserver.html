@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>First steps with bluesky-queueserver &#8212; APS Bluesky Training  documentation</title>
   
@@ -31,7 +31,6 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -44,6 +43,7 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_bluesky_queueserver';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Count the scaler" href="_count_scaler.html" />
@@ -410,15 +410,15 @@ start-re-manager<span class="w"> </span>--zmq-publish-console<span class="w"> </
 </div>
 <p>Here, the <code class="docutils literal notranslate"><span class="pre">training</span></code> catalog is subscribed to the RunEngine, in addition to a 0MQ stream (on port tcp://*:60615).</p>
 <details>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>(qserver) prjemian@zap:~$ start-re-manager --zmq-publish-console ON --databroker-config training
-INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at &#39;tcp://*:60615&#39;
+<pre>
+$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
+INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at 'tcp://*:60615'
 INFO:bluesky_queueserver.manager.manager:ZMQ control channels: encryption disabled
 INFO:bluesky_queueserver.manager.manager:Starting RE Manager process
 INFO:bluesky_queueserver.manager.manager:Loading the lists of allowed plans and devices ...
 INFO:bluesky_queueserver.manager.manager:Starting ZeroMQ server ...
 INFO:bluesky_queueserver.manager.manager:ZeroMQ server is waiting on tcp://*:60615
-</pre></div>
-</div>
+</pre>
 </details>
 </section>
 <section id="run-plans-on-the-qserver">
@@ -445,31 +445,31 @@ qserver<span class="w"> </span>allowed<span class="w"> </span>plans
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>add<span class="w"> </span>plan<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;count&quot;, &quot;args&quot;: [[&quot;det1&quot;, &quot;det2&quot;]], &quot;kwargs&quot;: {&quot;num&quot;: 10, &quot;delay&quot;: 1, &quot;md&quot;: {&quot;purpose&quot;: &quot;test bluesky-queueserver&quot;}}}&#39;</span>
 </pre></div>
 </div>
-<p>The monitor shows this response:</p>
 <details>
+<p>The monitor shows this response:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INFO:bluesky_queueserver.manager.manager:Adding new item to the queue ...
 INFO:bluesky_queueserver.manager.manager:Item added: success=True item_type=&#39;plan&#39; name=&#39;count&#39; item_uid=&#39;33487d7a-d1c8-4639-9a77-eef753a79c8b&#39; qsize=1.
 </pre></div>
 </div>
 </details>
 <p>Check the queue of plans to be run:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>qserver<span class="o">)</span><span class="w"> </span>prjemian@zap:~$<span class="w"> </span>qserver<span class="w"> </span>queue<span class="w"> </span>get
-Arguments:<span class="w"> </span><span class="o">[</span><span class="s1">&#39;queue&#39;</span>,<span class="w"> </span><span class="s1">&#39;get&#39;</span><span class="o">]</span>
-<span class="m">13</span>:02:44<span class="w"> </span>-<span class="w"> </span>MESSAGE:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;items&#39;</span>:<span class="w"> </span><span class="o">[{</span><span class="s1">&#39;args&#39;</span>:<span class="w"> </span><span class="o">[[</span><span class="s1">&#39;det1&#39;</span>,<span class="w"> </span><span class="s1">&#39;det2&#39;</span><span class="o">]]</span>,
-<span class="w">            </span><span class="s1">&#39;item_type&#39;</span>:<span class="w"> </span><span class="s1">&#39;plan&#39;</span>,
-<span class="w">            </span><span class="s1">&#39;item_uid&#39;</span>:<span class="w"> </span><span class="s1">&#39;33487d7a-d1c8-4639-9a77-eef753a79c8b&#39;</span>,
-<span class="w">            </span><span class="s1">&#39;kwargs&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;delay&#39;</span>:<span class="w"> </span><span class="m">1</span>,
-<span class="w">                       </span><span class="s1">&#39;md&#39;</span>:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;purpose&#39;</span>:<span class="w"> </span><span class="s1">&#39;test bluesky-queueserver&#39;</span><span class="o">}</span>,
-<span class="w">                       </span><span class="s1">&#39;num&#39;</span>:<span class="w"> </span><span class="m">10</span><span class="o">}</span>,
-<span class="w">            </span><span class="s1">&#39;name&#39;</span>:<span class="w"> </span><span class="s1">&#39;count&#39;</span>,
-<span class="w">            </span><span class="s1">&#39;user&#39;</span>:<span class="w"> </span><span class="s1">&#39;qserver-cli&#39;</span>,
-<span class="w">            </span><span class="s1">&#39;user_group&#39;</span>:<span class="w"> </span><span class="s1">&#39;admin&#39;</span><span class="o">}]</span>,
-<span class="w"> </span><span class="s1">&#39;msg&#39;</span>:<span class="w"> </span><span class="s1">&#39;&#39;</span>,
-<span class="w"> </span><span class="s1">&#39;plan_queue_uid&#39;</span>:<span class="w"> </span><span class="s1">&#39;40dc1e75-11b8-4331-8a03-24d5dff9f459&#39;</span>,
-<span class="w"> </span><span class="s1">&#39;running_item&#39;</span>:<span class="w"> </span><span class="o">{}</span>,
-<span class="w"> </span><span class="s1">&#39;success&#39;</span>:<span class="w"> </span>True<span class="o">}</span>
-</pre></div>
-</div>
+<pre>
+$ <b>qserver queue get</b>
+Arguments: ['queue', 'get']
+13:02:44 - MESSAGE: {'items': [{'args': [['det1', 'det2']],
+            'item_type': 'plan',
+            'item_uid': '33487d7a-d1c8-4639-9a77-eef753a79c8b',
+            'kwargs': {'delay': 1,
+                       'md': {'purpose': 'test bluesky-queueserver'},
+                       'num': 10},
+            'name': 'count',
+            'user': 'qserver-cli',
+            'user_group': 'primary'}],
+ 'msg': '',
+ 'plan_queue_uid': '40dc1e75-11b8-4331-8a03-24d5dff9f459',
+ 'running_item': {},
+ 'success': True}
+</pre>
 <p>Start running the queue:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>start
 </pre></div>
@@ -487,7 +487,7 @@ INFO:bluesky_queueserver.manager.manager:Starting the plan:
  &#39;meta&#39;: {},
  &#39;name&#39;: &#39;count&#39;,
  &#39;user&#39;: &#39;qserver-cli&#39;,
- &#39;user_group&#39;: &#39;admin&#39;}.
+ &#39;user_group&#39;: &#39;primary&#39;}.
 INFO:bluesky_queueserver.manager.worker:Starting execution of a plan ...
 INFO:bluesky_queueserver.manager.worker:Starting a plan &#39;count&#39;.
 INFO:bluesky_queueserver.manager.plan_monitoring:New run was open: &#39;dc48f1b8-6f98-4da4-922e-4daff406849a&#39;
@@ -521,46 +521,46 @@ INFO:bluesky_queueserver.manager.manager:Queue is empty.
 </div>
 </details>
 <p>Check the queue now:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>qserver<span class="o">)</span><span class="w"> </span>prjemian@zap:~$<span class="w"> </span>qserver<span class="w"> </span>queue<span class="w"> </span>get
-Arguments:<span class="w"> </span><span class="o">[</span><span class="s1">&#39;queue&#39;</span>,<span class="w"> </span><span class="s1">&#39;get&#39;</span><span class="o">]</span>
-<span class="m">13</span>:06:11<span class="w"> </span>-<span class="w"> </span>MESSAGE:<span class="w"> </span><span class="o">{</span><span class="s1">&#39;items&#39;</span>:<span class="w"> </span><span class="o">[]</span>,
-<span class="w"> </span><span class="s1">&#39;msg&#39;</span>:<span class="w"> </span><span class="s1">&#39;&#39;</span>,
-<span class="w"> </span><span class="s1">&#39;plan_queue_uid&#39;</span>:<span class="w"> </span><span class="s1">&#39;747545db-a402-4568-9282-74eeb2f1ebf1&#39;</span>,
-<span class="w"> </span><span class="s1">&#39;running_item&#39;</span>:<span class="w"> </span><span class="o">{}</span>,
-<span class="w"> </span><span class="s1">&#39;success&#39;</span>:<span class="w"> </span>True<span class="o">}</span>
-</pre></div>
-</div>
+<pre>
+$ <b>qserver queue get</b>
+Arguments: ['queue', 'get']
+13:06:11 - MESSAGE: {'items': [],
+ 'msg': '',
+ 'plan_queue_uid': '747545db-a402-4568-9282-74eeb2f1ebf1',
+ 'running_item': {},
+ 'success': True}
+</pre>
 <p>In a new terminal window, check if we can see that run in our databroker:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>qserver
 ipython
 </pre></div>
 </div>
 <details>
-<div class="highlight-ipython notranslate"><div class="highlight"><pre><span></span><span class="gp">In [1]: </span><span class="kn">import</span> <span class="nn">databroker</span>
-<span class="gp">   ...: </span><span class="n">cat</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">catalog</span><span class="p">[</span><span class="s2">&quot;training&quot;</span><span class="p">]</span>
-<span class="gp">   ...: </span><span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-<span class="gp">   ...: </span><span class="n">run</span>
-<span class="gp">   ...:</span>
-<span class="gh">Out[1]:</span>
-<span class="go">BlueskyRun</span>
-<span class="go">  uid=&#39;dc48f1b8-6f98-4da4-922e-4daff406849a&#39;</span>
-<span class="go">  exit_status=&#39;success&#39;</span>
-<span class="go">  2021-10-21 13:05:16.819 -- 2021-10-21 13:05:26.847</span>
-<span class="go">  Streams:</span>
-<span class="go">    * primary</span>
+<pre>
+In [1]: <b>import databroker</b>
+   ...: <b>cat = databroker.catalog["training"]</b>
+   ...: <b>run = cat[-1]</b>
+   ...: <b>run</b>
+   ...:
+Out[1]:
+BlueskyRun
+  uid='dc48f1b8-6f98-4da4-922e-4daff406849a'
+  exit_status='success'
+  2021-10-21 13:05:16.819 -- 2021-10-21 13:05:26.847
+  Streams:
+    * primary
 
 
-<span class="gp">In [2]: </span><span class="n">run</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-<span class="gh">Out[2]:</span>
-<span class="go">&lt;xarray.Dataset&gt;</span>
-<span class="go">Dimensions:  (time: 10)</span>
-<span class="go">Coordinates:</span>
-<span class="go">  * time     (time) float64 1.635e+09 1.635e+09 ... 1.635e+09 1.635e+09</span>
-<span class="go">Data variables:</span>
-<span class="go">    det1     (time) float64 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0</span>
-<span class="go">    det2     (time) float64 1.765 1.765 1.765 1.765 ... 1.765 1.765 1.765 1.765</span>
-</pre></div>
-</div>
+In [2]: <b>run.primary.read()</b>
+Out[2]:
+<xarray.Dataset>
+Dimensions:  (time: 10)
+Coordinates:
+  * time     (time) float64 1.635e+09 1.635e+09 ... 1.635e+09 1.635e+09
+Data variables:
+    det1     (time) float64 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0
+    det2     (time) float64 1.765 1.765 1.765 1.765 ... 1.765 1.765 1.765 1.765
+</pre>
 </details>
 <p>That’s our run!</p>
 </section>
@@ -585,7 +585,7 @@ INFO:bluesky_queueserver.manager.manager:Starting the plan:
  &#39;meta&#39;: {},
  &#39;name&#39;: &#39;scan&#39;,
  &#39;user&#39;: &#39;qserver-cli&#39;,
- &#39;user_group&#39;: &#39;admin&#39;}.
+ &#39;user_group&#39;: &#39;primary&#39;}.
 INFO:bluesky_queueserver.manager.worker:Starting execution of a plan ...
 INFO:bluesky_queueserver.manager.worker:Starting a plan &#39;scan&#39;.
 
@@ -630,7 +630,7 @@ INFO:bluesky_queueserver.manager.manager:Wait for RE Worker process to close (jo
 INFO:bluesky_queueserver.manager.start_manager:Joining RE Worker ...
 INFO:bluesky_queueserver.manager.manager:RE Manager was stopped by ZMQ command.
 INFO:bluesky_queueserver.manager.start_manager:RE Watchdog is stopped
-(qserver) prjemian@zap:~$
+$
 </pre></div>
 </div>
 </details>

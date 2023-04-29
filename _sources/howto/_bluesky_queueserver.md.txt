@@ -43,15 +43,15 @@ Here, the `training` catalog is subscribed to the RunEngine, in addition to a 0M
 
 <details>
 
-```text
-(qserver) prjemian@zap:~$ start-re-manager --zmq-publish-console ON --databroker-config training
+<pre>
+$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
 INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at 'tcp://*:60615'
 INFO:bluesky_queueserver.manager.manager:ZMQ control channels: encryption disabled
 INFO:bluesky_queueserver.manager.manager:Starting RE Manager process
 INFO:bluesky_queueserver.manager.manager:Loading the lists of allowed plans and devices ...
 INFO:bluesky_queueserver.manager.manager:Starting ZeroMQ server ...
 INFO:bluesky_queueserver.manager.manager:ZeroMQ server is waiting on tcp://*:60615
-```
+</pre>
 
 </details>
 
@@ -86,9 +86,9 @@ Add a plan to count from two detectors (from the ophyd simulators):
 qserver queue add plan '{"name": "count", "args": [["det1", "det2"]], "kwargs": {"num": 10, "delay": 1, "md": {"purpose": "test bluesky-queueserver"}}}'
 ```
 
-The monitor shows this response:
-
 <details>
+
+The monitor shows this response:
 
 ```text
 INFO:bluesky_queueserver.manager.manager:Adding new item to the queue ...
@@ -99,8 +99,8 @@ INFO:bluesky_queueserver.manager.manager:Item added: success=True item_type='pla
 
 Check the queue of plans to be run:
 
-```bash
-(qserver) prjemian@zap:~$ qserver queue get
+<pre>
+$ <b>qserver queue get</b>
 Arguments: ['queue', 'get']
 13:02:44 - MESSAGE: {'items': [{'args': [['det1', 'det2']],
             'item_type': 'plan',
@@ -110,12 +110,12 @@ Arguments: ['queue', 'get']
                        'num': 10},
             'name': 'count',
             'user': 'qserver-cli',
-            'user_group': 'admin'}],
+            'user_group': 'primary'}],
  'msg': '',
  'plan_queue_uid': '40dc1e75-11b8-4331-8a03-24d5dff9f459',
  'running_item': {},
  'success': True}
-```
+</pre>
 
 Start running the queue:
 
@@ -139,7 +139,7 @@ INFO:bluesky_queueserver.manager.manager:Starting the plan:
  'meta': {},
  'name': 'count',
  'user': 'qserver-cli',
- 'user_group': 'admin'}.
+ 'user_group': 'primary'}.
 INFO:bluesky_queueserver.manager.worker:Starting execution of a plan ...
 INFO:bluesky_queueserver.manager.worker:Starting a plan 'count'.
 INFO:bluesky_queueserver.manager.plan_monitoring:New run was open: 'dc48f1b8-6f98-4da4-922e-4daff406849a'
@@ -175,15 +175,15 @@ INFO:bluesky_queueserver.manager.manager:Queue is empty.
 
 Check the queue now:
 
-```bash
-(qserver) prjemian@zap:~$ qserver queue get
+<pre>
+$ <b>qserver queue get</b>
 Arguments: ['queue', 'get']
 13:06:11 - MESSAGE: {'items': [],
  'msg': '',
  'plan_queue_uid': '747545db-a402-4568-9282-74eeb2f1ebf1',
  'running_item': {},
  'success': True}
-```
+</pre>
 
 In a new terminal window, check if we can see that run in our databroker:
 
@@ -194,11 +194,11 @@ ipython
 
 <details>
 
-```ipython
-In [1]: import databroker
-   ...: cat = databroker.catalog["training"]
-   ...: run = cat[-1]
-   ...: run
+<pre>
+In [1]: <b>import databroker</b>
+   ...: <b>cat = databroker.catalog["training"]</b>
+   ...: <b>run = cat[-1]</b>
+   ...: <b>run</b>
    ...:
 Out[1]:
 BlueskyRun
@@ -209,7 +209,7 @@ BlueskyRun
     * primary
 
 
-In [2]: run.primary.read()
+In [2]: <b>run.primary.read()</b>
 Out[2]:
 <xarray.Dataset>
 Dimensions:  (time: 10)
@@ -218,7 +218,7 @@ Coordinates:
 Data variables:
     det1     (time) float64 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0
     det2     (time) float64 1.765 1.765 1.765 1.765 ... 1.765 1.765 1.765 1.765
-```
+</pre>
 
 </details>
 
@@ -252,7 +252,7 @@ INFO:bluesky_queueserver.manager.manager:Starting the plan:
  'meta': {},
  'name': 'scan',
  'user': 'qserver-cli',
- 'user_group': 'admin'}.
+ 'user_group': 'primary'}.
 INFO:bluesky_queueserver.manager.worker:Starting execution of a plan ...
 INFO:bluesky_queueserver.manager.worker:Starting a plan 'scan'.
 
@@ -300,7 +300,7 @@ INFO:bluesky_queueserver.manager.manager:Wait for RE Worker process to close (jo
 INFO:bluesky_queueserver.manager.start_manager:Joining RE Worker ...
 INFO:bluesky_queueserver.manager.manager:RE Manager was stopped by ZMQ command.
 INFO:bluesky_queueserver.manager.start_manager:RE Watchdog is stopped
-(qserver) prjemian@zap:~$
+$
 ```
 
 </details>
