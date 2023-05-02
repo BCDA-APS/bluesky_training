@@ -154,14 +154,14 @@ Setup your databroker catalog configuration
 Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog
 configuration.
 
-Let's assume (for example purposes), you have been given this
+For example purposes, let's assume you have been given this
 bluesky/databroker catalog assignment:
 
 -  name: ``45ida_abcd``
 -  MongoDB server: ``mongoserver.xray.aps.anl.gov``
 -  MongoDB collection: ``45ida_abcd-bluesky``
 
-See this `guide <./_configure_databroker.md>`__ to configure databroker.
+See this `guide <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html>`__ to configure databroker.
 
 Confirm that databroker can find the ``45ida_abcd`` catalog by running
 the python executable and passing the python commands as a command-line
