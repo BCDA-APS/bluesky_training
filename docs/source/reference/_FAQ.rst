@@ -49,6 +49,14 @@ This is a list of commonly asked questions concerning Bluesky.
 
 .. _faq-linux-tilde:
 
-1. What does the (**~**) mean in a path?
+5. What does the (**~**) mean in a path?
 
     The tilde (**~**) character represents the current user's home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.
+
+.. _faq-alias-start-bluesky:
+
+6. How to create an alias to start a bluesky session? 
+
+    There are several way to create an alias to start a bluesky session. One is described 
+    `here <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile>`_; other methods TODO.
+

@@ -227,13 +227,38 @@ To start an IPython session with the new bluesky profile, you can now use the fo
 .. raw:: html
 
    <details>
-   <summary>How to create an alias to quickly start a bluesky session?</summary>
+   <summary>How to create an alias to start a bluesky session?</summary>
 
-   
+   Creating a bash alias is like creating a custom shortcut for a command or a series 
+   of commands in the terminal. You can do this by editing the <code>~/.bashrc</code> 
+   file, which is a configuration file for your bash shell. 
+   Here's a simple step-by-step guide:
 
+
+   <ol>
+   <li>Open a terminal.</li>
+   <li>Open the <code>~/.bashrc</code> file with your preffered text editor, *e.g.*:
    <pre>
-   $ <b>alias start_bluesky='become_bluesky;ipython --profile=bluesky'  </b>
+   $ <b>gedit ~/.bashrc'  </b>
    </pre>
+   </li>
+   <li>Scroll down to the end of the file or find a suitable place to add your alias.</li>
+   <li>On two new lines, type:
+   <pre>
+   export BLUESKY_CONDA_ENV=bluesky_2023_2
+   alias start_bluesky = 'conda activate ${BLUESKY_CONDA_ENV}; ipython --profile=bluesky'
+   </pre>   
+   <b>Note:</b> the first line <code>export BLUESKY_CONDA_ENV=bluesky_2023_2</code> might already be included in your <code>~/.bashrc</code>,
+   <i>e.g.</i>, if you have created an alias to activate the bluesky conda environment (environment variable are often located
+   at the begining of the <code>~/.bashrc</code> file).
+   </li>
+   <li>Save your changes.</li>
+   <li>Type <code>bash</code> and press enter, or open a new terminal windows to make the new alias available.</li>
+
+   </ol>
+   You can now use the alias <code>start_bluesky</code> to activate the conda environment and
+   and start a new bluesky session in a terminal. 
+
    </details>
 
 
