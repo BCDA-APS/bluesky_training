@@ -48,6 +48,8 @@ alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 More documentation about [conda](../reference/_conda_base.md) is available
 [elsewhere](../instrument/_conda_environment.md) in this repository.
 
+TODO: how to create an alias to activate the bluesky environment (with access to APSshare vs not).
+
 ## bash environment variables
 
 The `blueskyStarter.sh` script looks for the `BLUESKY_CONDA_ENV` (bash shell)

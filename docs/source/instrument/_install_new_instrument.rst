@@ -129,10 +129,24 @@ To use bluesky, you first need to activate the bluesky conda environment:
 
 The prompt changes to display ``(bluesky_2023_2)`` .
 
+.. raw:: html
+
+   <details>
+   <summary>How to create an alias to activate the bluesky environment?</summary>
+
+   See <a href="https://bcda-aps.github.io/bluesky_training/instrument/_create_conda_env.html">here</a>. 
+   
+   TODO add the link to the future alias section.
+   </details>
+
+
+
 This activation will remain in effect for the duration of the session
 (*i.e.* as long as the terminal stays open), unless you activate a
 different environment or deactivate it using the ``conda deactivate``
 command.
+
+
 
 
 Test the new bluesky instrument
