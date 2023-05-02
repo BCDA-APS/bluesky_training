@@ -138,10 +138,12 @@ Test the new bluesky instrument
 -------------------------------
 
 At this point, you have assembled enough of the parts to test the
-initial installation with bluesky. Follow the steps in this
-`guide <./_test_new_instrument.md>`__ to test the installation.
-Additional instructions are available to `test <./_testing.md>`__ the
-installation with EPICS.
+initial installation with bluesky. Follow the steps in the following guides:
+
+- `Hello World <https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html>`_: test the basic installation of bluesky.
+- `Test my new instrument package <https://bcda-aps.github.io/bluesky_training/instrument/_test_new_instrument.html>`_: verify the new instrument package loads without error.
+- `Test bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/instrument/_test_bluesky_at_aps.html>`_: make sure you are able to connect to EPICS PVs at the APS.
+
 
 In the remaining steps, we'll configure the instrument for your catalog
 and specific hardware configuration.
@@ -161,9 +163,9 @@ bluesky/databroker catalog assignment:
 
 See this `guide <./_configure_databroker.md>`__ to configure databroker.
 
-Confirm that databroker can find the ``45ida_abcd`` catalog (by running
+Confirm that databroker can find the ``45ida_abcd`` catalog by running
 the python executable and passing the python commands as a command-line
-option):
+option:
 
 .. raw:: html
 
