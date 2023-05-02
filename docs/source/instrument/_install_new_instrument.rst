@@ -163,31 +163,7 @@ initial installation with bluesky. Follow the steps in the following guides:
 In the remaining steps, we'll configure the instrument for your catalog
 and specific hardware configuration.
 
-Setup your databroker catalog configuration
--------------------------------------------
 
-Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog
-configuration.
-
-For example purposes, let's assume you have been given this
-bluesky/databroker catalog assignment:
-
--  name: ``45ida_abcd``
--  MongoDB server: ``mongoserver.xray.aps.anl.gov``
--  MongoDB collection: ``45ida_abcd-bluesky``
-
-See this `guide <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html>`__ to configure databroker.
-
-Confirm that databroker can find the ``45ida_abcd`` catalog by running
-the python executable and passing the python commands as a command-line
-option:
-
-.. raw:: html
-
-   <pre>
-   $ <b>python -c "import databroker; print(list(databroker.catalog))"</b>
-   ['45ida_abcd']
-   </pre>
 
 Create a bluesky IPython profile
 --------------------------------
@@ -229,15 +205,14 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    <details>
    <summary>How to create an alias to start a bluesky session?</summary>
 
-   Creating a bash alias is like creating a custom shortcut for a command or a series 
-   of commands in the terminal. You can do this by editing the <code>~/.bashrc</code> 
+   Creating a bash alias is like creating a custom shortcut. You can do this by editing the <code>~/.bashrc</code> 
    file, which is a configuration file for your bash shell. 
    Here's a simple step-by-step guide:
 
 
    <ol>
    <li>Open a terminal.</li>
-   <li>Open the <code>~/.bashrc</code> file with your preffered text editor, *e.g.*:
+   <li>Open the <code>~/.bashrc</code> file with your preffered text editor, <i>e.g.</i>:
    <pre>
    $ <b>gedit ~/.bashrc'  </b>
    </pre>
@@ -265,6 +240,34 @@ To start an IPython session with the new bluesky profile, you can now use the fo
 For more info about IPython configuration, see `here <https://ipython.readthedocs.io/en/stable/config/intro.html>`__.
 
 
+Setup your databroker catalog configuration
+-------------------------------------------
+
+Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog
+configuration.
+
+For example purposes, let's assume you have been given this
+bluesky/databroker catalog assignment:
+
+-  name: ``45ida_abcd``
+-  MongoDB server: ``mongoserver.xray.aps.anl.gov``
+-  MongoDB collection: ``45ida_abcd-bluesky``
+
+See this `guide <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html>`__ to configure databroker.
+
+Confirm that databroker can find the ``45ida_abcd`` catalog by running
+the python executable and passing the python commands as a command-line
+option:
+
+.. raw:: html
+
+   <pre>
+   $ <b>python -c "import databroker; print(list(databroker.catalog))"</b>
+   ['45ida_abcd']
+   </pre>
+
+
+
 Start version control
 ---------------------
 
@@ -278,6 +281,10 @@ Instructions for using `git <https://git-scm.com/>`__ as software
 version control with `GitHub <https://github.com/>`__ or the `APS GitLab
 server <https://git.aps.anl.gov/>`__ are provided in `this separate
 document <https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html>`__.
+
+
+
+
 
 Configure bluesky instrument
 ----------------------------
