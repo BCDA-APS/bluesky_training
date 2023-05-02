@@ -119,78 +119,7 @@ Activate the bluesky conda environment
 
    </details>
 
-.. raw:: html
-
-   <details>
-   <summary>How do I know if I have a conda environment for bluesky?</summary>
-
-   <!-- html comment
-   Since we're inside a raw html block, NONE of the rst syntax will work properly.
-
-   Switch back to rst here by unindenting these blocks.
-   -->
-
-
-
-.. rst comment
-   The command "conda activate" works only when the "conda" command is available.
-   When it is not available, then the "conda" command can be added by sourcing it
-   using the activate script.  "source activate".  A common twist is when the
-   "activate" script is not in the default path.  Then use "source /path/to/activate",
-   such as the miniconda instructions for APS.
-
-.. tabs::
-
-   .. tab:: At APS
-
-      On a machine with access to APSshare, type the command::
-
-         source /APSshare/miniconda/x86_64/bin/activate
-      
-      If you are getting an error, contact the Bluesky support team.
-
-   .. tab:: Not at APS
-
-      On a machine with no access to APSshare, you first need to check that you have the ``conda`` command.  Type this command:
-      ``which conda``. If this prints the path to conda, you can activate it by using::
-
-         conda activate
-
-      Otherwise, see the conda installation tab.
-
-   .. tab:: Need to install conda?
-
-      If the command ``which conda`` does not return anything, or if you are getting an error message (``bash: conda: command not found``
-      or ``bash: activate: No such file or directory``), conda is not
-      installed on your computer or it is not added to the system's PATH
-      environment variable.    
-
-      You can install conda by following the installation instructions
-      for your operating system. You can find the instructions for Windows,
-      macOS, and Linux on the official conda documentation
-      `website <https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html>`__.
-
-      Once conda is installed, you can activate it by opening a new terminal
-      or command prompt and typing ``conda activate``. If you still encounter
-      the same error message, you may need to add the conda installation
-      directory to your system's PATH environment variable manually. You can
-      find instructions on how to do this in the Conda documentation.
-
-
-
-   The prompt changes to displays ``(base)``. Now you can use
-   ``conda env list`` to see the environments you have and the directories
-   in which they are installed.
-
-
-
-.. raw:: html
-
-   </details>
-   <br />
-
-To use bluesky, you need to activate the bluesky conda environment.
-Here's an example:
+To use bluesky, you first need to activate the bluesky conda environment:
 
 .. raw:: html
 
