@@ -134,6 +134,7 @@ This activation will remain in effect for the duration of the session
 different environment or deactivate it using the ``conda deactivate``
 command.
 
+
 Test the new bluesky instrument
 -------------------------------
 
@@ -174,25 +175,22 @@ option:
    ['45ida_abcd']
    </pre>
 
-IPython profile
----------------
+Create a bluesky IPython profile
+--------------------------------
 
-If there is an existing ``~/.ipython`` directory (perhaps created for
-other use from this account), then choose a unique directory for
-bluesky. Typical alternative is ``~/.ipython-bluesky``. These bash
-script commands create the `IPython
-profile <https://ipython.readthedocs.io/en/stable/config/intro.html>`__
-for bluesky, then create a starter script for the ``instrument`` package
-within that profile's ``startup`` directory.
+This bash command create a new IPython profile for bluesky: 
 
-First, use ipython to create the profile
 
-.. code:: bash
+.. raw:: html
 
-   ipython profile create bluesky --ipython-dir="~/.ipython"
+   <pre>
+   $ <b>ipython profile create bluesky --ipython-dir="~/.ipython"</b>
+   </pre>
 
-Next, create the starter script for the profile.  (Copy *all* these lines and
-paste them exactly into your terminal.)
+Next, create the starter script for this profile. This will ensure that the instrument 
+package gets loaded when starting a bluesky IPython session.
+
+**Note:** Copy *all* these lines and paste them exactly into your terminal:
 
 .. code:: bash
 
@@ -201,6 +199,32 @@ paste them exactly into your terminal.)
    sys.path.append(str(pathlib.Path().home() / "bluesky"))
    from instrument.collection import *
    EOF
+
+
+To start an IPython session with the new bluesky profile, you can now use the following command:
+
+.. raw:: html
+
+   <pre>
+   $ <b>ipython --profile=bluesky</b>
+   </pre>
+
+
+.. raw:: html
+
+   <details>
+   <summary>How to create an alias to quickly start a bluesky session?</summary>
+
+   
+
+   <pre>
+   $ <b>alias start_bluesky='become_bluesky;ipython --profile=bluesky'  </b>
+   </pre>
+   </details>
+
+
+For more info about IPython configuration, see `here <https://ipython.readthedocs.io/en/stable/config/intro.html>`__.
+
 
 Start version control
 ---------------------
@@ -214,11 +238,11 @@ sharing your instrument's implementations.
 Instructions for using `git <https://git-scm.com/>`__ as software
 version control with `GitHub <https://github.com/>`__ or the `APS GitLab
 server <https://git.aps.anl.gov/>`__ are provided in `this separate
-document <../reference/_git-help.rst>`__.
+document <https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html>`__.
 
 Configure bluesky instrument
 ----------------------------
 
-See this `advice <./_configure_bluesky_instrument.md>`__ for
-configuration of the ``instrument`` package (content in the
+See this `advice <https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html>`__ for
+configuration of the ``instrument`` package (*i.e.* content in the
 ``instrument/`` directory).
