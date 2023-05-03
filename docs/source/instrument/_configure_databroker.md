@@ -45,7 +45,7 @@ Let's assume (for example purposes) this catalog assignment ([BCDA instruction t
 - MongoDB collection: `45ida_abcd-bluesky`
 
 1. Create any missing directories as needed: `mkdir -p ~/.local/share/intake`
-1. Create file `~/.local/share/intake/databroker_catalog.yml`
+1. Create file `~/.local/share/intake/databroker_catalogs.yml`
 1. Open in an editor and copy/paste the content above.
 1. Change `training:` to your catalog's name, such as `45ida_abcd:`
 1. Change both lines with `mongodb://...` to

@@ -12,7 +12,7 @@ user_groups:
       - null  # Allow all
     forbidden_functions:
       - ":^_"  # All functions with names starting with '_'
-  admin:  # The group includes beamline staff, includes all or most of the plans and devices
+  primary:  # The group includes beamline staff, includes all or most of the plans and devices
     allowed_plans:
       - ":.*"  # Different way to allow all plans.
     forbidden_plans:
