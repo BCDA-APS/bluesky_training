@@ -115,7 +115,7 @@ Activate the bluesky conda environment
    <details>
    <summary>How to create a conda environment for bluesky?</summary>
 
-   See <a href="https://bcda-aps.github.io/bluesky_training/instrument/_create_conda_env.html">here</a>.
+   See <a href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html">here</a>.
 
    </details>
 
@@ -134,7 +134,7 @@ The prompt changes to display ``(bluesky_2023_2)`` .
    <details>
    <summary>How to create an alias to activate the bluesky environment?</summary>
 
-   See <a href="https://bcda-aps.github.io/bluesky_training/instrument/_create_conda_env.html">here</a>. 
+   See <a href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html">here</a>. 
    
    TODO add the link to the future alias section.
    </details>
