@@ -10,6 +10,8 @@ bluesky.
 
 **IMPORTANT**:  You must use `bash` shell.
 
+TODO: add how to get the conda command (for APSshare and without)
+
 Here's an example for the `bluesky_2023_2` environment:
 
 <pre>
