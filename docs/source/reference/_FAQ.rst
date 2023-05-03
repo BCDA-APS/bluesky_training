@@ -18,7 +18,7 @@ This is a list of commonly asked questions concerning Bluesky.
 
 2. How to start a Bluesky session? 
 
-    Visit `Getting started <https://bcda-aps.github.io/bluesky_training/tutor/_start_bluesky_session.html>`_
+    Visit `Getting started <https://bcda-aps.github.io/bluesky_training/instrument/_getting_started.html>`_
 
 .. _faq-alias-start-bluesky:
 

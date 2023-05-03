@@ -37,7 +37,7 @@ $ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_20
 
 </details>
 
-The [`blueskyStarter.sh`](../instrument/_directory_layout.rst) script looks for the
+The [`blueskyStarter.sh`](../instrument/_getting_started.rst) script looks for the
 `BLUESKY_CONDA_ENV` (bash shell) environment variable to choose the correct
 conda environment for Bluesky.  Suggest setting this in `~/.bash_aliases` (if
 that does not exist, then add it to `~/.bashrc`).
