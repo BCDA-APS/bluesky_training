@@ -244,10 +244,6 @@ environment:
 #     $ conda deactivate
 ```
 
-## Testing
-
-You may wish to [test](./_testing.md) that your conda environment is working.
-
 ## Other reading
 
 - [Getting started with conda](https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html)
