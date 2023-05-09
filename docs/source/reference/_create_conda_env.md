@@ -78,24 +78,39 @@ $ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_20
 
 ## Create an alias to activate the bluesky environment
 
-The [`blueskyStarter.sh`](https://bcda-aps.github.io/bluesky_training/instrument/_getting_started.html) script looks for the
-`BLUESKY_CONDA_ENV` (bash shell) environment variable to choose the correct
-conda environment for Bluesky.  Suggest setting this in `~/.bash_aliases` (if
-that does not exist, then add it to `~/.bashrc`).
+Creating a bash alias is like creating a custom shortcut. You can do this by editing the <code>~/.bashrc</code> and  <code>~/.bashrc_aliases</code> 
+files, which are configuration files for your bash shell. 
+Here's a simple step-by-step guide:
+
+
+   <ol>
+   <li>Open a terminal.</li>
+   <li>Open the <code>~/.bashrc</code> and <code>~/.bashrc_aliases</code> files with your prefered text editor, 
+   <i>e.g.</i>:
+   <pre>$ <b> gedit ~/.bashrc ~/.bashrc_aliases </b></pre>
+   If any of those files do not exist, this command will create blank ones. 
+   </li>
+   <li>In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
+   On a new line, type:
 
 ```bash
-export BLUESKY_CONDA_ENV=bluesky_2023_2
 alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 ```
 
-
-TODO: how to create an alias to activate the bluesky environment (with access to APSshare vs not) and add to FAQ.
-
-The `blueskyStarter.sh` script looks for the `BLUESKY_CONDA_ENV` (bash shell)
-environment variable to choose the correct conda environment for Bluesky.
-Suggest setting this in `~/.bash_aliases` (if that does not exist, then add it
-to `~/.bashrc`).
+   </li> 
+   <li> In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add the following lines:
 
 ```bash
 export BLUESKY_CONDA_ENV=bluesky_2023_2
+source ~/.bashrc_aliases
 ```
+
+   <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
+   <i>e.g.</i>, if you have created an alias to start a bluesky session.
+   </li>
+   <li>Save your changes.</li>
+   <li>Type <code>bash</code> and press enter, or open a new terminal windows to make the new alias available.</li>
+
+   </ol>
+   You can now use the alias <code>become_bluesky</code> to activate the bluesky environment. 
+
