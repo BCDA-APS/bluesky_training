@@ -50,15 +50,15 @@ This is a list of commonly asked questions concerning Bluesky.
 
 
     Bash is a type of shell, which is a program that provides a user interface for accessing the operating system's services.
-    To determine if you're using bash, you can open up a terminal on your computer and type **echo $SHELL**.
-    If the output is **/bin/bash** or something similar, then you're using the bash shell.
+    To determine if you're using bash, you can open up a terminal on your computer and type <code><b>echo $SHELL</b></code>.
+    If the output is <code><b>/bin/bash</b></code> or something similar, then you're using the bash shell.
     
     If bash is not your default shell, type <code><b>bash</b></code> in a terminal and press Enter to start a new instance of the bash shell. You should see a new prompt indicating that you're now using the bash shell. You can now type in bash commands. 
     Note that any changes you make to your environment variables or other system settings within this bash session will only apply to this session and will not persist after you close the session. To change your default shell, contact your IT support. 
 
 .. _faq-linux-tilde:
 
-6. What does the (<code><b>~</b></code>) mean in a path?
+1. What does the (<code><b>~</b></code>) mean in a path?
 
     The tilde (<code><b>~</b></code>) character represents the current user's home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.
 
