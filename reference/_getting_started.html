@@ -305,7 +305,7 @@ document.write(`
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="_FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aps_data_management.html">APS Data Management</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of Bluesky commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Conda virtual environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_conda_env.html">Create the conda environment</a></li>
@@ -373,7 +373,72 @@ document.write(`
                   
   <section id="getting-started">
 <h1>Getting started<a class="headerlink" href="#getting-started" title="Permalink to this heading">#</a></h1>
-<p>TODO</p>
+<section id="how-to-start-a-bluesky-session">
+<h2>How to start a Bluesky session?<a class="headerlink" href="#how-to-start-a-bluesky-session" title="Permalink to this heading">#</a></h2>
+<p>There are several ways to start a Bluesky session:</p>
+<ul class="simple">
+<li><p>IPython console</p></li>
+<li><p>Jupyter notebook</p></li>
+<li><p>Bluesky queueserver</p></li>
+<li><p>background process</p></li>
+<li><p>unit testing</p></li>
+</ul>
+<p>Some of these may involve loading a specially configured <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package.
+See the
+<a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/index.html">Instrument</a>
+section for more details.</p>
+<p>In this document, routine startup of an IPython console session and a JupyterLab
+notebook session will be demonstrated.  The <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> script was
+created to start a Bluesky session for routine data acquisition at beam lines.
+It is installed in the <code class="docutils literal notranslate"><span class="pre">~/bluesky</span></code> directory.  The script may be used from any
+shell in any directory to start a bluesky session in IPython console (default)
+or Jupyter notebook GUI.</p>
+<section id="use-blueskystarter-sh-to-start-a-console-session">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> to start a console session<a class="headerlink" href="#use-blueskystarter-sh-to-start-a-console-session" title="Permalink to this heading">#</a></h3>
+<p>This next command shows how to start an IPython console session with the
+<code class="docutils literal notranslate"><span class="pre">instrument</span></code> package loaded and ready for data acquisition:</p>
+<pre>
+$ <b>blueskyStarter.sh</b>
+(base) user@host:~$ cd /tmp
+(base) user@host:/tmp$ blueskyStarter.sh
+==> CONDA_PREFIX=/home/user/.conda/envs/bluesky_2023_2
+/home/user/.conda/envs/bluesky_2023_2/bin/python -- Python 3.10.10
+Python 3.10.10 | packaged by conda-forge | (main, Mar 24 2023, 20:08:06) [GCC 11.3.0]
+Type 'copyright', 'credits' or 'license' for more information
+IPython 8.12.0 -- An enhanced Interactive Python. Type '?' for help.
+
+IPython profile: bluesky
+Exception reporting mode: Minimal
+/home/user/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /tmp/.logs/ipython_console.log
+... more lines of output ...
+I Tue-14:44:57 - #### Startup is complete. ####
+
+In [1]:
+</pre>
+<p>At this point, the console session is ready for your data acquisition
+activities.</p>
+</section>
+<section id="use-blueskystarter-sh-to-start-a-notebook-session">
+<h3>Use <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> to start a notebook session<a class="headerlink" href="#use-blueskystarter-sh-to-start-a-notebook-session" title="Permalink to this heading">#</a></h3>
+<p>The next command shows how to start a Jupyter notebook session:</p>
+<pre>
+$ <b>blueskyStarter.sh lab</b>
+==> CONDA_PREFIX=/home/prjemian/.conda/envs/bluesky_2023_2
+Could not activate environment: 'bluesky_2023_2'
+Installed kernelspec bluesky_2023_2 in /home/prjemian/.local/share/jupyter/kernels/bluesky_2023_2
+[I 2023-05-09 14:32:03.687 ServerApp] Package jupyterlab took 0.0000s to import
+[I 2023-05-09 14:32:03.690 ServerApp] Package jupyter_server_fileid took 0.0022s to import
+... more lines of output ...
+</pre>
+<p>Shortly, the <a class="reference external" href="https://jupyterlab.readthedocs.io/en/stable/index.html">JupyterLab</a> Launcher will appear in the web browser.</p>
+<p><img alt="JupyterLab session example" src="../_images/bluesky-in-lab.png" /></p>
+<p>Many of the How-To guides and tutorials, such as the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_command_review.html">Bluesky cheat
+sheet</a>
+use a Jupyter notebook for data acquisition with the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package.</p>
+</section>
+</section>
 </section>
 
 
@@ -416,6 +481,20 @@ document.write(`
             
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-start-a-bluesky-session">How to start a Bluesky session?</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-blueskystarter-sh-to-start-a-console-session">Use <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> to start a console session</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#use-blueskystarter-sh-to-start-a-notebook-session">Use <code class="docutils literal notranslate"><span class="pre">blueskyStarter.sh</span></code> to start a notebook session</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">

@@ -134,9 +134,7 @@ The prompt changes to display ``(bluesky_2023_2)`` .
    <details>
    <summary>How to create an alias to activate the bluesky environment?</summary>
 
-   See <a href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html">here</a>. 
-   
-   TODO add the link to the future alias section.
+   See <a href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment">here</a>. 
    </details>
 
 
