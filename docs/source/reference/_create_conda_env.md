@@ -43,7 +43,7 @@ bash?](https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
 
 
 
-When `conda env list` is activated, the prompt changes to displays `(base)`. Now you can use
+When `conda` is activated, the prompt changes to displays `(base)`. Now you can use
 `conda env list` to see the environments you have and the directories
 in which they are installed.
 
