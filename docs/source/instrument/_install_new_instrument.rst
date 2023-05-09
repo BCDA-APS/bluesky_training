@@ -1,5 +1,5 @@
-Installation
-============
+Instal New Instrument
+=====================
 
 Describes the steps to install a new bluesky instrument.
 
