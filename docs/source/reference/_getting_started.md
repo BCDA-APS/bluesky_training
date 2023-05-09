@@ -30,7 +30,7 @@ This next command shows how to start an IPython console session with the
 <pre>
 $ <b>blueskyStarter.sh</b>
 (base) user@host:~$ cd /tmp
-(base) user@host:/tmp$ blueskyStarter.sh 
+(base) user@host:/tmp$ blueskyStarter.sh
 ==> CONDA_PREFIX=/home/user/.conda/envs/bluesky_2023_2
 /home/user/.conda/envs/bluesky_2023_2/bin/python -- Python 3.10.10
 Python 3.10.10 | packaged by conda-forge | (main, Mar 24 2023, 20:08:06) [GCC 11.3.0]
@@ -45,7 +45,7 @@ Filename       : /tmp/.logs/ipython_console.log
 ... more lines of output ...
 I Tue-14:44:57 - #### Startup is complete. ####
 
-In [1]: 
+In [1]:
 </pre>
 
 At this point, the console session is ready for your data acquisition
