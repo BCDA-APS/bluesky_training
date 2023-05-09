@@ -25,7 +25,7 @@ This is a list of commonly asked questions concerning Bluesky.
 3. How to create an alias to start a bluesky session? 
 
     There are several way to create an alias to start a bluesky session. One is described 
-    `here <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile>`_; other methods TODO.
+    `here <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile>`_.
 
 
 
@@ -53,12 +53,12 @@ This is a list of commonly asked questions concerning Bluesky.
     To determine if you're using bash, you can open up a terminal on your computer and type **echo $SHELL**.
     If the output is **/bin/bash** or something similar, then you're using the bash shell.
     
-    If bash is not your default shell, type **bash** in a terminal and press Enter to start a new instance of the bash shell. You should see a new prompt indicating that you're now using the bash shell. You can now type in bash commands. 
+    If bash is not your default shell, type <code><b>bash</b></code> in a terminal and press Enter to start a new instance of the bash shell. You should see a new prompt indicating that you're now using the bash shell. You can now type in bash commands. 
     Note that any changes you make to your environment variables or other system settings within this bash session will only apply to this session and will not persist after you close the session. To change your default shell, contact your IT support. 
 
 .. _faq-linux-tilde:
 
-6. What does the (**~**) mean in a path?
+6. What does the (<code><b>~</b></code>) mean in a path?
 
-    The tilde (**~**) character represents the current user's home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.
+    The tilde (<code><b>~</b></code>) character represents the current user's home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.
 
