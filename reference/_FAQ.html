@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Frequently Asked Questions &#8212; APS Bluesky Training  documentation</title>
   
@@ -31,6 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -43,10 +44,9 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'reference/_FAQ';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Review of commands" href="_command_review.html" />
+    <link rel="next" title="APS Data Management" href="_aps_data_management.html" />
     <link rel="prev" title="Reference" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -304,11 +304,16 @@ document.write(`
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_aps_data_management.html">APS Data Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Conda virtual environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_create_conda_env.html">Create the conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_git-help.html">Using git for version control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
 </ul>
 </div>
 </nav></div>
@@ -379,18 +384,45 @@ document.write(`
 <ol class="arabic" id="faq-start-bluesky-session" start="2">
 <li><p>How to start a Bluesky session?</p>
 <blockquote>
-<div><p>Visit <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/_start_bluesky_session.html">Getting started</a></p>
+<div><p>Visit <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_getting_started.html">Getting started</a></p>
 </div></blockquote>
 </li>
 </ol>
-<ol class="arabic" id="faq-obj-oriented" start="3">
+<ol class="arabic" id="faq-alias-start-bluesky" start="3">
+<li><p>How to create an alias to start a bluesky session?</p>
+<blockquote>
+<div><p>There are several ways to create an alias to start a bluesky session. One is described
+<a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile">here</a>.</p>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" id="faq-alias-become-bluesky" start="4">
+<li><p>How to create an alias to activate the bluesky environment?</p>
+<blockquote>
+<div><p>Visit <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#Create-an-alias-to-activate-the-bluesky-environment">here</a>.</p>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" id="faq-obj-oriented" start="5">
 <li><p>In python, what are classes, objects, methods and instances??</p>
 <blockquote>
 <div><ul class="simple">
-<li><p>A <strong>class</strong> is like a blueprint or a template that defines the characteristics and behaviors of a particular type of object. For example, we can define a <cite>Dog</cite> class that includes attributes such as breed, age, and name, as well as behaviors such as barking and wagging its tail.</p></li>
-<li><p>An <strong>object</strong> is an <strong>instance</strong> of a class. So, if we have a <cite>Dog</cite> class, we can create objects of that class, such as “Fido” and “Buddy”. Each object of the <cite>Dog</cite> class will have its own set of <strong>attributes</strong>, such as “Fido” being a Golden Retriever and “Buddy” being a Chihuahua, and <strong>methods</strong>, such as “Fido” barking loudly and “Buddy” wagging its tail.</p></li>
-<li><p>An <strong>instance</strong> is a specific occurrence of an <strong>object</strong> created from a <strong>class</strong>. For example, with our <cite>Dog</cite> class, we can create an instance of that class called “my_dog” with specific attributes and behaviors.</p></li>
-<li><p>A <strong>method</strong> is a function that is defined in a <strong>class</strong> and can be called on an <strong>object</strong> of that class. For example, the “bark” method defined in the <cite>Dog</cite> class can be called on the object “my_dog” to make it bark.</p></li>
+<li><p>A <strong>class</strong> is like a blueprint or a template that defines the
+characteristics and behaviors of a particular type of object. For example,
+we can define a <cite>Dog</cite> class that includes attributes such as breed, age,
+and name, as well as behaviors such as barking and wagging its tail.</p></li>
+<li><p>An <strong>object</strong> is an <strong>instance</strong> of a class. So, if we have a <cite>Dog</cite> class,
+we can create objects of that class, such as “Fido” and “Buddy”. Each
+object of the <cite>Dog</cite> class will have its own set of <strong>attributes</strong>, such as
+“Fido” being a Golden Retriever and “Buddy” being a Chihuahua, and
+<strong>methods</strong>, such as “Fido” barking loudly and “Buddy” wagging its tail.</p></li>
+<li><p>An <strong>instance</strong> is a specific occurrence of an <strong>object</strong> created from a
+<strong>class</strong>. For example, with our <cite>Dog</cite> class, we can create an instance of
+that class called “my_dog” with specific attributes and behaviors.</p></li>
+<li><p>A <strong>method</strong> is a function that is defined in a <strong>class</strong> and can be
+called on an <strong>object</strong> of that class. For example, the “bark” method
+defined in the <cite>Dog</cite> class can be called on the object “my_dog” to make it
+bark.</p></li>
 </ul>
 <p>For more details:</p>
 <ul class="simple">
@@ -401,10 +433,30 @@ document.write(`
 </div></blockquote>
 </li>
 </ol>
-<ol class="arabic" id="faq-linux-tilde" start="4">
-<li><p>What does the (~) mean in a path?</p>
+<ol class="arabic" id="faq-bash" start="6">
+<li><p>What is bash?</p>
 <blockquote>
-<div><p>The tilde (~) character represents the current user’s home directory. This is a shortcut that can be used to specify file paths without having to type out the entire path to the home directory.</p>
+<div><p>Bash is a type of shell, which is a program that provides a user interface
+for accessing the operating system’s services. To determine if you’re using
+bash, you can open up a terminal on your computer and type <strong>echo $SHELL</strong>.
+If the output is <strong>/bin/bash</strong> or something similar, then you’re using the
+bash shell.</p>
+<p>If bash is not your default shell, type <strong>bash</strong> in a terminal and press
+Enter to start a new instance of the bash shell. You should see a new prompt
+indicating that you’re now using the bash shell. You can now type in bash
+commands. Note that any changes you make to your environment variables or
+other system settings within this bash session will only apply to this
+session and will not persist after you close the session. To change your
+default shell, contact your IT support.</p>
+</div></blockquote>
+</li>
+</ol>
+<ol class="arabic" id="faq-linux-tilde" start="7">
+<li><p>What does the (<strong>~</strong>) mean in a path?</p>
+<blockquote>
+<div><p>The tilde (<strong>~</strong>) character represents the current user’s home directory.
+This is a shortcut that can be used to specify file paths without having to
+type out the entire path to the home directory.</p>
 </div></blockquote>
 </li>
 </ol>
@@ -431,11 +483,11 @@ document.write(`
       </div>
     </a>
     <a class="right-next"
-       href="_command_review.html"
+       href="_aps_data_management.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Review of commands</p>
+        <p class="prev-next-title">APS Data Management</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

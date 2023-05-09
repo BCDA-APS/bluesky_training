@@ -7,7 +7,7 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
     <title>Conda virtual environment &#8212; APS Bluesky Training  documentation</title>
   
@@ -31,6 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -43,11 +44,10 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_conda_environment';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Configure bluesky instrument" href="_configure_bluesky_instrument.html" />
-    <link rel="prev" title="Python __init__.py files" href="_about_init_files.html" />
+    <link rel="next" title="Create the conda environment" href="_create_conda_env.html" />
+    <link rel="prev" title="Conda Base Environment" href="_conda_base.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -136,8 +136,8 @@
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
                         Instrument
                       </a>
                     </li>
@@ -157,8 +157,8 @@
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../reference/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Reference
                       </a>
                     </li>
@@ -247,8 +247,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
                         Instrument
                       </a>
                     </li>
@@ -268,8 +268,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../reference/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Reference
                       </a>
                     </li>
@@ -303,20 +303,17 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_aps_data_management.html">APS Data Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Conda virtual environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_create_conda_env.html">Create the conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_git-help.html">Using git for version control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_testing.html">Testing</a></li>
 </ul>
 </div>
 </nav></div>
@@ -355,7 +352,7 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Reference</a></li>
     
     <li class="breadcrumb-item active" aria-current="page">Conda virtual environment</li>
   </ul>
@@ -394,7 +391,7 @@ the table below for an example.</p>
 <h3>base environment<a class="headerlink" href="#base-environment" title="Permalink to this heading">#</a></h3>
 <p>You might need to install a conda base environment (such a
 <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>) if one is not
-already available.  See <a class="reference internal" href="../reference/_conda_base.html"><span class="std std-doc">these instructions</span></a> for
+already available.  See <a class="reference internal" href="_conda_base.html"><span class="std std-doc">these instructions</span></a> for
 the installation steps.</p>
 <p>Often, the base environment is installed read-only for normal users so they
 cannot modify it directly.  Miniconda provides an ideal base environment since
@@ -447,7 +444,7 @@ environments.  See this
 <a class="reference external" href="https://medium.com/&#64;balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22">article</a>
 for more instruction about conda environment YAML files.</p>
 <p>If you need to install your own base environment, please See these
-<a class="reference internal" href="../reference/_conda_base.html"><span class="std std-doc">instructions</span></a> to install your own base environment.</p>
+<a class="reference internal" href="_conda_base.html"><span class="std std-doc">instructions</span></a> to install your own base environment.</p>
 </section>
 <section id="get-the-conda-command">
 <h2>Get the <code class="docutils literal notranslate"><span class="pre">conda</span></code> command<a class="headerlink" href="#get-the-conda-command" title="Permalink to this heading">#</a></h2>
@@ -499,7 +496,7 @@ conda<span class="w"> </span>config<span class="w"> </span>--env<span class="w">
 enhancement</a>
 was made available to <code class="docutils literal notranslate"><span class="pre">conda</span></code> by inclusion of the
 <a class="reference external" href="https://conda.github.io/conda-libmamba-solver/"><code class="docutils literal notranslate"><span class="pre">conda-libmamba-solver</span></code></a>
-package.  This package is added as part of the <a class="reference internal" href="../reference/_conda_base.html"><span class="std std-doc">base</span></a> installation
+package.  This package is added as part of the <a class="reference internal" href="_conda_base.html"><span class="std std-doc">base</span></a> installation
 instructions here and configured as the default solver.</p>
 <p>Install the libmamba solver in your conda environment:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>libmamba
@@ -518,7 +515,7 @@ instructions here and configured as the default solver.</p>
 </section>
 <section id="install-the-environment-for-bluesky">
 <h2>Install the environment for bluesky<a class="headerlink" href="#install-the-environment-for-bluesky" title="Permalink to this heading">#</a></h2>
-<p>Using the new instrument as <a class="reference internal" href="_install_new_instrument.html"><span class="std std-doc">setup</span></a> above (with
+<p>Using the new instrument as <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html">setup</a> above (with
 <code class="docutils literal notranslate"><span class="pre">~/bluesky/</span></code> as the installation directory), look for the latest installation
 configuration file in the <code class="docutils literal notranslate"><span class="pre">~bluesky/environments/</span></code> directory.  At this time, the
 latest file is <code class="docutils literal notranslate"><span class="pre">environment_2023_2.yml</span></code>.</p>
@@ -582,10 +579,6 @@ environment:</p>
 </pre></div>
 </div>
 </section>
-<section id="testing">
-<h2>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h2>
-<p>You may wish to <a class="reference internal" href="_testing.html"><span class="std std-doc">test</span></a> that your conda environment is working.</p>
-</section>
 <section id="other-reading">
 <h2>Other reading<a class="headerlink" href="#other-reading" title="Permalink to this heading">#</a></h2>
 <ul class="simple">
@@ -612,20 +605,20 @@ environment:</p>
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_about_init_files.html"
+       href="_conda_base.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</p>
+        <p class="prev-next-title">Conda Base Environment</p>
       </div>
     </a>
     <a class="right-next"
-       href="_configure_bluesky_instrument.html"
+       href="_create_conda_env.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Configure bluesky instrument</p>
+        <p class="prev-next-title">Create the conda environment</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -659,14 +652,13 @@ environment:</p>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#install-the-environment-for-bluesky">Install the environment for bluesky</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#testing">Testing</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#other-reading">Other reading</a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../_sources/instrument/_conda_environment.md.txt">
+    <a href="../_sources/reference/_conda_environment.md.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

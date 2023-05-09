@@ -169,7 +169,7 @@ conda config --set solver libmamba
 
 ## Install the environment for bluesky
 
-Using the new instrument as [setup](./_install_new_instrument.md) above (with
+Using the new instrument as [setup](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html) above (with
 `~/bluesky/` as the installation directory), look for the latest installation
 configuration file in the `~bluesky/environments/` directory.  At this time, the
 latest file is `environment_2023_2.yml`.
@@ -243,10 +243,6 @@ environment:
 #
 #     $ conda deactivate
 ```
-
-## Testing
-
-You may wish to [test](./_testing.md) that your conda environment is working.
 
 ## Other reading
 

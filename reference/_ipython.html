@@ -7,9 +7,9 @@
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Testing &#8212; APS Bluesky Training  documentation</title>
+    <title>IPython Profile &#8212; APS Bluesky Training  documentation</title>
   
   
   
@@ -31,6 +31,7 @@
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
@@ -43,11 +44,9 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_testing';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Examples" href="../example/index.html" />
-    <link rel="prev" title="Test the New Bluesky Instrument" href="_test_new_instrument.html" />
+    <link rel="prev" title="Bluesky: Brief Introduction" href="_intro2bluesky.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -136,8 +135,8 @@
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
                         Instrument
                       </a>
                     </li>
@@ -157,8 +156,8 @@
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../reference/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Reference
                       </a>
                     </li>
@@ -247,8 +246,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item current active">
-                      <a class="nav-link nav-internal" href="index.html">
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
                         Instrument
                       </a>
                     </li>
@@ -268,8 +267,8 @@ document.write(`
                     </li>
                 
 
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../reference/index.html">
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
                         Reference
                       </a>
                     </li>
@@ -303,20 +302,17 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
-<li class="toctree-l1"><a class="reference internal" href="instrument_template.html">Template for New Bluesky Instruments</a></li>
-<li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
-<li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_FAQ.html">Frequently Asked Questions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_aps_data_management.html">APS Data Management</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_conda_base.html">Conda Base Environment</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_conda_environment.html">Conda virtual environment</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_directory_layout.html">Recommended Directory Layout</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_install_new_instrument.html">Installation</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Testing</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_create_conda_env.html">Create the conda environment</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_git-help.html">Using git for version control</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">IPython Profile</a></li>
 </ul>
 </div>
 </nav></div>
@@ -355,9 +351,9 @@ document.write(`
       </a>
     </li>
     
-    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Testing</li>
+    <li class="breadcrumb-item active" aria-current="page">IPython Profile</li>
   </ul>
 </nav>
 </div>
@@ -374,50 +370,58 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="testing">
-<h1>Testing<a class="headerlink" href="#testing" title="Permalink to this heading">#</a></h1>
-<p>You may want to test the software in a conda environment.</p>
-<p>First you must activate that environment (if not already activated). This will
-reconfigure some environment variables so that the chosen environment’s
-executables and libraries will be found first.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>bluesky_2023_2
+  <section id="ipython-profile">
+<h1>IPython Profile<a class="headerlink" href="#ipython-profile" title="Permalink to this heading">#</a></h1>
+<p>An IPython profile <a class="footnote-reference brackets" href="#profile" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is used to enable the console interface for a bluesky
+session.</p>
+<section id="python-snippet-to-start-instrument-for-data-collection">
+<span id="startup-snippet"></span><span id="index-0"></span><h2>Python snippet to start instrument for data collection<a class="headerlink" href="#python-snippet-to-start-instrument-for-data-collection" title="Permalink to this heading">#</a></h2>
+<p>This snippet of Python code will start Bluesky for data collection.  Use it in
+the IPython startup script and also in Jupyter notebooks.  First, it puts the
+parent directory of the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package on the exectuable path, then it
+starts the instrument.</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="linenos">2</span><span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="linenos">3</span><span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
-<p>Here, we show how to test two packages that are part of the APS bluesky
-environment installation.</p>
-<section id="ophyd">
-<h2>ophyd<a class="headerlink" href="#ophyd" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> package is the control system abstraction layer that describes the
-hardware connections (such as EPICS process variables) and how they are
-coordinated.  The structures from <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> are used by the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> package from
-data acquisition procedures.</p>
-<p>Confirm that some part of Bluesky is working.  One easy item to test is
-an EPICS PV such as the APS storage ring current (<code class="docutils literal notranslate"><span class="pre">S:SRcurrentAI</span></code>).
-This should print the storage current.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;import ophyd;&quot;</span>
-<span class="nv">CMD</span><span class="o">+=</span><span class="s2">&quot; pv = ophyd.EpicsSignal(&#39;S:SRcurrentAI&#39;, name=&#39;pv&#39;);&quot;</span>
-<span class="nv">CMD</span><span class="o">+=</span><span class="s2">&quot; pv.wait_for_connection();&quot;</span>
-<span class="nv">CMD</span><span class="o">+=</span><span class="s2">&quot; print(pv.get());&quot;</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CMD</span><span class="si">}</span><span class="s2">&quot;</span>
-</pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Use this snippet in Jupyter notebooks to start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code>.</p>
 </div>
+<p>A slightly more robust version of this snippet is supplied by this <code class="docutils literal notranslate"><span class="pre">bluesky_training</span></code> repository:
+<a class="reference download internal" download="" href="../_downloads/9f76a7f63ab3740e857a4fc494f7568d/__start_bluesky_instrument__.py"><code class="xref download docutils literal notranslate"><span class="pre">__start_bluesky_instrument__.py</span></code></a></p>
 </section>
-<section id="aps-data-management">
-<h2>APS Data Management<a class="headerlink" href="#aps-data-management" title="Permalink to this heading">#</a></h2>
-<p>The APS Data Management software is used to process data file workflows after
-the data has been collected (by Bluesky or other software).  The workflows are
-sets of instructions that describe how to find the data and what should happen
-next with its processing.</p>
-<p>Add the APS data management API and test it.  If successful, this will
-not print any errors to standard output.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># install</span>
-conda<span class="w"> </span>install<span class="w"> </span>-c<span class="w"> </span>apsu<span class="w"> </span>aps-dm-api<span class="o">(</span>base<span class="o">)</span>
-
-<span class="c1"># test</span>
-<span class="nv">CMD</span><span class="o">=</span><span class="s2">&quot;from dm.cat_web_service.api.catApiFactory import CatApiFactory;&quot;</span>
-<span class="nv">CMD</span><span class="o">+=</span><span class="s2">&quot; api = CatApiFactory.getRunCatApi()&quot;</span>
-python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CMD</span><span class="si">}</span><span class="s2">&quot;</span>
+<section id="create-ipython-profile-for-bluesky">
+<h2>Create IPython Profile for Bluesky<a class="headerlink" href="#create-ipython-profile-for-bluesky" title="Permalink to this heading">#</a></h2>
+<p>If there is an existing <code class="docutils literal notranslate"><span class="pre">~/.ipython</span></code> directory (perhaps created for
+other use from this account), then choose a unique directory for
+bluesky. Typical alternative is <code class="docutils literal notranslate"><span class="pre">~/.ipython-bluesky</span></code>.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="nb">export</span><span class="w"> </span><span class="nv">BLUESKY_DIR</span><span class="o">=</span>~/.ipython-bluesky
+<span class="linenos">2</span>mkdir<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUESKY_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
+<span class="linenos">3</span>ipython<span class="w"> </span>profile<span class="w"> </span>create<span class="w"> </span>bluesky<span class="w"> </span>--ipython-dir<span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">BLUESKY_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
 </pre></div>
+</div>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="profile" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://ipython.readthedocs.io/en/stable/config/intro.html#profiles">https://ipython.readthedocs.io/en/stable/config/intro.html#profiles</a></p>
+</aside>
+</aside>
+</section>
+<section id="add-a-single-python-file-to-the-startup-directory">
+<h2>Add a single Python file to the startup directory<a class="headerlink" href="#add-a-single-python-file-to-the-startup-directory" title="Permalink to this heading">#</a></h2>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  .ipython-bluesky/
+<span class="linenos">2</span>    profile_bluesky/
+<span class="linenos">3</span>      startup/
+<span class="linenos">4</span>        __start_bluesky_instrument__.py --&gt; ~/bluesky/console/__start_bluesky_instrument__.py
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>when IPython starts …</p>
+<p><strong>Every</strong> Python file in the startup directory is run when IPython starts.
+The files are run in lexical (alphabetical) order.</p>
 </div>
 </section>
 </section>
@@ -434,22 +438,13 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
     <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_test_new_instrument.html"
+       href="_intro2bluesky.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Test the New Bluesky Instrument</p>
+        <p class="prev-next-title">Bluesky: Brief Introduction</p>
       </div>
-    </a>
-    <a class="right-next"
-       href="../example/index.html"
-       title="next page">
-      <div class="prev-next-info">
-        <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Examples</p>
-      </div>
-      <i class="fa-solid fa-angle-right"></i>
     </a>
 </div></div>
   
@@ -469,14 +464,15 @@ python<span class="w"> </span>-c<span class="w"> </span><span class="s2">&quot;<
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ophyd">ophyd</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#aps-data-management">APS Data Management</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#python-snippet-to-start-instrument-for-data-collection">Python snippet to start instrument for data collection</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-ipython-profile-for-bluesky">Create IPython Profile for Bluesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#add-a-single-python-file-to-the-startup-directory">Add a single Python file to the startup directory</a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
   <div class="tocsection sourcelink">
-    <a href="../_sources/instrument/_testing.md.txt">
+    <a href="../_sources/reference/_ipython.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

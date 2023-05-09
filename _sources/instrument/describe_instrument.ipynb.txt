@@ -39,13 +39,14 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "id": "8adfd058",
    "metadata": {},
    "source": [
     "## Start the `instrument` package\n",
     "\n",
-    "To start the `instrument`, use this Python startup [snippet](https://bcda-aps.github.io/bluesky_training/instrument/_ipython.html#python-snippet-to-start-instrument-for-data-collection):"
+    "To start the `instrument`, use this Python startup [snippet](https://bcda-aps.github.io/bluesky_training/reference/_ipython.html#python-snippet-to-start-instrument-for-data-collection):"
    ]
   },
   {
