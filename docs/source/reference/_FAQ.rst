@@ -24,14 +24,14 @@ This is a list of commonly asked questions concerning Bluesky.
 
 3. How to create an alias to start a bluesky session? 
 
-    There are several way to create an alias to start a bluesky session. One is described 
-    `here <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile>`_.
+    There are several ways to create an alias to start a bluesky session. One is described 
+    `here <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile>`__.
 
 .. _faq-alias-become-bluesky:
 
 4. How to create an alias to activate the bluesky environment? 
 
-    Visit `here <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#Create-an-alias-to-activate-the-bluesky-environment>`_.
+    Visit `here <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#Create-an-alias-to-activate-the-bluesky-environment>`__.
 
 
 .. _faq-obj-oriented:
