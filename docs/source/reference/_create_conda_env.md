@@ -1,0 +1,116 @@
+# Create the conda environment
+
+A bluesky instrument uses many Python packages not included in the Python
+Standard Library.  Rather than add these directly into the system Python
+installation, it is recommended to create a Python virtual environment which has
+the suite of packages (and specific versions) required.
+
+Follow these steps to create a conda environment for data collection with
+bluesky.
+
+**IMPORTANT**:  You must use `bash` shell. For more info
+see [what is
+bash?](https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>)
+
+
+## Activate conda
+
+- On a machine with access to APSshare, type the command:
+
+    <pre>$ <b>source /APSshare/miniconda/x86_64/bin/activate</b></pre>
+
+    If you are getting an error, contact the Bluesky support team.
+
+- On a machine with no access to APSshare, type the command:
+
+     <pre>$ <b>which conda</b></pre>
+
+    If the output prints the path to conda, you can activate it by using:
+
+    <pre>$ <b>source /PATH/TO/CONDA/bin/activate</b></pre>
+
+    However, if the command `which conda` does not return anything, or if you are getting an error message (`bash: conda: command not found`
+    or `bash: activate: No such file or directory`), conda is not
+    installed on your computer or it is not added to the system's PATH
+    environment variable.    
+
+    You can install conda by following the installation instructions
+    for your operating system. You can find the instructions for Windows,
+    macOS, and Linux on the official conda documentation
+    [website](https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html).
+
+    If you still encounter the same error message after installing conda, you may need to add the conda installation directory to your system's PATH environment variable manually. You can find instructions on how to do this in the Conda documentation.
+
+
+
+When `conda` is activated, the prompt changes to displays `(base)`. Now you can use
+`conda env list` to see the environments you have and the directories
+in which they are installed.
+
+Note that more documentation about [conda](../reference/_conda_base.md) is available
+[elsewhere](../reference/_conda_environment.md) in this repository.
+
+## Install the bluesky environment
+Here's an example for the `bluesky_2023_2` environment:
+
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda env create \
+    --force \
+    -n bluesky_2023_2 \
+    -f ./environments/environment_2023_2.yml \
+    --solver=libmamba</b>
+</pre>
+
+<details>
+In the commands above, a long command has been split over several lines to make
+it clearer to read and also to take less screen width. We could enter the
+<code>conda env</code> command all one one line.  These commands work the same
+as the one above.
+
+<pre>
+$ <b>cd ~/bluesky</b>
+$ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
+</pre>
+
+</details>
+<br>
+
+## Create an alias to activate the bluesky environment
+
+Creating a bash alias is like creating a custom shortcut. You can do this by editing the <code>~/.bashrc</code> and  <code>~/.bashrc_aliases</code> 
+files, which are configuration files for your bash shell. 
+Here's a simple step-by-step guide:
+
+
+   <ol>
+   <li>Open a terminal.</li>
+   <li>Open the <code>~/.bashrc</code> and <code>~/.bashrc_aliases</code> files with your prefered text editor, 
+   <i>e.g.</i>:
+   <pre>$ <b> gedit ~/.bashrc ~/.bashrc_aliases </b></pre>
+   If any of those files do not exist, this command will create blank ones. 
+   </li>
+   <li>In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
+   On a new line, type:
+
+```bash
+alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
+```
+
+   </li> 
+   <li> In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add the following lines:
+
+```bash
+export BLUESKY_CONDA_ENV=bluesky_2023_2
+source ~/.bashrc_aliases
+```
+
+   <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
+   <i>e.g.</i>, if you have created an alias to start a bluesky session.
+   </li>
+   <li>Save your changes.</li>
+   <li>Type <code>bash</code> and press enter, or open a new terminal windows to make the new alias available.</li>
+
+   </ol>
+   You can now use the alias <code>become_bluesky</code> to activate the bluesky environment. 
+

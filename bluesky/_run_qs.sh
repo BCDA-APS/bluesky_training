@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# manage the bluesky queueserver
+# Start the bluesky queueserver.
 
 #--------------------
 # change the program defaults here
