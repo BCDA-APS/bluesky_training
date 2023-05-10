@@ -25,5 +25,6 @@ to complete a project of some kind. Tutorials are *learning-oriented*.
    :maxdepth: 2
    :glob:
 
+   hello_world
    connect_epics
    _*

@@ -27,7 +27,7 @@ repository.
 ## Managing environments
 
 First you must activate the conda
-[environment](https://bcda-aps.github.io/bluesky_training/instrument/_conda_environment.html)
+[environment](https://bcda-aps.github.io/bluesky_training/reference/_conda_environment.html)
 you will use (if not already activated). Such as:
 
 ```bash
