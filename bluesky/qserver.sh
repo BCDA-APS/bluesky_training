@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# manage the bluesky queueserver process in a screen session
+# Manage the bluesky queueserver process in a screen session.
+# Calls _run_qs.sh
 
 #--------------------
 # change the program defaults here
-DATABROKER_CATALOG=training
+DATABROKER_CATALOG=training  # also defined in _run_qs.sh
 DEFAULT_SESSION_NAME="bluesky_queueserver-${DATABROKER_CATALOG}"
 #--------------------
 
@@ -17,7 +18,7 @@ fi
 SELECTION=${1:-usage}
 SESSION_NAME=${2:-"${DEFAULT_SESSION_NAME}"}
 
-PROCESS=run_qstarter_py.sh
+PROCESS=_run_qs.sh
 STARTUP_COMMAND="${STARTUP_DIR}/${PROCESS}"
 
 # - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
