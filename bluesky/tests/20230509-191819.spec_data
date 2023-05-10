@@ -23,7 +23,6 @@
 #MD instrument_name = BCDA EPICS Bluesky training
 #MD login_id = user@host
 #MD motors = ('m1',)
-#MD notebook = sscan_1d_flyer
 #MD num_intervals = 20
 #MD num_points = 21
 #MD pid = 2769995
@@ -75,7 +74,6 @@
 #MD instrument_name = BCDA EPICS Bluesky training
 #MD login_id = user@host
 #MD motors = ('m1',)
-#MD notebook = sscan_1d_flyer
 #MD num_intervals = 20
 #MD num_points = 21
 #MD pid = 2769995
@@ -127,7 +125,6 @@
 #MD instrument_name = BCDA EPICS Bluesky training
 #MD login_id = user@host
 #MD motors = ('m1',)
-#MD notebook = sscan_1d_flyer
 #MD num_intervals = 20
 #MD num_points = 21
 #MD pid = 2769995
@@ -179,7 +176,6 @@
 #MD instrument_name = BCDA EPICS Bluesky training
 #MD login_id = user@host
 #MD motors = ('m1',)
-#MD notebook = sscan_1d_flyer
 #MD num_intervals = 20
 #MD num_points = 21
 #MD pid = 2769995
