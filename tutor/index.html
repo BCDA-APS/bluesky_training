@@ -46,7 +46,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Connect Bluesky with EPICS" href="connect_epics.html" />
+    <link rel="next" title="Hello, World" href="hello_world.html" />
     <link rel="prev" title="XAFS scan" href="../example/_xafs_scan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -303,12 +303,13 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hello_world.html">Hello, World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connect_epics.html">Connect Bluesky with EPICS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aps101_notes.html">APS Bluesky 101 - Presenter’s Notes</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_hello_world.html">Hello, World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of Bluesky commands</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
@@ -378,6 +379,7 @@ document.write(`
 to complete a project of some kind. Tutorials are <em>learning-oriented</em>.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="hello_world.html">Hello, World</a></li>
 <li class="toctree-l1"><a class="reference internal" href="connect_epics.html">Connect Bluesky with EPICS</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="connect_epics.html#Fundamentals">Fundamentals</a></li>
 <li class="toctree-l2"><a class="reference internal" href="connect_epics.html#EpicsSignal"><code class="docutils literal notranslate"><span class="pre">EpicsSignal</span></code></a></li>
@@ -412,7 +414,14 @@ to complete a project of some kind. Tutorials are <em>learning-oriented</em>.</p
 <li class="toctree-l2"><a class="reference internal" href="_basic_c.html#Summary">Summary</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="_hello_world.html">Hello, World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of Bluesky commands</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_command_review.html#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_command_review.html#List,-Describe,-Summary">List, Describe, Summary</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_command_review.html#Read">Read</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_command_review.html#Move">Move</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_command_review.html#Count">Count</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_lesson1.html#Starting-this-session-in-a-Jupyter-notebook">Starting this session in a Jupyter notebook</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_lesson1.html#Connect-an-EPICS-scaler">Connect an EPICS scaler</a></li>
@@ -479,11 +488,11 @@ to complete a project of some kind. Tutorials are <em>learning-oriented</em>.</p
       </div>
     </a>
     <a class="right-next"
-       href="connect_epics.html"
+       href="hello_world.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Connect Bluesky with EPICS</p>
+        <p class="prev-next-title">Hello, World</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
