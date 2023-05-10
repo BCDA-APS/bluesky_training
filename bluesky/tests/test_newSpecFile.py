@@ -1,3 +1,4 @@
+import datetime
 import os
 import pathlib
 import shutil
@@ -7,12 +8,15 @@ import pytest
 from apstools.utils import cleanupText
 from instrument.callbacks.spec_data_file_writer import newSpecFile
 from instrument.callbacks.spec_data_file_writer import specwriter
+from spec2nexus.spec import is_spec_file
+from spec2nexus.spec import SpecDataFile
 
 from bluesky.run_engine import RunEngine
 
 INITIAL_SCAN_ID = 1234
 RE = RunEngine(dict(scan_id=INITIAL_SCAN_ID))
 # databroker is not necessary
+TEST_DATA_FILE = pathlib.Path(__file__).parent / "20230509-191819.dat"
 
 
 @pytest.fixture
@@ -57,3 +61,40 @@ def test_newSpecFile(title, scan_id, tempdir):
         assert safe_title in specwriter.spec_filename.name
         assert specwriter.spec_filename.name[5:] == f"_{safe_title}.dat"
         assert isinstance(specwriter.spec_filename, pathlib.Path)
+
+
+def test_newSpecFile_with_existing(tempdir):
+    assert tempdir.exists()
+    os.chdir(tempdir)  # newSpecFile() works in pwd
+
+    assert TEST_DATA_FILE.exists()
+    assert is_spec_file(TEST_DATA_FILE)
+
+    mmdd = str(datetime.datetime.now()).split()[0][5:].replace("-", "_")
+    title = "testfile"
+    testfile = tempdir / f"{mmdd}_{title}.dat"
+    assert not testfile.exists()
+
+    # make the file to be named by newSpecFile() below
+    shutil.copy2(TEST_DATA_FILE, testfile)
+    assert testfile.exists()
+    assert is_spec_file(testfile)
+
+    sdf = SpecDataFile(testfile)
+    last_scan_number_in_file = int(sdf.getLastScanNumber())
+    assert last_scan_number_in_file == 983
+
+    RE.md["scan_id"] = INITIAL_SCAN_ID
+    assert RE.md["scan_id"] == INITIAL_SCAN_ID
+
+    scan_id = max(last_scan_number_in_file, INITIAL_SCAN_ID)+10
+    newSpecFile(title, RE=RE)
+    assert RE.md["scan_id"] != INITIAL_SCAN_ID
+    assert RE.md["scan_id"] != scan_id
+    assert RE.md["scan_id"] == last_scan_number_in_file
+
+    RE.md["scan_id"] = INITIAL_SCAN_ID  # reset it before next call
+    newSpecFile(title, scan_id=scan_id, RE=RE)
+    assert RE.md["scan_id"] != INITIAL_SCAN_ID
+    assert RE.md["scan_id"] != scan_id
+    assert RE.md["scan_id"] == last_scan_number_in_file
