@@ -2,7 +2,7 @@
 
 The instrument package defines the features of your equipment for use with data
 acquisition using the Bluesky framework.  It is structured as a Python
-[package](https://python-packaging-tutorial.readthedocs.io/en/latest/setup_py.html)
+[package](https://packaging.python.org/en/latest/tutorials/packaging-projects/)
 so that it will be easy to use with the Python `import` command, like much other
 Python software.
 
