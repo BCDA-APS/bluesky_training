@@ -54,8 +54,10 @@ def newSpecFile(title, scan_id=1, RE=None):
 
     Cleans up title, prepends month and day and appends file extension.
     If ``RE`` is passed, then resets ``RE.md["scan_id"] = scan_id``.
+    
+    If the SPEC file already exists, then ``scan_id`` is ignored
+    and ``RE.md["scan_id"]`` is set to the last scan number in the file.
     """
-    global specwriter
     mmdd = str(datetime.datetime.now()).split()[0][5:].replace("-", "_")
     clean = apstools.utils.cleanupText(title)
     fname = pathlib.Path(f"{mmdd}_{clean}.dat")
