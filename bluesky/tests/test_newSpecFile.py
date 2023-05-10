@@ -6,17 +6,15 @@ import tempfile
 
 import pytest
 from apstools.utils import cleanupText
-from instrument.callbacks.spec_data_file_writer import newSpecFile
-from instrument.callbacks.spec_data_file_writer import specwriter
-from spec2nexus.spec import is_spec_file
-from spec2nexus.spec import SpecDataFile
+from instrument.callbacks.spec_data_file_writer import newSpecFile, specwriter
+from spec2nexus.spec import SpecDataFile, is_spec_file
 
 from bluesky.run_engine import RunEngine
 
 INITIAL_SCAN_ID = 1234
 RE = RunEngine(dict(scan_id=INITIAL_SCAN_ID))
 # databroker is not necessary
-TEST_DATA_FILE = pathlib.Path(__file__).parent / "20230509-191819.dat"
+TEST_DATA_FILE = pathlib.Path(__file__).parent / "20230509-191819.spec_data"
 
 
 @pytest.fixture
@@ -87,7 +85,7 @@ def test_newSpecFile_with_existing(tempdir):
     RE.md["scan_id"] = INITIAL_SCAN_ID
     assert RE.md["scan_id"] == INITIAL_SCAN_ID
 
-    scan_id = max(last_scan_number_in_file, INITIAL_SCAN_ID)+10
+    scan_id = max(last_scan_number_in_file, INITIAL_SCAN_ID) + 10
     newSpecFile(title, RE=RE)
     assert RE.md["scan_id"] != INITIAL_SCAN_ID
     assert RE.md["scan_id"] != scan_id
