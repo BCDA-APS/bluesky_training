@@ -24,6 +24,7 @@ extensions = """
     sphinx.ext.mathjax
     sphinx.ext.todo
     sphinx.ext.viewcode
+    sphinx_tabs.tabs
     nbsphinx
     myst_parser
 """.split()
@@ -32,7 +33,7 @@ templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
 exclude_patterns = ["**.ipynb_checkpoints"]
 
-# today_fmt = "%Y-%m-%d %H:%M"
+today_fmt = "%Y-%m-%d %H:%M"
 
 # Ignore errors in notebooks while documenting them
 nbsphinx_allow_errors = True

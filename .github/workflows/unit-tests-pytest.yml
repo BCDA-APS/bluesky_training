@@ -52,7 +52,11 @@ jobs:
       max-parallel: 5
 
     steps:
-    - uses: actions/checkout@v2
+    - name: Set time zone
+      run: echo "TZ=America/Chicago" >> "$GITHUB_ENV"
+
+    - name: Checkout the project from GitHub
+      uses: actions/checkout@v2
 
     - name: Create Python ${{ matrix.python-version }} environment
       uses: mamba-org/provision-with-micromamba@main

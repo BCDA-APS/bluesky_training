@@ -1,4 +1,4 @@
-# First Steps with Bluesky
+# Bluesky Cheat Sheet
 
 This is a quick-reference guide for those learning how
 to use the Bluesky Framework for data acquisition.
@@ -9,7 +9,7 @@ Covered here:
   - motors have values matching EPICS
   - scaler(s) match EPICS
 
-There steps are repeated in a [Jupyter notebook](../reference/_command_review.ipynb).
+There steps are repeated in a [Jupyter notebook](../tutor/_command_review.ipynb).
 
 ## Read
 

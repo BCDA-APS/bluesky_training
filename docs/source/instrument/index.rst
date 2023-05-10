@@ -22,7 +22,6 @@ reference for ideas rather than a set of requirements.
    :maxdepth: 2
    :glob:
 
-   instrument_template
    describe_instrument
    guide
    _*
