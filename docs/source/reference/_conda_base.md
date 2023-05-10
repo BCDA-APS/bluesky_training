@@ -1,6 +1,6 @@
 # Conda Base Environment
 
-Review [Python Virtual Environments](../instrument/_conda_environment.md) before continuing here.
+Review [Python Virtual Environments](../reference/_conda_environment.md) before continuing here.
 
 Install the conda [base
 environment](https://conda.io/projects/conda/en/latest/user-guide/getting-started.html#managing-environments)

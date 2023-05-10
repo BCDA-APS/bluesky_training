@@ -96,6 +96,7 @@ dependencies:
   - pydata-sphinx-theme
   - pygithub
   - sphinx
+  - sphinx-tabs
   - sphinxcontrib-napoleon
   - twine
   - versioneer

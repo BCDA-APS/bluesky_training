@@ -128,7 +128,7 @@ folders (created by tools from Bluesky's
 
 ## Review
 
-- [Command Review](https://bcda-aps.github.io/bluesky_training/reference/_command_review.html)
+- [Command Review](https://bcda-aps.github.io/bluesky_training/tutor/_command_review.html)
 - [Overview of the `instrument` package](https://bcda-aps.github.io/bluesky_training/instrument/describe_instrument.html)
 
 ## Install as Bluesky `instrument` package

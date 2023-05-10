@@ -24,6 +24,7 @@ extensions = """
     sphinx.ext.mathjax
     sphinx.ext.todo
     sphinx.ext.viewcode
+    sphinx_tabs.tabs
     nbsphinx
     myst_parser
 """.split()
