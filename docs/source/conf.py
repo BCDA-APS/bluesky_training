@@ -33,7 +33,7 @@ templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
 exclude_patterns = ["**.ipynb_checkpoints"]
 
-# today_fmt = "%Y-%m-%d %H:%M"
+today_fmt = "%Y-%m-%d %H:%M"
 
 # Ignore errors in notebooks while documenting them
 nbsphinx_allow_errors = True
