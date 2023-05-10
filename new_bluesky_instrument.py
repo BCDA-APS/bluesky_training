@@ -215,6 +215,7 @@ def adjust_permissions(destination):
         else:
             f.chmod(read_write_permissions)
 
+
 def git_init(destination):
     # User instructions should describe how to set git origin.
     owd = os.getcwd()
@@ -274,9 +275,10 @@ def command_line_options():
         const=logging.DEBUG,
     )
     logging_group.add_argument(
-        "-g", "--git-init",
+        "-g",
+        "--git-init",
         help="Create a git repository (by calling git init)",
-        action="store_true"
+        action="store_true",
     )
 
     args = parser.parse_args()
