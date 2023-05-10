@@ -243,6 +243,12 @@ def command_line_options():
         dest="loglevel",
         const=logging.DEBUG,
     )
+    # TODO: part of issue #142
+    # logging_group.add_argument(
+    #     "-g", "--git-init",
+    #     help="Create a git repository (by calling git init)",
+    #     action="store_true"
+    # )
 
     args = parser.parse_args()
 
@@ -264,4 +270,5 @@ if __name__ == "__main__":
     #     shutil.rmtree(destination)
 
     new_instrument_from_template(destination)
-    # User instructions should describe how to set up git repo: git init
+    # TODO: handle args.git_init
+    # User instructions should describe how to set git origin.
