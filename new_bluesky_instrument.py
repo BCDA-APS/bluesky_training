@@ -39,8 +39,10 @@ DEPENDENCIES:
 """
 
 import logging
+import os
 import pathlib
 import shutil
+import subprocess
 import tempfile
 import time
 import zipfile
@@ -65,7 +67,7 @@ HOUR = 60 * MINUTE
 DAY = 24 * HOUR
 
 
-def new_instrument_from_template(destination=None):
+def new_instrument_from_template(destination=None, make_git_repo=False):
     """
     Install a new bluesky instrument from the online training repository.
 
@@ -75,6 +77,8 @@ def new_instrument_from_template(destination=None):
         Directory for the new instrument.  Either a *str* or an
         instance of ``pathlib.Path()``.
         If ``None``, installs into a temporary directory.
+    make_git_repo *bool*:
+        Create a git repository by calling ``git init``.
     """
     destination = pathlib.Path(destination or tempfile.mkdtemp()).absolute()
     if destination.exists() and len(list(destination.iterdir())) > 0:
@@ -97,6 +101,11 @@ def new_instrument_from_template(destination=None):
     # remove the source directory from the repository
     logger.debug("Removing directory '%s'", destination / BASE_NAME)
     shutil.rmtree(destination / BASE_NAME)
+
+    adjust_permissions(destination)
+
+    if make_git_repo:
+        git_init(destination)
 
     return destination
 
@@ -193,6 +202,27 @@ def revise_content(destination):
         shutil.rmtree(subdir)
 
 
+def adjust_permissions(destination):
+    executable_permissions = 0o777  # rwx
+    read_write_permissions = 0o666  # rw-
+    executable_suffixes = ".sh .py".split()
+    for f in destination.iterdir():
+        if f.suffix in executable_suffixes:
+            f.chmod(executable_permissions)
+        elif f.is_dir():
+            f.chmod(executable_permissions)
+            adjust_permissions(f)
+        else:
+            f.chmod(read_write_permissions)
+
+def git_init(destination):
+    # User instructions should describe how to set git origin.
+    owd = os.getcwd()
+    os.chdir(destination)
+    subprocess.run(["git", "init"])  # doesn't capture output
+    os.chdir(owd)
+
+
 def command_line_options():
     import argparse
     import sys
@@ -243,12 +273,11 @@ def command_line_options():
         dest="loglevel",
         const=logging.DEBUG,
     )
-    # TODO: part of issue #142
-    # logging_group.add_argument(
-    #     "-g", "--git-init",
-    #     help="Create a git repository (by calling git init)",
-    #     action="store_true"
-    # )
+    logging_group.add_argument(
+        "-g", "--git-init",
+        help="Create a git repository (by calling git init)",
+        action="store_true"
+    )
 
     args = parser.parse_args()
 
@@ -269,6 +298,4 @@ if __name__ == "__main__":
     #     logger.debug("Removing file '%s'", destination)
     #     shutil.rmtree(destination)
 
-    new_instrument_from_template(destination)
-    # TODO: handle args.git_init
-    # User instructions should describe how to set git origin.
+    new_instrument_from_template(destination, make_git_repo=args.git_init)
