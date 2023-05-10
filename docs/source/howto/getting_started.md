@@ -70,5 +70,5 @@ Shortly, the [JupyterLab](https://jupyterlab.readthedocs.io/en/stable/index.html
 ![JupyterLab session example](../_static/bluesky-in-lab.png)
 
 Many of the How-To guides and tutorials, such as the [Bluesky cheat
-sheet](https://bcda-aps.github.io/bluesky_training/reference/_command_review.html)
+sheet](https://bcda-aps.github.io/bluesky_training/tutor/_command_review.html)
 use a Jupyter notebook for data acquisition with the `instrument` package.

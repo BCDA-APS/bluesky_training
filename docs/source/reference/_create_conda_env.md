@@ -23,7 +23,7 @@ bash?](https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
 
 - On a machine with no access to APSshare, type the command:
 
-     <pre>$ <b>`which conda`</b></pre>
+     <pre>$ <b>which conda</b></pre>
 
     If the output prints the path to conda, you can activate it by using:
 
