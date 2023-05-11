@@ -105,17 +105,7 @@ When run successfully, the program output should look like this:
    INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
    INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
    INFO:__main__:Installing to '/home/user/bluesky'
-   hint: Using 'master' as the name for the initial branch. This default branch name
-   hint: is subject to change. To configure the initial branch name to use in all
-   hint: of your new repositories, which will suppress this warning, call:
-   hint: 
-   hint: 	git config --global init.defaultBranch <name>
-   hint: 
-   hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-   hint: 'development'. The just-created branch can be renamed via this command:
-   hint: 
-   hint: 	git branch -m <name>
-   Initialized empty Git repository in /home/beams1/JEMIAN/bluesky/.git/
+   INFO:__main__:Initialized Git repository in '/home/user/bluesky'
    </pre>
 
 Activate the bluesky conda environment

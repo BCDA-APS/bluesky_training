@@ -41,6 +41,7 @@ DEPENDENCIES:
 import logging
 import os
 import pathlib
+import shlex
 import shutil
 import subprocess
 import tempfile
@@ -211,8 +212,8 @@ def revise_content(destination):
 
 
 def adjust_permissions(destination):
-    executable_permissions = 0o777  # rwx
-    read_write_permissions = 0o666  # rw-
+    executable_permissions = 0o775  # rwxrwxr-x
+    read_write_permissions = 0o664  # rw-rw-r--
     executable_suffixes = ".sh .py".split()
     for f in destination.iterdir():
         if f.suffix in executable_suffixes:
@@ -223,19 +224,41 @@ def adjust_permissions(destination):
         else:
             permissions = read_write_permissions
         f.chmod(permissions)
-        logger.debug("Set permissions=%o: '%s'", permissions, f)
+        logger.debug("Set permissions=o%o: '%s'", permissions, f)
 
 
 def git_init(destination):
-    # User instructions should describe how to set git origin.
-    owd = os.getcwd()
-    os.chdir(destination)
-    # TODO: these steps have too much output to the terminal
-    subprocess.run("git init".split())
-    subprocess.run("git add .gitignore".split())
-    subprocess.run("git add *".split())
-    subprocess.run(["git", "commit", "-m", "'initial commit'"])
-    os.chdir(owd)
+    """
+    Initialize a Git repository in 'destination' and make the first commit.
+
+    User instructions should describe how to set git origin.
+    """
+
+    def shell(cmd):
+        logger.debug("Execute shell command \"%s\" in directory '%s'.", cmd, destination)
+        split_command = shlex.split(cmd)
+        process = subprocess.Popen(
+            split_command,
+            cwd=destination,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        out, err = process.communicate()
+        logger.debug(
+            "command output:\n  stdout=%s\n  stderr=%s",
+            out.splitlines(),
+            err.splitlines(),
+        )
+
+    for command in """
+        git init
+        git add .gitignore
+        git add *
+        git commit -m 'initial commit'
+    """.strip().splitlines():
+        shell(command.strip())
+    logger.info("Initialized Git repository in '%s'", destination)
+    shell("ls -lAFgh")
 
 
 def command_line_options():
