@@ -1,5 +1,5 @@
-Instal New Instrument
-=====================
+Install New Instrument
+======================
 
 Describes the steps to install a new bluesky instrument.
 
@@ -105,6 +105,7 @@ When run successfully, the program output should look like this:
    INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
    INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
    INFO:__main__:Installing to '/home/user/bluesky'
+   INFO:__main__:Initialized Git repository in '/home/user/bluesky'
    </pre>
 
 Activate the bluesky conda environment
@@ -153,7 +154,7 @@ Test the new bluesky instrument
 At this point, you have assembled enough of the parts to test the
 initial installation with bluesky. Follow the steps in the following guides:
 
-- `Hello World <https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html>`_: test the basic installation of bluesky.
+- `Hello World <https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html>`_: test the basic installation of bluesky.
 - `Test my new instrument package <https://bcda-aps.github.io/bluesky_training/instrument/_test_new_instrument.html>`_: verify the new instrument package loads without error.
 - `Test bluesky with EPICS <https://bcda-aps.github.io/bluesky_training/instrument/_test_bluesky_at_aps.html>`_: make sure you are able to connect to EPICS PVs at the APS.
 
