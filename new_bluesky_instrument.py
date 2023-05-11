@@ -138,6 +138,9 @@ def extract_content(archive, destination):
         ):
             logger.debug("extracting archive item: '%s'", item)
             z.extract(item, path=destination)
+        elif item == f"{BASE_NAME}/.gitignore":
+            logger.debug("extracting archive item: '%s'", item)
+            z.extract(item, path=destination)
         else:
             logger.debug("ignoring archive item: '%s'", item)
     # fmt: on
@@ -145,6 +148,11 @@ def extract_content(archive, destination):
 
 def move_content(source, destination):
     """Move the content into the destination directory."""
+    item = source.parent / ".gitignore"
+    target = destination / item.name
+    logger.debug("file: '%s'  -->  '%s'", item.name, target)
+    shutil.copy2(item, destination / target)
+
     for item in source.iterdir():
         target = destination / item.name
         if item.is_file():
