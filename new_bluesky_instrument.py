@@ -232,8 +232,8 @@ def git_init(destination):
     os.chdir(destination)
     # TODO: these steps have too much output to the terminal
     subprocess.run("git init".split())
-    subprocess.run("git add *".split())
     subprocess.run("git add .gitignore".split())
+    subprocess.run("git add *".split())
     subprocess.run(["git", "commit", "-m", "'initial commit'"])
     os.chdir(owd)
 
