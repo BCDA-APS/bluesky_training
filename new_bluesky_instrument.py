@@ -13,6 +13,7 @@ EXAMPLE::
     INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
     INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
     INFO:__main__:Installing to '/tmp/tmp_instrument'
+    INFO:__main__:Initialized Git repository in '/tmp/tmp_instrument'
 
 USAGE::
 
@@ -30,6 +31,7 @@ USAGE::
     --quiet     Reporting: only warnings and errors
     --info      Reporting: also information messages (default)
     --debug     Reporting: also debugging messages
+    --no-git    Do not create a git repository.
 
 DEPENDENCIES:
 
@@ -40,7 +42,9 @@ DEPENDENCIES:
 
 import logging
 import pathlib
+import shlex
 import shutil
+import subprocess
 import tempfile
 import time
 import zipfile
@@ -65,7 +69,7 @@ HOUR = 60 * MINUTE
 DAY = 24 * HOUR
 
 
-def new_instrument_from_template(destination=None):
+def new_instrument_from_template(destination=None, make_git_repo=False):
     """
     Install a new bluesky instrument from the online training repository.
 
@@ -75,6 +79,8 @@ def new_instrument_from_template(destination=None):
         Directory for the new instrument.  Either a *str* or an
         instance of ``pathlib.Path()``.
         If ``None``, installs into a temporary directory.
+    make_git_repo *bool*:
+        Create a git repository by calling ``git init``.
     """
     destination = pathlib.Path(destination or tempfile.mkdtemp()).absolute()
     if destination.exists() and len(list(destination.iterdir())) > 0:
@@ -97,6 +103,11 @@ def new_instrument_from_template(destination=None):
     # remove the source directory from the repository
     logger.debug("Removing directory '%s'", destination / BASE_NAME)
     shutil.rmtree(destination / BASE_NAME)
+
+    adjust_permissions(destination)
+
+    if make_git_repo:
+        git_init(destination)
 
     return destination
 
@@ -129,6 +140,9 @@ def extract_content(archive, destination):
         ):
             logger.debug("extracting archive item: '%s'", item)
             z.extract(item, path=destination)
+        elif item == f"{BASE_NAME}/.gitignore":
+            logger.debug("extracting archive item: '%s'", item)
+            z.extract(item, path=destination)
         else:
             logger.debug("ignoring archive item: '%s'", item)
     # fmt: on
@@ -136,6 +150,11 @@ def extract_content(archive, destination):
 
 def move_content(source, destination):
     """Move the content into the destination directory."""
+    item = source.parent / ".gitignore"
+    target = destination / item.name
+    logger.debug("file: '%s'  -->  '%s'", item.name, target)
+    shutil.copy2(item, destination / target)
+
     for item in source.iterdir():
         target = destination / item.name
         if item.is_file():
@@ -193,6 +212,56 @@ def revise_content(destination):
         shutil.rmtree(subdir)
 
 
+def adjust_permissions(destination):
+    executable_permissions = 0o775  # rwxrwxr-x
+    read_write_permissions = 0o664  # rw-rw-r--
+    executable_suffixes = ".sh .py".split()
+    for f in destination.iterdir():
+        if f.suffix in executable_suffixes:
+            permissions = executable_permissions
+        elif f.is_dir():
+            permissions = executable_permissions
+            adjust_permissions(f)
+        else:
+            permissions = read_write_permissions
+        f.chmod(permissions)
+        logger.debug("Set permissions=o%o: '%s'", permissions, f)
+
+
+def git_init(destination):
+    """
+    Initialize a Git repository in 'destination' and make the first commit.
+
+    User instructions should describe how to set git origin.
+    """
+
+    def shell(cmd):
+        logger.debug("Execute shell command \"%s\" in directory '%s'.", cmd, destination)
+        split_command = shlex.split(cmd)
+        process = subprocess.Popen(
+            split_command,
+            cwd=destination,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        out, err = process.communicate()
+        logger.debug(
+            "command output:\n  stdout=%s\n  stderr=%s",
+            out.splitlines(),
+            err.splitlines(),
+        )
+
+    for command in """
+        git init
+        git add .gitignore
+        git add *
+        git commit -m 'initial commit'
+    """.strip().splitlines():
+        shell(command.strip())
+    logger.info("Initialized Git repository in '%s'", destination)
+    shell("ls -lAFgh")
+
+
 def command_line_options():
     import argparse
     import sys
@@ -206,7 +275,7 @@ def command_line_options():
 
     parser.add_argument(
         "directory",
-        type=str,
+        default=".",
         help=(
             "Directory for the new instrument."
             "  If omitted, use the present working directory"
@@ -215,33 +284,39 @@ def command_line_options():
             "  If the directory exists and it is not empty, this"
             " program will stop before any action is taken."
         ),
-        default=".",
         nargs="?",
+        type=str,
     )
 
     logging_group = parser.add_mutually_exclusive_group(required=False)
 
     logging_group.add_argument(
         "--quiet",
-        help="Reporting: only warnings and errors",
         action="store_const",
-        dest="loglevel",
         const=logging.WARNING,
         default=logging.INFO,
+        dest="loglevel",
+        help="Reporting: only warnings and errors",
     )
     logging_group.add_argument(
         "--info",
-        help="Reporting: also information messages (default)",
         action="store_const",
-        dest="loglevel",
         const=logging.INFO,
+        dest="loglevel",
+        help="Reporting: also information messages (default)",
     )
     logging_group.add_argument(
         "--debug",
-        help="Reporting: also debugging messages",
         action="store_const",
-        dest="loglevel",
         const=logging.DEBUG,
+        dest="loglevel",
+        help="Reporting: also debugging messages",
+    )
+    logging_group.add_argument(
+        "--no-git",
+        action="store_false",
+        dest="git_init",
+        help="Do not create a git repository.",
     )
 
     args = parser.parse_args()
@@ -257,11 +332,4 @@ if __name__ == "__main__":
     destination = pathlib.Path(args.directory)
     logger.info("Requested installation to: '%s'", destination)
 
-    # # TODO: Developer use only
-    # destination = pathlib.Path(__file__).parent / "bluesky"
-    # if destination.exists():
-    #     logger.debug("Removing file '%s'", destination)
-    #     shutil.rmtree(destination)
-
-    new_instrument_from_template(destination)
-    # User instructions should describe how to set up git repo: git init
+    new_instrument_from_template(destination, make_git_repo=args.git_init)

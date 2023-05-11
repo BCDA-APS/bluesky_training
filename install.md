@@ -1,5 +1,15 @@
 # Prepare Linux Workstation for Python Notebooks with Bluesky
 
+**NOTE**: Ignore this file, it's out of date.  See the new
+[Installation Guide](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html).
+
+-----
+
+The content below has been left in place for disposition in
+[issue #108](https://github.com/BCDA-APS/bluesky_training/issues/108).
+
+-----
+
 revision: 2021-12-13
 
 Without much explanation, these are the steps to prepare (install the various
