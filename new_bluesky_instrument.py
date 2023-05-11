@@ -230,7 +230,11 @@ def git_init(destination):
     # User instructions should describe how to set git origin.
     owd = os.getcwd()
     os.chdir(destination)
-    subprocess.run(["git", "init"])  # doesn't capture output
+    # TODO: these steps have too much output to the terminal
+    subprocess.run("git init".split())
+    subprocess.run("git add *".split())
+    subprocess.run("git add .gitignore".split())
+    subprocess.run(["git", "commit", "-m", "'initial commit'"])
     os.chdir(owd)
 
 
