@@ -15,11 +15,14 @@ name: bluesky_2023_2
 # https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/environments/admin/bluesky.md#bash-environment-variables
 
 channels:
-  - conda-forge
+  # To get epics-base compatible with both PyEpics _and_ pvapy, apsu channel first.
+  # BTW: apsu channel includes all of sveseli channel (no need for the extra).
   - apsu
+
+  # then conda-forge
+  - conda-forge
   - aps-anl-tag
   - defaults
-  - sveseli
 
 dependencies:
 
