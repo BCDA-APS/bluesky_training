@@ -13,6 +13,7 @@ EXAMPLE::
     INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/refs/heads/main.zip'
     INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
     INFO:__main__:Installing to '/tmp/tmp_instrument'
+    INFO:__main__:Initialized Git repository in '/tmp/tmp_instrument'
 
 USAGE::
 
@@ -30,6 +31,7 @@ USAGE::
     --quiet     Reporting: only warnings and errors
     --info      Reporting: also information messages (default)
     --debug     Reporting: also debugging messages
+    --no-git    Do not create a git repository.
 
 DEPENDENCIES:
 
@@ -39,7 +41,6 @@ DEPENDENCIES:
 """
 
 import logging
-import os
 import pathlib
 import shlex
 import shutil
