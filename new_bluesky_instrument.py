@@ -208,12 +208,14 @@ def adjust_permissions(destination):
     executable_suffixes = ".sh .py".split()
     for f in destination.iterdir():
         if f.suffix in executable_suffixes:
-            f.chmod(executable_permissions)
+            permissions = executable_permissions
         elif f.is_dir():
-            f.chmod(executable_permissions)
+            permissions = executable_permissions
             adjust_permissions(f)
         else:
-            f.chmod(read_write_permissions)
+            permissions = read_write_permissions
+        f.chmod(permissions)
+        logger.debug("Set permissions=%o: '%s'", permissions, f)
 
 
 def git_init(destination):
@@ -237,7 +239,7 @@ def command_line_options():
 
     parser.add_argument(
         "directory",
-        type=str,
+        default=".",
         help=(
             "Directory for the new instrument."
             "  If omitted, use the present working directory"
@@ -246,39 +248,39 @@ def command_line_options():
             "  If the directory exists and it is not empty, this"
             " program will stop before any action is taken."
         ),
-        default=".",
         nargs="?",
+        type=str,
     )
 
     logging_group = parser.add_mutually_exclusive_group(required=False)
 
     logging_group.add_argument(
         "--quiet",
-        help="Reporting: only warnings and errors",
         action="store_const",
-        dest="loglevel",
         const=logging.WARNING,
         default=logging.INFO,
+        dest="loglevel",
+        help="Reporting: only warnings and errors",
     )
     logging_group.add_argument(
         "--info",
-        help="Reporting: also information messages (default)",
         action="store_const",
-        dest="loglevel",
         const=logging.INFO,
+        dest="loglevel",
+        help="Reporting: also information messages (default)",
     )
     logging_group.add_argument(
         "--debug",
-        help="Reporting: also debugging messages",
         action="store_const",
-        dest="loglevel",
         const=logging.DEBUG,
+        dest="loglevel",
+        help="Reporting: also debugging messages",
     )
     logging_group.add_argument(
-        "-g",
-        "--git-init",
-        help="Create a git repository (by calling git init)",
-        action="store_true",
+        "--no-git",
+        action="store_false",
+        dest="git_init",
+        help="Do not create a git repository.",
     )
 
     args = parser.parse_args()
@@ -293,11 +295,5 @@ if __name__ == "__main__":
     args = command_line_options()
     destination = pathlib.Path(args.directory)
     logger.info("Requested installation to: '%s'", destination)
-
-    # # TODO: Developer use only
-    # destination = pathlib.Path(__file__).parent / "bluesky"
-    # if destination.exists():
-    #     logger.debug("Removing file '%s'", destination)
-    #     shutil.rmtree(destination)
 
     new_instrument_from_template(destination, make_git_repo=args.git_init)
