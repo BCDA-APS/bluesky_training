@@ -133,8 +133,10 @@ folders (created by tools from Bluesky's
 
 ## Install as Bluesky `instrument` package
 
-Parts of this repository (in the `bluesky/` directory) also serve as a template for
-creating a new bluesky `instrument` package.  See these
-[instructions](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument) for the _Steps to install a
-new instrument_.
-The steps are similar on Mac OS and Windows but details are not provided here.
+The [`bluesky`](https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky)
+directory of this [repository](https://github.com/BCDA-APS/bluesky_training)
+serves as a template for creating a new bluesky `instrument` package.  See these
+installation
+[instructions](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument).
+The process to install on Mac OS and Windows is similar but support for those
+operating systems is not provided here.
