@@ -65,11 +65,16 @@ APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
 
 ## Introductory
 
-The [APS Bluesky 101](https://bcda-aps.github.io/bluesky_training/tutor/aps101.html)
-introductory course covers these two notebooks as well as scanning with scaler _v._ motor.
+The best introduction to Bluesky might come through a _Hello, World!_ example
+and then an example connecting EPICS to Bluesky.
 
-- [Bluesky *Hello, World!*](https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html)
+- [Bluesky *Hello, World!*](https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html)
 - [Connect with EPICS](https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html)
+
+These notebooks, and the notebooks in the next section, comprise the **_APS
+Bluesky 101_** introductory course.  You can review the [presenter's
+notes](https://bcda-aps.github.io/bluesky_training/tutor/_aps101_notes.html) for
+details on that course.
 
 ## Basic hardware configuration and measurement
 
