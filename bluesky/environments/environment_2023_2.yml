@@ -72,6 +72,7 @@ dependencies:
   - databroker-pack
   - databroker =1.2
   - hklpy >=1.0.3  # --- linux-64
+  - httpx >=0.14  # issue #75
   - ophyd >=1.7
   - pydm
   - tiled
