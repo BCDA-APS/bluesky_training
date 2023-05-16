@@ -15,6 +15,11 @@ RUNENGINE_METADATA:
   proposal_id: training
   databroker_catalog: *databroker_catalog
 
+# Uncomment and edit to define a PV to use for the `scan_id`.
+# The default behavior is to use `RE.md["scan_id"]`.
+# RUN_ENGINE_SCAN_ID_PV: "IOC:integer"
+
+
 # area detector paths used by training IOC
 # These are examples for other use of this instrument.
 # see: https://bcda-aps.github.io/apstools/latest/examples/de_0_adsim_hdf5_basic.html#File-Directories
