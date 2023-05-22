@@ -68,6 +68,10 @@ MINUTE = 60 * SECOND
 HOUR = 60 * MINUTE
 DAY = 24 * HOUR
 
+EXECUTABLE_PERMISSIONS = 0o775  # rwxrwxr-x
+READ_WRITE_PERMISSIONS = 0o664  # rw-rw-r--
+EXECUTABLE_SUFFIXES = ".sh .py".split()
+
 
 def new_instrument_from_template(destination=None, make_git_repo=False):
     """
@@ -212,20 +216,16 @@ def revise_content(destination):
         shutil.rmtree(subdir)
 
 
-def adjust_permissions(destination):
-    executable_permissions = 0o775  # rwxrwxr-x
-    read_write_permissions = 0o664  # rw-rw-r--
-    executable_suffixes = ".sh .py".split()
-    for f in destination.iterdir():
-        if f.suffix in executable_suffixes:
-            permissions = executable_permissions
-        elif f.is_dir():
-            permissions = executable_permissions
-            adjust_permissions(f)
-        else:
-            permissions = read_write_permissions
-        f.chmod(permissions)
-        logger.debug("Set permissions=o%o: '%s'", permissions, f)
+def adjust_permissions(target):
+    if target.is_dir() or target.suffix in EXECUTABLE_SUFFIXES:
+        permissions = EXECUTABLE_PERMISSIONS
+    else:
+        permissions = READ_WRITE_PERMISSIONS
+    target.chmod(permissions)
+    logger.debug("Set permissions=o%o: '%s'", permissions, target)
+    if target.is_dir():
+        for item in target.iterdir():
+            adjust_permissions(item)
 
 
 def git_init(destination):
