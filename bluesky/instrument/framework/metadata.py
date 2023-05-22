@@ -11,26 +11,32 @@ logger = logging.getLogger(__name__)
 logger.info(__file__)
 
 from .. import iconfig
-from ..epics_signal_config import epics_scan_id_source
-from ..epics_signal_config import scan_id_epics
-import apstools
-import bluesky
-import databroker
-from datetime import datetime
-import epics
+
+try:
+    from ..epics_signal_config import epics_scan_id_source
+    from ..epics_signal_config import scan_id_epics
+except ImportError:
+    scan_id_epics = None
 import getpass
+import os
+import socket
+from datetime import datetime
+
+import apstools
+import databroker
+import epics
 import h5py
 import intake
 import matplotlib
 import numpy
 import ophyd
-import os
 import pyRestTable
-import socket
 import spec2nexus
 
-from .initialize import cat, RE
+import bluesky
 
+from .initialize import RE
+from .initialize import cat
 
 HOSTNAME = socket.gethostname() or "localhost"
 USERNAME = getpass.getuser() or "Bluesky user"
