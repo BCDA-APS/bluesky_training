@@ -1,0 +1,76 @@
+# configuration.yml
+
+# configuration for the instrument package
+# simple key:value pairs
+
+ADSIM_IOC_PREFIX: "ad:"
+GP_IOC_PREFIX: "gp:"
+
+DATABROKER_CATALOG: &databroker_catalog training
+
+# default RunEngine metadata
+RUNENGINE_METADATA:
+  beamline_id: Bluesky_training
+  instrument_name: BCDA EPICS Bluesky training
+  proposal_id: training
+  databroker_catalog: *databroker_catalog
+
+# Uncomment and edit to define a PV to use for the `scan_id`.
+# The default behavior is to use `RE.md["scan_id"]`.
+# RUN_ENGINE_SCAN_ID_PV: "IOC:integer"
+
+
+# area detector paths used by training IOC
+# These are examples for other use of this instrument.
+# see: https://bcda-aps.github.io/apstools/latest/examples/de_0_adsim_hdf5_basic.html#File-Directories
+AD_IMAGE_DIR: "adsimdet/%Y/%m/%d"
+AD_MOUNT_PATH: /tmp
+BLUESKY_MOUNT_PATH: /tmp/docker_ioc/iocad/tmp
+
+# permissions
+ALLOW_AREA_DETECTOR_WARMUP: true
+ENABLE_AREA_DETECTOR_IMAGE_PLUGIN: true
+ENABLE_CALCS: true
+USE_PROGRESS_BAR: false
+WRITE_SPEC_DATA_FILES: true
+
+# ----------------------------------
+
+# Directory to "autosave" the RE.md dictionary (uses PersistentDict)
+# Uncomment and modify to change from the default.
+# RUNENGINE_MD_PATH: /home/USERNAME/Bluesky_RunEngine_md
+
+# override default control layer for ophyd
+# if undefined, defaults to PyEpics
+# OPHYD_CONTROL_LAYER: PyEpics
+# OPHYD_CONTROL_LAYER: caproto
+
+# Uncomment any of these to override the defaults
+LOGGING:
+  # MAX_BYTES: 1000000
+  NUMBER_OF_PREVIOUS_BACKUPS: 9
+  # LOG_PATH: /tmp
+  # If LOG_PATH undefined, this session will log into PWD/logs/
+  # where PWD is present working directory when session is started
+
+# default timeouts (seconds)
+PV_READ_TIMEOUT: &TIMEOUT 15
+PV_WRITE_TIMEOUT: *TIMEOUT
+PV_CONNECTION_TIMEOUT: *TIMEOUT
+
+XMODE_DEBUG_LEVEL: Minimal
+
+# Minimum software package version checks: MAJOR.minor (no .patch).
+# These will be converted to tuple() for comparisons.
+MINIMUM_PYTHON_VERSION:
+  - 3
+  - 8
+MINIMUM_BLUESKY_VERSION:
+  - 1
+  - 10
+MINIMUM_OPHYD_VERSION:
+  - 1
+  - 7
+MINIMUM_DATABROKER_VERSION:
+  - 1
+  - 2
