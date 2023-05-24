@@ -65,11 +65,16 @@ APS Data Management | https://confluence.aps.anl.gov/display/DMGT/Infrastructure
 
 ## Introductory
 
-The [APS Bluesky 101](https://bcda-aps.github.io/bluesky_training/tutor/aps101.html)
-introductory course covers these two notebooks as well as scanning with scaler _v._ motor.
+The best introduction to Bluesky might come through a _Hello, World!_ example
+and then an example connecting EPICS to Bluesky.
 
-- [Bluesky *Hello, World!*](https://bcda-aps.github.io/bluesky_training/instrument/_hello_world.html)
+- [Bluesky *Hello, World!*](https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html)
 - [Connect with EPICS](https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html)
+
+These notebooks, and the notebooks in the next section, comprise the **_APS
+Bluesky 101_** introductory course.  You can review the [presenter's
+notes](https://bcda-aps.github.io/bluesky_training/tutor/_aps101_notes.html) for
+details on that course.
 
 ## Basic hardware configuration and measurement
 
@@ -133,8 +138,10 @@ folders (created by tools from Bluesky's
 
 ## Install as Bluesky `instrument` package
 
-Parts of this repository (in the `bluesky/` directory) also serve as a template for
-creating a new bluesky `instrument` package.  See these
-[instructions](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument) for the _Steps to install a
-new instrument_.
-The steps are similar on Mac OS and Windows but details are not provided here.
+The [`bluesky`](https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky)
+directory of this [repository](https://github.com/BCDA-APS/bluesky_training)
+serves as a template for creating a new bluesky `instrument` package.  See these
+installation
+[instructions](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument).
+The process to install on Mac OS and Windows is similar but support for those
+operating systems is not provided here.
