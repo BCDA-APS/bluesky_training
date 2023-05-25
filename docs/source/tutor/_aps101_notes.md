@@ -97,9 +97,9 @@ Links to the videos from the training sessions of 2021 August and September are 
 
 - APS Bluesky Office Hours
   - [every Wednesday, 2:00-3:00 pm](https://teams.microsoft.com/l/meetup-join/19%3ameeting_MzJjNGY5MTktOTRhZC00YmM4LThkMWMtOTJjMTYwYWU5ZGI2%40thread.v2/0?context=%7b%22Tid%22%3a%220cfca185-25f7-49e3-8ae7-704d5326e285%22%2c%22Oid%22%3a%22cd8e408e-f2c5-4590-937e-df9d934296ad%22%7d)
-- [APS Teams channel for Bluesky](https://teams.microsoft.com/l/channel/19%3af9523bff12844888b25bd7d49a5fad56%40thread.skype/Bluesky?groupId=334721bd-e27f-4663-add0-9941fb4e98e8&tenantId=0cfca185-25f7-49e3-8ae7-704d5326e285)
-- [Bluesky community chat on Slack](https://nikea.slack.com)
-- [NSLS-II/DAMA open Q&A on Gitter](https://gitter.im/NSLS-II/DAMA)
+- [APS Teams channel for Bluesky](https://teams.microsoft.com/l/channel/19%3af9523bff12844888b25bd7d49a5fad56%40thread.skype/Bluesky?groupId=334721bd-e27f-4663-add0-9941fb4e98e8&tenantId=0cfca185-25f7-49e3-8ae7-704d5326e285)
+- [Bluesky community chat on Slack](https://nikea.slack.com)
+- [NSLS-II/DAMA open Q&A on Gitter](https://gitter.im/NSLS-II/DAMA)
 
 ### Information
 

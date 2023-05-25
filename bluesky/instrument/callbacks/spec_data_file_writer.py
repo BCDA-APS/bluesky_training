@@ -48,31 +48,31 @@ def spec_comment(comment, doc=None):
     APS_fw.spec_comment(comment, doc, specwriter)
 
 
-def newSpecFile(title, scan_id=1, RE=None):
+def newSpecFile(title, scan_id=None, RE=None):
     """
     User choice of the SPEC file name.
 
     Cleans up title, prepends month and day and appends file extension.
     If ``RE`` is passed, then resets ``RE.md["scan_id"] = scan_id``.
+
+    If the SPEC file already exists, then ``scan_id`` is ignored and
+    ``RE.md["scan_id"]`` is set to the last scan number in the file.
     """
-    global specwriter
+    kwargs = {}
+    if RE is not None:
+        kwargs["RE"] = RE
+
     mmdd = str(datetime.datetime.now()).split()[0][5:].replace("-", "_")
     clean = apstools.utils.cleanupText(title)
     fname = pathlib.Path(f"{mmdd}_{clean}.dat")
     if fname.exists():
         logger.warning(f">>> file already exists: {fname} <<<")
-        if RE is None:
-            specwriter.newfile(fname)
-        else:
-            specwriter.newfile(fname, RE=RE)
         handled = "appended"
-
     else:
-        if RE is None:
-            specwriter.newfile(fname, scan_id=scan_id)
-        else:
-            specwriter.newfile(fname, scan_id=scan_id, RE=RE)
+        kwargs["scan_id"] = scan_id or 1
         handled = "created"
+
+    specwriter.newfile(fname, **kwargs)
 
     logger.info(f"SPEC file name : {specwriter.spec_filename}")
     logger.info(f"File will be {handled} at end of next bluesky scan.")

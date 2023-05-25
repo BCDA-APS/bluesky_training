@@ -6,9 +6,10 @@ the `instrument` package (it is configured as a Python package for use by an
 `import` statement).  See this [advice](./_configure_bluesky_instrument.md) for
 configuration of the `instrument` package.
 
-The `instrument/iconfig.yml` file is an effort to gather
-these many configurations into one location, easily found in the root directory
-of the `instrument` package.  The definitions in this file are easily
+The `instrument/iconfig.yml`
+[file](../../../bluesky/instrument/iconfig.yml)
+gathers these many configurations into one location, easily found in the root
+directory of the `instrument` package.  The definitions in this file are easily
 (re)configured.
 
 ## Initial configuration
