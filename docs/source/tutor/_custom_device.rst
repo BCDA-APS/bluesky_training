@@ -94,15 +94,95 @@ the component values:
 
 .. index:: staging
 
-When ``hello_device`` is :index:`staged` (by the ``bp.count`` plan below), the
-value of ``hello_device.number`` will be changed from ``0`` to ``1`` and the
-value of ``hello_device.text`` will be changed from ``""``to ``"Hello,
-World!"``.  As a final step of the ``bp.count`` plan, the device is
-:index:`unstaged`, meaning that the previous values are restored.
+When ``hello_device`` is :index:`staged` (by the bluesky RunEngine), the value
+of ``hello_device.number`` will be changed from ``0`` to ``1`` and the value of
+``hello_device.text`` will be changed from ``""`` to ``"Hello, World!"``. Before
+finishing the run, the RunEngine will :index:`unstage` all ophyd Devices,
+meaning that the previous values are restored.
 
 We *expect* the ``number`` component to contain numerical values and the
 ``text`` component to contain text values. To keep the example simple, we have
 not added `type <https://docs.python.org/3/library/typing.html>`__ hints.
+
+``.read()``
+^^^^^^^^^^^
+
+All ophyd ``Signal`` and ``Device`` instances have a ``.read()`` [#read]_  method.  The
+``.read()`` method returns the current value of each component and the timestamp
+(`time <https://docs.python.org/3/library/time.html#time.time>`__ in seconds
+since the system *epoch*) when that value was received in Python.  The
+``.read()`` method is called by data acquisition during execution of a bluesky
+plan.  The *keys* of the Python dictionary returned by ``.read()`` are the full
+names of each component.  Here's an example:
+
+.. code-block:: python
+    :linenos:
+
+    In [4]: hello_device.read()
+    Out[4]:
+    OrderedDict([('hello_number', {'value': 0, 'timestamp': 1685123274.1847932}),
+                ('hello_text', {'value': '', 'timestamp': 1685123274.1848683})])
+
+``.summary()``
+^^^^^^^^^^^^^^
+
+All ophyd ``Device`` instances have a ``.summary()`` method to explain
+a Device to an interactive user.  Here is ``hello_device.summary()``:
+
+.. code-block:: python
+    :linenos:
+
+    In [5]: hello_device.summary()
+    data keys (* hints)
+    -------------------
+    *hello_number
+    hello_text
+
+    read attrs
+    ----------
+    number               Signal              ('hello_number')
+    text                 Signal              ('hello_text')
+
+    config keys
+    -----------
+
+    configuration attrs
+    -------------------
+
+    unused attrs
+    ------------
+
+``.stage()``
+^^^^^^^^^^^^^^
+
+Here is the result of staging ``hello_device``:
+
+.. code-block:: python
+    :linenos:
+
+    In [8]: hello_device.unstage()
+    Out[8]: [HelloDevice(prefix='', name='hello', read_attrs=['number', 'text'], configuration_attrs=[])]
+
+    In [9]: hello_device.read()
+    Out[9]:
+    OrderedDict([('hello_number', {'value': 0, 'timestamp': 1685123542.713047}),
+                ('hello_text', {'value': '', 'timestamp': 1685123542.7126422})])
+
+``.unstage()``
+^^^^^^^^^^^^^^
+
+Here is the result of unstaging ``hello_device``:
+
+.. code-block:: python
+    :linenos:
+
+    In [8]: hello_device.unstage()
+    Out[8]: [HelloDevice(prefix='', name='hello', read_attrs=['number', 'text'], configuration_attrs=[])]
+
+    In [9]: hello_device.read()
+    Out[9]:
+    OrderedDict([('hello_number', {'value': 0, 'timestamp': 1685123542.713047}),
+                ('hello_text', {'value': '', 'timestamp': 1685123542.7126422})])
 
 Connect with EPICS
 ~~~~~~~~~~~~~~~~~~
@@ -135,6 +215,8 @@ common PV prefix:
 .. code-block:: python
     :linenos:
 
+    from ophyd import Component, Device, EpicsSignal
+
     class MyGroup(Device):
         enable = Component(EpicsSignal, "gp:bit1")
         setpoint = Component(EpicsSignal, "gp:float1")
@@ -150,7 +232,7 @@ updating the PV with new content, as directed by one or more clients, such as
 
 .. index:: wait_for_connection
 
-``wait_for_connection()``
+``.wait_for_connection()``
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 We must allow some time after creating an instance, albeit short, for the
@@ -174,47 +256,21 @@ instance to connect by calling its ``wait_for_connection()`` `method
     immediately, you should use the ``wait_for_connection()`` method
     before interacting with the instance.
 
-``.read()``
-^^^^^^^^^^^
-
-All ophyd ``Signal`` and ``Device`` instances have a ``.read()`` [#read]_  method.  The
-``.read()`` method returns the current value of each component and the timestamp
-(`time <https://docs.python.org/3/library/time.html#time.time>`__ in seconds
-since the system *epoch*) when that value was received in Python.  The
-``.read()`` method is called by data acquisition during execution of a bluesky
-plan.  The *keys* of the Python dictionary returned by ``.read()`` are the full
-names of each component.  Each ``EpicsMotor`` Device has a setpoint and
-readback.  Here's an example:
-
-.. code-block:: python
-    :linenos:
-
-    In [14]: group.read()
-    Out[14]:
-    OrderedDict([('group_enable', {'value': 0, 'timestamp': 631152000.0}),
-                ('group_setpoint',
-                {'value': 55.0, 'timestamp': 1683746978.711794}),
-                ('group_units', {'value': '', 'timestamp': 1683746978.711794}),
-                ('group_label', {'value': '', 'timestamp': 631152000.0})])
+.. TODO:
+    'kind'
+    ^^^^
+    Could divert and explain how the ``kind`` kwarg affects
+    what components are not reported with .`read()`
 
 ``.summary()``
 ^^^^^^^^^^^^^^
 
-All ophyd ``Device`` instances have a ``.summary()`` method to explain
-a Device to an interactive user.  Consider this instance:
+Here is ``group.summary()``:
 
 .. code-block:: python
     :linenos:
 
-    In [14]: group.read()
-    Out[14]:
-    OrderedDict([('group_enable', {'value': 0, 'timestamp': 631152000.0}),
-                ('group_setpoint',
-                {'value': 55.0, 'timestamp': 1683746978.711794}),
-                ('group_units', {'value': '', 'timestamp': 1683746978.711794}),
-                ('group_label', {'value': '', 'timestamp': 631152000.0})])
-
-    In [15]: group.summary()
+    In [4]: group.summary()
     data keys (* hints)
     -------------------
     group_enable
@@ -237,12 +293,6 @@ a Device to an interactive user.  Consider this instance:
 
     unused attrs
     ------------
-
-.. TODO:
-    'kind'
-    ^^^^
-    Could divert and explain how the ``kind`` kwarg affects
-    what components are not reported with .`read()`
 
 Groupings
 =========
@@ -278,6 +328,8 @@ Since each of these axes are EPICS motors, we'll use ``ophyd.EpicsMotor``
 .. code-block:: python
     :linenos:
 
+    from ophyd import Component, Device, EpicsMotor
+
     class NeatStage_3IDD(Device):
         x = Component(EpicsMotor, "m1", labels=("NEAT stage",))
         y = Component(EpicsMotor, "m2", labels=("NEAT stage",))
@@ -296,6 +348,8 @@ for data acquisition.
 
 .. code-block:: python
     :linenos:
+
+    from ophyd import Component, Device, EpicsSignal
 
     class ApsUndulator(Device):
         """
@@ -375,6 +429,8 @@ either preset or changed programmatically.
 
 .. code-block:: python
     :linenos:
+
+    from ophyd import Component, Device, Signal
 
     class HomeValue(Device):
         home_value = Component(Signal)
