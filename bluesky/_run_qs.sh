@@ -4,6 +4,8 @@
 
 #--------------------
 # change the program defaults here
+# CONDA: pre-defined in GitHub Actions workflow
+export CONDA=${CONDA:-/APSshare/miniconda/x86_64}
 export CONDA_ENVIRONMENT="${BLUESKY_CONDA_ENV:-training_2022}"
 export DATABROKER_CATALOG=${DATABROKER_CATALOG:-training}
 export QS_SERVER_HOST=$(hostname)
