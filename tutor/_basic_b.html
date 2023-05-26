@@ -312,6 +312,7 @@ document.write(`
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of Bluesky commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_device.html">Custom Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
@@ -385,8 +386,9 @@ document.write(`
 <p>Work with an EPICS positioning motor (for precise positioning) in <a class="reference external" href="http://blueskyproject.io/bluesky/">Bluesky</a> and <a class="reference external" href="http://blueskyproject.io/">related tools</a>.</p>
 <p>First, we’ll connect with an EPICS motor (using <a class="reference external" href="http://blueskyproject.io/ophyd/">ophyd</a>), and then use the Bluesky software to scan the motor (with the scaler from <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a>).</p>
 <p>Load <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> device support for the <code class="docutils literal notranslate"><span class="pre">EpicsMotor</span></code> and connect with one EPICS motor channel. We have a synApps XXX-style IOC with the prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. It has a scaler, 16 soft channel motors, and some other support we’ll ignore in this lesson.</p>
-<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md">prjemian/epics-docker</a></p>
-<div class="nbinput nblast docutils container">
+<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">xxx</span></code> <a class="reference external" href="https://github.com/epics-modules/xxx">IOC</a> with prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>.</p>
+<details><p>A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md">prjemian/epics-docker</a></p>
+</details><div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
@@ -413,7 +415,7 @@ document.write(`
 m1.position = 1.0
 </pre></div></div>
 </div>
-<p>Connect the scaler (as was done in the <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a> lesson). Define some of the chaannel names and clear out others.</p>
+<p>Connect the scaler (as was done in the <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a> lesson). Define some of the channel names and clear out others.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -454,12 +456,10 @@ m1.position = 1.0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1627333994.301146}),
-             (&#39;I0&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1627333994.301146}),
-             (&#39;scint&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1627333994.301146}),
-             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627333994.301146}),
-             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627333994.301146}),
-             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1627333994.301146})])
+OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1684257260.223683}),
+             (&#39;I0&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1684257260.223683}),
+             (&#39;scint&#39;, {&#39;value&#39;: 8.0, &#39;timestamp&#39;: 1684257260.223683}),
+             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1684257260.223683})])
 </pre></div></div>
 </div>
 <p>Create a RunEngine but do not connect it with a data collection strategy. That will come in the next lessons.</p>
@@ -488,7 +488,7 @@ OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;833360f0-e21b-45e4-9ae5-ac62e26754b1&#39;,)
+(&#39;588b3330-2fc0-48db-8943-0383db1d22f0&#39;,)
 </pre></div></div>
 </div>
 <p>Ah, yes. Nothing to see here since we did not setup anything to receive the <em>documents</em> from the RunEngine. Here’s the basic callback from the <a class="reference internal" href="_basic_a.html"><span class="doc">basic_scaler</span></a> lesson.</p>
@@ -537,9 +537,7 @@ start 15
                              &#34;read_attrs=[&#39;channels&#39;, &#39;channels.chan01&#39;, &#34;
                              &#34;&#39;channels.chan01.s&#39;, &#39;channels.chan02&#39;, &#34;
                              &#34;&#39;channels.chan02.s&#39;, &#39;channels.chan03&#39;, &#34;
-                             &#34;&#39;channels.chan03.s&#39;, &#39;channels.chan11&#39;, &#34;
-                             &#34;&#39;channels.chan11.s&#39;, &#39;channels.chan12&#39;, &#34;
-                             &#34;&#39;channels.chan12.s&#39;, &#39;time&#39;], &#34;
+                             &#34;&#39;channels.chan03.s&#39;, &#39;time&#39;], &#34;
                              &#34;configuration_attrs=[&#39;channels&#39;, &#34;
                              &#34;&#39;channels.chan01&#39;, &#39;channels.chan01.chname&#39;, &#34;
                              &#34;&#39;channels.chan01.preset&#39;, &#34;
@@ -549,13 +547,7 @@ start 15
                              &#34;&#39;channels.chan02.gate&#39;, &#39;channels.chan03&#39;, &#34;
                              &#34;&#39;channels.chan03.chname&#39;, &#34;
                              &#34;&#39;channels.chan03.preset&#39;, &#34;
-                             &#34;&#39;channels.chan03.gate&#39;, &#39;channels.chan11&#39;, &#34;
-                             &#34;&#39;channels.chan11.chname&#39;, &#34;
-                             &#34;&#39;channels.chan11.preset&#39;, &#34;
-                             &#34;&#39;channels.chan11.gate&#39;, &#39;channels.chan12&#39;, &#34;
-                             &#34;&#39;channels.chan12.chname&#39;, &#34;
-                             &#34;&#39;channels.chan12.preset&#39;, &#34;
-                             &#34;&#39;channels.chan12.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#34;
+                             &#34;&#39;channels.chan03.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#34;
                              &#34;&#39;auto_count_delay&#39;, &#39;freq&#39;, &#39;preset_time&#39;, &#34;
                              &#34;&#39;auto_count_time&#39;, &#39;egu&#39;])&#34;],
                &#39;num&#39;: 5,
@@ -575,9 +567,9 @@ start 15
  &#39;plan_pattern_module&#39;: &#39;bluesky.plan_patterns&#39;,
  &#39;plan_type&#39;: &#39;generator&#39;,
  &#39;scan_id&#39;: 2,
- &#39;time&#39;: 1627334154.1719954,
- &#39;uid&#39;: &#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,
- &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.6.7&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;}}
+ &#39;time&#39;: 1684257283.2970834,
+ &#39;uid&#39;: &#39;27c27453-9632-4f8c-b0a7-602c5db0a2e1&#39;,
+ &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.10.0&#39;, &#39;ophyd&#39;: &#39;1.7.0&#39;}}
 
 descriptor 8
 {&#39;configuration&#39;: {&#39;m1&#39;: {&#39;data&#39;: {&#39;m1_acceleration&#39;: 0.2,
@@ -588,7 +580,7 @@ descriptor 8
                           &#39;data_keys&#39;: OrderedDict([(&#39;m1_user_offset&#39;,
                                                      {&#39;dtype&#39;: &#39;number&#39;,
                                                       &#39;lower_ctrl_limit&#39;: -1e+300,
-                                                      &#39;precision&#39;: 5,
+                                                      &#39;precision&#39;: 4,
                                                       &#39;shape&#39;: [],
                                                       &#39;source&#39;: &#39;PV:gp:m1.OFF&#39;,
                                                       &#39;units&#39;: &#39;degrees&#39;,
@@ -605,7 +597,7 @@ descriptor 8
                                                     (&#39;m1_velocity&#39;,
                                                      {&#39;dtype&#39;: &#39;number&#39;,
                                                       &#39;lower_ctrl_limit&#39;: 0.1,
-                                                      &#39;precision&#39;: 5,
+                                                      &#39;precision&#39;: 4,
                                                       &#39;shape&#39;: [],
                                                       &#39;source&#39;: &#39;PV:gp:m1.VELO&#39;,
                                                       &#39;units&#39;: &#39;degrees&#39;,
@@ -613,7 +605,7 @@ descriptor 8
                                                     (&#39;m1_acceleration&#39;,
                                                      {&#39;dtype&#39;: &#39;number&#39;,
                                                       &#39;lower_ctrl_limit&#39;: -1e+300,
-                                                      &#39;precision&#39;: 5,
+                                                      &#39;precision&#39;: 4,
                                                       &#39;shape&#39;: [],
                                                       &#39;source&#39;: &#39;PV:gp:m1.ACCL&#39;,
                                                       &#39;units&#39;: &#39;sec&#39;,
@@ -625,11 +617,11 @@ descriptor 8
                                                       &#39;source&#39;: &#39;PV:gp:m1.EGU&#39;,
                                                       &#39;units&#39;: None,
                                                       &#39;upper_ctrl_limit&#39;: None})]),
-                          &#39;timestamps&#39;: {&#39;m1_acceleration&#39;: 1627333994.442579,
-                                         &#39;m1_motor_egu&#39;: 1627333994.442579,
-                                         &#39;m1_user_offset&#39;: 1627333994.442579,
-                                         &#39;m1_user_offset_dir&#39;: 1627333994.442579,
-                                         &#39;m1_velocity&#39;: 1627333994.442579}},
+                          &#39;timestamps&#39;: {&#39;m1_acceleration&#39;: 1684257260.388981,
+                                         &#39;m1_motor_egu&#39;: 1684257260.388981,
+                                         &#39;m1_user_offset&#39;: 1684257260.388981,
+                                         &#39;m1_user_offset_dir&#39;: 1684257260.388981,
+                                         &#39;m1_velocity&#39;: 1684257260.388981}},
                    &#39;scaler&#39;: {&#39;data&#39;: {&#39;scaler_auto_count_delay&#39;: 0.0,
                                        &#39;scaler_auto_count_time&#39;: 1.0,
                                        &#39;scaler_channels_chan01_chname&#39;: &#39;clock&#39;,
@@ -641,12 +633,6 @@ descriptor 8
                                        &#39;scaler_channels_chan03_chname&#39;: &#39;scint&#39;,
                                        &#39;scaler_channels_chan03_gate&#39;: &#39;N&#39;,
                                        &#39;scaler_channels_chan03_preset&#39;: 0.0,
-                                       &#39;scaler_channels_chan11_chname&#39;: &#39;roi1&#39;,
-                                       &#39;scaler_channels_chan11_gate&#39;: &#39;N&#39;,
-                                       &#39;scaler_channels_chan11_preset&#39;: 0.0,
-                                       &#39;scaler_channels_chan12_chname&#39;: &#39;roi2&#39;,
-                                       &#39;scaler_channels_chan12_gate&#39;: &#39;N&#39;,
-                                       &#39;scaler_channels_chan12_preset&#39;: 0.0,
                                        &#39;scaler_count_mode&#39;: &#39;OneShot&#39;,
                                        &#39;scaler_delay&#39;: 0.0,
                                        &#39;scaler_egu&#39;: &#39;&#39;,
@@ -724,54 +710,6 @@ descriptor 8
                                                           &#39;source&#39;: &#39;PV:gp:scaler1.G3&#39;,
                                                           &#39;units&#39;: None,
                                                           &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan11_chname&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM11&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan11_preset&#39;,
-                                                         {&#39;dtype&#39;: &#39;number&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: 0.0,
-                                                          &#39;precision&#39;: 0,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR11&#39;,
-                                                          &#39;units&#39;: &#39;&#39;,
-                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
-                                                        (&#39;scaler_channels_chan11_gate&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
-                                                                        &#39;Y&#39;),
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G11&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan12_chname&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM12&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan12_preset&#39;,
-                                                         {&#39;dtype&#39;: &#39;number&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: 0.0,
-                                                          &#39;precision&#39;: 0,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR12&#39;,
-                                                          &#39;units&#39;: &#39;&#39;,
-                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
-                                                        (&#39;scaler_channels_chan12_gate&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
-                                                                        &#39;Y&#39;),
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G12&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
                                                         (&#39;scaler_count_mode&#39;,
                                                          {&#39;dtype&#39;: &#39;string&#39;,
                                                           &#39;enum_strs&#39;: (&#39;OneShot&#39;,
@@ -828,28 +766,22 @@ descriptor 8
                                                           &#39;source&#39;: &#39;PV:gp:scaler1.EGU&#39;,
                                                           &#39;units&#39;: None,
                                                           &#39;upper_ctrl_limit&#39;: None})]),
-                              &#39;timestamps&#39;: {&#39;scaler_auto_count_delay&#39;: 1627334158.291554,
-                                             &#39;scaler_auto_count_time&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan01_chname&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan01_gate&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan01_preset&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan02_chname&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan02_gate&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan02_preset&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan03_chname&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan03_gate&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan03_preset&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan11_chname&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan11_gate&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan11_preset&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan12_chname&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan12_gate&#39;: 1627334158.291554,
-                                             &#39;scaler_channels_chan12_preset&#39;: 1627334158.291554,
-                                             &#39;scaler_count_mode&#39;: 1627334158.291554,
-                                             &#39;scaler_delay&#39;: 1627334158.291554,
-                                             &#39;scaler_egu&#39;: 1627334158.291554,
-                                             &#39;scaler_freq&#39;: 1627334158.291554,
-                                             &#39;scaler_preset_time&#39;: 1627334158.291554}}},
+                              &#39;timestamps&#39;: {&#39;scaler_auto_count_delay&#39;: 1684257287.283159,
+                                             &#39;scaler_auto_count_time&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan01_chname&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan01_gate&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan01_preset&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan02_chname&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan02_gate&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan02_preset&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan03_chname&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan03_gate&#39;: 1684257287.283159,
+                                             &#39;scaler_channels_chan03_preset&#39;: 1684257287.283159,
+                                             &#39;scaler_count_mode&#39;: 1684257287.283159,
+                                             &#39;scaler_delay&#39;: 1684257287.283159,
+                                             &#39;scaler_egu&#39;: 1684257287.283159,
+                                             &#39;scaler_freq&#39;: 1684257287.283159,
+                                             &#39;scaler_preset_time&#39;: 1684257287.283159}}},
  &#39;data_keys&#39;: {&#39;I0&#39;: {&#39;dtype&#39;: &#39;number&#39;,
                       &#39;lower_ctrl_limit&#39;: 0.0,
                       &#39;object_name&#39;: &#39;scaler&#39;,
@@ -867,37 +799,21 @@ descriptor 8
                          &#39;units&#39;: &#39;&#39;,
                          &#39;upper_ctrl_limit&#39;: 0.0},
                &#39;m1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                      &#39;lower_ctrl_limit&#39;: -32000.0,
+                      &#39;lower_ctrl_limit&#39;: -1000.0,
                       &#39;object_name&#39;: &#39;m1&#39;,
-                      &#39;precision&#39;: 5,
+                      &#39;precision&#39;: 4,
                       &#39;shape&#39;: [],
                       &#39;source&#39;: &#39;PV:gp:m1.RBV&#39;,
                       &#39;units&#39;: &#39;degrees&#39;,
-                      &#39;upper_ctrl_limit&#39;: 32000.0},
+                      &#39;upper_ctrl_limit&#39;: 1000.0},
                &#39;m1_user_setpoint&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                                    &#39;lower_ctrl_limit&#39;: -32000.0,
+                                    &#39;lower_ctrl_limit&#39;: -1000.0,
                                     &#39;object_name&#39;: &#39;m1&#39;,
-                                    &#39;precision&#39;: 5,
+                                    &#39;precision&#39;: 4,
                                     &#39;shape&#39;: [],
                                     &#39;source&#39;: &#39;PV:gp:m1.VAL&#39;,
                                     &#39;units&#39;: &#39;degrees&#39;,
-                                    &#39;upper_ctrl_limit&#39;: 32000.0},
-               &#39;roi1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                        &#39;lower_ctrl_limit&#39;: 0.0,
-                        &#39;object_name&#39;: &#39;scaler&#39;,
-                        &#39;precision&#39;: 0,
-                        &#39;shape&#39;: [],
-                        &#39;source&#39;: &#39;PV:gp:scaler1.S11&#39;,
-                        &#39;units&#39;: &#39;&#39;,
-                        &#39;upper_ctrl_limit&#39;: 0.0},
-               &#39;roi2&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                        &#39;lower_ctrl_limit&#39;: 0.0,
-                        &#39;object_name&#39;: &#39;scaler&#39;,
-                        &#39;precision&#39;: 0,
-                        &#39;shape&#39;: [],
-                        &#39;source&#39;: &#39;PV:gp:scaler1.S12&#39;,
-                        &#39;units&#39;: &#39;&#39;,
-                        &#39;upper_ctrl_limit&#39;: 0.0},
+                                    &#39;upper_ctrl_limit&#39;: 1000.0},
                &#39;scaler_time&#39;: {&#39;dtype&#39;: &#39;number&#39;,
                                &#39;lower_ctrl_limit&#39;: 0.0,
                                &#39;object_name&#39;: &#39;scaler&#39;,
@@ -915,141 +831,116 @@ descriptor 8
                          &#39;units&#39;: &#39;&#39;,
                          &#39;upper_ctrl_limit&#39;: 0.0}},
  &#39;hints&#39;: {&#39;m1&#39;: {&#39;fields&#39;: [&#39;m1&#39;]},
-           &#39;scaler&#39;: {&#39;fields&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;, &#39;roi1&#39;, &#39;roi2&#39;]}},
+           &#39;scaler&#39;: {&#39;fields&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;]}},
  &#39;name&#39;: &#39;primary&#39;,
  &#39;object_keys&#39;: {&#39;m1&#39;: [&#39;m1&#39;, &#39;m1_user_setpoint&#39;],
-                 &#39;scaler&#39;: [&#39;clock&#39;,
-                            &#39;I0&#39;,
-                            &#39;scint&#39;,
-                            &#39;roi1&#39;,
-                            &#39;roi2&#39;,
-                            &#39;scaler_time&#39;]},
- &#39;run_start&#39;: &#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,
- &#39;time&#39;: 1627334158.321151,
- &#39;uid&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;}
+                 &#39;scaler&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;, &#39;scaler_time&#39;]},
+ &#39;run_start&#39;: &#39;27c27453-9632-4f8c-b0a7-602c5db0a2e1&#39;,
+ &#39;time&#39;: 1684257287.3060765,
+ &#39;uid&#39;: &#39;facadfef-8068-4c5b-b641-c9ebb91e1220&#39;}
 
 event 7
 {&#39;data&#39;: {&#39;I0&#39;: 8.0,
           &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: -1.0,
           &#39;m1_user_setpoint&#39;: -1.0,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
           &#39;scaler_time&#39;: 1.6,
           &#39;scint&#39;: 8.0},
- &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+ &#39;descriptor&#39;: &#39;facadfef-8068-4c5b-b641-c9ebb91e1220&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 1,
- &#39;time&#39;: 1627334159.597447,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334158.291554,
-                &#39;clock&#39;: 1627334158.291554,
-                &#39;m1&#39;: 1627334156.570483,
-                &#39;m1_user_setpoint&#39;: 1627334154.320055,
-                &#39;roi1&#39;: 1627334158.291554,
-                &#39;roi2&#39;: 1627334158.291554,
-                &#39;scaler_time&#39;: 1627334158.291554,
-                &#39;scint&#39;: 1627334158.291554},
- &#39;uid&#39;: &#39;48529050-a1d8-4168-b038-60dbc0df5285&#39;}
+ &#39;time&#39;: 1684257288.5562477,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257287.283159,
+                &#39;clock&#39;: 1684257287.283159,
+                &#39;m1&#39;: 1684257285.657212,
+                &#39;m1_user_setpoint&#39;: 1684257283.400607,
+                &#39;scaler_time&#39;: 1684257287.283159,
+                &#39;scint&#39;: 1684257287.283159},
+ &#39;uid&#39;: &#39;e3cadd5d-36aa-4d65-a86c-e5e3b40f38db&#39;}
 
 event 7
 {&#39;data&#39;: {&#39;I0&#39;: 9.0,
           &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: -0.5,
           &#39;m1_user_setpoint&#39;: -0.5,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
           &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 8.0},
- &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+          &#39;scint&#39;: 7.0},
+ &#39;descriptor&#39;: &#39;facadfef-8068-4c5b-b641-c9ebb91e1220&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 2,
- &#39;time&#39;: 1627334162.1043005,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334162.096512,
-                &#39;clock&#39;: 1627334162.096512,
-                &#39;m1&#39;: 1627334160.37715,
-                &#39;m1_user_setpoint&#39;: 1627334159.672333,
-                &#39;roi1&#39;: 1627334162.096512,
-                &#39;roi2&#39;: 1627334162.096512,
-                &#39;scaler_time&#39;: 1627334162.096512,
-                &#39;scint&#39;: 1627334162.096512},
- &#39;uid&#39;: &#39;d24ba3c3-dadf-4a2d-958d-f96b5e2f7ddc&#39;}
+ &#39;time&#39;: 1684257290.9914892,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257290.988253,
+                &#39;clock&#39;: 1684257290.988253,
+                &#39;m1&#39;: 1684257289.36312,
+                &#39;m1_user_setpoint&#39;: 1684257288.603839,
+                &#39;scaler_time&#39;: 1684257290.988253,
+                &#39;scint&#39;: 1684257290.988253},
+ &#39;uid&#39;: &#39;3b448615-cfbf-4fa6-949b-bfc5f38669db&#39;}
 
 event 7
 {&#39;data&#39;: {&#39;I0&#39;: 7.0,
           &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: 0.0,
           &#39;m1_user_setpoint&#39;: 0.0,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
           &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 9.0},
- &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+          &#39;scint&#39;: 5.0},
+ &#39;descriptor&#39;: &#39;facadfef-8068-4c5b-b641-c9ebb91e1220&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 3,
- &#39;time&#39;: 1627334164.7096627,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334164.701895,
-                &#39;clock&#39;: 1627334164.701895,
-                &#39;m1&#39;: 1627334162.981871,
-                &#39;m1_user_setpoint&#39;: 1627334162.21886,
-                &#39;roi1&#39;: 1627334164.701895,
-                &#39;roi2&#39;: 1627334164.701895,
-                &#39;scaler_time&#39;: 1627334164.701895,
-                &#39;scint&#39;: 1627334164.701895},
- &#39;uid&#39;: &#39;f6fc1a0b-e0fb-4ddb-ab89-90442c525d3e&#39;}
+ &#39;time&#39;: 1684257293.3976073,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257293.391206,
+                &#39;clock&#39;: 1684257293.391206,
+                &#39;m1&#39;: 1684257291.768174,
+                &#39;m1_user_setpoint&#39;: 1684257291.056937,
+                &#39;scaler_time&#39;: 1684257293.391206,
+                &#39;scint&#39;: 1684257293.391206},
+ &#39;uid&#39;: &#39;d170727a-038b-432a-9fa4-a14d9857e41d&#39;}
 
 event 7
-{&#39;data&#39;: {&#39;I0&#39;: 8.0,
-          &#39;clock&#39;: 15000000.0,
+{&#39;data&#39;: {&#39;I0&#39;: 7.0,
+          &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: 0.5,
           &#39;m1_user_setpoint&#39;: 0.5,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
-          &#39;scaler_time&#39;: 1.5,
-          &#39;scint&#39;: 7.0},
- &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 8.0},
+ &#39;descriptor&#39;: &#39;facadfef-8068-4c5b-b641-c9ebb91e1220&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 4,
- &#39;time&#39;: 1627334167.218836,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334167.211022,
-                &#39;clock&#39;: 1627334167.211022,
-                &#39;m1&#39;: 1627334165.586726,
-                &#39;m1_user_setpoint&#39;: 1627334164.823617,
-                &#39;roi1&#39;: 1627334167.211022,
-                &#39;roi2&#39;: 1627334167.211022,
-                &#39;scaler_time&#39;: 1627334167.211022,
-                &#39;scint&#39;: 1627334167.211022},
- &#39;uid&#39;: &#39;edd4ecb7-40a1-45b4-999f-52603fddb5d5&#39;}
+ &#39;time&#39;: 1684257295.9012296,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257295.898317,
+                &#39;clock&#39;: 1684257295.898317,
+                &#39;m1&#39;: 1684257294.272727,
+                &#39;m1_user_setpoint&#39;: 1684257293.50185,
+                &#39;scaler_time&#39;: 1684257295.898317,
+                &#39;scint&#39;: 1684257295.898317},
+ &#39;uid&#39;: &#39;47180649-a9b0-4a10-b380-95541a096c24&#39;}
 
 event 7
-{&#39;data&#39;: {&#39;I0&#39;: 6.0,
+{&#39;data&#39;: {&#39;I0&#39;: 9.0,
           &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: 1.0,
           &#39;m1_user_setpoint&#39;: 1.0,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
           &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 5.0},
- &#39;descriptor&#39;: &#39;0fd26dc1-784d-4de4-8c21-69a71104c125&#39;,
+          &#39;scint&#39;: 7.0},
+ &#39;descriptor&#39;: &#39;facadfef-8068-4c5b-b641-c9ebb91e1220&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 5,
- &#39;time&#39;: 1627334169.7239022,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334169.716031,
-                &#39;clock&#39;: 1627334169.716031,
-                &#39;m1&#39;: 1627334168.091639,
-                &#39;m1_user_setpoint&#39;: 1627334167.328457,
-                &#39;roi1&#39;: 1627334169.716031,
-                &#39;roi2&#39;: 1627334169.716031,
-                &#39;scaler_time&#39;: 1627334169.716031,
-                &#39;scint&#39;: 1627334169.716031},
- &#39;uid&#39;: &#39;51d89f51-a99b-4bc4-a23e-65de1c058661&#39;}
+ &#39;time&#39;: 1684257298.4070554,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257298.403889,
+                &#39;clock&#39;: 1684257298.403889,
+                &#39;m1&#39;: 1684257296.778319,
+                &#39;m1_user_setpoint&#39;: 1684257295.981387,
+                &#39;scaler_time&#39;: 1684257298.403889,
+                &#39;scint&#39;: 1684257298.403889},
+ &#39;uid&#39;: &#39;303a8aa8-8fdb-44c6-8366-1b1cc3000b08&#39;}
 
 stop 6
 {&#39;exit_status&#39;: &#39;success&#39;,
  &#39;num_events&#39;: {&#39;primary&#39;: 5},
  &#39;reason&#39;: &#39;&#39;,
- &#39;run_start&#39;: &#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,
- &#39;time&#39;: 1627334169.8411226,
- &#39;uid&#39;: &#39;ef387dc6-6aac-4f74-8a74-027a10e07ade&#39;}
+ &#39;run_start&#39;: &#39;27c27453-9632-4f8c-b0a7-602c5db0a2e1&#39;,
+ &#39;time&#39;: 1684257298.5027833,
+ &#39;uid&#39;: &#39;ed996294-1aaf-4052-b82b-c1b7d5bc9a3a&#39;}
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1058,7 +949,7 @@ stop 6
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;a824db53-24d4-4197-a928-8db3371154d1&#39;,)
+(&#39;27c27453-9632-4f8c-b0a7-602c5db0a2e1&#39;,)
 </pre></div></div>
 </div>
 <div class="nbinput nblast docutils container">
@@ -1129,12 +1020,10 @@ m1.position = 1.0
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1627334169.716031}),
-             (&#39;I0&#39;, {&#39;value&#39;: 6.0, &#39;timestamp&#39;: 1627334169.716031}),
-             (&#39;scint&#39;, {&#39;value&#39;: 5.0, &#39;timestamp&#39;: 1627334169.716031}),
-             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627334169.716031}),
-             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627334169.716031}),
-             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1627334169.716031})])
+OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1684257298.403889}),
+             (&#39;I0&#39;, {&#39;value&#39;: 9.0, &#39;timestamp&#39;: 1684257298.403889}),
+             (&#39;scint&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1684257298.403889}),
+             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1684257298.403889})])
 </pre></div></div>
 </div>
 <p>Create a RunEngine but do not connect it with a data collection strategy. That will come in the next lessons.</p>
@@ -1163,7 +1052,7 @@ OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;a73d9f8b-7533-46ad-b1f3-b15d350f4fbd&#39;,)
+(&#39;d5960bf4-fb29-43a1-9783-e7b9f3a926f3&#39;,)
 </pre></div></div>
 </div>
 <p>Ah, yes. Nothing to see here since we did not setup anything to receive the <em>documents</em> from the RunEngine. Here’s the basic callback from the <code class="docutils literal notranslate"><span class="pre">`basic_scaler</span></code> &lt;_basic_a.ipynb&gt;`__ notebook.</p>
@@ -1212,9 +1101,7 @@ start 15
                              &#34;read_attrs=[&#39;channels&#39;, &#39;channels.chan01&#39;, &#34;
                              &#34;&#39;channels.chan01.s&#39;, &#39;channels.chan02&#39;, &#34;
                              &#34;&#39;channels.chan02.s&#39;, &#39;channels.chan03&#39;, &#34;
-                             &#34;&#39;channels.chan03.s&#39;, &#39;channels.chan11&#39;, &#34;
-                             &#34;&#39;channels.chan11.s&#39;, &#39;channels.chan12&#39;, &#34;
-                             &#34;&#39;channels.chan12.s&#39;, &#39;time&#39;], &#34;
+                             &#34;&#39;channels.chan03.s&#39;, &#39;time&#39;], &#34;
                              &#34;configuration_attrs=[&#39;channels&#39;, &#34;
                              &#34;&#39;channels.chan01&#39;, &#39;channels.chan01.chname&#39;, &#34;
                              &#34;&#39;channels.chan01.preset&#39;, &#34;
@@ -1224,13 +1111,7 @@ start 15
                              &#34;&#39;channels.chan02.gate&#39;, &#39;channels.chan03&#39;, &#34;
                              &#34;&#39;channels.chan03.chname&#39;, &#34;
                              &#34;&#39;channels.chan03.preset&#39;, &#34;
-                             &#34;&#39;channels.chan03.gate&#39;, &#39;channels.chan11&#39;, &#34;
-                             &#34;&#39;channels.chan11.chname&#39;, &#34;
-                             &#34;&#39;channels.chan11.preset&#39;, &#34;
-                             &#34;&#39;channels.chan11.gate&#39;, &#39;channels.chan12&#39;, &#34;
-                             &#34;&#39;channels.chan12.chname&#39;, &#34;
-                             &#34;&#39;channels.chan12.preset&#39;, &#34;
-                             &#34;&#39;channels.chan12.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#34;
+                             &#34;&#39;channels.chan03.gate&#39;, &#39;count_mode&#39;, &#39;delay&#39;, &#34;
                              &#34;&#39;auto_count_delay&#39;, &#39;freq&#39;, &#39;preset_time&#39;, &#34;
                              &#34;&#39;auto_count_time&#39;, &#39;egu&#39;])&#34;],
                &#39;num&#39;: 5,
@@ -1250,9 +1131,9 @@ start 15
  &#39;plan_pattern_module&#39;: &#39;bluesky.plan_patterns&#39;,
  &#39;plan_type&#39;: &#39;generator&#39;,
  &#39;scan_id&#39;: 2,
- &#39;time&#39;: 1627334219.9386528,
- &#39;uid&#39;: &#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,
- &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.6.7&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;}}
+ &#39;time&#39;: 1684257313.26152,
+ &#39;uid&#39;: &#39;f5cee92c-ecf0-4e92-8ba6-075d574638fe&#39;,
+ &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.10.0&#39;, &#39;ophyd&#39;: &#39;1.7.0&#39;}}
 
 descriptor 8
 {&#39;configuration&#39;: {&#39;m1&#39;: {&#39;data&#39;: {&#39;m1_acceleration&#39;: 0.2,
@@ -1263,7 +1144,7 @@ descriptor 8
                           &#39;data_keys&#39;: OrderedDict([(&#39;m1_user_offset&#39;,
                                                      {&#39;dtype&#39;: &#39;number&#39;,
                                                       &#39;lower_ctrl_limit&#39;: -1e+300,
-                                                      &#39;precision&#39;: 5,
+                                                      &#39;precision&#39;: 4,
                                                       &#39;shape&#39;: [],
                                                       &#39;source&#39;: &#39;PV:gp:m1.OFF&#39;,
                                                       &#39;units&#39;: &#39;degrees&#39;,
@@ -1280,7 +1161,7 @@ descriptor 8
                                                     (&#39;m1_velocity&#39;,
                                                      {&#39;dtype&#39;: &#39;number&#39;,
                                                       &#39;lower_ctrl_limit&#39;: 0.1,
-                                                      &#39;precision&#39;: 5,
+                                                      &#39;precision&#39;: 4,
                                                       &#39;shape&#39;: [],
                                                       &#39;source&#39;: &#39;PV:gp:m1.VELO&#39;,
                                                       &#39;units&#39;: &#39;degrees&#39;,
@@ -1288,7 +1169,7 @@ descriptor 8
                                                     (&#39;m1_acceleration&#39;,
                                                      {&#39;dtype&#39;: &#39;number&#39;,
                                                       &#39;lower_ctrl_limit&#39;: -1e+300,
-                                                      &#39;precision&#39;: 5,
+                                                      &#39;precision&#39;: 4,
                                                       &#39;shape&#39;: [],
                                                       &#39;source&#39;: &#39;PV:gp:m1.ACCL&#39;,
                                                       &#39;units&#39;: &#39;sec&#39;,
@@ -1300,11 +1181,11 @@ descriptor 8
                                                       &#39;source&#39;: &#39;PV:gp:m1.EGU&#39;,
                                                       &#39;units&#39;: None,
                                                       &#39;upper_ctrl_limit&#39;: None})]),
-                          &#39;timestamps&#39;: {&#39;m1_acceleration&#39;: 1627333994.442579,
-                                         &#39;m1_motor_egu&#39;: 1627334169.871139,
-                                         &#39;m1_user_offset&#39;: 1627333994.442579,
-                                         &#39;m1_user_offset_dir&#39;: 1627333994.442579,
-                                         &#39;m1_velocity&#39;: 1627333994.442579}},
+                          &#39;timestamps&#39;: {&#39;m1_acceleration&#39;: 1684257260.388981,
+                                         &#39;m1_motor_egu&#39;: 1684257298.535858,
+                                         &#39;m1_user_offset&#39;: 1684257260.388981,
+                                         &#39;m1_user_offset_dir&#39;: 1684257260.388981,
+                                         &#39;m1_velocity&#39;: 1684257260.388981}},
                    &#39;scaler&#39;: {&#39;data&#39;: {&#39;scaler_auto_count_delay&#39;: 0.0,
                                        &#39;scaler_auto_count_time&#39;: 1.0,
                                        &#39;scaler_channels_chan01_chname&#39;: &#39;clock&#39;,
@@ -1316,12 +1197,6 @@ descriptor 8
                                        &#39;scaler_channels_chan03_chname&#39;: &#39;scint&#39;,
                                        &#39;scaler_channels_chan03_gate&#39;: &#39;N&#39;,
                                        &#39;scaler_channels_chan03_preset&#39;: 0.0,
-                                       &#39;scaler_channels_chan11_chname&#39;: &#39;roi1&#39;,
-                                       &#39;scaler_channels_chan11_gate&#39;: &#39;N&#39;,
-                                       &#39;scaler_channels_chan11_preset&#39;: 0.0,
-                                       &#39;scaler_channels_chan12_chname&#39;: &#39;roi2&#39;,
-                                       &#39;scaler_channels_chan12_gate&#39;: &#39;N&#39;,
-                                       &#39;scaler_channels_chan12_preset&#39;: 0.0,
                                        &#39;scaler_count_mode&#39;: &#39;OneShot&#39;,
                                        &#39;scaler_delay&#39;: 0.0,
                                        &#39;scaler_egu&#39;: &#39;&#39;,
@@ -1399,54 +1274,6 @@ descriptor 8
                                                           &#39;source&#39;: &#39;PV:gp:scaler1.G3&#39;,
                                                           &#39;units&#39;: None,
                                                           &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan11_chname&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM11&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan11_preset&#39;,
-                                                         {&#39;dtype&#39;: &#39;number&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: 0.0,
-                                                          &#39;precision&#39;: 0,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR11&#39;,
-                                                          &#39;units&#39;: &#39;&#39;,
-                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
-                                                        (&#39;scaler_channels_chan11_gate&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
-                                                                        &#39;Y&#39;),
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G11&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan12_chname&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.NM12&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
-                                                        (&#39;scaler_channels_chan12_preset&#39;,
-                                                         {&#39;dtype&#39;: &#39;number&#39;,
-                                                          &#39;lower_ctrl_limit&#39;: 0.0,
-                                                          &#39;precision&#39;: 0,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.PR12&#39;,
-                                                          &#39;units&#39;: &#39;&#39;,
-                                                          &#39;upper_ctrl_limit&#39;: 0.0}),
-                                                        (&#39;scaler_channels_chan12_gate&#39;,
-                                                         {&#39;dtype&#39;: &#39;string&#39;,
-                                                          &#39;enum_strs&#39;: (&#39;N&#39;,
-                                                                        &#39;Y&#39;),
-                                                          &#39;lower_ctrl_limit&#39;: None,
-                                                          &#39;shape&#39;: [],
-                                                          &#39;source&#39;: &#39;PV:gp:scaler1.G12&#39;,
-                                                          &#39;units&#39;: None,
-                                                          &#39;upper_ctrl_limit&#39;: None}),
                                                         (&#39;scaler_count_mode&#39;,
                                                          {&#39;dtype&#39;: &#39;string&#39;,
                                                           &#39;enum_strs&#39;: (&#39;OneShot&#39;,
@@ -1503,28 +1330,22 @@ descriptor 8
                                                           &#39;source&#39;: &#39;PV:gp:scaler1.EGU&#39;,
                                                           &#39;units&#39;: None,
                                                           &#39;upper_ctrl_limit&#39;: None})]),
-                              &#39;timestamps&#39;: {&#39;scaler_auto_count_delay&#39;: 1627334223.918718,
-                                             &#39;scaler_auto_count_time&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan01_chname&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan01_gate&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan01_preset&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan02_chname&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan02_gate&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan02_preset&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan03_chname&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan03_gate&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan03_preset&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan11_chname&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan11_gate&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan11_preset&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan12_chname&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan12_gate&#39;: 1627334223.918718,
-                                             &#39;scaler_channels_chan12_preset&#39;: 1627334223.918718,
-                                             &#39;scaler_count_mode&#39;: 1627334223.918718,
-                                             &#39;scaler_delay&#39;: 1627334223.918718,
-                                             &#39;scaler_egu&#39;: 1627334223.918718,
-                                             &#39;scaler_freq&#39;: 1627334223.918718,
-                                             &#39;scaler_preset_time&#39;: 1627334223.918718}}},
+                              &#39;timestamps&#39;: {&#39;scaler_auto_count_delay&#39;: 1684257317.33793,
+                                             &#39;scaler_auto_count_time&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan01_chname&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan01_gate&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan01_preset&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan02_chname&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan02_gate&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan02_preset&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan03_chname&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan03_gate&#39;: 1684257317.33793,
+                                             &#39;scaler_channels_chan03_preset&#39;: 1684257317.33793,
+                                             &#39;scaler_count_mode&#39;: 1684257317.33793,
+                                             &#39;scaler_delay&#39;: 1684257317.33793,
+                                             &#39;scaler_egu&#39;: 1684257317.33793,
+                                             &#39;scaler_freq&#39;: 1684257317.33793,
+                                             &#39;scaler_preset_time&#39;: 1684257317.33793}}},
  &#39;data_keys&#39;: {&#39;I0&#39;: {&#39;dtype&#39;: &#39;number&#39;,
                       &#39;lower_ctrl_limit&#39;: 0.0,
                       &#39;object_name&#39;: &#39;scaler&#39;,
@@ -1542,37 +1363,21 @@ descriptor 8
                          &#39;units&#39;: &#39;&#39;,
                          &#39;upper_ctrl_limit&#39;: 0.0},
                &#39;m1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                      &#39;lower_ctrl_limit&#39;: -32000.0,
+                      &#39;lower_ctrl_limit&#39;: -1000.0,
                       &#39;object_name&#39;: &#39;m1&#39;,
-                      &#39;precision&#39;: 5,
+                      &#39;precision&#39;: 4,
                       &#39;shape&#39;: [],
                       &#39;source&#39;: &#39;PV:gp:m1.RBV&#39;,
                       &#39;units&#39;: &#39;degrees&#39;,
-                      &#39;upper_ctrl_limit&#39;: 32000.0},
+                      &#39;upper_ctrl_limit&#39;: 1000.0},
                &#39;m1_user_setpoint&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                                    &#39;lower_ctrl_limit&#39;: -32000.0,
+                                    &#39;lower_ctrl_limit&#39;: -1000.0,
                                     &#39;object_name&#39;: &#39;m1&#39;,
-                                    &#39;precision&#39;: 5,
+                                    &#39;precision&#39;: 4,
                                     &#39;shape&#39;: [],
                                     &#39;source&#39;: &#39;PV:gp:m1.VAL&#39;,
                                     &#39;units&#39;: &#39;degrees&#39;,
-                                    &#39;upper_ctrl_limit&#39;: 32000.0},
-               &#39;roi1&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                        &#39;lower_ctrl_limit&#39;: 0.0,
-                        &#39;object_name&#39;: &#39;scaler&#39;,
-                        &#39;precision&#39;: 0,
-                        &#39;shape&#39;: [],
-                        &#39;source&#39;: &#39;PV:gp:scaler1.S11&#39;,
-                        &#39;units&#39;: &#39;&#39;,
-                        &#39;upper_ctrl_limit&#39;: 0.0},
-               &#39;roi2&#39;: {&#39;dtype&#39;: &#39;number&#39;,
-                        &#39;lower_ctrl_limit&#39;: 0.0,
-                        &#39;object_name&#39;: &#39;scaler&#39;,
-                        &#39;precision&#39;: 0,
-                        &#39;shape&#39;: [],
-                        &#39;source&#39;: &#39;PV:gp:scaler1.S12&#39;,
-                        &#39;units&#39;: &#39;&#39;,
-                        &#39;upper_ctrl_limit&#39;: 0.0},
+                                    &#39;upper_ctrl_limit&#39;: 1000.0},
                &#39;scaler_time&#39;: {&#39;dtype&#39;: &#39;number&#39;,
                                &#39;lower_ctrl_limit&#39;: 0.0,
                                &#39;object_name&#39;: &#39;scaler&#39;,
@@ -1590,141 +1395,116 @@ descriptor 8
                          &#39;units&#39;: &#39;&#39;,
                          &#39;upper_ctrl_limit&#39;: 0.0}},
  &#39;hints&#39;: {&#39;m1&#39;: {&#39;fields&#39;: [&#39;m1&#39;]},
-           &#39;scaler&#39;: {&#39;fields&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;, &#39;roi1&#39;, &#39;roi2&#39;]}},
+           &#39;scaler&#39;: {&#39;fields&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;]}},
  &#39;name&#39;: &#39;primary&#39;,
  &#39;object_keys&#39;: {&#39;m1&#39;: [&#39;m1&#39;, &#39;m1_user_setpoint&#39;],
-                 &#39;scaler&#39;: [&#39;clock&#39;,
-                            &#39;I0&#39;,
-                            &#39;scint&#39;,
-                            &#39;roi1&#39;,
-                            &#39;roi2&#39;,
-                            &#39;scaler_time&#39;]},
- &#39;run_start&#39;: &#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,
- &#39;time&#39;: 1627334223.9472103,
- &#39;uid&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;}
-
-event 7
-{&#39;data&#39;: {&#39;I0&#39;: 10.0,
-          &#39;clock&#39;: 16000000.0,
-          &#39;m1&#39;: -1.0,
-          &#39;m1_user_setpoint&#39;: -1.0,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
-          &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 7.0},
- &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
- &#39;filled&#39;: {},
- &#39;seq_num&#39;: 1,
- &#39;time&#39;: 1627334224.9877248,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334223.918718,
-                &#39;clock&#39;: 1627334223.918718,
-                &#39;m1&#39;: 1627334222.294413,
-                &#39;m1_user_setpoint&#39;: 1627334220.0848894,
-                &#39;roi1&#39;: 1627334223.918718,
-                &#39;roi2&#39;: 1627334223.918718,
-                &#39;scaler_time&#39;: 1627334223.918718,
-                &#39;scint&#39;: 1627334223.918718},
- &#39;uid&#39;: &#39;7385f06f-d532-45ba-a759-26a731d1b0fc&#39;}
-
-event 7
-{&#39;data&#39;: {&#39;I0&#39;: 9.0,
-          &#39;clock&#39;: 16000000.0,
-          &#39;m1&#39;: -0.5,
-          &#39;m1_user_setpoint&#39;: -0.5,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
-          &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 6.0},
- &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
- &#39;filled&#39;: {},
- &#39;seq_num&#39;: 2,
- &#39;time&#39;: 1627334227.4251966,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334227.420283,
-                &#39;clock&#39;: 1627334227.420283,
-                &#39;m1&#39;: 1627334225.799421,
-                &#39;m1_user_setpoint&#39;: 1627334225.042071,
-                &#39;roi1&#39;: 1627334227.420283,
-                &#39;roi2&#39;: 1627334227.420283,
-                &#39;scaler_time&#39;: 1627334227.420283,
-                &#39;scint&#39;: 1627334227.420283},
- &#39;uid&#39;: &#39;e6ef0b03-e841-4fc5-803c-647a4e44ca26&#39;}
+                 &#39;scaler&#39;: [&#39;clock&#39;, &#39;I0&#39;, &#39;scint&#39;, &#39;scaler_time&#39;]},
+ &#39;run_start&#39;: &#39;f5cee92c-ecf0-4e92-8ba6-075d574638fe&#39;,
+ &#39;time&#39;: 1684257317.3608406,
+ &#39;uid&#39;: &#39;cb045687-1fb9-489a-a626-469cf73c8af2&#39;}
 
 event 7
 {&#39;data&#39;: {&#39;I0&#39;: 8.0,
           &#39;clock&#39;: 16000000.0,
-          &#39;m1&#39;: 0.0,
-          &#39;m1_user_setpoint&#39;: 0.0,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
+          &#39;m1&#39;: -1.0,
+          &#39;m1_user_setpoint&#39;: -1.0,
           &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 9.0},
- &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+          &#39;scint&#39;: 6.0},
+ &#39;descriptor&#39;: &#39;cb045687-1fb9-489a-a626-469cf73c8af2&#39;,
  &#39;filled&#39;: {},
- &#39;seq_num&#39;: 3,
- &#39;time&#39;: 1627334229.9296093,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334229.924173,
-                &#39;clock&#39;: 1627334229.924173,
-                &#39;m1&#39;: 1627334228.303182,
-                &#39;m1_user_setpoint&#39;: 1627334227.502291,
-                &#39;roi1&#39;: 1627334229.924173,
-                &#39;roi2&#39;: 1627334229.924173,
-                &#39;scaler_time&#39;: 1627334229.924173,
-                &#39;scint&#39;: 1627334229.924173},
- &#39;uid&#39;: &#39;7011e199-db4c-4299-9b48-bf748b22510e&#39;}
+ &#39;seq_num&#39;: 1,
+ &#39;time&#39;: 1684257318.4262064,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257317.33793,
+                &#39;clock&#39;: 1684257317.33793,
+                &#39;m1&#39;: 1684257315.616413,
+                &#39;m1_user_setpoint&#39;: 1684257313.372947,
+                &#39;scaler_time&#39;: 1684257317.33793,
+                &#39;scint&#39;: 1684257317.33793},
+ &#39;uid&#39;: &#39;29a9a538-c101-412a-bf1e-11b27ccdab31&#39;}
 
 event 7
-{&#39;data&#39;: {&#39;I0&#39;: 6.0,
+{&#39;data&#39;: {&#39;I0&#39;: 8.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: -0.5,
+          &#39;m1_user_setpoint&#39;: -0.5,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 6.0},
+ &#39;descriptor&#39;: &#39;cb045687-1fb9-489a-a626-469cf73c8af2&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 2,
+ &#39;time&#39;: 1684257320.9464417,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257320.943829,
+                &#39;clock&#39;: 1684257320.943829,
+                &#39;m1&#39;: 1684257319.222574,
+                &#39;m1_user_setpoint&#39;: 1684257318.484022,
+                &#39;scaler_time&#39;: 1684257320.943829,
+                &#39;scint&#39;: 1684257320.943829},
+ &#39;uid&#39;: &#39;7aa89cb9-52ae-468b-91ea-e95279d92680&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 9.0,
+          &#39;clock&#39;: 16000000.0,
+          &#39;m1&#39;: 0.0,
+          &#39;m1_user_setpoint&#39;: 0.0,
+          &#39;scaler_time&#39;: 1.6,
+          &#39;scint&#39;: 8.0},
+ &#39;descriptor&#39;: &#39;cb045687-1fb9-489a-a626-469cf73c8af2&#39;,
+ &#39;filled&#39;: {},
+ &#39;seq_num&#39;: 3,
+ &#39;time&#39;: 1684257323.4557936,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257323.449555,
+                &#39;clock&#39;: 1684257323.449555,
+                &#39;m1&#39;: 1684257321.727785,
+                &#39;m1_user_setpoint&#39;: 1684257321.025257,
+                &#39;scaler_time&#39;: 1684257323.449555,
+                &#39;scint&#39;: 1684257323.449555},
+ &#39;uid&#39;: &#39;f38c11ff-5139-4ab7-9128-3f6c0d112dff&#39;}
+
+event 7
+{&#39;data&#39;: {&#39;I0&#39;: 9.0,
           &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: 0.5,
           &#39;m1_user_setpoint&#39;: 0.5,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
           &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 8.0},
- &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+          &#39;scint&#39;: 7.0},
+ &#39;descriptor&#39;: &#39;cb045687-1fb9-489a-a626-469cf73c8af2&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 4,
- &#39;time&#39;: 1627334232.4308178,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334232.428412,
-                &#39;clock&#39;: 1627334232.428412,
-                &#39;m1&#39;: 1627334230.806799,
-                &#39;m1_user_setpoint&#39;: 1627334230.013634,
-                &#39;roi1&#39;: 1627334232.428412,
-                &#39;roi2&#39;: 1627334232.428412,
-                &#39;scaler_time&#39;: 1627334232.428412,
-                &#39;scint&#39;: 1627334232.428412},
- &#39;uid&#39;: &#39;dc32d440-8482-4ecb-844a-a554c31bd5f9&#39;}
+ &#39;time&#39;: 1684257326.0549905,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257326.051597,
+                &#39;clock&#39;: 1684257326.051597,
+                &#39;m1&#39;: 1684257324.333163,
+                &#39;m1_user_setpoint&#39;: 1684257323.565358,
+                &#39;scaler_time&#39;: 1684257326.051597,
+                &#39;scint&#39;: 1684257326.051597},
+ &#39;uid&#39;: &#39;91a4c029-ac64-41a7-b46f-25dea5dcd799&#39;}
 
 event 7
 {&#39;data&#39;: {&#39;I0&#39;: 7.0,
           &#39;clock&#39;: 16000000.0,
           &#39;m1&#39;: 1.0,
           &#39;m1_user_setpoint&#39;: 1.0,
-          &#39;roi1&#39;: 0.0,
-          &#39;roi2&#39;: 0.0,
           &#39;scaler_time&#39;: 1.6,
-          &#39;scint&#39;: 6.0},
- &#39;descriptor&#39;: &#39;9df681a3-b192-4600-8f6b-3aafe2eb9cac&#39;,
+          &#39;scint&#39;: 7.0},
+ &#39;descriptor&#39;: &#39;cb045687-1fb9-489a-a626-469cf73c8af2&#39;,
  &#39;filled&#39;: {},
  &#39;seq_num&#39;: 5,
- &#39;time&#39;: 1627334234.9331014,
- &#39;timestamps&#39;: {&#39;I0&#39;: 1627334234.930827,
-                &#39;clock&#39;: 1627334234.930827,
-                &#39;m1&#39;: 1627334233.310378,
-                &#39;m1_user_setpoint&#39;: 1627334232.511985,
-                &#39;roi1&#39;: 1627334234.930827,
-                &#39;roi2&#39;: 1627334234.930827,
-                &#39;scaler_time&#39;: 1627334234.930827,
-                &#39;scint&#39;: 1627334234.930827},
- &#39;uid&#39;: &#39;0da7af73-0eb9-4d84-b303-a5670a056982&#39;}
+ &#39;time&#39;: 1684257328.6620367,
+ &#39;timestamps&#39;: {&#39;I0&#39;: 1684257328.660073,
+                &#39;clock&#39;: 1684257328.660073,
+                &#39;m1&#39;: 1684257326.938315,
+                &#39;m1_user_setpoint&#39;: 1684257326.140348,
+                &#39;scaler_time&#39;: 1684257328.660073,
+                &#39;scint&#39;: 1684257328.660073},
+ &#39;uid&#39;: &#39;1be6e09f-4a92-4bf1-9ffc-7c5f787eba37&#39;}
 
 stop 6
 {&#39;exit_status&#39;: &#39;success&#39;,
  &#39;num_events&#39;: {&#39;primary&#39;: 5},
  &#39;reason&#39;: &#39;&#39;,
- &#39;run_start&#39;: &#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,
- &#39;time&#39;: 1627334234.9921644,
- &#39;uid&#39;: &#39;a176a034-e41a-47db-9135-82704ec08d22&#39;}
+ &#39;run_start&#39;: &#39;f5cee92c-ecf0-4e92-8ba6-075d574638fe&#39;,
+ &#39;time&#39;: 1684257328.7292325,
+ &#39;uid&#39;: &#39;97b6c313-ddf5-4fb4-8ae4-39e10f70201a&#39;}
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1733,7 +1513,7 @@ stop 6
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;3e2fec6c-48c8-4bf6-9153-5410962c7afc&#39;,)
+(&#39;f5cee92c-ecf0-4e92-8ba6-075d574638fe&#39;,)
 </pre></div></div>
 </div>
 <section id="Summary">

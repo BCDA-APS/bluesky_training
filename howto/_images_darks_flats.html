@@ -312,6 +312,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
@@ -437,7 +438,7 @@ document.write(`
 <p>In NeXus, detector data is stored within the <code class="docutils literal notranslate"><span class="pre">`instrument</span></code> &lt;<a class="reference external" href="https://manual.nexusformat.org/classes/base_classes/NXinstrument.html#nxinstrument-detector-group">https://manual.nexusformat.org/classes/base_classes/NXinstrument.html#nxinstrument-detector-group</a>&gt;`__ group, traditionally at <code class="docutils literal notranslate"><span class="pre">/entry/instrument/detector/</span></code>. We then hard link the field <code class="docutils literal notranslate"><span class="pre">data</span></code>, <code class="docutils literal notranslate"><span class="pre">dark</span></code>, and <code class="docutils literal notranslate"><span class="pre">white</span></code> fields to the <code class="docutils literal notranslate"><span class="pre">/entry/data/</span></code> group. The hard links provide a shorter HDF5 address. We use this shorter address in EPICS, to fit within the maximum 25 characters allowed by the EPICS <em>mbbo</em> record. We write the data
 into the <code class="docutils literal notranslate"><span class="pre">/entry/data</span></code> group and hard link it (in the <code class="docutils literal notranslate"><span class="pre">layout.xml</span></code> file) to the instrument group.</p>
 <p><strong>Tip</strong>: Whether you use dxchange or NeXus, be sure the fields of the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV are put in the IOC’s <a class="reference external" href="https://epics.anl.gov/bcda/synApps/autosave/autosave.html">autosave</a> configuration so they are restored when the IOC is restarted!</p>
-<p>The <a class="reference external" href="#xml-attributes-file">area detector attributes XML file</a> needs the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> selection PV included in its list. We’ll call it <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> so we can use the same name in the layout file:</p>
+<p>The <a class="reference internal" href="#XML-Attributes-File"><span class="std std-ref">area detector attributes XML file</span></a> needs the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> selection PV included in its list. We’ll call it <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> so we can use the same name in the layout file:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>&lt;Attribute
     name=&quot;HDF5FrameLocation&quot;
     type=&quot;EPICS_PV&quot;
@@ -507,7 +508,7 @@ into the <code class="docutils literal notranslate"><span class="pre">/entry/dat
 <section id="XML-Attributes-File">
 <h3>XML Attributes File<a class="headerlink" href="#XML-Attributes-File" title="Permalink to this heading">#</a></h3>
 <p>Here, we create the custom <code class="docutils literal notranslate"><span class="pre">/tmp/attributes.xml</span></code> (starting from the XML layout file supplied with the ADSimDetector). Rather than use an XML library to write this file, we’ll create all the content here as text and write the file with the usual text file tools. Then, we’ll check that the file exists.</p>
-<p>Note: This is the part of the file that connects the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV with an attribute to be used in the <a class="reference external" href="#xml-layout-file">layout</a> file. We can choose any unique name for this attribute (within the names allowed by XML) but we must use the same name in both the attributes and layout XML files. Here, we choose the name <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> .</p>
+<p>Note: This is the part of the file that connects the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV with an attribute to be used in the <a class="reference internal" href="#XML-Layout-File"><span class="std std-ref">layout</span></a> file. We can choose any unique name for this attribute (within the names allowed by XML) but we must use the same name in both the attributes and layout XML files. Here, we choose the name <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> .</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Attribute</span>
 <span class="w">    </span><span class="na">name=</span><span class="s">&quot;HDF5FrameLocation&quot;</span>
 <span class="w">    </span><span class="na">type=</span><span class="s">&quot;EPICS_PV&quot;</span>
@@ -517,7 +518,7 @@ into the <code class="docutils literal notranslate"><span class="pre">/entry/dat
 <span class="w">    </span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>In a <a class="reference external" href="#install-support-for-custom-frame-types">later step</a>, we’ll tell the HDF5 plugin to use it.</p>
+<p>In a <a class="reference internal" href="#Install-Support-for-Custom-Frame-Types"><span class="std std-ref">later step</span></a>, we’ll tell the HDF5 plugin to use it.</p>
 <p><strong>NOTE</strong>: Very important that you set the attributes file in the <code class="docutils literal notranslate"><span class="pre">cam</span></code>, and not the <code class="docutils literal notranslate"><span class="pre">hdf1</span></code> plugin!</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -562,8 +563,8 @@ xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/attributes.xml&#39;)
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;global</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;detector_data_destination&quot;</span><span class="w"> </span><span class="na">ndattribute=</span><span class="s">&quot;HDF5FrameLocation&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
 </pre></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">detector_data_destination</span></code> name is compiled into the HDF5 writer plugin and is required for proper operation. The <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> coordinates with the same name in the <a class="reference external" href="#xml-attributes-file">attributes</a> above.</p>
-<p>In a <a class="reference external" href="#install-support-for-custom-frame-types">later step</a>, we’ll tell the HDF5 plugin to use it.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">detector_data_destination</span></code> name is compiled into the HDF5 writer plugin and is required for proper operation. The <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> coordinates with the same name in the <a class="reference internal" href="#XML-Attributes-File"><span class="std std-ref">attributes</span></a> above.</p>
+<p>In a <a class="reference internal" href="#Install-Support-for-Custom-Frame-Types"><span class="std std-ref">later step</span></a>, we’ll tell the HDF5 plugin to use it.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -1062,8 +1063,8 @@ h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0000.h5&#39;)
 <p>Test the acquisition of the different frame types.</p>
 <section id="Install-Support-for-Custom-Frame-Types">
 <h3>Install Support for Custom Frame Types<a class="headerlink" href="#Install-Support-for-Custom-Frame-Types" title="Permalink to this heading">#</a></h3>
-<p>Previously we wrote <a class="reference external" href="#xml-attributes-file">attributes</a> and <a class="reference external" href="#xml-layout-file">layout</a> files for the IOC to use. Configure the IOC to use these files now. With these files, the HDF5 writer will use the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV, configured <a class="reference external" href="#configure-pv-for-the-frame-type">above</a>, to direct each frame to its configured HDF5 address in the file.</p>
-<p><strong>NOTE</strong>: Very important that you set the <a class="reference external" href="#xml-attributes-file">attributes</a> file in the <code class="docutils literal notranslate"><span class="pre">cam</span></code>, and not the <code class="docutils literal notranslate"><span class="pre">hdf1</span></code> plugin!</p>
+<p>Previously we wrote <a class="reference internal" href="#XML-Attributes-File"><span class="std std-ref">attributes</span></a> and <a class="reference internal" href="#XML-Layout-File"><span class="std std-ref">layout</span></a> files for the IOC to use. Configure the IOC to use these files now. With these files, the HDF5 writer will use the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV, configured <a class="reference internal" href="#Configure-PV-for-the-Frame-Type"><span class="std std-ref">above</span></a>, to direct each frame to its configured HDF5 address in the file.</p>
+<p><strong>NOTE</strong>: Very important that you set the <a class="reference internal" href="#XML-Attributes-File"><span class="std std-ref">attributes</span></a> file in the <code class="docutils literal notranslate"><span class="pre">cam</span></code>, and not the <code class="docutils literal notranslate"><span class="pre">hdf1</span></code> plugin!</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
@@ -1088,7 +1089,7 @@ adsimdet.hdf1.layout_filename_valid.get()=&#39;Yes&#39;
 </section>
 <section id="Start-Data-Acquisition">
 <h3>Start Data Acquisition<a class="headerlink" href="#Start-Data-Acquisition" title="Permalink to this heading">#</a></h3>
-<p>In staging, ophyd sets the various detector PVs to the values to be used for the next data acquisition. The configuration is stored in the various <code class="docutils literal notranslate"><span class="pre">stage_sigs</span></code> dictionaries printed <a class="reference external" href="#review-the-configurations">above</a>.</p>
+<p>In staging, ophyd sets the various detector PVs to the values to be used for the next data acquisition. The configuration is stored in the various <code class="docutils literal notranslate"><span class="pre">stage_sigs</span></code> dictionaries printed <a class="reference internal" href="#Review-the-Configurations"><span class="std std-ref">above</span></a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>

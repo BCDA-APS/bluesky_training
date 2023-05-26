@@ -15,9 +15,11 @@
     "\n",
     "First, we'll show how to start a Jupyter notebook.  Next, we'll connect with an EPICS scaler (using [ophyd](http://blueskyproject.io/ophyd/)), and then use the Bluesky software to count from the scaler.\n",
     "\n",
+    "**note**:  This tutorial expects to find an EPICS IOC on the local network configured as a synApps `xxx` [IOC](https://github.com/epics-modules/xxx) with prefix `gp:`.\n",
     "\n",
-    "**note**:  This tutorial expects to find an EPICS IOC on the local network configured as a synApps [`xxx`](https://github.com/epics-modules/xxx) IOC with prefix `gp:`.  A docker container is available to provide this IOC.  See this URL for instructions:  https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md\n",
-    "\n",
+    "<details>\n",
+    "A docker container is available to provide this IOC.  See this URL for instructions:  https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md\n",
+    "</details>\n",
     "\n",
     "## Starting this session in a Jupyter notebook\n",
     "\n",
@@ -60,12 +62,12 @@
     "\n",
     "![example 16-channel scaler screen](../_static/scaler.png)\n",
     "\n",
-    "The scaler is `gp:scaler1`.  We'll connect to that first.  To make the connection, we need to import the [`ScalerCH`](http://nsls-ii.github.io/ophyd/builtin-devices.html#epicsscaler) device from the [`ophyd.scaler`](http://nsls-ii.github.io/ophyd/) library."
+    "The scaler is `gp:scaler1`.  We'll connect to that first.  To make the connection, we need to import the [ScalerCH](https://blueskyproject.io/ophyd/builtin-devices.html#epicsscaler) device from the `ophyd.scaler` [library](https://blueskyproject.io/ophyd/)."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 1,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -73,6 +75,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -81,7 +84,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 2,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -89,6 +92,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -97,7 +101,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 3,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -105,6 +109,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -113,9 +118,28 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 4,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "OrderedDict([('timebase',\n",
+       "              {'value': 16000000.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I0', {'value': 6.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scint', {'value': 7.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I000', {'value': 8.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I00', {'value': 7.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('roi1', {'value': 8.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scaler_time', {'value': 1.6, 'timestamp': 1684257074.233208})])"
+      ]
+     },
+     "execution_count": 4,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "scaler.read()"
    ]
@@ -125,48 +149,58 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "By default, the ophyd `ScalerCH` object shows data for only the channels with names defined in EPICS.  Except for one channel (probably a bug in the `ScalerCH` code).  To fix that, we'll load another support library.  (Loading additional support as we need it will be a common theme in these lessons.  Rather than loading all the libraries first, as is common in python code files, we'll load support code as the need arises.)\n",
-    "\n",
-    "The new support code is `use_EPICS_scaler_channels` from [`apstools.devices`](https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.scaler_support.use_EPICS_scaler_channels)."
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
     "Our scaler only has a few channels in use (that is, channels where the name of the channel has been specified in the GUI screen).  Let's focus on just those channels.\n",
     "\n",
-    "To read just the *named* channels, we call the scaler's `select_channels()` method and name the scaler channels we wish to see.  To see all channels with names defined in EPICS, leave out the argument to `select_channels()` as shown:"
+    "To read just the *named* channels (and eliminate that one channel with an empty text name), we call the scaler's `select_channels()` method."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 5,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "OrderedDict([('timebase',\n",
+       "              {'value': 16000000.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I0', {'value': 6.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scint', {'value': 7.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I000', {'value': 8.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I00', {'value': 7.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('roi1', {'value': 8.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scaler_time', {'value': 1.6, 'timestamp': 1684257074.233208})])"
+      ]
+     },
+     "execution_count": 5,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "scaler.select_channels()\n",
     "scaler.read()"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "If you want to change the name fields on any of the scaler channels from the command line, follow this example."
+    "If you want to change the name fields (in EPICS) on any of the scaler channels from the command line, follow this example."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 6,
    "metadata": {},
    "outputs": [],
    "source": [
-    "scaler.channels.chan04.chname.put(\"scint\")\n",
-    "scaler.channels.chan07.chname.put(\"roi1\")"
+    "scaler.channels.chan07.chname.put(\"ROI1\")"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -175,15 +209,34 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 7,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "OrderedDict([('timebase',\n",
+       "              {'value': 16000000.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I0', {'value': 6.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scint', {'value': 7.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I000', {'value': 8.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I00', {'value': 7.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('ROI1', {'value': 8.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scaler_time', {'value': 1.6, 'timestamp': 1684257074.233208})])"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
-    "scaler.select_channels(None)\n",
+    "scaler.select_channels()\n",
     "scaler.read()"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -194,9 +247,20 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 8,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "EpicsSignal(read_pv='gp:scaler1.TP', name='scaler_preset_time', parent='scaler', timestamp=1684257074.233208, tolerance=0.001, auto_monitor=False, string=False, write_pv='gp:scaler1.TP', limits=False, put_complete=False)"
+      ]
+     },
+     "execution_count": 8,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "scaler.preset_time"
    ]
@@ -206,19 +270,31 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Since `scaler.preset_time` is an [`EpicsSignal`](https://github.com/NSLS-II/ophyd/blob/master/ophyd/signal.py#L647), ([Signal](http://nsls-ii.github.io/ophyd/signals.html) is a fundamental ophyd structure), we print its value using `.get()`."
+    "`scaler.preset_time` is an [`EpicsSignal`](https://github.com/bluesky/ophyd/blob/7612b2c9de9d5bc16cf28eea79ba5c12553f3cc2/ophyd/signal.py#L1615).  All such [Signal](https://blueskyproject.io/ophyd/signals.html) objects have a `.get()` method which returns the Signal's value."
    ]
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 9,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "1.5"
+      ]
+     },
+     "execution_count": 9,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "scaler.preset_time.get()"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -227,7 +303,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 10,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -235,6 +311,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -243,7 +320,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 11,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -251,6 +328,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -259,14 +337,32 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 12,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "OrderedDict([('timebase', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I0', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scint', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I000', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('I00', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('ROI1', {'value': 0.0, 'timestamp': 1684257074.233208}),\n",
+       "             ('scaler_time', {'value': 0.0, 'timestamp': 1684257074.233208})])"
+      ]
+     },
+     "execution_count": 12,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "scaler.read()"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -279,7 +375,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 13,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -288,6 +384,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -296,7 +393,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 14,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -304,6 +401,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -312,14 +410,26 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 15,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "('62b7d6d8-01ee-4984-83bf-b44e90239d90',)"
+      ]
+     },
+     "execution_count": 15,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "RE(bp.count([scaler]))"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -327,6 +437,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -339,7 +450,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 16,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -349,14 +460,36 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 17,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "start 11\n",
+      "descriptor 8\n",
+      "event 7\n",
+      "stop 6\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('4774a0b2-929b-4b23-a1b7-64e3fe6e4033',)"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "RE(bp.count([scaler]), myCallbackBrief)"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -365,7 +498,7 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 18,
    "metadata": {},
    "outputs": [],
    "source": [
@@ -378,14 +511,72 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 19,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "start 11\n",
+      "\t uid 289316ca-646a-425f-96b3-70a8485982bb\n",
+      "\t time 1684257089.5682273\n",
+      "\t versions {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\n",
+      "\t scan_id 3\n",
+      "\t plan_type generator\n",
+      "\t plan_name count\n",
+      "\t detectors ['scaler']\n",
+      "\t num_points 1\n",
+      "\t num_intervals 0\n",
+      "\t plan_args {'detectors': [\"ScalerCH(prefix='gp:scaler1', name='scaler', read_attrs=['channels', 'channels.chan01', 'channels.chan01.s', 'channels.chan02', 'channels.chan02.s', 'channels.chan04', 'channels.chan04.s', 'channels.chan05', 'channels.chan05.s', 'channels.chan06', 'channels.chan06.s', 'channels.chan07', 'channels.chan07.s', 'time'], configuration_attrs=['channels', 'channels.chan01', 'channels.chan01.chname', 'channels.chan01.preset', 'channels.chan01.gate', 'channels.chan02', 'channels.chan02.chname', 'channels.chan02.preset', 'channels.chan02.gate', 'channels.chan04', 'channels.chan04.chname', 'channels.chan04.preset', 'channels.chan04.gate', 'channels.chan05', 'channels.chan05.chname', 'channels.chan05.preset', 'channels.chan05.gate', 'channels.chan06', 'channels.chan06.chname', 'channels.chan06.preset', 'channels.chan06.gate', 'channels.chan07', 'channels.chan07.chname', 'channels.chan07.preset', 'channels.chan07.gate', 'count_mode', 'delay', 'auto_count_delay', 'freq', 'preset_time', 'auto_count_time', 'egu'])\"], 'num': 1}\n",
+      "\t hints {'dimensions': [(('time',), 'primary')]}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "descriptor 8\n",
+      "\t run_start 289316ca-646a-425f-96b3-70a8485982bb\n",
+      "\t time 1684257091.3677423\n",
+      "\t data_keys {'timebase': {'source': 'PV:gp:scaler1.S1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'I0': {'source': 'PV:gp:scaler1.S2', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'scint': {'source': 'PV:gp:scaler1.S4', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'I000': {'source': 'PV:gp:scaler1.S5', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'I00': {'source': 'PV:gp:scaler1.S6', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'ROI1': {'source': 'PV:gp:scaler1.S7', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'scaler_time': {'source': 'PV:gp:scaler1.T', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3, 'object_name': 'scaler'}}\n",
+      "\t uid 0b8e90f0-4365-4faf-aeb7-0be05e2af8f0\n",
+      "\t configuration {'scaler': {'data': {'scaler_channels_chan01_chname': 'timebase', 'scaler_channels_chan01_preset': 15000000.0, 'scaler_channels_chan01_gate': 'Y', 'scaler_channels_chan02_chname': 'I0', 'scaler_channels_chan02_preset': 0.0, 'scaler_channels_chan02_gate': 'N', 'scaler_channels_chan04_chname': 'scint', 'scaler_channels_chan04_preset': 0.0, 'scaler_channels_chan04_gate': 'N', 'scaler_channels_chan05_chname': 'I000', 'scaler_channels_chan05_preset': 0.0, 'scaler_channels_chan05_gate': 'N', 'scaler_channels_chan06_chname': 'I00', 'scaler_channels_chan06_preset': 0.0, 'scaler_channels_chan06_gate': 'N', 'scaler_channels_chan07_chname': 'ROI1', 'scaler_channels_chan07_preset': 0.0, 'scaler_channels_chan07_gate': 'N', 'scaler_count_mode': 'OneShot', 'scaler_delay': 0.0, 'scaler_auto_count_delay': 0.0, 'scaler_freq': 10000000.0, 'scaler_preset_time': 1.5, 'scaler_auto_count_time': 1.0, 'scaler_egu': ''}, 'timestamps': {'scaler_channels_chan01_chname': 1684257091.350259, 'scaler_channels_chan01_preset': 1684257091.350259, 'scaler_channels_chan01_gate': 1684257091.350259, 'scaler_channels_chan02_chname': 1684257091.350259, 'scaler_channels_chan02_preset': 1684257091.350259, 'scaler_channels_chan02_gate': 1684257091.350259, 'scaler_channels_chan04_chname': 1684257091.350259, 'scaler_channels_chan04_preset': 1684257091.350259, 'scaler_channels_chan04_gate': 1684257091.350259, 'scaler_channels_chan05_chname': 1684257091.350259, 'scaler_channels_chan05_preset': 1684257091.350259, 'scaler_channels_chan05_gate': 1684257091.350259, 'scaler_channels_chan06_chname': 1684257091.350259, 'scaler_channels_chan06_preset': 1684257091.350259, 'scaler_channels_chan06_gate': 1684257091.350259, 'scaler_channels_chan07_chname': 1684257091.350259, 'scaler_channels_chan07_preset': 1684257091.350259, 'scaler_channels_chan07_gate': 1684257091.350259, 'scaler_count_mode': 1684257091.350259, 'scaler_delay': 1684257091.350259, 'scaler_auto_count_delay': 1684257091.350259, 'scaler_freq': 1684257091.350259, 'scaler_preset_time': 1684257091.350259, 'scaler_auto_count_time': 1684257091.350259, 'scaler_egu': 1684257091.350259}, 'data_keys': OrderedDict([('scaler_channels_chan01_chname', {'source': 'PV:gp:scaler1.NM1', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan01_preset', {'source': 'PV:gp:scaler1.PR1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan01_gate', {'source': 'PV:gp:scaler1.G1', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan02_chname', {'source': 'PV:gp:scaler1.NM2', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan02_preset', {'source': 'PV:gp:scaler1.PR2', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan02_gate', {'source': 'PV:gp:scaler1.G2', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan04_chname', {'source': 'PV:gp:scaler1.NM4', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan04_preset', {'source': 'PV:gp:scaler1.PR4', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan04_gate', {'source': 'PV:gp:scaler1.G4', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan05_chname', {'source': 'PV:gp:scaler1.NM5', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan05_preset', {'source': 'PV:gp:scaler1.PR5', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan05_gate', {'source': 'PV:gp:scaler1.G5', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan06_chname', {'source': 'PV:gp:scaler1.NM6', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan06_preset', {'source': 'PV:gp:scaler1.PR6', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan06_gate', {'source': 'PV:gp:scaler1.G6', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan07_chname', {'source': 'PV:gp:scaler1.NM7', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan07_preset', {'source': 'PV:gp:scaler1.PR7', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan07_gate', {'source': 'PV:gp:scaler1.G7', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_count_mode', {'source': 'PV:gp:scaler1.CONT', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('OneShot', 'AutoCount')}), ('scaler_delay', {'source': 'PV:gp:scaler1.DLY', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_auto_count_delay', {'source': 'PV:gp:scaler1.DLY1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_freq', {'source': 'PV:gp:scaler1.FREQ', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_preset_time', {'source': 'PV:gp:scaler1.TP', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_auto_count_time', {'source': 'PV:gp:scaler1.TP1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_egu', {'source': 'PV:gp:scaler1.EGU', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None})])}}\n",
+      "\t name primary\n",
+      "\t hints {'scaler': {'fields': ['timebase', 'I0', 'scint', 'I000', 'I00', 'ROI1']}}\n",
+      "\t object_keys {'scaler': ['timebase', 'I0', 'scint', 'I000', 'I00', 'ROI1', 'scaler_time']}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "event 7\n",
+      "\t descriptor 0b8e90f0-4365-4faf-aeb7-0be05e2af8f0\n",
+      "\t time 1684257091.4174223\n",
+      "\t data {'timebase': 16000000.0, 'I0': 6.0, 'scint': 9.0, 'I000': 7.0, 'I00': 8.0, 'ROI1': 9.0, 'scaler_time': 1.6}\n",
+      "\t timestamps {'timebase': 1684257091.350259, 'I0': 1684257091.350259, 'scint': 1684257091.350259, 'I000': 1684257091.350259, 'I00': 1684257091.350259, 'ROI1': 1684257091.350259, 'scaler_time': 1684257091.350259}\n",
+      "\t seq_num 1\n",
+      "\t uid c7726af3-4491-4019-a5df-030ee76a2088\n",
+      "\t filled {}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "stop 6\n",
+      "\t run_start 289316ca-646a-425f-96b3-70a8485982bb\n",
+      "\t time 1684257091.4661891\n",
+      "\t uid b6df412a-4c18-4109-937a-a7f4edf28790\n",
+      "\t exit_status success\n",
+      "\t reason \n",
+      "\t num_events {'primary': 1}\n",
+      "~~~~~~~~~~~~~~~~~\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('289316ca-646a-425f-96b3-70a8485982bb',)"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "RE(bp.count([scaler]), myCallback)"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -404,14 +595,90 @@
   },
   {
    "cell_type": "code",
-   "execution_count": null,
+   "execution_count": 20,
    "metadata": {},
-   "outputs": [],
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "start 11\n",
+      "\t uid 6303cb22-caa4-4975-a532-1a1d99a4808d\n",
+      "\t time 1684257091.5613716\n",
+      "\t versions {'ophyd': '1.7.0', 'bluesky': '1.10.0'}\n",
+      "\t scan_id 4\n",
+      "\t plan_type generator\n",
+      "\t plan_name count\n",
+      "\t detectors ['scaler']\n",
+      "\t num_points 3\n",
+      "\t num_intervals 2\n",
+      "\t plan_args {'detectors': [\"ScalerCH(prefix='gp:scaler1', name='scaler', read_attrs=['channels', 'channels.chan01', 'channels.chan01.s', 'channels.chan02', 'channels.chan02.s', 'channels.chan04', 'channels.chan04.s', 'channels.chan05', 'channels.chan05.s', 'channels.chan06', 'channels.chan06.s', 'channels.chan07', 'channels.chan07.s', 'time'], configuration_attrs=['channels', 'channels.chan01', 'channels.chan01.chname', 'channels.chan01.preset', 'channels.chan01.gate', 'channels.chan02', 'channels.chan02.chname', 'channels.chan02.preset', 'channels.chan02.gate', 'channels.chan04', 'channels.chan04.chname', 'channels.chan04.preset', 'channels.chan04.gate', 'channels.chan05', 'channels.chan05.chname', 'channels.chan05.preset', 'channels.chan05.gate', 'channels.chan06', 'channels.chan06.chname', 'channels.chan06.preset', 'channels.chan06.gate', 'channels.chan07', 'channels.chan07.chname', 'channels.chan07.preset', 'channels.chan07.gate', 'count_mode', 'delay', 'auto_count_delay', 'freq', 'preset_time', 'auto_count_time', 'egu'])\"], 'num': 3}\n",
+      "\t hints {'dimensions': [(('time',), 'primary')]}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "descriptor 8\n",
+      "\t run_start 6303cb22-caa4-4975-a532-1a1d99a4808d\n",
+      "\t time 1684257093.345719\n",
+      "\t data_keys {'timebase': {'source': 'PV:gp:scaler1.S1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'I0': {'source': 'PV:gp:scaler1.S2', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'scint': {'source': 'PV:gp:scaler1.S4', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'I000': {'source': 'PV:gp:scaler1.S5', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'I00': {'source': 'PV:gp:scaler1.S6', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'ROI1': {'source': 'PV:gp:scaler1.S7', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0, 'object_name': 'scaler'}, 'scaler_time': {'source': 'PV:gp:scaler1.T', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3, 'object_name': 'scaler'}}\n",
+      "\t uid ba57a59a-3215-4f85-94a0-d5ed3914b11f\n",
+      "\t configuration {'scaler': {'data': {'scaler_channels_chan01_chname': 'timebase', 'scaler_channels_chan01_preset': 15000000.0, 'scaler_channels_chan01_gate': 'Y', 'scaler_channels_chan02_chname': 'I0', 'scaler_channels_chan02_preset': 0.0, 'scaler_channels_chan02_gate': 'N', 'scaler_channels_chan04_chname': 'scint', 'scaler_channels_chan04_preset': 0.0, 'scaler_channels_chan04_gate': 'N', 'scaler_channels_chan05_chname': 'I000', 'scaler_channels_chan05_preset': 0.0, 'scaler_channels_chan05_gate': 'N', 'scaler_channels_chan06_chname': 'I00', 'scaler_channels_chan06_preset': 0.0, 'scaler_channels_chan06_gate': 'N', 'scaler_channels_chan07_chname': 'ROI1', 'scaler_channels_chan07_preset': 0.0, 'scaler_channels_chan07_gate': 'N', 'scaler_count_mode': 'OneShot', 'scaler_delay': 0.0, 'scaler_auto_count_delay': 0.0, 'scaler_freq': 10000000.0, 'scaler_preset_time': 1.5, 'scaler_auto_count_time': 1.0, 'scaler_egu': ''}, 'timestamps': {'scaler_channels_chan01_chname': 1684257093.323402, 'scaler_channels_chan01_preset': 1684257093.323402, 'scaler_channels_chan01_gate': 1684257093.323402, 'scaler_channels_chan02_chname': 1684257093.323402, 'scaler_channels_chan02_preset': 1684257093.323402, 'scaler_channels_chan02_gate': 1684257093.323402, 'scaler_channels_chan04_chname': 1684257093.323402, 'scaler_channels_chan04_preset': 1684257093.323402, 'scaler_channels_chan04_gate': 1684257093.323402, 'scaler_channels_chan05_chname': 1684257093.323402, 'scaler_channels_chan05_preset': 1684257093.323402, 'scaler_channels_chan05_gate': 1684257093.323402, 'scaler_channels_chan06_chname': 1684257093.323402, 'scaler_channels_chan06_preset': 1684257093.323402, 'scaler_channels_chan06_gate': 1684257093.323402, 'scaler_channels_chan07_chname': 1684257093.323402, 'scaler_channels_chan07_preset': 1684257093.323402, 'scaler_channels_chan07_gate': 1684257093.323402, 'scaler_count_mode': 1684257093.323402, 'scaler_delay': 1684257093.323402, 'scaler_auto_count_delay': 1684257093.323402, 'scaler_freq': 1684257093.323402, 'scaler_preset_time': 1684257093.323402, 'scaler_auto_count_time': 1684257093.323402, 'scaler_egu': 1684257093.323402}, 'data_keys': OrderedDict([('scaler_channels_chan01_chname', {'source': 'PV:gp:scaler1.NM1', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan01_preset', {'source': 'PV:gp:scaler1.PR1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan01_gate', {'source': 'PV:gp:scaler1.G1', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan02_chname', {'source': 'PV:gp:scaler1.NM2', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan02_preset', {'source': 'PV:gp:scaler1.PR2', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan02_gate', {'source': 'PV:gp:scaler1.G2', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan04_chname', {'source': 'PV:gp:scaler1.NM4', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan04_preset', {'source': 'PV:gp:scaler1.PR4', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan04_gate', {'source': 'PV:gp:scaler1.G4', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan05_chname', {'source': 'PV:gp:scaler1.NM5', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan05_preset', {'source': 'PV:gp:scaler1.PR5', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan05_gate', {'source': 'PV:gp:scaler1.G5', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan06_chname', {'source': 'PV:gp:scaler1.NM6', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan06_preset', {'source': 'PV:gp:scaler1.PR6', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan06_gate', {'source': 'PV:gp:scaler1.G6', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_channels_chan07_chname', {'source': 'PV:gp:scaler1.NM7', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None}), ('scaler_channels_chan07_preset', {'source': 'PV:gp:scaler1.PR7', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 0}), ('scaler_channels_chan07_gate', {'source': 'PV:gp:scaler1.G7', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('N', 'Y')}), ('scaler_count_mode', {'source': 'PV:gp:scaler1.CONT', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None, 'enum_strs': ('OneShot', 'AutoCount')}), ('scaler_delay', {'source': 'PV:gp:scaler1.DLY', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_auto_count_delay', {'source': 'PV:gp:scaler1.DLY1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_freq', {'source': 'PV:gp:scaler1.FREQ', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_preset_time', {'source': 'PV:gp:scaler1.TP', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_auto_count_time', {'source': 'PV:gp:scaler1.TP1', 'dtype': 'number', 'shape': [], 'units': '', 'lower_ctrl_limit': 0.0, 'upper_ctrl_limit': 0.0, 'precision': 3}), ('scaler_egu', {'source': 'PV:gp:scaler1.EGU', 'dtype': 'string', 'shape': [], 'units': None, 'lower_ctrl_limit': None, 'upper_ctrl_limit': None})])}}\n",
+      "\t name primary\n",
+      "\t hints {'scaler': {'fields': ['timebase', 'I0', 'scint', 'I000', 'I00', 'ROI1']}}\n",
+      "\t object_keys {'scaler': ['timebase', 'I0', 'scint', 'I000', 'I00', 'ROI1', 'scaler_time']}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "event 7\n",
+      "\t descriptor ba57a59a-3215-4f85-94a0-d5ed3914b11f\n",
+      "\t time 1684257093.4148276\n",
+      "\t data {'timebase': 16000000.0, 'I0': 7.0, 'scint': 8.0, 'I000': 8.0, 'I00': 5.0, 'ROI1': 8.0, 'scaler_time': 1.6}\n",
+      "\t timestamps {'timebase': 1684257093.323402, 'I0': 1684257093.323402, 'scint': 1684257093.323402, 'I000': 1684257093.323402, 'I00': 1684257093.323402, 'ROI1': 1684257093.323402, 'scaler_time': 1684257093.323402}\n",
+      "\t seq_num 1\n",
+      "\t uid e85912a7-0f2f-460a-8394-9a50aa13dc46\n",
+      "\t filled {}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "event 7\n",
+      "\t descriptor ba57a59a-3215-4f85-94a0-d5ed3914b11f\n",
+      "\t time 1684257095.1680999\n",
+      "\t data {'timebase': 16000000.0, 'I0': 8.0, 'scint': 7.0, 'I000': 7.0, 'I00': 5.0, 'ROI1': 9.0, 'scaler_time': 1.6}\n",
+      "\t timestamps {'timebase': 1684257095.164514, 'I0': 1684257095.164514, 'scint': 1684257095.164514, 'I000': 1684257095.164514, 'I00': 1684257095.164514, 'ROI1': 1684257095.164514, 'scaler_time': 1684257095.164514}\n",
+      "\t seq_num 2\n",
+      "\t uid dceacbcd-7a26-4f26-a5b5-0c707a731878\n",
+      "\t filled {}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "event 7\n",
+      "\t descriptor ba57a59a-3215-4f85-94a0-d5ed3914b11f\n",
+      "\t time 1684257096.9594595\n",
+      "\t data {'timebase': 16000000.0, 'I0': 8.0, 'scint': 5.0, 'I000': 7.0, 'I00': 9.0, 'ROI1': 5.0, 'scaler_time': 1.6}\n",
+      "\t timestamps {'timebase': 1684257096.955052, 'I0': 1684257096.955052, 'scint': 1684257096.955052, 'I000': 1684257096.955052, 'I00': 1684257096.955052, 'ROI1': 1684257096.955052, 'scaler_time': 1684257096.955052}\n",
+      "\t seq_num 3\n",
+      "\t uid ac952c7a-1ae5-4930-adc6-a31bd1466f22\n",
+      "\t filled {}\n",
+      "~~~~~~~~~~~~~~~~~\n",
+      "stop 6\n",
+      "\t run_start 6303cb22-caa4-4975-a532-1a1d99a4808d\n",
+      "\t time 1684257097.0455909\n",
+      "\t uid ce03caab-6562-46b6-942f-73f629bfd337\n",
+      "\t exit_status success\n",
+      "\t reason \n",
+      "\t num_events {'primary': 3}\n",
+      "~~~~~~~~~~~~~~~~~\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('6303cb22-caa4-4975-a532-1a1d99a4808d',)"
+      ]
+     },
+     "execution_count": 20,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
    "source": [
     "RE(bp.count([scaler], num=3), myCallback)"
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -461,6 +728,7 @@
    ]
   },
   {
+   "attachments": {},
    "cell_type": "markdown",
    "metadata": {},
    "source": [
@@ -489,7 +757,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.7.7"
+   "version": "3.10.4"
   }
  },
  "nbformat": 4,

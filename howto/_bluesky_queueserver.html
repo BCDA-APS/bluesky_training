@@ -310,6 +310,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
@@ -394,13 +395,13 @@ from the [APS beam line data pipelines.</p>
 <section id="one-time-setup">
 <h2>One-time setup<a class="headerlink" href="#one-time-setup" title="Permalink to this heading">#</a></h2>
 <p>Install <code class="docutils literal notranslate"><span class="pre">redis</span></code> package in OS (if not already installed):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>redis
-</pre></div>
-</div>
+<pre>
+$ <b>sudo apt install redis</b>
+</pre>
 <p>Create conda environment</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>qserver<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>bluesky-queueserver
-</pre></div>
-</div>
+<pre>
+$ <b>conda create -y -n qserver -c conda-forge bluesky-queueserver</b>
+</pre>
 </section>
 <section id="start-a-monitor-on-a-qserver">
 <h2>Start a monitor on a qserver<a class="headerlink" href="#start-a-monitor-on-a-qserver" title="Permalink to this heading">#</a></h2>
@@ -411,6 +412,8 @@ start-re-manager<span class="w"> </span>--zmq-publish-console<span class="w"> </
 </div>
 <p>Here, the <code class="docutils literal notranslate"><span class="pre">training</span></code> catalog is subscribed to the RunEngine, in addition to a 0MQ stream (on port tcp://*:60615).</p>
 <details>
+<pre>
+$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
 <pre>
 $ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
 INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at 'tcp://*:60615'

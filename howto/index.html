@@ -310,6 +310,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
@@ -377,7 +378,8 @@ document.write(`
   <section id="how-to-guides">
 <span id="howto"></span><span id="index-0"></span><h1>How-To Guides<a class="headerlink" href="#how-to-guides" title="Permalink to this heading">#</a></h1>
 <p>How-to guides are directions that take the reader through the steps required to
-solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
+solve a real-world problem. How-to guides are <em>goal-oriented</em>.
+Tutorials often involve more depth than HowTo guides.</p>
 <div class="toctree-wrapper compound">
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a><ul>
@@ -422,6 +424,17 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_count_scaler.html#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_count_scaler.html#A-closer-look-at-the-EPICS-scaler">A closer look at the EPICS scaler</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#Overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#Schematic">Schematic</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#Implementation">Implementation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#PID-Control-Loops">PID Control Loops</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#ophyd-interface">ophyd interface</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#heater-as-positioner">heater as positioner</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#ramp-the-temperature">ramp the temperature</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_custom_heater_positioner.html#Thermal-profile">Thermal profile</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a><ul>
@@ -481,6 +494,7 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.</p>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#4.-Get-data-for-the-x-and-y-axes">4. Get data for the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#5.-Use-MatPlotLib">5. Use MatPlotLib</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#6.-Plot-(x,y)-using-matplotlib">6. Plot <span class="math notranslate nohighlight">\((x,y)\)</span> using matplotlib</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_plot_x_y_databroker.html#7.-Plotting-function">7. Plotting function</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a><ul>

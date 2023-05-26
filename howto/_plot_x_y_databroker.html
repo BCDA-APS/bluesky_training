@@ -312,6 +312,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
@@ -412,13 +413,14 @@ document.write(`
 </section>
 <section id="2.-Choose-a-specific-run-from-a-catalog">
 <h2>2. Choose a specific run from a catalog<a class="headerlink" href="#2.-Choose-a-specific-run-from-a-catalog" title="Permalink to this heading">#</a></h2>
-<p>Here, the <code class="docutils literal notranslate"><span class="pre">class_data_examples</span></code> catalog will be used. As shown in step 3 below, the run with <code class="docutils literal notranslate"><span class="pre">scan_id=86</span></code> has a scan of detector vs. motor: (<code class="docutils literal notranslate"><span class="pre">m1</span></code>, <code class="docutils literal notranslate"><span class="pre">noisy</span></code>).</p>
+<p>Here, the <code class="docutils literal notranslate"><span class="pre">class_data_examples</span></code> catalog will be used.</p>
+<p>We create an instance of this catalog and assign it to the variable <code class="docutils literal notranslate"><span class="pre">cat</span></code>. In this <code class="docutils literal notranslate"><span class="pre">cat</span></code>, the run with <code class="docutils literal notranslate"><span class="pre">scan_id=86</span></code> has a scan of detector <em>vs</em>. motor. The <code class="docutils literal notranslate"><span class="pre">cat</span></code> object is like a dictionary where <code class="docutils literal notranslate"><span class="pre">scan_id</span></code> can be used as a key. Next, using <code class="docutils literal notranslate"><span class="pre">86</span></code> as the key, we create an object called <code class="docutils literal notranslate"><span class="pre">run</span></code> that will be used to access the data from this run.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cat</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">catalog</span><span class="p">[</span><span class="s2">&quot;class_data_examples&quot;</span><span class="p">]</span>
-<span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="o">.</span><span class="n">v2</span><span class="p">[</span><span class="mi">86</span><span class="p">]</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="mi">86</span><span class="p">]</span>
 <span class="n">run</span>
 </pre></div>
 </div>
@@ -442,7 +444,8 @@ BlueskyRun
 </section>
 <section id="3.-Show-the-(primary)-data">
 <h2>3. Show the (primary) data<a class="headerlink" href="#3.-Show-the-(primary)-data" title="Permalink to this heading">#</a></h2>
-<p>Get all the data available from the <code class="docutils literal notranslate"><span class="pre">primary</span></code> stream. The primary stream is where bluesky stores the data acquired from a scan. <code class="docutils literal notranslate"><span class="pre">databroker</span></code> returns this data as an <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.Dataset.html">xarray Dataset</a>.</p>
+<p>Get all the data available from the <code class="docutils literal notranslate"><span class="pre">primary</span></code> stream. The <code class="docutils literal notranslate"><span class="pre">primary</span></code> stream is where bluesky stores the data acquired from a scan. <code class="docutils literal notranslate"><span class="pre">databroker</span></code> returns this data as an <a class="reference external" href="http://xarray.pydata.org/en/stable/generated/xarray.Dataset.html">xarray Dataset</a>.</p>
+<p>The detector is named <code class="docutils literal notranslate"><span class="pre">noisy</span></code> and the motor is named <code class="docutils literal notranslate"><span class="pre">m1</span></code>. We’ll refer to <code class="docutils literal notranslate"><span class="pre">m1</span></code> and <code class="docutils literal notranslate"><span class="pre">noisy</span></code> as <em>data variables</em> to be consistent with the <code class="docutils literal notranslate"><span class="pre">xarray.Dataset</span></code> (as shown in the table below).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -815,33 +818,34 @@ Coordinates:
 Data variables:
     m1                (time) float64 0.939 0.941 0.942 ... 0.968 0.969 0.971
     m1_user_setpoint  (time) float64 0.9392 0.9407 0.9421 ... 0.9693 0.9708
-    noisy             (time) float64 8.589e+03 1.067e+04 ... 1.076e+04 8.774e+03</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-95c243ef-1345-432f-a482-9d38ece3fc8e' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-95c243ef-1345-432f-a482-9d38ece3fc8e' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 23</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-91b7d416-de01-43ce-b923-3e9ac755ce30' class='xr-section-summary-in' type='checkbox'  checked><label for='section-91b7d416-de01-43ce-b923-3e9ac755ce30' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.615e+09 1.615e+09 ... 1.615e+09</div><input id='attrs-392e6156-8bff-4745-a556-02888dcd8718' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-392e6156-8bff-4745-a556-02888dcd8718' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f9d4a650-6507-4103-876b-8ab711040cb6' class='xr-var-data-in' type='checkbox'><label for='data-f9d4a650-6507-4103-876b-8ab711040cb6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09,
+    noisy             (time) float64 8.589e+03 1.067e+04 ... 1.076e+04 8.774e+03</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-9b0f7a4e-052b-4908-b1e4-7f78767fd5fa' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-9b0f7a4e-052b-4908-b1e4-7f78767fd5fa' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 23</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-a3ef52d5-0524-46ea-8b8f-3fb092d3e900' class='xr-section-summary-in' type='checkbox'  checked><label for='section-a3ef52d5-0524-46ea-8b8f-3fb092d3e900' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.615e+09 1.615e+09 ... 1.615e+09</div><input id='attrs-2aaee391-a683-4dc3-abc0-6698221817c2' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-2aaee391-a683-4dc3-abc0-6698221817c2' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-478b9d27-cab9-4660-bf8e-fe52b02e4a7e' class='xr-var-data-in' type='checkbox'><label for='data-478b9d27-cab9-4660-bf8e-fe52b02e4a7e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09,
        1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09,
        1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09,
        1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09, 1.615061e+09,
-       1.615061e+09, 1.615061e+09, 1.615061e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-1395b83a-53a6-47a2-87df-fdc19aa7a9ce' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1395b83a-53a6-47a2-87df-fdc19aa7a9ce' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>m1</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.939 0.941 0.942 ... 0.969 0.971</div><input id='attrs-320e6184-fb16-4f53-bf40-30af1a24aa28' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-320e6184-fb16-4f53-bf40-30af1a24aa28' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-ccc0da11-11c6-47e1-857c-09a32a6e4442' class='xr-var-data-in' type='checkbox'><label for='data-ccc0da11-11c6-47e1-857c-09a32a6e4442' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>m1</dd></dl></div><div class='xr-var-data'><pre>array([0.939, 0.941, 0.942, 0.944, 0.945, 0.946, 0.948, 0.949, 0.951,
+       1.615061e+09, 1.615061e+09, 1.615061e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-9293ea4c-2f6e-4d84-aa7e-53bd2207673a' class='xr-section-summary-in' type='checkbox'  checked><label for='section-9293ea4c-2f6e-4d84-aa7e-53bd2207673a' class='xr-section-summary' >Data variables: <span>(3)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>m1</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.939 0.941 0.942 ... 0.969 0.971</div><input id='attrs-914b1296-456e-4882-8028-59c43ffa02b4' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-914b1296-456e-4882-8028-59c43ffa02b4' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-430a5cf6-7eca-4b37-a0db-dbe663104295' class='xr-var-data-in' type='checkbox'><label for='data-430a5cf6-7eca-4b37-a0db-dbe663104295' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>m1</dd></dl></div><div class='xr-var-data'><pre>array([0.939, 0.941, 0.942, 0.944, 0.945, 0.946, 0.948, 0.949, 0.951,
        0.952, 0.954, 0.955, 0.956, 0.958, 0.959, 0.961, 0.962, 0.964,
-       0.965, 0.966, 0.968, 0.969, 0.971])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>m1_user_setpoint</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.9392 0.9407 ... 0.9693 0.9708</div><input id='attrs-6a569681-c218-4377-aa52-c15cfa3756d9' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6a569681-c218-4377-aa52-c15cfa3756d9' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-f995d49a-0b22-4c97-b1df-cf76f6eccd23' class='xr-var-data-in' type='checkbox'><label for='data-f995d49a-0b22-4c97-b1df-cf76f6eccd23' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>m1</dd></dl></div><div class='xr-var-data'><pre>array([0.93922358, 0.9406578 , 0.94209202, 0.94352624, 0.94496046,
+       0.965, 0.966, 0.968, 0.969, 0.971])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>m1_user_setpoint</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.9392 0.9407 ... 0.9693 0.9708</div><input id='attrs-73f2015c-90d4-4f95-b7d3-c7dc8671ef73' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-73f2015c-90d4-4f95-b7d3-c7dc8671ef73' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-cf95c12d-039e-4156-a5af-f7a7ce20c418' class='xr-var-data-in' type='checkbox'><label for='data-cf95c12d-039e-4156-a5af-f7a7ce20c418' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>m1</dd></dl></div><div class='xr-var-data'><pre>array([0.93922358, 0.9406578 , 0.94209202, 0.94352624, 0.94496046,
        0.94639468, 0.9478289 , 0.94926312, 0.95069734, 0.95213156,
        0.95356578, 0.955     , 0.95643422, 0.95786844, 0.95930266,
        0.96073688, 0.9621711 , 0.96360532, 0.96503954, 0.96647376,
-       0.96790798, 0.9693422 , 0.97077642])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>noisy</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>8.589e+03 1.067e+04 ... 8.774e+03</div><input id='attrs-8d9825ee-db5e-4dbf-a07a-32cc8033926d' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-8d9825ee-db5e-4dbf-a07a-32cc8033926d' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-7696def9-f17d-4017-a141-1d87210fa612' class='xr-var-data-in' type='checkbox'><label for='data-7696def9-f17d-4017-a141-1d87210fa612' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>noisy</dd></dl></div><div class='xr-var-data'><pre>array([ 8589.32940855, 10673.5935127 , 12175.42592515, 16002.50003937,
+       0.96790798, 0.9693422 , 0.97077642])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>noisy</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>8.589e+03 1.067e+04 ... 8.774e+03</div><input id='attrs-20d535c3-c8c5-4177-a71a-404058fe53a3' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-20d535c3-c8c5-4177-a71a-404058fe53a3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-d6f4365b-98aa-4c78-9604-2893f850cff4' class='xr-var-data-in' type='checkbox'><label for='data-d6f4365b-98aa-4c78-9604-2893f850cff4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>noisy</dd></dl></div><div class='xr-var-data'><pre>array([ 8589.32940855, 10673.5935127 , 12175.42592515, 16002.50003937,
        19570.16387909, 22262.12759241, 32683.26999595, 37632.86194784,
        56726.20388132, 70195.36934214, 91437.94502751, 97870.56104504,
        92105.54803581, 69931.50593825, 57654.64241544, 40947.06521792,
        31686.60297804, 22357.10017001, 19497.85944574, 17007.29364564,
-       12802.50606181, 10761.63637859,  8773.96384533])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-cf1decbc-ba54-416a-873e-51e138a67457' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-cf1decbc-ba54-416a-873e-51e138a67457' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+       12802.50606181, 10761.63637859,  8773.96384533])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-0abfe76a-5874-432c-9508-06808b4964b3' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-0abfe76a-5874-432c-9508-06808b4964b3' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
 </div>
 </section>
 <section id="4.-Get-data-for-the-x-and-y-axes">
 <h2>4. Get data for the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes<a class="headerlink" href="#4.-Get-data-for-the-x-and-y-axes" title="Permalink to this heading">#</a></h2>
-<p>Pick the <code class="docutils literal notranslate"><span class="pre">m1</span></code> (motor readback value) and <code class="docutils literal notranslate"><span class="pre">noisy</span></code> data for motor and detector, respectively. These are <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html">numpy ndarrays</a>.</p>
+<p>The plotting steps become easier (and more general) if we create objects for each specific data variable to be plotted.</p>
+<p>Pick the <code class="docutils literal notranslate"><span class="pre">m1</span></code> (motor readback value) and <code class="docutils literal notranslate"><span class="pre">noisy</span></code> data for <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span>, respectively.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">motor</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;m1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
-<span class="n">detector</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;m1&quot;</span><span class="p">]</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -859,15 +863,15 @@ Data variables:
 </section>
 <section id="6.-Plot-(x,y)-using-matplotlib">
 <h2>6. Plot <span class="math notranslate nohighlight">\((x,y)\)</span> using matplotlib<a class="headerlink" href="#6.-Plot-(x,y)-using-matplotlib" title="Permalink to this heading">#</a></h2>
-<p>Follow the MatPlotLib <a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/pyplot.html">tutorial</a> to learn how to customize this plot.</p>
+<p>Follow the MatPlotLib <a class="reference external" href="https://matplotlib.org/stable/tutorials/introductory/pyplot.html">tutorial</a> to learn how to customize this plot. The data (<code class="docutils literal notranslate"><span class="pre">x.values</span></code> and <code class="docutils literal notranslate"><span class="pre">y.values</span></code>) are obtained as <a class="reference external" href="https://numpy.org/doc/stable/reference/generated/numpy.ndarray.html">numpy ndarrays</a>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">motor</span><span class="p">,</span> <span class="n">detector</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">y</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scan_id=</span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">][</span><span class="s1">&#39;scan_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;m1&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;noisy&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -877,7 +881,7 @@ Data variables:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Text(0, 0.5, &#39;noisy&#39;)
+Text(0.5, 1.0, &#39;scan_id=86&#39;)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -885,6 +889,51 @@ Text(0, 0.5, &#39;noisy&#39;)
 </div>
 <div class="output_area docutils container">
 <img alt="../_images/howto__plot_x_y_databroker_11_1.png" src="../_images/howto__plot_x_y_databroker_11_1.png" />
+</div>
+</div>
+</section>
+<section id="7.-Plotting-function">
+<h2>7. Plotting function<a class="headerlink" href="#7.-Plotting-function" title="Permalink to this heading">#</a></h2>
+<p>Summarizing the code above, here is a handy function you can use to plot such <span class="math notranslate nohighlight">\((x, y)\)</span> data. Or, you can use this code as a starting point to make your own plot function.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><br/><span></span><span class="k">def</span> <span class="nf">xyplot</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">xname</span><span class="p">,</span> <span class="n">yname</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Plot the data from the primary stream (above).</span>
+
+<span class="sd">    Example::</span>
+
+<span class="sd">        xyplot(cat[-1].primary.read(), x.name, y.name)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+    <span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">xname</span><span class="p">]</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="n">yname</span><span class="p">]</span>
+    <span class="n">title</span> <span class="o">=</span> <span class="n">title</span> <span class="ow">or</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">yname</span><span class="si">}</span><span class="s2"> v. </span><span class="si">{</span><span class="n">xname</span><span class="si">}</span><span class="s2">&quot;</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">xname</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="n">yname</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Here is an example using this function with the <code class="docutils literal notranslate"><span class="pre">dataset</span></code> from above. The actual name for each data variable must match the name provided by the <code class="docutils literal notranslate"><span class="pre">dataset</span></code>. A plot title is provided.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xyplot</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="s2">&quot;noisy&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Example XY plot&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__plot_x_y_databroker_15_0.png" src="../_images/howto__plot_x_y_databroker_15_0.png" />
 </div>
 </div>
 </section>
@@ -943,6 +992,7 @@ Text(0, 0.5, &#39;noisy&#39;)
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#4.-Get-data-for-the-x-and-y-axes">4. Get data for the <span class="math notranslate nohighlight">\(x\)</span> and <span class="math notranslate nohighlight">\(y\)</span> axes</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#5.-Use-MatPlotLib">5. Use MatPlotLib</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#6.-Plot-(x,y)-using-matplotlib">6. Plot <span class="math notranslate nohighlight">\((x,y)\)</span> using matplotlib</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#7.-Plotting-function">7. Plotting function</a></li>
 </ul>
   </nav></div>
 

@@ -312,6 +312,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Basic, Part C: Step Scan with Scaler and Motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of Bluesky commands</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_device.html">Custom Devices</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
@@ -386,8 +387,9 @@ document.write(`
 <p>In this lesson, we’ll show how to use the tools provided with Bluesky to show the data as it is acquired using both a table representation and a graphical view, as well. These capabilities are provided by using callbacks. In lessons 1 and 2, we wrote our own simple callback to view the documents that come from the RunEngine during execution of a plan. Quickly, the data became too complex for simple viewing.</p>
 <p>The <em>LiveTable</em> and <em>LivePlot</em> callbacks provide a table and graphical view of the data from the plan. We’ll get to those first. Later, we’ll show the <em>BestEffortCallback</em>, which combines both those callbacks plus a little more. For routine work, we’ll want to use <em>BestEffortCallback</em> all the time. We’ll show how to make that happen so we <em>set it and forget about it</em>.</p>
 <hr class="docutils" />
-<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md">prjemian/epics-docker</a></p>
-<p>Starting with the configuration from the basic scaler and motor notebooks, we first group the <code class="docutils literal notranslate"><span class="pre">import</span></code>s together as is common Python practice:</p>
+<p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">xxx</span></code> <a class="reference external" href="https://github.com/epics-modules/xxx">IOC</a> with prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>.</p>
+<details><p>A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps/README.md">prjemian/epics-docker</a></p>
+</details><p>Starting with the configuration from the basic scaler and motor notebooks, we first group the <code class="docutils literal notranslate"><span class="pre">import</span></code>s together as is common Python practice:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -434,12 +436,10 @@ document.write(`
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 5000000.0, &#39;timestamp&#39;: 1627337978.650808}),
-             (&#39;I0&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1627337978.650808}),
-             (&#39;scint&#39;, {&#39;value&#39;: 3.0, &#39;timestamp&#39;: 1627337978.650808}),
-             (&#39;roi1&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627337978.650808}),
-             (&#39;roi2&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 1627337978.650808}),
-             (&#39;scaler_time&#39;, {&#39;value&#39;: 0.5, &#39;timestamp&#39;: 1627337978.650808})])
+OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 16000000.0, &#39;timestamp&#39;: 1684257328.660073}),
+             (&#39;I0&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1684257328.660073}),
+             (&#39;scint&#39;, {&#39;value&#39;: 7.0, &#39;timestamp&#39;: 1684257328.660073}),
+             (&#39;scaler_time&#39;, {&#39;value&#39;: 1.6, &#39;timestamp&#39;: 1684257328.660073})])
 </pre></div></div>
 </div>
 <section id="Showing-the-data">
@@ -471,16 +471,16 @@ OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 5000000.0, &#39;timestamp&#39;:
 <div class="highlight"><pre>
 
 
-+-----------+------------+------------+------------+------------+------------+-------------+------------+
-|   seq_num |       time |         I0 |      clock |       roi1 |       roi2 | scaler_time |      scint |
-+-----------+------------+------------+------------+------------+------------+-------------+------------+
-|         1 | 17:21:27.3 |          1 |    5000000 |          0 |          0 |       0.500 |          2 |
-|         2 | 17:21:27.9 |          1 |    5000000 |          0 |          0 |       0.500 |          2 |
-|         3 | 17:21:28.4 |          1 |    5000000 |          0 |          0 |       0.500 |          1 |
-|         4 | 17:21:28.9 |          1 |    5000000 |          0 |          0 |       0.500 |          1 |
-|         5 | 17:21:29.4 |          2 |    5000000 |          0 |          0 |       0.500 |          3 |
-+-----------+------------+------------+------------+------------+------------+-------------+------------+
-generator count [&#39;054e856f&#39;] (scan num: 1)
++-----------+------------+------------+------------+-------------+------------+
+|   seq_num |       time |         I0 |      clock | scaler_time |      scint |
++-----------+------------+------------+------------+-------------+------------+
+|         1 | 12:16:30.3 |          1 |    4000000 |       0.400 |          2 |
+|         2 | 12:16:31.0 |          2 |    5000000 |       0.500 |          1 |
+|         3 | 12:16:31.5 |          3 |    5000000 |       0.500 |          3 |
+|         4 | 12:16:32.0 |          2 |    5000000 |       0.500 |          2 |
+|         5 | 12:16:32.5 |          1 |    5000000 |       0.500 |          3 |
++-----------+------------+------------+------------+-------------+------------+
+generator count [&#39;3b77f60f&#39;] (scan num: 1)
 
 
 </pre></div></div>
@@ -491,7 +491,7 @@ generator count [&#39;054e856f&#39;] (scan num: 1)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;054e856f-b40b-4888-888a-828ba9e1822c&#39;,)
+(&#39;3b77f60f-deab-4dd3-8ae1-cde3f40e90e1&#39;,)
 </pre></div></div>
 </div>
 <p>You see columns for the data collection sequence number, the time of collection, and each of the <em>named</em> scaler channels. At the end, the short form for the scan’s <code class="docutils literal notranslate"><span class="pre">uid</span></code> is shown as well as <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> which is a more convenient reference to the scan. The user has control to set or reset <code class="docutils literal notranslate"><span class="pre">scan</span> <span class="pre">num</span></code> so do not rely on that number to be unique.</p>
@@ -511,16 +511,16 @@ generator count [&#39;054e856f&#39;] (scan num: 1)
 <div class="highlight"><pre>
 
 
-+-----------+------------+------------+------------------+------------+------------+------------+------------+-------------+------------+
-|   seq_num |       time |         m1 | m1_user_setpoint |         I0 |      clock |       roi1 |       roi2 | scaler_time |      scint |
-+-----------+------------+------------+------------------+------------+------------+------------+------------+-------------+------------+
-|         1 | 17:21:34.5 |    1.00000 |          1.00000 |          3 |    5000000 |          0 |          0 |       0.500 |          1 |
-|         2 | 17:21:36.3 |    2.00000 |          2.00000 |          3 |    5000000 |          0 |          0 |       0.500 |          2 |
-|         3 | 17:21:38.2 |    3.00000 |          3.00000 |          2 |    5000000 |          0 |          0 |       0.500 |          2 |
-|         4 | 17:21:40.1 |    4.00000 |          4.00000 |          1 |    5000000 |          0 |          0 |       0.500 |          2 |
-|         5 | 17:21:42.0 |    5.00000 |          5.00000 |          3 |    5000000 |          0 |          0 |       0.500 |          1 |
-+-----------+------------+------------+------------------+------------+------------+------------+------------+-------------+------------+
-generator scan [&#39;b2a3ab4c&#39;] (scan num: 2)
++-----------+------------+------------+------------------+------------+------------+-------------+------------+
+|   seq_num |       time |         m1 | m1_user_setpoint |         I0 |      clock | scaler_time |      scint |
++-----------+------------+------------+------------------+------------+------------+-------------+------------+
+|         1 | 12:16:39.0 |     1.0000 |           1.0000 |          2 |    5000000 |       0.500 |          1 |
+|         2 | 12:16:40.8 |     2.0000 |           2.0000 |          1 |    5000000 |       0.500 |          3 |
+|         3 | 12:16:42.6 |     3.0000 |           3.0000 |          2 |    5000000 |       0.500 |          2 |
+|         4 | 12:16:44.4 |     4.0000 |           4.0000 |          1 |    5000000 |       0.500 |          3 |
+|         5 | 12:16:46.3 |     5.0000 |           5.0000 |          2 |    5000000 |       0.500 |          2 |
++-----------+------------+------------+------------------+------------+------------+-------------+------------+
+generator scan [&#39;08cc8fdd&#39;] (scan num: 2)
 
 
 </pre></div></div>
@@ -531,12 +531,12 @@ generator scan [&#39;b2a3ab4c&#39;] (scan num: 2)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;b2a3ab4c-3abd-44d4-ae4e-2d826ce37bb5&#39;,)
+(&#39;08cc8fdd-c541-4905-aa21-974024e0ae66&#39;,)
 </pre></div></div>
 </div>
 <p>In addition to the data columns from <code class="docutils literal notranslate"><span class="pre">count</span></code> above, the motor position (both where the motor reported as its position and where the motor was told to go, respectively) are shown.</p>
 <hr class="docutils" />
-<p>There is a callback routine that will plot the data as it is acquired. When starting graphics, it is necessary to first initialize the graphics manager of the display. The setup is specific to the graphics manager. For command line or python program use, see <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#aside-making-plots-update-live">http://nsls-ii.github.io/bluesky/callbacks.html#aside-making-plots-update-live</a>.</p>
+<p>There is a callback routine that will plot the data as it is acquired. When starting graphics, it is necessary to first initialize the graphics manager of the display. The setup is specific to the graphics manager. For command line or python program use, see <a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html#aside-making-plots-update-live">https://blueskyproject.io/bluesky/callbacks.html#aside-making-plots-update-live</a>.</p>
 <p>For jupyter notebooks:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -570,7 +570,7 @@ generator scan [&#39;b2a3ab4c&#39;] (scan num: 2)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;75b38b8c-8c96-40c6-b998-566fe12bc21b&#39;,)
+(&#39;0890967d-f1fb-4364-a6f4-8a924b9d4fd9&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -595,7 +595,7 @@ generator scan [&#39;b2a3ab4c&#39;] (scan num: 2)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;38412f35-1cf8-4974-9796-7f0372bb6d69&#39;,)
+(&#39;5d3b0b3e-8d1d-49af-b1d2-6e07cea61d99&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -606,8 +606,7 @@ generator scan [&#39;b2a3ab4c&#39;] (scan num: 2)
 </div>
 </div>
 <hr class="docutils" />
-<p>Both the table and the plot are very useful diagnostics for routine use. They have been combined in the <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#best-effort-callback">Best-Efforts Callback</a> which provides best-effort plots and visualization for any plan. It uses <a class="reference external" href="http://nsls-ii.github.io/bluesky/callbacks.html#hints">user-configurable information</a> that is part of every ophyd device to make reasonable assumptions about what information is appropriate to display in the context of the
-current plan.</p>
+<p>Both the table and the plot are very useful diagnostics for routine use. They have been combined in the <a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html#best-effort-callback">Best-Efforts Callback</a> which provides visualization for any plan. It uses <a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html#hints">user-configurable information</a> that is part of every ophyd device to make reasonable assumptions about what information is appropriate to display in the context of the current plan.</p>
 <p>We’ll import the <code class="docutils literal notranslate"><span class="pre">BestEffortCallback</span></code> callback from the Bluesky library:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -634,19 +633,19 @@ current plan.</p>
 <div class="highlight"><pre>
 
 
-Transient Scan ID: 5     Time: 2021-07-26 17:21:58
-Persistent Unique Scan ID: &#39;4fec1288-eb0e-47d5-8a17-d584aee9a197&#39;
+Transient Scan ID: 5     Time: 2023-05-16 12:18:51
+Persistent Unique Scan ID: &#39;519c4326-fd1b-489a-a951-00ee64f74dcf&#39;
 New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+------------+------------+------------+
-|   seq_num |       time |      clock |         I0 |      scint |       roi1 |       roi2 |
-+-----------+------------+------------+------------+------------+------------+------------+
-|         1 | 17:21:59.0 |    5000000 |          3 |          1 |          0 |          0 |
-|         2 | 17:22:00.0 |    5000000 |          1 |          3 |          0 |          0 |
-|         3 | 17:22:01.0 |    5000000 |          2 |          2 |          0 |          0 |
-|         4 | 17:22:01.9 |    5000000 |          1 |          2 |          0 |          0 |
-|         5 | 17:22:02.9 |    5000000 |          2 |          3 |          0 |          0 |
-+-----------+------------+------------+------------+------------+------------+------------+
-generator count [&#39;4fec1288&#39;] (scan num: 5)
++-----------+------------+------------+------------+------------+
+|   seq_num |       time |      clock |         I0 |      scint |
++-----------+------------+------------+------------+------------+
+|         1 | 12:18:52.1 |    5000000 |          2 |          2 |
+|         2 | 12:18:53.0 |    5000000 |          3 |          2 |
+|         3 | 12:18:53.8 |    5000000 |          3 |          2 |
+|         4 | 12:18:54.6 |    5000000 |          2 |          2 |
+|         5 | 12:18:55.3 |    5000000 |          2 |          2 |
++-----------+------------+------------+------------+------------+
+generator count [&#39;519c4326&#39;] (scan num: 5)
 
 
 
@@ -658,7 +657,7 @@ generator count [&#39;4fec1288&#39;] (scan num: 5)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;4fec1288-eb0e-47d5-8a17-d584aee9a197&#39;,)
+(&#39;519c4326-fd1b-489a-a951-00ee64f74dcf&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -685,35 +684,19 @@ generator count [&#39;4fec1288&#39;] (scan num: 5)
 <div class="highlight"><pre>
 
 
-Transient Scan ID: 6     Time: 2021-07-26 17:22:04
-Persistent Unique Scan ID: &#39;09c823a1-1e6c-448a-bdce-5018a9b02e8b&#39;
+Transient Scan ID: 6     Time: 2023-05-16 12:19:05
+Persistent Unique Scan ID: &#39;50711505-9676-44d3-adf6-a176390b4995&#39;
 New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+------------+------------+------------+------------+
-|   seq_num |       time |         m1 |      clock |         I0 |      scint |       roi1 |       roi2 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+
-|         1 | 17:22:09.2 |    1.00000 |    5000000 |          1 |          2 |          0 |          0 |
-|         2 | 17:22:11.4 |    2.00000 |    5000000 |          3 |          2 |          0 |          0 |
-|         3 | 17:22:13.7 |    3.00000 |    5000000 |          2 |          3 |          0 |          0 |
-|         4 | 17:22:15.9 |    4.00000 |    5000000 |          2 |          1 |          0 |          0 |
-|         5 | 17:22:18.2 |    5.00000 |    5000000 |          1 |          3 |          0 |          0 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+
-generator scan [&#39;09c823a1&#39;] (scan num: 6)
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-/home/prjemian/.local/lib/python3.8/site-packages/bluesky/callbacks/fitting.py:165: RuntimeWarning: invalid value encountered in double_scalars
-  np.sum(input * grids[dir].astype(float), labels, index) / normalizer
-</pre></div></div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
++-----------+------------+------------+------------+------------+------------+
+|   seq_num |       time |         m1 |      clock |         I0 |      scint |
++-----------+------------+------------+------------+------------+------------+
+|         1 | 12:19:10.1 |     1.0000 |    5000000 |          2 |          2 |
+|         2 | 12:19:12.2 |     2.0000 |    5000000 |          3 |          2 |
+|         3 | 12:19:14.3 |     3.0000 |    5000000 |          2 |          1 |
+|         4 | 12:19:16.3 |     4.0000 |    5000000 |          3 |          2 |
+|         5 | 12:19:18.4 |     5.0000 |    5000000 |          3 |          2 |
++-----------+------------+------------+------------+------------+------------+
+generator scan [&#39;50711505&#39;] (scan num: 6)
 
 
 
@@ -725,14 +708,14 @@ generator scan [&#39;09c823a1&#39;] (scan num: 6)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;09c823a1-1e6c-448a-bdce-5018a9b02e8b&#39;,)
+(&#39;50711505-9676-44d3-adf6-a176390b4995&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutor__basic_c_26_4.png" src="../_images/tutor__basic_c_26_4.png" />
+<img alt="../_images/tutor__basic_c_26_2.png" src="../_images/tutor__basic_c_26_2.png" />
 </div>
 </div>
 <p>Because this is such a useful tool, we want to make this callback happen all the time. The RunEngine manages a list of such callbacks. We’ll make a new RunEngine and <em>subscribe</em> the <code class="docutils literal notranslate"><span class="pre">BestEffortCallback</span></code> to it:</p>
@@ -771,19 +754,19 @@ generator scan [&#39;09c823a1&#39;] (scan num: 6)
 <div class="highlight"><pre>
 
 
-Transient Scan ID: 1     Time: 2021-07-26 17:22:19
-Persistent Unique Scan ID: &#39;4e6f577d-572b-4dc1-8621-6e4e1e9007c1&#39;
+Transient Scan ID: 1     Time: 2023-05-16 12:19:30
+Persistent Unique Scan ID: &#39;0ff73331-444c-4c2d-8056-31ed673961b1&#39;
 New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+------------+------------+------------+
-|   seq_num |       time |      clock |         I0 |      scint |       roi1 |       roi2 |
-+-----------+------------+------------+------------+------------+------------+------------+
-|         1 | 17:22:20.1 |    5000000 |          2 |          2 |          0 |          0 |
-|         2 | 17:22:21.0 |    5000000 |          3 |          2 |          0 |          0 |
-|         3 | 17:22:22.0 |    5000000 |          2 |          2 |          0 |          0 |
-|         4 | 17:22:22.9 |    5000000 |          3 |          2 |          0 |          0 |
-|         5 | 17:22:24.0 |    5000000 |          3 |          3 |          0 |          0 |
-+-----------+------------+------------+------------+------------+------------+------------+
-generator count [&#39;4e6f577d&#39;] (scan num: 1)
++-----------+------------+------------+------------+------------+
+|   seq_num |       time |      clock |         I0 |      scint |
++-----------+------------+------------+------------+------------+
+|         1 | 12:19:31.4 |    5000000 |          2 |          2 |
+|         2 | 12:19:32.2 |    5000000 |          1 |          2 |
+|         3 | 12:19:33.0 |    5000000 |          2 |          2 |
+|         4 | 12:19:33.8 |    5000000 |          1 |          1 |
+|         5 | 12:19:34.6 |    5000000 |          2 |          2 |
++-----------+------------+------------+------------+------------+
+generator count [&#39;0ff73331&#39;] (scan num: 1)
 
 
 
@@ -795,7 +778,7 @@ generator count [&#39;4e6f577d&#39;] (scan num: 1)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;4e6f577d-572b-4dc1-8621-6e4e1e9007c1&#39;,)
+(&#39;0ff73331-444c-4c2d-8056-31ed673961b1&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -822,19 +805,19 @@ generator count [&#39;4e6f577d&#39;] (scan num: 1)
 <div class="highlight"><pre>
 
 
-Transient Scan ID: 2     Time: 2021-07-26 17:22:25
-Persistent Unique Scan ID: &#39;37c42493-6534-4839-8041-d832b8bad9b6&#39;
+Transient Scan ID: 2     Time: 2023-05-16 12:19:42
+Persistent Unique Scan ID: &#39;08024823-0c76-4e4d-9f7d-52d9db1b5471&#39;
 New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+------------+------------+------------+------------+
-|   seq_num |       time |         m1 |      clock |         I0 |      scint |       roi1 |       roi2 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+
-|         1 | 17:22:30.2 |    1.00000 |    5000000 |          2 |          2 |          0 |          0 |
-|         2 | 17:22:32.5 |    2.00000 |    5000000 |          3 |          2 |          0 |          0 |
-|         3 | 17:22:34.7 |    3.00000 |    5000000 |          2 |          1 |          0 |          0 |
-|         4 | 17:22:36.9 |    4.00000 |    5000000 |          2 |          3 |          0 |          0 |
-|         5 | 17:22:39.2 |    5.00000 |    5000000 |          3 |          1 |          0 |          0 |
-+-----------+------------+------------+------------+------------+------------+------------+------------+
-generator scan [&#39;37c42493&#39;] (scan num: 2)
++-----------+------------+------------+------------+------------+------------+
+|   seq_num |       time |         m1 |      clock |         I0 |      scint |
++-----------+------------+------------+------------+------------+------------+
+|         1 | 12:19:47.7 |     1.0000 |    4000000 |          2 |          1 |
+|         2 | 12:19:49.7 |     2.0000 |    5000000 |          2 |          1 |
+|         3 | 12:19:51.8 |     3.0000 |    5000000 |          2 |          1 |
+|         4 | 12:19:53.8 |     4.0000 |    5000000 |          3 |          2 |
+|         5 | 12:19:55.9 |     5.0000 |    5000000 |          2 |          2 |
++-----------+------------+------------+------------+------------+------------+
+generator scan [&#39;08024823&#39;] (scan num: 2)
 
 
 
@@ -846,7 +829,7 @@ generator scan [&#39;37c42493&#39;] (scan num: 2)
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-(&#39;37c42493-6534-4839-8041-d832b8bad9b6&#39;,)
+(&#39;08024823-0c76-4e4d-9f7d-52d9db1b5471&#39;,)
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">

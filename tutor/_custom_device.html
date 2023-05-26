@@ -1,0 +1,1106 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Custom Devices &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Lesson 1: scaler and count" href="_lesson1.html" />
+    <link rel="prev" title="Review of Bluesky commands" href="_command_review.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="hello_world.html">Hello, World</a></li>
+<li class="toctree-l1"><a class="reference internal" href="connect_epics.html">Connect Bluesky with EPICS</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_aps101_notes.html">APS Bluesky 101 - Presenter’s Notes</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_a.html">Basic, Part A: Scaler and Count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_b.html">Basic, Part B: Motor and Move</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_c.html">Basic, Part C: Step Scan with Scaler and Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_command_review.html">Review of Bluesky commands</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Custom Devices</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson1.html">Lesson 1: scaler and count</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson2.html">Lesson 2: motor and scan</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3a.html">Lesson 3, Part A: Show the data as it is acquired</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson3b.html">Lesson 3, Part B: Show Data - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson4.html">Lesson 4: Basic scan (&amp; plot) of scaler <em>vs.</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5a.html">Lesson 5, Part A: find a peak and lineup</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson5b.html">Lesson 5, Part B: Custom Plan to Lineup a Peak - Concise Summary</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson6.html">Lesson 6: EPICS area detector</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lesson7.html">Lesson 7: 4-circle diffractometer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Tutorials</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Custom Devices</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <span class="target" id="index-0"></span><section id="custom-devices">
+<span id="howto-custom-device"></span><h1>Custom Devices<a class="headerlink" href="#custom-devices" title="Permalink to this heading">#</a></h1>
+<aside class="sidebar">
+<p class="sidebar-title">Form follows function <a class="footnote-reference brackets" href="#fff" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a></p>
+<p>Integral to the implementation of a custom <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> is the
+consideration of its architecture: <em>how is the control provided</em> and
+<em>how will it be used</em>.</p>
+</aside>
+<p>Within the Bluesky Framework, the <em>bluesky</em> <a class="footnote-reference brackets" href="#bluesky" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>4<span class="fn-bracket">]</span></a> package, orchestrates
+measurements and acquires data. Hardware components from various control systems
+(such as EPICS <a class="footnote-reference brackets" href="#epics" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>5<span class="fn-bracket">]</span></a>) connect to <em>bluesky</em> through the
+the <em>ophyd</em> <a class="footnote-reference brackets" href="#ophyd" id="id4" role="doc-noteref"><span class="fn-bracket">[</span>9<span class="fn-bracket">]</span></a> package. This separation generalizes underlying control
+system details of specific devices and separates them from generalized
+measurement procedures.</p>
+<p>This document describes how to create custom <em>ophyd</em> Devices.</p>
+<p><em>Ophyd</em>, a hardware abstraction layer connects with the underlying control
+system (such as EPICS) and describes the objects for control as either a
+<em>Signal</em> (a single-valued object for control) or a <em>Device</em> (built up from
+Signal and/or Device components).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>This document was written for the ophyd v1 Device
+specification. <a class="footnote-reference brackets" href="#v1-device" id="id5" role="doc-noteref"><span class="fn-bracket">[</span>13<span class="fn-bracket">]</span></a></p>
+<p>At the time of this writing, the ophyd v2 Device
+specification <a class="footnote-reference brackets" href="#v2-device" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> has not been released from its draft form.</p>
+</div>
+<p>Both <em>Signal</em> and <em>Device</em> are Python classes.  The methods of these classes
+describe actions specific to that class.  Subclasses, such as <cite>EpicsSignal</cite> and
+<cite>EpicsMotor</cite> augment the basic capabilities with additional capabilities.</p>
+<p>Reasons for a custom <em>ophyd</em> Device include:</p>
+<ul class="simple">
+<li><p>groupings (such as: related metadata or a motor stage)</p></li>
+<li><p>modify existing Device</p></li>
+</ul>
+<p>These will be presented in sections below.</p>
+<section id="simple-devices">
+<h2>Simple Devices<a class="headerlink" href="#simple-devices" title="Permalink to this heading">#</a></h2>
+<p>Perhaps the best starting point is one or two simple examples of <em>ophyd</em>
+Devices.</p>
+<section id="hello-world">
+<h3>Hello, World!<a class="headerlink" href="#hello-world" title="Permalink to this heading">#</a></h3>
+<p>The <code class="docutils literal notranslate"><span class="pre">HelloDevice</span></code> (in the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html">Hello, World!</a>
+notebook) is a subclass of <cite>ophyd.Device</cite>.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">class</span> <span class="nc">HelloDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="n">number</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="n">text</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">HelloDevice</span></code> declares two <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> (non-EPICS) components, <code class="docutils literal notranslate"><span class="pre">number</span></code>
+and <code class="docutils literal notranslate"><span class="pre">text</span></code>. <code class="docutils literal notranslate"><span class="pre">hello_device</span></code> is an instance of <code class="docutils literal notranslate"><span class="pre">HelloDevice</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">hello_device</span> <span class="o">=</span> <span class="n">HelloDevice</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;hello&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>It is required to specify the <code class="docutils literal notranslate"><span class="pre">name</span></code> keyword argument (also known as
+‘<span class="target" id="index-1"></span>kwarg’).  By convention, we use the same name as the Python <a class="reference external" href="https://stackoverflow.com/questions/61713990">instance</a></p>
+<p>The <em>Hello, World!</em> example uses <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/explanations/staging.html">staging</a> to change
+the component values:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">hello_device</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;number&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="linenos">2</span><span class="n">hello_device</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;text&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;Hello, World!&quot;</span>
+</pre></div>
+</div>
+<p id="index-2">When <code class="docutils literal notranslate"><span class="pre">hello_device</span></code> is <span class="target" id="index-3"></span>staged (by the bluesky RunEngine), the value
+of <code class="docutils literal notranslate"><span class="pre">hello_device.number</span></code> will be changed from <code class="docutils literal notranslate"><span class="pre">0</span></code> to <code class="docutils literal notranslate"><span class="pre">1</span></code> and the value of
+<code class="docutils literal notranslate"><span class="pre">hello_device.text</span></code> will be changed from <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> to <code class="docutils literal notranslate"><span class="pre">&quot;Hello,</span> <span class="pre">World!&quot;</span></code>. Before
+finishing the run, the RunEngine will <span class="target" id="index-4"></span>unstage all ophyd Devices,
+meaning that the previous values are restored.</p>
+<p>We <em>expect</em> the <code class="docutils literal notranslate"><span class="pre">number</span></code> component to contain numerical values and the
+<code class="docutils literal notranslate"><span class="pre">text</span></code> component to contain text values. To keep the example simple, we have
+not added <a class="reference external" href="https://docs.python.org/3/library/typing.html">type</a> hints.</p>
+<section id="read">
+<h4><code class="docutils literal notranslate"><span class="pre">.read()</span></code><a class="headerlink" href="#read" title="Permalink to this heading">#</a></h4>
+<p>All ophyd <code class="docutils literal notranslate"><span class="pre">Signal</span></code> and <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.read()</span></code> <a class="footnote-reference brackets" href="#id18" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>  method.  The
+<code class="docutils literal notranslate"><span class="pre">.read()</span></code> method returns the current value of each component and the timestamp
+(<a class="reference external" href="https://docs.python.org/3/library/time.html#time.time">time</a> in seconds
+since the system <em>epoch</em>) when that value was received in Python.  The
+<code class="docutils literal notranslate"><span class="pre">.read()</span></code> method is called by data acquisition during execution of a bluesky
+plan.  The <em>keys</em> of the Python dictionary returned by <code class="docutils literal notranslate"><span class="pre">.read()</span></code> are the full
+names of each component.  Here’s an example:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">2</span><span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
+<span class="linenos">3</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;hello_number&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123274.1847932</span><span class="p">}),</span>
+<span class="linenos">4</span>            <span class="p">(</span><span class="s1">&#39;hello_text&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123274.1848683</span><span class="p">})])</span>
+</pre></div>
+</div>
+</section>
+<section id="summary">
+<h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h4>
+<p>All ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method to explain
+a Device to an interactive user.  Here is <code class="docutils literal notranslate"><span class="pre">hello_device.summary()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="linenos"> 2</span><span class="n">data</span> <span class="n">keys</span> <span class="p">(</span><span class="o">*</span> <span class="n">hints</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="o">-------------------</span>
+<span class="linenos"> 4</span><span class="o">*</span><span class="n">hello_number</span>
+<span class="linenos"> 5</span><span class="n">hello_text</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="n">read</span> <span class="n">attrs</span>
+<span class="linenos"> 8</span><span class="o">----------</span>
+<span class="linenos"> 9</span><span class="n">number</span>               <span class="n">Signal</span>              <span class="p">(</span><span class="s1">&#39;hello_number&#39;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">text</span>                 <span class="n">Signal</span>              <span class="p">(</span><span class="s1">&#39;hello_text&#39;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">config</span> <span class="n">keys</span>
+<span class="linenos">13</span><span class="o">-----------</span>
+<span class="linenos">14</span>
+<span class="linenos">15</span><span class="n">configuration</span> <span class="n">attrs</span>
+<span class="linenos">16</span><span class="o">-------------------</span>
+<span class="linenos">17</span>
+<span class="linenos">18</span><span class="n">unused</span> <span class="n">attrs</span>
+<span class="linenos">19</span><span class="o">------------</span>
+</pre></div>
+</div>
+</section>
+<section id="stage">
+<h4><code class="docutils literal notranslate"><span class="pre">.stage()</span></code><a class="headerlink" href="#stage" title="Permalink to this heading">#</a></h4>
+<p>Here is the result of staging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+<span class="linenos">2</span><span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="p">[</span><span class="n">HelloDevice</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">read_attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span> <span class="n">configuration_attrs</span><span class="o">=</span><span class="p">[])]</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">5</span><span class="n">Out</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span>
+<span class="linenos">6</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;hello_number&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123542.713047</span><span class="p">}),</span>
+<span class="linenos">7</span>            <span class="p">(</span><span class="s1">&#39;hello_text&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123542.7126422</span><span class="p">})])</span>
+</pre></div>
+</div>
+</section>
+<section id="unstage">
+<h4><code class="docutils literal notranslate"><span class="pre">.unstage()</span></code><a class="headerlink" href="#unstage" title="Permalink to this heading">#</a></h4>
+<p>Here is the result of unstaging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
+<span class="linenos">2</span><span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="p">[</span><span class="n">HelloDevice</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">read_attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span> <span class="n">configuration_attrs</span><span class="o">=</span><span class="p">[])]</span>
+<span class="linenos">3</span>
+<span class="linenos">4</span><span class="n">In</span> <span class="p">[</span><span class="mi">9</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="linenos">5</span><span class="n">Out</span><span class="p">[</span><span class="mi">9</span><span class="p">]:</span>
+<span class="linenos">6</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;hello_number&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123542.713047</span><span class="p">}),</span>
+<span class="linenos">7</span>            <span class="p">(</span><span class="s1">&#39;hello_text&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123542.7126422</span><span class="p">})])</span>
+</pre></div>
+</div>
+</section>
+</section>
+<section id="connect-with-epics">
+<h3>Connect with EPICS<a class="headerlink" href="#connect-with-epics" title="Permalink to this heading">#</a></h3>
+<p>EPICS is a control system completely separate from Python.
+<code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> (in the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html">Connect Bluesky with EPICS</a>
+notebook) is a subclass of <cite>ophyd.Device</cite> that connects with EPICS.</p>
+<p>When an instance of an ophyd Device is created, a common PV prefix is provided
+as the first argument.  This prefix is used with all EPICS components in the
+class. A <em>reuseable</em> class (such as <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code>) is created with this
+design consideration.  The prefix is provided when the instance is created.  (If
+there is no common prefix, then an empty string is provded.)  In this example,
+we have these EPICS PVs to connect:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>full PV</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kgp:gp:bit1</span></code></p></td>
+<td><p>enable</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kgp:gp:float1</span></code></p></td>
+<td><p>setpoint</p></td>
+</tr>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">kgp:gp:float1.EGU</span></code></p></td>
+<td><p>units</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">kgp:gp:text1</span></code></p></td>
+<td><p>label</p></td>
+</tr>
+</tbody>
+</table>
+<p>Separating the common PV prefix, we create a <code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> Device that connects
+these PVs (using the remaining PV suffix for each).  Remember to provide the
+common PV prefix:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">class</span> <span class="nc">MyGroup</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="n">enable</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:bit1&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="n">setpoint</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:float1&quot;</span><span class="p">)</span>
+<span class="linenos">6</span>    <span class="n">units</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:float1.EGU&quot;</span><span class="p">)</span>
+<span class="linenos">7</span>    <span class="n">label</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:text1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">ophyd.EpicsSignal</span></code>, a variation of <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code>, provides a connection
+with the EPICS control system. The text argument after <code class="docutils literal notranslate"><span class="pre">EpicsSignal</span></code> (such as
+<code class="docutils literal notranslate"><span class="pre">&quot;gp:bit1&quot;</span></code>) is the EPICS Process Variable (or suffix).  A PV <a class="footnote-reference brackets" href="#pv" id="id9" role="doc-noteref"><span class="fn-bracket">[</span>11<span class="fn-bracket">]</span></a> is a text
+identifier for a unit <a class="footnote-reference brackets" href="#pv-intro" id="id10" role="doc-noteref"><span class="fn-bracket">[</span>10<span class="fn-bracket">]</span></a> of EPICS data. EPICS is responsible for
+updating the PV with new content, as directed by one or more clients, such as
+<em>ophyd</em>.</p>
+<section id="wait-for-connection">
+<span id="index-5"></span><h4><code class="docutils literal notranslate"><span class="pre">.wait_for_connection()</span></code><a class="headerlink" href="#wait-for-connection" title="Permalink to this heading">#</a></h4>
+<p>We must allow some time after creating an instance, albeit short, for the
+instance to connect by calling its <code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> <a class="reference external" href="https://nsls-ii.github.io/ophyd/device-overview.html#low-level-api">method</a>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">group</span> <span class="o">=</span> <span class="n">MyGroup</span><span class="p">(</span><span class="s2">&quot;kgp:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+<span class="linenos">2</span><span class="n">group</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p><code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> is not always used</p>
+<p>For most use (such as interactive sessions), a call to an
+instance’s <code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> method does not <em>appear</em>
+to be necessary.  EPICS connections usually happen very fast,
+unless a requested PV is not available.  This is why you do not see
+<code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> called in most library code.  However,
+when the instance is to be used
+immediately, you should use the <code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> method
+before interacting with the instance.</p>
+</div>
+</section>
+<section id="id11">
+<h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
+<p>Here is <code class="docutils literal notranslate"><span class="pre">group.summary()</span></code>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">group</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="linenos"> 2</span><span class="n">data</span> <span class="n">keys</span> <span class="p">(</span><span class="o">*</span> <span class="n">hints</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="o">-------------------</span>
+<span class="linenos"> 4</span><span class="n">group_enable</span>
+<span class="linenos"> 5</span><span class="n">group_label</span>
+<span class="linenos"> 6</span><span class="n">group_setpoint</span>
+<span class="linenos"> 7</span><span class="n">group_units</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="n">read</span> <span class="n">attrs</span>
+<span class="linenos">10</span><span class="o">----------</span>
+<span class="linenos">11</span><span class="n">enable</span>               <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_enable&#39;</span><span class="p">)</span>
+<span class="linenos">12</span><span class="n">setpoint</span>             <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_setpoint&#39;</span><span class="p">)</span>
+<span class="linenos">13</span><span class="n">units</span>                <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_units&#39;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">label</span>                <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_label&#39;</span><span class="p">)</span>
+<span class="linenos">15</span>
+<span class="linenos">16</span><span class="n">config</span> <span class="n">keys</span>
+<span class="linenos">17</span><span class="o">-----------</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">configuration</span> <span class="n">attrs</span>
+<span class="linenos">20</span><span class="o">-------------------</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">unused</span> <span class="n">attrs</span>
+<span class="linenos">23</span><span class="o">------------</span>
+</pre></div>
+</div>
+</section>
+</section>
+</section>
+<section id="groupings">
+<h2>Groupings<a class="headerlink" href="#groupings" title="Permalink to this heading">#</a></h2>
+<p>A custom Device may be created to group several controls together as they relate
+to a common object, such as a motorized stage or even an abstract object such as
+undulator or monochoromator energy.  A Device might refer to some other grouping
+of information, such as the proposal information related to the current
+measurements.  Presented here are a few examples of the many possibilities.</p>
+<section id="neat-stage-2apd">
+<h3>Neat Stage 2APD<a class="headerlink" href="#neat-stage-2apd" title="Permalink to this heading">#</a></h3>
+<p class="rubric">NEAT Stage</p>
+<p>The <em>NEAT Stage 2APD</em>, stage from APS station 3-ID-D, consists of
+three motorized axes, as described in the next table.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>axis name</p></th>
+<th class="head"><p>EPICS PV</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(x\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3idd:m1</span></code></p></td>
+<td><p>horizontal translation</p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(y\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3idd:m2</span></code></p></td>
+<td><p>vertical translation</p></td>
+</tr>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\theta\)</span></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">3idd:m3</span></code></p></td>
+<td><p>rotation</p></td>
+</tr>
+</tbody>
+</table>
+<a class="reference internal image-reference" href="../_images/neat_stage_2apd.png"><img alt="../_images/neat_stage_2apd.png" src="../_images/neat_stage_2apd.png" style="width: 80%;" /></a>
+<p>Since each of these axes are EPICS motors, we’ll use <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code>
+<a class="footnote-reference brackets" href="#epics-motor" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> to connect with the rich set of EPICS controls for each:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsMotor</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">class</span> <span class="nc">NeatStage_3IDD</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;NEAT stage&quot;</span><span class="p">,))</span>
+<span class="linenos">5</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;m2&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;NEAT stage&quot;</span><span class="p">,))</span>
+<span class="linenos">6</span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;m3&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;NEAT stage&quot;</span><span class="p">,))</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="n">neat_stage</span> <span class="o">=</span> <span class="n">NeatStage_3IDD</span><span class="p">(</span><span class="s2">&quot;3idd:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;neat_stage&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</section>
+<section id="aps-undulator">
+<h3>APS Undulator<a class="headerlink" href="#aps-undulator" title="Permalink to this heading">#</a></h3>
+<p>In the <em>apstools</em> <a class="footnote-reference brackets" href="#apstools" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> package, the <a class="reference external" href="https://github.com/BCDA-APS/apstools/blob/d87ca0782bbcc7339bdda328b90f734f9957eaa6/apstools/devices/aps_undulator.py#L20-L63">ApsUndulator</a>
+Device groups the EPICS PVs into Device.  This makes it easy to access useful
+controls such as <code class="docutils literal notranslate"><span class="pre">undulator.energy</span></code>, and to record the undulator configuration
+for data acquisition.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">ApsUndulator</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="linenos"> 5</span><span class="sd">    APS Undulator</span>
+<span class="linenos"> 6</span>
+<span class="linenos"> 7</span><span class="sd">    EXAMPLE::</span>
+<span class="linenos"> 8</span>
+<span class="linenos"> 9</span><span class="sd">        undulator = ApsUndulator(&quot;ID09ds:&quot;, name=&quot;undulator&quot;)</span>
+<span class="linenos">10</span><span class="sd">    &quot;&quot;&quot;</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>    <span class="n">energy</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;Energy&quot;</span><span class="p">,</span> <span class="n">write_pv</span><span class="o">=</span><span class="s2">&quot;EnergySet&quot;</span><span class="p">,</span> <span class="n">put_complete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
+<span class="linenos">13</span>    <span class="n">energy_taper</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;TaperEnergy&quot;</span><span class="p">,</span> <span class="n">write_pv</span><span class="o">=</span><span class="s2">&quot;TaperEnergySet&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">14</span>    <span class="n">gap</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;Gap&quot;</span><span class="p">,</span> <span class="n">write_pv</span><span class="o">=</span><span class="s2">&quot;GapSet&quot;</span><span class="p">)</span>
+<span class="linenos">15</span>    <span class="n">gap_taper</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;TaperGap&quot;</span><span class="p">,</span> <span class="n">write_pv</span><span class="o">=</span><span class="s2">&quot;TaperGapSet&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">16</span>    <span class="n">start_button</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;Start&quot;</span><span class="p">,</span> <span class="n">put_complete</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">)</span>
+<span class="linenos">17</span>    <span class="n">stop_button</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;Stop&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>    <span class="n">harmonic_value</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;HarmonicValue&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">19</span>    <span class="n">gap_deadband</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;DeadbandGap&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">20</span>    <span class="n">device_limit</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;DeviceLimit&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>    <span class="c1"># ... more</span>
+</pre></div>
+</div>
+</section>
+<section id="aps-dual-undulator">
+<h3>APS Dual Undulator<a class="headerlink" href="#aps-dual-undulator" title="Permalink to this heading">#</a></h3>
+<p>The APS Dual Undulator consists of two APS Undulator devices, installed
+end-to-end in the storage ring.  The two devices are referred to as <em>upstream</em>
+and <em>downstream</em>, as described in the next table.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>undulator name</p></th>
+<th class="head"><p>EPICS PV (prefix)</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>us</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">45ID:us:</span></code></p></td>
+<td><p>upstream undulator</p></td>
+</tr>
+<tr class="row-odd"><td><p>ds</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">45ID:ds:</span></code></p></td>
+<td><p>downstream undulator</p></td>
+</tr>
+</tbody>
+</table>
+<p>Keep in mind that the overall prefix <cite>45ID:</cite> will be provided when the Python
+object is created (below).  In the <code class="docutils literal notranslate"><span class="pre">ApsUndulatorDual</span></code> class below, the
+combined prefix of <code class="docutils literal notranslate"><span class="pre">45ID:us:</span></code> will be passed to the upstream undulator.
+Similarly, <code class="docutils literal notranslate"><span class="pre">45ID:ds:</span></code> for the downstream undulator.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">ApsUndulatorDual</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">upstream</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">ApsUndulator</span><span class="p">,</span> <span class="s2">&quot;us:&quot;</span><span class="p">)</span>
+<span class="linenos">3</span>    <span class="n">downstream</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">ApsUndulator</span><span class="p">,</span> <span class="s2">&quot;ds:&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now, create the Python object for the dual APS Undulator controls:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">undulator</span> <span class="o">=</span> <span class="n">ApsUndulatorDual</span><span class="p">(</span><span class="s2">&quot;45ID:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;undulator&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The undulator energy of each is accessed by <code class="docutils literal notranslate"><span class="pre">undulator.us.energy.get()</span></code> and
+<code class="docutils literal notranslate"><span class="pre">undulator.ds.energy.get()</span></code>.</p>
+</section>
+</section>
+<section id="modify-existing-device">
+<span id="index-6"></span><h2>Modify existing Device<a class="headerlink" href="#modify-existing-device" title="Permalink to this heading">#</a></h2>
+<p>Sometimes, a <em>standard</em> device is missing a feature, such as connection with an
+additional field (or fields) in an EPICS record. A <em>mixin</em> class can modify
+a class by providing additional structures and/or methods.
+The <em>apstools</em> package provides mixin classes <a class="footnote-reference brackets" href="#apstools-mixins" id="id14" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a> for fields common to
+various EPICS records types.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>An advantage to using these custom <em>mixin</em> classes is that all these
+additional fields and methods will have consistent names.  This simplifies
+both data acquisition and
+the process of searching and matching acquired data in the database.</p>
+</div>
+<p>For example, we might want to define a new feature that is not yet present in
+<em>ophyd</em>.  Here, we define a <code class="docutils literal notranslate"><span class="pre">home_value</span></code> component.  The position can be
+either preset or changed programmatically.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="k">class</span> <span class="nc">HomeValue</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">4</span>    <span class="n">home_value</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>We can use <code class="docutils literal notranslate"><span class="pre">HomeValue()</span></code> as a <em>mixin</em> class to modify (actually, create a
+variation of) the <code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> (above):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">MyGroupWithHome</span><span class="p">(</span><span class="n">HomeValue</span><span class="p">,</span> <span class="n">MyGroup</span><span class="p">):</span>
+<span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;MyGroup with known home value.&quot;&quot;&quot;</span>
+</pre></div>
+</div>
+<p>Create an instance and view its <cite>.summary()</cite>:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">In</span> <span class="p">[</span><span class="mi">23</span><span class="p">]:</span> <span class="n">group</span> <span class="o">=</span> <span class="n">MyGroupWithHome</span><span class="p">(</span><span class="s2">&quot;kgp:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span>
+<span class="linenos"> 3</span><span class="n">In</span> <span class="p">[</span><span class="mi">24</span><span class="p">]:</span> <span class="n">group</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="linenos"> 4</span><span class="n">data</span> <span class="n">keys</span> <span class="p">(</span><span class="o">*</span> <span class="n">hints</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="o">-------------------</span>
+<span class="linenos"> 6</span><span class="n">group_enable</span>
+<span class="linenos"> 7</span><span class="n">group_home_value</span>
+<span class="linenos"> 8</span><span class="n">group_label</span>
+<span class="linenos"> 9</span><span class="n">group_setpoint</span>
+<span class="linenos">10</span><span class="n">group_units</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span><span class="n">read</span> <span class="n">attrs</span>
+<span class="linenos">13</span><span class="o">----------</span>
+<span class="linenos">14</span><span class="n">enable</span>               <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_enable&#39;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">setpoint</span>             <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_setpoint&#39;</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">units</span>                <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_units&#39;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">label</span>                <span class="n">EpicsSignal</span>         <span class="p">(</span><span class="s1">&#39;group_label&#39;</span><span class="p">)</span>
+<span class="linenos">18</span><span class="n">home_value</span>           <span class="n">Signal</span>              <span class="p">(</span><span class="s1">&#39;group_home_value&#39;</span><span class="p">)</span>
+<span class="linenos">19</span>
+<span class="linenos">20</span><span class="n">config</span> <span class="n">keys</span>
+<span class="linenos">21</span><span class="o">-----------</span>
+<span class="linenos">22</span>
+<span class="linenos">23</span><span class="n">configuration</span> <span class="n">attrs</span>
+<span class="linenos">24</span><span class="o">-------------------</span>
+<span class="linenos">25</span>
+<span class="linenos">26</span><span class="n">unused</span> <span class="n">attrs</span>
+<span class="linenos">27</span><span class="o">------------</span>
+</pre></div>
+</div>
+<p>Compare this most recent summary with the previous one.  Note the <code class="docutils literal notranslate"><span class="pre">home_value</span></code>
+Signal.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>A Device can define (or replace) methods, too.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">apstools.synApps.EpicsSynAppsRecordEnableMixin</span></code> mixin
+<a class="footnote-reference brackets" href="#apstools-epics-mixins" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> includes a method in addition to a new component.</p>
+</div>
+<section id="epics-ai-ao-records">
+<h3>EPICS <code class="docutils literal notranslate"><span class="pre">ai</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">ao</span></code> Records<a class="headerlink" href="#epics-ai-ao-records" title="Permalink to this heading">#</a></h3>
+<p>One variation might be recognizing that all of the PVs are the same (or similar)
+EPICS record type, such as EPICS <code class="docutils literal notranslate"><span class="pre">ai</span></code>  and <code class="docutils literal notranslate"><span class="pre">ao</span></code> records.  These records are
+all floating point PVs which share many extra fields.  The difference is that
+<code class="docutils literal notranslate"><span class="pre">ai</span></code> records are read-only while <code class="docutils literal notranslate"><span class="pre">ao</span></code> records can be changed from Bluesky.
+The extra fields follow two common EPICS patterns:</p>
+<ul class="simple">
+<li><p>fields common to all EPICS records</p></li>
+<li><p>fields common EPICS floating-point value records</p></li>
+</ul>
+<p>Support for these common fields <a class="footnote-reference brackets" href="#epics-common-fields" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> is provided in the
+<em>apstools</em> <a class="footnote-reference brackets" href="#apstools" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> package.  Make custom Devices including the additional
+configuration support from apstools.  Like this:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">EpicsRecordDeviceCommonAll</span>
+<span class="linenos">2</span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">EpicsRecordFloatFields</span>
+<span class="linenos">3</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span><span class="p">,</span> <span class="n">EpicsSignalRO</span>
+<span class="linenos">4</span>
+<span class="linenos">5</span><span class="k">class</span> <span class="nc">EpicsAiRecord</span><span class="p">(</span><span class="n">EpicsRecordFloatFields</span><span class="p">,</span> <span class="n">EpicsRecordDeviceCommonAll</span><span class="p">):</span>
+<span class="linenos">6</span>    <span class="n">signal</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.VAL&quot;</span><span class="p">)</span>  <span class="c1"># read-only</span>
+<span class="linenos">7</span>
+<span class="linenos">8</span><span class="k">class</span> <span class="nc">EpicsAoRecord</span><span class="p">(</span><span class="n">EpicsRecordFloatFields</span><span class="p">,</span> <span class="n">EpicsRecordDeviceCommonAll</span><span class="p">):</span>
+<span class="linenos">9</span>    <span class="n">signal</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.VAL&quot;</span><span class="p">)</span>  <span class="c1"># read &amp; write</span>
+</pre></div>
+</div>
+<p>This gives you many, many additional fields with standard names, such as:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">description</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.DESC&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="n">processing_active</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.PACT&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="n">scanning_rate</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.SCAN&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="n">disable_value</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.DISV&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="n">scan_disable_input_link_value</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.DISA&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos"> 6</span><span class="n">scan_disable_value_input_link</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.SDIS&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="n">process_record</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.PROC&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">,</span> <span class="n">put_complete</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="n">forward_link</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.FLNK&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos"> 9</span><span class="n">trace_processing</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.TPRO&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;omitted&quot;</span><span class="p">)</span>
+<span class="linenos">10</span><span class="n">device_type</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.DTYP&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">11</span>
+<span class="linenos">12</span>
+<span class="linenos">13</span><span class="n">alarm_status</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.STAT&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">14</span><span class="n">alarm_severity</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.SEVR&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">15</span><span class="n">new_alarm_status</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.NSTA&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">16</span><span class="n">new_alarm_severity</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.NSEV&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">17</span><span class="n">disable_alarm_severity</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.DISS&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">18</span>
+<span class="linenos">19</span><span class="n">units</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.EGU&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">20</span><span class="n">precision</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.PREC&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+<span class="linenos">21</span>
+<span class="linenos">22</span><span class="n">monitor_deadband</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.MDEL&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>To use these custom Devices, consider a hypothetical controller with these
+controls.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>signal</p></th>
+<th class="head"><p>direction</p></th>
+<th class="head"><p>EPICS PV</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>pressure</p></td>
+<td><p>input</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ioc:ai4</span></code></p></td>
+<td><p>pressure gauge</p></td>
+</tr>
+<tr class="row-odd"><td><p>temperature</p></td>
+<td><p>input</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ioc:ai2</span></code></p></td>
+<td><p>thermocouple</p></td>
+</tr>
+<tr class="row-even"><td><p>flow</p></td>
+<td><p>output</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ioc:ao12</span></code></p></td>
+<td><p>flow control</p></td>
+</tr>
+<tr class="row-odd"><td><p>voltage</p></td>
+<td><p>output</p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">ioc:ao13</span></code></p></td>
+<td><p>applied voltage</p></td>
+</tr>
+</tbody>
+</table>
+<p>Recognize that all these EPICS PVs share a common prefix: <code class="docutils literal notranslate"><span class="pre">ioc:</span></code>.
+Define the custom Device:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">MyController</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">2</span>    <span class="n">pressure</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAiRecord</span><span class="p">,</span> <span class="s2">&quot;ai4&quot;</span><span class="p">)</span>
+<span class="linenos">3</span>    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAiRecord</span><span class="p">,</span> <span class="s2">&quot;ai2&quot;</span><span class="p">)</span>
+<span class="linenos">4</span>    <span class="n">flow</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAoRecord</span><span class="p">,</span> <span class="s2">&quot;ao12&quot;</span><span class="p">)</span>
+<span class="linenos">5</span>    <span class="n">voltage</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAoRecord</span><span class="p">,</span> <span class="s2">&quot;ao13&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Create the Python object with the common prefix:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="c1"># create the Python object:</span>
+<span class="linenos">2</span><span class="n">controller</span> <span class="o">=</span> <span class="n">MyController</span><span class="p">(</span><span class="s2">&quot;ioc:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;controller&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<hr class="docutils" />
+<p class="rubric">Footnotes</p>
+<aside class="footnote-list brackets">
+<aside class="footnote brackets" id="apstools-epics-mixins" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">1</a><span class="fn-bracket">]</span></span>
+<p><a class="reference external" href="https://bcda-aps.github.io/apstools/latest/_modules/apstools/synApps/_common.html#EpicsSynAppsRecordEnableMixin">https://bcda-aps.github.io/apstools/latest/_modules/apstools/synApps/_common.html#EpicsSynAppsRecordEnableMixin</a></p>
+</aside>
+<aside class="footnote brackets" id="apstools-mixins" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">2</a><span class="fn-bracket">]</span></span>
+<p><code class="docutils literal notranslate"><span class="pre">apstools.synApps</span></code> mixin classes: <a class="github reference external" href="https://github.com/BCDA-APS/apstools/blob/b9d959cd7beb70994b0fc2fca0f344ef160f9849/apstools/synApps/_common.py#L25-L109">BCDA-APS/apstools</a></p>
+</aside>
+<aside class="footnote brackets" id="apstools" role="note">
+<span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
+<span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id17">2</a>)</span>
+<p><em>apstools</em> :  <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/">https://bcda-aps.github.io/apstools/latest/</a></p>
+</aside>
+<aside class="footnote brackets" id="bluesky" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">4</a><span class="fn-bracket">]</span></span>
+<p><em>bluesky</em> : <a class="reference external" href="https://blueskyproject.io/bluesky">https://blueskyproject.io/bluesky</a></p>
+</aside>
+<aside class="footnote brackets" id="epics" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">5</a><span class="fn-bracket">]</span></span>
+<p>EPICS : <a class="reference external" href="https://epics-controls.org">https://epics-controls.org</a></p>
+</aside>
+<aside class="footnote brackets" id="epics-common-fields" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">6</a><span class="fn-bracket">]</span></span>
+<p>EPICS common fields : <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/__common.html">https://bcda-aps.github.io/apstools/latest/api/synApps/__common.html</a></p>
+</aside>
+<aside class="footnote brackets" id="epics-motor" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">7</a><span class="fn-bracket">]</span></span>
+<p><code class="docutils literal notranslate"><span class="pre">EpicsMotor</span></code>: <a class="reference external" href="https://blueskyproject.io/ophyd/builtin-devices.html?highlight=epicsmotor#epicsmotor">https://blueskyproject.io/ophyd/builtin-devices.html?highlight=epicsmotor#epicsmotor</a></p>
+</aside>
+<aside class="footnote brackets" id="fff" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">8</a><span class="fn-bracket">]</span></span>
+<p>Form follows function : <a class="reference external" href="https://en.wikipedia.org/wiki/Form_follows_function">https://en.wikipedia.org/wiki/Form_follows_function</a></p>
+</aside>
+<aside class="footnote brackets" id="ophyd" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">9</a><span class="fn-bracket">]</span></span>
+<p><em>ophyd</em> : <a class="reference external" href="https://blueskyproject.io/ophyd">https://blueskyproject.io/ophyd</a></p>
+</aside>
+<aside class="footnote brackets" id="pv-intro" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
+<p>PV introduction: <a class="reference external" href="https://docs.epics-controls.org/en/latest/specs/ca_protocol.html?highlight=Process%20Variable#process-variables">https://docs.epics-controls.org/en/latest/specs/ca_protocol.html?highlight=Process%20Variable#process-variables</a></p>
+</aside>
+<aside class="footnote brackets" id="pv" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">11</a><span class="fn-bracket">]</span></span>
+<p>PV: <a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Intro.html#appendix-objects-vs-process-variables-discussion">https://docs.epics-controls.org/en/latest/guides/EPICS_Intro.html#appendix-objects-vs-process-variables-discussion</a></p>
+</aside>
+<aside class="footnote brackets" id="id18" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">12</a><span class="fn-bracket">]</span></span>
+<p><code class="docutils literal notranslate"><span class="pre">.read()</span></code>: <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/tutorials/single-PV.html#read">https://blueskyproject.io/ophyd/user_v1/tutorials/single-PV.html#read</a></p>
+</aside>
+<aside class="footnote brackets" id="v1-device" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">13</a><span class="fn-bracket">]</span></span>
+<p><em>ophyd</em> v1 Device : <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device">https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device</a></p>
+</aside>
+<aside class="footnote brackets" id="v2-device" role="note">
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">14</a><span class="fn-bracket">]</span></span>
+<p><em>ophyd</em> v2 Device : <a class="reference external" href="https://blueskyproject.io/ophyd/user_v2/how-to/make-a-simple-device.html">https://blueskyproject.io/ophyd/user_v2/how-to/make-a-simple-device.html</a></p>
+</aside>
+</aside>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_command_review.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Review of Bluesky commands</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_lesson1.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Lesson 1: scaler and count</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-devices">Simple Devices</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world">Hello, World!</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read"><code class="docutils literal notranslate"><span class="pre">.read()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#summary"><code class="docutils literal notranslate"><span class="pre">.summary()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#stage"><code class="docutils literal notranslate"><span class="pre">.stage()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#unstage"><code class="docutils literal notranslate"><span class="pre">.unstage()</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#connect-with-epics">Connect with EPICS</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#wait-for-connection"><code class="docutils literal notranslate"><span class="pre">.wait_for_connection()</span></code></a></li>
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#id11"><code class="docutils literal notranslate"><span class="pre">.summary()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#groupings">Groupings</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#neat-stage-2apd">Neat Stage 2APD</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aps-undulator">APS Undulator</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aps-dual-undulator">APS Dual Undulator</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#modify-existing-device">Modify existing Device</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#epics-ai-ao-records">EPICS <code class="docutils literal notranslate"><span class="pre">ai</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">ao</span></code> Records</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/tutor/_custom_device.rst.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>

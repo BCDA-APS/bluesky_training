@@ -1,0 +1,1183 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+    <title>Heater Simulation using synApps epid and transform records &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Custom bluesky plan" href="_custom_plan.html" />
+    <link rel="prev" title="Count the scaler" href="_count_scaler.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  <div class="navbar-header-items__start">
+    
+      <div class="navbar-item">
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+        </div>
+      
+      
+        <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+`);
+</script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </nav>
+  
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item"><nav class="navbar-nav">
+  <p class="sidebar-header-items__title"
+     role="heading"
+     aria-level="1"
+     aria-label="Site Navigation">
+    Site Navigation
+  </p>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../example/index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+<script>
+document.write(`
+  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluesky_cheat_sheet.html">Bluesky Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Heater Simulation using synApps epid and transform records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumbs">
+  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">Heater Simulation using synApps epid and transform records</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article" role="main">
+                  
+  <section id="Heater-Simulation-using-synApps-epid-and-transform-records">
+<h1>Heater Simulation using synApps epid and transform records<a class="headerlink" href="#Heater-Simulation-using-synApps-epid-and-transform-records" title="Permalink to this heading">#</a></h1>
+<details><p>TODO</p>
+<p>Needs GUI screen shots, collected data, …</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pushd</span><span class="w"> </span>/tmp/docker_ioc/iocgp/tmp/screens/ui/
+caQtDM<span class="w"> </span>-macro<span class="w"> </span><span class="s2">&quot;P=gp:,T=userTran1&quot;</span><span class="w"> </span>yyTransform_full.ui<span class="w"> </span><span class="p">&amp;</span>
+caQtDM<span class="w"> </span>-macro<span class="w"> </span><span class="s2">&quot;P=gp:,PID=epid1,TITLE=fb_epid&quot;</span><span class="w"> </span>./pid_control.ui<span class="w"> </span><span class="p">&amp;</span>
+<span class="nb">popd</span>
+</pre></div>
+</div>
+</details><p>Simulate a temperature controller with heater and cooling features. Use it as a positioner.</p>
+<p>A temperature sensor can be <a class="reference external" href="https://github.com/epics-modules/optics/blob/fdf5bc3c2731ba6769b62e71628fe3018c8245e3/opticsApp/Db/fb_epid.db#L236-L270">simulated</a> with a single synApps <code class="docutils literal notranslate"><span class="pre">`swait</span></code> &lt;<a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html">https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html</a>&gt;`__ record. The <code class="docutils literal notranslate"><span class="pre">swait</span></code> record has 16 fields for input values, either as constants or values from other EPICS PVs. Via a custom calculation
+<a class="reference external" href="https://github.com/epics-modules/optics/blob/fdf5bc3c2731ba6769b62e71628fe3018c8245e3/opticsApp/Db/fb_epid.db#L262">expression</a>, a simulated temperature sensor value is computed.</p>
+<details><p>The simulation has these fields:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>field</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>A</p></td>
+<td><p>minimum “temperature” allowed</p></td>
+</tr>
+<tr class="row-odd"><td><p>B</p></td>
+<td><p>cooling rate parameter</p></td>
+</tr>
+<tr class="row-even"><td><p>C</p></td>
+<td><p>heater power</p></td>
+</tr>
+<tr class="row-odd"><td><p>D</p></td>
+<td><p>output of PID loop</p></td>
+</tr>
+<tr class="row-even"><td><p>F</p></td>
+<td><p>current “temperature”</p></td>
+</tr>
+</tbody>
+</table>
+<p>A cooling simulation is necessary or the controller could never decrease the temperature.</p>
+</details><p>This simulation is an example of building a custom <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a> <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device">Device</a>.</p>
+<section id="Overview">
+<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this heading">#</a></h2>
+<p>A <em>PID</em> loop (see below) has been <a class="reference external" href="https://github.com/epics-modules/optics/blob/master/opticsApp/Db/fb_epid.db">paired</a> with the simulated temperature using the synApps <code class="docutils literal notranslate"><span class="pre">`epid</span></code> &lt;<a class="reference external" href="https://epics.anl.gov/bcda/synApps/std/epidRecord.html">https://epics.anl.gov/bcda/synApps/std/epidRecord.html</a>&gt;`__ record, to update the operating power of the heater so that the temperature reaches a desired value.</p>
+<p>Significant <em>additional</em> <strong>realism is added to the simulation</strong> by switching to the synApps <code class="docutils literal notranslate"><span class="pre">`transform</span></code> &lt;<a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/transformRecord.html">https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/transformRecord.html</a>&gt;`__ record. The <code class="docutils literal notranslate"><span class="pre">transform</span></code> record also has 16 fields for values plus additional features:</p>
+<ul class="simple">
+<li><p>value (same as <code class="docutils literal notranslate"><span class="pre">swait</span></code> record)</p></li>
+<li><p>(optional) input PV link (same as <code class="docutils literal notranslate"><span class="pre">swait</span></code> record)</p></li>
+<li><p>(optional) calculation expression</p></li>
+<li><p>(optional) output PV link</p></li>
+<li><p>(optional) descriptive text comment</p></li>
+</ul>
+<p>Replacing <code class="docutils literal notranslate"><span class="pre">swait</span></code> with <code class="docutils literal notranslate"><span class="pre">transform</span></code> allows the addition of:</p>
+<ul class="simple">
+<li><p>a random noise simulation</p></li>
+<li><p>a <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> value for evaluating if the setpoint and readback are in agreement</p></li>
+<li><p>an <em>at temperature</em> feature</p></li>
+</ul>
+</section>
+<section id="Schematic">
+<h2>Schematic<a class="headerlink" href="#Schematic" title="Permalink to this heading">#</a></h2>
+<p>The PID loop decreases the difference (the <em>following error</em>) between the current temperature (readback) and a given setpoint by controlling the heater’s power:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>power_fraction --&gt; temperature --&gt; PID --&gt; output
+  ^                                          |
+  |                                          v
+   &lt;-----------------------------------------
+</pre></div>
+</div>
+</section>
+<section id="Implementation">
+<h2>Implementation<a class="headerlink" href="#Implementation" title="Permalink to this heading">#</a></h2>
+<p>The simulated temperature signal is computed from the various inputs of the <code class="docutils literal notranslate"><span class="pre">transform</span></code> record. The computation follows:</p>
+<p><span class="math notranslate nohighlight">\(T_{sim} = T_{last} + \Delta T_{cool} + \Delta T_{heat} + \Delta T_{noise}\)</span></p>
+<p>Certain fields of this <code class="docutils literal notranslate"><span class="pre">transform</span></code> record are linked to fields in an <code class="docutils literal notranslate"><span class="pre">epid</span></code> record. When the <code class="docutils literal notranslate"><span class="pre">transform</span></code> record is <a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Process_Database_Concepts.html">evaluated</a> (<em>processed</em>, in EPICS terms), the <code class="docutils literal notranslate"><span class="pre">epid</span></code> is then <em>processed</em>. The <code class="docutils literal notranslate"><span class="pre">epid</span></code> record computes a new value (of <em>power_fraction</em>, the fraction of total heater power) for the next computation of the temperature signal.</p>
+<p>The simulated temperature is re-computed (processed) <a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Process_Database_Concepts.html#scanning-specification">periodically</a>, as configured by the <code class="docutils literal notranslate"><span class="pre">transform</span></code> record’s <code class="docutils literal notranslate"><span class="pre">`.SCAN</span></code> &lt;<a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Process_Database_Concepts.html?highlight=.SCAN#periodic-scanning">https://docs.epics-controls.org/en/latest/guides/EPICS_Process_Database_Concepts.html?highlight=.SCAN#periodic-scanning</a>&gt;`__ field. When <code class="docutils literal notranslate"><span class="pre">transform</span></code> is processed, it first pulls the <em>power_fraction</em> from <code class="docutils literal notranslate"><span class="pre">epid</span></code> (the output of the PID loop calculation) for the
+next simulated temperature.</p>
+<p>Once <code class="docutils literal notranslate"><span class="pre">transform</span></code> processing is complete, the <code class="docutils literal notranslate"><span class="pre">epid</span></code> record is told to process itself by configuring the <code class="docutils literal notranslate"><span class="pre">transform</span></code> record’s <a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Process_Database_Concepts.html#forward-links">forward link</a> (.``FLNK``) field. The <em>setpoint</em> is pushed from <code class="docutils literal notranslate"><span class="pre">transform</span></code> to <code class="docutils literal notranslate"><span class="pre">epid</span></code>_ while <code class="docutils literal notranslate"><span class="pre">epid</span></code> pulls the current <em>temperature</em> (readback) from <code class="docutils literal notranslate"><span class="pre">transform</span></code>.</p>
+<p>In addition to the simulated heater, the temperature calculation includes a simulation of cooling. This cooling is computed as a fraction of the last simulated temperature. Without any applied heating (when the heater power is OFF), the simulated will progress to the minimum temperature. (This simulation is a <em>heater</em> where the simulated temperature is constrained by <code class="docutils literal notranslate"><span class="pre">T_min</span> <span class="pre">&lt;=</span> <span class="pre">T</span> <span class="pre">&lt;=</span> <span class="pre">T_max</span></code>.)</p>
+</section>
+<section id="PID-Control-Loops">
+<h2>PID Control Loops<a class="headerlink" href="#PID-Control-Loops" title="Permalink to this heading">#</a></h2>
+<p>See these on-line references which explain PID control loops in detail.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://en.wikipedia.org/wiki/PID_controller">https://en.wikipedia.org/wiki/PID_controller</a></p></li>
+<li><p><a class="reference external" href="https://pidexplained.com/pid-controller-explained/">https://pidexplained.com/pid-controller-explained/</a></p></li>
+<li><p><a class="reference external" href="https://www.ni.com/en-us/shop/labview/pid-theory-explained.html">https://www.ni.com/en-us/shop/labview/pid-theory-explained.html</a></p></li>
+<li><p><a class="reference external" href="https://www.mathworks.com/discovery/pid-control.html">https://www.mathworks.com/discovery/pid-control.html</a></p></li>
+</ul>
+</section>
+<section id="ophyd-interface">
+<h2>ophyd interface<a class="headerlink" href="#ophyd-interface" title="Permalink to this heading">#</a></h2>
+<p>This notebook will configure both <code class="docutils literal notranslate"><span class="pre">transform</span></code> and <code class="docutils literal notranslate"><span class="pre">epid</span></code> records using <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> Python tools within the <a class="reference external" href="https://blueskyproject.io/">Bluesky</a> framework. GUI screens from the <code class="docutils literal notranslate"><span class="pre">`caQtDM</span></code> &lt;<a class="reference external" href="https://caqtdm.github.io/">https://caqtdm.github.io/</a>&gt;`__ application will show the summary settings of each record.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>record</p></th>
+<th class="head"><p>EPICS PV</p></th>
+<th class="head"><p>Python object</p></th>
+<th class="head"><p>ophyd support</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">transform</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;gp:userTran1&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">heater</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">`apstools.synApps.TransformRecord</span></code> &lt;<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/_transform.html">https://bcda-aps.github.io/apstools/latest/api/synApps/_transform.html</a>&gt;`__</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">epid</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">&quot;gp:epid1&quot;</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">pid</span></code></p></td>
+<td><p><code class="docutils literal notranslate"><span class="pre">`apstools.synApps.EpidRecord</span></code> &lt;<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/_epid.html">https://bcda-aps.github.io/apstools/latest/api/synApps/_epid.html</a>&gt;`__</p></td>
+</tr>
+</tbody>
+</table>
+<section id="Setup-the-heater-and-pid">
+<h3>Setup the <code class="docutils literal notranslate"><span class="pre">heater</span></code> and <code class="docutils literal notranslate"><span class="pre">pid</span></code><a class="headerlink" href="#Setup-the-heater-and-pid" title="Permalink to this heading">#</a></h3>
+<p>There’s a lot to configure here. Symbols have been defined as shortcuts to the transform record channels and comments have been added to explain.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">EpidRecord</span></code> and <code class="docutils literal notranslate"><span class="pre">TransformRecord</span></code> classes connect with many PVs, far more than we need <em>as an EPICS client</em> to operate a temperature controller. We must access <em>some</em> of these fields to configure the records for our simulator. Local instances are created for each, within the setup function, to access all the settings for the EPICS configuration of the simulator. Once set, a simpler interface to the simulator PVs will be constructed.</p>
+<p>Create a <code class="docutils literal notranslate"><span class="pre">setup()</span></code> which can be called when needed to reset the simulated heater.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">EpidRecord</span>
+<span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">TransformRecord</span>
+
+<span class="k">def</span> <span class="nf">heater_simulator_setup</span><span class="p">(</span><span class="n">transform_pv</span><span class="p">,</span> <span class="n">epid_pv</span><span class="p">,</span> <span class="n">starting</span><span class="o">=</span><span class="mf">28.5</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;heater simulator&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Configure the transform record as a heater with epid control.&quot;&quot;&quot;</span>
+
+    <span class="n">transform</span> <span class="o">=</span> <span class="n">TransformRecord</span><span class="p">(</span><span class="n">transform_pv</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;transform&quot;</span><span class="p">)</span>
+    <span class="n">epid</span> <span class="o">=</span> <span class="n">EpidRecord</span><span class="p">(</span><span class="n">epid_pv</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;epid&quot;</span><span class="p">)</span>
+    <span class="n">transform</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+    <span class="n">transform</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>  <span class="c1"># clear all the transform record&#39;s configuration</span>
+    <span class="c1"># TODO: epid.reset()  # no such thing available (now)</span>
+
+    <span class="n">transform</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">title</span><span class="p">)</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">title</span><span class="si">}</span><span class="s2"> PID&quot;</span><span class="p">)</span>
+    <span class="n">transform</span><span class="o">.</span><span class="n">precision</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># note: real T only needs 1 sig fig</span>
+
+    <span class="c1"># assign (local) Python symbols since channel names are long.</span>
+    <span class="c1"># The calculation expressions (evaluated in the IOC) use channel letters.</span>
+    <span class="n">t_max</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span>
+    <span class="n">t_min</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">B</span>
+    <span class="n">tolerance</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">C</span>
+    <span class="n">cooling</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">D</span>
+    <span class="n">power_fraction</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">E</span>
+    <span class="n">on_off</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">F</span>
+    <span class="n">noise</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">G</span>
+    <span class="n">t_last</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">H</span>
+    <span class="n">t_cooling</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">I</span>
+    <span class="n">t_heating</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">J</span>
+    <span class="n">t_noise</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">K</span>
+    <span class="n">smoothing</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">L</span>
+    <span class="n">setpoint</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">M</span>
+    <span class="n">readback</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">N</span>
+    <span class="n">difference</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">O</span>
+    <span class="n">at_temperature</span> <span class="o">=</span> <span class="n">transform</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">P</span>
+
+    <span class="c1"># simulated T will not go higher than this number</span>
+    <span class="c1"># also used by heating &amp; cooling</span>
+    <span class="n">t_max</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;T max&quot;</span><span class="p">)</span>
+    <span class="n">t_max</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">500</span><span class="p">)</span>
+
+    <span class="c1"># simulated T will not go lower than this number</span>
+    <span class="c1"># also used by heating &amp; cooling</span>
+    <span class="n">t_min</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;T min&quot;</span><span class="p">)</span>
+    <span class="n">t_min</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">)</span>
+
+    <span class="c1"># Acceptable range for difference between readback and setpoint</span>
+    <span class="n">tolerance</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;tolerance&quot;</span><span class="p">)</span>
+    <span class="n">tolerance</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># same units as temperature</span>
+
+    <span class="c1"># fraction to cool previous simulated temperature</span>
+    <span class="n">cooling</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;cooling&quot;</span><span class="p">)</span>
+    <span class="n">cooling</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.05</span><span class="p">)</span>  <span class="c1"># 0.0 .. 1.0</span>
+
+    <span class="c1"># PID will control this number from 0 (no power) to 1 (full power)</span>
+    <span class="n">power_fraction</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;power fraction&quot;</span><span class="p">)</span>
+    <span class="n">power_fraction</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 0.0 .. 1.0</span>
+    <span class="c1"># assume EPICS IOC will take care of adding &quot; NPP NMS&quot; to the link</span>
+    <span class="n">power_fraction</span><span class="o">.</span><span class="n">input_pv</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">epid</span><span class="o">.</span><span class="n">output_value</span><span class="o">.</span><span class="n">pvname</span><span class="p">)</span> <span class="c1"># _from_ epid</span>
+
+    <span class="c1"># User controls this ON/OFF switch.</span>
+    <span class="c1"># No heating if the power is off.</span>
+    <span class="c1"># This value will be passed _to_ the epid record.</span>
+    <span class="n">on_off</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;heater ON&quot;</span><span class="p">)</span>
+    <span class="n">on_off</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># 0 or 1 (as float)</span>
+    <span class="n">on_off</span><span class="o">.</span><span class="n">output_pv</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">epid</span><span class="o">.</span><span class="n">feedback_on</span><span class="o">.</span><span class="n">pvname</span><span class="p">)</span>  <span class="c1"># _to_ epid</span>
+
+    <span class="c1"># a random noise amplitude</span>
+    <span class="n">noise</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;noise&quot;</span><span class="p">)</span>
+    <span class="n">noise</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.15</span><span class="p">)</span>
+
+    <span class="c1"># Basis for the next computed temperature.</span>
+    <span class="c1"># Previous computed temperature, smoothed by L.</span>
+    <span class="c1"># Smoothing added to _reduce_ effects of simulated sensor noise.</span>
+    <span class="n">t_last</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;T last&quot;</span><span class="p">)</span>
+    <span class="n">t_last</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;H*L + N*(1-L)&quot;</span><span class="p">)</span>  <span class="c1"># 0.0 .. 1.0</span>
+
+    <span class="c1"># temperature change for cooling</span>
+    <span class="n">t_cooling</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;T cooling&quot;</span><span class="p">)</span>
+    <span class="n">t_cooling</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;-(H-B)*D&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Temperature change for heating.</span>
+    <span class="c1"># No heating if on_off is OFF.</span>
+    <span class="n">t_heating</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;T heating&quot;</span><span class="p">)</span>
+    <span class="c1"># Since transform values are floats, we evaluate the &quot;boolean&quot;</span>
+    <span class="c1"># as True if value&gt;0.5 (and False if &lt;= 0.5).</span>
+    <span class="n">t_heating</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;F&gt;0.5? (A-B)*E: 0&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Temperature change for uniform random noise with amplitude G.</span>
+    <span class="c1"># RNDM returns uniform random number between 0 .. 1.</span>
+    <span class="c1"># Keep in mind that smoothing can contribute to overshoot since non-zero</span>
+    <span class="c1"># smoothing introduces some lag in the computed temperature.</span>
+    <span class="n">t_noise</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;T noise&quot;</span><span class="p">)</span>
+    <span class="n">t_noise</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;G * (RNDM-0.5)*2&quot;</span><span class="p">)</span>
+
+    <span class="c1"># smoothing fraction (0: only new values, 1: no new values)</span>
+    <span class="n">smoothing</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;smoothing&quot;</span><span class="p">)</span>
+    <span class="n">smoothing</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.001</span><span class="p">)</span>  <span class="c1"># 0.0 .. 1.0</span>
+
+    <span class="c1"># User changes the desired temperature here.</span>
+    <span class="c1"># This value will be passed _to_ the epid record.</span>
+    <span class="n">setpoint</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;setpoint&quot;</span><span class="p">)</span>
+    <span class="n">setpoint</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">starting</span><span class="p">)</span>
+    <span class="n">setpoint</span><span class="o">.</span><span class="n">output_pv</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">epid</span><span class="o">.</span><span class="n">final_value</span><span class="o">.</span><span class="n">pvname</span><span class="p">)</span>  <span class="c1"># _to_ epid</span>
+
+    <span class="c1"># readback: the current temperature.</span>
+    <span class="c1"># During steady-state with the heater on, T_heating should balance T_cooling</span>
+    <span class="c1"># and the power_fraction should remain steady.  Any variation in</span>
+    <span class="c1"># power_fraction should be in response to the effect of T_noise variations.</span>
+    <span class="n">readback</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;readback&quot;</span><span class="p">)</span>
+    <span class="n">readback</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;min(max(B, H+I+J+K), A)&quot;</span><span class="p">)</span>
+
+    <span class="c1"># readback - setpoint</span>
+    <span class="n">difference</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;difference&quot;</span><span class="p">)</span>
+    <span class="n">difference</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;N-M&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Is the heater &quot;at temperature&quot;?</span>
+    <span class="n">at_temperature</span><span class="o">.</span><span class="n">comment</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;at temperature&quot;</span><span class="p">)</span>
+    <span class="n">at_temperature</span><span class="o">.</span><span class="n">expression</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;abs(O)&lt;=C&quot;</span><span class="p">)</span>
+
+    <span class="c1"># process epid after transform</span>
+    <span class="n">transform</span><span class="o">.</span><span class="n">forward_link</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">epid</span><span class="o">.</span><span class="n">prefix</span><span class="p">)</span>
+
+    <span class="c1"># epid record wll be processed after transform by FLNK</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">scanning_rate</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;Passive&quot;</span><span class="p">)</span>  <span class="c1"># do not change</span>
+
+    <span class="c1"># If Kp too low, controller will be slow to respond.</span>
+    <span class="c1"># If Kp&gt;=0.004, controller will oscillate!</span>
+    <span class="c1"># If Ki is smaller, controller is slower to reach setpoint.</span>
+    <span class="c1"># If Ki is larger, controller reacts to noise when at temperature</span>
+    <span class="c1"># Kd is 0 for non-mechanical systems (do not change from zero)</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">proportional_gain</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.000_04</span><span class="p">)</span>  <span class="c1"># Kp</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">integral_gain</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># Ki</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">derivative_gain</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>  <span class="c1"># Kd</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">high_limit</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span>  <span class="c1"># enforce 0.0 .. 1.0 range as power_fraction</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">low_limit</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.0</span><span class="p">)</span>  <span class="c1"># enforce 0.0 .. 1.0 range as power_fraction</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">low_operating_range</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># low == high: permissive</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">high_operating_range</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>  <span class="c1"># low == high: permissive</span>
+
+    <span class="c1"># This is readback: PID output is changed to minimize (readback-setpoint)</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">controlled_value_link</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">readback</span><span class="o">.</span><span class="n">current_value</span><span class="o">.</span><span class="n">pvname</span><span class="p">)</span>
+
+    <span class="c1"># Since power_fraction.current_value _pulls_ epid.output_value,</span>
+    <span class="c1"># do not configure epid.output_location to _push_ the value.</span>
+    <span class="n">epid</span><span class="o">.</span><span class="n">output_location</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">)</span>  <span class="c1"># leave this empty</span>
+
+    <span class="n">transform</span><span class="o">.</span><span class="n">scanning_rate</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;.1 second&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Make the changes:</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">heater_simulator_setup</span><span class="p">(</span><span class="s2">&quot;gp:userTran1&quot;</span><span class="p">,</span> <span class="s2">&quot;gp:epid1&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="heater-as-positioner">
+<h2>heater as positioner<a class="headerlink" href="#heater-as-positioner" title="Permalink to this heading">#</a></h2>
+<p>The heater temperature may be described in ophyd as a <em>positioner</em>, enabling temperature scans and (thermal profiles)[<a class="reference external" href="https://en.wikipedia.org/wiki/Thermal_profiling">https://en.wikipedia.org/wiki/Thermal_profiling</a>] such as <em>ramp, soak, cool</em>.</p>
+<p>Remember to turn on the power to the heater, or the controller will not come up to temperature.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">PVPositionerSoftDoneWithStop</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignal</span>
+
+<span class="k">class</span> <span class="nc">HeaterPositioner</span><span class="p">(</span><span class="n">PVPositionerSoftDoneWithStop</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Simulated Heater as ophyd Positioner.</span>
+
+<span class="sd">    PVs for setpoint (``.M``) and readback (``.N``) are defined through keyword</span>
+<span class="sd">    arguments.  It is not necessary to create Components for them here. The</span>
+<span class="sd">    ``PVPositionerSoftDoneWithStop`` will create components for both of these.</span>
+
+<span class="sd">    EXAMPLE::</span>
+
+<span class="sd">        temperature = HeaterPositioner(</span>
+<span class="sd">            &quot;gp:userTran1&quot;, name=&quot;temperature&quot;,</span>
+<span class="sd">            setpoint_pv=&quot;.M&quot;, readback_pv=&quot;.N&quot;)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">tolerance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.C&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+    <span class="n">on_off</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.F&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">HeaterPositioner</span><span class="p">(</span>
+    <span class="s2">&quot;gp:userTran1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">,</span>
+    <span class="n">setpoint_pv</span><span class="o">=</span><span class="s2">&quot;.M&quot;</span><span class="p">,</span> <span class="n">readback_pv</span><span class="o">=</span><span class="s2">&quot;.N&quot;</span><span class="p">)</span>
+<span class="n">temperature</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+<span class="n">temperature</span><span class="o">.</span><span class="n">on_off</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Move the positioner using it’s ophyd controls:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MoveStatus(done=True, pos=temperature, elapsed=20.2, success=True, settle_time=0.0)
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mf">28.5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+MoveStatus(done=True, pos=temperature, elapsed=21.3, success=True, settle_time=0.0)
+</pre></div></div>
+</div>
+<p>Minimal setup of bluesky to demonstrate the positioner with the RunEngine. Use the plan_stubs to build a plan.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">RunEngine</span><span class="p">,</span> <span class="n">plan_stubs</span> <span class="k">as</span> <span class="n">bps</span>
+
+<span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Make a custom <code class="docutils literal notranslate"><span class="pre">report()</span></code> function.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">report</span><span class="p">():</span>
+    <span class="n">sp</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">rb</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">.</span><span class="n">position</span>
+    <span class="nb">print</span><span class="p">(</span>
+        <span class="sa">f</span><span class="s2">&quot;  rb=</span><span class="si">{</span><span class="n">rb</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;  sp=</span><span class="si">{</span><span class="n">sp</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="sa">f</span><span class="s2">&quot;  diff=</span><span class="si">{</span><span class="n">rb</span><span class="o">-</span><span class="n">sp</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="p">)</span>
+
+<span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=28.604  sp=28.500  diff=0.104
+</pre></div></div>
+</div>
+<p>Create a custom plan to demonstrate (with the RunEngine) the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> object as a positioner. Use the <em>move relative</em> (<code class="docutils literal notranslate"><span class="pre">bps.mvr()</span></code>) plan stub to change the temperature.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_plan</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">step</span> <span class="ow">or</span> <span class="n">temperature</span><span class="o">.</span><span class="n">tolerance</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mvr</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mvr</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="o">-</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>First, run the plan, taking a 5 degree step. The step size is chosen to be well beyond the <code class="docutils literal notranslate"><span class="pre">temperature.tolerance</span></code> value.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">my_plan</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=28.595  sp=28.500  diff=0.095
+  rb=32.750  sp=33.595  diff=-0.845
+  rb=28.746  sp=27.750  diff=0.996
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+<p>There are problems with this plan:</p>
+<ul class="simple">
+<li><p>setpoint did not change by the exact step value</p></li>
+<li><p>setpoint did not return to the starting value as expected</p></li>
+</ul>
+<p>That’s because <code class="docutils literal notranslate"><span class="pre">bps.mvr()</span></code> set the new setpoint as a relative change from the temperature’s position at the time a new step was requested.</p>
+<p>Change the plan to control the temperature <em>setpoint</em> instead.</p>
+<p>Before running the revsed plan, set the temperature back to 28.5.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_plan</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mvr</span><span class="p">(</span><span class="n">temperature</span><span class="o">.</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">step</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mvr</span><span class="p">(</span><span class="n">temperature</span><span class="o">.</span><span class="n">setpoint</span><span class="p">,</span> <span class="o">-</span><span class="n">step</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+<span class="n">temperature</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mf">28.5</span><span class="p">)</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">my_plan</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=27.877  sp=28.500  diff=-0.623
+  rb=27.877  sp=33.500  diff=-5.623
+  rb=27.877  sp=28.500  diff=-0.623
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+<p>Good, the setpoint returned to the starting 28.5. New problems appeared:</p>
+<ul class="simple">
+<li><p>The starting readback was not the expected 28.5</p></li>
+<li><p>The readback did not change by the expected amount.</p></li>
+</ul>
+<p>Both of these problems have the same cause, the temperature <code class="docutils literal notranslate"><span class="pre">readback</span></code> had not yet settled to the <code class="docutils literal notranslate"><span class="pre">setpoint</span></code> when the <code class="docutils literal notranslate"><span class="pre">setpoint</span></code> was next updated. While the <code class="docutils literal notranslate"><span class="pre">readback</span></code> was within the <code class="docutils literal notranslate"><span class="pre">tolerance</span></code>, the <code class="docutils literal notranslate"><span class="pre">readback</span></code> will be closer to the <code class="docutils literal notranslate"><span class="pre">setpoint</span></code> if we either:</p>
+<ul class="simple">
+<li><p>wait a short time longer</p></li>
+<li><p>reduce the tolerance</p></li>
+</ul>
+<p>If the <code class="docutils literal notranslate"><span class="pre">tolerance</span></code> is too small, the temperature <code class="docutils literal notranslate"><span class="pre">noise</span></code> will cause the <code class="docutils literal notranslate"><span class="pre">at_temperature</span></code> value to fluctuate even if the <code class="docutils literal notranslate"><span class="pre">setpoint</span></code> is not changing.</p>
+<p>Rather than reduce the <code class="docutils literal notranslate"><span class="pre">tolerance</span></code>, add the settling time into the plan (using <code class="docutils literal notranslate"><span class="pre">bps.sleep()</span></code>).</p>
+<p>Also, switch back to absolute moves (<code class="docutils literal notranslate"><span class="pre">bps.mv()</span></code>) and controlling <code class="docutils literal notranslate"><span class="pre">temperature</span></code> (not <code class="docutils literal notranslate"><span class="pre">temperature.setpoint</span></code>).</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">my_plan</span><span class="p">(</span><span class="n">step</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">settle_time</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">report</span><span class="p">()</span>
+    <span class="n">starting</span> <span class="o">=</span> <span class="n">temperature</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">starting</span> <span class="o">+</span> <span class="n">step</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">settle_time</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="n">starting</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">settle_time</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+<span class="n">RE</span><span class="p">(</span><span class="n">my_plan</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=28.326  sp=28.500  diff=-0.174
+  rb=32.872  sp=33.500  diff=-0.628
+  rb=28.934  sp=28.500  diff=0.434
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+<p>Good. Now we see how to change the temperature in a step-wise manner, using <code class="docutils literal notranslate"><span class="pre">bps.mv()</span></code> and a settling time using <code class="docutils literal notranslate"><span class="pre">bps.sleep()</span></code>.</p>
+</section>
+<section id="ramp-the-temperature">
+<h2>ramp the temperature<a class="headerlink" href="#ramp-the-temperature" title="Permalink to this heading">#</a></h2>
+<p>When the tmperature is <em>ramped</em>, the setpoint is varied only some predetermined trajectory until some end condition is satisfied. One type of ramp is at constant rate where the temperature changes by a constant number of degrees / second (or minute).</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">ramp()</span></code> plan below, the <em>duration</em> of the ramp is computed, given the <em>start</em> and <em>final</em> positions and the ramp <em>rate</em>. The setpoint is continually updated during the ramp (at the given <em>period</em>) to keep the temperature changing. The setpoint is a linear function of elapsed time, the <em>start</em> &amp; <em>final</em> temperatures, and the <em>direction</em> of the ramp. The ramp ends when the <em>duration</em> has elapsed. One move to the <em>final</em> temperature finishes the ramp.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[22]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="k">def</span> <span class="nf">ramp</span><span class="p">(</span><span class="n">positioner</span><span class="p">,</span> <span class="n">final</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">period</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span> <span class="n">settle_time</span><span class="o">=</span><span class="mi">5</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">positioner</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">direction</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">final</span> <span class="o">&gt;</span> <span class="n">start</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span>
+    <span class="n">duration</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">final</span> <span class="o">-</span> <span class="n">start</span><span class="p">)</span> <span class="o">/</span> <span class="n">rate</span>
+
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+    <span class="n">t_update</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">period</span>
+    <span class="k">while</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">duration</span><span class="p">:</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;=</span> <span class="n">t_update</span><span class="p">:</span>
+            <span class="n">t_update</span> <span class="o">+=</span> <span class="n">period</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">start</span> <span class="o">+</span> <span class="n">direction</span> <span class="o">*</span> <span class="n">rate</span> <span class="o">*</span> <span class="p">(</span><span class="n">t</span> <span class="o">-</span> <span class="n">t0</span><span class="p">)</span>
+            <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">positioner</span><span class="o">.</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">period</span> <span class="o">/</span> <span class="mi">10</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">positioner</span><span class="o">.</span><span class="n">setpoint</span><span class="p">,</span> <span class="n">final</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">settle_time</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Ramp the temperature from the current value to 40.0.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[23]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">report</span><span class="p">()</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">ramp</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">settle_time</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=28.500  sp=28.500  diff=0.000
+  rb=39.583  sp=40.000  diff=-0.417
+</pre></div></div>
+</div>
+<p>There are new problems:</p>
+<ul class="simple">
+<li><p>the readback temperature after the first ramp is not within tolerance (1.0)</p></li>
+<li><p>during the <code class="docutils literal notranslate"><span class="pre">ramp()</span></code>, the following error was much greater than the <code class="docutils literal notranslate"><span class="pre">temperature.tolerance</span></code> and the controller was not <code class="docutils literal notranslate"><span class="pre">at_temperature</span></code> . The controller did not keep up with the setpoint changes</p></li>
+</ul>
+<p>Either reduce the ramp rate or change the PID Kp and Ki terms to keep the following error smaller.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[25]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># return to room temperature</span>
+<span class="n">temperature</span><span class="o">.</span><span class="n">move</span><span class="p">(</span><span class="mf">28.5</span><span class="p">)</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="c1"># ramp again, slower this time</span>
+<span class="n">report</span><span class="p">()</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">ramp</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">settle_time</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=28.752  sp=28.500  diff=0.252
+  rb=39.607  sp=40.000  diff=-0.393
+</pre></div></div>
+</div>
+<p>Good. The following error was smaller in this last ramp and the final readback was within tolerance of the setpoint.</p>
+</section>
+<section id="Thermal-profile">
+<h2>Thermal profile<a class="headerlink" href="#Thermal-profile" title="Permalink to this heading">#</a></h2>
+<p>With the <code class="docutils literal notranslate"><span class="pre">ramp()</span></code> plan above, a plan to <em>ramp, soak, and cool</em> is possible. Remember to control the ramp <em>rate</em>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ramp_soak_cool</span><span class="p">(</span><span class="n">positioner</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">soak_time</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+    <span class="n">start</span> <span class="o">=</span> <span class="n">positioner</span><span class="o">.</span><span class="n">setpoint</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; ramp from </span><span class="si">{</span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">high</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">ramp</span><span class="p">(</span><span class="n">positioner</span><span class="p">,</span> <span class="n">high</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; soak for </span><span class="si">{</span><span class="n">soak_time</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="n">soak_time</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&gt;&gt;&gt; ramp from </span><span class="si">{</span><span class="n">high</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2"> to </span><span class="si">{</span><span class="n">start</span><span class="si">:</span><span class="s2">.2f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">ramp</span><span class="p">(</span><span class="n">positioner</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="n">rate</span><span class="p">)</span>
+    <span class="n">report</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<p>Run the new plan:</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">ramp_soak_cool</span><span class="p">(</span><span class="n">temperature</span><span class="p">,</span> <span class="mi">55</span><span class="p">,</span> <span class="n">rate</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span> <span class="n">soak_time</span><span class="o">=</span><span class="mi">15</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+  rb=40.146  sp=40.000  diff=0.146
+&gt;&gt;&gt; ramp from 40.00 to 55.00
+  rb=54.550  sp=55.000  diff=-0.450
+&gt;&gt;&gt; soak for 15.00 s
+  rb=54.890  sp=55.000  diff=-0.110
+&gt;&gt;&gt; ramp from 55.00 to 40.00
+  rb=40.526  sp=40.000  diff=0.526
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[27]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+                <footer class="bd-footer-article">
+                  
+<div class="footer-article-items footer-article__inner">
+  
+    <div class="footer-article-item"><!-- Previous / next buttons -->
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_count_scaler.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Count the scaler</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_custom_plan.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Custom bluesky plan</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div></div>
+  
+</div>
+
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Schematic">Schematic</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Implementation">Implementation</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#PID-Control-Loops">PID Control Loops</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ophyd-interface">ophyd interface</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Setup-the-heater-and-pid">Setup the <code class="docutils literal notranslate"><span class="pre">heater</span></code> and <code class="docutils literal notranslate"><span class="pre">pid</span></code></a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#heater-as-positioner">heater as positioner</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ramp-the-temperature">ramp the temperature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Thermal-profile">Thermal profile</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_custom_heater_positioner.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item"><p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
