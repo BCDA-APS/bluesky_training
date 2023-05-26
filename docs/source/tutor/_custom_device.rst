@@ -42,11 +42,13 @@ Reasons for a custom *ophyd* Device include:
 
 - groupings (such as: related metadata or a motor stage)
 - modify existing Device
-- custom configuration (such as area detector)
-- new support
-- pseudo-positioner
 
-Each of these will be presented in the sections below.
+.. TODO: 
+    - custom configuration (such as area detector)
+    - new support
+    - pseudo-positioner
+
+These will be presented in sections below.
 
 Simple Devices
 ==============
