@@ -437,6 +437,22 @@ default shell, contact your IT support.</p>
 This is a shortcut that can be used to specify file paths without having to
 type out the entire path to the home directory.</p>
 </section>
+<section id="how-to-understand-a-timestamp">
+<span id="faq-timestamp"></span><h2>How to understand a timestamp?<a class="headerlink" href="#how-to-understand-a-timestamp" title="Permalink to this heading">#</a></h2>
+<p>Timestamps are floating point numbers offset from a fixed reference
+(1970-01-01 00:00 UTC).  Convert that to a format for humans using the
+<em>datetime</em> package (assuming the local time zone, in this case
+<cite>“US/Chicago”</cite>):</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">import</span> <span class="nn">datetime</span>
+<span class="linenos">2</span>
+<span class="linenos">3</span><span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mf">1685123274.1847932</span><span class="p">)</span>
+<span class="linenos">4</span><span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="p">(</span><span class="mi">2023</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">26</span><span class="p">,</span> <span class="mi">12</span><span class="p">,</span> <span class="mi">47</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">184793</span><span class="p">)</span>
+<span class="linenos">5</span>
+<span class="linenos">6</span><span class="n">In</span> <span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="nb">str</span><span class="p">(</span><span class="n">datetime</span><span class="o">.</span><span class="n">datetime</span><span class="o">.</span><span class="n">fromtimestamp</span><span class="p">(</span><span class="mf">1685123274.1847932</span><span class="p">))</span>
+<span class="linenos">7</span><span class="n">Out</span><span class="p">[</span><span class="mi">3</span><span class="p">]:</span> <span class="s1">&#39;2023-05-26 12:47:54.184793&#39;</span>
+</pre></div>
+</div>
+</section>
 </section>
 
 
@@ -493,6 +509,7 @@ type out the entire path to the home directory.</p>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#in-python-what-are-classes-objects-methods-and-instances">In python, what are classes, objects, methods and instances?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-is-bash">What is bash?</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#what-does-the-mean-in-a-path">What does the (<strong>~</strong>) mean in a path?</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#how-to-understand-a-timestamp">How to understand a timestamp?</a></li>
 </ul>
   </nav></div>
 

@@ -394,10 +394,6 @@ the <em>ophyd</em> <a class="footnote-reference brackets" href="#ophyd" id="id4"
 system details of specific devices and separates them from generalized
 measurement procedures.</p>
 <p>This document describes how to create custom <em>ophyd</em> Devices.</p>
-<p><em>Ophyd</em>, a hardware abstraction layer connects with the underlying control
-system (such as EPICS) and describes the objects for control as either a
-<em>Signal</em> (a single-valued object for control) or a <em>Device</em> (built up from
-Signal and/or Device components).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This document was written for the ophyd v1 Device
@@ -405,6 +401,14 @@ specification. <a class="footnote-reference brackets" href="#v1-device" id="id5"
 <p>At the time of this writing, the ophyd v2 Device
 specification <a class="footnote-reference brackets" href="#v2-device" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> has not been released from its draft form.</p>
 </div>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<p><em>Ophyd</em> is a hardware abstraction layer connects with the underlying control
+system (such as EPICS). <em>Ophyd</em> describes the objects for control as either:</p>
+<ul class="simple">
+<li><p>a <em>Signal</em> (a single-valued object for control)</p></li>
+<li><p>a <em>Device</em> (built up from Signal and/or Device components)</p></li>
+</ul>
 <p>Both <em>Signal</em> and <em>Device</em> are Python classes.  The methods of these classes
 describe actions specific to that class.  Subclasses, such as <cite>EpicsSignal</cite> and
 <cite>EpicsMotor</cite> augment the basic capabilities with additional capabilities.</p>
@@ -414,6 +418,7 @@ describe actions specific to that class.  Subclasses, such as <cite>EpicsSignal<
 <li><p>modify existing Device</p></li>
 </ul>
 <p>These will be presented in sections below.</p>
+</section>
 <section id="simple-devices">
 <h2>Simple Devices<a class="headerlink" href="#simple-devices" title="Permalink to this heading">#</a></h2>
 <p>Perhaps the best starting point is one or two simple examples of <em>ophyd</em>
@@ -452,23 +457,24 @@ meaning that the previous values are restored.</p>
 not added <a class="reference external" href="https://docs.python.org/3/library/typing.html">type</a> hints.</p>
 <section id="read">
 <h4><code class="docutils literal notranslate"><span class="pre">.read()</span></code><a class="headerlink" href="#read" title="Permalink to this heading">#</a></h4>
-<p>All ophyd <code class="docutils literal notranslate"><span class="pre">Signal</span></code> and <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.read()</span></code> <a class="footnote-reference brackets" href="#id18" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a>  method.  The
-<code class="docutils literal notranslate"><span class="pre">.read()</span></code> method returns the current value of each component and the timestamp
-(<a class="reference external" href="https://docs.python.org/3/library/time.html#time.time">time</a> in seconds
-since the system <em>epoch</em>) when that value was received in Python.  The
-<code class="docutils literal notranslate"><span class="pre">.read()</span></code> method is called by data acquisition during execution of a bluesky
-plan.  The <em>keys</em> of the Python dictionary returned by <code class="docutils literal notranslate"><span class="pre">.read()</span></code> are the full
-names of each component.  Here’s an example:</p>
+<p>All ophyd <code class="docutils literal notranslate"><span class="pre">Signal</span></code> and <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.read()</span></code> <a class="footnote-reference brackets" href="#id18" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> method
+which is called by data acquisition during execution of a bluesky plan. The
+<code class="docutils literal notranslate"><span class="pre">.read()</span></code> method returns a Python dictionary with the current value of each
+component and the timestamp (<a class="reference external" href="https://docs.python.org/3/library/time.html#time.time">time</a> in seconds since the
+system <em>epoch</em>) when that value was received in Python.  The <em>keys</em> of the
+Python dictionary returned by <code class="docutils literal notranslate"><span class="pre">.read()</span></code> are the full names of each component.
+Here’s an example:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
 <span class="linenos">2</span><span class="n">Out</span><span class="p">[</span><span class="mi">4</span><span class="p">]:</span>
 <span class="linenos">3</span><span class="n">OrderedDict</span><span class="p">([(</span><span class="s1">&#39;hello_number&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123274.1847932</span><span class="p">}),</span>
 <span class="linenos">4</span>            <span class="p">(</span><span class="s1">&#39;hello_text&#39;</span><span class="p">,</span> <span class="p">{</span><span class="s1">&#39;value&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="s1">&#39;timestamp&#39;</span><span class="p">:</span> <span class="mf">1685123274.1848683</span><span class="p">})])</span>
 </pre></div>
 </div>
+<p>See <a class="reference internal" href="../reference/_FAQ.html#faq-timestamp"><span class="std std-ref">How to understand a timestamp?</span></a></p>
 </section>
 <section id="summary">
 <h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h4>
-<p>All ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method to explain
+<p>All ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method to describe
 a Device to an interactive user.  Here is <code class="docutils literal notranslate"><span class="pre">hello_device.summary()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="n">data</span> <span class="n">keys</span> <span class="p">(</span><span class="o">*</span> <span class="n">hints</span><span class="p">)</span>
@@ -494,7 +500,8 @@ a Device to an interactive user.  Here is <code class="docutils literal notransl
 </section>
 <section id="stage">
 <h4><code class="docutils literal notranslate"><span class="pre">.stage()</span></code><a class="headerlink" href="#stage" title="Permalink to this heading">#</a></h4>
-<p>Here is the result of staging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
+<p>Each device participating in a plan is staged at the beginning of data
+acquisition. Here is the result of staging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
 <span class="linenos">2</span><span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="p">[</span><span class="n">HelloDevice</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">read_attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span> <span class="n">configuration_attrs</span><span class="o">=</span><span class="p">[])]</span>
 <span class="linenos">3</span>
@@ -507,7 +514,8 @@ a Device to an interactive user.  Here is <code class="docutils literal notransl
 </section>
 <section id="unstage">
 <h4><code class="docutils literal notranslate"><span class="pre">.unstage()</span></code><a class="headerlink" href="#unstage" title="Permalink to this heading">#</a></h4>
-<p>Here is the result of unstaging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
+<p>After data acquisition concludes, the participating devices are unstaged. Here
+is the result of unstaging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
 <span class="linenos">2</span><span class="n">Out</span><span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="p">[</span><span class="n">HelloDevice</span><span class="p">(</span><span class="n">prefix</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;hello&#39;</span><span class="p">,</span> <span class="n">read_attrs</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;number&#39;</span><span class="p">,</span> <span class="s1">&#39;text&#39;</span><span class="p">],</span> <span class="n">configuration_attrs</span><span class="o">=</span><span class="p">[])]</span>
 <span class="linenos">3</span>
@@ -1015,6 +1023,7 @@ Define the custom Device:</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#simple-devices">Simple Devices</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#hello-world">Hello, World!</a><ul class="nav section-nav flex-column">
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#read"><code class="docutils literal notranslate"><span class="pre">.read()</span></code></a></li>

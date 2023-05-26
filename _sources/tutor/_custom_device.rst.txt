@@ -23,16 +23,20 @@ measurement procedures.
 
 This document describes how to create custom *ophyd* Devices.
 
-*Ophyd*, a hardware abstraction layer connects with the underlying control
-system (such as EPICS) and describes the objects for control as either a
-*Signal* (a single-valued object for control) or a *Device* (built up from
-Signal and/or Device components).
-
 .. note::  This document was written for the ophyd v1 Device
     specification. [#v1_device]_
 
     At the time of this writing, the ophyd v2 Device
     specification [#v2_device]_ has not been released from its draft form.
+
+Overview
+==============
+
+*Ophyd* is a hardware abstraction layer connects with the underlying control
+system (such as EPICS). *Ophyd* describes the objects for control as either:
+
+- a *Signal* (a single-valued object for control)
+- a *Device* (built up from Signal and/or Device components)
 
 Both *Signal* and *Device* are Python classes.  The methods of these classes
 describe actions specific to that class.  Subclasses, such as `EpicsSignal` and
@@ -43,7 +47,7 @@ Reasons for a custom *ophyd* Device include:
 - groupings (such as: related metadata or a motor stage)
 - modify existing Device
 
-.. TODO: 
+.. TODO:
     - custom configuration (such as area detector)
     - new support
     - pseudo-positioner
@@ -109,13 +113,14 @@ not added `type <https://docs.python.org/3/library/typing.html>`__ hints.
 ``.read()``
 ^^^^^^^^^^^
 
-All ophyd ``Signal`` and ``Device`` instances have a ``.read()`` [#read]_  method.  The
-``.read()`` method returns the current value of each component and the timestamp
-(`time <https://docs.python.org/3/library/time.html#time.time>`__ in seconds
-since the system *epoch*) when that value was received in Python.  The
-``.read()`` method is called by data acquisition during execution of a bluesky
-plan.  The *keys* of the Python dictionary returned by ``.read()`` are the full
-names of each component.  Here's an example:
+All ophyd ``Signal`` and ``Device`` instances have a ``.read()`` [#read]_ method
+which is called by data acquisition during execution of a bluesky plan. The
+``.read()`` method returns a Python dictionary with the current value of each
+component and the timestamp (`time
+<https://docs.python.org/3/library/time.html#time.time>`__ in seconds since the
+system *epoch*) when that value was received in Python.  The *keys* of the
+Python dictionary returned by ``.read()`` are the full names of each component.
+Here's an example:
 
 .. code-block:: python
     :linenos:
@@ -125,10 +130,12 @@ names of each component.  Here's an example:
     OrderedDict([('hello_number', {'value': 0, 'timestamp': 1685123274.1847932}),
                 ('hello_text', {'value': '', 'timestamp': 1685123274.1848683})])
 
+See :ref:`faq-timestamp`
+
 ``.summary()``
 ^^^^^^^^^^^^^^
 
-All ophyd ``Device`` instances have a ``.summary()`` method to explain
+All ophyd ``Device`` instances have a ``.summary()`` method to describe
 a Device to an interactive user.  Here is ``hello_device.summary()``:
 
 .. code-block:: python
@@ -157,7 +164,8 @@ a Device to an interactive user.  Here is ``hello_device.summary()``:
 ``.stage()``
 ^^^^^^^^^^^^^^
 
-Here is the result of staging ``hello_device``:
+Each device participating in a plan is staged at the beginning of data
+acquisition. Here is the result of staging ``hello_device``:
 
 .. code-block:: python
     :linenos:
@@ -173,7 +181,8 @@ Here is the result of staging ``hello_device``:
 ``.unstage()``
 ^^^^^^^^^^^^^^
 
-Here is the result of unstaging ``hello_device``:
+After data acquisition concludes, the participating devices are unstaged. Here
+is the result of unstaging ``hello_device``:
 
 .. code-block:: python
     :linenos:
