@@ -1,7 +1,7 @@
 # README.md
 
 This repository, via [Jupyter](https://jupyter.org/) notebooks, demonstrates use
-of the Bluesky framework at a typical beam line scenario for a BCDA-sponsored
+of the Bluesky framework at a typical beamline scenario for a BCDA-sponsored
 class.
 
 Unit Tests | License | GH tag
