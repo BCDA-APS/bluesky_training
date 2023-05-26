@@ -54,6 +54,7 @@ if [ -z "${ENV_NAME}" ] ; then
 fi
 
 # echo "Environment: $(env | sort)"
+echo "conda env list = $(conda env list)"
 
 source "${CONDA_BASE_BIN}/activate" "${ENV_NAME}"
 
