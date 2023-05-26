@@ -28,27 +28,36 @@ if [ -z "$STARTUP_DIR" ] ; then
     export STARTUP_DIR=$(dirname "${SHELL_SCRIPT_NAME}")
 fi
 
-# activate conda environment
-# search for root: "${CONDA}" /APSshare/miniconda/x86_64 /opt/miniconda3
-# source "${root}/etc/profile.d/conda.sh"
-# conda activate "${ENV_NAME}"
-
-# $CONDA: root directory of miniconda or anaconda
-# In GitHub Actions workflow, $CONDA is defined (miniconda).
-# Otherwise, we have to find the conda root.
-if [ "${CONDA}" == "" ] ; then
-    CONDA=/APSshare/miniconda/x86_64
-    if [ ! -d "${CONDA}" ]; then
-        if [ "${CONDA_EXE}" != "" ]; then
-            # CONDA_EXE is the conda executable
-            CONDA=$(dirname $(dirname $(readlink -f "${CONDA_EXE}")))
-        else
-            # fallback
-            CONDA=/opt/miniconda3
+# activate conda command, if needed
+if [ ! -f "${CONDA_EXE}" ]; then
+    CONDA_ROOTS="${CONDA}"
+    CONDA_ROOTS+=" /APSshare/miniconda/x86_64"
+    CONDA_ROOTS+=" /opt/miniconda3"
+    for root in ${CONDA_ROOTS}; do
+        if [ -d "${root}" ] && [ -f "${root}/etc/profile.d/conda.sh" ]; then
+            source "${root}/etc/profile.d/conda.sh"
+            break
         fi
-    fi
+    done
 fi
-CONDA_BASE_BIN="${CONDA}/bin"
+
+
+# # $CONDA: root directory of miniconda or anaconda
+# # In GitHub Actions workflow, $CONDA is defined (miniconda).
+# # Otherwise, we have to find the conda root.
+# if [ "${CONDA}" == "" ] ; then
+#     CONDA=/APSshare/miniconda/x86_64
+#     if [ ! -d "${CONDA}" ]; then
+#         if [ "${CONDA_EXE}" != "" ]; then
+#             # CONDA_EXE is the conda executable
+#             CONDA=$(dirname $(dirname $(readlink -f "${CONDA_EXE}")))
+#         else
+#             # fallback
+#             CONDA=/opt/miniconda3
+#         fi
+#     fi
+# fi
+# CONDA_BASE_BIN="${CONDA}/bin"
 
 # In GitHub Actions workflow,
 # $ENV_NAME is an environment variable naming the conda environment to be used
@@ -56,9 +65,14 @@ if [ -z "${ENV_NAME}" ] ; then
     ENV_NAME="${CONDA_ENVIRONMENT}"
 fi
 
+if [ "${GITHUB_ACTIONS}" == "true" ]; then
+    ENV_NAME=base
+    echo "Forcing conda environment to: ${ENV_NAME}"
+fi
+
 echo "conda env list = $(conda env list)"
 
-source "${CONDA_BASE_BIN}/activate" "${ENV_NAME}"
+conda activate "${ENV_NAME}"
 
 #--------------------
 echo "Environment: $(env | sort)"
