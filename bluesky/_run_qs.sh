@@ -30,7 +30,7 @@ fi
 
 # activate conda command, if needed
 if [ ! -f "${CONDA_EXE}" ]; then
-    CONDA_ROOTS="${CONDA}"
+    CONDA_ROOTS="${CONDA}"  # In GitHub Actions workflow: (miniconda)
     CONDA_ROOTS+=" /APSshare/miniconda/x86_64"
     CONDA_ROOTS+=" /opt/miniconda3"
     for root in ${CONDA_ROOTS}; do
@@ -65,10 +65,10 @@ if [ -z "${ENV_NAME}" ] ; then
     ENV_NAME="${CONDA_ENVIRONMENT}"
 fi
 
-if [ "${GITHUB_ACTIONS}" == "true" ]; then
-    ENV_NAME=base
-    echo "Forcing conda environment to: ${ENV_NAME}"
-fi
+# if [ "${GITHUB_ACTIONS}" == "true" ]; then
+#     ENV_NAME=base
+#     echo "Forcing conda environment to: ${ENV_NAME}"
+# fi
 
 echo "conda env list = $(conda env list)"
 
