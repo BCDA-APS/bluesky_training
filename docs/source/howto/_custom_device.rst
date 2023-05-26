@@ -8,22 +8,20 @@
 Custom Devices
 ===============
 
-.. warning:: Work-in-Progress
+.. sidebar:: Form follows function [#fff]_
+
+    Integral to the implementation of a custom ``ophyd.Device`` is the
+    consideration of its architecture: *how is the control provided* and
+    *how will it be used*.
 
 Within the Bluesky Framework, the *bluesky* [#bluesky]_ package, orchestrates
 measurements and acquires data. Hardware components from various control systems
-(such as [EPICS](https://epics-controls.org/)) connect to *bluesky* through the
+(such as EPICS [#epics]_) connect to *bluesky* through the
 the *ophyd* [#ophyd]_ package. This separation generalizes underlying control
 system details of specific devices and separates them from generalized
 measurement procedures.
 
 This document describes how to create custom *ophyd* Devices.
-
-.. sidebar:: `Form follows function <https://en.wikipedia.org/wiki/Form_follows_function>`_
-
-    Integral to the implementation of a custom ``ophyd.Device`` is the
-    consideration of its architecture: *how is the control provided* and
-    *how will it be used*.
 
 *Ophyd*, a hardware abstraction layer connects with the underlying control
 system (such as EPICS) and describes the objects for control as either a
@@ -40,8 +38,6 @@ Both *Signal* and *Device* are Python classes.  The methods of these classes
 describe actions specific to that class.  Subclasses, such as `EpicsSignal` and
 `EpicsMotor` augment the basic capabilities with additional capabilities.
 
-.. caution:: Could start with more basic examples. Make note of common prefix.
-
 Reasons for a custom *ophyd* Device include:
 
 - groupings (such as: related metadata or a motor stage)
@@ -52,21 +48,18 @@ Reasons for a custom *ophyd* Device include:
 
 Each of these will be presented in the sections below.
 
-Simple Examples
-================
+Simple Devices
+==============
 
-Perhaps the best starting point is one or two simple examples.
+Perhaps the best starting point is one or two simple examples of *ophyd*
+Devices.
 
 Hello, World!
-~~~~~~~~~~~~~~~~
-
-.. TODO: link to the _hello_world notebook.
+~~~~~~~~~~~~~
 
 The ``HelloDevice`` (in the `Hello, World!
 <https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html>`_
 notebook) is a subclass of `ophyd.Device`.
-
-.. TODO:  Complete this section
 
 .. code-block:: python
     :linenos:
@@ -77,25 +70,179 @@ notebook) is a subclass of `ophyd.Device`.
         number = Component(Signal, value=0, kind="hinted")
         text = Component(Signal, value="", kind="normal")
 
-.. comment
+``HelloDevice`` declares two ``ophyd.Signal`` (non-EPICS) components, ``number``
+and ``text``. ``hello_device`` is an instance of ``HelloDevice``:
+
+.. code-block:: python
+    :linenos:
+
     hello_device = HelloDevice(name="hello")
+
+It is required to specify the ``name`` keyword argument (also known as
+':index:`kwarg`').  By convention, we use the same name as the Python `instance
+<https://stackoverflow.com/questions/61713990>`__
+
+The *Hello, World!* example uses `staging
+<https://blueskyproject.io/ophyd/user_v1/explanations/staging.html>`__ to change
+the component values:
+
+.. code-block:: python
+    :linenos:
+
     hello_device.stage_sigs["number"] = 1
     hello_device.stage_sigs["text"] = "Hello, World!"
-    hello_device.number.name = hello_device.name
 
-    def hello_world():
-        """Simple bluesky plan for demonstrating Hello, World!."""
-        yield from bp.count([hello_device], md=dict(title="test QS"))
+.. index:: staging
+
+When ``hello_device`` is :index:`staged` (by the ``bp.count`` plan below), the
+value of ``hello_device.number`` will be changed from ``0`` to ``1`` and the
+value of ``hello_device.text`` will be changed from ``""``to ``"Hello,
+World!"``.  As a final step of the ``bp.count`` plan, the device is
+:index:`unstaged`, meaning that the previous values are restored.
+
+We *expect* the ``number`` component to contain numerical values and the
+``text`` component to contain text values. To keep the example simple, we have
+not added `type <https://docs.python.org/3/library/typing.html>`__ hints.
 
 Connect with EPICS
 ~~~~~~~~~~~~~~~~~~
 
-The ``MyGroup`` (in the `Connect Bluesky with EPICS
+EPICS is a control system completely separate from Python.
+``MyGroup`` (in the `Connect Bluesky with EPICS
 <https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html>`_
-notebook) is a subclass of `ophyd.Device` that connects with EPICS.  The
-notebook also describes the ``wait_for_connection()`` method.
+notebook) is a subclass of `ophyd.Device` that connects with EPICS.
 
-.. TODO: finish
+When an instance of an ophyd Device is created, a common PV prefix is provided
+as the first argument.  This prefix is used with all EPICS components in the
+class. A *reuseable* class (such as ``ophyd.EpicsMotor``) is created with this
+design consideration.  The prefix is provided when the instance is created.  (If
+there is no common prefix, then an empty string is provded.)  In this example,
+we have these EPICS PVs to connect:
+
+======================= =======================
+full PV                 description
+======================= =======================
+``kgp:gp:bit1``         enable
+``kgp:gp:float1``       setpoint
+``kgp:gp:float1.EGU``   units
+``kgp:gp:text1``        label
+======================= =======================
+
+Separating the common PV prefix, we create a ``MyGroup`` Device that connects
+these PVs (using the remaining PV suffix for each).  Remember to provide the
+common PV prefix:
+
+.. code-block:: python
+    :linenos:
+
+    class MyGroup(Device):
+        enable = Component(EpicsSignal, "gp:bit1")
+        setpoint = Component(EpicsSignal, "gp:float1")
+        units = Component(EpicsSignal, "gp:float1.EGU")
+        label = Component(EpicsSignal, "gp:text1")
+
+``ophyd.EpicsSignal``, a variation of ``ophyd.Signal``, provides a connection
+with the EPICS control system. The text argument after ``EpicsSignal`` (such as
+``"gp:bit1"``) is the EPICS Process Variable (or suffix).  A PV [#pv]_ is a text
+identifier for a unit [#pv_intro]_ of EPICS data. EPICS is responsible for
+updating the PV with new content, as directed by one or more clients, such as
+*ophyd*.
+
+.. index:: wait_for_connection
+
+``wait_for_connection()``
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+We must allow some time after creating an instance, albeit short, for the
+instance to connect by calling its ``wait_for_connection()`` `method
+<https://nsls-ii.github.io/ophyd/device-overview.html#low-level-api>`__:
+
+.. code-block:: python
+    :linenos:
+
+    group = MyGroup("kgp:", name="group")
+    group.wait_for_connection()
+
+.. tip:: ``wait_for_connection()`` is not always used
+
+    For most use (such as interactive sessions), a call to an
+    instance's ``wait_for_connection()`` method does not *appear*
+    to be necessary.  EPICS connections usually happen very fast,
+    unless a requested PV is not available.  This is why you do not see
+    ``wait_for_connection()`` called in most library code.  However,
+    when the instance is to be used
+    immediately, you should use the ``wait_for_connection()`` method
+    before interacting with the instance.
+
+``.read()``
+^^^^^^^^^^^
+
+All ophyd ``Signal`` and ``Device`` instances have a ``.read()`` [#read]_  method.  The
+``.read()`` method returns the current value of each component and the timestamp
+(`time <https://docs.python.org/3/library/time.html#time.time>`__ in seconds
+since the system *epoch*) when that value was received in Python.  The
+``.read()`` method is called by data acquisition during execution of a bluesky
+plan.  The *keys* of the Python dictionary returned by ``.read()`` are the full
+names of each component.  Each ``EpicsMotor`` Device has a setpoint and
+readback.  Here's an example:
+
+.. code-block:: python
+    :linenos:
+
+    In [14]: group.read()
+    Out[14]:
+    OrderedDict([('group_enable', {'value': 0, 'timestamp': 631152000.0}),
+                ('group_setpoint',
+                {'value': 55.0, 'timestamp': 1683746978.711794}),
+                ('group_units', {'value': '', 'timestamp': 1683746978.711794}),
+                ('group_label', {'value': '', 'timestamp': 631152000.0})])
+
+``.summary()``
+^^^^^^^^^^^^^^
+
+All ophyd ``Device`` instances have a ``.summary()`` method to explain
+a Device to an interactive user.  Consider this instance:
+
+.. code-block:: python
+    :linenos:
+
+    In [14]: group.read()
+    Out[14]:
+    OrderedDict([('group_enable', {'value': 0, 'timestamp': 631152000.0}),
+                ('group_setpoint',
+                {'value': 55.0, 'timestamp': 1683746978.711794}),
+                ('group_units', {'value': '', 'timestamp': 1683746978.711794}),
+                ('group_label', {'value': '', 'timestamp': 631152000.0})])
+
+    In [15]: group.summary()
+    data keys (* hints)
+    -------------------
+    group_enable
+    group_label
+    group_setpoint
+    group_units
+
+    read attrs
+    ----------
+    enable               EpicsSignal         ('group_enable')
+    setpoint             EpicsSignal         ('group_setpoint')
+    units                EpicsSignal         ('group_units')
+    label                EpicsSignal         ('group_label')
+
+    config keys
+    -----------
+
+    configuration attrs
+    -------------------
+
+    unused attrs
+    ------------
+
+.. TODO:
+    'kind'
+    ^^^^
+    Could divert and explain how the ``kind`` kwarg affects
+    what components are not reported with .`read()`
 
 Groupings
 =========
@@ -111,7 +258,7 @@ Neat Stage 2APD
 
 .. rubric:: NEAT Stage
 
-The *NEAT Stage*, stage from APS station 3-ID-D, consists of
+The *NEAT Stage 2APD*, stage from APS station 3-ID-D, consists of
 three motorized axes, as described in the next table.
 
 ============== ===========  ======================
@@ -125,6 +272,9 @@ axis name      EPICS PV     description
 .. image:: ../_static/neat_stage_2apd.png
     :width: 80%
 
+Since each of these axes are EPICS motors, we'll use ``ophyd.EpicsMotor``
+[#epics_motor]_ to connect with the rich set of EPICS controls for each:
+
 .. code-block:: python
     :linenos:
 
@@ -134,8 +284,6 @@ axis name      EPICS PV     description
         theta = Component(EpicsMotor, "m3", labels=("NEAT stage",))
 
     neat_stage = NeatStage_3IDD("3idd:", name="neat_stage")
-
-.. TODO: describe how it will be used, read, summary, ...
 
 APS Undulator
 ~~~~~~~~~~~~~~~
@@ -205,39 +353,81 @@ Now, create the Python object for the dual APS Undulator controls:
 The undulator energy of each is accessed by ``undulator.us.energy.get()`` and
 ``undulator.ds.energy.get()``.
 
-.. maybe
-    User Info
-    ~~~~~~~~~~~~~~~~~~
-
-    aggregate custom data ...
-
-    .. Perhaps NO to this example since apsbss provides...
-
-    .. code-block:: python
-        :linenos:
-
-        class ExperimentInfo(Device):		# from the APS General User Proposal system
-            GUP_number = Component(EpicsSignalRO, "ProposalNumber", string=True)
-            title = Component(EpicsSignalRO, "ProposalTitle", string=True)
-            user_name = Component(EpicsSignalRO, "UserName", string=True)
-            user_institution = Component(EpicsSignalRO, "UserInstitution", string=True)
-            user_badge_number = Component(EpicsSignalRO, "UserBadge", string=True)
-
-        user_info = ExperimentInfo("2bmS1:", name="user_info")
+.. index:: mixin device
 
 Modify existing Device
 ======================
 
-.. TODO includes mixin devices
-
 Sometimes, a *standard* device is missing a feature, such as connection with an
 additional field (or fields) in an EPICS record. A *mixin* class can modify
-a class by providing additional structures and/or methods
+a class by providing additional structures and/or methods.
+The *apstools* package provides mixin classes [#apstools_mixins]_ for fields common to
+various EPICS records types.
 
 .. tip:: An advantage to using these custom *mixin* classes is that all these
     additional fields and methods will have consistent names.  This simplifies
-    both data acquisition and 
+    both data acquisition and
     the process of searching and matching acquired data in the database.
+
+For example, we might want to define a new feature that is not yet present in
+*ophyd*.  Here, we define a ``home_value`` component.  The position can be
+either preset or changed programmatically.
+
+.. code-block:: python
+    :linenos:
+
+    class HomeValue(Device):
+        home_value = Component(Signal)
+
+We can use ``HomeValue()`` as a *mixin* class to modify (actually, create a
+variation of) the ``MyGroup`` (above):
+
+.. code-block:: python
+    :linenos:
+
+    class MyGroupWithHome(HomeValue, MyGroup):
+        """MyGroup with known home value."""
+
+Create an instance and view its `.summary()`:
+
+.. code-block:: python
+    :linenos:
+
+    In [23]: group = MyGroupWithHome("kgp:", name="group")
+
+    In [24]: group.summary()
+    data keys (* hints)
+    -------------------
+    group_enable
+    group_home_value
+    group_label
+    group_setpoint
+    group_units
+
+    read attrs
+    ----------
+    enable               EpicsSignal         ('group_enable')
+    setpoint             EpicsSignal         ('group_setpoint')
+    units                EpicsSignal         ('group_units')
+    label                EpicsSignal         ('group_label')
+    home_value           Signal              ('group_home_value')
+
+    config keys
+    -----------
+
+    configuration attrs
+    -------------------
+
+    unused attrs
+    ------------
+
+Compare this most recent summary with the previous one.  Note the ``home_value``
+Signal.
+
+.. note:: A Device can define (or replace) methods, too.
+
+    The ``apstools.synApps.EpicsSynAppsRecordEnableMixin`` mixin
+    [#apstools_epics_mixins]_ includes a method in addition to a new component.
 
 EPICS ``ai`` & ``ao`` Records
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -328,44 +518,39 @@ Create the Python object with the common prefix:
     # create the Python object:
     controller = MyController("ioc:", name="controller")
 
+.. TODO:
+    Custom configurations
+    ======================
 
-.. For example, the ``ophyd.EpicsMotor`` does not connect with every field of the EPICS motor record.
+    such as area detector
 
-.. TODO pick a different example (CamMixin) since this example is a very limited case.
-    To enable changing the motor resolution at runtime:
+    .. TODO
 
-    class MyEpicsMotor(EpicsMotor):
-        steps_per_revolution = Component(EpicsSignal, ".SREV", kind="omitted")
+    New support
+    ======================
 
-    Also see
-    - [CamMixin](https://github.com/BCDA-APS/apstools/blob/d87ca0782bbcc7339bdda328b90f734f9957eaa6/apstools/devices/area_detector_support.py#L732-L739) - updates a text attribute
-    - [SingleTrigger](https://github.com/BCDA-APS/apstools/blob/d87ca0782bbcc7339bdda328b90f734f9957eaa6/apstools/devices/area_detector_support.py#L742-L770) - overrides existing methods (`__init__()`, `stage()`, `unstage()`)
+    .. TODO
 
+    Pseudo-positioner
+    ======================
 
-Custom configurations
-======================
-
-such as area detector
-
-.. TODO
-
-New support
-======================
-
-.. TODO
-
-Pseudo-positioner
-======================
-
-.. TODO
+    .. TODO
 
 -------------
 
 .. rubric:: Footnotes
 
+.. [#apstools_epics_mixins] https://bcda-aps.github.io/apstools/latest/_modules/apstools/synApps/_common.html#EpicsSynAppsRecordEnableMixin
+.. [#apstools_mixins] ``apstools.synApps`` mixin classes: https://github.com/BCDA-APS/apstools/blob/b9d959cd7beb70994b0fc2fca0f344ef160f9849/apstools/synApps/_common.py#L25-L109
 .. [#apstools] *apstools* :  https://bcda-aps.github.io/apstools/latest/
 .. [#bluesky] *bluesky* : https://blueskyproject.io/bluesky
+.. [#epics] EPICS : https://epics-controls.org
 .. [#epics_common_fields] EPICS common fields : https://bcda-aps.github.io/apstools/latest/api/synApps/__common.html
+.. [#epics_motor] ``EpicsMotor``: https://blueskyproject.io/ophyd/builtin-devices.html?highlight=epicsmotor#epicsmotor
+.. [#fff] Form follows function : https://en.wikipedia.org/wiki/Form_follows_function
 .. [#ophyd] *ophyd* : https://blueskyproject.io/ophyd
+.. [#pv_intro] PV introduction: https://docs.epics-controls.org/en/latest/specs/ca_protocol.html?highlight=Process%20Variable#process-variables
+.. [#pv] PV: https://docs.epics-controls.org/en/latest/guides/EPICS_Intro.html#appendix-objects-vs-process-variables-discussion
+.. [#read] ``.read()``: https://blueskyproject.io/ophyd/user_v1/tutorials/single-PV.html#read
 .. [#v1_device] *ophyd* v1 Device : https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device
 .. [#v2_device] *ophyd* v2 Device : https://blueskyproject.io/ophyd/user_v2/how-to/make-a-simple-device.html
