@@ -29,6 +29,9 @@ if [ -z "$STARTUP_DIR" ] ; then
 fi
 
 # activate conda environment
+# search for root: "${CONDA}" /APSshare/miniconda/x86_64 /opt/miniconda3
+# source "${root}/etc/profile.d/conda.sh"
+# conda activate "${ENV_NAME}"
 
 # $CONDA: root directory of miniconda or anaconda
 # In GitHub Actions workflow, $CONDA is defined (miniconda).
@@ -53,12 +56,13 @@ if [ -z "${ENV_NAME}" ] ; then
     ENV_NAME="${CONDA_ENVIRONMENT}"
 fi
 
-# echo "Environment: $(env | sort)"
 echo "conda env list = $(conda env list)"
 
 source "${CONDA_BASE_BIN}/activate" "${ENV_NAME}"
 
 #--------------------
+echo "Environment: $(env | sort)"
+echo "------"
 echo "CONDA_ENVIRONMENT=${CONDA_ENVIRONMENT}"
 echo "CONDA=${CONDA}"
 echo "DATABROKER_CATALOG=${DATABROKER_CATALOG}"
