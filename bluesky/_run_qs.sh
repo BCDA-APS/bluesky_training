@@ -3,6 +3,7 @@
 # Start the bluesky queueserver.
 
 SHELL_SCRIPT_NAME=${BASH_SOURCE:-${0}}
+SHELL_SCRIPT_DIR=$(dirname "${SHELL_SCRIPT_NAME}")
 if [ -z "$STARTUP_DIR" ] ; then
     # If no startup dir is specified, use the directory with this script
     export STARTUP_DIR=$(dirname "${SHELL_SCRIPT_NAME}")
@@ -14,7 +15,7 @@ export CONDA_ENVIRONMENT="${BLUESKY_CONDA_ENV:-training_2022}"
 export DATABROKER_CATALOG=${DATABROKER_CATALOG:-training}
 export QS_SERVER_HOST=$(hostname)
 export QS_UPDATE_PLANS_DEVICES=ENVIRONMENT_OPEN
-export QS_USER_GROUP_PERMISSIONS_FILE="${STARTUP_DIR}/user_group_permissions.yaml"
+export QS_USER_GROUP_PERMISSIONS_FILE="${SHELL_SCRIPT_DIR}/user_group_permissions.yaml"
 export QS_USER_GROUP_PERMISSIONS_RELOAD=ON_STARTUP
 #--------------------
 
