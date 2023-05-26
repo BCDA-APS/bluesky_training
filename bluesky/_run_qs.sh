@@ -35,29 +35,12 @@ if [ ! -f "${CONDA_EXE}" ]; then
     CONDA_ROOTS+=" /opt/miniconda3"
     for root in ${CONDA_ROOTS}; do
         if [ -d "${root}" ] && [ -f "${root}/etc/profile.d/conda.sh" ]; then
+            # Found a match!
             source "${root}/etc/profile.d/conda.sh"
             break
         fi
     done
 fi
-
-
-# # $CONDA: root directory of miniconda or anaconda
-# # In GitHub Actions workflow, $CONDA is defined (miniconda).
-# # Otherwise, we have to find the conda root.
-# if [ "${CONDA}" == "" ] ; then
-#     CONDA=/APSshare/miniconda/x86_64
-#     if [ ! -d "${CONDA}" ]; then
-#         if [ "${CONDA_EXE}" != "" ]; then
-#             # CONDA_EXE is the conda executable
-#             CONDA=$(dirname $(dirname $(readlink -f "${CONDA_EXE}")))
-#         else
-#             # fallback
-#             CONDA=/opt/miniconda3
-#         fi
-#     fi
-# fi
-# CONDA_BASE_BIN="${CONDA}/bin"
 
 # In GitHub Actions workflow,
 # $ENV_NAME is an environment variable naming the conda environment to be used
@@ -65,30 +48,26 @@ if [ -z "${ENV_NAME}" ] ; then
     ENV_NAME="${CONDA_ENVIRONMENT}"
 fi
 
-# if [ "${GITHUB_ACTIONS}" == "true" ]; then
-#     ENV_NAME=base
-#     echo "Forcing conda environment to: ${ENV_NAME}"
-# fi
-
-echo "conda env list = $(conda env list)"
+# echo "conda env list = $(conda env list)"
 
 conda activate "${ENV_NAME}"
 
-#--------------------
-echo "Environment: $(env | sort)"
-echo "------"
-echo "CONDA_ENVIRONMENT=${CONDA_ENVIRONMENT}"
-echo "CONDA=${CONDA}"
-echo "DATABROKER_CATALOG=${DATABROKER_CATALOG}"
-echo "QS_SERVER_HOST=${QS_SERVER_HOST}"
-echo "QS_UPDATE_PLANS_DEVICES=${QS_UPDATE_PLANS_DEVICES}"
-echo "QS_USER_GROUP_PERMISSIONS_FILE=${QS_USER_GROUP_PERMISSIONS_FILE}"
-echo "QS_USER_GROUP_PERMISSIONS_RELOAD=${QS_USER_GROUP_PERMISSIONS_RELOAD}"
-echo "REDIS_ADDR=${REDIS_ADDR}"
-echo "SHELL_SCRIPT_NAME=${SHELL_SCRIPT_NAME}"
-echo "STARTUP_DIR=${STARTUP_DIR}"
-#--------------------
+# #--------------------
+# echo "Environment: $(env | sort)"
+# echo "------"
+# echo "CONDA_ENVIRONMENT=${CONDA_ENVIRONMENT}"
+# echo "CONDA=${CONDA}"
+# echo "DATABROKER_CATALOG=${DATABROKER_CATALOG}"
+# echo "QS_SERVER_HOST=${QS_SERVER_HOST}"
+# echo "QS_UPDATE_PLANS_DEVICES=${QS_UPDATE_PLANS_DEVICES}"
+# echo "QS_USER_GROUP_PERMISSIONS_FILE=${QS_USER_GROUP_PERMISSIONS_FILE}"
+# echo "QS_USER_GROUP_PERMISSIONS_RELOAD=${QS_USER_GROUP_PERMISSIONS_RELOAD}"
+# echo "REDIS_ADDR=${REDIS_ADDR}"
+# echo "SHELL_SCRIPT_NAME=${SHELL_SCRIPT_NAME}"
+# echo "STARTUP_DIR=${STARTUP_DIR}"
+# #--------------------
 
+# Start the bluesky queueserver (QS)
 start-re-manager \
     --redis-addr "${REDIS_ADDR}" \
     --startup-dir "${STARTUP_DIR}" \
