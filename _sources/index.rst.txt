@@ -74,6 +74,8 @@ Other resources
    * source: https://github.com/pyepics/pyepics
    * PyPI: https://pypi.org/project/pyepics/
    * conda: https://anaconda.org/conda-forge/pyepics
+* APS Data Management
+   * home: https://confluence.aps.anl.gov/display/DMGT/
 
 Index
 ==================
