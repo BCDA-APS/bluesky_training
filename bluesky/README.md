@@ -9,7 +9,7 @@ Contains:
 
 description | item(s)
 --- | ---
-Introduction | [`intro2bluesky.md`](intro2bluesky.md)
+Introduction | [`intro2bluesky.md`](https://bcda-aps.github.io/bluesky_training/reference/_intro2bluesky.html)
 IPython console startup | [`console/`](console/README.md)
 Bluesky queueserver support | [introduction](qserver.md), `*qs*`
 Instrument configuration | `instrument/`
