@@ -506,7 +506,7 @@ all floating point PVs which share many extra fields.  The difference is that
 The extra fields follow two common EPICS patterns:
 
 - fields common to all EPICS records
-- fields common EPICS floating-point value records
+- fields common to EPICS floating-point value records
 
 Support for these common fields [#epics_common_fields]_ is provided in the
 *apstools* [#apstools]_ package.  Make custom Devices including the additional
