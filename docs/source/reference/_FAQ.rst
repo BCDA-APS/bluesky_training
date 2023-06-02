@@ -93,3 +93,24 @@ What does the (**~**) mean in a path?
 The tilde (**~**) character represents the current user's home directory.
 This is a shortcut that can be used to specify file paths without having to
 type out the entire path to the home directory.
+
+.. _faq-timestamp:
+
+How to understand a timestamp?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Timestamps are floating point numbers offset from a fixed reference
+(1970-01-01 00:00 UTC).  Convert that to a format for humans using the
+*datetime* package (assuming the local time zone, in this case
+`"US/Chicago"`):
+
+.. code-block:: python
+    :linenos:
+
+    In [1]: import datetime
+
+    In [2]: datetime.datetime.fromtimestamp(1685123274.1847932)
+    Out[2]: datetime.datetime(2023, 5, 26, 12, 47, 54, 184793)
+
+    In [3]: str(datetime.datetime.fromtimestamp(1685123274.1847932))
+    Out[3]: '2023-05-26 12:47:54.184793'
