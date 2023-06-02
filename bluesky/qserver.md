@@ -8,7 +8,7 @@ work-in-progress: *very* basic notes for now
     - [diagnostics and testing](#diagnostics-and-testing)
   - [graphical user interface](#graphical-user-interface)
 
-**IMPORTANT**:  When the queueserver starts, it **must** find only one `/.py` file in this directory and it must find `instrument/` in the same directory.  Attempts to place the qserver files in a sub directory result in `'instrument/' directory not found` as queueserver starts.
+**IMPORTANT**:  When the queueserver starts, it **must** find only one `.py` file in this directory and it must find `instrument/` in the same directory.  Attempts to place the qserver files in a sub directory result in `'instrument/' directory not found` as queueserver starts.
 
 ## Run the queuserver
 
@@ -16,15 +16,15 @@ work-in-progress: *very* basic notes for now
 
 Run in a background screen session.
 
-`./qserver start`
+`./qserver.sh start`
 
 Stop this with
 
-`./qserver stop`
+`./qserver.sh stop`
 
 ### diagnostics and testing
 
-`./qserver run`
+`./qserver.sh run`
 
 ## graphical user interface
 
@@ -34,3 +34,4 @@ Stop this with
 - open the environment
 - add tasks to the queue
 - run the queue
+- 

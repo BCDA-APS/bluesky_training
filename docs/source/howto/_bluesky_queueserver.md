@@ -20,15 +20,15 @@ from the [APS beamline data pipelines.
 
 Install `redis` package in OS (if not already installed):
 
-```bash
-sudo apt install redis
-```
+<pre>
+$ <b>sudo apt install redis</b>
+</pre>
 
 Create conda environment
 
-```bash
-conda create -y -n qserver -c conda-forge bluesky-queueserver
-```
+<pre>
+$ <b>conda create -y -n qserver -c conda-forge bluesky-queueserver</b>
+</pre>
 
 ## Start a monitor on a qserver
 
@@ -43,6 +43,8 @@ Here, the `training` catalog is subscribed to the RunEngine, in addition to a 0M
 
 <details>
 
+<pre>
+$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
 <pre>
 $ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
 INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at 'tcp://*:60615'
