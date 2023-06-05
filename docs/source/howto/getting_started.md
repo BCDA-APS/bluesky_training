@@ -17,7 +17,7 @@ section for more details.
 
 In this document, routine startup of an IPython console session and a JupyterLab
 notebook session will be demonstrated.  The `blueskyStarter.sh` script was
-created to start a Bluesky session for routine data acquisition at beam lines.
+created to start a Bluesky session for routine data acquisition at beamlines.
 It is installed in the `~/bluesky` directory.  The script may be used from any
 shell in any directory to start a bluesky session in IPython console (default)
 or Jupyter notebook GUI.

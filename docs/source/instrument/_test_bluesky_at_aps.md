@@ -1,6 +1,6 @@
 # Test that Bluesky Works at APS
 
-Beam lines of the Advanced Photon Source have access to EPICS PVs that
+Beamlines of the Advanced Photon Source have access to EPICS PVs that
 tell the storage ring current and other real-time information from the
 facility.  These have been gathered into a special device from the
 `apstools` package.  (If you are not at the APS, then you will need to

@@ -36,8 +36,7 @@ Overview
       2. `APS GitLab <#aps-gitlab>`__
       3. others not described here
 
-   2. Use or create an `organization for the beam
-      line <#beam-line-github-organizations>`__.
+   2. Use or create an `organization for the beamline <#beamline-github-organizations>`__.
    3. Create a new repository for the ``bluesky`` directory
 
 2. Make the ``bluesky/`` directory into a ``git`` repository - either
@@ -61,7 +60,7 @@ Overview
 GitHub
 ~~~~~~
 
-Most beam lines will use `GitHub <https://github.com>`__ to host their
+Most beamlines will use `GitHub <https://github.com>`__ to host their
 ``bluesky`` repositories. These are publicly-accessible (read-only) so
 do not place any content there that should not be publicly-accessible.
 
@@ -81,16 +80,16 @@ orgnization (created by some GitHub user).
 Note that GitHub now uses multi-factor authentication
 (`MFA <https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication>`__).
 
-Beam line GitHub organizations
+Beamline GitHub organizations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 Use GitHub organizations to provide version control for various software
-projects used by a beam line. This naming convention is recommended for
-the beam line organization:
+projects used by a beamline. This naming convention is recommended for
+the beamline organization:
 
 -  create a GitHub *organization* with a name like this :
    ``APS-SSS-GGG``
--  ``SSS`` : sector, beam line, and station (such as ``32IDC``)
+-  ``SSS`` : sector, beamline, and station (such as ``32IDC``)
 -  ``GGG`` : operating group (such as ``MIC`` for the XSD/Microscopy
    group)
 -  Within each organization, create a *repository* :

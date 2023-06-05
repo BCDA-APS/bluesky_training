@@ -2,11 +2,11 @@ APS Bluesky Training
 ====================
 
 The APS Bluesky Training repository [#]_ demonstrates use of the Bluesky
-framework at a typical APS beam line.  Its ``bluesky/`` directory [#]_ also
-serves as a template for new beam line installations.
+framework at a typical APS beamline.  Its ``bluesky/`` directory [#]_ also
+serves as a template for new beamline installations.
 
 .. [#] repository: https://github.com/BCDA-APS/bluesky_training
-.. [#] ``bluesky/`` directory: new beam line
+.. [#] ``bluesky/`` directory: new beamline
    `template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`__
 
 .. for documentation authors:
