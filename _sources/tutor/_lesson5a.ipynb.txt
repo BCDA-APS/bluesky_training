@@ -65,7 +65,7 @@
    "source": [
     "## Initialize\n",
     "\n",
-    "Load the instrument controls (which sets up the Bluesky framework for collection: `RE`, `bec`, `bp`, ...).  This defines more than we need but works as a simple start, just like regular data acquisition at a beam line."
+    "Load the instrument controls (which sets up the Bluesky framework for collection: `RE`, `bec`, `bp`, ...).  This defines more than we need but works as a simple start, just like regular data acquisition at a beamline."
    ]
   },
   {

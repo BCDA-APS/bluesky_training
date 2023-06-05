@@ -165,6 +165,21 @@
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
       
@@ -276,6 +291,21 @@ document.write(`
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
         
@@ -308,7 +338,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bluesky_cheat_sheet.html">Bluesky Cheat Sheet</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beam Lines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beamlines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
@@ -387,13 +417,13 @@ document.write(`
 <section id="Overview">
 <h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://blueskyproject.io/bluesky">Bluesky</a> framework has support for data acquisition using an external data collector. The support is for an ophyd <em>fly-able</em> device, which must be customized for the details of that external data collector. The design prototype collector is a <em>fly</em> scan controller (hence the name used by bluesky), operating outside the <em>bluesky</em> process, which performs its readings of detector(s) during continuous (<em>on-the-fly</em>) motion of one or more positioners.
-Triggering of the detectors must also be part of the external controller. The description is that this type of <a class="reference external" href="http://nsls-ii.github.io/bluesky/async.html#asynchronous-acquisition">asynchronous acquisition</a> requires fine-grained timing beyond the capabilities of <em>bluesky</em>.</p>
+Triggering of the detectors must also be part of the external controller. The description is that this type of <a class="reference external" href="https://blueskyproject.io/bluesky/async.html#asynchronous-acquisition">asynchronous acquisition</a> requires fine-grained timing beyond the capabilities of <em>bluesky</em>.</p>
 <blockquote>
 <div><p>Flying means: “Let the hardware take control, cache data externally, and then transfer all the data to the RunEngine at the end.” This is essential when the data acquisition rates are faster than the RunEngine or Python can go.</p>
 </div></blockquote>
 <p>Note: As a consequence of the external nature of this <em>Flyer</em> device, the usual activity of the bluesky RunEngine pertaining to interruptions (pause, resume, stop, or abort) may not affect the progress of the external data collector. The RunEngine may only interrupt the external data collector as that collector allows in its interface with bluesky.</p>
 <p><em>Any</em> external data acquisition controller or data logger is suitable for use as a bluesky <em>Flyer</em>. It is not necessary for the external controller to conduct its acquisition at high rates.</p>
-<p>The EPICS <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan record</a> is an example of an external data acquisition controller. It supports various scan types (step, list, continuous) with flexible configuration for up to four positioners and dozens of detectors, as well as scans of up to four dimensions. The <em>sscan</em> record is used by many APS beam lines for routine data collection.</p>
+<p>The EPICS <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan record</a> is an example of an external data acquisition controller. It supports various scan types (step, list, continuous) with flexible configuration for up to four positioners and dozens of detectors, as well as scans of up to four dimensions. The <em>sscan</em> record is used by many APS beamlines for routine data collection.</p>
 </section>
 <section id="References">
 <h2>References<a class="headerlink" href="#References" title="Permalink to this heading">#</a></h2>
@@ -403,12 +433,12 @@ Triggering of the detectors must also be part of the external controller. The de
 <li><p>bluesky <code class="docutils literal notranslate"><span class="pre">fly()</span></code> plan: <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.fly.html#bluesky.plans.fly">https://blueskyproject.io/bluesky/generated/bluesky.plans.fly.html#bluesky.plans.fly</a></p></li>
 <li><p>asynchronous collection with fly scans: <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#asynchronous-plans-fly-scans-and-monitoring">https://blueskyproject.io/bluesky/plans.html#asynchronous-plans-fly-scans-and-monitoring</a></p></li>
 <li><p>Asynchronous Acquisition:https://blueskyproject.io/bluesky/async.html</p></li>
-<li><p>ophyd flyer classes: <a class="reference external" href="http://nsls-ii.github.io/ophyd/generated/ophyd.flyers.html">http://nsls-ii.github.io/ophyd/generated/ophyd.flyers.html</a></p></li>
-<li><p>ophyd Fly-able Interface (with links to the <code class="docutils literal notranslate"><span class="pre">FlyerInterface()</span></code> methods) : <a class="reference external" href="http://nsls-ii.github.io/ophyd/architecture.html#fly-able-interface">http://nsls-ii.github.io/ophyd/architecture.html#fly-able-interface</a> ## 1D step scans using sscan record</p></li>
+<li><p>ophyd flyer classes: <a class="reference external" href="https://blueskyproject.io/ophyd/generated/ophyd.flyers.html">https://blueskyproject.io/ophyd/generated/ophyd.flyers.html</a></p></li>
+<li><p>ophyd Fly-able Interface (with links to the <code class="docutils literal notranslate"><span class="pre">FlyerInterface()</span></code> methods) : <a class="reference external" href="https://blueskyproject.io/ophyd/architecture.html#fly-able-interface">https://blueskyproject.io/ophyd/architecture.html#fly-able-interface</a> ## 1D step scans using sscan record</p></li>
 </ul>
-<p>Use the <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan record</a> as an <a class="reference external" href="http://nsls-ii.github.io/bluesky/async.html">ophyd Flyer</a> for data acquisition with the <a class="reference external" href="http://nsls-ii.github.io/bluesky">bluesky</a> <a class="reference external" href="http://nsls-ii.github.io/bluesky/generated/bluesky.plans.fly.html#bluesky.plans.fly">fly</a> plan. Consider the case of <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html#HEADING_1-1">1D step scans using sscan record</a>.</p>
+<p>Use the <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan record</a> as an <a class="reference external" href="https://blueskyproject.io/bluesky/async.html">ophyd Flyer</a> for data acquisition with the <a class="reference external" href="https://blueskyproject.io/bluesky">bluesky</a> <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.fly.html#bluesky.plans.fly">fly</a> plan. Consider the case of <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html#HEADING_1-1">1D step scans using sscan record</a>.</p>
 <p>Suggest the <em>noisy v m1</em> scan, done as 1-D step scan with <code class="docutils literal notranslate"><span class="pre">sscan</span></code> record, where <code class="docutils literal notranslate"><span class="pre">noisy</span></code> is the <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html">swait</a> record calculating a Lorentzian peak based on <code class="docutils literal notranslate"><span class="pre">m1</span></code> (EPICS <a class="reference external" href="%5B*swait*%5D(https://epics.anl.gov/bcda/synApps/motor/motorRecord.html)">motor</a> record) position.</p>
-<p>We’ll build a custom Python class, from <code class="docutils literal notranslate"><span class="pre">`apstools.synApps.SscanRecord</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/synApps/_sscan.html">https://apstools.readthedocs.io/en/latest/source/synApps/_sscan.html</a>&gt;`__ (a subclass of <code class="docutils literal notranslate"><span class="pre">`ophyd.Device</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/tutorials/device.html#define-a-custom-device">https://blueskyproject.io/ophyd/tutorials/device.html#define-a-custom-device</a>&gt;`__), that supports the EPICS <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan</a> record and add the <code class="docutils literal notranslate"><span class="pre">`ophyd.FlyerInterface</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/ophyd/architecture.html#fly-able-interface">http://nsls-ii.github.io/ophyd/architecture.html#fly-able-interface</a>&gt;`__ to that class. A class
+<p>We’ll build a custom Python class, from <code class="docutils literal notranslate"><span class="pre">`apstools.synApps.SscanRecord</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/synApps/_sscan.html">https://apstools.readthedocs.io/en/latest/source/synApps/_sscan.html</a>&gt;`__ (a subclass of <code class="docutils literal notranslate"><span class="pre">`ophyd.Device</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/tutorials/device.html#define-a-custom-device">https://blueskyproject.io/ophyd/tutorials/device.html#define-a-custom-device</a>&gt;`__), that supports the EPICS <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan</a> record and add the <code class="docutils literal notranslate"><span class="pre">`ophyd.FlyerInterface</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/architecture.html#fly-able-interface">https://blueskyproject.io/ophyd/architecture.html#fly-able-interface</a>&gt;`__ to that class. A class
 method will configure the Device staging to setup the sscan record for a 1-D step scan using the <code class="docutils literal notranslate"><span class="pre">`m1</span></code> &lt;<a class="github reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/711baca0e4fcdffc97fb4d05ee73d4b5b93fcc3a/bluesky/instrument/devices/motors.py#L25">BCDA-APS/bluesky_training</a>&gt;`__ positioner and the <code class="docutils literal notranslate"><span class="pre">`noisy</span></code> &lt;<a class="github reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/711baca0e4fcdffc97fb4d05ee73d4b5b93fcc3a/bluesky/instrument/devices/noisy_detector.py#L42">BCDA-APS/bluesky_training</a>&gt;`__ detector. <code class="docutils literal notranslate"><span class="pre">noisy</span></code> is implemented as an EPICS
 <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html">swait</a> record configured to recalculate a Lorentzian profile when the <code class="docutils literal notranslate"><span class="pre">m1</span></code> readback value changes. The center, width, and height are <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/711baca0e4fcdffc97fb4d05ee73d4b5b93fcc3a/bluesky/instrument/devices/noisy_detector.py#L24-L38">set randomly</a> as this bluesky instrument package is loaded. The center of the simulated
 peak will be defined somewhere between <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/711baca0e4fcdffc97fb4d05ee73d4b5b93fcc3a/bluesky/instrument/devices/noisy_detector.py#L34">+/- 1</a>.</p>
@@ -749,7 +779,7 @@ generator scan [&#39;cfa4afcd&#39;] (scan num: 956)
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Provide schema &amp; meta-data from collect().</span>
 
-<span class="sd">        http://nsls-ii.github.io/ophyd/generated/ophyd.flyers.FlyerInterface.describe_collect.html</span>
+<span class="sd">        https://blueskyproject.io/ophyd/generated/ophyd.flyers.FlyerInterface.describe_collect.html</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dd</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">dd</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">m1</span><span class="o">.</span><span class="n">describe</span><span class="p">())</span>
@@ -761,7 +791,7 @@ generator scan [&#39;cfa4afcd&#39;] (scan num: 956)
 <span class="sd">        Retrieve all collected data (after complete()).</span>
 
 <span class="sd">        Retrieve data from the flyer as proto-events.</span>
-<span class="sd">        http://nsls-ii.github.io/ophyd/generated/ophyd.flyers.FlyerInterface.collect.html</span>
+<span class="sd">        https://blueskyproject.io/ophyd/generated/ophyd.flyers.FlyerInterface.collect.html</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_acquiring</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">&quot;Acquisition still in progress. Call complete() first.&quot;</span><span class="p">)</span>
@@ -1409,8 +1439,8 @@ sigma: 0.6149932116936468
 <li><p>bluesky <code class="docutils literal notranslate"><span class="pre">fly()</span></code> plan: <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.fly.html#bluesky.plans.fly">https://blueskyproject.io/bluesky/generated/bluesky.plans.fly.html#bluesky.plans.fly</a></p></li>
 <li><p>asynchronous collection with fly scans: <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#asynchronous-plans-fly-scans-and-monitoring">https://blueskyproject.io/bluesky/plans.html#asynchronous-plans-fly-scans-and-monitoring</a></p></li>
 <li><p>Asynchronous Acquisition:https://blueskyproject.io/bluesky/async.html</p></li>
-<li><p>ophyd flyer classes: <a class="reference external" href="http://nsls-ii.github.io/ophyd/generated/ophyd.flyers.html">http://nsls-ii.github.io/ophyd/generated/ophyd.flyers.html</a></p></li>
-<li><p>ophyd Fly-able Interface (with links to the <code class="docutils literal notranslate"><span class="pre">FlyerInterface()</span></code> methods) : <a class="reference external" href="http://nsls-ii.github.io/ophyd/architecture.html#fly-able-interface">http://nsls-ii.github.io/ophyd/architecture.html#fly-able-interface</a></p></li>
+<li><p>ophyd flyer classes: <a class="reference external" href="https://blueskyproject.io/ophyd/generated/ophyd.flyers.html">https://blueskyproject.io/ophyd/generated/ophyd.flyers.html</a></p></li>
+<li><p>ophyd Fly-able Interface (with links to the <code class="docutils literal notranslate"><span class="pre">FlyerInterface()</span></code> methods) : <a class="reference external" href="https://blueskyproject.io/ophyd/architecture.html#fly-able-interface">https://blueskyproject.io/ophyd/architecture.html#fly-able-interface</a></p></li>
 </ul>
 </section>
 </section>

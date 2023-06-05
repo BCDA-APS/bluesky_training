@@ -165,6 +165,21 @@
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
       
@@ -276,6 +291,21 @@ document.write(`
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
         
@@ -381,8 +411,8 @@ document.write(`
                   
   <section id="Lesson-2:-motor-and-scan">
 <h1>Lesson 2: motor and scan<a class="headerlink" href="#Lesson-2:-motor-and-scan" title="Permalink to this heading">#</a></h1>
-<p>In this lesson, we’ll work with a motor (for precise positioning) in <a class="reference external" href="http://nsls-ii.github.io/bluesky/">Bluesky</a> and <a class="reference external" href="http://nsls-ii.github.io/">related tools</a>.</p>
-<p>First, we’ll connect with an EPICS motor (using <a class="reference external" href="http://nsls-ii.github.io/ophyd/">ophyd</a>), and then use the Bluesky software to scan the motor (with the scaler from <a class="reference internal" href="_lesson1.html"><span class="doc">lesson 1</span></a>).</p>
+<p>In this lesson, we’ll work with a motor (for precise positioning) in <a class="reference external" href="https://blueskyproject.io/bluesky/">Bluesky</a> and <a class="reference external" href="https://blueskyproject.io/">related tools</a>.</p>
+<p>First, we’ll connect with an EPICS motor (using <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a>), and then use the Bluesky software to scan the motor (with the scaler from <a class="reference internal" href="_lesson1.html"><span class="doc">lesson 1</span></a>).</p>
 <p>Load <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> device support for the <code class="docutils literal notranslate"><span class="pre">EpicsMotor</span></code> and connect with one EPICS motor channel. We have a synApps (v6.1) XXX-style IOC with the prefix <code class="docutils literal notranslate"><span class="pre">sky:</span></code>. It has a scaler, 16 soft channel motors, and some other support we’ll ignore in this lesson.</p>
 <p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <code class="docutils literal notranslate"><span class="pre">`xxx</span></code> &lt;<a class="github reference external" href="https://github.com/epics-modules/xxx">epics-modules/xxx</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">sky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/blob/master/n3_synApps/README.md">prjemian/epics-docker</a></p>
 <div class="nbinput nblast docutils container">

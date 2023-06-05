@@ -165,6 +165,21 @@
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
       
@@ -276,6 +291,21 @@ document.write(`
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
         
@@ -613,8 +643,8 @@ OrderedDict([(&#39;timebase&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 16
 </section>
 <section id="Use-Bluesky-to-count-the-scaler">
 <h2>Use Bluesky to count the scaler<a class="headerlink" href="#Use-Bluesky-to-count-the-scaler" title="Permalink to this heading">#</a></h2>
-<p>So far, we have used ophyd to talk with the EPICS scaler. Let’s start to use Bluesky. We need to load support to start the Bluesky <a class="reference external" href="http://nsls-ii.github.io/bluesky/tutorial.html#the-runengine">RunEngine</a>. For now, we’ll use the most basic configuration (does not save data anywhere).</p>
-<p>The job of the RunEngine is to process command messages (our data acquisition commands) and to output documents (the data to be acquired). Initially, we’ll use predefined data acquisition sequences (called <a class="reference external" href="http://nsls-ii.github.io/bluesky/plans.html">plans</a>) and ignore the <a class="reference external" href="http://nsls-ii.github.io/bluesky/documents.html">documents</a>.</p>
+<p>So far, we have used ophyd to talk with the EPICS scaler. Let’s start to use Bluesky. We need to load support to start the Bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/tutorial.html#the-runengine">RunEngine</a>. For now, we’ll use the most basic configuration (does not save data anywhere).</p>
+<p>The job of the RunEngine is to process command messages (our data acquisition commands) and to output documents (the data to be acquired). Initially, we’ll use predefined data acquisition sequences (called <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">plans</a>) and ignore the <a class="reference external" href="https://blueskyproject.io/bluesky/documents.html">documents</a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
@@ -624,7 +654,7 @@ OrderedDict([(&#39;timebase&#39;, {&#39;value&#39;: 0.0, &#39;timestamp&#39;: 16
 </pre></div>
 </div>
 </div>
-<p>Next, we’ll load a library with many <a class="reference external" href="http://nsls-ii.github.io/bluesky/plans.html#summary">predefined plans</a>. The first plan we want to use is <code class="docutils literal notranslate"><span class="pre">`count()</span></code> &lt;<a class="reference external" href="http://nsls-ii.github.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count">http://nsls-ii.github.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count</a>&gt;`__. By the way, we’ll use a python feature to rename <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> to the shorter <code class="docutils literal notranslate"><span class="pre">bp</span></code> since it will be used a lot.</p>
+<p>Next, we’ll load a library with many <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#summary">predefined plans</a>. The first plan we want to use is <code class="docutils literal notranslate"><span class="pre">`count()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count">https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count</a>&gt;`__. By the way, we’ll use a python feature to rename <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> to the shorter <code class="docutils literal notranslate"><span class="pre">bp</span></code> since it will be used a lot.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -693,7 +723,7 @@ stop 6
 (&#39;4774a0b2-929b-4b23-a1b7-64e3fe6e4033&#39;,)
 </pre></div></div>
 </div>
-<p>So, there were four documents. See <a class="reference external" href="http://nsls-ii.github.io/bluesky/documents.html">http://nsls-ii.github.io/bluesky/documents.html</a> for the details of each. Let’s extend our callback to print the details of each.</p>
+<p>So, there were four documents. See <a class="reference external" href="https://blueskyproject.io/bluesky/documents.html">https://blueskyproject.io/bluesky/documents.html</a> for the details of each. Let’s extend our callback to print the details of each.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
 </pre></div>

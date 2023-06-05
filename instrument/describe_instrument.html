@@ -165,6 +165,21 @@
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
       
@@ -276,6 +291,21 @@ document.write(`
                       </a>
                     </li>
                 
+            <div class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    More
+                </button>
+                <div class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </div>
+            </div>
+            
   </ul>
 </nav></div>
         
@@ -377,7 +407,7 @@ document.write(`
 <p><strong>Objective</strong></p>
 <p>In this notebook, we describe the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for a simulated X-ray instrument at a user facility such as the Advanced Photon Source. The goal is to use EPICS as much as possible to provide the control system features and to use Bluesky (providing the data acquisition framework) as a thin layer on top of EPICS.</p>
 <p><strong>Overview</strong></p>
-<p>This notebook uses two EPICS servers (IOCs), one, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;gp:&quot;</span></code>, providing (simulated) general beam line equipment such as motors, slits, shutter, counters, … The other IOC, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;ad:&quot;</span></code>, provides a simulated EPICS area detector. This notebook will acquaint you with some of the features provided by our Python <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package which uses these IOCs.</p>
+<p>This notebook uses two EPICS servers (IOCs), one, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;gp:&quot;</span></code>, providing (simulated) general beamline equipment such as motors, slits, shutter, counters, … The other IOC, with prefix <code class="docutils literal notranslate"><span class="pre">&quot;ad:&quot;</span></code>, provides a simulated EPICS area detector. This notebook will acquaint you with some of the features provided by our Python <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package which uses these IOCs.</p>
 <details><p>IOC details</p>
 <p>This simulated instrument is provided using <a class="reference external" href="https://www.docker.com/">docker</a> images for <a class="reference external" href="https://www.aps.anl.gov/epics">EPICS base</a>, the <a class="reference external" href="https://www.aps.anl.gov/BCDA/synApps">synApps</a> <a class="reference external" href="https://github.com/epics-modules/xxx">xxx</a> module, and <a class="reference external" href="https://areadetector.github.io/master/index.html">EPICS area detector</a> <a class="reference external" href="https://areadetector.github.io/master/ADSimDetector/simDetector.html?highlight=adsimdetector">ADSimDetector</a>. The images are based on these software versions:</p>
 <ul class="simple">
@@ -621,7 +651,7 @@ pva                  PvaPlugin_V34       (&#39;adsimdet_pva&#39;)
 </section>
 <section id="scaler1">
 <h3><code class="docutils literal notranslate"><span class="pre">scaler1</span></code><a class="headerlink" href="#scaler1" title="Permalink to this heading">#</a></h3>
-<p>A simulated 16-channel scaler is configured with several channels of pulse counters, typical of a synchrotron beam line. <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> can be used as a detector.</p>
+<p>A simulated 16-channel scaler is configured with several channels of pulse counters, typical of a synchrotron beamline. <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> can be used as a detector.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -734,7 +764,7 @@ auto_count_update_rate EpicsSignal         (&#39;scaler1_auto_count_update_rate&
 </pre></div></div>
 </div>
 <p>The timebase is always shown. The additional channels (using names from the scaler GUI screen) are shown output of <code class="docutils literal notranslate"><span class="pre">listdevice(scaler1)</span></code> below.</p>
-<p>Note that in the instrument package, the channel names were assigned on startup. An operating beam line would not do define the names here but instead, let the instrument team name these channels in the GUI screen at the time the cables from the pulse detectors are connected physically to the scaler.</p>
+<p>Note that in the instrument package, the channel names were assigned on startup. An operating beamline would not do define the names here but instead, let the instrument team name these channels in the GUI screen at the time the cables from the pulse detectors are connected physically to the scaler.</p>
 <p>Count the scaler from the command line:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:

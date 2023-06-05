@@ -12,7 +12,7 @@ These _stream-of-consciousness_ notes document first steps with
 *bluesky-queueserver*.  Until these find their way into proper documentation,
 you might first review
 [documentation](https://github.com/BCDA-APS/bdp_controls/tree/main/qserver/README.md)
-from the [APS beam line data pipelines.
+from the [APS beamline data pipelines.
 
 </details>
 
