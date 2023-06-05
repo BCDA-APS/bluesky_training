@@ -20,14 +20,16 @@ installation](https://conda.io/projects/conda/en/latest/user-guide/install/linux
 
 ```bash
 # download the latest installer
-wget https://repo.anaconda.com/miniconda/Miniconda3-py310_23.1.0-1-Linux-x86_64.sh
+INSTALLER=Miniconda3-latest-Linux-x86_64.sh
+# INSTALLER=Miniconda3-py310_23.3.1-0-Linux-x86_64.sh
+wget "https://repo.anaconda.com/miniconda/${INSTALLER}"
 
 # pick the installation location for your system
-# export INSTALL_DIR=/opt/miniconda
+# export INSTALL_DIR=/opt/miniconda3
 export INSTALL_DIR=/APSshare/miniconda/x86_64
 
 # run the silent installer
-bash Miniconda3-py310_23.1.0-1-Linux-x86_64.sh -b -p "${INSTALL_DIR}"
+bash ${INSTALLER} -b -p "${INSTALL_DIR}"
 
 # set some defaults (can override in local settings)
 export CONFIG_FILE="${INSTALL_DIR}/condarc"
@@ -41,5 +43,7 @@ echo "solver: libmamba" >> "${CONFIG_FILE}"
 
 # install libmamba, mamba, & micromamba
 source "${INSTALL_DIR}/bin/activate"
-conda install -y -n base conda-libmamba-solver mamba micromamba
+conda update -y -n base -c defaults conda --solver=classic
+conda install -y -n base -c conda-forge conda-libmamba-solver --solver=classic
+conda install -y -n base mamba micromamba
 ```
