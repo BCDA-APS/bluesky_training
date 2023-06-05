@@ -49,6 +49,7 @@ serves as a template for new beam line installations.
    example/index
    tutor/index
    reference/index
+   changes
 
 Other resources
 ==================
@@ -76,6 +77,8 @@ Other resources
    * conda: https://anaconda.org/conda-forge/pyepics
 * APS Data Management
    * home: https://confluence.aps.anl.gov/display/DMGT/
+
+   changes
 
 Index
 ==================
