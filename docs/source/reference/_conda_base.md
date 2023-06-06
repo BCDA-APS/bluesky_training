@@ -19,20 +19,29 @@ environment.  Note these instructions for [silent
 installation](https://conda.io/projects/conda/en/latest/user-guide/install/linux.html#install-linux-silent).
 
 ```bash
-# download the latest installer
+# pick the installer script
 INSTALLER=Miniconda3-latest-Linux-x86_64.sh
 # INSTALLER=Miniconda3-py310_23.3.1-0-Linux-x86_64.sh
-wget "https://repo.anaconda.com/miniconda/${INSTALLER}"
 
 # pick the installation location for your system
-# export INSTALL_DIR=/opt/miniconda3
-export INSTALL_DIR=/APSshare/miniconda/x86_64
+# INSTALL_DIR=/opt/miniconda3
+INSTALL_DIR=/APSshare/miniconda/x86_64
 
-# run the silent installer
+# download the installer script
+wget "https://repo.anaconda.com/miniconda/${INSTALLER}"
+
+# install Miniconda
 bash ${INSTALLER} -b -p "${INSTALL_DIR}"
 
+# install libmamba, mamba, & micromamba
+source "${INSTALL_DIR}/bin/activate"
+conda update -y -n base conda
+conda install -y -n base conda-libmamba-solver
+# conda install -y -n base -c conda-forge mamba --solver=libmamba
+conda install -y -n base -c conda-forge micromamba --solver=libmamba
+
 # set some defaults (can override in local settings)
-export CONFIG_FILE="${INSTALL_DIR}/condarc"
+CONFIG_FILE="${INSTALL_DIR}/condarc"
 echo "channels:" > "${CONFIG_FILE}"
 echo "  - defaults" >> "${CONFIG_FILE}"
 echo "  - conda-forge" >> "${CONFIG_FILE}"
@@ -40,10 +49,4 @@ echo "  - apsu" >> "${CONFIG_FILE}"
 echo "  - aps-anl-tag" >> "${CONFIG_FILE}"
 echo "channel_priority: flexible" >> "${CONFIG_FILE}"
 echo "solver: libmamba" >> "${CONFIG_FILE}"
-
-# install libmamba, mamba, & micromamba
-source "${INSTALL_DIR}/bin/activate"
-conda update -y -n base -c defaults conda --solver=classic
-conda install -y -n base -c conda-forge conda-libmamba-solver --solver=classic
-conda install -y -n base mamba micromamba
 ```
