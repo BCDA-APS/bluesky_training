@@ -1,5 +1,5 @@
 user_groups:
-  root:  # The group includes all available plan and devices
+  root:  # The group includes all available plans and devices
     allowed_plans:
       - null  # Allow all
     forbidden_plans:
@@ -18,7 +18,7 @@ user_groups:
     forbidden_plans:
       - null  # Nothing is forbidden
     allowed_devices:
-      - ":?.*:depth=5"  # Allow all device and subdevices. Maximum deepth for subdevices is 5.
+      - ":?.*:depth=5"  # Allow all device and subdevices. Maximum depth for subdevices is 5.
     forbidden_devices:
       - null  # Nothing is forbidden
     allowed_functions:

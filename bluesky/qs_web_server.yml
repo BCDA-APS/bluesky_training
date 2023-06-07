@@ -1,0 +1,35 @@
+# Configuration for QS Web Server (bluesky-httpserver)
+
+# QSERVER_HTTP_SERVER_CONFIG=./qs_web_server.yml uvicorn --host localhost --port 60610 bluesky_httpserver.server:app
+
+# authentication:
+#   allow_anonymous_access: True
+#   single_user_api_key: ${SU_API_KEY}
+
+qserver_zmq_configuration:
+  control_address: tcp://localhost:60615
+  info_address: tcp://localhost:60625
+  # public_key: ${PUBLIC_KEY}
+
+api_access:
+  policy: bluesky_httpserver.authorization:BasicAPIAccessControl
+  args:
+    roles:
+      unauthenticated_public:
+        scopes_add: read:console
+        scopes_add: read:queue
+      unauthenticated_single_user:
+        scopes_add:
+          - read:console
+          - read:queue
+          - write:scripts
+          - write:queue:edit
+        # scopes_remove:
+        #   - write:scripts
+        #   - user:apikeys
+
+resource_access:
+  policy: bluesky_httpserver.authorization:DefaultResourceAccessControl
+  args:
+    # default_group: test_user
+    default_group: primary
