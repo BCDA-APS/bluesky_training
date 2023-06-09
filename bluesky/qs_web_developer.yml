@@ -1,0 +1,44 @@
+# Configuration for QS Web Server (bluesky-httpserver)
+
+# anonymous access - DEVELOPMENT ONLY
+
+# QSERVER_HTTP_SERVER_CONFIG=./qs_web_developer.yml uvicorn --host "${HOSTNAME}" --port 60610 bluesky_httpserver.server:app
+
+authentication:
+  allow_anonymous_access: True
+
+qserver_zmq_configuration:
+  control_address: tcp://localhost:60615
+  info_address: tcp://localhost:60625
+
+api_access:
+  policy: bluesky_httpserver.authorization:BasicAPIAccessControl
+  args:
+    roles:
+      unauthenticated_public:
+        scopes_add:
+          - read:status
+          - read:queue
+          - read:history
+          - read:resources
+          - read:config
+          - read:monitor
+          - read:console
+          - read:lock
+          - read:testing
+          - write:queue:edit
+          - write:queue:control
+          - write:manager:control
+          - write:plan:control
+          - write:execute
+          - write:history:edit
+          - write:permissions
+          - write:scripts
+          - write:config
+          - write:lock
+          - write:manager:stop
+          - write:testing
+          - user:apikeys
+          - admin:apikeys
+          - admin:read:principals
+          - admin:metrics
