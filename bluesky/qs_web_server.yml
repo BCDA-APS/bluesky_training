@@ -1,6 +1,6 @@
 # Configuration for QS Web Server (bluesky-httpserver)
 
-# QSERVER_HTTP_SERVER_CONFIG=./qs_web_server.yml uvicorn --host localhost --port 60610 bluesky_httpserver.server:app
+# QSERVER_HTTP_SERVER_CONFIG=./qs_web_server.yml uvicorn --host "${HOSTNAME}" --port 60610 bluesky_httpserver.server:app
 
 # authentication:
 #   allow_anonymous_access: True
@@ -18,10 +18,12 @@ api_access:
       unauthenticated_public:
         scopes_add: read:console
         scopes_add: read:queue
+        scopes_add: read:status
       unauthenticated_single_user:
         scopes_add:
           - read:console
           - read:queue
+          - read:status
           - write:scripts
           - write:queue:edit
         # scopes_remove:
