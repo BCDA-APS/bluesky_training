@@ -90,15 +90,7 @@ Here's a simple step-by-step guide:
    <pre>$ <b> gedit ~/.bashrc ~/.bashrc_aliases </b></pre>
    If any of those files do not exist, this command will create blank ones. 
    </li>
-   <li>In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
-   On a new line, type:
-
-```bash
-alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
-```
-
-   </li> 
-   <li> In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add the following lines:
+   <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find a suitable place to add the following lines:
 
 ```bash
 export BLUESKY_CONDA_ENV=bluesky_2023_2
@@ -108,6 +100,14 @@ source ~/.bashrc_aliases
    <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
    <i>e.g.</i>, if you have created an alias to start a bluesky session.
    </li>
+   <li>In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
+   On a new line, type:
+
+```bash
+alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
+```
+
+   </li> 
    <li>Save your changes.</li>
    <li>Type <code>bash</code> and press enter, or open a new terminal windows to make the new alias available.</li>
 

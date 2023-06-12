@@ -415,20 +415,29 @@ directories which are read-only with regular permissions).</p>
 <a class="reference external" href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a> as base conda
 environment.  Note these instructions for <a class="reference external" href="https://conda.io/projects/conda/en/latest/user-guide/install/linux.html#install-linux-silent">silent
 installation</a>.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># download the latest installer</span>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># pick the installer script</span>
 <span class="nv">INSTALLER</span><span class="o">=</span>Miniconda3-latest-Linux-x86_64.sh
 <span class="c1"># INSTALLER=Miniconda3-py310_23.3.1-0-Linux-x86_64.sh</span>
-wget<span class="w"> </span><span class="s2">&quot;https://repo.anaconda.com/miniconda/</span><span class="si">${</span><span class="nv">INSTALLER</span><span class="si">}</span><span class="s2">&quot;</span>
 
 <span class="c1"># pick the installation location for your system</span>
-<span class="c1"># export INSTALL_DIR=/opt/miniconda3</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">INSTALL_DIR</span><span class="o">=</span>/APSshare/miniconda/x86_64
+<span class="c1"># INSTALL_DIR=/opt/miniconda3</span>
+<span class="nv">INSTALL_DIR</span><span class="o">=</span>/APSshare/miniconda/x86_64
 
-<span class="c1"># run the silent installer</span>
+<span class="c1"># download the installer script</span>
+wget<span class="w"> </span><span class="s2">&quot;https://repo.anaconda.com/miniconda/</span><span class="si">${</span><span class="nv">INSTALLER</span><span class="si">}</span><span class="s2">&quot;</span>
+
+<span class="c1"># install Miniconda</span>
 bash<span class="w"> </span><span class="si">${</span><span class="nv">INSTALLER</span><span class="si">}</span><span class="w"> </span>-b<span class="w"> </span>-p<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">INSTALL_DIR</span><span class="si">}</span><span class="s2">&quot;</span>
 
+<span class="c1"># install libmamba, mamba, &amp; micromamba</span>
+<span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">INSTALL_DIR</span><span class="si">}</span><span class="s2">/bin/activate&quot;</span>
+conda<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>conda
+conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>conda-libmamba-solver
+<span class="c1"># conda install -y -n base -c conda-forge mamba --solver=libmamba</span>
+conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>micromamba<span class="w"> </span>--solver<span class="o">=</span>libmamba
+
 <span class="c1"># set some defaults (can override in local settings)</span>
-<span class="nb">export</span><span class="w"> </span><span class="nv">CONFIG_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">INSTALL_DIR</span><span class="si">}</span><span class="s2">/condarc&quot;</span>
+<span class="nv">CONFIG_FILE</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">INSTALL_DIR</span><span class="si">}</span><span class="s2">/condarc&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;channels:&quot;</span><span class="w"> </span>&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONFIG_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  - defaults&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONFIG_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  - conda-forge&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONFIG_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
@@ -436,12 +445,6 @@ bash<span class="w"> </span><span class="si">${</span><span class="nv">INSTALLER
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;  - aps-anl-tag&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONFIG_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;channel_priority: flexible&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONFIG_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
 <span class="nb">echo</span><span class="w"> </span><span class="s2">&quot;solver: libmamba&quot;</span><span class="w"> </span>&gt;&gt;<span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">CONFIG_FILE</span><span class="si">}</span><span class="s2">&quot;</span>
-
-<span class="c1"># install libmamba, mamba, &amp; micromamba</span>
-<span class="nb">source</span><span class="w"> </span><span class="s2">&quot;</span><span class="si">${</span><span class="nv">INSTALL_DIR</span><span class="si">}</span><span class="s2">/bin/activate&quot;</span>
-conda<span class="w"> </span>update<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-c<span class="w"> </span>defaults<span class="w"> </span>conda<span class="w"> </span>--solver<span class="o">=</span>classic
-conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>-c<span class="w"> </span>conda-forge<span class="w"> </span>conda-libmamba-solver<span class="w"> </span>--solver<span class="o">=</span>classic
-conda<span class="w"> </span>install<span class="w"> </span>-y<span class="w"> </span>-n<span class="w"> </span>base<span class="w"> </span>mamba<span class="w"> </span>micromamba
 </pre></div>
 </div>
 </section>
