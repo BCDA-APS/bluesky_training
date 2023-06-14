@@ -1,5 +1,5 @@
-Conda environment
-=================
+Create the conda environment
+============================
 
 Describes the steps to create a new bluesky environment.
 
