@@ -79,31 +79,33 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          $ <b>source /PATH/TO/CONDA/bin/activate</b>
          </pre>
          
-      However, if the command ``which conda`` does not return anything, or if 
-      you are getting an error message (``bash: conda: command not found`` or 
-      ``bash: activate: No such file or directory``), conda is not installed on 
-      your computer or it is not added to the system's ``PATH`` environment 
+      However, if the command ``which conda`` does not return anything, or if
+      you are getting an error message (``bash: conda: command not found`` or
+      ``bash: activate: No such file or directory``), conda is not installed on
+      your computer or it is not added to the system's ``PATH`` environment
       variable.
 
-      You can install conda by following the installation instructions for 
-      your operating system. You can find the instructions for Windows, 
-      macOS, and Linux on the official conda documentation 
-      `website <https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html>`__.
+      You can install conda by following the installation instructions for your
+      operating system. You can find the instructions for Windows, macOS, and
+      Linux on the official conda documentation `website
+      <https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html>`__.
 
-      If you still encounter the same error message after installing conda, 
-      you may need to add the conda installation directory to your system's 
-      ``PATH`` environment variable manually. You can find instructions on how 
-      to do this in the 
-      `conda documentation <https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html>`__.
+      If you still encounter the same error message after installing conda, you
+      may need to add the conda installation directory to your system's ``PATH``
+      environment variable manually. You can find instructions on how to do this
+      in the `conda documentation
+      <https://docs.conda.io/projects/conda/en/latest/user-guide/install/index.html>`__.
 
 
 
-When ``conda`` is activated, the prompt changes to displays ``(base)``. Now you can 
-use ``conda env list`` to see the environments you have and the directories in 
-which they are installed.
+When ``conda`` is activated, the prompt changes to displays ``(base)``. Now you
+can use ``conda env list`` to see the environments you have and the directories
+in which they are installed.
 
-Note that more documentation about `conda <https://bcda-aps.github.io/bluesky_training/reference/_conda_base.html>`__ 
-is available `elsewhere <https://bcda-aps.github.io/bluesky_training/reference/_conda_environment.html>`__ 
+Note that more documentation about `conda
+<https://bcda-aps.github.io/bluesky_training/reference/_conda_base.html>`__ is
+available `elsewhere
+<https://bcda-aps.github.io/bluesky_training/reference/_conda_environment.html>`__
 in this repository.
 
 
@@ -124,8 +126,10 @@ Here's an example for the ``bluesky_2023_2`` environment:
         --solver=libmamba</b>
     </pre>
 
-The above commands install the ``bluesky_2023_2`` environment inside the ``bluesky`` directory  that was created when installing a new bluesky instrument
-(see `setup a bluesky instrument <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
+The above commands install the ``bluesky_2023_2`` environment inside the
+``bluesky`` directory  that was created when installing a new bluesky instrument
+(see `setup a bluesky instrument
+<https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
 
 Note that the installation takes several minutes. 
 
@@ -148,9 +152,9 @@ Note that the installation takes several minutes.
 Create an alias to activate the bluesky environment
 ---------------------------------------------------
 
-Creating a bash alias is like creating a custom shortcut. You can do this by editing the ``~/.bashrc`` and  ``~/.bashrc_aliases``
-files, which are configuration files for your bash shell. 
-Here's a simple step-by-step guide:
+Creating a bash alias is like creating a custom shortcut. You can do this by
+editing the ``~/.bashrc`` and  ``~/.bashrc_aliases`` files, which are
+configuration files for your bash shell. Here's a simple step-by-step guide:
 
 .. raw:: html
 
@@ -180,7 +184,9 @@ Here's a simple step-by-step guide:
    </b> </pre>
    </li>  
    <li>Save your changes.</li>
-   <li>Type <code>bash</code> and press enter, or open a new terminal windows to make the new alias available.</li>
+   <li>Type <code>bash</code> and press enter, or open a new terminal windows to
+   make the new alias available.</li>
 
    </ol>
-   You can now use the alias <code>become_bluesky</code> to activate the bluesky environment. 
+   You can now use the alias <code>become_bluesky</code> to activate the bluesky
+   environment. 
