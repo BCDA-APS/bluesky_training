@@ -1,21 +1,50 @@
 Create bluesky environment
 ==========================
 
-Describes the steps to create a virtual environment for a new bluesky instrument 
-(see `setup a bluesky instrument <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
+Describes the steps to create a virtual environment for a bluesky instrument
+(see `setup a bluesky instrument
+<https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
 
-A bluesky instrument uses many Python packages not included in the Python 
-Standard Library. Rather than add these directly into the system Python 
-installation, it is recommended to create a Python virtual environment 
-which has the suite of packages (and specific versions) required.
+A bluesky instrument uses many Python packages not included in the Python
+Standard Library. Rather than add these directly into the system Python
+installation, it is recommended to create a Python virtual environment which has
+the suite of packages (and specific versions) required.
 
-**IMPORTANT**: In Linux, use the ``bash`` command shell. For more info
-see `what is
-bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__
+.. raw:: html
+
+    <details><summary>More about virtual conda environments</summary>
+    A virtual environment gives your account control over the suite of installed
+    packages and insulates you from any system software updates:
+
+      - Each conda environment has a name, which corresponds to the file
+        directory in which the environments packages, libraries, and other
+        resources are stored. 
+      - When you install or update package(s) in one environment, this will not
+        affect any of the other environments. This makes it easy to control
+        which software is installed.
+
+    The ``base`` environment refers to the default environment created when you
+    install ``Conda``, which is a package manager and environment management
+    system for Python. The ``base`` environment is created automatically during the
+    installation process, and it serves as the starting point for managing and
+    creating additional environments. When you install packages or libraries
+    using ``Conda`` without specifying a specific environment, the packages are
+    installed into the ``base`` environment by default. The ``base`` environment is
+    often used for general-purpose Python development or as a fallback option
+    when you haven't explicitly created any other environments. However, it is 
+    recommended to create separate environments for different projects
+    or applications to avoid conflicts between package versions. This allows you
+    to isolate the dependencies of each project and maintain consistent
+    environments.
+    </details>
 
 
 Activate conda
 --------------
+
+**IMPORTANT**: In Linux, use the ``bash`` command shell. For more info
+see `what is
+bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__
 
 .. tabs::
 
