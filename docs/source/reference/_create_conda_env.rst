@@ -346,18 +346,18 @@ configuration files for your bash shell. Here's a simple step-by-step guide:
    </li>
    <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find 
    a suitable place to add the following lines:
-   <pre><b> 
+   <pre>
    source ~/.bash_aliases
-   </b> </pre>
+   </pre>
    <b>Note:</b> this line may already be included in your <code>~/.bashrc</code>.
    </li>
    <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find 
    a suitable place to add your alias. 
    On a new line, type:
-   <pre><b> 
+   <pre>
    export BLUESKY_CONDA_ENV=bluesky_2023_2
    alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
-   </b> </pre>
+   </pre>
    </li>  
    <li>Save your changes.</li>
    <li>Type <code>bash</code> and press enter, or open a new terminal windows to
