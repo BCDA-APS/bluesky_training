@@ -300,21 +300,8 @@ Note that the installation takes several minutes.
     created.</li> 
     <li>The <code>-f ./environments/environment_2023_2.yml</code> option names the 
     YAML file to be used. We create different versions of the YAML file, named for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages for a working installation may change over time. By keeping all these files in the environments subdirectory, we can restore any of these environments with a simple command.</li> 
-    <li>The <code>--solver=libmamba</code> option will use the (much faster)
-    conda-libmamba-solver. Either install that in your base environment or
-    remove this install option.</li> 
+    <li>The <code>--solver=libmamba</code> option will use the conda-libmamba-solver. This option is optional (can be removed) but result in a much faster installation of the bluesky environment. The libmanba installation is described in the previous section.</li> 
     </ul>
-
-
-    Note that in the commands above, a long command has been split over several
-    lines to make it clearer to read and also to take less screen width. We
-    could enter the second command all one one line.  The following command
-    works the same as the one above.
-
-    <pre>
-    $ <b>cd ~/bluesky</b>
-    $ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
-    </pre>
 
     </details>
 
