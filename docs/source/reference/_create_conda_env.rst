@@ -195,7 +195,7 @@ in which they are installed.
 
 
 
-The environment with the ``*``is the active one. The command
+The environment with the ``*`` is the active one. The command
 prompt is also prefixed with the environment name, has mentioned above.
 
 
