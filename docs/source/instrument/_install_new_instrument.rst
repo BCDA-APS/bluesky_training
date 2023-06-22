@@ -52,11 +52,6 @@ package.
    Test that the <code>requests</code> package is available by trying to import
    it. In a terminal, type the following command and press <em>Enter</em>:
    <pre>
-   $ <b>python -c "import requests"</b>
-   </pre>
-
-   You might need to <em>specify</em> <code>python3</code>:
-   <pre>
    $ <b>python3 -c "import requests"</b>
    </pre>
 
@@ -80,7 +75,7 @@ workstation at APS with access to the ``/APSshare`` file server):
       .. raw:: html
 
          <pre>
-         $ <b>python /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
+         $ <b>python3 /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
          </pre>
 
    .. tab:: Not at APS
@@ -93,7 +88,7 @@ workstation at APS with access to the ``/APSshare`` file server):
       .. raw:: html
 
          <pre>
-         $ <b>python new_bluesky_instrument.py ~/bluesky</b>
+         $ <b>python3 new_bluesky_instrument.py ~/bluesky</b>
          </pre>
 
 When run successfully, the program output should look like this:
@@ -212,14 +207,14 @@ To start an IPython session with the new bluesky profile, you can now use the fo
 
    <ol>
    <li>Open a terminal.</li>
-   <li>Open the <code>~/.bashrc</code> and <code>~/.bashrc_aliases</code> files with your prefered text editor, 
+   <li>Open the <code>~/.bashrc</code> and <code>~/.bash_aliases</code> files with your prefered text editor, 
    <i>e.g.</i>:
    <pre>
-   $ <b> gedit ~/.bashrc ~/.bashrc_aliases </b>
+   $ <b> gedit ~/.bashrc ~/.bash_aliases </b>
    </pre>
    If any of those files do not exist, this command will create blank ones. 
    </li>
-   <li>In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
+   <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
    On a new line, type:
    <pre>
    alias start_bluesky='conda activate ${BLUESKY_CONDA_ENV}; ipython --profile=bluesky'
@@ -228,7 +223,7 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find a suitable place to add the following lines:
    <pre>
    export BLUESKY_CONDA_ENV=bluesky_2023_2
-   source ~/.bashrc_aliases
+   source ~/.bash_aliases
    </pre>
    <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
    <i>e.g.</i>, if you have created an alias to activate the bluesky conda environment.
