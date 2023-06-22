@@ -12,6 +12,7 @@ the suite of packages (and specific versions) required.
 
 .. raw:: html
 
+    
     <details>
     <summary>More about conda virtual environments</summary>
 
@@ -22,12 +23,14 @@ the suite of packages (and specific versions) required.
     may differ between the environments, as well as the package versions. Even
     the Python version itself may be different.
 
-      - Each conda environment has a name, which corresponds to the file
-        directory in which the environments packages, libraries, and other
-        resources are stored. 
-      - When you install or update package(s) in one environment, this will not
-        affect any of the other environments. This makes it easy to control
-        which software is installed.
+    <ul>
+    <li>Each conda environment has a name, which corresponds to the file
+      directory in which the environments packages, libraries, and other
+      resources are stored. </li>
+    <li>When you install or update package(s) in one environment, this will not
+      affect any of the other environments. This makes it easy to control
+      which software is installed.</li>
+    </ul>
 
     The <code>base</code> environment refers to the default environment created
     when you install conda, which is a package manager and environment
@@ -197,7 +200,8 @@ in which they are installed.
 
 .. raw:: html
 
-    <details><summary>Conda channels</summary>
+    <details>
+    <summary>Conda channels</summary>
 
     Channel refers to a repository or a source from which Conda packages can be
     downloaded and installed. To see your default channels:
@@ -222,9 +226,9 @@ in which they are installed.
 
     </details>
 
-.. raw:: html
 
-    <details><summary>libmamba solver</summary>
+    <details>
+    <summary>libmamba solver</summary>
 
     In 2022, a <a
     href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">significant
@@ -242,7 +246,7 @@ in which they are installed.
 
     If the above command returns <code>classic</code>, follow those steps:
 
-    <ol>
+    <ul>
     <li>Install the libmamba solver:</li>
     <pre>
     $ <b>conda install -c conda-forge libmamba</b>
@@ -255,9 +259,10 @@ in which they are installed.
     <pre>
     $ <b>conda config --show solver</b>
     </pre>
-    </ol>
+    </ul>
 
     </details>
+    <br />
 
 
 
