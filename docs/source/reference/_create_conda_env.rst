@@ -110,7 +110,7 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          the <b>root</b> account or the <b>superuser</b> account).<br>
          The installation steps are described in the following bash script:
 
-         <pre>
+         <pre><code class="language-bash">
          # pick the installer script
          INSTALLER=Miniconda3-latest-Linux-x86_64.sh
          # INSTALLER=Miniconda3-py310_23.3.1-0-Linux-x86_64.sh
@@ -141,11 +141,11 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          echo "  - aps-anl-tag" >> "${CONFIG_FILE}"
          echo "channel_priority: flexible" >> "${CONFIG_FILE}"
          echo "solver: libmamba" >> "${CONFIG_FILE}"
-         </pre>     
+         </code></pre>     
          
          </details>
 
-
+      <br>
       If you still encounter the same error message after installing conda or
       miniconda, you may need to add the conda installation directory to your
       system's ``PATH`` environment variable manually. You can find instructions
