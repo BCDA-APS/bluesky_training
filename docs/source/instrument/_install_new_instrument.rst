@@ -217,16 +217,16 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
    On a new line, type:
    <pre>
+   export BLUESKY_CONDA_ENV=bluesky_2023_2
    alias start_bluesky='conda activate ${BLUESKY_CONDA_ENV}; ipython --profile=bluesky'
    </pre>
+   <b>Note:</b> this lines may already be included in your <code>~/.bash_aliases</code>,
+   <i>e.g.</i>, if you have created an alias to activate the bluesky conda environment.
    </li> 
    <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find a suitable place to add the following lines:
    <pre>
-   export BLUESKY_CONDA_ENV=bluesky_2023_2
    source ~/.bash_aliases
    </pre>
-   <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
-   <i>e.g.</i>, if you have created an alias to activate the bluesky conda environment.
    </li>
    <li>Save your changes.</li>
    <li>Type <code>bash</code> and press enter, or open a new terminal windows to make the new alias available.</li>

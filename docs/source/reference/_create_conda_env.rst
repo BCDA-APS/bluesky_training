@@ -347,16 +347,15 @@ configuration files for your bash shell. Here's a simple step-by-step guide:
    <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find 
    a suitable place to add the following lines:
    <pre><b> 
-   export BLUESKY_CONDA_ENV=bluesky_2023_2
    source ~/.bash_aliases
    </b> </pre>
-   <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
-   <i>e.g.</i>, if you have created an alias to start a bluesky session.
+   <b>Note:</b> this line may already be included in your <code>~/.bashrc</code>.
    </li>
    <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find 
    a suitable place to add your alias. 
    On a new line, type:
    <pre><b> 
+   export BLUESKY_CONDA_ENV=bluesky_2023_2
    alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
    </b> </pre>
    </li>  
