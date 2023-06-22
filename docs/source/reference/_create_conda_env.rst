@@ -193,15 +193,17 @@ in which they are installed.
    base                  *  /opt/miniconda3
    </pre>
 
-   The environment with the <code>*</code> is the active one. The command
-   prompt is also prefixed with the environment name, has mentioned above.
-   <br />
+
+
+The environment with the ``*``is the active one. The command
+prompt is also prefixed with the environment name, has mentioned above.
+
 
 
 .. raw:: html
 
     <details>
-    <summary>Conda channels</summary>
+    <summary>conda channels</summary>
 
     Channel refers to a repository or a source from which Conda packages can be
     downloaded and installed. To see your default channels:
