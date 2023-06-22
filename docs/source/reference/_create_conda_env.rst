@@ -277,6 +277,9 @@ The following commands install the ``bluesky_2023_2`` environment inside the
 <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
 
 
+
+Note that the installation takes several minutes.
+
 .. raw:: html
 
     <pre>
@@ -288,8 +291,34 @@ The following commands install the ``bluesky_2023_2`` environment inside the
         --solver=libmamba</b>
     </pre>
 
+    <details><summary>Details</summary>
+    
+    <ul> 
+    <li>The <code>--force</code> option will replace any existing environment by this
+    name without asking for confirmation. Remove this option if you wish.</li>
+    <li>The <code>-n bluesky_2023_2</code> sets the name of the conda environment to be
+    created.</li> 
+    <li>The <code>-f ./environments/environment_2023_2.yml</code> option names the 
+    YAML file to be used. We create different versions of the YAML file, named for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages for a working installation may change over time. By keeping all these files in the environments subdirectory, we can restore any of these environments with a simple command.</li> 
+    <li>The <code>--solver=libmamba</code> option will use the (much faster)
+    conda-libmamba-solver. Either install that in your base environment or
+    remove this install option.</li> 
+    </ul>
 
-Note that the installation takes several minutes. 
+
+    Note that in the commands above, a long command has been split over several
+    lines to make it clearer to read and also to take less screen width. We
+    could enter the second command all one one line.  The following command
+    works the same as the one above.
+
+    <pre>
+    $ <b>cd ~/bluesky</b>
+    $ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
+    </pre>
+
+    </details>
+
+
 
 Once finished, the installer will report the commands to manage the new environment:
 
@@ -306,21 +335,6 @@ Once finished, the installer will report the commands to manage the new environm
     #     $ conda deactivate
     </pre>
 
-.. raw:: html
-
-    <details><summary>Details</summary>
-
-    Note that in the commands above, a long command has been split over several
-    lines to make it clearer to read and also to take less screen width. We
-    could enter the second command all one one line.  The following command
-    works the same as the one above.
-
-    <pre>
-    $ <b>cd ~/bluesky</b>
-    $ <b>conda env create --force -n bluesky_2023_2 -f ./environments/environment_2023_2.yml --solver=libmamba</b>
-    </pre>
-
-    </details>
 
 
 
