@@ -101,13 +101,13 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
 
       .. raw:: html
 
-         <details><summary>Recommended installation for Linux</summary>
+         <details><summary>Recommended Miniconda installation for Linux</summary>
 
          To prevent users from modifying the conda base environment by accident,
          it is recommanded to install it as read-only. This can be achieved by
-         installing miniconda with *elevated privileges* (this type of account
+         installing miniconda with <i>elevated privileges</i> (this type of account
          refers to a user account that has administrative rights, also known as
-         the *root* account or the *superuser* account.)
+         the <b>root</b> account or the <b>superuser</b> account).<br>
          The installation steps are described in the following bash script:
 
          <pre>
