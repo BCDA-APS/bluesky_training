@@ -12,7 +12,6 @@ the suite of packages (and specific versions) required.
 
 .. raw:: html
 
-    
     <details>
     <summary>More about conda virtual environments</summary>
 
@@ -61,7 +60,7 @@ the suite of packages (and specific versions) required.
     hrf="https://medium.com/@balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22">article</a>
     for more instruction about conda environment YAML files.
     </details>
-    <br />
+
 
 
 Activate conda
@@ -122,7 +121,8 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
 
       .. raw:: html
 
-         <details><summary>Recommended Miniconda installation for Linux</summary>
+         <details>
+         <summary>Recommended Miniconda installation for Linux</summary>
 
          To prevent users from modifying the conda base environment by accident,
          it is recommanded to install it as read-only. This can be achieved by
@@ -165,7 +165,7 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          </code></pre>     
          
          </details>
-
+         <br />
       
 
       If you still encounter the same error message after installing conda or
@@ -195,7 +195,7 @@ in which they are installed.
 
    The environment with the <code>*</code> is the active one. The command
    prompt is also prefixed with the environment name, has mentioned above.
-
+   <br />
 
 
 .. raw:: html
@@ -262,7 +262,6 @@ in which they are installed.
     </ul>
 
     </details>
-    <br />
 
 
 
