@@ -42,6 +42,24 @@ the suite of packages (and specific versions) required.
     dependencies of each project and maintain consistent environments.
     </details>
 
+.. raw:: html
+
+    <details><summary>Why conda?</summary>
+
+    Here, we describe the creation of a Python virtual environment managed by
+    <code>conda</code>. While opinions may vary, we see some advantages to using
+    <code>conda</code> over <a
+    hrf="https://docs.python.org/3/library/venv.html">venv</a>. Consequently, we
+    use <code>conda</code> to install most packages, falling back to
+    <code>pip</code> to install any remaining packages. We use  <a
+    hrf="https://yaml.org/">YAML</a> files to describe these conda environments.
+    See this <a
+    hrf="https://medium.com/@balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22">article</a>
+    for more instruction about conda environment YAML files.
+
+
+    </details>
+
 
 Activate conda
 --------------
@@ -146,6 +164,7 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          </details>
 
       <br>
+
       If you still encounter the same error message after installing conda or
       miniconda, you may need to add the conda installation directory to your
       system's ``PATH`` environment variable manually. You can find instructions
@@ -165,21 +184,94 @@ in which they are installed.
    $ <b>conda env list</b>
    # conda environments:
    #
-   bluesky_2022_3           /home/prjemian/.conda/envs/bluesky_2022_3
-   bluesky_2023_1        *  /home/prjemian/.conda/envs/bluesky_2023_1
-   base                     /opt/miniconda3
+   bluesky_2022_2           /home/username/.conda/envs/bluesky_2022_2
+   bluesky_2022_3           /home/username/.conda/envs/bluesky_2022_3
+   bluesky_2023_1           /home/username/.conda/envs/bluesky_2023_1
+   base                  *  /opt/miniconda3
    </pre>
 
-   The environment with the `*` is the active one.  The full command prompt (not
-   shown here) will also be prefixed with the environment name, such as
-   `(bluesky_2023_1) `.
+   The environment with the <code>*</code> is the active one. The command
+   prompt is also prefixed with the environment name, has mentioned above.
+
+
+
+.. raw:: html
+
+    <details><summary>Conda channels</summary>
+
+    Channel refers to a repository or a source from which Conda packages can be
+    downloaded and installed. To see your default channels:
+
+    <pre>
+    $ <b>conda config --show channels</b>
+    </pre>
+    
+    To add more channels:
+
+    <pre>
+    $ <b>conda config --env --append channels conda-forge </b>
+    $ <b>conda config --env --append channels apsu</b>
+    </pre>
+
+    When you use Conda to install a package, it will search for the package in
+    the specified channel or channels. If the package is found, Conda will
+    download and install it along with its dependencies. By default, Conda will
+    search for packages in the default channels, but you can also specify
+    additional channels to search in using the <code>-c</code> or
+    <code>--channel</code> option when using the conda install command.
+
+    </details>
+
+.. raw:: html
+
+    <details><summary>libmamba solver</summary>
+
+    In 2022, a <a
+    href="https://www.anaconda.com/blog/a-faster-conda-for-a-growing-community">significant
+    performance enhancement</a> was made available to conda by inclusion of the
+    <a
+    href="https://conda.github.io/conda-libmamba-solver/">conda-libmamba-solver</a>
+    package. If you have installed miniconda using the instructions for Linux
+    above, this package is already installed and configured as the default solver.
+    
+    You can check your default solver with the following command:
+
+    <pre>
+    $ <b>conda config --show solver</b>
+    </pre>
+
+    If the above command returns <code>classic</code>, follow those steps:
+
+      - Install the libmamba solver:
+      <pre>
+      $ <b>conda install -c conda-forge libmamba</b>
+      </pre>
+
+      - Set libmamba as the default solver:
+
+      <pre>
+      $ <b>conda config --set solver libmamba</b>
+      </pre>      
+    
+      - Confirm libmanda is now your default solver:
+
+      <pre>
+      $ <b>conda config --show solver</b>
+      </pre>
+
+    </details>
+
 
 
 
 Install the bluesky environment
 -------------------------------
 
-Here's an example for the ``bluesky_2023_2`` environment:
+The following commands install the ``bluesky_2023_2`` environment inside the
+``bluesky`` directory  that was created when installing a new bluesky instrument
+(see `setup a bluesky instrument
+<https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
+
 
 .. raw:: html
 
@@ -192,20 +284,32 @@ Here's an example for the ``bluesky_2023_2`` environment:
         --solver=libmamba</b>
     </pre>
 
-The above commands install the ``bluesky_2023_2`` environment inside the
-``bluesky`` directory  that was created when installing a new bluesky instrument
-(see `setup a bluesky instrument
-<https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
 
 Note that the installation takes several minutes. 
 
+Once finished, the installer will report the commands to manage the new environment:
+
 .. raw:: html
 
-    <details>
-    In the commands above, a long command has been split over several lines to make
-    it clearer to read and also to take less screen width. We could enter the
-    <code>conda env</code> command all one one line.  These commands work the same
-    as the one above.
+    <pre>
+    #
+    # To activate this environment, use
+    #
+    #     $ conda activate bluesky_2023_2
+    #
+    # To deactivate an active environment, use
+    #
+    #     $ conda deactivate
+    </pre>
+
+.. raw:: html
+
+    <details><summary>Details</summary>
+
+    Note that in the commands above, a long command has been split over several
+    lines to make it clearer to read and also to take less screen width. We
+    could enter the second command all one one line.  The following command
+    works the same as the one above.
 
     <pre>
     $ <b>cd ~/bluesky</b>
@@ -213,6 +317,8 @@ Note that the installation takes several minutes.
     </pre>
 
     </details>
+
+
 
 
 Create an alias to activate the bluesky environment
@@ -226,10 +332,10 @@ configuration files for your bash shell. Here's a simple step-by-step guide:
 
    <ol>
    <li>Open a terminal.</li>
-   <li>Open the <code>~/.bashrc</code> and <code>~/.bashrc_aliases</code> files with your prefered text editor, 
+   <li>Open the <code>~/.bashrc</code> and <code>~/.bash_aliases</code> files with your prefered text editor, 
    <i>e.g.</i>:
    <pre>
-   $ <b> gedit ~/.bashrc ~/.bashrc_aliases </b>
+   $ <b> gedit ~/.bashrc ~/.bash_aliases </b>
    </pre>
    If any of those files do not exist, this command will create blank ones. 
    </li>
@@ -237,12 +343,12 @@ configuration files for your bash shell. Here's a simple step-by-step guide:
    a suitable place to add the following lines:
    <pre><b> 
    export BLUESKY_CONDA_ENV=bluesky_2023_2
-   source ~/.bashrc_aliases
+   source ~/.bash_aliases
    </b> </pre>
    <b>Note:</b> those lines may already be included in your <code>~/.bashrc</code>,
    <i>e.g.</i>, if you have created an alias to start a bluesky session.
    </li>
-   <li>In <code>~/.bashrc_aliases</code>, scroll down to the end of the file or find 
+   <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find 
    a suitable place to add your alias. 
    On a new line, type:
    <pre><b> 
@@ -256,3 +362,18 @@ configuration files for your bash shell. Here's a simple step-by-step guide:
    </ol>
    You can now use the alias <code>become_bluesky</code> to activate the bluesky
    environment. 
+
+
+
+
+Other reading
+-------------
+
+   - `Getting started with conda <https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html>`__
+   - `conda environments - User Guide <https://docs.conda.io/projects/conda/en/latest/user-guide/concepts/environments.html>`__
+   - `conda environments - Independent Guide <https://towardsdatascience.com/a-guide-to-conda-environments-bc6180fc533>`__
+   - `conda cheat sheet <https://docs.conda.io/projects/conda/en/4.6.0/_downloads/52a95608c49671267e40c689e0bc00ca/conda-cheatsheet.pdf>`__
+   - `Managing conda environments <https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html>`__
+   - `difference between base environment and no environment at all <https://stackoverflow.com/questions/55134440/in-conda-what-is-the-differece-between-base-environment-and-no-environment-at>`__
+   -  ``venv``:  `Python virtual environments <https://realpython.com/python-virtual-environments-a-primer/>`__
+   - `micromamba environments <https://mamba.readthedocs.io/en/latest/user_guide/micromamba.html>`__
