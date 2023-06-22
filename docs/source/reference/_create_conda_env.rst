@@ -12,7 +12,9 @@ the suite of packages (and specific versions) required.
 
 .. raw:: html
 
-    <details><summary>More about conda virtual environments</summary>
+    <details>
+    <summary>More about conda virtual environments</summary>
+
     A virtual environment gives your control over the suite of installed
     packages and insulates you from any system software updates. It is likely
     that you will have more than one conda environment available.  Each of these
@@ -42,9 +44,8 @@ the suite of packages (and specific versions) required.
     dependencies of each project and maintain consistent environments.
     </details>
 
-.. raw:: html
-
-    <details><summary>Why conda?</summary>
+    <details>
+    <summary>Why conda?</summary>
 
     Here, we describe the creation of a Python virtual environment managed by
     <code>conda</code>. While opinions may vary, we see some advantages to using
@@ -56,9 +57,8 @@ the suite of packages (and specific versions) required.
     See this <a
     hrf="https://medium.com/@balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22">article</a>
     for more instruction about conda environment YAML files.
-
-
     </details>
+    <br />
 
 
 Activate conda
@@ -163,7 +163,7 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          
          </details>
 
-      <br>
+      
 
       If you still encounter the same error message after installing conda or
       miniconda, you may need to add the conda installation directory to your
@@ -242,22 +242,20 @@ in which they are installed.
 
     If the above command returns <code>classic</code>, follow those steps:
 
-      - Install the libmamba solver:
-      <pre>
-      $ <b>conda install -c conda-forge libmamba</b>
-      </pre>
-
-      - Set libmamba as the default solver:
-
-      <pre>
-      $ <b>conda config --set solver libmamba</b>
-      </pre>      
-    
-      - Confirm libmanda is now your default solver:
-
-      <pre>
-      $ <b>conda config --show solver</b>
-      </pre>
+    <ol>
+    <li>Install the libmamba solver:</li>
+    <pre>
+    $ <b>conda install -c conda-forge libmamba</b>
+    </pre>
+    <li>Set libmamba as the default solver:</li>
+    <pre>
+    $ <b>conda config --set solver libmamba</b>
+    </pre>      
+    <li>Confirm libmanda is now your default solver:</li>
+    <pre>
+    $ <b>conda config --show solver</b>
+    </pre>
+    </ol>
 
     </details>
 
