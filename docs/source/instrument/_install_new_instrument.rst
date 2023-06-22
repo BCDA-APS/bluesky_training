@@ -200,7 +200,7 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    <summary>How to create an alias to start a bluesky session?</summary>
 
    Creating a bash alias is like creating a custom shortcut. 
-   You can do this by editing the <code>~/.bashrc</code> and  <code>~/.bashrc_aliases</code> 
+   You can do this by editing the <code>~/.bashrc</code> and  <code>~/.bash_aliases</code> 
    files, which are configuration files for your bash shell. 
    Here's a simple step-by-step guide:
 

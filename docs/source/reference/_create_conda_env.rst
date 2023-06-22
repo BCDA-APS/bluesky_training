@@ -330,7 +330,7 @@ Create an alias to activate the bluesky environment
 ---------------------------------------------------
 
 Creating a bash alias is like creating a custom shortcut. You can do this by
-editing the ``~/.bashrc`` and  ``~/.bashrc_aliases`` files, which are
+editing the ``~/.bashrc`` and  ``~/.bash_aliases`` files, which are
 configuration files for your bash shell. Here's a simple step-by-step guide:
 
 .. raw:: html
