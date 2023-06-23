@@ -15,7 +15,7 @@ the suite of packages (and specific versions) required.
     <details>
     <summary>More about conda virtual environments</summary>
 
-    A virtual environment gives your control over the suite of installed
+    A virtual environment gives you control over the suite of installed
     packages and insulates you from any system software updates. It is likely
     that you will have more than one conda environment available.  Each of these
     has a complete installation of Python with a suite of packages.  The suite
@@ -24,7 +24,7 @@ the suite of packages (and specific versions) required.
 
     <ul>
     <li>Each conda environment has a name, which corresponds to the file
-      directory in which the environments packages, libraries, and other
+      directory in which the environment's packages, libraries, and other
       resources are stored. </li>
     <li>When you install or update package(s) in one environment, this will not
       affect any of the other environments. This makes it easy to control
@@ -176,7 +176,7 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
 
 
 
-When ``conda`` is activated, the prompt changes to displays ``(base)``. Now you
+When ``conda`` is activated, the prompt changes to display ``(base)``. Now you
 can use ``conda env list`` to see the environments you have and the directories
 in which they are installed.
 
@@ -196,7 +196,7 @@ in which they are installed.
 
 
 The environment with the ``*`` is the active one. The command
-prompt is also prefixed with the environment name, has mentioned above.
+prompt is also prefixed with the environment name, as mentioned above.
 
 
 
@@ -299,8 +299,15 @@ Note that the installation takes several minutes.
     <li>The <code>-n bluesky_2023_2</code> sets the name of the conda environment to be
     created.</li> 
     <li>The <code>-f ./environments/environment_2023_2.yml</code> option names the 
-    YAML file to be used. We create different versions of the YAML file, named for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages for a working installation may change over time. By keeping all these files in the environments subdirectory, we can restore any of these environments with a simple command.</li> 
-    <li>The <code>--solver=libmamba</code> option will use the conda-libmamba-solver. This option is optional (can be removed) but result in a much faster installation of the bluesky environment. The libmanba installation is described in the previous section.</li> 
+    YAML file to be used. We create different versions of the YAML file, named
+    for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages
+    for a working installation may change over time. By keeping all these files
+    in the environments subdirectory, we can restore any of these environments
+    with a simple command.</li>
+    <li>The <code>--solver=libmamba</code> option will use the conda-libmamba-solver. 
+    The <code>--solver</code> option can be removed but its use results in a much 
+    faster installation of the bluesky environment. The <code>libmamba</code> installation 
+    is described in the previous section.</li> 
     </ul>
 
     </details>
