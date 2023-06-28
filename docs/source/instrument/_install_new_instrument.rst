@@ -81,9 +81,12 @@ workstation at APS with access to the ``/APSshare`` file server):
    .. tab:: Not at APS
 
       Workstations on other networks (with no access to APSshare) need to
-      `download <https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/new_bluesky_instrument.py>`_
-      this program. Navigate to the directory where the program was downloaded
-      and run the following command:
+      download this program.  Open the file in your browser with this
+      :download:`link <../../../new_bluesky_instrument.py>`
+      and use your browser's commands to **Save As ...** in the directory of
+      your choice (use the file name: `new_bluesky_instrument.py`). Then,
+      navigate to the directory where the program was downloaded and run the
+      following command:
 
       .. raw:: html
 
