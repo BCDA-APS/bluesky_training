@@ -271,7 +271,7 @@ prompt is also prefixed with the environment name, as mentioned above.
 Install the bluesky environment
 -------------------------------
 
-The following commands install the ``bluesky_2023_2`` environment inside the
+The following commands install the ``bluesky_2023_3`` environment inside the
 ``bluesky`` directory  that was created when installing a new bluesky instrument
 (see `setup a bluesky instrument
 <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
@@ -286,8 +286,8 @@ Note that the installation takes several minutes.
     $ <b>cd ~/bluesky</b>
     $ <b>conda env create \
         --force \
-        -n bluesky_2023_2 \
-        -f ./environments/environment_2023_2.yml \
+        -n bluesky_2023_3 \
+        -f ./environments/environment_2023_3.yml \
         --solver=libmamba</b>
     </pre>
 
@@ -296,9 +296,9 @@ Note that the installation takes several minutes.
     <ul> 
     <li>The <code>--force</code> option will replace any existing environment by this
     name without asking for confirmation. Remove this option if you wish.</li>
-    <li>The <code>-n bluesky_2023_2</code> sets the name of the conda environment to be
+    <li>The <code>-n bluesky_2023_3</code> sets the name of the conda environment to be
     created.</li> 
-    <li>The <code>-f ./environments/environment_2023_2.yml</code> option names the 
+    <li>The <code>-f ./environments/environment_2023_3.yml</code> option names the 
     YAML file to be used. We create different versions of the YAML file, named
     for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages
     for a working installation may change over time. By keeping all these files
@@ -322,7 +322,7 @@ Once finished, the installer will report the commands to manage the new environm
     #
     # To activate this environment, use
     #
-    #     $ conda activate bluesky_2023_2
+    #     $ conda activate bluesky_2023_3
     #
     # To deactivate an active environment, use
     #
@@ -362,7 +362,7 @@ configuration files for your bash shell. Here's a simple step-by-step guide:
    a suitable place to add your alias. 
    On a new line, type:
    <pre>
-   export BLUESKY_CONDA_ENV=bluesky_2023_2
+   export BLUESKY_CONDA_ENV=bluesky_2023_3
    alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
    </pre>
    </li>  

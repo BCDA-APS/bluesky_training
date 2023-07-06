@@ -123,10 +123,10 @@ To use bluesky, you first need to activate the bluesky conda environment:
 .. raw:: html
 
    <pre>
-   $ <b>conda activate bluesky_2023_2</b>
+   $ <b>conda activate bluesky_2023_3</b>
    </pre>
 
-The prompt changes to display ``(bluesky_2023_2)`` .
+The prompt changes to display ``(bluesky_2023_3)`` .
 
 .. raw:: html
 
@@ -220,7 +220,7 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
    On a new line, type:
    <pre>
-   export BLUESKY_CONDA_ENV=bluesky_2023_2
+   export BLUESKY_CONDA_ENV=bluesky_2023_3
    alias start_bluesky='conda activate ${BLUESKY_CONDA_ENV}; ipython --profile=bluesky'
    </pre>
    <b>Note:</b> this lines may already be included in your <code>~/.bash_aliases</code>,

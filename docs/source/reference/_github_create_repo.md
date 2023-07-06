@@ -49,8 +49,8 @@ Clone the new repository from GitHub to a local directory.  Since the
 directory.
 
 ```bash
-(bluesky_2023_2) s6hedm@otz:~/bluesky$ cd /tmp
-(bluesky_2023_2) s6hedm@otz:/tmp$ git clone https://github.com/aps-ht-hedm/bluesky_instrument.git
+(bluesky_2023_3) s6hedm@otz:~/bluesky$ cd /tmp
+(bluesky_2023_3) s6hedm@otz:/tmp$ git clone https://github.com/aps-ht-hedm/bluesky_instrument.git
 Cloning into 'bluesky_instrument'...
 warning: You appear to have cloned an empty repository.
 ```
@@ -61,12 +61,12 @@ information.  It is what makes a normal directory into a local git
 repository.
 
 ```bash
-(bluesky_2023_2) s6hedm@otz:/tmp$ mv ./bluesky_instrument/.git ~/bluesky/
+(bluesky_2023_3) s6hedm@otz:/tmp$ mv ./bluesky_instrument/.git ~/bluesky/
 ```
 
 Now, you are done with this temporary
 directory so remove it:
 
 ```bash
-(bluesky_2023_2) s6hedm@otz:/tmp$ /bin/rm -rf ./bluesky_instrument/
+(bluesky_2023_3) s6hedm@otz:/tmp$ /bin/rm -rf ./bluesky_instrument/
 ```
