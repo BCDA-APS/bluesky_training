@@ -21,10 +21,32 @@ Project `milestones <https://github.com/BCDA-APS/bluesky_training/milestones>`_
 describe future plans.
 
 ..
-   1.0.1
+   1.0.2
    ******
 
-   release expected by 2023-06-30
+   release expected by 2023-12-31
+
+
+1.0.1
+******
+
+release expected by 2023-08-31
+
+Breaking Changes
+------------------------
+
+* Move older environment files into archive subdirectory.
+
+New Features
+------------
+
+* Add packages to environment: 
+
+   * bluesky-httpserver
+   * bluesky-kafka
+   * bluesky-live
+   * haven-spc
+   * httpie
 
 1.0.0
 ******
