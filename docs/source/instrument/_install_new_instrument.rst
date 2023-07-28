@@ -2,6 +2,54 @@ Install New Instrument
 ======================
 
 Describes the steps to install a new bluesky instrument.
+The _installation checklist_ summarizes the steps with links
+to the documentation for each step.
+
+.. raw:: html
+
+   <details>
+   <summary>Installation checklist</summary>
+
+      <ol>
+         <li>
+            Assign a MongoDB catalog (
+               <a href="https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md">
+               BCDA instructions
+               </a>
+            )
+         </li>
+         <li>
+            <a href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html">
+            run <pre>new_bluesky_instrument.py ~/bluesky</pre>
+            </a>
+         </li>
+         <li>
+            <a href="https://bcda-aps.github.io/bluesky_training/reference/_ipython.html">
+            configure IPython profile startup
+            </a>
+         </li>
+         <li>
+            <a href="(https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration">
+            databroker catalog configuration
+            </a>
+         </li>
+         <li>
+            create soft link:
+            <pre>ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/</pre>
+         </li>
+         <li>
+            <a href="https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration">
+            initial configuration of instrument
+            </a>
+         </li>
+         <li>
+            <a href="https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html">
+            start a GitHub repository
+            </a>
+         </li>
+      </ol>
+
+   </details>
 
 **Note**: These *instructions have been written for workstations running
 the Linux operating system*. They may be used for other operating
