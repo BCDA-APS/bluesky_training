@@ -2,7 +2,7 @@ Install New Instrument
 ======================
 
 Describes the steps to install a new bluesky instrument.
-The _installation checklist_ summarizes the steps with links
+The *installation checklist* summarizes the steps with links
 to the documentation for each step.
 
 .. raw:: html
@@ -12,15 +12,8 @@ to the documentation for each step.
 
       <ol>
          <li>
-            Assign a MongoDB catalog (
-               <a href="https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md">
-               BCDA instructions
-               </a>
-            )
-         </li>
-         <li>
             <a href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html">
-            run <pre>new_bluesky_instrument.py ~/bluesky</pre>
+            run: <code>python3 new_bluesky_instrument.py ~/bluesky</code>
             </a>
          </li>
          <li>
@@ -29,13 +22,20 @@ to the documentation for each step.
             </a>
          </li>
          <li>
+            create soft link:
+            <code>ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/</code>
+         </li>
+         <li>
+            Assign a MongoDB catalog  for databroker (
+               <a href="https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md">
+               instructions for BCDA
+               </a>
+            )
+         </li>
+         <li>
             <a href="(https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration">
             databroker catalog configuration
             </a>
-         </li>
-         <li>
-            create soft link:
-            <pre>ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/</pre>
          </li>
          <li>
             <a href="https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration">
@@ -50,6 +50,10 @@ to the documentation for each step.
       </ol>
 
    </details>
+
+.. raw:: html
+
+   <br />
 
 **Note**: These *instructions have been written for workstations running
 the Linux operating system*. They may be used for other operating
