@@ -27,7 +27,7 @@ to the documentation for each step.
 #. Assign a MongoDB catalog for databroker: `instructions for BCDA <https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md>`__
 #. `databroker catalog configuration <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration>`__
 #. `initial configuration of instrument <https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration>`__
-#. `start a GitHub repository <https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html>`__
+#. `start a remote repository <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#start-version-control>`__
 
 Setup a bluesky instrument
 --------------------------
@@ -121,6 +121,10 @@ When run successfully, the program output should look like this:
    INFO:__main__:Installing to '/home/user/bluesky'
    INFO:__main__:Initialized Git repository in '/home/user/bluesky'
    </pre>
+   
+The installer program takes care of initializing a local git repository in the ``bluesky`` folder.
+Further instruction are provided `below <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#start-version-control>`_ to create a remote reposititory. 
+
 
 Activate the bluesky conda environment
 --------------------------------------
@@ -291,19 +295,48 @@ option:
 Start version control
 ---------------------
 
-While this step is optional, it is **highly recommended** that you place
+While this step is optional, it is **highly recommended** that you keep
 your bluesky instrument directory under some form of software version
 control. At minimum, this can provide some form of backup protection. It
 also helps others to collaborate with similar bluesky instruments by
 sharing your instrument's implementations.
 
-Instructions for using `git <https://git-scm.com/>`__ as software
-version control with `GitHub <https://github.com/>`__ or the `APS GitLab
-server <https://git.aps.anl.gov/>`__ are provided in `this separate
-document <https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html>`__.
+The installer program initializes a local git repository in the ``bluesky``
+folder. The next step is to create a blank remote repository, for example
+on `GitHub <https://github.com/>`__ or the `APS GitLab server
+<https://git.aps.anl.gov/>`__, as described below.
+
+**WARNING**: to simplify the process (avoid merge conflicts), it is important for the
+remote repository to be **empty**. To do so, follow the steps below **without**
+selecting the option "Initialize this repository with a README"
+
+- GitHub: `Create a repository (step 1 to 6) <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
+- GitLab: `Create a blank project (step 1 to 4) <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_
+
+The next steps are common to both web-based repositories (GitHub and GitLab):
+
+.. raw:: html
+
+   <pre>
+   $ <b>cd ~/bluesky </b>
+   $ <b>git remote add origin https://github.com/OWNER/REPOSITORY.git  </b>
+   # Set a new remote
+
+   $ <b>git remote -v  </b>
+   # Verify new remote
+   > origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+   > origin  https://github.com/OWNER/REPOSITORY.git (push)
+
+   $ <b>git push -u origin main  </b>
+   # Push repo to remote
+   </pre>
 
 
+For more information, you can refer to the GitHub documentation:
 
+- which URL to use: `About remote repositories <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories>`_
+- ``git remote add`` command: `Adding a remote repository <https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository>`_
+- ``git push`` command: `Pushing to a remote repository <https://docs.github.com/en/enterprise-server@3.9/get-started/using-git/pushing-commits-to-a-remote-repository>`_
 
 
 Configure bluesky instrument
