@@ -316,7 +316,7 @@ selecting the option "Initialize this repository with a README"
 
 The next steps are common to both web-based repositories (GitHub and GitLab):
 copy the remote repository URL, for example,
-https://github.com/OWNER/REPOSITORY.git, and open a terminal.
+`https://github.com/OWNER/REPOSITORY.git <https://github.com/OWNER/REPOSITORY.git>`_, and open a terminal.
 
 .. raw:: html
 
