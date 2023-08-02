@@ -313,7 +313,10 @@ selecting the option "Initialize this repository with a README"
 - GitHub: `Create a repository (step 1 to 6) <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
 - GitLab: `Create a blank project (step 1 to 4) <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_
 
+
 The next steps are common to both web-based repositories (GitHub and GitLab):
+copy the remote repository URL, for example,
+https://github.com/OWNER/REPOSITORY.git, and open a terminal.
 
 .. raw:: html
 
