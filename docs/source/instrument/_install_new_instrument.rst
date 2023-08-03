@@ -307,11 +307,11 @@ on `GitHub <https://github.com/>`_ or the `APS GitLab server
 <https://git.aps.anl.gov/>`_.
 
 **WARNING**: to simplify the process (avoid merge conflicts), it is important for the
-remote repository to be **empty**. To do so, follow the intructions described in the link below **without**
-selecting the option *"Initialize this repository with a README"*.
+remote repository to be **empty**. To do so, follow the intructions described in the link below **do not select**
+*"Initialize this repository with a README"*.
 
-- GitHub: `Create a repository (step 1 to 6) <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
-- GitLab: `Create a blank project (step 1 to 4) <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_
+- GitHub: `Create a repository <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`; step 1 to 4, then 6 (skip 5, leave everything else as is). 
+- GitLab: `Create a blank project <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_: step 1 to 4 (do not select Initialize repository with a README nor Enable Static Application Security Testing).
 
 
 The next steps are common to both web-based repositories (GitHub and GitLab):
