@@ -308,7 +308,7 @@ on `GitHub <https://github.com/>`__ or the `APS GitLab server
 
 **WARNING**: to simplify the process (avoid merge conflicts), it is important for the
 remote repository to be **empty**. To do so, follow the steps below **without**
-selecting the option "Initialize this repository with a README"
+selecting the option *"Initialize this repository with a README"*.
 
 - GitHub: `Create a repository (step 1 to 6) <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
 - GitLab: `Create a blank project (step 1 to 4) <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_
