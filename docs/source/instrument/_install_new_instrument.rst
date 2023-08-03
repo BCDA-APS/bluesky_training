@@ -302,7 +302,7 @@ also helps others to collaborate with similar bluesky instruments by
 sharing your instrument's implementations.
 
 The installer program initializes a local git repository in the ``bluesky``
-folder. The next step is to create a blank remote repository, for example
+folder. We now need to create a blank remote repository, for example
 on `GitHub <https://github.com/>`__ or the `APS GitLab server
 <https://git.aps.anl.gov/>`__, as described below.
 
