@@ -123,7 +123,7 @@ When run successfully, the program output should look like this:
    </pre>
    
 The installer program takes care of initializing a local git repository in the ``bluesky`` folder.
-Further instruction are provided `below <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#start-version-control>`_ to create a remote reposititory. 
+Further instructions are provided `below <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#start-version-control>`_ to create a remote reposititory. 
 
 
 Activate the bluesky conda environment
@@ -309,7 +309,7 @@ on `GitHub <https://github.com/>`_ or the `APS GitLab server
 **WARNING**: to simplify the process (avoid merge conflicts), it is important for the
 remote repository to be **empty**. To do so, follow the intructions described in the links below:
 
-- GitHub: `Create a repository <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`; **do not** select Initialize repository with a README. 
+- GitHub: `Create a repository <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_; **do not** select Initialize repository with a README. 
 - GitLab: `Create a blank project <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_; **do not** select Initialize repository with a README.
 
 
