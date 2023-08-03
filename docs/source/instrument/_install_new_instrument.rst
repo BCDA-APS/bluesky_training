@@ -325,14 +325,14 @@ in the tabs below:
       Follow the official GitHub instructions <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository">Create a repository</a>
       with the modifications below:
       <ul>
-         <li><b>Do not</b> select Initialize this repository with a README (step 5)</li>
-         <li>Keep the other options as default:</li>
-         <ul>
-            <li>Visibility: Public</li>
-            <li>Repository template: No template</li>
-            <li><code>.gitignore</code> template: None</li>
-            <li>License: None</li>
-         </ul>
+      <li><b>Do not</b> select Initialize this repository with a README (step 5)</li>
+      <li>Keep the other options as default:</li>
+      <ul>
+      <li>Visibility: Public</li>
+      <li>Repository template: No template</li>
+      <li><code>.gitignore</code> template: None</li>
+      <li>License: None</li>
+      </ul>
       </ul>
 
 
@@ -342,10 +342,10 @@ in the tabs below:
       Follow the official GitLab instructions <a href="https://docs.gitlab.com/ee/user/project/#create-a-blank-project">Create a blank project</a>
       with the modifications below:
       <ul>
-         <li>Visibility Level: Public</li>
-         <li><b>Unselect</b> <i>Initialize repository with a README</i></li>
-         <li>Keep <i>Enable Static <i>Application Security Testing (SAST)</i> unselected</li>
-         <li>
+      <li>Visibility Level: Public</li>
+      <li><b>Unselect</b> <i>Initialize repository with a README</i></li>
+      <li>Keep <i>Enable Static <i>Application Security Testing (SAST)</i> unselected</li>
+      <li>
       </ul>
 
 
