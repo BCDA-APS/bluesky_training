@@ -303,11 +303,11 @@ sharing your instrument's implementations.
 
 The installer program initializes a local git repository in the ``bluesky``
 folder. We now need to create a blank remote repository, for example
-on `GitHub <https://github.com/>`__ or the `APS GitLab server
-<https://git.aps.anl.gov/>`__, as described below.
+on `GitHub <https://github.com/>`_ or the `APS GitLab server
+<https://git.aps.anl.gov/>`_.
 
 **WARNING**: to simplify the process (avoid merge conflicts), it is important for the
-remote repository to be **empty**. To do so, follow the steps below **without**
+remote repository to be **empty**. To do so, follow the intructions described in the link below **without**
 selecting the option *"Initialize this repository with a README"*.
 
 - GitHub: `Create a repository (step 1 to 6) <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
