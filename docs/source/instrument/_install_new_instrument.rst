@@ -304,13 +304,51 @@ sharing your instrument's implementations.
 The installer program initializes a local git repository in the ``bluesky``
 folder. We now need to create a blank remote repository, for example
 on `GitHub <https://github.com/>`_ or the `APS GitLab server
-<https://git.aps.anl.gov/>`_.
+<https://git.aps.anl.gov/>`_ using your `beamline organization 
+<https://bcda-aps.github.io/bluesky_training/reference/_git-help.html#beamline-github-organizations>`_. 
+Note that the bluesky team recommends GitHub (why is that? See 
+`here <https://bcda-aps.github.io/bluesky_training/reference/_git-help.html>`_ 
+for more info).
+
+Note: APS beamlines uses conventions for `beamline organization 
+<https://bcda-aps.github.io/bluesky_training/reference/_git-help.html#beamline-github-organizations>`_
 
 **WARNING**: to simplify the process (avoid merge conflicts), it is important for the
-remote repository to be **empty**. To do so, follow the intructions described in the links below:
+remote repository to be **empty**. To do so, carefully follow the instructions described 
+in the tabs below:
 
-- GitHub: `Create a repository <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_; **do not** select Initialize repository with a README. 
-- GitLab: `Create a blank project <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_; **do not** select Initialize repository with a README.
+
+.. tabs::
+
+   .. tab:: GitHub (recommended)
+
+      Follow the official GitHub instructions <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository">Create a repository</a>
+      with the modifications below:
+      <ul>
+         <li><b>Do not</b> select Initialize this repository with a README (step 5)</li>
+         <li>Keep the other options as default:</li>
+         <ul>
+            <li>Visibility: Public</li>
+            <li>Repository template: No template</li>
+            <li><code>.gitignore</code> template: None</li>
+            <li>License: None</li>
+         </ul>
+      </ul>
+
+
+
+   .. tab:: GitLab
+
+      Follow the official GitLab instructions <a href="https://docs.gitlab.com/ee/user/project/#create-a-blank-project">Create a blank project</a>
+      with the modifications below:
+      <ul>
+         <li>Visibility Level: Public</li>
+         <li><b>Unselect</b> <i>Initialize repository with a README</i></li>
+         <li>Keep <i>Enable Static <i>Application Security Testing (SAST)</i> unselected</li>
+         <li>
+      </ul>
+
+
 
 
 The next steps are common to both web-based repositories (GitHub and GitLab):
@@ -334,12 +372,11 @@ copy the remote repository URL, for example,
    </pre>
 
 
-For more information, you can refer to the GitHub documentation:
+For more information, you can refer to the official GitHub documentation:
 
-- which URL to use: `About remote repositories <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories>`_
+- which URL to use (``ssh`` vs ``https``): `About remote repositories <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories>`_
 - ``git remote add`` command: `Adding a remote repository <https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository>`_
 - ``git push`` command: `Pushing to a remote repository <https://docs.github.com/en/enterprise-server@3.9/get-started/using-git/pushing-commits-to-a-remote-repository>`_
-
 
 Configure bluesky instrument
 ----------------------------
