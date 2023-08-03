@@ -328,7 +328,7 @@ in the tabs below:
       .. raw:: html
 
          <ul>
-         <li><b>Do not</b> select Initialize this repository with a README (step 5)</li>
+         <li><b>Do not</b> select "Initialize this repository with a README" (skip step 5)</li>
          <li>Keep the other options as default:</li>
          <ul>
          <li>Visibility: Public</li>
@@ -349,8 +349,8 @@ in the tabs below:
 
          <ul>
          <li>Visibility Level: Public</li>
-         <li><b>Unselect</b> <i>Initialize repository with a README</i></li>
-         <li>Keep <i>Enable Static <i>Application Security Testing (SAST)</i> unselected</li>
+         <li><b>Unselect</b> "Initialize repository with a README"</li>
+         <li>Keep "Enable Static Application Security Testing (SAST)" unselected</li>
          <li>
          </ul>
 
