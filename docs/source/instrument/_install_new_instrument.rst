@@ -322,7 +322,7 @@ in the tabs below:
 
    .. tab:: GitHub (recommended)
 
-      Follow the official GitHub instructions <a href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository">Create a repository</a>
+      Follow the official GitHub instructions `Create a repository <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
       with the modifications below:
 
       .. raw:: html
@@ -342,7 +342,7 @@ in the tabs below:
 
    .. tab:: GitLab
 
-      Follow the official GitLab instructions <a href="https://docs.gitlab.com/ee/user/project/#create-a-blank-project">Create a blank project</a>
+      Follow the official GitLab instructions `Create a blank project <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_
       with the modifications below:
 
       .. raw:: html
