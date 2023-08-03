@@ -315,19 +315,19 @@ remote repository to be **empty**. To do so, follow the intructions described in
 
 The next steps are common to both web-based repositories (GitHub and GitLab):
 copy the remote repository URL, for example,
-https://git.aps.anl.gov/OWNER/REPOSITORY.git, and open a terminal.
+``https://github.com/OWNER/REPOSITORY.git``, and open a terminal.
 
 .. raw:: html
 
    <pre>
    $ <b>cd ~/bluesky </b>
-   $ <b>git remote add origin https://git.aps.anl.govOWNER/REPOSITORY.git  </b>
+   $ <b>git remote add origin https://github.com/OWNER/REPOSITORY.git  </b>
    # Set a new remote
 
    $ <b>git remote -v  </b>
    # Verify new remote
-   > origin  https://git.aps.anl.gov/OWNER/REPOSITORY.git (fetch)
-   > origin  https://git.aps.anl.gov/OWNER/REPOSITORY.git (push)
+   > origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+   > origin  https://github.com/OWNER/REPOSITORY.git (push)
 
    $ <b>git push -u origin main  </b>
    # Push repo to remote
