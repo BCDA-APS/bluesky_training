@@ -130,10 +130,11 @@ jobs:
 
     - name: Diagnostics
       run: |
-        pwd
-        ls
-        ls bluesky
-        grep primary bluesky/user*
+        echo $(pwd)
+        ls -lAFgh ./
+        echo "------------------"
+        ls -lAFgh ./bluesky/
+        grep primary bluesky/user_group_permissions.yaml
   
     - name: Run tests with pytest & coverage
       run: |
