@@ -128,6 +128,13 @@ jobs:
         bash ./bluesky/qserver.sh status
         qserver status
 
+    - name: Diagnostics
+      run: |
+        pwd
+        ls
+        ls bluesky
+        grep primary bluesky/user*
+  
     - name: Run tests with pytest & coverage
       run: |
         coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
