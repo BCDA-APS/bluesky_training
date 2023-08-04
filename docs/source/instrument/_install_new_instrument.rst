@@ -123,7 +123,7 @@ When run successfully, the program output should look like this:
    </pre>
    
 The installer program takes care of initializing a local git repository in the ``bluesky`` folder.
-Further instructions are provided `below <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#start-version-control>`_ to create a remote reposititory. 
+Further instructions are provided :ref:`below <start_vc>` to create a remote reposititory. 
 
 
 Activate the bluesky conda environment
@@ -349,15 +349,16 @@ Note that the bluesky team recommends GitHub. (Why is that? See section
          <li>Visibility Level: Public</li>
          <li><b>Unselect</b> "Initialize repository with a README"</li>
          <li>Keep "Enable Static Application Security Testing (SAST)" unselected</li>
-         <li>
          </ul>
 
 
 
 
 The next steps are common to both web-based repositories (GitHub and GitLab):
-copy the remote `repository URL <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository>`_, for example,
-``https://github.com/OWNER/REPOSITORY.git``, and open a terminal.
+
+- copy the remote `repository URL <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository>`_, for example,
+``https://github.com/OWNER/REPOSITORY.git``
+- open a terminal
 
 .. raw:: html
 
