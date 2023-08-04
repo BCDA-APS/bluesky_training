@@ -27,7 +27,7 @@ to the documentation for each step.
 #. Assign a MongoDB catalog for databroker: `instructions for BCDA <https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md>`__
 #. `databroker catalog configuration <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration>`__
 #. `initial configuration of instrument <https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration>`__
-#. `start a remote repository <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#start-version-control>`__
+#. :ref:`start a remote repository <start_vc>`
 
 Setup a bluesky instrument
 --------------------------
@@ -290,7 +290,7 @@ option:
    ['45ida_abcd']
    </pre>
 
-
+.. _start_vc:
 
 Start version control
 ---------------------
