@@ -15,7 +15,7 @@ do not place any content there that should not be publicly-accessible.
 GitHub organizes repositories using this pattern:
 ``https://github.com/ORGANIZATION/REPOSITORY``
 
-In ``ORGANIZATION`` is either a single user’s account or a named
+``ORGANIZATION`` is either a single user’s account or a named
 `organizations <https://support.github.com/features/organizations>`__ 
 (created by some GitHub user).
 
@@ -48,7 +48,7 @@ The ``SUBGROUP`` level is optional.
 Guides
 ------
 
-This is a sampling of How-To guides explaining git and GitHub
+This is a sampling of How-To guides explaining Git and GitHub
 repositories.
 
 - Why use version control?
