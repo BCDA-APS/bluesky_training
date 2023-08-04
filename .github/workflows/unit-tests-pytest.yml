@@ -45,10 +45,10 @@ jobs:
     strategy:
       matrix:
         python-version:
-          # - "3.8"
+          - "3.8"
           - "3.9"
           - "3.10"
-          # - "3.11"  # TODO needs queueserver 0.0.18, see PR #83
+          - "3.11"  # TODO needs queueserver 0.0.18, see PR #83
       max-parallel: 5
 
     steps:
@@ -66,28 +66,12 @@ jobs:
         ls -lAFgh "$(pwd)/bluesky/"
         grep primary bluesky/user_group_permissions.yaml
 
-    # - name: Create Python ${{ matrix.python-version }} environment
-    #   uses: mamba-org/provision-with-micromamba@main
-    #   # use main branch to enable choice of channel-priority
-    #   with:
-    #     cache-env: true
-    #     cache-env-key: env-key-${{ matrix.python-version }}
-    #     channel-priority: flexible
-    #     environment-file: environment.yml
-    #     environment-name: anaconda-test-env-py-${{ matrix.python-version }}
-    #     extra-specs: |
-    #       coveralls
-    #       pytest
-    #       pytest-cov
-    #       python=${{ matrix.python-version }}
-    #       setuptools-scm
-  
     - name: Create Python ${{ matrix.python-version }} environment
       uses: mamba-org/setup-micromamba@v1
       with:
-        cache-env: true
-        cache-env-key: env-key-${{ matrix.python-version }}
-        channel-priority: flexible
+        cache-environment: true
+        cache-environment-key: env-key-${{ matrix.python-version }}
+        # channel-priority: flexible
         environment-file: environment.yml
         environment-name: anaconda-test-env-py-${{ matrix.python-version }}
         create-args: >-
@@ -145,6 +129,7 @@ jobs:
 
     - name: Run Bluesky queueserver
       run: |
+        conda env list
         pushd ./bluesky/
         bash ./qserver.sh run &
         # bash ./qserver.sh start
@@ -152,7 +137,7 @@ jobs:
         bash ./qserver.sh status
         qserver status
         popd
-  
+
     - name: Run tests with pytest & coverage
       run: |
         coverage run --concurrency=thread --parallel-mode -m pytest -vvv .
