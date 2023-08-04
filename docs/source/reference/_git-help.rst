@@ -1,6 +1,9 @@
+.. _git-help:
+
 Using Git for version control
 =============================
 
+.. _beamline-github-organizations:
 
 Beamline GitHub organizations
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

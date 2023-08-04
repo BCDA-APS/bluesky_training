@@ -304,18 +304,16 @@ sharing your instrument's implementations.
 The installer program initializes a local git repository in the ``bluesky``
 folder. We now need to create a blank remote repository, for example
 on `GitHub <https://github.com/>`_ or the `APS GitLab server
-<https://git.aps.anl.gov/>`_ using your `beamline organization 
-<https://bcda-aps.github.io/bluesky_training/reference/_git-help.html#beamline-github-organizations>`_. 
-Note that the bluesky team recommends GitHub (why is that? See 
-`here <https://bcda-aps.github.io/bluesky_training/reference/_git-help.html>`_ 
-for more info).
+<https://git.aps.anl.gov/>`_ using your :ref:`beamline organization 
+<beamline-github-organizations>`. 
+Note that the bluesky team recommends GitHub. (Why is that? See section
+:ref:`git-help` for more info).
 
-Note: APS beamlines uses conventions for `beamline organization 
-<https://bcda-aps.github.io/bluesky_training/reference/_git-help.html#beamline-github-organizations>`_
+.. note:: APS beamlines use conventions for :ref:`beamline organization <beamline-github-organizations>`
 
-**WARNING**: to simplify the process (avoid merge conflicts), it is important for the
-remote repository to be **empty**. To do so, carefully follow the instructions described 
-in the tabs below:
+.. warning:: To simplify the process (avoid merge conflicts), it is important for the
+   remote repository to be **empty**. To do so, carefully follow the instructions described 
+   in the tabs below.
 
 
 .. tabs::
