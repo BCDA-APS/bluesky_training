@@ -58,6 +58,14 @@ jobs:
     - name: Checkout the project from GitHub
       uses: actions/checkout@v2
 
+    - name: Diagnostics
+      run: |
+        echo $(pwd)
+        ls -lAFgh ./
+        echo "------------------"
+        ls -lAFgh ./bluesky/
+        grep primary bluesky/user_group_permissions.yaml
+
     - name: Create Python ${{ matrix.python-version }} environment
       uses: mamba-org/provision-with-micromamba@main
       # use main branch to enable choice of channel-priority
@@ -122,19 +130,12 @@ jobs:
 
     - name: Run Bluesky queueserver
       run: |
+        export STARTUP_DIR="${HOME}bluesky"
         bash ./bluesky/qserver.sh run &
         # bash ./bluesky/qserver.sh start
         sleep 10
         bash ./bluesky/qserver.sh status
         qserver status
-
-    - name: Diagnostics
-      run: |
-        echo $(pwd)
-        ls -lAFgh ./
-        echo "------------------"
-        ls -lAFgh ./bluesky/
-        grep primary bluesky/user_group_permissions.yaml
   
     - name: Run tests with pytest & coverage
       run: |
