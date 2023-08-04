@@ -3,13 +3,13 @@ Install New Instrument
 
 Describes the steps to install a new bluesky instrument.
 
-**Note**: These *instructions have been written for workstations running
+.. note:: These *instructions have been written for workstations running
 the Linux operating system*. They may be used for other operating
 systems but expect some modifications are necessary. One such
 modification is that the ``libhkl`` library, needed for diffractometer
 support, is only available for Linux x86_64 host architectures.
 
-**IMPORTANT**: In Linux, use the ``bash`` command shell. For more info
+.. warning:: In Linux, use the ``bash`` command shell. For more info
 see `what is
 bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__
 
@@ -197,7 +197,7 @@ This bash command create a new IPython profile for bluesky:
 Next, create the starter script for this profile. This will ensure that the instrument 
 package gets loaded when starting a bluesky IPython session.
 
-**Note:** Copy *all* these lines and paste them exactly into your terminal:
+.. note:: Copy *all* these lines and paste them exactly into your terminal:
 
 .. code:: bash
 
@@ -309,7 +309,7 @@ on `GitHub <https://github.com/>`_ or the `APS GitLab server
 Note that the bluesky team recommends GitHub. (Why is that? See section
 :ref:`git-help` for more info).
 
-.. note:: APS beamlines use conventions for :ref:`beamline organization <beamline-github-organizations>`
+.. note:: APS beamlines use specific conventions for :ref:`beamline organization <beamline-github-organizations>`.
 
 .. warning:: To simplify the process (avoid merge conflicts), it is important for the
    remote repository to be **empty**. To do so, carefully follow the instructions described 
@@ -358,7 +358,9 @@ The next steps are common to both web-based repositories (GitHub and GitLab):
 
 - copy the remote `repository URL <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository>`_, for example,
 ``https://github.com/OWNER/REPOSITORY.git``
+
 - open a terminal
+  
 
 .. raw:: html
 
