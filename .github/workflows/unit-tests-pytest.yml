@@ -63,7 +63,7 @@ jobs:
         echo $(pwd)
         ls -lAFgh ./
         echo "------------------"
-        ls -lAFgh ./bluesky/
+        ls -lAFgh "$(pwd)/bluesky/"
         grep primary bluesky/user_group_permissions.yaml
 
     - name: Create Python ${{ matrix.python-version }} environment
@@ -130,7 +130,7 @@ jobs:
 
     - name: Run Bluesky queueserver
       run: |
-        export STARTUP_DIR="${HOME}bluesky"
+        export STARTUP_DIR="$(pwd)/bluesky"
         bash ./bluesky/qserver.sh run &
         # bash ./bluesky/qserver.sh start
         sleep 10
