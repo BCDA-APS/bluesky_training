@@ -130,12 +130,13 @@ jobs:
 
     - name: Run Bluesky queueserver
       run: |
-        export STARTUP_DIR="$(pwd)/bluesky"
-        bash ./bluesky/qserver.sh run &
-        # bash ./bluesky/qserver.sh start
+        pushd ./bluesky/
+        bash ./qserver.sh run &
+        # bash ./qserver.sh start
         sleep 10
-        bash ./bluesky/qserver.sh status
+        bash ./qserver.sh status
         qserver status
+        popd
   
     - name: Run tests with pytest & coverage
       run: |
