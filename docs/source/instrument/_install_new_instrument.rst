@@ -3,15 +3,9 @@ Install New Instrument
 
 Describes the steps to install a new bluesky instrument.
 
-**Note**: These *instructions have been written for workstations running
-the Linux operating system*. They may be used for other operating
-systems but expect some modifications are necessary. One such
-modification is that the ``libhkl`` library, needed for diffractometer
-support, is only available for Linux x86_64 host architectures.
+.. note:: These *instructions have been written for workstations running the Linux operating system*. They may be used for other operating systems but expect some modifications are necessary. One such modification is that the ``libhkl`` library, needed for diffractometer support, is only available for Linux x86_64 host architectures.
 
-**IMPORTANT**: In Linux, use the ``bash`` command shell. For more info
-see `what is
-bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__
+.. warning:: In Linux, use the ``bash`` command shell. For more info see `what is bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__
 
 Installation checklist
 --------------------------
@@ -27,7 +21,7 @@ to the documentation for each step.
 #. Assign a MongoDB catalog for databroker: `instructions for BCDA <https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md>`__
 #. `databroker catalog configuration <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration>`__
 #. `initial configuration of instrument <https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration>`__
-#. `start a GitHub repository <https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html>`__
+#. :ref:`start a remote repository <start_vc>`
 
 Setup a bluesky instrument
 --------------------------
@@ -121,6 +115,10 @@ When run successfully, the program output should look like this:
    INFO:__main__:Installing to '/home/user/bluesky'
    INFO:__main__:Initialized Git repository in '/home/user/bluesky'
    </pre>
+   
+The installer program takes care of initializing a local git repository in the ``bluesky`` folder.
+Further instructions are provided :ref:`below <start_vc>` to create a remote reposititory. 
+
 
 Activate the bluesky conda environment
 --------------------------------------
@@ -193,7 +191,7 @@ This bash command create a new IPython profile for bluesky:
 Next, create the starter script for this profile. This will ensure that the instrument 
 package gets loaded when starting a bluesky IPython session.
 
-**Note:** Copy *all* these lines and paste them exactly into your terminal:
+.. note:: Copy *all* these lines and paste them exactly into your terminal.
 
 .. code:: bash
 
@@ -286,25 +284,98 @@ option:
    ['45ida_abcd']
    </pre>
 
-
+.. _start_vc:
 
 Start version control
 ---------------------
 
-While this step is optional, it is **highly recommended** that you place
+While this step is optional, it is **highly recommended** that you keep
 your bluesky instrument directory under some form of software version
 control. At minimum, this can provide some form of backup protection. It
 also helps others to collaborate with similar bluesky instruments by
 sharing your instrument's implementations.
 
-Instructions for using `git <https://git-scm.com/>`__ as software
-version control with `GitHub <https://github.com/>`__ or the `APS GitLab
-server <https://git.aps.anl.gov/>`__ are provided in `this separate
-document <https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html>`__.
+The installer program initializes a local git repository in the ``bluesky``
+folder. We now need to create a blank remote repository, for example
+on `GitHub <https://github.com/>`_ or the `APS GitLab server
+<https://git.aps.anl.gov/>`_ using your :ref:`beamline organization 
+<beamline-github-organizations>`. 
+Note that the bluesky team recommends GitHub. (Why is that? See section
+:ref:`git-help` for more info).
+
+.. note:: APS beamlines use specific conventions for :ref:`beamline organization <beamline-github-organizations>`.
+
+.. warning:: To simplify the process (avoid merge conflicts), it is important for the
+   remote repository to be **empty**. To do so, carefully follow the instructions described 
+   in the tabs below.
+
+
+.. tabs::
+
+   .. tab:: GitHub (recommended)
+
+      Follow the official GitHub instructions `Create a repository <https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository>`_
+      with the modifications below:
+
+      .. raw:: html
+
+         <ul>
+         <li><b>Do not</b> select "Initialize this repository with a README" (skip step 5)</li>
+         <li>Keep the other options as default:</li>
+         <ul>
+         <li>Visibility: Public</li>
+         <li>Repository template: No template</li>
+         <li><code>.gitignore</code> template: None</li>
+         <li>License: None</li>
+         </ul>
+         </ul>
+
+
+
+   .. tab:: GitLab
+
+      Follow the official GitLab instructions `Create a blank project <https://docs.gitlab.com/ee/user/project/#create-a-blank-project>`_
+      with the modifications below:
+
+      .. raw:: html
+
+         <ul>
+         <li>Visibility Level: Public</li>
+         <li><b>Unselect</b> "Initialize repository with a README"</li>
+         <li>Keep "Enable Static Application Security Testing (SAST)" unselected</li>
+         </ul>
 
 
 
 
+The next steps are common to both web-based repositories (GitHub and GitLab):
+
+- copy the remote `repository URL <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository>`_, for example,
+  ``https://github.com/OWNER/REPOSITORY.git``
+- open a terminal
+
+.. raw:: html
+
+   <pre>
+   $ <b>cd ~/bluesky </b>
+   $ <b>git remote add origin https://github.com/OWNER/REPOSITORY.git  </b>
+   # Set a new remote
+
+   $ <b>git remote -v  </b>
+   # Verify new remote
+   > origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+   > origin  https://github.com/OWNER/REPOSITORY.git (push)
+
+   $ <b>git push -u origin main  </b>
+   # Push repo to remote
+   </pre>
+
+
+For more information, you can refer to the official GitHub documentation:
+
+- which URL to use (``ssh`` vs ``https``): `About remote repositories <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories>`_
+- ``git remote add`` command: `Adding a remote repository <https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository>`_
+- ``git push`` command: `Pushing to a remote repository <https://docs.github.com/en/enterprise-server@3.9/get-started/using-git/pushing-commits-to-a-remote-repository>`_
 
 Configure bluesky instrument
 ----------------------------
