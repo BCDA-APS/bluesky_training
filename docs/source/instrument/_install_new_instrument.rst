@@ -351,10 +351,8 @@ Note that the bluesky team recommends GitHub. (Why is that? See section
 The next steps are common to both web-based repositories (GitHub and GitLab):
 
 - copy the remote `repository URL <https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository>`_, for example,
-``https://github.com/OWNER/REPOSITORY.git``
-
+  ``https://github.com/OWNER/REPOSITORY.git``
 - open a terminal
-  
 
 .. raw:: html
 
