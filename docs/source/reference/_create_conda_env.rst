@@ -162,6 +162,9 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          echo "  - aps-anl-tag" >> "${CONFIG_FILE}"
          echo "channel_priority: flexible" >> "${CONFIG_FILE}"
          echo "solver: libmamba" >> "${CONFIG_FILE}"
+
+         # update ~/.bashrc to activate base environment on login
+         conda init
          </code></pre>     
          
          </details>
