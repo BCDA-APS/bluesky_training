@@ -27,3 +27,6 @@ dev_*.ipynb
 
 # Sphinx build products
 build/
+.DS_Store
+.gitignore
+.gitignore
