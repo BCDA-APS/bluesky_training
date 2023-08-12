@@ -404,14 +404,30 @@ document.write(`
   <section id="install-new-instrument">
 <h1>Install New Instrument<a class="headerlink" href="#install-new-instrument" title="Permalink to this heading">#</a></h1>
 <p>Describes the steps to install a new bluesky instrument.</p>
-<p><strong>Note</strong>: These <em>instructions have been written for workstations running
-the Linux operating system</em>. They may be used for other operating
-systems but expect some modifications are necessary. One such
-modification is that the <code class="docutils literal notranslate"><span class="pre">libhkl</span></code> library, needed for diffractometer
-support, is only available for Linux x86_64 host architectures.</p>
-<p><strong>IMPORTANT</strong>: In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell. For more info
-see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash">what is
-bash?</a></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>These <em>instructions have been written for workstations running the Linux operating system</em>. They may be used for other operating systems but expect some modifications are necessary. One such modification is that the <code class="docutils literal notranslate"><span class="pre">libhkl</span></code> library, needed for diffractometer support, is only available for Linux x86_64 host architectures.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell. For more info see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash">what is bash?</a></p>
+</div>
+<section id="installation-checklist">
+<h2>Installation checklist<a class="headerlink" href="#installation-checklist" title="Permalink to this heading">#</a></h2>
+<p>The <em>installation checklist</em> summarizes the steps with links
+to the documentation for each step.</p>
+<ol class="arabic simple">
+<li><p>run <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span> <span class="pre">~/bluesky</span></code> (see sections below)</p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html">create conda environment</a></p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_ipython.html">configure IPython profile startup</a></p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment">configure bash with environment variable and alias</a></p></li>
+<li><p>create soft link:  <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">${HOME}/bluesky/blueskyStarter.sh</span> <span class="pre">~/bin/</span></code></p></li>
+<li><p>Assign a MongoDB catalog for databroker: <a class="reference external" href="https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md">instructions for BCDA</a></p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration">databroker catalog configuration</a></p></li>
+<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration">initial configuration of instrument</a></p></li>
+<li><p><a class="reference internal" href="#start-vc"><span class="std std-ref">start a remote repository</span></a></p></li>
+</ol>
+</section>
 <section id="setup-a-bluesky-instrument">
 <h2>Setup a bluesky instrument<a class="headerlink" href="#setup-a-bluesky-instrument" title="Permalink to this heading">#</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code>
@@ -474,7 +490,9 @@ INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
 INFO:__main__:Initialized Git repository in '/home/user/bluesky'
-</pre></section>
+</pre><p>The installer program takes care of initializing a local git repository in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> folder.
+Further instructions are provided <a class="reference internal" href="#start-vc"><span class="std std-ref">below</span></a> to create a remote reposititory.</p>
+</section>
 <section id="activate-the-bluesky-conda-environment">
 <h2>Activate the bluesky conda environment<a class="headerlink" href="#activate-the-bluesky-conda-environment" title="Permalink to this heading">#</a></h2>
 <details>
@@ -514,7 +532,10 @@ and specific hardware configuration.</p>
 $ <b>ipython profile create bluesky --ipython-dir="~/.ipython"</b>
 </pre><p>Next, create the starter script for this profile. This will ensure that the instrument
 package gets loaded when starting a bluesky IPython session.</p>
-<p><strong>Note:</strong> Copy <em>all</em> these lines and paste them exactly into your terminal:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Copy <em>all</em> these lines and paste them exactly into your terminal.</p>
+</div>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>cat<span class="w"> </span>&gt;<span class="w"> </span>~/.ipython/profile_bluesky/startup/00-start-bluesky.py<span class="w">  </span><span class="s">&lt;&lt; EOF</span>
 <span class="s">import pathlib, sys</span>
 <span class="s">sys.path.append(str(pathlib.Path().home() / &quot;bluesky&quot;))</span>
@@ -586,16 +607,70 @@ $ <b>python -c "import databroker; print(list(databroker.catalog))"</b>
 ['45ida_abcd']
 </pre></section>
 <section id="start-version-control">
-<h2>Start version control<a class="headerlink" href="#start-version-control" title="Permalink to this heading">#</a></h2>
-<p>While this step is optional, it is <strong>highly recommended</strong> that you place
+<span id="start-vc"></span><h2>Start version control<a class="headerlink" href="#start-version-control" title="Permalink to this heading">#</a></h2>
+<p>While this step is optional, it is <strong>highly recommended</strong> that you keep
 your bluesky instrument directory under some form of software version
 control. At minimum, this can provide some form of backup protection. It
 also helps others to collaborate with similar bluesky instruments by
 sharing your instrument’s implementations.</p>
-<p>Instructions for using <a class="reference external" href="https://git-scm.com/">git</a> as software
-version control with <a class="reference external" href="https://github.com/">GitHub</a> or the <a class="reference external" href="https://git.aps.anl.gov/">APS GitLab
-server</a> are provided in <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_github_create_repo.html">this separate
-document</a>.</p>
+<p>The installer program initializes a local git repository in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code>
+folder. We now need to create a blank remote repository, for example
+on <a class="reference external" href="https://github.com/">GitHub</a> or the <a class="reference external" href="https://git.aps.anl.gov/">APS GitLab server</a> using your <a class="reference internal" href="../reference/_git-help.html#beamline-github-organizations"><span class="std std-ref">beamline organization</span></a>.
+Note that the bluesky team recommends GitHub. (Why is that? See section
+<a class="reference internal" href="../reference/_git-help.html#git-help"><span class="std std-ref">Using Git for version control</span></a> for more info).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>APS beamlines use specific conventions for <a class="reference internal" href="../reference/_git-help.html#beamline-github-organizations"><span class="std std-ref">beamline organization</span></a>.</p>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To simplify the process (avoid merge conflicts), it is important for the
+remote repository to be <strong>empty</strong>. To do so, carefully follow the instructions described
+in the tabs below.</p>
+</div>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-1-1-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-1-1-0" name="1-0" role="tab" tabindex="0">GitHub (recommended)</button><button aria-controls="panel-1-1-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-1-1-1" name="1-1" role="tab" tabindex="-1">GitLab</button></div><div aria-labelledby="tab-1-1-0" class="sphinx-tabs-panel" id="panel-1-1-0" name="1-0" role="tabpanel" tabindex="0"><p>Follow the official GitHub instructions <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository">Create a repository</a>
+with the modifications below:</p>
+<ul>
+<li><b>Do not</b> select "Initialize this repository with a README" (skip step 5)</li>
+<li>Keep the other options as default:</li>
+<ul>
+<li>Visibility: Public</li>
+<li>Repository template: No template</li>
+<li><code>.gitignore</code> template: None</li>
+<li>License: None</li>
+</ul>
+</ul></div><div aria-labelledby="tab-1-1-1" class="sphinx-tabs-panel" hidden="true" id="panel-1-1-1" name="1-1" role="tabpanel" tabindex="0"><p>Follow the official GitLab instructions <a class="reference external" href="https://docs.gitlab.com/ee/user/project/#create-a-blank-project">Create a blank project</a>
+with the modifications below:</p>
+<ul>
+<li>Visibility Level: Public</li>
+<li><b>Unselect</b> "Initialize repository with a README"</li>
+<li>Keep "Enable Static Application Security Testing (SAST)" unselected</li>
+</ul></div></div>
+<p>The next steps are common to both web-based repositories (GitHub and GitLab):</p>
+<ul class="simple">
+<li><p>copy the remote <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository">repository URL</a>, for example,
+<code class="docutils literal notranslate"><span class="pre">https://github.com/OWNER/REPOSITORY.git</span></code></p></li>
+<li><p>open a terminal</p></li>
+</ul>
+<pre>
+$ <b>cd ~/bluesky </b>
+$ <b>git remote add origin https://github.com/OWNER/REPOSITORY.git  </b>
+# Set a new remote
+
+$ <b>git remote -v  </b>
+# Verify new remote
+> origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+> origin  https://github.com/OWNER/REPOSITORY.git (push)
+
+$ <b>git push -u origin main  </b>
+# Push repo to remote
+</pre><p>For more information, you can refer to the official GitHub documentation:</p>
+<ul class="simple">
+<li><p>which URL to use (<code class="docutils literal notranslate"><span class="pre">ssh</span></code> vs <code class="docutils literal notranslate"><span class="pre">https</span></code>): <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories">About remote repositories</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span></code> command: <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository">Adding a remote repository</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command: <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.9/get-started/using-git/pushing-commits-to-a-remote-repository">Pushing to a remote repository</a></p></li>
+</ul>
 </section>
 <section id="configure-bluesky-instrument">
 <h2>Configure bluesky instrument<a class="headerlink" href="#configure-bluesky-instrument" title="Permalink to this heading">#</a></h2>
@@ -652,6 +727,7 @@ configuration of the <code class="docutils literal notranslate"><span class="pre
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-checklist">Installation checklist</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-a-bluesky-instrument">Setup a bluesky instrument</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-bluesky-conda-environment">Activate the bluesky conda environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-new-bluesky-instrument">Test the new bluesky instrument</a></li>

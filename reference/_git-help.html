@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 
-    <title>Using git for version control &#8212; APS Bluesky Training  documentation</title>
+    <title>Using Git for version control &#8212; APS Bluesky Training  documentation</title>
   
   
   
@@ -46,7 +46,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="GitHub Repository" href="_github_create_repo.html" />
+    <link rel="next" title="Bluesky: Brief Introduction" href="_intro2bluesky.html" />
     <link rel="prev" title="Create bluesky environment" href="_create_conda_env.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -336,8 +336,7 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="_FAQ.html">Frequently Asked Questions</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_aps_data_management.html">APS Data Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_conda_env.html">Create bluesky environment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using git for version control</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_github_create_repo.html">GitHub Repository</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Using Git for version control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_intro2bluesky.html">Bluesky: Brief Introduction</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_ipython.html">IPython Profile</a></li>
 </ul>
@@ -380,7 +379,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Reference</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Using git for version control</li>
+    <li class="breadcrumb-item active" aria-current="page">Using Git for version control</li>
   </ul>
 </nav>
 </div>
@@ -398,93 +397,18 @@ document.write(`
                 <article class="bd-article" role="main">
                   
   <section id="using-git-for-version-control">
-<h1>Using git for version control<a class="headerlink" href="#using-git-for-version-control" title="Permalink to this heading">#</a></h1>
-<p>While version control is optional, it is _highly recommended <a class="footnote-reference brackets" href="#id4" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> <a class="footnote-reference brackets" href="#id5" id="id2" role="doc-noteref"><span class="fn-bracket">[</span>2<span class="fn-bracket">]</span></a>
-that you place your bluesky instrument directory under some form of
-software version control. <a class="footnote-reference brackets" href="#id6" id="id3" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a>
-At minimum, this can provide some form of backup protection. It also
-helps others to collaborate with similar bluesky instruments by sharing
-your instrument’s implementations.</p>
-<p>There are many <a class="reference internal" href="#guides"><span class="std std-ref">guides available online</span></a> to learn about
-<code class="docutils literal notranslate"><span class="pre">git</span></code> and GitHub or GitLab. This document will not attempt to cover
-that material. Rather, this document will describe the steps to place
-the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory and its contents under <code class="docutils literal notranslate"><span class="pre">git</span></code> version control
-and push to a GitHub repository.</p>
-<aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id4" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
-<p>Why use version control?
-<a class="reference external" href="https://www.git-tower.com/learn/git/ebook/en/desktop-gui/basics/why-use-version-control">https://www.git-tower.com/learn/git/ebook/en/desktop-gui/basics/why-use-version-control</a></p>
-</aside>
-<aside class="footnote brackets" id="id5" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">2</a><span class="fn-bracket">]</span></span>
-<p>Why use version control?
-<a class="reference external" href="https://about.gitlab.com/topics/version-control/#why-use-version-control">https://about.gitlab.com/topics/version-control/#why-use-version-control</a></p>
-</aside>
-<aside class="footnote brackets" id="id6" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">3</a><span class="fn-bracket">]</span></span>
-<p>software version control guide
-<a class="reference external" href="https://www.software.com/devops-guides/version-control-guide">https://www.software.com/devops-guides/version-control-guide</a></p>
-</aside>
-</aside>
-<section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
-<ol class="arabic simple">
-<li><p>Identify the web host for the repository</p>
-<ol class="arabic simple">
-<li><p>Possible web hosts include:</p>
-<ol class="arabic simple">
-<li><p><a class="reference internal" href="#github"><span class="std std-ref">GitHub</span></a></p></li>
-<li><p><a class="reference internal" href="#aps-gitlab"><span class="std std-ref">APS GitLab</span></a></p></li>
-<li><p>others not described here</p></li>
-</ol>
-</li>
-<li><p>Use or create an <a class="reference internal" href="#beamline-github-organizations"><span class="std std-ref">organization for the beamline</span></a>.</p></li>
-<li><p>Create a new repository for the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory</p></li>
-</ol>
-</li>
-<li><p>Make the <code class="docutils literal notranslate"><span class="pre">bluesky/</span></code> directory into a <code class="docutils literal notranslate"><span class="pre">git</span></code> repository - either</p>
-<ul class="simple">
-<li><p>clone the repository from the web host</p></li>
-<li><p>Use <code class="docutils literal notranslate"><span class="pre">`git</span> <span class="pre">init</span></code> &lt;<a class="github reference external" href="https://github.com/git-guides/git-init">git-guides/git-init</a>&gt;`__ in
-the <code class="docutils literal notranslate"><span class="pre">bluesky/</span></code> directory</p></li>
-</ul>
-</li>
-<li><p>Create a <code class="docutils literal notranslate"><span class="pre">`.gitignore</span></code>
-file &lt;<a class="reference external" href="https://git-scm.com/docs/gitignore">https://git-scm.com/docs/gitignore</a>&gt;`__, such as this
-<a class="reference external" href="https://github.com/APS-USAXS/usaxs-bluesky/blob/master/.gitignore">example</a></p></li>
-<li><p><a class="reference external" href="https://git-scm.com/docs/git-add">Add</a> content and
-<a class="reference external" href="https://git-scm.com/docs/git-commit">commit</a> with <a class="reference external" href="https://www.freecodecamp.org/news/git-best-practices-commits-and-code-reviews/">a meaningful
-commit
-message</a>
-(see these
-<a class="reference external" href="https://github.com/bluesky/databroker/blob/main/.github/CONTRIBUTING.md#writing-the-commit-message">hints</a>
-for relevant prefixes)</p></li>
-<li><p><a class="reference external" href="https://git-scm.com/docs/git-push">Push</a> content to web host</p></li>
-</ol>
-<section id="github">
-<h3>GitHub<a class="headerlink" href="#github" title="Permalink to this heading">#</a></h3>
+<span id="git-help"></span><h1>Using Git for version control<a class="headerlink" href="#using-git-for-version-control" title="Permalink to this heading">#</a></h1>
+<section id="beamline-github-organizations">
+<span id="id1"></span><h2>Beamline GitHub organizations<a class="headerlink" href="#beamline-github-organizations" title="Permalink to this heading">#</a></h2>
 <p>Most beamlines will use <a class="reference external" href="https://github.com">GitHub</a> to host their
 <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> repositories. These are publicly-accessible (read-only) so
 do not place any content there that should not be publicly-accessible.</p>
-<p>See this document to learn more about:</p>
-<ul class="simple">
-<li><p>GitHub
-<a class="reference external" href="https://support.github.com/features/organizations">organizations</a></p></li>
-<li><p>GitHub
-<a class="reference external" href="https://support.github.com/features/repositories">repositories</a></p></li>
-</ul>
 <p>GitHub organizes repositories using this pattern:
 <code class="docutils literal notranslate"><span class="pre">https://github.com/ORGANIZATION/REPOSITORY</span></code></p>
-<p>In <code class="docutils literal notranslate"><span class="pre">ORGANIZATION</span></code> is either a single user’s account or a named
-orgnization (created by some GitHub user).</p>
-<p>Note that GitHub now uses multi-factor authentication
-(<a class="reference external" href="https://docs.github.com/en/authentication/securing-your-account-with-two-factor-authentication-2fa/configuring-two-factor-authentication">MFA</a>).</p>
-<section id="beamline-github-organizations">
-<h4>Beamline GitHub organizations<a class="headerlink" href="#beamline-github-organizations" title="Permalink to this heading">#</a></h4>
-<p>Use GitHub organizations to provide version control for various software
-projects used by a beamline. This naming convention is recommended for
-the beamline organization:</p>
+<p><code class="docutils literal notranslate"><span class="pre">ORGANIZATION</span></code> is either a single user’s account or a named
+<a class="reference external" href="https://support.github.com/features/organizations">organizations</a>
+(created by some GitHub user).</p>
+<p>This naming convention is recommended for the beamline organization:</p>
 <ul class="simple">
 <li><p>create a GitHub <em>organization</em> with a name like this :
 <code class="docutils literal notranslate"><span class="pre">APS-SSS-GGG</span></code></p></li>
@@ -495,8 +419,6 @@ group)</p></li>
 <code class="docutils literal notranslate"><span class="pre">bluesky-INSTRUMENT</span></code></p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">INSTRUMENT</span></code> : the name of the sintrument, such as <code class="docutils literal notranslate"><span class="pre">USAXS</span></code></p></li>
 </ul>
-</section>
-</section>
 <section id="aps-gitlab">
 <h3>APS GitLab<a class="headerlink" href="#aps-gitlab" title="Permalink to this heading">#</a></h3>
 <p>When there is content that requires access restrictions (thus, not
@@ -507,27 +429,34 @@ comparable to that provided by GitHub.</p>
 <p>GitLab organizes repositories using this pattern:
 <code class="docutils literal notranslate"><span class="pre">https://git.aps.anl.gov/ORGANIZATION/SUBGROUP/REPOSITORY</span></code></p>
 <p>The <code class="docutils literal notranslate"><span class="pre">SUBGROUP</span></code> level is optional.</p>
-</section>
-</section>
-<section id="create-a-github-repository">
-<h2>Create a GitHub repository<a class="headerlink" href="#create-a-github-repository" title="Permalink to this heading">#</a></h2>
-<p>We took notes when creating a repository for the APS 6-ID-D <a class="reference external" href="https://github.com/aps-ht-hedm/bluesky_instrument.git">HEDM
-bluesky
-instrument</a>.
-Once you have a GitHub organization, follow the notes
-<a class="reference external" href="./create_github_repo.md">here</a>.</p>
-</section>
 <section id="guides">
-<h2>Guides<a class="headerlink" href="#guides" title="Permalink to this heading">#</a></h2>
-<p>This is a sampling of How-To guides explaining git and GitHub
+<h4>Guides<a class="headerlink" href="#guides" title="Permalink to this heading">#</a></h4>
+<p>This is a sampling of How-To guides explaining Git and GitHub
 repositories.</p>
 <ul class="simple">
+<li><dl class="simple">
+<dt>Why use version control?</dt><dd><p><a class="reference external" href="https://www.git-tower.com/learn/git/ebook/en/desktop-gui/basics/why-use-version-control">https://www.git-tower.com/learn/git/ebook/en/desktop-gui/basics/why-use-version-control</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Why use version control?</dt><dd><p><a class="reference external" href="https://about.gitlab.com/topics/version-control/#why-use-version-control">https://about.gitlab.com/topics/version-control/#why-use-version-control</a></p>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Software version control guide</dt><dd><p><a class="reference external" href="https://www.software.com/devops-guides/version-control-guide">https://www.software.com/devops-guides/version-control-guide</a></p>
+</dd>
+</dl>
+</li>
 <li><p><a class="reference external" href="https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github">https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github</a></p></li>
 <li><p><a class="reference external" href="https://dzone.com/articles/ten-easy-steps-to-start-using-git-and-github">https://dzone.com/articles/ten-easy-steps-to-start-using-git-and-github</a></p></li>
 <li><p><a class="reference external" href="https://www.freecodecamp.org/news/introduction-to-git-and-github/">https://www.freecodecamp.org/news/introduction-to-git-and-github/</a></p></li>
 <li><p><a class="reference external" href="https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github">https://www.digitalocean.com/community/tutorials/how-to-push-an-existing-project-to-github</a></p></li>
 <li><p><a class="reference external" href="https://www.geeksforgeeks.org/how-to-push-folders-from-local-pc-to-github-using-git-commands/">https://www.geeksforgeeks.org/how-to-push-folders-from-local-pc-to-github-using-git-commands/</a></p></li>
 </ul>
+</section>
+</section>
 </section>
 </section>
 
@@ -552,11 +481,11 @@ repositories.</p>
       </div>
     </a>
     <a class="right-next"
-       href="_github_create_repo.html"
+       href="_intro2bluesky.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">GitHub Repository</p>
+        <p class="prev-next-title">Bluesky: Brief Introduction</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -578,16 +507,13 @@ repositories.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#github">GitHub</a><ul class="nav section-nav flex-column">
-<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#beamline-github-organizations">Beamline GitHub organizations</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#beamline-github-organizations">Beamline GitHub organizations</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aps-gitlab">APS GitLab</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#guides">Guides</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#aps-gitlab">APS GitLab</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-github-repository">Create a GitHub repository</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#guides">Guides</a></li>
 </ul>
   </nav></div>
 
