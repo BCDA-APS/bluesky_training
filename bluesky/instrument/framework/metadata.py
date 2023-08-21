@@ -57,6 +57,7 @@ RE.md["login_id"] = USERNAME + "@" + HOSTNAME
 RE.md.update(iconfig.get("RUNENGINE_METADATA", {}))
 RE.md["versions"] = versions
 RE.md["pid"] = os.getpid()
+RE.md["iconfig"] = iconfig
 
 conda_prefix = os.environ.get("CONDA_PREFIX")
 if conda_prefix is not None:
