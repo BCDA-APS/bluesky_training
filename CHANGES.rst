@@ -26,6 +26,13 @@ describe future plans.
 
    release expected by 2023-12-31
 
+   New Features
+   ------------
+
+   * Add package(s) to environment: 
+
+      * haven-spc
+
 
 1.0.1
 ******
@@ -45,7 +52,6 @@ New Features
    * bluesky-httpserver
    * bluesky-kafka
    * bluesky-live
-   * haven-spc
    * httpie
 
 1.0.0
