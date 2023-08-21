@@ -24,10 +24,10 @@ extensions = """
     sphinx.ext.mathjax
     sphinx.ext.todo
     sphinx.ext.viewcode
-    sphinx_tabs.tabs
     nbsphinx
     myst_parser
 """.split()
+extensions.append("sphinx_tabs.tabs")  # issue #129: this must be last
 
 templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
