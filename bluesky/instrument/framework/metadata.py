@@ -12,11 +12,6 @@ logger.info(__file__)
 
 from .. import iconfig
 
-try:
-    from ..epics_signal_config import epics_scan_id_source
-    from ..epics_signal_config import scan_id_epics
-except ImportError:
-    scan_id_epics = None
 import getpass
 import os
 import socket
@@ -62,8 +57,7 @@ RE.md["login_id"] = USERNAME + "@" + HOSTNAME
 RE.md.update(iconfig.get("RUNENGINE_METADATA", {}))
 RE.md["versions"] = versions
 RE.md["pid"] = os.getpid()
-if scan_id_epics is not None:
-    RE.md["scan_id"] = scan_id_epics.get()
+
 conda_prefix = os.environ.get("CONDA_PREFIX")
 if conda_prefix is not None:
     RE.md["conda_prefix"] = conda_prefix
