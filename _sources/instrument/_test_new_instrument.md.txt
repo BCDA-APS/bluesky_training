@@ -52,7 +52,7 @@ I Mon-14:43:28 - logging started
 I Mon-14:43:28 - logging level = 10
 I Mon-14:43:28 - /home/user/bluesky/instrument/session_logs.py
 I Mon-14:43:28 - /home/user/bluesky/instrument/collection.py
-I Mon-14:43:28 - CONDA_PREFIX = /home/user/.conda/envs/bluesky_2023_2
+I Mon-14:43:28 - CONDA_PREFIX = /home/user/.conda/envs/bluesky_2023_3
 Exception reporting mode: Minimal
 I Mon-14:43:28 - xmode exception level: 'Minimal'
 I Mon-14:43:28 - /home/user/bluesky/instrument/mpl/console.py

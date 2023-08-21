@@ -523,6 +523,9 @@ echo "  - apsu" >> "${CONFIG_FILE}"
 echo "  - aps-anl-tag" >> "${CONFIG_FILE}"
 echo "channel_priority: flexible" >> "${CONFIG_FILE}"
 echo "solver: libmamba" >> "${CONFIG_FILE}"
+
+# update ~/.bashrc to activate base environment on login
+conda init
 </code></pre>
 
 </details>
@@ -608,7 +611,7 @@ $ <b>conda config --show solver</b>
 </details></section>
 <section id="install-the-bluesky-environment">
 <h2>Install the bluesky environment<a class="headerlink" href="#install-the-bluesky-environment" title="Permalink to this heading">#</a></h2>
-<p>The following commands install the <code class="docutils literal notranslate"><span class="pre">bluesky_2023_2</span></code> environment inside the
+<p>The following commands install the <code class="docutils literal notranslate"><span class="pre">bluesky_2023_3</span></code> environment inside the
 <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory  that was created when installing a new bluesky instrument
 (see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument">setup a bluesky instrument</a>).</p>
 <p>Note that the installation takes several minutes.</p>
@@ -616,8 +619,8 @@ $ <b>conda config --show solver</b>
 $ <b>cd ~/bluesky</b>
 $ <b>conda env create \
     --force \
-    -n bluesky_2023_2 \
-    -f ./environments/environment_2023_2.yml \
+    -n bluesky_2023_3 \
+    -f ./environments/environment_2023_3.yml \
     --solver=libmamba</b>
 </pre>
 
@@ -626,9 +629,9 @@ $ <b>conda env create \
 <ul>
 <li>The <code>--force</code> option will replace any existing environment by this
 name without asking for confirmation. Remove this option if you wish.</li>
-<li>The <code>-n bluesky_2023_2</code> sets the name of the conda environment to be
+<li>The <code>-n bluesky_2023_3</code> sets the name of the conda environment to be
 created.</li>
-<li>The <code>-f ./environments/environment_2023_2.yml</code> option names the
+<li>The <code>-f ./environments/environment_2023_3.yml</code> option names the
 YAML file to be used. We create different versions of the YAML file, named
 for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages
 for a working installation may change over time. By keeping all these files
@@ -645,7 +648,7 @@ is described in the previous section.</li>
 #
 # To activate this environment, use
 #
-#     $ conda activate bluesky_2023_2
+#     $ conda activate bluesky_2023_3
 #
 # To deactivate an active environment, use
 #
@@ -676,7 +679,7 @@ source ~/.bash_aliases
 a suitable place to add your alias.
 On a new line, type:
 <pre>
-export BLUESKY_CONDA_ENV=bluesky_2023_2
+export BLUESKY_CONDA_ENV=bluesky_2023_3
 alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
 </pre>
 </li>

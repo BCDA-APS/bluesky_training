@@ -409,14 +409,14 @@ This is called a catalog configuration file.</p>
 expects to find it.  Run this snippet to find the list of paths where it looks on your system:</p>
 <pre>
 $ <b>python -c "import databroker; print(databroker.catalog_search_path())"</b>
-('/home/user/.local/share/intake', '/home/user/.conda/envs/bluesky_2023_2/share/intake')
+('/home/user/.local/share/intake', '/home/user/.conda/envs/bluesky_2023_3/share/intake')
 </pre>
 <p>Create a YAML file in one of these directories. (The actual file name does not
 matter.  Only that it ends with <code class="docutils literal notranslate"><span class="pre">.yml</span></code>.  Also, amongst all the <code class="docutils literal notranslate"><span class="pre">.yml</span></code> files
 found on the search path, any catalog names defined only appear once.)  Since
 you might recreate the environment, it is suggested not to install into any
 environment directory (such as
-<code class="docutils literal notranslate"><span class="pre">/home/user/.conda/envs/bluesky_2023_2/share/intake</span></code> listed above).</p>
+<code class="docutils literal notranslate"><span class="pre">/home/user/.conda/envs/bluesky_2023_3/share/intake</span></code> listed above).</p>
 <p>Here is an example used with the Bluesky training demonstration:</p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: training.yml</span>
 <span class="c1"># purpose: Configuration file to connect Bluesky databroker with MongoDB</span>

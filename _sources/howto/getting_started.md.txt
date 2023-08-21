@@ -31,8 +31,8 @@ This next command shows how to start an IPython console session with the
 $ <b>blueskyStarter.sh</b>
 (base) user@host:~$ cd /tmp
 (base) user@host:/tmp$ blueskyStarter.sh
-==> CONDA_PREFIX=/home/user/.conda/envs/bluesky_2023_2
-/home/user/.conda/envs/bluesky_2023_2/bin/python -- Python 3.10.10
+==> CONDA_PREFIX=/home/user/.conda/envs/bluesky_2023_3
+/home/user/.conda/envs/bluesky_2023_3/bin/python -- Python 3.10.10
 Python 3.10.10 | packaged by conda-forge | (main, Mar 24 2023, 20:08:06) [GCC 11.3.0]
 Type 'copyright', 'credits' or 'license' for more information
 IPython 8.12.0 -- An enhanced Interactive Python. Type '?' for help.
@@ -57,9 +57,9 @@ The next command shows how to start a Jupyter notebook session:
 
 <pre>
 $ <b>blueskyStarter.sh lab</b>
-==> CONDA_PREFIX=/home/prjemian/.conda/envs/bluesky_2023_2
-Could not activate environment: 'bluesky_2023_2'
-Installed kernelspec bluesky_2023_2 in /home/prjemian/.local/share/jupyter/kernels/bluesky_2023_2
+==> CONDA_PREFIX=/home/prjemian/.conda/envs/bluesky_2023_3
+Could not activate environment: 'bluesky_2023_3'
+Installed kernelspec bluesky_2023_3 in /home/prjemian/.local/share/jupyter/kernels/bluesky_2023_3
 [I 2023-05-09 14:32:03.687 ServerApp] Package jupyterlab took 0.0000s to import
 [I 2023-05-09 14:32:03.690 ServerApp] Package jupyter_server_fileid took 0.0022s to import
 ... more lines of output ...
