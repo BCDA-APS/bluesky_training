@@ -17,7 +17,7 @@ RUNENGINE_METADATA:
 
 # Uncomment and edit to define a PV to use for the `scan_id`.
 # The default behavior is to use `RE.md["scan_id"]`.
-# RUN_ENGINE_SCAN_ID_PV: "IOC:integer"
+RUN_ENGINE_SCAN_ID_PV: "gp:gp:int20"
 
 
 # area detector paths used by training IOC
