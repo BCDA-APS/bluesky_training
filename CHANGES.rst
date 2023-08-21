@@ -29,7 +29,7 @@ describe future plans.
    New Features
    ------------
 
-   * Add package(s) to environment: 
+   * Add package(s) to environment:
 
       * haven-spc
 
@@ -47,12 +47,36 @@ Breaking Changes
 New Features
 ------------
 
-* Add packages to environment: 
+* Add packages to environment:
 
    * bluesky-httpserver
    * bluesky-kafka
    * bluesky-live
    * httpie
+
+* Documentation
+
+  * Git advice for the reference section.
+  * How to get the conda command?
+  * Use Sphinx :download: role.
+  * Use Sphinx tab sections for instructions with alternatives.
+
+* Add iconfig dictionary to routine metadata.
+* Add ICONFIG_VERSION string to iconfig.yml file.
+* EPICS PV for scan_id.
+* Make it easier to download new_bluesky_instrument.py.
+* Use RUN_ENGINE_SCAN_ID_PV if defined in iconfig.yml file.
+
+Fixes
+------------
+
+* Fix bad formatting of Jupyter notebook cells.
+* libmamba installed before it is used now
+
+Maintenance
+------------
+
+* Environment for bluesky_2023_3.
 
 1.0.0
 ******
