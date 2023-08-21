@@ -125,7 +125,6 @@ else:
 
     logger.info("Using EPICS PV %s for scan_id", _pv)
     scan_id_epics = EpicsSignal(_pv, name="scan_id_epics")
-    # no need to wait for connection now, not accessing the signal yet.
 
     def epics_scan_id_source(_md):
         """
@@ -147,3 +146,5 @@ else:
 
     # tell RunEngine to use the EPICS PV to provide the scan_id.
     RE.scan_id_source = epics_scan_id_source
+    scan_id_epics.wait_for_connection()
+    RE.md["scan_id"] = scan_id_epics.get()
