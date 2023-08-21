@@ -1,11 +1,9 @@
 # bluesky-queueserver
 existing_plans_and_devices.yaml
 
-*.pyc
-*.pyo
-*~
-mViewer.log
-
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
 *.egg-info/
 
 # Microsoft VisualStudio Code Editor
@@ -21,12 +19,11 @@ mViewer.log
 *.h5
 *.dat
 
-# local developer Python code
-dev_*.py
-dev_*.ipynb
+# local developer content
+dev_*
 
 # Sphinx build products
 build/
+
+# Macintosh
 .DS_Store
-.gitignore
-.gitignore

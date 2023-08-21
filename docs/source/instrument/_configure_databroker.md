@@ -10,7 +10,7 @@ expects to find it.  Run this snippet to find the list of paths where it looks o
 
 <pre>
 $ <b>python -c "import databroker; print(databroker.catalog_search_path())"</b>
-('/home/user/.local/share/intake', '/home/user/.conda/envs/bluesky_2023_2/share/intake')
+('/home/user/.local/share/intake', '/home/user/.conda/envs/bluesky_2023_3/share/intake')
 </pre>
 
 Create a YAML file in one of these directories. (The actual file name does not
@@ -18,7 +18,7 @@ matter.  Only that it ends with `.yml`.  Also, amongst all the `.yml` files
 found on the search path, any catalog names defined only appear once.)  Since
 you might recreate the environment, it is suggested not to install into any
 environment directory (such as
-`/home/user/.conda/envs/bluesky_2023_2/share/intake` listed above).
+`/home/user/.conda/envs/bluesky_2023_3/share/intake` listed above).
 
 Here is an example used with the Bluesky training demonstration:
 
