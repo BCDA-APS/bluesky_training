@@ -116,3 +116,34 @@ if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
         write_timeout=iconfig.get("PV_WRITE_TIMEOUT", TIMEOUT),
         connection_timeout=iconfig.get("PV_CONNECTION_TIMEOUT", TIMEOUT),
     )
+
+_pv = iconfig.get("RUN_ENGINE_SCAN_ID_PV")
+if _pv is None:
+    logger.info("Using RunEngine metadata for scan_id")
+else:
+    from ophyd import EpicsSignal
+
+    logger.info("Using EPICS PV %s for scan_id", _pv)
+    scan_id_epics = EpicsSignal(_pv, name="scan_id_epics")
+    # no need to wait for connection now, not accessing the signal yet.
+
+    def epics_scan_id_source(_md):
+        """
+        Callback function for RunEngine.  Returns *next* scan_id to be used.
+
+        * Ignore metadata dictionary passed as argument.
+        * Get current scan_id from PV.
+        * Apply lower limit of zero.
+        * Increment (so that scan_id numbering starts from 1).
+        * Set PV with new value.
+        * Return new value.
+
+        Exception will be raised if PV is not connected when next
+        ``bps.open_run()`` is called.
+        """
+        new_scan_id = max(scan_id_epics.get(), 0) + 1
+        scan_id_epics.put(new_scan_id)
+        return new_scan_id
+
+    # tell RunEngine to use the EPICS PV to provide the scan_id.
+    RE.scan_id_source = epics_scan_id_source
