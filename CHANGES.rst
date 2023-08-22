@@ -48,7 +48,6 @@ New Features
 ------------
 
 * Add packages to environment:
-
    * bluesky-httpserver
    * bluesky-kafka
    * bluesky-live
@@ -62,11 +61,19 @@ New Features
   * Use Sphinx :download: role.
   * Use Sphinx tab sections for instructions with alternatives.
 
-* Add iconfig dictionary to routine metadata.
-* Add ICONFIG_VERSION string to iconfig.yml file.
-* EPICS PV for scan_id.
-* Make it easier to download new_bluesky_instrument.py.
-* Use RUN_ENGINE_SCAN_ID_PV if defined in iconfig.yml file.
+* Add ``iconfig`` dictionary to routine metadata.
+
+* ``iconfig.yml``
+
+  * Add ICONFIG_VERSION string.
+  * EPICS PV for scan_id.
+  * Use RUN_ENGINE_SCAN_ID_PV if defined in iconfig.yml file.
+
+* ``new_bluesky_instrument.py``
+
+  * Adds/updates tag version in ``iconfig.yml`` file.
+  * Downloads most recent release of repo.
+  * Easier to download.
 
 Fixes
 ------------
