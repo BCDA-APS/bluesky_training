@@ -78,7 +78,10 @@ Other resources
 * APS Data Management
    * home: https://confluence.aps.anl.gov/display/DMGT/
 
-   changes
+Revision History
+==================
+
+:ref:`History of code changes <changes>`
 
 Index
 ==================

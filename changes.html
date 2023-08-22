@@ -376,14 +376,14 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article" role="main">
                   
-  <section id="changes">
-<h1>Changes<a class="headerlink" href="#changes" title="Permalink to this heading">#</a></h1>
+  <span class="target" id="changes"></span><section id="id1">
+<h1>Changes<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h1>
 <p>History of user-visible changes between the versions.</p>
 <p>Project <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/milestones">milestones</a>
 describe future plans.</p>
-<section id="id1">
-<h2>1.0.1<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
-<p>release expected by 2023-08-31</p>
+<section id="v1-0-1">
+<h2>v1.0.1<a class="headerlink" href="#v1-0-1" title="Permalink to this heading">#</a></h2>
+<p>Released 2023-08-22.</p>
 <section id="breaking-changes">
 <h3>Breaking Changes<a class="headerlink" href="#breaking-changes" title="Permalink to this heading">#</a></h3>
 <ul class="simple">
@@ -392,30 +392,41 @@ describe future plans.</p>
 </section>
 <section id="new-features">
 <h3>New Features<a class="headerlink" href="#new-features" title="Permalink to this heading">#</a></h3>
-<ul>
-<li><p>Add packages to environment:</p>
-<blockquote>
-<div><ul class="simple">
+<ul class="simple">
+<li><dl class="simple">
+<dt>Add packages to environment:</dt><dd><ul>
 <li><p>bluesky-httpserver</p></li>
 <li><p>bluesky-kafka</p></li>
 <li><p>bluesky-live</p></li>
 <li><p>httpie</p></li>
 </ul>
-</div></blockquote>
+</dd>
+</dl>
 </li>
 <li><p>Documentation</p>
-<ul class="simple">
+<ul>
 <li><p>Git advice for the reference section.</p></li>
 <li><p>How to get the conda command?</p></li>
+<li><p>Use “zlib” as default HDF5 compression.</p></li>
 <li><p>Use Sphinx :download: role.</p></li>
 <li><p>Use Sphinx tab sections for instructions with alternatives.</p></li>
 </ul>
 </li>
-<li><p>Add iconfig dictionary to routine metadata.</p></li>
-<li><p>Add ICONFIG_VERSION string to iconfig.yml file.</p></li>
+<li><p>Add <code class="docutils literal notranslate"><span class="pre">iconfig</span></code> dictionary to routine metadata.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code></p>
+<ul>
+<li><p>Add ICONFIG_VERSION string.</p></li>
 <li><p>EPICS PV for scan_id.</p></li>
-<li><p>Make it easier to download new_bluesky_instrument.py.</p></li>
 <li><p>Use RUN_ENGINE_SCAN_ID_PV if defined in iconfig.yml file.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code></p>
+<ul>
+<li><p>Adds/updates tag version in <code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code> file.</p></li>
+<li><p>Downloads most recent release of repo.</p></li>
+<li><p>Easier to download.</p></li>
+</ul>
+</li>
 </ul>
 </section>
 <section id="fixes">
@@ -432,8 +443,8 @@ describe future plans.</p>
 </ul>
 </section>
 </section>
-<section id="id2">
-<h2>1.0.0<a class="headerlink" href="#id2" title="Permalink to this heading">#</a></h2>
+<section id="v1-0-0">
+<h2>v1.0.0<a class="headerlink" href="#v1-0-0" title="Permalink to this heading">#</a></h2>
 <p>Released 2023-06-05.</p>
 <section id="notice">
 <h3>Notice<a class="headerlink" href="#notice" title="Permalink to this heading">#</a></h3>
@@ -482,14 +493,14 @@ describe future plans.</p>
   </div>
   <nav class="bd-toc-nav page-toc">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">1.0.1</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v1-0-1">v1.0.1</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#breaking-changes">Breaking Changes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#new-features">New Features</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fixes">Fixes</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#maintenance">Maintenance</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#id2">1.0.0</a><ul class="nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#v1-0-0">v1.0.0</a><ul class="nav section-nav flex-column">
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#notice">Notice</a></li>
 </ul>
 </li>
