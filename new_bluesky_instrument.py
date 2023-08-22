@@ -51,7 +51,7 @@ import zipfile
 
 import requests
 
-logger = None  # set by command_line_options()
+logger = logging.getLogger(__name__)  # set by command_line_options()
 
 GITHUB_URL = "https://github.com"
 REPO_NAME = "bluesky_training"
@@ -71,12 +71,7 @@ EXECUTABLE_PERMISSIONS = 0o775  # rwxrwxr-x
 READ_WRITE_PERMISSIONS = 0o664  # rw-rw-r--
 EXECUTABLE_SUFFIXES = ".sh .py".split()
 
-
-def branch_name_header(org, repo):
-    branch = latest_github_release_string(REPO_ORG, REPO_NAME)
-    base_name = f"{REPO_NAME}-{branch.lstrip('v')}"
-    header = f"{base_name}/bluesky/"
-    return branch, base_name, header
+release_details_cache_ = None  # minimize calls to GitHub API
 
 
 def new_instrument_from_template(destination=None, make_git_repo=False):
@@ -124,6 +119,25 @@ def new_instrument_from_template(destination=None, make_git_repo=False):
     return destination
 
 
+def adjust_permissions(target):
+    if target.is_dir() or target.suffix in EXECUTABLE_SUFFIXES:
+        permissions = EXECUTABLE_PERMISSIONS
+    else:
+        permissions = READ_WRITE_PERMISSIONS
+    target.chmod(permissions)
+    logger.debug("Set permissions=o%o: '%s'", permissions, target)
+    if target.is_dir():
+        for item in target.iterdir():
+            adjust_permissions(item)
+
+
+def branch_name_header(org, repo):
+    branch = latest_github_release_string(REPO_ORG, REPO_NAME)
+    base_name = f"{REPO_NAME}-{branch.lstrip('v')}"
+    header = f"{base_name}/bluesky/"
+    return branch, base_name, header
+
+
 def download_zip(local_zip_file, branch):
     """Download repository as ZIP file."""
     url = f"{TRAINING_REPO}/archive/refs/tags/{branch}.zip"
@@ -161,6 +175,54 @@ def extract_content(archive, destination):
         else:
             logger.debug("ignoring archive item: '%s'", item)
     # fmt: on
+
+
+def git_init(destination):
+    """
+    Initialize a Git repository in 'destination' and make the first commit.
+
+    User instructions should describe how to set git origin.
+    """
+
+    def shell(cmd):
+        logger.debug(
+            "Execute shell command \"%s\" in directory '%s'.", cmd, destination
+        )
+        split_command = shlex.split(cmd)
+        process = subprocess.Popen(
+            split_command,
+            cwd=destination,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        out, err = process.communicate()
+        logger.debug(
+            "command output:\n  stdout=%s\n  stderr=%s",
+            out.splitlines(),
+            err.splitlines(),
+        )
+
+    for command in """
+        git init
+        git add .gitignore
+        git add *
+        git commit -m 'initial commit'
+    """.strip().splitlines():
+        shell(command.strip())
+    logger.info("Initialized Git repository in '%s'", destination)
+    shell("ls -lAFgh")
+
+
+def latest_github_release_string(org, repo, ref="releases/latest"):
+    global release_details_cache_
+
+    if release_details_cache_ is None:
+        api = "https://api.github.com/repos"
+        url = f"{api}/{org}/{repo}/{ref}"
+        response = requests.get(url)
+        release_details_cache_ = response.json()
+
+    return release_details_cache_["tag_name"]
 
 
 def move_content(source, destination):
@@ -236,69 +298,6 @@ def revise_content(destination):
     if subdir.exists():
         logger.debug("Removing directory '%s'", subdir)
         shutil.rmtree(subdir)
-
-
-def adjust_permissions(target):
-    if target.is_dir() or target.suffix in EXECUTABLE_SUFFIXES:
-        permissions = EXECUTABLE_PERMISSIONS
-    else:
-        permissions = READ_WRITE_PERMISSIONS
-    target.chmod(permissions)
-    logger.debug("Set permissions=o%o: '%s'", permissions, target)
-    if target.is_dir():
-        for item in target.iterdir():
-            adjust_permissions(item)
-
-
-def git_init(destination):
-    """
-    Initialize a Git repository in 'destination' and make the first commit.
-
-    User instructions should describe how to set git origin.
-    """
-
-    def shell(cmd):
-        logger.debug(
-            "Execute shell command \"%s\" in directory '%s'.", cmd, destination
-        )
-        split_command = shlex.split(cmd)
-        process = subprocess.Popen(
-            split_command,
-            cwd=destination,
-            stdout=subprocess.PIPE,
-            stderr=subprocess.PIPE,
-        )
-        out, err = process.communicate()
-        logger.debug(
-            "command output:\n  stdout=%s\n  stderr=%s",
-            out.splitlines(),
-            err.splitlines(),
-        )
-
-    for command in """
-        git init
-        git add .gitignore
-        git add *
-        git commit -m 'initial commit'
-    """.strip().splitlines():
-        shell(command.strip())
-    logger.info("Initialized Git repository in '%s'", destination)
-    shell("ls -lAFgh")
-
-
-release_details_cache_ = None  # minimize calls to GitHub API
-
-
-def latest_github_release_string(org, repo, ref="releases/latest"):
-    global release_details_cache_
-
-    if release_details_cache_ is None:
-        api = "https://api.github.com/repos"
-        url = f"{api}/{org}/{repo}/{ref}"
-        response = requests.get(url)
-        release_details_cache_ = response.json()
-
-    return release_details_cache_["tag_name"]
 
 
 def command_line_options():
