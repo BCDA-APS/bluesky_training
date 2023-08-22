@@ -34,7 +34,7 @@ describe future plans.
       * haven-spc
 
 
-1.0.1
+v1.0.1
 ******
 
 Released 2023-08-22.
@@ -86,7 +86,7 @@ Maintenance
 
 * Environment for bluesky_2023_3.
 
-1.0.0
+v1.0.0
 ******
 
 Released 2023-06-05.
