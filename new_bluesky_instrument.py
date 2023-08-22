@@ -53,15 +53,14 @@ import requests
 
 logger = None  # set by command_line_options()
 
+GITHUB_URL = "https://github.com"
 REPO_NAME = "bluesky_training"
-REPO_ORG = "https://github.com/BCDA-APS"
-BRANCH = "main"
+REPO_ORG = "BCDA-APS"
+# BRANCH = "main"  # TODO: use latest release name
 
-BASE_NAME = f"{REPO_NAME}-{BRANCH}"
-HEADER = f"{BASE_NAME}/bluesky/"
-LOCAL_ZIP_FILE = pathlib.Path("/tmp") / f"{BASE_NAME}.zip"
-TRAINING_REPO = f"{REPO_ORG}/{REPO_NAME}"
-DOWNLOAD_URL = f"{TRAINING_REPO}/archive/refs/heads/{BRANCH}.zip"
+# BASE_NAME = f"{REPO_NAME}-{BRANCH}"
+# HEADER = f"{BASE_NAME}/bluesky/"
+TRAINING_REPO = f"{GITHUB_URL}/{REPO_ORG}/{REPO_NAME}"
 
 SECOND = 1
 MINUTE = 60 * SECOND
@@ -71,6 +70,13 @@ DAY = 24 * HOUR
 EXECUTABLE_PERMISSIONS = 0o775  # rwxrwxr-x
 READ_WRITE_PERMISSIONS = 0o664  # rw-rw-r--
 EXECUTABLE_SUFFIXES = ".sh .py".split()
+
+
+def branch_name_header(org, repo):
+    branch = latest_github_release_string(REPO_ORG, REPO_NAME)
+    base_name = f"{REPO_NAME}-{branch.lstrip('v')}"
+    header = f"{base_name}/bluesky/"
+    return branch, base_name, header
 
 
 def new_instrument_from_template(destination=None, make_git_repo=False):
@@ -93,20 +99,22 @@ def new_instrument_from_template(destination=None, make_git_repo=False):
         # delete any content without review.
         raise RuntimeError("Directory is not empty: " + str(destination))
     # fmt: off
+    branch, base_name, header = branch_name_header(REPO_ORG, REPO_NAME)
+    local_zip_file = pathlib.Path("/tmp") / f"{base_name}.zip"
     if (
-        not LOCAL_ZIP_FILE.exists()
-        or LOCAL_ZIP_FILE.stat().st_mtime < time.time() - 1 * DAY
+        not local_zip_file.exists()
+        or local_zip_file.stat().st_mtime < time.time() - 1 * DAY
     ):
-        download_zip()
+        download_zip(local_zip_file, branch)
     # fmt: on
 
-    extract_content(LOCAL_ZIP_FILE, destination)
-    move_content(destination / HEADER, destination)
+    extract_content(local_zip_file, destination)
+    move_content(destination / header, destination)
     revise_content(destination)
 
     # remove the source directory from the repository
-    logger.debug("Removing directory '%s'", destination / BASE_NAME)
-    shutil.rmtree(destination / BASE_NAME)
+    logger.debug("Removing directory '%s'", destination / base_name)
+    shutil.rmtree(destination / base_name)
 
     adjust_permissions(destination)
 
@@ -116,14 +124,15 @@ def new_instrument_from_template(destination=None, make_git_repo=False):
     return destination
 
 
-def download_zip():
+def download_zip(local_zip_file, branch):
     """Download repository as ZIP file."""
-    logger.info("Downloading '%s'", DOWNLOAD_URL)
+    url = f"{TRAINING_REPO}/archive/refs/tags/{branch}.zip"
+    logger.info("Downloading '%s'", url)
     try:
-        r = requests.get(DOWNLOAD_URL, stream=True)
+        r = requests.get(url, stream=True)
         if not r.ok:
-            raise RuntimeError(f"Problem getting zip file: {DOWNLOAD_URL}")
-        with open(LOCAL_ZIP_FILE, "wb") as f:
+            raise RuntimeError(f"Problem getting zip file: {url}")
+        with open(local_zip_file, "wb") as f:
             f.write(r.content)
     except Exception as exinfo:
         logger.warning("Problem: %s", exinfo)
@@ -135,16 +144,18 @@ def extract_content(archive, destination):
     z = zipfile.ZipFile(archive)
     logger.info("Installing to '%s'", destination)
 
+    branch, base_name, header = branch_name_header(REPO_ORG, REPO_NAME)
+
     # fmt: off
     for item in z.namelist():
         if (
-            item.startswith(HEADER)
+            item.startswith(header)
             and
             not item.endswith(".ipynb")
         ):
             logger.debug("extracting archive item: '%s'", item)
             z.extract(item, path=destination)
-        elif item == f"{BASE_NAME}/.gitignore":
+        elif item == f"{base_name}/.gitignore":  # special case
             logger.debug("extracting archive item: '%s'", item)
             z.extract(item, path=destination)
         else:
@@ -188,14 +199,25 @@ def revise_content(destination):
         with open(file, "w") as f:
             f.write("\n".join(lines))
 
+    branch, base_name, header = branch_name_header(REPO_ORG, REPO_NAME)
+
     file = destination / "instrument" / "iconfig.yml"
     # User should edit this to assigned catalog name.
-    key = "DATABROKER_CATALOG: &databroker_catalog"
+    key_catalog = "DATABROKER_CATALOG: &databroker_catalog"
     buf = []
+    version_found = False
     for line in read(file):
-        if key in line:
-            line = f"{key} EDIT_CATALOG_NAME_HERE"
+        if key_catalog in line:
+            line = f"{key_catalog} EDIT_CATALOG_NAME_HERE"
+        elif line.startswith("ICONFIG_VERSION: "):
+            line = f"ICONFIG_VERSION: {branch.lstrip('v')}"
+            version_found = True
         buf.append(line)
+    if not version_found:
+        buf.append("")
+        line = f"ICONFIG_VERSION: {branch.lstrip('v')}"
+        buf.append(line)
+        buf.append("")
     write(file, buf)
 
     for group in "devices plans".split():
@@ -236,7 +258,9 @@ def git_init(destination):
     """
 
     def shell(cmd):
-        logger.debug("Execute shell command \"%s\" in directory '%s'.", cmd, destination)
+        logger.debug(
+            "Execute shell command \"%s\" in directory '%s'.", cmd, destination
+        )
         split_command = shlex.split(cmd)
         process = subprocess.Popen(
             split_command,
@@ -260,6 +284,21 @@ def git_init(destination):
         shell(command.strip())
     logger.info("Initialized Git repository in '%s'", destination)
     shell("ls -lAFgh")
+
+
+release_details_cache_ = None  # minimize calls to GitHub API
+
+
+def latest_github_release_string(org, repo, ref="releases/latest"):
+    global release_details_cache_
+
+    if release_details_cache_ is None:
+        api = "https://api.github.com/repos"
+        url = f"{api}/{org}/{repo}/{ref}"
+        response = requests.get(url)
+        release_details_cache_ = response.json()
+
+    return release_details_cache_["tag_name"]
 
 
 def command_line_options():
