@@ -147,7 +147,7 @@ except TimeoutError:
     logger.warning("Did not connect to area detector IOC '%s'", IOC)
     adsimdet = None
 else:
-    # override default settingd from ophyd
+    # override default settings from ophyd
     adsimdet.hdf1.create_directory.put(-5)
     adsimdet.hdf1.kind = Kind.config | Kind.normal  # Ensure plugin's read is called.
 
@@ -158,6 +158,8 @@ else:
             if "blocking_callbacks" in dir(obj):  # is it a plugin?
                 obj.stage_sigs["blocking_callbacks"] = "No"
         det.cam.stage_sigs["wait_for_plugins"] = "Yes"
+        det.hdf1.stage_sigs["compression"] = "zlib"
+        det.hdf1.stage_sigs.move_to_end("capture", last=True)
 
     if iconfig.get("ALLOW_AREA_DETECTOR_WARMUP", False):
         # Even with `lazy_open=1`, ophyd checks if the area

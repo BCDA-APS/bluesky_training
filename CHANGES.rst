@@ -58,6 +58,7 @@ New Features
 
   * Git advice for the reference section.
   * How to get the conda command?
+  * Use "zlib" as default HDF5 compression.
   * Use Sphinx :download: role.
   * Use Sphinx tab sections for instructions with alternatives.
 
