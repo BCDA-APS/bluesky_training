@@ -51,7 +51,7 @@ import zipfile
 
 import requests
 
-logger = logging.getLogger(__name__)  # set by command_line_options()
+logger = None  # set by command_line_options()
 
 GITHUB_URL = "https://github.com"
 REPO_NAME = "bluesky_training"
@@ -271,6 +271,8 @@ def revise_content(destination):
     for line in read(file):
         if key_catalog in line:
             line = f"{key_catalog} EDIT_CATALOG_NAME_HERE"
+        elif line.startswith("RUN_ENGINE_SCAN_ID_PV: "):
+            line = '# RUN_ENGINE_SCAN_ID_PV: "IOC:integer"'
         elif line.startswith("ICONFIG_VERSION: "):
             line = f"ICONFIG_VERSION: {branch.lstrip('v')}"
             version_found = True
