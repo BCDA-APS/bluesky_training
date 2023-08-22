@@ -37,7 +37,7 @@ describe future plans.
 1.0.1
 ******
 
-release expected by 2023-08-31
+Released 2023-08-22.
 
 Breaking Changes
 ------------------------
