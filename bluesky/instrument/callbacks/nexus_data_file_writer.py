@@ -14,13 +14,13 @@ import pathlib
 logger = logging.getLogger(__name__)
 logger.info(__file__)
 
-from apstools.callbacks import NXWriterAPS
+from apstools.callbacks import NXWriter
 
 from .._iconfig import iconfig
 from ..framework.initialize import RE
 
 
-class MyNXWriter(NXWriterAPS):
+class MyNXWriter(NXWriter):
     def get_sample_title(self):
         """
         Get the title from the metadata or modify the default.
