@@ -117,7 +117,7 @@ dependencies:
 
   - pip:
     - apsbss  # only works on APS subnet
-    # - ophyd-registry
+    - ophyd-registry
     # - happi
     # - tiled[all]
     - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
