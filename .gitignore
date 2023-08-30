@@ -17,6 +17,7 @@ __pycache__/
 
 # filewriter callback output files
 *.h5
+*.hdf
 *.dat
 
 # local developer content
