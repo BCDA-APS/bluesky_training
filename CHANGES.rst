@@ -21,17 +21,27 @@ Project `milestones <https://github.com/BCDA-APS/bluesky_training/milestones>`_
 describe future plans.
 
 ..
-   1.0.2
+   1.0.3
    ******
 
-   release expected by 2023-12-31
+   release expected by 2024-02-01
 
-   New Features
-   ------------
+1.0.2
+******
 
-   * Add package(s) to environment:
+release expected by 2023-12-31
 
-      * haven-spc
+New Features
+------------
+
+* Add package(s) to environment:
+
+  * ophyd-registry
+
+Maintenance
+------------
+
+* Environment for bluesky_2024_1.
 
 
 v1.0.1
