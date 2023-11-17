@@ -452,9 +452,8 @@ If you are translating PyEpics code to Bluesky plans, consult this
 
 In the working directory, the log files are written to a `./.logs` subdirectory.
 There are two kinds of file, one that records user commands and the python
-result, the other records items sent to the
-[customized](https://github.com/prjemian/stdlogpj#example-directing-logs-to-a-specific-directory)
-Python [logging](https://docs.python.org/3/library/logging.html) package.
+result, the other records items sent to the Python
+[logging](https://docs.python.org/3/library/logging.html) package.
 
 In the IPython session, use the `!` to run a linux command:
 
