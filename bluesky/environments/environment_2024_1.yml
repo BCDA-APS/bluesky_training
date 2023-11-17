@@ -91,7 +91,6 @@ dependencies:
   - pymca
   - pyRestTable
   - spec2nexus
-  - stdlogpj
   - xrayutilities
 
   # --- packaging and publishing
