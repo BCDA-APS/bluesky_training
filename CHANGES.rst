@@ -41,6 +41,7 @@ New Features
 Maintenance
 ------------
 
+* Drop the (unused now) *stdlogpj* package for configuring Python's *logging*.
 * Environment for bluesky_2024_1.
 
 
