@@ -47,6 +47,7 @@ dependencies:
   - qt =5
 
   # --- general support packages
+  - apischema
   - bitshuffle
   - epics-base >=7.0.5
   - h5py

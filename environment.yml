@@ -33,6 +33,7 @@ dependencies:
   - qt=5
 
   # --- general support packages
+  - apischema
   - aps-dm-api >=5
   - bitshuffle
   - blosc
