@@ -24,12 +24,12 @@ describe future plans.
    1.0.3
    ******
 
-   release expected by 2024-02-01
+   release expected by 2024-04-01
 
 1.0.2
 ******
 
-release expected by 2023-12-31
+release expected by 2024-03-01
 
 New Features
 ------------
@@ -37,6 +37,8 @@ New Features
 * Add package(s) to environment:
 
   * ophyd-registry
+
+* Build ``registry`` of all ophyd objects.
 
 Maintenance
 ------------
