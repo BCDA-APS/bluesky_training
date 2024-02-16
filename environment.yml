@@ -96,6 +96,7 @@ dependencies:
   - uvicorn
 
   - pip:
+    - ophyd-registry
     - tiled
 
     - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
