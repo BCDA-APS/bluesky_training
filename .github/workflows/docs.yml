@@ -27,8 +27,8 @@ defaults:
 jobs:
 
   pages:
-
-    runs-on: ubuntu-20.04
+    name: Publish documentation
+    runs-on: ubuntu-latest
 
     steps:
 
@@ -45,13 +45,20 @@ jobs:
     - name: Set time zone
       run: echo "TZ=America/Chicago" >> "$GITHUB_ENV"
 
-    - id: deployment
+    - name: Sphinx build
+      id: deployment
       uses: sphinx-notes/pages@v3
       with:
         documentation_path: ./docs/source
         publish: false
         requirements_path: ./docs/requirements.txt
 
+    - name: Upload Docs ZIP file as artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ env.REPOSITORY_NAME }}-docs
+        path: docs/build/html/
+    
     - uses: peaceiris/actions-gh-pages@v3
       if: ${{ github.event.inputs.deploy }}
       with:
