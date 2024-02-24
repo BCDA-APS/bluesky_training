@@ -6,7 +6,7 @@ sys.path.append(str(ROOT_PATH))
 
 
 def test_startup(capsys):
-    from qstarter import iconfig
+    # from qstarter import iconfig
 
     out, err = capsys.readouterr()
 

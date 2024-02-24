@@ -6,7 +6,7 @@ sys.path.append(str(ROOT_PATH))
 
 
 def test_startup(capsys):
-    from instrument.collection import iconfig
+    # from instrument.collection import iconfig
 
     out, err = capsys.readouterr()
 

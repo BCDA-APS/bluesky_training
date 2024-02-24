@@ -24,7 +24,7 @@ if _ip is not None:
     logger.info("xmode exception level: '%s'", _xmode_level)
     del _ip
 
-from . import mpl
+from . import mpl  # noqa
 
 logger.info("#### Bluesky Framework ####")
 from .framework import *

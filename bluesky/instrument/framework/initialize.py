@@ -26,22 +26,22 @@ from bluesky import RunEngine
 from bluesky import SupplementalData
 from bluesky.callbacks.best_effort import BestEffortCallback
 from bluesky.magics import BlueskyMagics
-from bluesky.simulators import summarize_plan
+from bluesky.simulators import summarize_plan  # noqa
 from bluesky.utils import PersistentDict
 from bluesky.utils import ProgressBarManager
-from bluesky.utils import ts_msg_hook
+from bluesky.utils import ts_msg_hook  # noqa
 from IPython import get_ipython
 from ophyd.signal import EpicsSignalBase
 from ophydregistry import Registry
 import databroker
 import ophyd
-import warnings
+import warnings  # noqa
 
 # convenience imports
-import bluesky.plans as bp
-import bluesky.plan_stubs as bps
-import bluesky.preprocessors as bpp
-import numpy as np
+import bluesky.plans as bp  # noqa
+import bluesky.plan_stubs as bps  # noqa
+import bluesky.preprocessors as bpp  # noqa
+import numpy as np  # noqa
 
 
 def get_md_path():
