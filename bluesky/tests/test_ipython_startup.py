@@ -6,7 +6,8 @@ sys.path.append(str(ROOT_PATH))
 
 
 def test_startup(capsys):
-    # from instrument.collection import iconfig
+    # start the instrument package for IPython console session
+    from instrument.collection import iconfig  # noqa
 
     out, err = capsys.readouterr()
 
