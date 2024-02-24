@@ -59,7 +59,7 @@ jobs:
     - name: Upload Docs ZIP file as artifact
       uses: actions/upload-artifact@v4
       with:
-        name: ${{ env.REPOSITORY_NAME }}-docs
+        name: bluesky_training-docs
         path: ${{ steps.deployment.outputs.artifact }}
     
     - uses: peaceiris/actions-gh-pages@v3
