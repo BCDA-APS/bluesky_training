@@ -22,6 +22,7 @@ import sys
 sys.path.append(str(pathlib.Path(__file__).absolute().parent.parent.parent))
 
 from .. import iconfig
+from apstools.utils import warn_if_not_aps_controls_subnet
 from bluesky import RunEngine
 from bluesky import SupplementalData
 from bluesky.callbacks.best_effort import BestEffortCallback
@@ -42,6 +43,10 @@ import bluesky.plans as bp
 import bluesky.plan_stubs as bps
 import bluesky.preprocessors as bpp
 import numpy as np
+
+
+# Post a warning if at APS but not on controls subnet.
+warn_if_not_aps_controls_subnet()
 
 
 def get_md_path():
