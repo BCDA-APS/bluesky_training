@@ -102,7 +102,7 @@ if iconfig.get("VERIFY_FILES_SAVED", False):
 
     RE.subscribe(post_run(verify_files_saved), "stop")
 
-ophyd.logger.setLevel(iconfig.get("LOGGING", {})("OPHYD_LOGGER_LEVEL", "WARNING"))
+ophyd.logger.setLevel(iconfig.get("LOGGING", {}).get("OPHYD_LOGGER_LEVEL", "WARNING"))
 ophyd.set_cl(iconfig.get("OPHYD_CONTROL_LAYER", "PyEpics").lower())
 logger.info(f"using ophyd control layer: {ophyd.cl.name}")
 
