@@ -1,5 +1,5 @@
 """
-initialize the bluesky framework
+Initialize the bluesky framework.
 """
 
 __all__ = """
@@ -7,8 +7,8 @@ __all__ = """
     bp  bps  bpp
     summarize_plan
     np
-    registry
-    """.split()
+    oregistry
+""".split()
 
 import logging
 
@@ -96,18 +96,19 @@ bec.disable_baseline()
 
 # At the end of every run, verify that files were saved and
 # print a confirmation message.
-# from bluesky.callbacks.broker import verify_files_saved
-# RE.subscribe(post_run(verify_files_saved), 'stop')
+if iconfig.get("VERIFY_FILES_SAVED", False):
+    from bluesky.callbacks.broker import post_run
+    from bluesky.callbacks.broker import verify_files_saved
 
-# Uncomment the following lines to turn on
-# verbose messages for debugging.
-# ophyd.logger.setLevel(logging.DEBUG)
+    RE.subscribe(post_run(verify_files_saved), "stop")
 
+ophyd.logger.setLevel(iconfig.get("LOGGING", {})("OPHYD_LOGGER_LEVEL", "WARNING"))
 ophyd.set_cl(iconfig.get("OPHYD_CONTROL_LAYER", "PyEpics").lower())
 logger.info(f"using ophyd control layer: {ophyd.cl.name}")
 
-# diagnostics
-# RE.msg_hook = ts_msg_hook
+if iconfig.get("ADD_DIAGNOSTIC_MESSAGES", False):
+    # Log bluesky Message objects in RunEngine (follow plan's progress).
+    RE.msg_hook = ts_msg_hook
 
 # set default timeout for all EpicsSignal connections & communications
 TIMEOUT = 60
@@ -119,8 +120,8 @@ if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
         connection_timeout=iconfig.get("PV_CONNECTION_TIMEOUT", TIMEOUT),
     )
 
-# Create a registry of ophyd devices
-registry = Registry(auto_register=True)
+# Create a registry of ophyd devices.
+oregistry = Registry(auto_register=True)
 
 _pv = iconfig.get("RUN_ENGINE_SCAN_ID_PV")
 if _pv is None:
