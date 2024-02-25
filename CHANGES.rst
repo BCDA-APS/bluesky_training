@@ -34,6 +34,11 @@ release expected by 2024-03-01
 New Features
 ------------
 
+* Add options to instrument configuration (iconfig.yml):
+
+  * After every run, verify that files were saved, print a confirmation message. 
+  * Debugging and message options.
+
 * Add package(s) to environment:
 
   * ophyd-registry
