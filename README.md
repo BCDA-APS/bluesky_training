@@ -5,13 +5,14 @@ beamlines to use the [Bluesky](https://blueskyproject.io) framework.
 
 - [HowTo guides, tutorials, & references](https://bcda-aps.github.io/bluesky_training/)
   demonstrating use of the Bluesky framework at a typical beamline.
-- a [template](./bluesky/) for beamlines to configure their instrument
-- a [list of APS instrument](https://github.com/BCDA-APS/bluesky_training/wiki/)
+- A [template](./bluesky/) for beamlines to configure their instrument.
+- A [checklist](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#installation-checklist) to install a new instrument.
+- A [list of APS instrument](https://github.com/BCDA-APS/bluesky_training/wiki/)
   repositories
 
-Unit Tests | License | GH tag
---- | --- | ---
-[![Unit Tests](https://github.com/BCDA-APS/bluesky_training/workflows/Unit%20Tests/badge.svg)](https://github.com/BCDA-APS/bluesky_training/actions/workflows/unit_tests.yml) | [![license: ANL](https://img.shields.io/badge/license-ANL-brightgreen)](/LICENSE.txt) | [![tag](https://img.shields.io/github/tag/BCDA-APS/bluesky_training.svg)](https://github.com/BCDA-APS/bluesky_training/tags)
+Unit Tests | License | GH tag | Code Coverage
+--- | --- | --- | ---
+[![Unit Tests](https://github.com/BCDA-APS/bluesky_training/workflows/Unit%20Tests/badge.svg)](https://github.com/BCDA-APS/bluesky_training/actions/workflows/unit_tests.yml) | [![license: ANL](https://img.shields.io/badge/license-ANL-brightgreen)](/LICENSE.txt) | [![tag](https://img.shields.io/github/tag/BCDA-APS/bluesky_training.svg)](https://github.com/BCDA-APS/bluesky_training/tags) | [![Coverage Status](https://coveralls.io/repos/github/BCDA-APS/bluesky_training/badge.svg?branch=main)](https://coveralls.io/github/BCDA-APS/bluesky_training?branch=main)
 
 <!-- take note of
 
