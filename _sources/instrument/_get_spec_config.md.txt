@@ -1,6 +1,6 @@
 # Translate Previous SPEC Configuration
 
-The [apstools](https://bcda-aps.github.io/apstools/latest/) package has an application that will translate most
+The [`apstools`](https://bcda-aps.github.io/apstools/latest/) package has an application that will translate most
 of the SPEC config file into ophyd commands.  The output is to the
 console.  Use a pipe to direct the output to a new file:
 

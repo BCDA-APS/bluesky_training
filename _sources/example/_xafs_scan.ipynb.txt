@@ -212,7 +212,7 @@
     "\n",
     "XAFS scans measure signals from two or more detectors as the incident X-ray energy is varied.  One method is to step the energy where the step size is different depending on the region of the scan.  Steps could be in constant units of energy or _k_ (see above).\n",
     "\n",
-    "We define here a default list of four regions (known here as `segments`), each showing a different feature of units or count time weighting.  This default list is used in the `xafs()` scan below if the caller chooses.  The `get_energies_and_times()` function parses the supplied list of segments and returns a list of `(energy_keV, count_time)` pairs for use in a [bluesky](https://blueskyproject.io/bluesky/).[plans](https://blueskyproject.io/bluesky/plans.html).[list_scan()](https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan)."
+    "We define here a default list of four regions (known here as `segments`), each showing a different feature of units or count time weighting.  This default list is used in the `xafs()` scan below if the caller chooses.  The `get_energies_and_times()` function parses the supplied list of segments and returns a list of `(energy_keV, count_time)` pairs for use in a [`bluesky`](https://blueskyproject.io/bluesky/).[`plans`](https://blueskyproject.io/bluesky/plans.html).[`list_scan()`](https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan)."
    ]
   },
   {
@@ -385,7 +385,7 @@
    "source": [
     "## `xafs()` plan\n",
     "\n",
-    "With all the pieces defined, it is time to write a plan to measure the XAFS.  The caller must provide the absorption edge energy (in keV).  A list of segments is optional (will default to `DEFAULT_XAFS_SCAN_SEGMENTS` as defined above) so only the absorption edge energy is required.  Once the inputs are checked for correctness, the absorption calculation is setup in an EPICS userCalc ([SwaitRecord](https://apstools.readthedocs.io/en/latest/source/synApps/_swait.html#synapps-swait-record)).  Finally, the 1-D step scan is run by calling [bp.list_scan()](https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan) with lists of energy and count time values for each step."
+    "With all the pieces defined, it is time to write a plan to measure the XAFS.  The caller must provide the absorption edge energy (in keV).  A list of segments is optional (will default to `DEFAULT_XAFS_SCAN_SEGMENTS` as defined above) so only the absorption edge energy is required.  Once the inputs are checked for correctness, the absorption calculation is setup in an EPICS userCalc ([`SwaitRecord`](https://apstools.readthedocs.io/en/latest/source/synApps/_swait.html#synapps-swait-record)).  Finally, the 1-D step scan is run by calling [`bp.list_scan()`](https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan) with lists of energy and count time values for each step."
    ]
   },
   {

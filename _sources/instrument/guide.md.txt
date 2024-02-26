@@ -30,13 +30,13 @@ instrument/       <-- all aspects of the equipment
     iconfig.yml   <-- instrument configuration settings for you to customize
 ```
 
-Each directory has a [__init__.py](./_about_init_files.md) file (which _can_ be empty).  The very
+Each directory has a [`__init__.py`](./_about_init_files.md) file (which _can_ be empty).  The very
 existence of this file informs Python that the directory is a Python *package*
 which means that it can be imported.  The `__init__.py` file can be used to control
 what is imported and the order in which that import is sequenced.
 
 In any of the Python files, the
-[__all__](https://stackoverflow.com/questions/44834) symbol is a Python list
+[`__all__`](https://stackoverflow.com/questions/44834) symbol is a Python list
 that identifies which Python symbols from that file will be imported by default.
 (Any Python symbol may be imported by name, this just controls the more general
 case.)
@@ -70,13 +70,13 @@ convention, the `name=` keyword has the same value as the LHS.  The keyword
 [tuple](https://docs.python.org/3/library/stdtypes.html?highlight=tuple#sequence-types-list-tuple-range).
 When the `motor` value is added to the tuple, then this motor will show up in
 the report provided by the
-[%wa](https://blueskyproject.io/bluesky/magics.html?highlight=magic#listing-available-motors-using-wa-post-v1-3-0)
+[`%wa`](https://blueskyproject.io/bluesky/magics.html?highlight=magic#listing-available-motors-using-wa-post-v1-3-0)
 (bluesky IPython) magic command.
 
 CAUTION: Avoid certain names such as
-[del](https://docs.python.org/3/reference/simple_stmts.html?highlight=del#the-del-statement)
+[`del`](https://docs.python.org/3/reference/simple_stmts.html?highlight=del#the-del-statement)
 and
-[lambda](https://docs.python.org/3/reference/expressions.html?highlight=lambda#lambda)
+[`lambda`](https://docs.python.org/3/reference/expressions.html?highlight=lambda#lambda)
 since these are reserved Python names with very important meanings.  
 
 Be sure to add this new motor symbol to the `__all__` list near the top of the file.
@@ -270,8 +270,8 @@ Sometimes, a user may need experiment-specific code that is not for general
 inclusion in the instrument package.  Components from the `instrument` package
 may be imported from such custom user code by writing a file in the working
 directory with the support.  The file can be loaded and run in an IPython
-session with the [%run -i
-filename.py](https://ipython.org/ipython-doc/3/interactive/magics.html#magic-run)
+session with the [`%run -i
+filename.py`](https://ipython.org/ipython-doc/3/interactive/magics.html#magic-run)
 magic command.
 
 <details>

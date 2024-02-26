@@ -270,7 +270,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "`scaler.preset_time` is an [EpicsSignal](https://github.com/bluesky/ophyd/blob/7612b2c9de9d5bc16cf28eea79ba5c12553f3cc2/ophyd/signal.py#L1615).  All such [Signal](https://blueskyproject.io/ophyd/signals.html) objects have a `.get()` method which returns the Signal's value."
+    "`scaler.preset_time` is an [`EpicsSignal`](https://github.com/bluesky/ophyd/blob/7612b2c9de9d5bc16cf28eea79ba5c12553f3cc2/ophyd/signal.py#L1615).  All such [Signal](https://blueskyproject.io/ophyd/signals.html) objects have a `.get()` method which returns the Signal's value."
    ]
   },
   {
@@ -388,7 +388,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Next, we'll load a library with many [predefined plans](https://blueskyproject.io/bluesky/plans.html#summary).  The first plan we want to use is [count()](https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count).  By the way, we'll use a python feature to rename `bluesky.plans` to the shorter `bp` since it will be used a lot."
+    "Next, we'll load a library with many [predefined plans](https://blueskyproject.io/bluesky/plans.html#summary).  The first plan we want to use is [`count()`](https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count).  By the way, we'll use a python feature to rename `bluesky.plans` to the shorter `bp` since it will be used a lot."
    ]
   },
   {

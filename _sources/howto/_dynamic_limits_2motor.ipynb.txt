@@ -21,7 +21,7 @@
     "\n",
     "To prevent the collision *in this case*, the $2\\theta$ axis must be at least $\\delta$ degrees above the $\\theta$ axis.  Empirically, $\\delta$ of 3 degrees is sufficient protection.\n",
     "\n",
-    "From a controls safety view, we provide an EPICS PV calculation that is zero when the move is not permitted and one when: ($2\\theta - \\theta) \\ge \\delta$.  We'll monitor that PV in Bluesky to add a [suspender](https://blueskyproject.io/bluesky/state-machine.html#automated-suspension) that can interrupt the scan (via the [bluesky.RunEngine](https://blueskyproject.io/bluesky/run_engine_api.html?highlight=runengine)) if the permit is removed.  When the RunEngine handles an interruption involving [*movable devices*](https://blueskyproject.io/bluesky/hardware.html?highlight=movables#settable-movable-device), it sends a stop to each of the movables involved.  Thus, when the dynamic limit permit is removed, both motors are stopped and the scan pauses, waiting for external interaction to clear the condition.\n",
+    "From a controls safety view, we provide an EPICS PV calculation that is zero when the move is not permitted and one when: ($2\\theta - \\theta) \\ge \\delta$.  We'll monitor that PV in Bluesky to add a [suspender](https://blueskyproject.io/bluesky/state-machine.html#automated-suspension) that can interrupt the scan (via the [`bluesky.RunEngine`](https://blueskyproject.io/bluesky/run_engine_api.html?highlight=runengine)) if the permit is removed.  When the RunEngine handles an interruption involving [*movable devices*](https://blueskyproject.io/bluesky/hardware.html?highlight=movables#settable-movable-device), it sends a stop to each of the movables involved.  Thus, when the dynamic limit permit is removed, both motors are stopped and the scan pauses, waiting for external interaction to clear the condition.\n",
     "\n",
     "<details>\n",
     "[Here](https://github.com/bluesky/bluesky/blob/4fab894bddbd4a563f28852ea3171b87140ae7b9/bluesky/run_engine.py#L1034-L1036) is where bluesky tells the motors to stop:\n",
@@ -67,7 +67,7 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "We start with two motor axes defined in EPICS.  Here, we run the docker image [prjemian/synApps](https://hub.docker.com/r/prjemian/synapps) to make the [EPICS IOC simulator run in a docker container](https://github.com/prjemian/epics-docker/#custom-synappshttps://github.com/prjemian/epics-docker/#custom-synapps) with IOC prefix `gp:`.  These are motor PVs: `gp:m1` and `gp:m2` as shown.\n",
+    "We start with two motor axes defined in EPICS.  Here, we run the docker image [`prjemian/synApps`](https://hub.docker.com/r/prjemian/synapps) to make the [EPICS IOC simulator run in a docker container](https://github.com/prjemian/epics-docker/#custom-synappshttps://github.com/prjemian/epics-docker/#custom-synapps) with IOC prefix `gp:`.  These are motor PVs: `gp:m1` and `gp:m2` as shown.\n",
     "\n",
     "![EPICS motor GUI screens](/_static/demo_dynamic_limits_motors.png)"
    ]

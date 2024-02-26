@@ -43,7 +43,7 @@
     "\n",
     "**note**:  This tutorial expects to find an EPICS IOC \n",
     "on the local network configured as an EPICS AreaDetector \n",
-    "[ADSimDetector](https://github.com/areaDetector/ADSimDetector) \n",
+    "[`ADSimDetector`](https://github.com/areaDetector/ADSimDetector) \n",
     "IOC with prefix `adsky:`.  A docker container is available \n",
     "to provide this IOC.  See this URL for instructions:  \n",
     "https://github.com/prjemian/epics-docker/blob/master/n4_areaDetector/README.md\n",

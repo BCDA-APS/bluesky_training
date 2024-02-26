@@ -482,7 +482,7 @@ I Wed-17:24:47 -    to change SPEC file, use command:   newSpecFile(&#39;title&#
 </pre></div>
 </div>
 </div>
-<p>Next, import the desired diffractometer geometry from the <a class="reference external" href="https://github.com/bluesky/hklpy">hklpy</a> package. We pick <a class="reference external" href="https://people.debian.org/~picca/hkl/hkl.html#orge78e5c4">E4CV</a> (Eulerian 4-Circle with Vertical scattering geometry) as is typical at synchrotron beamlines.</p>
+<p>Next, import the desired diffractometer geometry from the <a class="reference external" href="https://github.com/bluesky/hklpy">hklpy</a> package. We pick <code class="docutils literal notranslate"><span class="pre">`E4CV</span></code> &lt;<a class="reference external" href="https://people.debian.org/~picca/hkl/hkl.html#orge78e5c4">https://people.debian.org/~picca/hkl/hkl.html#orge78e5c4</a>&gt;`__ (Eulerian 4-Circle with Vertical scattering geometry) as is typical at synchrotron beamlines.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
@@ -1129,6 +1129,7 @@ FourCircleDiffractometerPseudoPos(h=1.5121846940302517e-16, k=1.9999999974773768
 <section id="Forward-Solutions">
 <h3>Forward Solutions<a class="headerlink" href="#Forward-Solutions" title="Permalink to this heading">#</a></h3>
 <p>Forward solutions are the calculated combinations of real-space motor positions given the sample oreitnation matrix, reciprocal-space axes, operating mode, wavelength, and applied constraints. These combinations are presented as a python list which may be empty if there are no solutions.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">`DiffractometerMixin</span></code> &lt;???&gt;`__ (FIXME: Not in apstools, maybe hklpy?) provides a helper to print the possible forward solutions for a list of <em>hkl</em> reflections. (Each reflection is provided as a python tuple or list.)</p>
 <p>Show default solution for a few reflections (<em>100</em>), (<em>010</em>) and (<em>001</em>):</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[34]:
@@ -1344,13 +1345,13 @@ tth   -180.0    180.0      -11.01665011929264 True
 [&#39;omega&#39;, &#39;chi&#39;, &#39;phi&#39;, &#39;tth&#39;]
 </pre></div></div>
 </div>
-<p>The value is a <a class="reference external" href="https://blueskyproject.io/hklpy/constraints.html#constraints">Constraints</a> object.</p>
-<p><code class="docutils literal notranslate"><span class="pre">Constraints</span></code> Arguments</p>
+<p>The value is a <code class="docutils literal notranslate"><span class="pre">`Constraint</span></code> &lt;???&gt;`__ object. (FIXME: Not in apstools, maybe hklpy?)</p>
+<p><code class="docutils literal notranslate"><span class="pre">Constraint</span></code> Arguments</p>
 <ul class="simple">
 <li><p>low_limit (<em>number</em>) : Limit solutions for this axis to no less than <code class="docutils literal notranslate"><span class="pre">low_limit</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=True</span></code>.</p></li>
 <li><p>high_limit (<em>number</em>) : Limit solutions for this axis to no greater than <code class="docutils literal notranslate"><span class="pre">high_limit</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=True</span></code>.</p></li>
 <li><p>value (<em>number</em>) : Calculate with axis = <code class="docutils literal notranslate"><span class="pre">value</span></code> when <code class="docutils literal notranslate"><span class="pre">fit=False</span></code>.</p></li>
-<li><p>fit (<em>bool</em>) : Not used.</p></li>
+<li><p>fit (<em>bool</em>) : When <code class="docutils literal notranslate"><span class="pre">True</span></code>, calculate new values for this axis. When <code class="docutils literal notranslate"><span class="pre">False</span></code>, keep this axis fixed at <code class="docutils literal notranslate"><span class="pre">value</span></code>.</p></li>
 </ul>
 <p>In the dictionary, it is only necessary to define the axis constraints to be changed. The other (commented out) constraints will not be changed.</p>
 <div class="nbinput docutils container">

@@ -82,9 +82,9 @@ graphical text editors, MongoDB database server, and Python infrastructure.
 - Are there other tutorials available online?  [Yes!](https://blueskyproject.io/tutorials/README.html)
 - [How to access data from previous measurements?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/after_measurement.ipynb)
 - [How to plot data from previous scans?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/plot_x_y_databroker.ipynb)
-- How to use [EPICS area detectors](https://areadetector.github.io)? ([setup](https://apstools.readthedocs.io/en/latest/examples/_ad__pilatus.html), [measure](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb), [analyze from databroker](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/databroker_analysis.ipynb))
+- How to use [EPICS area detectors](https://areadetector.github.io)? ([setup](https://apstools.readthedocs.io/en/latest/examples/_ad__pilatus.html), [measure](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/locate_image_peak.ipynb), [analyze from `databroker`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/bluesky/databroker_analysis.ipynb))
 - How to support complex [devices](https://blueskyproject.io/ophyd/tutorials/device.html?highlight=device)?
-- How does [databroker](https://blueskyproject.io/databroker/) store the data?
+- How does [`databroker`](https://blueskyproject.io/databroker/) store the data?
 - What is [MongoDB](https://www.mongodb.com/)?
 - [How to execute Linux command from Bluesky?](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/demo_doodle.ipynb)
 - [How to setup and use a diffractometer with Bluesky?](https://blueskyproject.io/hklpy/examples/index.html)
@@ -107,5 +107,5 @@ Links to the videos from the training sessions of 2021 August and September are 
 - [References from Bluesky Tutorials](https://blueskyproject.io/tutorials/README.html#references)
 - [Jupyter Lab](https://jupyterlab.readthedocs.io)
 - [EPICS](https://epics-controls.org/) ([old web site](https://epics.anl.gov/))
-- [More on EpicsSignal](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
+- [More on `EpicsSignal`](https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_training/blob/main/connect_epics.ipynb) including `ophyd.Device`
 - For more about Juypter, see the Bluesky [Hello Python and Jupyter](https://blueskyproject.io/tutorials/Hello%20Python%20and%20Jupyter.html) Tutorial.

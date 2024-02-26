@@ -441,12 +441,12 @@ these directories may contain python file(s).</p>
     <span class="n">iconfig</span><span class="o">.</span><span class="n">yml</span>   <span class="o">&lt;--</span> <span class="n">instrument</span> <span class="n">configuration</span> <span class="n">settings</span> <span class="k">for</span> <span class="n">you</span> <span class="n">to</span> <span class="n">customize</span>
 </pre></div>
 </div>
-<p>Each directory has a <a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><strong>init</strong>.py</span></a> file (which <em>can</em> be empty).  The very
+<p>Each directory has a <a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></span></a> file (which <em>can</em> be empty).  The very
 existence of this file informs Python that the directory is a Python <em>package</em>
 which means that it can be imported.  The <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file can be used to control
 what is imported and the order in which that import is sequenced.</p>
 <p>In any of the Python files, the
-<a class="reference external" href="https://stackoverflow.com/questions/44834"><strong>all</strong></a> symbol is a Python list
+<a class="reference external" href="https://stackoverflow.com/questions/44834"><code class="docutils literal notranslate"><span class="pre">__all__</span></code></a> symbol is a Python list
 that identifies which Python symbols from that file will be imported by default.
 (Any Python symbol may be imported by name, this just controls the more general
 case.)</p>
@@ -478,12 +478,12 @@ convention, the <code class="docutils literal notranslate"><span class="pre">nam
 <a class="reference external" href="https://docs.python.org/3/library/stdtypes.html?highlight=tuple#sequence-types-list-tuple-range">tuple</a>.
 When the <code class="docutils literal notranslate"><span class="pre">motor</span></code> value is added to the tuple, then this motor will show up in
 the report provided by the
-<a class="reference external" href="https://blueskyproject.io/bluesky/magics.html?highlight=magic#listing-available-motors-using-wa-post-v1-3-0">%wa</a>
+<a class="reference external" href="https://blueskyproject.io/bluesky/magics.html?highlight=magic#listing-available-motors-using-wa-post-v1-3-0"><code class="docutils literal notranslate"><span class="pre">%wa</span></code></a>
 (bluesky IPython) magic command.</p>
 <p>CAUTION: Avoid certain names such as
-<a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html?highlight=del#the-del-statement">del</a>
+<a class="reference external" href="https://docs.python.org/3/reference/simple_stmts.html?highlight=del#the-del-statement"><code class="docutils literal notranslate"><span class="pre">del</span></code></a>
 and
-<a class="reference external" href="https://docs.python.org/3/reference/expressions.html?highlight=lambda#lambda">lambda</a>
+<a class="reference external" href="https://docs.python.org/3/reference/expressions.html?highlight=lambda#lambda"><code class="docutils literal notranslate"><span class="pre">lambda</span></code></a>
 since these are reserved Python names with very important meanings.</p>
 <p>Be sure to add this new motor symbol to the <code class="docutils literal notranslate"><span class="pre">__all__</span></code> list near the top of the file.</p>
 <p>Once you add motors to the <code class="docutils literal notranslate"><span class="pre">instrument/devices/motors.py</span></code> file, you should
@@ -695,8 +695,7 @@ is versatile.</p>
 inclusion in the instrument package.  Components from the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package
 may be imported from such custom user code by writing a file in the working
 directory with the support.  The file can be loaded and run in an IPython
-session with the <a class="reference external" href="https://ipython.org/ipython-doc/3/interactive/magics.html#magic-run">%run -i
-filename.py</a>
+session with the <a class="reference external" href="https://ipython.org/ipython-doc/3/interactive/magics.html#magic-run"><code class="docutils literal notranslate"><span class="pre">%run</span> <span class="pre">-i</span> <span class="pre">filename.py</span></code></a>
 magic command.</p>
 <details>
 <summary>Example User Code</summary>

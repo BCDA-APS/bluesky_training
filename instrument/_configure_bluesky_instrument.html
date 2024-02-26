@@ -486,7 +486,7 @@ SPEC data collection software, then change this line in your
 NeXus files using a
 <a class="reference external" href="https://github.com/APS-USAXS/usaxs-bluesky/blob/master/instrument/callbacks/nxwriter.py">callback</a>.</p>
 <p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><strong>init</strong>.py</span></a> file.  In some cases, the sequence of
+<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></span></a> file.  In some cases, the sequence of
 loading is important.</p>
 </section>
 <section id="devices">
@@ -501,14 +501,14 @@ files, you might need to adjust the contents of the file first to match your
 hardware. These files are leftovers as used in the bluesky training examples and
 provide ideas for what is possible with your instrument.</p>
 <p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><strong>init</strong>.py</span></a> file.  In some cases, the sequence of
+<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></span></a> file.  In some cases, the sequence of
 loading is important.</p>
 <p><strong>Note</strong>: A major principle is that any activities on startup <strong>should not
 change settings in EPICS</strong>.  With this in mind, you gain the confidence that
 EPICS will not be affected just beacuse a Bluesky session was started.
 (This is why you changed <code class="docutils literal notranslate"><span class="pre">ALLOW_AREA_DETECTOR_WARMUP</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> above.)</p>
 <p><strong>Tip</strong>: SPEC users:
-<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/applications/spec2ophyd.html#spec2ophyd">spec2ophyd</a>
+<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/applications/spec2ophyd.html#spec2ophyd"><code class="docutils literal notranslate"><span class="pre">spec2ophyd</span></code></a>
 can translate much of your SPEC config file into content for the Devices
 directory.</p>
 </section>
@@ -517,7 +517,7 @@ directory.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">instrument/plans/</span></code> directory contains Python files that define the custom
 Bluesky plans for your instrument.  The existing files serve as examples.</p>
 <p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><strong>init</strong>.py</span></a> file.  In some cases, the sequence of
+<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></span></a> file.  In some cases, the sequence of
 loading is important.</p>
 </section>
 <section id="utils">
@@ -526,7 +526,7 @@ loading is important.</p>
 classified as Callbacks, Devices, or Plans.  For example, standard analytical
 routines might be best placed in Utils.</p>
 <p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><strong>init</strong>.py</span></a> file.  In some cases, the sequence of
+<a class="reference internal" href="_about_init_files.html"><span class="std std-doc"><code class="docutils literal notranslate"><span class="pre">__init__.py</span></code></span></a> file.  In some cases, the sequence of
 loading is important.</p>
 </section>
 </section>
