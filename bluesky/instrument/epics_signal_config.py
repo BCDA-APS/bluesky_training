@@ -14,7 +14,7 @@ from ophyd.signal import EpicsSignalBase
 logger = logging.getLogger(__name__)
 logger.info(__file__)
 
-from . import iconfig
+from . import iconfig  # noqa
 
 
 # Set default timeout for all EpicsSignal connections & communications.
