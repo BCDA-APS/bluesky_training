@@ -41,7 +41,7 @@ WRITE_SPEC_DATA_FILES: true
 
 # Directory to "autosave" the RE.md dictionary (uses PersistentDict)
 # Uncomment and modify to change from the default.
-# RUNENGINE_MD_PATH: /home/USERNAME/Bluesky_RunEngine_md
+# RUNENGINE_MD_PATH: /home/USERNAME/.config/Bluesky_RunEngine_md
 
 # override default control layer for ophyd
 # if undefined, defaults to PyEpics

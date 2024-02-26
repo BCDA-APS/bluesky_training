@@ -47,7 +47,7 @@ import numpy as np
 def get_md_path():
     path = iconfig.get("RUNENGINE_MD_PATH")
     if path is None:
-        path = pathlib.Path.home() / "Bluesky_RunEngine_md"
+        path = pathlib.Path.home() / ".config" / "Bluesky_RunEngine_md"
     else:
         path = pathlib.Path(path)
     logger.info("RunEngine metadata saved in directory: %s", str(path))
