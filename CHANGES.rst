@@ -24,12 +24,12 @@ describe future plans.
    1.0.3
    ******
 
-   release expected by 2024-04-01
+   release expected by 2024-04-02
 
 1.0.2
 ******
 
-release expected by 2024-03-01
+released 2024-02-26
 
 New Features
 ------------
