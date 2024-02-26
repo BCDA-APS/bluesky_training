@@ -10,7 +10,9 @@ Visit <a href=https://bcda-aps.github.io/bluesky_training/instrument/_install_ne
 
 <details>
 <summary>How to test my Bluesky installation?</summary>
-Visit <a href=https://bcda-aps.github.io/bluesky_training/tutor/_hello_word.html> Hello World</a>.
+Test (verify) the installation by running the <a
+href=https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html>Hello, World!</a>
+tutorial.
 </details>
 
 <br>
