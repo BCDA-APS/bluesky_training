@@ -48,6 +48,7 @@ Maintenance
 * Environment for bluesky_2024_1.
 * Lint the code (for style and syntax errors) using the 'ruff' package.
 * Updates (learned from 2-ID) for new installations.
+* Various documentation updates.
 
 v1.0.1
 ******
