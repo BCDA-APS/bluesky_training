@@ -33,6 +33,7 @@ dependencies:
   - qt=5
 
   # --- general support packages
+  - apischema
   - aps-dm-api >=5
   - bitshuffle
   - blosc
@@ -73,7 +74,6 @@ dependencies:
   - pymca
   - pyRestTable
   - spec2nexus
-  - stdlogpj
   - xrayutilities
 
   # # --- packaging and publishing
@@ -96,6 +96,7 @@ dependencies:
   - uvicorn
 
   - pip:
+    - ophyd-registry
     - tiled
 
     - https://github.com/BCDA-APS/adl2pydm/archive/main.zip

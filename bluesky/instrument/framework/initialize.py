@@ -7,6 +7,7 @@ __all__ = """
     bp  bps  bpp
     summarize_plan
     np
+    registry
     """.split()
 
 import logging
@@ -31,6 +32,7 @@ from bluesky.utils import ProgressBarManager
 from bluesky.utils import ts_msg_hook
 from IPython import get_ipython
 from ophyd.signal import EpicsSignalBase
+from ophydregistry import Registry
 import databroker
 import ophyd
 import warnings
@@ -116,6 +118,9 @@ if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
         write_timeout=iconfig.get("PV_WRITE_TIMEOUT", TIMEOUT),
         connection_timeout=iconfig.get("PV_CONNECTION_TIMEOUT", TIMEOUT),
     )
+
+# Create a registry of ophyd devices
+registry = Registry(auto_register=True)
 
 _pv = iconfig.get("RUN_ENGINE_SCAN_ID_PV")
 if _pv is None:
