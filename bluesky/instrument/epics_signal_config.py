@@ -9,16 +9,16 @@ __all__ = """
 
 import logging
 
+from ophyd.signal import EpicsSignalBase
+
 logger = logging.getLogger(__name__)
 logger.info(__file__)
 
 from . import iconfig
-from ophyd.signal import EpicsSignal
-from ophyd.signal import EpicsSignalBase
 
 
-# set default timeout for all EpicsSignal connections & communications
-# always first, before ANY ophyd EPICS-based signals are created
+# Set default timeout for all EpicsSignal connections & communications.
+# Always call first, before ANY ophyd EPICS-based signals are created.
 TIMEOUT = 60
 if not EpicsSignalBase._EpicsSignalBase__any_instantiated:
     EpicsSignalBase.set_defaults(
@@ -33,7 +33,10 @@ if pvname is None:
     logger.info("Using RunEngine metadata for scan_id")
     scan_id_epics = None
 else:
+    from ophyd.signal import EpicsSignal
+
     logger.info("Using EPICS PV %s for scan_id", pvname)
+    # Must not call _before_ default timeouts are set.
     scan_id_epics = EpicsSignal(pvname, name="scan_id_epics")
 
 
@@ -41,17 +44,21 @@ def epics_scan_id_source(*args, **kwargs):
     """
     Callback function for RunEngine.  Returns *next* scan_id to be used.
 
+    * Ignore args and kwargs.
     * Get current scan_id from PV.
     * Apply lower limit of zero.
     * Increment.
     * Set PV with new value.
     * Return new value.
+
+    Exception will be raised if PV is not connected when next
+    ``bluesky.plan_stubs.open_run()`` is called.
     """
     if scan_id_epics is None:
         raise RuntimeError(
             "epics_scan_id_source() called when"
             " 'RUN_ENGINE_SCAN_ID_PV' is"
-            "undefined in 'iconfig.yml' file."
+            " undefined in 'iconfig.yml' file."
         )
     new_scan_id = max(scan_id_epics.get(), 0) + 1
     scan_id_epics.put(new_scan_id)
