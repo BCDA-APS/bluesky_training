@@ -43,7 +43,7 @@ New Features
 
   * ophyd-registry
 
-* Build ``registry`` of all ophyd objects.
+* Build ``oregistry`` of all ophyd objects.
 
 Maintenance
 ------------
