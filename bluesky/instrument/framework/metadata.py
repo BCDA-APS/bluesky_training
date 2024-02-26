@@ -15,7 +15,6 @@ from .. import iconfig
 import getpass
 import os
 import socket
-from datetime import datetime
 
 import apstools
 import databroker
