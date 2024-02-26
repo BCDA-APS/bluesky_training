@@ -5,7 +5,7 @@ with some location where data is stored, typically a MongoDB collection.
 This is called a catalog configuration file.
 
 The catalog configuration file must be placed in a directory where
-[`databroker`](https://blueskyproject.io/databroker/how-to/mongo-backed-catalog.html)
+[databroker](https://blueskyproject.io/databroker/how-to/mongo-backed-catalog.html)
 expects to find it.  Run this snippet to find the list of paths where it looks on your system:
 
 <pre>

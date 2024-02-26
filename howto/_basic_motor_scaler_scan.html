@@ -450,7 +450,7 @@ document.write(`
 </table>
 <section id="Connect-the-motor">
 <h2>Connect the motor<a class="headerlink" href="#Connect-the-motor" title="Permalink to this heading">#</a></h2>
-<p>First, import the <code class="docutils literal notranslate"><span class="pre">`ophyd.EpicsMotor</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/generated/ophyd.epics_motor.EpicsMotor.html?highlight=epicsmotor#ophyd.epics_motor.EpicsMotor">https://blueskyproject.io/ophyd/generated/ophyd.epics_motor.EpicsMotor.html?highlight=epicsmotor#ophyd.epics_motor.EpicsMotor</a>&gt;`__ (class) definition. This Python class from <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> is the best representation of the synApps <a class="reference external" href="https://github.com/epics-modules/motor">motor</a> record.</p>
+<p>First, import the <a class="reference external" href="https://blueskyproject.io/ophyd/generated/ophyd.epics_motor.EpicsMotor.html?highlight=epicsmotor#ophyd.epics_motor.EpicsMotor">ophyd.EpicsMotor</a> (class) definition. This Python class from <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> is the best representation of the synApps <a class="reference external" href="https://github.com/epics-modules/motor">motor</a> record.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -578,7 +578,7 @@ xpos [In progress. No progress bar available.]
 </section>
 <section id="Connect-the-scaler">
 <h2>Connect the scaler<a class="headerlink" href="#Connect-the-scaler" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> package provides two representations of the synApps <a class="reference external" href="https://github.com/epics-modules/scaler">scaler</a> record (<code class="docutils literal notranslate"><span class="pre">`EpicsScaler</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#epicsscaler">https://blueskyproject.io/ophyd/reference/builtin-devices.html#epicsscaler</a>&gt;`__ and <code class="docutils literal notranslate"><span class="pre">`ScalerCH</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#scalerch">https://blueskyproject.io/ophyd/reference/builtin-devices.html#scalerch</a>&gt;`__). My <em>opinion</em> is that the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> class provides the representation most compatible with use at the APS.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> package provides two representations of the synApps <a class="reference external" href="https://github.com/epics-modules/scaler">scaler</a> record (<a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#epicsscaler">EpicsScaler</a> and <a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#scalerch">ScalerCH</a>). My <em>opinion</em> is that the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> class provides the representation most compatible with use at the APS.</p>
 <p>As before, import the ophyd class:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -990,7 +990,7 @@ sources:
 </section>
 <section id="First-scan">
 <h2>First scan<a class="headerlink" href="#First-scan" title="Permalink to this heading">#</a></h2>
-<p>The standard plans provided in <code class="docutils literal notranslate"><span class="pre">`bluesky.plans</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans">https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans</a>&gt;`__ are sufficient for many needs, so import them and, in the same command, give the package a short name (<code class="docutils literal notranslate"><span class="pre">bp</span></code>) since it is used frequently.</p>
+<p>The standard plans provided in <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans">bluesky.plans</a> are sufficient for many needs, so import them and, in the same command, give the package a short name (<code class="docutils literal notranslate"><span class="pre">bp</span></code>) since it is used frequently.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
 </pre></div>
@@ -999,7 +999,7 @@ sources:
 </pre></div>
 </div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">`scan()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan">https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan</a>&gt;`__ plan is flexible and will be used here to scan scaler <em>vs.</em> motor. The first argument is the <em>list</em> of detectors to be recorded. Here, we give the scaler object <code class="docutils literal notranslate"><span class="pre">vsc16</span></code>. The next argument is the positioner object, then start and end positions, finally, the number of points to be collected.</p>
+<p>The <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan">scan()</a> plan is flexible and will be used here to scan scaler <em>vs.</em> motor. The first argument is the <em>list</em> of detectors to be recorded. Here, we give the scaler object <code class="docutils literal notranslate"><span class="pre">vsc16</span></code>. The next argument is the positioner object, then start and end positions, finally, the number of points to be collected.</p>
 <p>Observe that we do not run the scan directly, but rather give the scan to the <code class="docutils literal notranslate"><span class="pre">RE()</span></code> object. The <code class="docutils literal notranslate"><span class="pre">RE()</span></code> object will run the scan, performing each of the actions defined by the scan, but also handle the additional tasks of managing the data acquisition process, publishing data to all subscribers (here: databroker and BestEffortCallback) and checking for updates from EPICS and checking if the run must be interrupted either by user request or some other observation. (We have not configured any
 of those other observations in this simple example.)</p>
 <div class="nbinput docutils container">
@@ -1387,10 +1387,10 @@ scaler.preset_time.get() = 0.5
 <ol class="arabic">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">logger</span></code> to report at various places.</p>
 <p><em>Hint</em>: <code class="docutils literal notranslate"><span class="pre">logger.info(&quot;text:</span> <span class="pre">%s</span>&#160; <span class="pre">value:</span> <span class="pre">%g&quot;,</span> <span class="pre">s1,</span> <span class="pre">v2,</span> <span class="pre">...)</span></code></p>
-<p>Consider examples as used in <code class="docutils literal notranslate"><span class="pre">`peak_finder_example.py</span></code> &lt;instrument/plans/peak_finder_example.py&gt;`__. See the <a class="reference external" href="https://docs.python.org/3/howto/logging.html">Python logging tutorial</a> for more information.</p>
+<p>Consider examples as used in <code class="docutils literal notranslate"><span class="pre">instrument/plans/peak_finder_example.py</span></code>. See the <a class="reference external" href="https://docs.python.org/3/howto/logging.html">Python logging tutorial</a> for more information.</p>
 </li>
 <li><p>Write a custom plan that accepts user-provided metadata.</p>
-<p><em>Hint</em>: <code class="docutils literal notranslate"><span class="pre">`bp.scan()</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan">https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan</a>&gt;`__ has the <code class="docutils literal notranslate"><span class="pre">md</span></code> keyword argument (<em>kwarg</em>) that accepts a dictionary of <em>key: value</em> pairs as the metadata when the plan is run. Your custom plan should accept the same kwarg and pass this to <code class="docutils literal notranslate"><span class="pre">bp.scan(md=the_dictionary)</span></code>, possibly after adding some of its own keys to the metadata.</p>
+<p><em>Hint</em>: <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html#bluesky.plans.scan">bp.scan()</a> has the <code class="docutils literal notranslate"><span class="pre">md</span></code> keyword argument (<em>kwarg</em>) that accepts a dictionary of <em>key: value</em> pairs as the metadata when the plan is run. Your custom plan should accept the same kwarg and pass this to <code class="docutils literal notranslate"><span class="pre">bp.scan(md=the_dictionary)</span></code>, possibly after adding some of its own keys to the metadata.</p>
 </li>
 </ol>
 </section>

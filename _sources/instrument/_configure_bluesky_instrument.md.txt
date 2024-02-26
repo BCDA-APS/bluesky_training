@@ -92,7 +92,7 @@ NeXus files using a
 [callback](https://github.com/APS-USAXS/usaxs-bluesky/blob/master/instrument/callbacks/nxwriter.py).
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
+[__init__.py](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.
 
 ### Devices
@@ -109,7 +109,7 @@ hardware. These files are leftovers as used in the bluesky training examples and
 provide ideas for what is possible with your instrument.
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
+[__init__.py](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.
 
 **Note**: A major principle is that any activities on startup **should not
@@ -118,7 +118,7 @@ EPICS will not be affected just beacuse a Bluesky session was started.
 (This is why you changed `ALLOW_AREA_DETECTOR_WARMUP` to `false` above.)
 
 **Tip**: SPEC users:
-[`spec2ophyd`](https://bcda-aps.github.io/apstools/latest/applications/spec2ophyd.html#spec2ophyd)
+[spec2ophyd](https://bcda-aps.github.io/apstools/latest/applications/spec2ophyd.html#spec2ophyd)
 can translate much of your SPEC config file into content for the Devices
 directory.
 
@@ -128,7 +128,7 @@ The `instrument/plans/` directory contains Python files that define the custom
 Bluesky plans for your instrument.  The existing files serve as examples.
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
+[__init__.py](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.
 
 ### Utils
@@ -138,5 +138,5 @@ classified as Callbacks, Devices, or Plans.  For example, standard analytical
 routines might be best placed in Utils.
 
 The order of file loading is controlled by the lines in the
-[`__init__.py`](./_about_init_files.md) file.  In some cases, the sequence of
+[__init__.py](./_about_init_files.md) file.  In some cases, the sequence of
 loading is important.

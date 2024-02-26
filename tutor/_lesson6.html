@@ -432,7 +432,7 @@ document.write(`
 image data is stored external to the <em>databroker</em> component in bluesky. The <em>databroker</em> stores references to the file and address and provides access routines for the image data that manage ease of use along with efficient use of computing resources (memory, networking, etc.).</p>
 <p>So, instead of reading the image data directly from the area detector, we’ll configure the area detector plugin chain to handle the image data and then, if we choose, use the databroker to process the image further such as visualize.</p>
 <div class="line-block">
-<div class="line"><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as an EPICS AreaDetector <code class="docutils literal notranslate"><span class="pre">`ADSimDetector</span></code> &lt;<a class="github reference external" href="https://github.com/areaDetector/ADSimDetector">areaDetector/ADSimDetector</a>&gt;`__ IOC with prefix <code class="docutils literal notranslate"><span class="pre">adsky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions:</div>
+<div class="line"><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as an EPICS AreaDetector <a class="reference external" href="https://github.com/areaDetector/ADSimDetector">ADSimDetector</a> IOC with prefix <code class="docutils literal notranslate"><span class="pre">adsky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions:</div>
 <div class="line"><a class="github reference external" href="https://github.com/prjemian/epics-docker/blob/master/n4_areaDetector/README.md">prjemian/epics-docker</a></div>
 </div>
 <hr class="docutils" />

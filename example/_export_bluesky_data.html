@@ -425,12 +425,12 @@ How do I get the data out of the databroker to send it to my user?</p>
 <li><p><em>one-time</em>: learn a set of Python commands</p></li>
 <li><p><em>occasional</em>: build Python command (or <em>callback</em>) to expedite the steps <em>for your users</em>.</p></li>
 <li><p><em>always</em>: write file as data is acquired using a Bluesky
-<a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html?highlight=callback#overview-of-callbacks"><code class="docutils literal notranslate"><span class="pre">callback</span></code></a> (to the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>)</p></li>
+<a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html?highlight=callback#overview-of-callbacks">callback</a> (to the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>)</p></li>
 </ul>
 </li>
 <li><p>What tool(s) will the user(s) be using to <strong><em>read</em></strong> the data received?</p>
 <ul>
-<li><p><em>python</em>: <a class="reference external" href="https://blueskyproject.io/databroker/"><code class="docutils literal notranslate"><span class="pre">databroker</span></code></a></p></li>
+<li><p><em>python</em>: <a class="reference external" href="https://blueskyproject.io/databroker/">databroker</a></p></li>
 <li><p><em>file(s)</em>: What file format to use?</p>
 <ul>
 <li><p><em>text</em>:
@@ -448,7 +448,7 @@ How do I get the data out of the databroker to send it to my user?</p>
 <ul>
 <li><p><em><a class="reference external" href="https://www.globus.org/data-transfer">globus</a></em>:
 high-performance data transfers between systems within and across organizations</p></li>
-<li><p><em><a class="reference external" href="https://blueskyproject.io/tiled/"><code class="docutils literal notranslate"><span class="pre">tiled</span></code></a></em>:
+<li><p><em><a class="reference external" href="https://blueskyproject.io/tiled/">tiled</a></em>:
 Bluesky <strong>data access</strong> service for data-aware portals and data science tools.</p></li>
 </ul>
 </li>
@@ -458,7 +458,7 @@ Bluesky <strong>data access</strong> service for data-aware portals and data sci
 </section>
 <section id="databroker-pack">
 <h2>databroker-pack<a class="headerlink" href="#databroker-pack" title="Permalink to this heading">#</a></h2>
-<p>The <a class="reference external" href="https://blueskyproject.io/databroker-pack/"><code class="docutils literal notranslate"><span class="pre">databroker-pack</span></code></a> package
+<p>The <a class="reference external" href="https://blueskyproject.io/databroker-pack/">databroker-pack</a> package
 is used as part of the process to move a subset of a databroker catalog (or the entire catalog).</p>
 <blockquote>
 <div><p>The utility <code class="docutils literal notranslate"><span class="pre">databroker-pack</span></code> boxes up Bluesky Runs as a directory of
@@ -565,7 +565,7 @@ against the objective keeping it simple).  Here is an example:</p>
 <section id="json">
 <h4>JSON<a class="headerlink" href="#json" title="Permalink to this heading">#</a></h4>
 <p>While Python provides a
-<a class="reference external" href="https://docs.python.org/3/library/json.html"><code class="docutils literal notranslate"><span class="pre">json</span></code></a> package to
+<a class="reference external" href="https://docs.python.org/3/library/json.html">json</a> package to
 read/write a JSON file, it may be easier to use the <code class="docutils literal notranslate"><span class="pre">xarray</span></code> structure
 returned by the <code class="docutils literal notranslate"><span class="pre">databroker</span></code> from <code class="docutils literal notranslate"><span class="pre">run.primary.read()</span></code> (where  <code class="docutils literal notranslate"><span class="pre">primary</span></code>
 is the name of the document stream named <em>primary</em>).  Export the data to
@@ -594,7 +594,7 @@ can be set to <code class="docutils literal notranslate"><span class="pre">false
 <section id="hdf5-files">
 <h3>HDF5 files<a class="headerlink" href="#hdf5-files" title="Permalink to this heading">#</a></h3>
 <p>Python support for the HDF5 format is usally provided through use of the
-<a class="reference external" href="https://www.h5py.org/"><code class="docutils literal notranslate"><span class="pre">h5py</span></code></a> package.  NeXus is an example of a specific</p>
+<a class="reference external" href="https://www.h5py.org/">h5py</a> package.  NeXus is an example of a specific</p>
 <section id="raw">
 <h4>raw<a class="headerlink" href="#raw" title="Permalink to this heading">#</a></h4>
 <p>HDF5 is a hierarchical data format, allowing much structure in how the
@@ -627,7 +627,7 @@ data according to the terms of the file format.</p>
 <section id="apstools">
 <h3>apstools<a class="headerlink" href="#apstools" title="Permalink to this heading">#</a></h3>
 <p>The
-<a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html"><code class="docutils literal notranslate"><span class="pre">apstools</span></code></a>
+<a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html">apstools</a>
 package supports automatic data export to NeXus or SPEC data files via
 callbacks.  The support is provided in python <code class="docutils literal notranslate"><span class="pre">class</span></code> definitions that
 handle each of the document types from the <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>.</p>
