@@ -44,6 +44,7 @@ New Features
   * ophyd-registry
 
 * Build ``oregistry`` of all ophyd objects.
+* Post a warning if at APS but not on controls subnet.
 
 Maintenance
 ------------

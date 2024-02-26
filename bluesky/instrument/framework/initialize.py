@@ -22,6 +22,7 @@ import sys
 sys.path.append(str(pathlib.Path(__file__).absolute().parent.parent.parent))
 
 from .. import iconfig
+from apstools.utils import warn_if_not_aps_controls_subnet
 from bluesky import RunEngine
 from bluesky import SupplementalData
 from bluesky.callbacks.best_effort import BestEffortCallback
@@ -42,6 +43,9 @@ import bluesky.plan_stubs as bps  # noqa
 import bluesky.preprocessors as bpp  # noqa
 import numpy as np  # noqa
 
+# Post a warning if at APS but not on controls subnet.
+warn_if_not_aps_controls_subnet()
+
 
 def get_md_path():
     path = iconfig.get("RUNENGINE_MD_PATH")
@@ -52,11 +56,9 @@ def get_md_path():
     logger.info("RunEngine metadata saved in directory: %s", str(path))
     return str(path)
 
-
 # Set up a RunEngine and use metadata backed PersistentDict
 RE = RunEngine({})
 RE.md = PersistentDict(get_md_path())
-
 
 # Connect with our mongodb database
 catalog_name = iconfig.get("DATABROKER_CATALOG", "training")
@@ -67,7 +69,6 @@ try:
 except KeyError:
     cat = databroker.temp().v2
     logger.info("using TEMPORARY databroker catalog '%s'", cat.name)
-
 
 # Subscribe metadatastore to documents.
 # If this is removed, data is not saved to metadatastore.
