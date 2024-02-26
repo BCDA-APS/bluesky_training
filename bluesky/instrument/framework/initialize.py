@@ -31,7 +31,6 @@ from bluesky.utils import PersistentDict
 from bluesky.utils import ProgressBarManager
 from bluesky.utils import ts_msg_hook  # noqa
 from IPython import get_ipython
-from ophyd.signal import EpicsSignalBase
 from ophydregistry import Registry
 import databroker
 import ophyd
