@@ -31,7 +31,6 @@ from bluesky.utils import PersistentDict
 from bluesky.utils import ProgressBarManager
 from bluesky.utils import ts_msg_hook
 from IPython import get_ipython
-from ophyd.signal import EpicsSignalBase
 from ophydregistry import Registry
 import databroker
 import ophyd
@@ -120,4 +119,4 @@ if iconfig.get("RUN_ENGINE_SCAN_ID_PV") is not None:
     RE.md["scan_id"] = scan_id_epics.get()
 
 # Create a registry of ophyd devices
-registry = Registry(auto_register=True)
+oregistry = Registry(auto_register=True)
