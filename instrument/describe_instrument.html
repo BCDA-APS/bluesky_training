@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 
 
-<html lang="en" >
+<html lang="en" data-content_root="" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
     <title>The instrument package for Bluesky Data Acquisition &#8212; APS Bluesky Training  documentation</title>
   
@@ -19,15 +19,15 @@
   </script>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/bootstrap.css?digest=e353d410970836974a52" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=e353d410970836974a52" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
 
   
-  <link href="../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=e353d410970836974a52" rel="stylesheet" />
-  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2" />
-<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2" />
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
@@ -35,8 +35,9 @@
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=e353d410970836974a52" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -47,6 +48,7 @@
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/describe_instrument';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Instrument Package Guide" href="guide.html" />
@@ -60,7 +62,15 @@
 
   
   
-  <a class="skip-link" href="#main-content">Skip to main content</a>
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
   
   <input type="checkbox"
           class="sidebar-toggle"
@@ -95,18 +105,21 @@
 </form></div>
   </div>
   
-    <nav class="bd-header navbar navbar-expand-lg bd-navbar">
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
 <div class="bd-header__inner bd-page-width">
   <label class="sidebar-toggle primary-toggle" for="__primary">
     <span class="fa-solid fa-bars"></span>
   </label>
   
-  <div class="navbar-header-items__start">
+  
+  <div class="col-lg-3 navbar-header-items__start">
     
       <div class="navbar-item">
+
   
 
 <a class="navbar-brand logo" href="../index.html">
+  
   
   
   
@@ -118,18 +131,12 @@
     
   </div>
   
-  
   <div class="col-lg-9 navbar-header-items">
     
     <div class="me-auto navbar-header-items__center">
       
-        <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+        <div class="navbar-item">
+<nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
                     <li class="nav-item">
@@ -166,20 +173,20 @@
                       </a>
                     </li>
                 
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
                     More
                 </button>
-                <div class="dropdown-menu">
+                <ul id="pst-nav-more-links" class="dropdown-menu">
                     
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../changes.html">
+                      <a class="nav-link dropdown-item nav-internal" href="../changes.html">
                         Changes
                       </a>
                     </li>
                 
-                </div>
-            </div>
+                </ul>
+            </li>
             
   </ul>
 </nav></div>
@@ -191,23 +198,27 @@
       
         <div class="navbar-item navbar-persistent--container">
           
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
         </div>
       
       
         <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
@@ -218,27 +229,33 @@ document.write(`
   
   
     <div class="navbar-persistent--mobile">
-<script>
-document.write(`
-  <button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
     <i class="fa-solid fa-magnifying-glass"></i>
-  </button>
-`);
-</script>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
     </div>
   
 
   
-    <label class="sidebar-toggle secondary-toggle" for="__secondary">
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
       <span class="fa-solid fa-outdent"></span>
     </label>
   
 </div>
 
-    </nav>
+    </header>
   
+
   <div class="bd-container">
     <div class="bd-container__inner bd-page-width">
+      
+      
       
       <div class="bd-sidebar-primary bd-sidebar">
         
@@ -249,13 +266,8 @@ document.write(`
     
       <div class="sidebar-header-items__center">
         
-          <div class="navbar-item"><nav class="navbar-nav">
-  <p class="sidebar-header-items__title"
-     role="heading"
-     aria-level="1"
-     aria-label="Site Navigation">
-    Site Navigation
-  </p>
+          <div class="navbar-item">
+<nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
                     <li class="nav-item">
@@ -292,20 +304,20 @@ document.write(`
                       </a>
                     </li>
                 
-            <div class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
                     More
                 </button>
-                <div class="dropdown-menu">
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
                     
                     <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../changes.html">
+                      <a class="nav-link dropdown-item nav-internal" href="../changes.html">
                         Changes
                       </a>
                     </li>
                 
-                </div>
-            </div>
+                </ul>
+            </li>
             
   </ul>
 </nav></div>
@@ -317,12 +329,13 @@ document.write(`
       <div class="sidebar-header-items__end">
         
           <div class="navbar-item">
+
 <script>
 document.write(`
-  <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
-    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
-    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
-    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
   </button>
 `);
 </script></div>
@@ -332,7 +345,8 @@ document.write(`
   </div>
   
     <div class="sidebar-primary-items__start sidebar-primary__section">
-        <div class="sidebar-primary-item"><nav class="bd-docs-nav bd-links"
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
@@ -374,8 +388,8 @@ document.write(`
 
 
 
-<nav aria-label="Breadcrumbs">
-  <ul class="bd-breadcrumbs" role="navigation" aria-label="Breadcrumb">
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
     
     <li class="breadcrumb-item breadcrumb-home">
       <a href="../index.html" class="nav-link" aria-label="Home">
@@ -385,7 +399,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</li>
+    <li class="breadcrumb-item active" aria-current="page">The <code...</li>
   </ul>
 </nav>
 </div>
@@ -400,7 +414,7 @@ document.write(`
               
                 
 <div id="searchbox"></div>
-                <article class="bd-article" role="main">
+                <article class="bd-article">
                   
   <section id="The-instrument-package-for-Bluesky-Data-Acquisition">
 <h1>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition<a class="headerlink" href="#The-instrument-package-for-Bluesky-Data-Acquisition" title="Permalink to this heading">#</a></h1>
@@ -429,12 +443,12 @@ document.write(`
 <tbody>
 <tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">ad:</span></code></p></td>
 <td><p>area detector IOC</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">`prjemian/custom-synapps-6.2-ad-3.10</span></code> &lt;<a class="reference external" href="https://hub.docker.com/r/prjemian/custom-synapps-6.2-ad-3.10">https://hub.docker.com/r/prjemian/custom-synapps-6.2-ad-3.10</a>&gt;`__</p></td>
+<td><p><a class="reference external" href="https://hub.docker.com/r/prjemian/custom-synapps-6.2-ad-3.10">prjemian/custom-synapps-6.2-ad-3.10</a></p></td>
 <td><p><a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n6_custom_areaDetector">prjemian/epics-docker</a></p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gp:</span></code></p></td>
 <td><p>general purpose IOC</p></td>
-<td><p><code class="docutils literal notranslate"><span class="pre">`prjemian/prjemian/custom-synapps-6.2</span></code> &lt;<a class="reference external" href="https://hub.docker.com/r/prjemian/custom-synapps-6.2">https://hub.docker.com/r/prjemian/custom-synapps-6.2</a>&gt;`__</p></td>
+<td><p><a class="reference external" href="https://hub.docker.com/r/prjemian/custom-synapps-6.2">prjemian/prjemian/custom-synapps-6.2</a></p></td>
 <td><p><a class="github reference external" href="https://github.com/prjemian/epics-docker/tree/main/v1.1/n5_custom_synApps">prjemian/epics-docker</a></p></td>
 </tr>
 </tbody>
@@ -595,7 +609,7 @@ I Fri-11:15:58 - #### Startup is complete. ####
 </section>
 <section id="adsimdet">
 <h3><code class="docutils literal notranslate"><span class="pre">adsimdet</span></code><a class="headerlink" href="#adsimdet" title="Permalink to this heading">#</a></h3>
-<p>The EPICS Area Detector ADSimDetector is included with this instrument as <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code>. The detector is a monochrome 1k x 1k frame. The image is written to an HDF5 file and made available to the <code class="docutils literal notranslate"><span class="pre">`databroker</span></code> &lt;#databroker&gt;`__ via a shared volume from the docker container. <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code> can be used as a detector.</p>
+<p>The EPICS Area Detector ADSimDetector is included with this instrument as <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code>. The detector is a monochrome 1k x 1k frame. The image is written to an HDF5 file and made available to the <a class="reference internal" href="#databroker"><span class="std std-ref">databroker</span></a> via a shared volume from the docker container. <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code> can be used as a detector.</p>
 <p>The image is a simulated diffraction spot with center randomly-chosen between 100..900 on both axes. The width is also random as is the peak intensity and noise level. Furthermore, to simulate realistic conditions, the center position of both axes is adjusted by a few pixels using a pair of <em>swait</em> records (<code class="docutils literal notranslate"><span class="pre">gp:userCalc9</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">gp:userCalc10</span></code>) updating from random numbers.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -1042,7 +1056,7 @@ temperature_report_dmov_changes False                               2023-04-14 1
 <section id="motors">
 <h3>motors<a class="headerlink" href="#motors" title="Permalink to this heading">#</a></h3>
 <p>There are 16 soft motor channels: <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> .. <code class="docutils literal notranslate"><span class="pre">gp:m16</span></code>. Any motor can be used as a detector <strong>and</strong> as a positioner.</p>
-<p>The first motor, <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code>, is used to compute a simulated 1-D diffraction peak (<code class="docutils literal notranslate"><span class="pre">`noisy</span></code> &lt;#noisy&gt;`__) using <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>.</p>
+<p>The first motor, <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code>, is used to compute a simulated 1-D diffraction peak (<a class="reference internal" href="#noisy"><span class="std std-ref">noisy</span></a>) using <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>.</p>
 <p>To make it easier to change the motor step size, a custom <code class="docutils literal notranslate"><span class="pre">MyEpicsMotor</span></code> class was made, subclassing from <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code> and adding a component to access the motor’s <code class="docutils literal notranslate"><span class="pre">.SREV</span></code> (steps/revolution) field. The default motor step size is 0.01 (with SREV=200). For only <code class="docutils literal notranslate"><span class="pre">m1</span></code>, the step size has been changed to 0.001 by setting SREV=2000.</p>
 <p>NOTE: Changing SREV (in this simulator* seems to affect the soft motor’s simulated hardware limit. Be careful if you adjust SREV to higher numbers (smaller step sizes) that the expected range of motion remains sufficient for your measurements. Again, another thing to change in the EPICS support.</p>
 <div class="nbinput docutils container">
@@ -1170,7 +1184,7 @@ noisy     685.3703376927396 2023-04-14 11:15:56.876793
 <section id="Log-files">
 <h2>Log files<a class="headerlink" href="#Log-files" title="Permalink to this heading">#</a></h2>
 <p>For diagnostic and general support, log files are created to record activity. In the working directory, the log files are written to a <code class="docutils literal notranslate"><span class="pre">./.logs</span></code> subdirectory.</p>
-<p>There are two kinds of file, one that records user commands and the python result, the other records items sent to the <a class="reference external" href="https://github.com/prjemian/stdlogpj#example-directing-logs-to-a-specific-directory">customized</a> Python <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> package.</p>
+<p>There are two kinds of file, one that records user commands and the python result, the other records items sent to the Python <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> package.</p>
 <p>In the IPython session, use the <code class="docutils literal notranslate"><span class="pre">!</span></code> to run a linux command:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -1269,8 +1283,8 @@ I Wed-00:24:52 - Startup is complete.
 </section>
 <section id="SPEC-data-files">
 <h2>SPEC data files<a class="headerlink" href="#SPEC-data-files" title="Permalink to this heading">#</a></h2>
-<p>A <a class="reference external" href="https://certif.com">SPEC</a> data file records a copy of the scan data (area detector images are not stored in SPEC files). By default, the file is created in the present working directory using a name constructed from the date and time with a <code class="docutils literal notranslate"><span class="pre">.dat</span></code> file extension. Unlike SPEC, new data is written <em>at the end of a scan</em>. It is also possible to use the <code class="docutils literal notranslate"><span class="pre">`SpecWriterCallback</span></code> &lt;<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback</a>&gt;`__ to
-write data extracted from the database after the experiment is done.</p>
+<p>A <a class="reference external" href="https://certif.com">SPEC</a> data file records a copy of the scan data (area detector images are not stored in SPEC files). By default, the file is created in the present working directory using a name constructed from the date and time with a <code class="docutils literal notranslate"><span class="pre">.dat</span></code> file extension. Unlike SPEC, new data is written <em>at the end of a scan</em>. It is also possible to use the <a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">SpecWriterCallback</a> to write
+data extracted from the database after the experiment is done.</p>
 <p>The 2021-03 training does not cover the use of these files. You are free to examine them yourselves.</p>
 <p>Example SPEC data file from a bluesky session:</p>
 <details><div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#F /home/mintadmin/Documents/projects/BCDA-APS/bluesky_training/20210723-205451.dat
@@ -1447,12 +1461,12 @@ write data extracted from the database after the experiment is done.</p>
 <section id="User-Code-File">
 <h2>User Code File<a class="headerlink" href="#User-Code-File" title="Permalink to this heading">#</a></h2>
 <p>A common request from instruments is to allow the user to write some python code that can be loaded into the current session. Since development of this <em>user code</em> is often iterative, it must be possible to reload the code without requiring the session to exit and restart.</p>
-<p>The local file <code class="docutils literal notranslate"><span class="pre">`quick_hello.py</span></code> &lt;../../../bluesky/user/quick_hello.py&gt;`__ provides an example of such a user code file. Load this file with the command:</p>
+<p>The local file <code class="docutils literal notranslate"><span class="pre">user/quick_hello.py</span></code> provides an example of such a user code file. Load this file with the command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%run -im user.quick_hello
 </pre></div>
 </div>
 <details><p>The <code class="docutils literal notranslate"><span class="pre">%run</span></code> is an <a class="reference external" href="https://ipython.readthedocs.io/en/stable/interactive/magics.html">IPython Magic</a> command. <em>Magic</em> commands are only available from the <em>interactive</em> IPython command line (either in a console or Jupyter notebook). You can’t use them in your Python files, functions, classes, etc.</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">user/</span></code> directory must be on the import path, which we did as part of starting the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package (above). Also, <code class="docutils literal notranslate"><span class="pre">user/</span></code> <em>must</em> contain a file named <code class="docutils literal notranslate"><span class="pre">`__init__.py</span></code> &lt;./_about_init_files.md&gt;`__ so that <code class="docutils literal notranslate"><span class="pre">user</span></code> is an importable Python package.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">user/</span></code> directory must be on the import path, which we did as part of starting the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package (above). Also, <code class="docutils literal notranslate"><span class="pre">user/</span></code> <em>must</em> contain a file named <a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> so that <code class="docutils literal notranslate"><span class="pre">user</span></code> is an importable Python package.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">m</span></code> (as module) command option was added so it is not necessary to give the Python extension <code class="docutils literal notranslate"><span class="pre">.py</span></code>.</p>
 <p>Alternatively, we could use the command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%run -i user/quick_hello.py
@@ -1500,8 +1514,8 @@ Loading &#39;Hello, World!&#39; example.
 </section>
 <section id="databroker">
 <h2>databroker<a class="headerlink" href="#databroker" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">`databroker</span></code> &lt;<a class="reference external" href="https://blueskyproject.io/databroker">https://blueskyproject.io/databroker</a>&gt;`__ package provides a Python interface to the database with the experiment data, including references to the large file content such as area detector images. A <a class="reference external" href="https://yaml.org">YAML</a> configuration file connects databroker with a specific repository in the MongoDB database server. In the example here (<code class="docutils literal notranslate"><span class="pre">`bluesky_class.yml</span></code> &lt;./bluesky_class.yml&gt;`__), the name of the <em>catalog</em> entry in this file is <code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code>. It makes two
-connections to a MongoDB server running on the same workstation <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. Both connections are to the same MongoDB collection: <code class="docutils literal notranslate"><span class="pre">class_2021_03-bluesky</span></code>. The name of the file is not important as long as it is placed in a directory searched by <code class="docutils literal notranslate"><span class="pre">databroker.catalog</span></code>.</p>
+<p>The <a class="reference external" href="https://blueskyproject.io/databroker">databroker</a> package provides a Python interface to the database with the experiment data, including references to the large file content such as area detector images. A <a class="reference external" href="https://yaml.org">YAML</a> configuration file connects databroker with a specific repository in the MongoDB database server. In the example here (<a class="reference external" href="./bluesky_class.yml">bluesky_class.yml</a>), the name of the <em>catalog</em> entry in this file is <code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code>. It makes two connections
+to a MongoDB server running on the same workstation <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. Both connections are to the same MongoDB collection: <code class="docutils literal notranslate"><span class="pre">class_2021_03-bluesky</span></code>. The name of the file is not important as long as it is placed in a directory searched by <code class="docutils literal notranslate"><span class="pre">databroker.catalog</span></code>.</p>
 <p><strong>Example</strong></p>
 <div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># file: bluesky_class.yml</span>
 <span class="c1"># purpose: Configuration file to connect Bluesky databroker with MongoDB</span>
@@ -1532,11 +1546,10 @@ connections to a MongoDB server running on the same workstation <code class="doc
               
               
               
-                <footer class="bd-footer-article">
+              
+              
+                <footer class="prev-next-footer">
                   
-<div class="footer-article-items footer-article__inner">
-  
-    <div class="footer-article-item"><!-- Previous / next buttons -->
 <div class="prev-next-area">
     <a class="left-prev"
        href="index.html"
@@ -1556,10 +1569,7 @@ connections to a MongoDB server running on the same workstation <code class="doc
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
-</div></div>
-  
 </div>
-
                 </footer>
               
             </div>
@@ -1568,11 +1578,14 @@ connections to a MongoDB server running on the same workstation <code class="doc
               
                 <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
 
+
   <div class="sidebar-secondary-item">
-  <div class="page-toc tocsection onthispage">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
     <i class="fa-solid fa-list"></i> On this page
   </div>
-  <nav class="bd-toc-nav page-toc">
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Description">Description</a><ul class="nav section-nav flex-column">
@@ -1593,6 +1606,7 @@ connections to a MongoDB server running on the same workstation <code class="doc
   </nav></div>
 
   <div class="sidebar-secondary-item">
+
   <div class="tocsection sourcelink">
     <a href="../_sources/instrument/describe_instrument.ipynb.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
@@ -1613,8 +1627,8 @@ connections to a MongoDB server running on the same workstation <code class="doc
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/bootstrap.js?digest=e353d410970836974a52"></script>
-<script src="../_static/scripts/pydata-sphinx-theme.js?digest=e353d410970836974a52"></script>
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1622,6 +1636,7 @@ connections to a MongoDB server running on the same workstation <code class="doc
     <div class="footer-items__start">
       
         <div class="footer-item">
+
   <p class="copyright">
     
       © Copyright 2023, APS BCDA.
@@ -1631,6 +1646,7 @@ connections to a MongoDB server running on the same workstation <code class="doc
 </div>
       
         <div class="footer-item">
+
   <p class="sphinx-version">
     Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
     <br/>
@@ -1640,10 +1656,12 @@ connections to a MongoDB server running on the same workstation <code class="doc
     </div>
   
   
+  
     <div class="footer-items__end">
       
-        <div class="footer-item"><p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.13.3.
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
 </p></div>
       
     </div>

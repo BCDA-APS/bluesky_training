@@ -13,9 +13,9 @@ First, you have some choices:
   - _one-time_: learn a set of Python commands
   - _occasional_: build Python command (or _callback_) to expedite the steps _for your users_.
   - _always_: write file as data is acquired using a Bluesky
-    [`callback`](https://blueskyproject.io/bluesky/callbacks.html?highlight=callback#overview-of-callbacks) (to the bluesky `RunEngine`)
+    [callback](https://blueskyproject.io/bluesky/callbacks.html?highlight=callback#overview-of-callbacks) (to the bluesky `RunEngine`)
 - What tool(s) will the user(s) be using to **_read_** the data received?
-  - _python_: [`databroker`](https://blueskyproject.io/databroker/)
+  - _python_: [databroker](https://blueskyproject.io/databroker/)
   - _file(s)_: What file format to use?
     - _text_:
       [CSV](https://docs.python.org/3/library/csv.html),
@@ -29,12 +29,12 @@ First, you have some choices:
   - _network_:
     - _[globus](https://www.globus.org/data-transfer)_:
       high-performance data transfers between systems within and across organizations
-    - _[`tiled`](https://blueskyproject.io/tiled/)_:
+    - _[tiled](https://blueskyproject.io/tiled/)_:
       Bluesky **data access** service for data-aware portals and data science tools.
 
 ## databroker-pack
 
-The [`databroker-pack`](https://blueskyproject.io/databroker-pack/) package
+The [databroker-pack](https://blueskyproject.io/databroker-pack/) package
 is used as part of the process to move a subset of a databroker catalog (or the entire catalog).
 
 > The utility `databroker-pack` boxes up Bluesky Runs as a directory of
@@ -157,7 +157,7 @@ Since `md` is a dictionary structure, it is not so easy to write into a CSV file
 #### JSON
 
 While Python provides a
-[`json`](https://docs.python.org/3/library/json.html) package to
+[json](https://docs.python.org/3/library/json.html) package to
 read/write a JSON file, it may be easier to use the `xarray` structure
 returned by the `databroker` from `run.primary.read()` (where  `primary`
 is the name of the document stream named _primary_).  Export the data to
@@ -186,7 +186,7 @@ can be set to `false` if you wish to disable this.
 ### HDF5 files
 
 Python support for the HDF5 format is usally provided through use of the
-[`h5py`](https://www.h5py.org/) package.  NeXus is an example of a specific
+[h5py](https://www.h5py.org/) package.  NeXus is an example of a specific
 
 #### raw
 
@@ -220,7 +220,7 @@ data according to the terms of the file format.
 ### apstools
 
 The
-[`apstools`](https://bcda-aps.github.io/apstools/source/_filewriters.html)
+[apstools](https://bcda-aps.github.io/apstools/source/_filewriters.html)
 package supports automatic data export to NeXus or SPEC data files via
 callbacks.  The support is provided in python `class` definitions that
 handle each of the document types from the `RunEngine`.
