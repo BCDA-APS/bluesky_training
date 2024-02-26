@@ -1,5 +1,5 @@
 """
-initialize the bluesky framework
+Initialize the bluesky framework.
 """
 
 __all__ = """
@@ -7,8 +7,8 @@ __all__ = """
     bp  bps  bpp
     summarize_plan
     np
-    registry
-    """.split()
+    oregistry
+""".split()
 
 import logging
 
@@ -31,7 +31,6 @@ from bluesky.utils import PersistentDict
 from bluesky.utils import ProgressBarManager
 from bluesky.utils import ts_msg_hook
 from IPython import get_ipython
-from ophyd.signal import EpicsSignalBase
 from ophydregistry import Registry
 import databroker
 import ophyd
@@ -96,18 +95,19 @@ bec.disable_baseline()
 
 # At the end of every run, verify that files were saved and
 # print a confirmation message.
-# from bluesky.callbacks.broker import verify_files_saved
-# RE.subscribe(post_run(verify_files_saved), 'stop')
+if iconfig.get("VERIFY_FILES_SAVED", False):
+    from bluesky.callbacks.broker import post_run
+    from bluesky.callbacks.broker import verify_files_saved
 
-# Uncomment the following lines to turn on
-# verbose messages for debugging.
-# ophyd.logger.setLevel(logging.DEBUG)
+    RE.subscribe(post_run(verify_files_saved), "stop")
 
+ophyd.logger.setLevel(iconfig.get("LOGGING", {}).get("OPHYD_LOGGER_LEVEL", "WARNING"))
 ophyd.set_cl(iconfig.get("OPHYD_CONTROL_LAYER", "PyEpics").lower())
 logger.info(f"using ophyd control layer: {ophyd.cl.name}")
 
-# diagnostics
-# RE.msg_hook = ts_msg_hook
+if iconfig.get("ADD_DIAGNOSTIC_MESSAGES", False):
+    # Log bluesky Message objects in RunEngine (follow plan's progress).
+    RE.msg_hook = ts_msg_hook
 
 if iconfig.get("RUN_ENGINE_SCAN_ID_PV") is not None:
     from ..epics_signal_config import epics_scan_id_source
@@ -119,4 +119,4 @@ if iconfig.get("RUN_ENGINE_SCAN_ID_PV") is not None:
     RE.md["scan_id"] = scan_id_epics.get()
 
 # Create a registry of ophyd devices
-registry = Registry(auto_register=True)
+oregistry = Registry(auto_register=True)
