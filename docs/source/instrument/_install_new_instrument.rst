@@ -17,6 +17,7 @@ to the documentation for each step.
 #. `create conda environment <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html>`__
 #. `configure IPython profile startup <https://bcda-aps.github.io/bluesky_training/reference/_ipython.html>`__
 #. `configure bash with environment variable and alias <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment>`__
+#. Verify the installation by running the `Hello, World! tutorial. <https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html>`__
 #. create soft link:  ``ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/``
 #. Assign a MongoDB catalog for databroker: `instructions for BCDA <https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md>`__
 #. `databroker catalog configuration <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration>`__
@@ -344,8 +345,6 @@ Note that the bluesky team recommends GitHub. (Why is that? See section
          <li><b>Unselect</b> "Initialize repository with a README"</li>
          <li>Keep "Enable Static Application Security Testing (SAST)" unselected</li>
          </ul>
-
-
 
 
 The next steps are common to both web-based repositories (GitHub and GitLab):

@@ -1,5 +1,5 @@
 """
-Hello, World! demo for bluesky-queueserver testing.
+Demo 'Hello, World!' for testing, including bluesky-queueserver.
 
 EXAMPLE::
 
@@ -44,4 +44,4 @@ hello_device.number.name = hello_device.name
 
 def hello_world():
     """Simple bluesky plan for demonstrating Hello, World!."""
-    yield from bp.count([hello_device], md=dict(title="test QS"))
+    yield from bp.count([hello_device], md=dict(subtitle="test Bluesky"))

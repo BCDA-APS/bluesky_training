@@ -43,9 +43,11 @@ New Features
 Maintenance
 ------------
 
+* Add 'Hello, World!' test to installation checklist.
 * Drop the (unused now) *stdlogpj* package for configuring Python's *logging*.
 * Environment for bluesky_2024_1.
 * Lint the code (for style and syntax errors) using the 'ruff' package.
+* Updates (learned from 2-ID) for new installations.
 
 v1.0.1
 ******
