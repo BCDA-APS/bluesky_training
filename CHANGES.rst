@@ -45,6 +45,7 @@ Maintenance
 
 * Drop the (unused now) *stdlogpj* package for configuring Python's *logging*.
 * Environment for bluesky_2024_1.
+* Updates (from learned 2-ID) for new installations.
 
 
 v1.0.1
