@@ -17,9 +17,6 @@ serves as a template for new beamline installations.
    files which do not start with a "_" are added explicitly to the toctree in
    the `index.rst` file of that folder.
 
-In addition to these highlights, additional content is available in each section
-of the documentation.
-
 - :ref:`howto`
    -  `Bluesky Cheat Sheet <howto/bluesky_cheat_sheet.md>`_:
       First Steps to use Bluesky after installation.
