@@ -24,28 +24,37 @@ describe future plans.
    1.0.3
    ******
 
-   release expected by 2024-04-01
+   release expected by 2024-04-02
 
 1.0.2
 ******
 
-release expected by 2024-03-01
+released 2024-02-26
 
 New Features
 ------------
+
+* Add options to instrument configuration (iconfig.yml):
+
+  * After every run, verify that files were saved, print a confirmation message. 
+  * Debugging and message options.
 
 * Add package(s) to environment:
 
   * ophyd-registry
 
-* Build ``registry`` of all ophyd objects.
+* Build ``oregistry`` of all ophyd objects.
+* Post a warning if at APS but not on controls subnet.
 
 Maintenance
 ------------
 
+* Add 'Hello, World!' test to installation checklist.
 * Drop the (unused now) *stdlogpj* package for configuring Python's *logging*.
 * Environment for bluesky_2024_1.
-
+* Lint the code (for style and syntax errors) using the 'ruff' package.
+* Updates (learned from 2-ID) for new installations.
+* Various documentation updates.
 
 v1.0.1
 ******

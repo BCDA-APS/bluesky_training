@@ -1,5 +1,5 @@
 """
-Hello, World! demo for bluesky-queueserver testing.
+Demo 'Hello, World!' for testing, including bluesky-queueserver.
 
 EXAMPLE::
 
@@ -16,12 +16,15 @@ __all__ = """
 
 import logging
 
+from ophyd import Component
+from ophyd import Device
+from ophyd import Signal
+
+from bluesky import plans as bp
+
 logger = logging.getLogger(__name__)
 logger.info(__file__)
 
-from ophyd import Component, Device, Signal
-
-from bluesky import plans as bp
 
 print("Loading 'Hello, World!' example.")
 
@@ -41,4 +44,4 @@ hello_device.number.name = hello_device.name
 
 def hello_world():
     """Simple bluesky plan for demonstrating Hello, World!."""
-    yield from bp.count([hello_device], md=dict(title="test QS"))
+    yield from bp.count([hello_device], md=dict(subtitle="test Bluesky"))

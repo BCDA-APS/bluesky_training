@@ -1,2 +1,2 @@
 # instrument configuration
-from ._iconfig import iconfig
+from ._iconfig import iconfig  # noqa

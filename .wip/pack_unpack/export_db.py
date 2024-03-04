@@ -6,10 +6,12 @@ export data from one db and import to another
 see: https://github.com/APS-3ID-IXN/ipython-s3blue/issues/2
 """
 
-from databroker import Broker
-import datetime, os, shutil, time
+import datetime
+import os
+import shutil
+
 import pyRestTable
-from dask.bag import text
+from databroker import Broker
 
 
 def main():
@@ -101,6 +103,7 @@ def main():
 
 
 import re
+
 ACCEPTABLE_PATTERN = r"[A-Za-z_][\w_]*"
 
 
@@ -127,9 +130,7 @@ def tester():
     'mca_elapsed_real_time', 'mca_preset_real_time', 'mca_spectrum',
     'neat_stage_x', 'neat_stage_x_user_setpoint', 'neat_stage_y',
     'neat_stage_y_user_setpoint', 'scaler_time']
-    safe_keys = make_safe(keys)
-    keymap = {k:v for k, v in zip(keys, safe_keys)}
-    for old_key, new_key in zip(keys, safe_keys):
+    for old_key, new_key in zip(keys, make_safe(keys)):
         tbl.addRow((old_key, new_key))
     print(tbl)
 

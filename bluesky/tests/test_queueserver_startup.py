@@ -6,7 +6,8 @@ sys.path.append(str(ROOT_PATH))
 
 
 def test_startup(capsys):
-    from qstarter import iconfig
+    # start the instrument package for queueserver session
+    from qstarter import iconfig  # noqa
 
     out, err = capsys.readouterr()
 

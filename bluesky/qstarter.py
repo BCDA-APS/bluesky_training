@@ -22,7 +22,7 @@ sys.path.append(
 )
 
 from instrument import iconfig
-from instrument.queueserver import *
+from instrument.queueserver import *  # noqa
 
 
 print_instrument_configuration()
