@@ -48,7 +48,7 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'example/index';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Exporting data from Bluesky" href="_export_bluesky_data.html" />
+    <link rel="next" title="APS fly scans with taxi &amp; fly busy records" href="_busy_fly_scan.html" />
     <link rel="prev" title="Test the New Bluesky Instrument" href="../instrument/_test_new_instrument.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
@@ -347,6 +347,7 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="_busy_fly_scan.html">APS fly scans with taxi &amp; fly <code class="docutils literal notranslate"><span class="pre">busy</span></code> records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_specwriter.html">Demo the spec file writer callback</a></li>
@@ -412,6 +413,15 @@ document.write(`
 Examples might have minimal explanation.</p>
 <div class="toctree-wrapper compound">
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="_busy_fly_scan.html">APS fly scans with taxi &amp; fly <code class="docutils literal notranslate"><span class="pre">busy</span></code> records</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_busy_fly_scan.html#Overview">Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_busy_fly_scan.html#Bluesky-(Python)-setup">Bluesky (Python) setup</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_busy_fly_scan.html#EPICS-IOC">EPICS IOC</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_busy_fly_scan.html#The-busy-record">The <code class="docutils literal notranslate"><span class="pre">busy</span></code> record</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_busy_fly_scan.html#Procedure----Delay-a-short-time">Procedure – Delay a short time</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_busy_fly_scan.html#Procedure----step-scan-scaler-&amp;-motor">Procedure – step scan scaler &amp; motor</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#choices">Choices</a></li>
 <li class="toctree-l2"><a class="reference internal" href="_export_bluesky_data.html#databroker-pack">databroker-pack</a></li>
@@ -473,11 +483,11 @@ Examples might have minimal explanation.</p>
       </div>
     </a>
     <a class="right-next"
-       href="_export_bluesky_data.html"
+       href="_busy_fly_scan.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Exporting data from Bluesky</p>
+        <p class="prev-next-title">APS fly scans with taxi &amp; fly <code class="docutils literal notranslate"><span class="pre">busy</span></code> records</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

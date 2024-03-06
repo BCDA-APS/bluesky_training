@@ -1,0 +1,793 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "# Simulate a temperature controller with an EPICS `swait` record\n",
+    "\n",
+    "<blockquote>\n",
+    "<b>TODO</b>:\n",
+    "This HowTo is written as a tutorial (how to setup the swait record then apply it as a positioner).\n",
+    "Refactor into a HowTo (cut directly to use of the swait record)\n",
+    "using <code>apstools.devices.SimulatedSwaitControllerPositioner</code>.  Then make a new notebook for <code>apstools.devices.SimulatedTransformControllerPositioner</code>.\n",
+    "</blockquote>\n",
+    "\n",
+    "Learn how to create a simulated [temperature\n",
+    "controller](https://bcda-aps.github.io/bluesky_training/instrument/describe_instrument.html#temperature)\n",
+    "with Bluesky and an EPICS\n",
+    "[swait](https://bcda-aps.github.io/apstools/1.6.17/api/synApps/_swait.html)\n",
+    "record.  We'll show how to simulate the controller in EPICS and use that\n",
+    "simulation as a *positioner* in Bluesky.\n",
+    "\n",
+    "In this simulation, the `swait` record provides the computations for the\n",
+    "feedback loop that updates the simulated temperature."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Connect with a `swait` record\n",
+    "\n",
+    "We'll connect with the `gp:userCalc18` PV, an instance of an EPICS `swait`\n",
+    "record in our example IOC.  We'll create the ophyd controller object using the\n",
+    "[SwaitRecord](https://bcda-aps.github.io/apstools/latest/api/synApps/_swait.html#apstools.synApps.swait.SwaitRecord)\n",
+    "structure from the [apstools](https://bcda-aps.github.io/apstools/latest/)\n",
+    "package."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 10,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "controller.read()=OrderedDict([('simulator_calculated_value', {'value': 0.0, 'timestamp': 631152000.0})])\n",
+      "controller.read_configuration()=OrderedDict([('simulator_description', {'value': 'userCalc 8', 'timestamp': 631152000.0}), ('simulator_scanning_rate', {'value': 0, 'timestamp': 631152000.0}), ('simulator_disable_value', {'value': 0, 'timestamp': 631152000.0}), ('simulator_scan_disable_input_link_value', {'value': 0, 'timestamp': 631152000.0}), ('simulator_scan_disable_value_input_link', {'value': 'gp:userCalcEnable.VAL CA MS', 'timestamp': 631152000.0}), ('simulator_forward_link', {'value': '', 'timestamp': 631152000.0}), ('simulator_device_type', {'value': 0, 'timestamp': 631152000.0}), ('simulator_alarm_status', {'value': 17, 'timestamp': 631152000.0}), ('simulator_alarm_severity', {'value': 3, 'timestamp': 631152000.0}), ('simulator_new_alarm_status', {'value': 0, 'timestamp': 631152000.0}), ('simulator_new_alarm_severity', {'value': 0, 'timestamp': 631152000.0}), ('simulator_disable_alarm_severity', {'value': 0, 'timestamp': 631152000.0}), ('simulator_precision', {'value': 5, 'timestamp': 631152000.0}), ('simulator_high_operating_range', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_low_operating_range', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_calculation', {'value': '0', 'timestamp': 631152000.0}), ('simulator_output_link_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_output_location_name', {'value': '', 'timestamp': 631152000.0}), ('simulator_output_location_data', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_output_data_option', {'value': 0, 'timestamp': 631152000.0}), ('simulator_output_execute_option', {'value': 0, 'timestamp': 631152000.0}), ('simulator_output_execution_delay', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_event_to_issue', {'value': 0, 'timestamp': 631152000.0}), ('simulator_channels_A_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_A_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_A_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_B_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_B_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_B_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_C_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_C_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_C_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_D_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_D_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_D_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_E_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_E_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_E_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_F_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_F_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_F_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_G_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_G_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_G_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_H_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_H_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_H_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_I_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_I_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_I_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_J_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_J_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_J_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_K_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_K_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_K_input_trigger', {'value': 1, 'timestamp': 631152000.0}), ('simulator_channels_L_input_value', {'value': 0.0, 'timestamp': 631152000.0}), ('simulator_channels_L_input_pv', {'value': '', 'timestamp': 631152000.0}), ('simulator_channels_L_input_trigger', {'value': 1, 'timestamp': 631152000.0})])\n"
+     ]
+    }
+   ],
+   "source": [
+    "from apstools.synApps import SwaitRecord\n",
+    "\n",
+    "controller = SwaitRecord(\"gp:userCalc8\", name=\"simulator\")\n",
+    "controller.wait_for_connection()\n",
+    "print(f\"{controller.read()=}\\n{controller.read_configuration()=}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Create a function to setup the controller\n",
+    "\n",
+    "Create a function to configure the `swait` record as a simulated temperature\n",
+    "controller.  The \"controller\" will update the current computed value (the\n",
+    "*readback*) at `period` based on the setpoint.  Note that `period` here is one\n",
+    "of the preset EPICS `.SCAN` field values.  Pick from any of these values (from\n",
+    "the table at [this\n",
+    "reference](https://epics-base.github.io/epics-base/menuScan.html)):\n",
+    "\n",
+    "- `\"10 second\"`\n",
+    "- `\"5 second\"`\n",
+    "- `\"2 second\"`\n",
+    "- `\"1 second\"`\n",
+    "- `\".5 second\"`\n",
+    "- `\".2 second\"`\n",
+    "- `\".1 second\"`\n",
+    "\n",
+    "Be certain to use the exact text string as shown.\n",
+    "\n",
+    "The `swait` record will compute the step size based on the difference between\n",
+    "the previous value and the setpoint, limited to the maximum step size.  Random `noise`\n",
+    "is applied to each new computation.  The fields of the `swait` record in\n",
+    "this simulation are described in the next table:\n",
+    "\n",
+    "field | description\n",
+    "--- | ---\n",
+    "`.VAL` | readback\n",
+    "`.B` | setpoint\n",
+    "`.A` | previous value\n",
+    "`.C` | noise level\n",
+    "`.D` | maximum change\n",
+    "`.CALC` | calculation expression\n",
+    "`.SCAN` | record scan `period`\n",
+    "\n",
+    "The calculation will simulate a feedback loop which reduces the\n",
+    "value of `abs(readback - setpoint)`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 11,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "def setup_controller(\n",
+    "    swait,\n",
+    "    setpoint=None,\n",
+    "    label=\"controller\",\n",
+    "    noise=2,\n",
+    "    period=\"1 second\",\n",
+    "    max_change=2\n",
+    "):\n",
+    "    swait.reset()  # remove any prior configuration\n",
+    "    swait.description.put(label)\n",
+    "    swait.channels.A.input_pv.put(swait.calculated_value.pvname)\n",
+    "    if setpoint is not None:\n",
+    "        swait.calculated_value.put(setpoint)  # preset\n",
+    "        swait.channels.A.input_value.put(setpoint)  # readback\n",
+    "        swait.channels.B.input_value.put(setpoint)  # setpoint\n",
+    "    swait.channels.C.input_value.put(noise)  # 2 * noise amplitude\n",
+    "    swait.channels.D.input_value.put(max_change)\n",
+    "    swait.scanning_rate.put(period)\n",
+    "    swait.calculation.put(\"A+max(-D,min(D,(B-A)))+C*(RNDM-0.5)\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Setup our controller\n",
+    "\n",
+    "Setup our controller with a (randomly-selected) setpoint and scan period."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "import random\n",
+    "\n",
+    "setup_controller(controller, 10 + 30 * random.random(), period=\"1 second\", label=\"temperature\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Once configured, the control screen for this `swait` record should look like this screen view:\n",
+    "\n",
+    "![swait screen](../_static/userCalc8-as-tc.png)\n",
+    "\n",
+    "Watch the controller as it starts for a short time.  The readback should already\n",
+    "be very close (within random noise) to the setpoint value."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 13,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1.00s: readback=19.20 setpoint=19.81\n",
+      "2.01s: readback=20.74 setpoint=19.81\n",
+      "3.01s: readback=18.95 setpoint=19.81\n",
+      "4.01s: readback=19.22 setpoint=19.81\n",
+      "5.01s: readback=19.53 setpoint=19.81\n"
+     ]
+    }
+   ],
+   "source": [
+    "import time\n",
+    "\n",
+    "t0 = time.time()\n",
+    "for i in range(5):\n",
+    "    time.sleep(1)\n",
+    "    print(\n",
+    "        f\"{time.time() - t0:.2f}s:\"\n",
+    "        f\" readback={controller.calculated_value.get():.2f}\"\n",
+    "        f\" setpoint={controller.channels.B.input_value.get():.2f}\"\n",
+    "    )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## temperature as a positioner\n",
+    "\n",
+    "A *positioner* is a device that has both a *readback* (the current measured value) and a *setpoint* (the expected, or demanded, value of the device).  These are available as EPICS PVs from our `swait` record.  We can obtain these directly from our ophyd `controller` object:\n",
+    "\n",
+    "signal | swait field | ophyd object\n",
+    "--- | --- | ---\n",
+    "readback | `.VAL` | `controller.calculated_value.pvname`\n",
+    "setpoint | `.B` | `controller.channels.B.input_value.pvname`\n",
+    "\n",
+    "We'll create the ophyd `temperature` positioner object using the\n",
+    "[PVPositionerSoftDoneWithStop](https://bcda-aps.github.io/apstools/latest/api/_devices.html#apstools.devices.positioner_soft_done.PVPositionerSoftDoneWithStop)\n",
+    "structure from the [apstools](https://bcda-aps.github.io/apstools/latest/)\n",
+    "package."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 14,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "temperature.position=19.527702862815946\n"
+     ]
+    }
+   ],
+   "source": [
+    "from apstools.devices import PVPositionerSoftDoneWithStop\n",
+    "\n",
+    "temperature = PVPositionerSoftDoneWithStop(\n",
+    "    \"\",\n",
+    "    name=\"temperature\",\n",
+    "    readback_pv=controller.calculated_value.pvname,\n",
+    "    setpoint_pv=controller.channels.B.input_value.pvname,\n",
+    "    tolerance=1,\n",
+    ")\n",
+    "temperature.wait_for_connection()\n",
+    "print(f\"{temperature.position=}\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Change the setpoint\n",
+    "\n",
+    "Watch the readback after the setpoint is changed, until the temperature becomes\n",
+    "`inposition` (`inposition` is a property that reports a `True`/`False` value\n",
+    "determined by `abs(readback - setpoint) <= tolerance`).\n",
+    "\n",
+    "Here, we lower the temperature setpoint by 10 from the current readback value.\n",
+    "Then, monitor the readback value until `inposition`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 15,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "1.00s: readback=17.39 setpoint=9.53\n",
+      "2.00s: readback=16.22 setpoint=9.53\n",
+      "3.00s: readback=14.24 setpoint=9.53\n",
+      "4.01s: readback=12.67 setpoint=9.53\n",
+      "5.01s: readback=10.00 setpoint=9.53\n"
+     ]
+    }
+   ],
+   "source": [
+    "temperature.setpoint.put(temperature.readback.get() - 10)\n",
+    "\n",
+    "t0 = time.time()\n",
+    "while not temperature.inposition:\n",
+    "    time.sleep(1)\n",
+    "    print(\n",
+    "        f\"{time.time() - t0:.2f}s:\"\n",
+    "        f\" readback={temperature.readback.get():.2f}\"\n",
+    "        f\" setpoint={temperature.setpoint.get():.2f}\"\n",
+    "    )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "### Move the temperature as a positioner\n",
+    "\n",
+    "Here, we treat the `temperature` object as a *positioner*.  \n",
+    "\n",
+    "<b>Tip</b>:\n",
+    "In ophyd, a positioner object has a `move()` method and a `position` property.  The `position` property is a shortcut for `readback.get()`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 16,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "9.998062212781615"
+      ]
+     },
+     "execution_count": 16,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "temperature.position"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Set the `temperature` to `25` and wait for the *move* to complete.  A `MoveStatus` object is returned by the `move()` method.\n",
+    "\n",
+    "<b>Tip</b>: Python prints the value of the last object shown.  In this case,\n",
+    "Python prints the value of the `MoveStatus` object.  It shows\n",
+    "that that the move is done, how long it took, whether the move was successful,\n",
+    "and other information."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 17,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "MoveStatus(done=True, pos=temperature, elapsed=7.2, success=True, settle_time=0.0)"
+      ]
+     },
+     "execution_count": 17,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "temperature.move(25)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Make a move *relative* to the current (**readback**) position:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 18,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "MoveStatus(done=True, pos=temperature, elapsed=3.0, success=True, settle_time=0.0)"
+      ]
+     },
+     "execution_count": 18,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "temperature.move(temperature.position + 5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Make a move *relative* to the current **setpoint**:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 19,
+   "metadata": {},
+   "outputs": [
+    {
+     "data": {
+      "text/plain": [
+       "MoveStatus(done=True, pos=temperature, elapsed=2.0, success=True, settle_time=0.0)"
+      ]
+     },
+     "execution_count": 19,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "temperature.move(temperature.setpoint.get() - 5)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Use the `temperature` positioner with a bluesky plan\n",
+    "\n",
+    "The `temperature` positioner may be used as a detector or a positioner in a bluesky plan.\n",
+    "\n",
+    "First, setup the bluesky objects needed for scanning and reporting.  We won't\n",
+    "need plots nor will we need to save any data.  Also create a convenience function to report the current parameters of the positioner."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 20,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from bluesky.run_engine import RunEngine\n",
+    "from bluesky import plans as bp\n",
+    "from bluesky import plan_stubs as bps\n",
+    "from bluesky.callbacks.best_effort import BestEffortCallback\n",
+    "\n",
+    "bec = BestEffortCallback()\n",
+    "RE = RunEngine()\n",
+    "RE.subscribe(bec)\n",
+    "bec.disable_plots()\n",
+    "\n",
+    "def print_position(pos):\n",
+    "    print(\n",
+    "        f\"inposition={pos.inposition}\"\n",
+    "        f\"  position={pos.position:.3f}\"\n",
+    "        f\"  setpoint={pos.setpoint.get():.3f}\"\n",
+    "    )"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Set the temperature to `25` using a bluesky plan stub (`bps.mv()`).  Here, `bps.mv()` will set the temperature to an *absolute* value.\n",
+    "\n",
+    "A plan stub can be used directly with the `RE()` as shown here, or as part of another bluesky plan."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 21,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "inposition=True  position=23.828  setpoint=24.165\n",
+      "inposition=True  position=24.015  setpoint=25.000\n"
+     ]
+    }
+   ],
+   "source": [
+    "print_position(temperature)\n",
+    "RE(bps.mv(temperature, 25))\n",
+    "print_position(temperature)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`bps.mvr()` will make a *relative* move.  Decrease the temperature by `5`.\n",
+    "\n",
+    "<b>Note</b> that `bps.mvr()` has set the new setpoint to exactly 5 below the\n",
+    "previous *readback* value (not from the previous *setpoint* value)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 22,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "inposition=True  position=24.015  setpoint=25.000\n",
+      "inposition=True  position=18.230  setpoint=19.015\n"
+     ]
+    }
+   ],
+   "source": [
+    "print_position(temperature)\n",
+    "RE(bps.mvr(temperature, -5))\n",
+    "print_position(temperature)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can change the setpoint value directly.  But notice that the temperature is not inposition immediately.  This is because we asked for bluesky to wait *only* until setpoint changed, which happened almost instantly."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 23,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "inposition=True  position=18.230  setpoint=19.015\n",
+      "inposition=False  position=18.230  setpoint=24.015\n"
+     ]
+    }
+   ],
+   "source": [
+    "print_position(temperature)\n",
+    "RE(bps.mvr(temperature.setpoint, 5))\n",
+    "print_position(temperature)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "We can measure the readback value (over time) by using `temperature` as a detector.  Here we use the `bp.count` plan, making 5 readings at 1 second intervals.  A data table is printed since this is one of the bluesky plans (`bp`) that create a [run](https://blueskyproject.io/bluesky/multi_run_plans.html#definition-of-a-run) which collects data.\n",
+    "\n",
+    "<b>Tip</b>  If this cell is executed immediately after the preceding cell, then it will follow the readback as it approaches the new setpoint."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 24,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "\n",
+      "Transient Scan ID: 1     Time: 2023-12-27 13:12:05\n",
+      "Persistent Unique Scan ID: '83e470c4-84b3-4669-8828-1ef0bb74a777'\n",
+      "New stream: 'primary'\n",
+      "+-----------+------------+-------------+\n",
+      "|   seq_num |       time | temperature |\n",
+      "+-----------+------------+-------------+\n",
+      "|         1 | 13:12:05.4 |    18.22953 |\n",
+      "|         2 | 13:12:06.4 |    20.03035 |\n",
+      "|         3 | 13:12:07.4 |    22.95103 |\n",
+      "|         4 | 13:12:08.4 |    24.51171 |\n",
+      "|         5 | 13:12:09.4 |    23.83296 |\n",
+      "+-----------+------------+-------------+\n",
+      "generator count ['83e470c4'] (scan num: 1)\n",
+      "\n",
+      "\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('83e470c4-84b3-4669-8828-1ef0bb74a777',)"
+      ]
+     },
+     "execution_count": 24,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "RE(bp.count([temperature], delay=1, num=5))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To demonstrate the use of `temperature` as a positioner in a scan, we'll need another signal to use as a detector.  We'll create a simple ophyd Signal with a value that does not change."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 25,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from ophyd import Signal\n",
+    "\n",
+    "det = Signal(name=\"det\", value=\"123.45\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "To see the temperature setpoint reported in the table, set its `kind` attribute to `\"hinted\"`.  Hinted attributes are shown (and plotted) when they are used as detectors."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 26,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "temperature.setpoint.kind = \"hinted\""
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Scan `det` vs. `temperature` in 5 steps from 20..40.  See how it is the\n",
+    "*setpoint* which is advanced in even steps.  The `bp.scan()` plan adjusts the\n",
+    "setpoint at each step, waits for the move to complete, then triggers and reads\n",
+    "the detectors."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 27,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "\n",
+      "\n",
+      "Transient Scan ID: 2     Time: 2023-12-27 13:12:10\n",
+      "Persistent Unique Scan ID: 'e4043fdc-debb-4a63-839d-2019230b63fe'\n",
+      "New stream: 'primary'\n",
+      "+-----------+------------+-------------+----------------------+------------+\n",
+      "|   seq_num |       time | temperature | temperature_setpoint |        det |\n",
+      "+-----------+------------+-------------+----------------------+------------+\n",
+      "|         1 | 13:12:12.4 |    20.05370 |             20.00000 |        123 |\n",
+      "|         2 | 13:12:14.4 |    24.35966 |             25.00000 |        123 |\n",
+      "|         3 | 13:12:14.4 |    24.35966 |             30.00000 |        123 |\n",
+      "|         4 | 13:12:20.4 |    34.65895 |             35.00000 |        123 |\n",
+      "|         5 | 13:12:23.4 |    39.39283 |             40.00000 |        123 |\n",
+      "+-----------+------------+-------------+----------------------+------------+\n",
+      "generator scan ['e4043fdc'] (scan num: 2)\n",
+      "\n",
+      "\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('e4043fdc-debb-4a63-839d-2019230b63fe',)"
+      ]
+     },
+     "execution_count": 27,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "RE(bp.scan([det], temperature, 20, 40, 5))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "`bp.rel_scan()` chooses its limits *relative* to the current position.  Here we scan from `-17` to `3`, *relative* to the current position."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 28,
+   "metadata": {},
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "inposition=True  position=39.393  setpoint=40.000\n",
+      "\n",
+      "\n",
+      "Transient Scan ID: 3     Time: 2023-12-27 13:12:23\n",
+      "Persistent Unique Scan ID: 'f1cc2819-cd3d-4efa-b401-3f9dddceb5d1'\n",
+      "New stream: 'primary'\n",
+      "+-----------+------------+-------------+----------------------+------------+\n",
+      "|   seq_num |       time | temperature | temperature_setpoint |        det |\n",
+      "+-----------+------------+-------------+----------------------+------------+\n",
+      "|         1 | 13:12:23.5 |    39.39283 |             22.39283 |        123 |\n",
+      "|         2 | 13:12:29.4 |    28.36643 |             27.39283 |        123 |\n",
+      "|         3 | 13:12:31.4 |    32.06715 |             32.39283 |        123 |\n",
+      "|         4 | 13:12:33.4 |    36.75387 |             37.39283 |        123 |\n",
+      "|         5 | 13:12:37.4 |    41.97115 |             42.39283 |        123 |\n",
+      "+-----------+------------+-------------+----------------------+------------+\n",
+      "generator rel_scan ['f1cc2819'] (scan num: 3)\n",
+      "\n",
+      "\n",
+      "\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "('f1cc2819-cd3d-4efa-b401-3f9dddceb5d1',)"
+      ]
+     },
+     "execution_count": 28,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "print_position(temperature)\n",
+    "RE(bp.rel_scan([det], temperature, -17, 3, 5))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## SimulatedTransformControllerPositioner device\n",
+    "\n",
+    "Combine the setup steps into a single ophyd Device to make a simulator.  Show the support code first:"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 29,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "from apstools.devices import SimulatedTransformControllerPositioner\n",
+    "\n",
+    "temperature = SimulatedTransformControllerPositioner(\n",
+    "    \"\", name=\"controller\", loop_pv=\"gp:userTran1\"\n",
+    ")\n",
+    "temperature.wait_for_connection()\n",
+    "temperature.setup(25, label=\"temperature controller\", noise=0.2, max_change=1, tolerance=0.999)\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Demonstrate the class by setting up a new temperature controller using a\n",
+    "different `swait` record."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 30,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "t17 = SimulatedTransformControllerPositioner(\n",
+    "    \"\", name=\"t17\", loop_pv=\"gp:userTran17\", tolerance=1,\n",
+    ")\n",
+    "t17.wait_for_connection()\n",
+    "t17.setup(25, label=\"t17 controller\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Screen view of the transform record.\n",
+    "\n",
+    "![transform record](../_static/userTran1-as-tc.png)"
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "base",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.11.6"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 2
+}

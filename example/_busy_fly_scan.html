@@ -1,0 +1,1765 @@
+
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>APS fly scans with taxi &amp; fly busy records &#8212; APS Bluesky Training  documentation</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.1/css/all.min.css?digest=8d27b9dea8ad943066ae" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.1/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae" />
+  <script src="../_static/vendor/fontawesome/6.5.1/js/all.min.js?digest=8d27b9dea8ad943066ae"></script>
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/sphinx_highlight.js"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'example/_busy_fly_scan';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Exporting data from Bluesky" href="_export_bluesky_data.html" />
+    <link rel="prev" title="Examples" href="index.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <a id="pst-skip-link" class="skip-link" href="#main-content">Skip to main content</a>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>
+    Back to top
+  </button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__primary"
+          id="__primary"/>
+  <label class="overlay overlay-primary" for="__primary"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          name="__secondary"
+          id="__secondary"/>
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar">
+<div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+    <span class="fa-solid fa-bars"></span>
+  </label>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training  documentation</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+ <script>
+ document.write(`
+   <button class="btn navbar-btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script>
+    </div>
+  
+
+  
+    <label class="sidebar-toggle secondary-toggle" for="__secondary" tabindex="0">
+      <span class="fa-solid fa-outdent"></span>
+    </label>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          <div class="navbar-item">
+<nav class="navbar-nav">
+  <ul class="bd-navbar-elements navbar-nav">
+    
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../instrument/index.html">
+                        Instrument
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="index.html">
+                        Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../tutor/index.html">
+                        Tutorials
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../reference/index.html">
+                        Reference
+                      </a>
+                    </li>
+                
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links-2">
+                    More
+                </button>
+                <ul id="pst-nav-more-links-2" class="dropdown-menu">
+                    
+                    <li class="nav-item">
+                      <a class="nav-link dropdown-item nav-internal" href="../changes.html">
+                        Changes
+                      </a>
+                    </li>
+                
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<script>
+document.write(`
+  <button class="btn btn-sm navbar-btn theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="theme-switch nav-link" data-mode="light"><i class="fa-solid fa-sun fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="dark"><i class="fa-solid fa-moon fa-lg"></i></span>
+    <span class="theme-switch nav-link" data-mode="auto"><i class="fa-solid fa-circle-half-stroke fa-lg"></i></span>
+  </button>
+`);
+</script></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">APS fly scans with taxi &amp; fly <code class="docutils literal notranslate"><span class="pre">busy</span></code> records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_bluesky_data.html">Exporting data from Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_export_to_csv.html">Export bluesky data to CSV</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_specwriter.html">Demo the spec file writer callback</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_watch_temperature.html">Watch a temperature : scan temperature <em>v</em> time</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_xafs_scan.html">XAFS scan</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+
+
+<nav aria-label="Breadcrumb">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">Examples</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page">APS fly...</li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="APS-fly-scans-with-taxi-&amp;-fly-busy-records">
+<h1>APS fly scans with taxi &amp; fly <code class="docutils literal notranslate"><span class="pre">busy</span></code> records<a class="headerlink" href="#APS-fly-scans-with-taxi-&-fly-busy-records" title="Permalink to this heading">#</a></h1>
+<p>Some EPICS fly scans at APS are triggered by a pair of EPICS <a class="reference external" href="https://epics-modules.github.io/busy/">busy</a> records. The first <em>busy</em> record is called <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and is responsible for preparing the hardware to fly. Once <em>taxi</em> is complete, the second <em>busy</em> record called <code class="docutils literal notranslate"><span class="pre">fly</span></code> performs the actual fly scan. In a third (optional) phase, data is collected from hardware and written to a file. Each <em>busy</em> record initates a sequence of processing steps as defined by other EPICS records.</p>
+<p>This document shows how to operate such a scan with two examples. We’ll refer to <em>taxi</em> and <em>fly</em> as phases.</p>
+<ul class="simple">
+<li><p>simplified processing sequence for each phase</p>
+<ul>
+<li><p>shows the basic flow of control</p></li>
+<li><p>sequence: delay a short time, then return</p></li>
+<li><p>no data collection</p></li>
+</ul>
+</li>
+<li><p>step scan of scaler <em>v</em>. motor</p>
+<ul>
+<li><p>includes data collection</p></li>
+<li><p>plot saved data</p></li>
+<li><p>typical use case for APS beamlines</p></li>
+</ul>
+</li>
+</ul>
+<section id="Overview">
+<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this heading">#</a></h2>
+<p>Compare the taxi &amp; fly scan algorithm to an airplane flight:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>phase</p></th>
+<th class="head"><p>airplane flight</p></th>
+<th class="head"><p>taxi &amp; fly scan</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>preparation</p></td>
+<td><p>ticketing &amp; boarding</p></td>
+<td><p>configuration of software</p></td>
+</tr>
+<tr class="row-odd"><td><p>taxi</p></td>
+<td><p>move the aircraft to the start of the runway</p></td>
+<td><p>move the hardware to pre-scan positions</p></td>
+</tr>
+<tr class="row-even"><td><p>fly</p></td>
+<td><p>start moving, liftoff at flight velocity</p></td>
+<td><p>start moving, begin collecting data at first position</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="Bluesky-(Python)-setup">
+<h2>Bluesky (Python) setup<a class="headerlink" href="#Bluesky-(Python)-setup" title="Permalink to this heading">#</a></h2>
+<p>These packages are needed to begin. The first block contains Python standard packages, then come the various bluesky packages. Just the parts we plan on using here.</p>
+<ul class="simple">
+<li><p>Create a logger instance in case we want to investigate internal details as our code runs.</p></li>
+<li><p>Create an instance of the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>.</p></li>
+<li><p>Create a temporary databroker catalog to save collected data.</p></li>
+<li><p>Subscribe the catalog to receive all data published by the RunEngine.</p></li>
+</ul>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">BusyRecord</span>
+<span class="kn">from</span> <span class="nn">apstools.plans</span> <span class="kn">import</span> <span class="n">run_blocking_function</span>
+<span class="kn">import</span> <span class="nn">bluesky</span>
+<span class="kn">import</span> <span class="nn">bluesky.plan_stubs</span> <span class="k">as</span> <span class="nn">bps</span>
+<span class="kn">import</span> <span class="nn">databroker</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
+<span class="kn">from</span> <span class="nn">ophyd.status</span> <span class="kn">import</span> <span class="n">Status</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
+<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
+    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>  <span class="c1"># more details than default (WARNING) level</span>
+    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
+<span class="p">)</span>
+
+<span class="n">RE</span> <span class="o">=</span> <span class="n">bluesky</span><span class="o">.</span><span class="n">RunEngine</span><span class="p">()</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">temp</span><span class="p">()</span><span class="o">.</span><span class="n">v2</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">insert</span><span class="p">)</span>
+<span class="c1"># RE.msg_hook = bluesky.utils.ts_msg_hook  # deeper logging details</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cat</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+cat=&lt;Intake catalog: temp&gt;
+</pre></div></div>
+</div>
+</section>
+<section id="EPICS-IOC">
+<h2>EPICS IOC<a class="headerlink" href="#EPICS-IOC" title="Permalink to this heading">#</a></h2>
+<p>We’ll start with an EPICS IOC that provides two instances of the <a class="reference external" href="https://epics-modules.github.io/busy/">busy</a> record.</p>
+<p>In the <code class="docutils literal notranslate"><span class="pre">gp:</span></code> IOC, we can use these general purpose PVs for this example:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>PV</p></th>
+<th class="head"><p>record</p></th>
+<th class="head"><p>purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><code class="docutils literal notranslate"><span class="pre">gp:mybusy1</span></code></p></td>
+<td><p><em>busy</em></p></td>
+<td><p>taxi (preparation) phase</p></td>
+</tr>
+<tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gp:mybusy2</span></code></p></td>
+<td><p><em>fly</em></p></td>
+<td><p>fly (fly scan) phase</p></td>
+</tr>
+</tbody>
+</table>
+<p>Here, an ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> subclass coordinates both of these PVs. The <code class="docutils literal notranslate"><span class="pre">BusyRecord</span></code> class from <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/index.html#records">apstools.devices</a> provides a standard interface to the synApps <code class="docutils literal notranslate"><span class="pre">busy</span></code> record.</p>
+<p>Handling of the <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and <code class="docutils literal notranslate"><span class="pre">fly</span></code> phases is identical, as handled in the <code class="docutils literal notranslate"><span class="pre">run_one_phase()</span></code> method. A complete taxi/fly scan is performed by the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method. Note that both these methods are bluesky plans. They should be run by the bluesky RunEngine. Also note that, as written, the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method does not collect any data. As such, it should be considered as a part of a bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#plans">plan</a> which <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.open_run.html#bluesky.plan_stubs.open_run">opens a
+run</a> and (<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.trigger_and_read.html#bluesky.plan_stubs.trigger_and_read">triggers and</a>) <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.read.html">reads</a> data from one or more <a class="reference external" href="https://blueskyproject.io/ophyd/user/reference/signals.html">Signals</a> or
+<a class="reference external" href="https://blueskyproject.io/ophyd/user/tutorials/device.html">Devices</a>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">abs_put</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Like bps.abs_set(), but without a Status object.&quot;&quot;&quot;</span>
+    <span class="k">yield from</span> <span class="n">run_blocking_function</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">put</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+<span class="k">class</span> <span class="nc">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+    <span class="n">taxi</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy1&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+    <span class="n">fly</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy2&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+    <span class="n">taxi_timeout</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+    <span class="n">fly_timeout</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+    <span class="n">poll_interval</span> <span class="o">=</span> <span class="mf">0.02</span>
+
+    <span class="k">def</span> <span class="nf">run_one_phase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">busy</span><span class="p">):</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> phase start&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+        <span class="n">timeout</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2">_timeout&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">abs_put</span><span class="p">(</span><span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Busy&quot;</span><span class="p">)</span>
+        <span class="c1"># TODO: refactor with a status object</span>
+        <span class="c1">#   Instead of polling, use Status to return to &#39;Done&#39;.</span>
+
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">deadline</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">timeout</span>
+        <span class="k">while</span> <span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Busy&quot;</span><span class="p">):</span>
+            <span class="n">tNow</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tNow</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2"> not started after </span><span class="si">{</span><span class="n">tNow</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+            <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> busy started&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+
+        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">deadline</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">timeout</span>
+        <span class="k">while</span> <span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">):</span>
+            <span class="n">tNow</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">tNow</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2"> not complete after </span><span class="si">{</span><span class="n">tNow</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
+            <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> busy cleared&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+
+        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> phase end&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">taxi_fly_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;taxi&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taxi</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;fly&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fly</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="The-busy-record">
+<h2>The <code class="docutils literal notranslate"><span class="pre">busy</span></code> record<a class="headerlink" href="#The-busy-record" title="Permalink to this heading">#</a></h2>
+<p>Summary: The <em>busy</em> record tells the <em>sseq</em> record to do all its processing steps. The <em>sseq</em> record waits its assigned time, then turns the <em>busy</em> record off.</p>
+<p>The <em>busy</em> record has a very limited task. It signals the procedure should start and reports if the procedure is either <code class="docutils literal notranslate"><span class="pre">Busy</span></code> or <code class="docutils literal notranslate"><span class="pre">Done</span></code>.</p>
+<p><em>The details of the procedure should be of no concern to the busy record.</em></p>
+<details><p>The EPICS <em>busy</em> record is quite simple. It is a boolean that is used to indicate if a procedure is still active (busy). The caller is responsible for setting it to <code class="docutils literal notranslate"><span class="pre">Busy</span></code> (value of 1) to start the procedure. The procedure (and <strong>not</strong> the caller) is responsible for setting it back to <code class="docutils literal notranslate"><span class="pre">Done</span></code> (value of 0) when the procedure is finished.</p>
+<p><img alt="example of busy record" src="../_images/bf1-busy-record.png" /></p>
+<p>A <em>userCalc</em> (the <em>swait</em> record) starts the <em>sseq</em> record when the <em>busy</em> record changes to <code class="docutils literal notranslate"><span class="pre">Busy</span></code>.</p>
+</details></section>
+<section id="Procedure----Delay-a-short-time">
+<h2>Procedure – Delay a short time<a class="headerlink" href="#Procedure----Delay-a-short-time" title="Permalink to this heading">#</a></h2>
+<p>A very simple procedure for the <code class="docutils literal notranslate"><span class="pre">taxi</span></code> phase might be to delay for a programmable time (seconds), then set <code class="docutils literal notranslate"><span class="pre">busy</span></code> to <code class="docutils literal notranslate"><span class="pre">Done</span></code>. The <code class="docutils literal notranslate"><span class="pre">fly</span></code> phase could use the same procedure, with a different programmable time.</p>
+<p>A <em>preparation</em> function is needed to configure the EPICS subsystem. In addition to the <code class="docutils literal notranslate"><span class="pre">busy</span></code> record, each phase of this example will use these EPICS records. The ophyd Device classes are from <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/index.html#records">apstools.synApps</a>:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>EPICS record</p></th>
+<th class="head"><p>ophyd class</p></th>
+<th class="head"><p>purpose</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>sseq</p></td>
+<td><p>SseqRecord</p></td>
+<td><p>runs the procedure: delay for <em>n</em> seconds, then set busy to <code class="docutils literal notranslate"><span class="pre">Done</span></code></p></td>
+</tr>
+<tr class="row-odd"><td><p>swait</p></td>
+<td><p>SwaitRecord</p></td>
+<td><p>Starts sseq when the busy record transitions to <code class="docutils literal notranslate"><span class="pre">Busy</span></code>.</p></td>
+</tr>
+</tbody>
+</table>
+<p>Both phases use the same procedure steps. A separate chain of busy/swait/sseq records is necessary for each phase.</p>
+<p>Later, we’ll demonstrate an EPICS step scan using the motor, scaler, and sscan records.</p>
+<section id="SseqRecord">
+<h3>SseqRecord<a class="headerlink" href="#SseqRecord" title="Permalink to this heading">#</a></h3>
+<p>The sseq record runs the procedure, then sets busy to <code class="docutils literal notranslate"><span class="pre">Done</span></code>.</p>
+<details><p><img alt="sseq record example" src="../_images/bf1-sseq-record.png" /></p>
+<p>Setting <code class="docutils literal notranslate"><span class="pre">.SCAN=&quot;Passive&quot;</span></code> allows this record to process on command (from the swait record, below). Only the last step, step 10, is needed for this simple <em>delay</em> procedure. Other procedures may use steps 1-9 for additional tasks. For more than 10 steps, use an additional sseq record(s), called from a step in this sseq record.</p>
+<p>Write the delay time to <code class="docutils literal notranslate"><span class="pre">.DLYA</span></code>, the busy record value to write (<code class="docutils literal notranslate"><span class="pre">.STRA=&quot;Done&quot;</span></code>), and the busy record PV to be written (<code class="docutils literal notranslate"><span class="pre">LNKA</span></code>). Note the use of the <code class="docutils literal notranslate"><span class="pre">CA</span></code> modifier to the PV name, which is required for the <code class="docutils literal notranslate"><span class="pre">.WAITA=&quot;Wait&quot;</span></code> setting.</p>
+</details></section>
+<section id="SwaitRecord">
+<h3>SwaitRecord<a class="headerlink" href="#SwaitRecord" title="Permalink to this heading">#</a></h3>
+<p>The swait record acts like a trigger to start the sseq record. It senses when busy changes value.</p>
+<details><p><img alt="swait record example" src="../_images/bf1-swait-record.png" /></p>
+<p>For both phases, the swait record watches its busy record (the PV name in channel A). It reacts (via its <code class="docutils literal notranslate"><span class="pre">.SCAN=&quot;I/O</span> <span class="pre">Intr&quot;</span></code> setting) when the busy record changes value. When busy is 1 (via <code class="docutils literal notranslate"><span class="pre">.CALC=&quot;A&gt;0&quot;</span></code> and setting <code class="docutils literal notranslate"><span class="pre">.OOPT=&quot;When</span> <span class="pre">Non-zero&quot;</span></code>), it tells sseq to process (by sending a 1 to the <code class="docutils literal notranslate"><span class="pre">.PROC</span></code> field of the sseq record configured in the <code class="docutils literal notranslate"><span class="pre">.OUTN</span></code> field).</p>
+</details></section>
+<section id="Connect-with-EPICS">
+<h3>Connect with EPICS<a class="headerlink" href="#Connect-with-EPICS" title="Permalink to this heading">#</a></h3>
+<p>Create local (ophyd-style) objects to connect with the EPICS IOC records.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">SseqRecord</span><span class="p">,</span> <span class="n">SwaitRecord</span>
+
+<span class="n">IOC</span> <span class="o">=</span> <span class="s2">&quot;gp:&quot;</span>
+
+<span class="n">ifly</span> <span class="o">=</span> <span class="n">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">IOC</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ifly&quot;</span><span class="p">)</span>
+<span class="n">taxi_sseq</span> <span class="o">=</span> <span class="n">SseqRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userStringSeq1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;taxi_sseq&quot;</span><span class="p">)</span>
+<span class="n">taxi_swait</span> <span class="o">=</span> <span class="n">SwaitRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalc11&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;taxi_swait&quot;</span><span class="p">)</span>
+<span class="n">fly_sseq</span> <span class="o">=</span> <span class="n">SseqRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userStringSeq2&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fly_sseq&quot;</span><span class="p">)</span>
+<span class="n">fly_swait</span> <span class="o">=</span> <span class="n">SwaitRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalc12&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fly_swait&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ifly</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">):</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Write-the-plan-that-prepares-EPICS">
+<h3>Write the plan that prepares EPICS<a class="headerlink" href="#Write-the-plan-that-prepares-EPICS" title="Permalink to this heading">#</a></h3>
+<p>The <em>busy</em>, <em>swait</em>, &amp; <em>sseq</em> records for the <em>taxi</em> &amp; <em>fly</em> phases are configured by the following bluesky plan.</p>
+<p>The plan uses predefined names for the ophyd objects, a pattern typical for beamline plans.</p>
+<section id="The-reset()-method">
+<h4>The <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method<a class="headerlink" href="#The-reset()-method" title="Permalink to this heading">#</a></h4>
+<p>The <em>SseqRecord</em> support in <em>apstools</em> has a <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method to clear any previous settings of the EPICS PVs and ophyd object and return them to default settings. Note: some of the other record support classes in <em>apstools.synApps</em>, including <em>SwaitRecord</em> and <em>SscanRecord</em>, have such <code class="docutils literal notranslate"><span class="pre">reset()</span></code> methods.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method is written as <em>ophyd</em> code, intended to be called from a command-line session. The commands it contains that may take some time to complete and possibly block the normal execution of the RunEngine’s callback thread. The <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_plans.html#module-apstools.plans.run_blocking_function_plan">run_blocking_function()</a> plan from <em>apstools.plans</em> allows us to run <code class="docutils literal notranslate"><span class="pre">reset()</span></code> in a thread so that it does not block the <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_taxi_fly_simple_delay</span><span class="p">(</span><span class="n">taxi_delay_s</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Delay before returning from both taxi &amp; fly phases.&quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;taxi time: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">taxi_delay_s</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;fly time: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">)</span>
+    <span class="c1"># stop any action in progress</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># clear the taxi &amp; fly busy records</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># clear the records to be used: swait and sseq</span>
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="n">run_blocking_function</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># arbitrary wait for EPICS record processing</span>
+
+    <span class="c1"># busy record (via swait record) triggers sseq record</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># taxi &amp; fly will each wait the selected time, then return</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
+        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">delay</span><span class="p">,</span> <span class="n">taxi_delay_s</span><span class="p">,</span>
+        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
+        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">delay</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">,</span>
+        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+</section>
+<section id="taxi----Run-the-preparation-plan">
+<h3>taxi – Run the preparation plan<a class="headerlink" href="#taxi----Run-the-preparation-plan" title="Permalink to this heading">#</a></h3>
+<p>Call the <code class="docutils literal notranslate"><span class="pre">prep_taxi_fly_simple_delay()</span></code> plan (with the bluesky RunEngine, <code class="docutils literal notranslate"><span class="pre">RE</span></code>) with delay times for each phase.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">prep_taxi_fly_simple_delay</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-03-06 12:31:38,660 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_simple_delay at 0x7fa6edab2e60&gt;
+2024-03-06 12:31:38,664 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-06 12:31:39,009 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-06 12:31:39,011 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_simple_delay at 0x7fa6edab2e60&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+</section>
+<section id="fly----Run-taxi-&amp;-fly-scan-plan">
+<h3>fly – Run taxi &amp; fly scan plan<a class="headerlink" href="#fly----Run-taxi-&-fly-scan-plan" title="Permalink to this heading">#</a></h3>
+<p>Call the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method with the bluesky RunEngine. Note this plan completes in the ~6s interval, as configured in the preparation step.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-03-06 12:31:39,025 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ed1fcad0&gt;
+2024-03-06 12:31:39,027 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-06 12:31:45,085 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-06 12:31:45,085 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ed1fcad0&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+</section>
+</section>
+<section id="Procedure----step-scan-scaler-&amp;-motor">
+<h2>Procedure – step scan scaler &amp; motor<a class="headerlink" href="#Procedure----step-scan-scaler-&-motor" title="Permalink to this heading">#</a></h2>
+<section id="scaler-record">
+<h3>scaler record<a class="headerlink" href="#scaler-record" title="Permalink to this heading">#</a></h3>
+<p><img alt="scaler" src="../_images/bf1-scaler-record.png" /></p>
+</section>
+<section id="motor-record">
+<h3>motor record<a class="headerlink" href="#motor-record" title="Permalink to this heading">#</a></h3>
+<p><img alt="motor" src="../_images/bf1-motor-record.png" /></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
+<span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+
+<span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
+<span class="n">scaler1</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler1&quot;</span><span class="p">)</span>
+
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">scaler1</span><span class="p">):</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+<span class="c1"># convenience: pick out the individual detector signals from the scaler</span>
+<span class="n">I0</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan02</span><span class="o">.</span><span class="n">s</span>
+<span class="n">scint</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan03</span><span class="o">.</span><span class="n">s</span>
+<span class="n">diode</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan04</span><span class="o">.</span><span class="n">s</span>
+<span class="n">I000</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan05</span><span class="o">.</span><span class="n">s</span>
+<span class="n">I00</span> <span class="o">=</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">chan06</span><span class="o">.</span><span class="n">s</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="sscan-record">
+<h3>sscan record<a class="headerlink" href="#sscan-record" title="Permalink to this heading">#</a></h3>
+<p><img alt="sscan scaler and motor" src="../_images/bf1-sscan-record.png" /></p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">SscanRecord</span>
+
+<span class="n">scan1</span> <span class="o">=</span> <span class="n">SscanRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">scan1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scan1&quot;</span><span class="p">)</span>
+<span class="n">scan1</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Write-a-preparation-plan-for-the-step-scan">
+<h3>Write a preparation plan for the step scan<a class="headerlink" href="#Write-a-preparation-plan-for-the-step-scan" title="Permalink to this heading">#</a></h3>
+<p>The preparation plan configures these actions:</p>
+<ul class="simple">
+<li><p>preparation</p>
+<ul>
+<li><p>setup ‘sseq’ records</p>
+<ul>
+<li><p>for both <em>taxi</em> and <em>fly</em> phases</p></li>
+</ul>
+</li>
+<li><p>set counting time in <em>scaler</em> record</p></li>
+<li><p>set scan parameters in <em>sscan</em> record</p>
+<ul>
+<li><p>start, finish, number of points</p></li>
+<li><p>motor PVs</p></li>
+<li><p>detector PVs</p></li>
+<li><p>detector trigger PVs</p></li>
+</ul>
+</li>
+<li><p>set <em>swait</em> records to start (process) <em>sseq</em> records</p>
+<ul>
+<li><p>for both <em>taxi</em> and <em>fly</em> phases</p></li>
+<li><p>only when <em>busy</em> record goes to <code class="docutils literal notranslate"><span class="pre">Busy</span></code></p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><em>taxi</em> phase</p>
+<ul>
+<li><p>move the motor (EPICS) to the start of the <em>fly</em> scan</p></li>
+<li><p>wait for the move to finish</p></li>
+<li><p>set its <em>busy</em> record to <code class="docutils literal notranslate"><span class="pre">Done</span></code></p></li>
+</ul>
+</li>
+<li><p><em>fly</em> phase</p>
+<ul>
+<li><p>execute the scan (process the (EPICS) <em>sscan</em> record)</p></li>
+<li><p>wait for the scan to finish</p></li>
+<li><p>set its <em>busy</em> record to <code class="docutils literal notranslate"><span class="pre">Done</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p><strong>Note</strong>: The preparation plan does not actually move the motor or start the scan. It configures the <em>sseq</em> records to do these actions when commanded by the <em>busy</em> records.</p>
+<p>The <em>busy</em> records start the <em>taxi</em> and <em>fly</em> phases.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_taxi_fly_step_scan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup EPICS for step scan directed by taxi &amp; fly.&quot;&quot;&quot;</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;start: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;finish: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">finish</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;number of points: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">npts</span><span class="p">)</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;count time: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">ct</span><span class="p">)</span>
+    <span class="c1"># stop any action in progress</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># clear the taxi &amp; fly busy records</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># clear the records to be used: swait, sscan, and sseq</span>
+    <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">,</span> <span class="n">scan1</span><span class="p">):</span>
+        <span class="k">yield from</span> <span class="n">run_blocking_function</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># arbitrary wait for EPICS record processing</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;taxi procedure&quot;</span><span class="p">,</span>
+        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;fly procedure&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Move the motor to the start position.</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step1</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">numeric_value</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">m1</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Start the sscan.</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step1</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">numeric_value</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">scan1</span><span class="o">.</span><span class="n">execute_scan</span><span class="o">.</span><span class="n">pvname</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Configure scaler count time.</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span><span class="n">scaler1</span><span class="o">.</span><span class="n">preset_time</span><span class="p">,</span> <span class="n">ct</span><span class="p">)</span>
+
+    <span class="c1"># Configure sscan.</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">readback_pv</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_readback</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">setpoint_pv</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_setpoint</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">number_points</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">triggers</span><span class="o">.</span><span class="n">t1</span><span class="o">.</span><span class="n">trigger_pv</span><span class="p">,</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">I0</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">scint</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Trigger taxi &amp; fly sseq records (via swait record) from their busy records.</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="c1"># taxi &amp; fly: set busy record to `Done`</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="taxi:-prepare-for-scan">
+<h3>taxi: prepare for scan<a class="headerlink" href="#taxi:-prepare-for-scan" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">prep_taxi_fly_step_scan</span><span class="p">(</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-03-06 12:31:46,628 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_step_scan at 0x7fa6edbc3400&gt;
+2024-03-06 12:31:46,629 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-06 12:31:47,063 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-06 12:31:47,064 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_step_scan at 0x7fa6edbc3400&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+</section>
+<section id="fly:-run-the-scan">
+<h3>fly: run the scan<a class="headerlink" href="#fly:-run-the-scan" title="Permalink to this heading">#</a></h3>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-03-06 12:31:47,071 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ec5d2b50&gt;
+2024-03-06 12:31:47,073 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-06 12:32:00,947 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-06 12:32:00,947 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ec5d2b50&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+()
+</pre></div></div>
+</div>
+</section>
+<section id="Need-to-save-the-data">
+<h3>Need to save the data<a class="headerlink" href="#Need-to-save-the-data" title="Permalink to this heading">#</a></h3>
+<p>Get the data (arrays) from <code class="docutils literal notranslate"><span class="pre">scan1</span></code> and make them into a readable ophyd device.</p>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">make_dict_device</span>
+
+<span class="k">def</span> <span class="nf">get_taxi_fly_sscan_data</span><span class="p">():</span>
+    <span class="n">npts</span> <span class="o">=</span> <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
+    <span class="n">xref</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">m1</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span>
+        <span class="n">I0</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="p">,</span>
+        <span class="n">scint</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="p">,</span>
+    <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
+        <span class="n">name_</span><span class="p">:</span> <span class="n">signal_</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">name_</span><span class="p">,</span> <span class="n">signal_</span> <span class="ow">in</span> <span class="n">xref</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+    <span class="p">}</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;timestamps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">npts</span><span class="p">))</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">make_dict_device</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scan1&quot;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">data</span>
+
+<span class="c1"># r = get_taxi_fly_sscan_data().read()</span>
+<span class="c1"># data = get_taxi_fly_sscan_data()</span>
+</pre></div>
+</div>
+</div>
+<p>Write a bluesky plan that puts it all together:</p>
+<ul class="simple">
+<li><p>metadata</p></li>
+<li><p>bluesky run</p></li>
+<li><p>prepare EPICS for the taxi &amp; fly scan</p></li>
+<li><p>taxi</p></li>
+<li><p>fly</p></li>
+<li><p>get the data</p></li>
+<li><p>publish data to primary stream</p></li>
+</ul>
+<div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
+    <span class="n">md</span><span class="p">[</span><span class="s2">&quot;plan_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;taxi_fly_sscan_plan&quot;</span>
+    <span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">open_run</span><span class="p">(</span><span class="n">md</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">prep_taxi_fly_step_scan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">)</span>
+
+    <span class="n">timestamps</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;timestamps&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="p">[])</span>  <span class="c1"># collect by observing &#39;scan1&#39;</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="c1"># print(f&quot;{len(timestamps.get())=} {kwargs=}&quot;)</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">timestamps</span><span class="o">.</span><span class="n">put</span><span class="p">([])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">timestamps</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">timestamps</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="o">+</span> <span class="p">[</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">])</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;callback: </span><span class="si">{</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;value&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">  </span><span class="si">{</span><span class="n">m1</span><span class="o">.</span><span class="n">position</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+
+    <span class="k">yield from</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">()</span>  <span class="c1"># &lt;--- the taxi/fly scan</span>
+
+    <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+    <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fly time: </span><span class="si">%.3f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
+    <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">clear_sub</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">get_taxi_fly_sscan_data</span><span class="p">()</span>
+    <span class="n">data</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">timestamps</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">close_run</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</section>
+<section id="Run-the-complete-taxi/fly-scan">
+<h3>Run the complete taxi/fly scan<a class="headerlink" href="#Run-the-complete-taxi/fly-scan" title="Permalink to this heading">#</a></h3>
+<p>Note: Includes data collection. Plotting will follow.</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>parameter</p></th>
+<th class="head"><p>value</p></th>
+<th class="head"><p>description</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>start</p></td>
+<td><p>-0.5</p></td>
+<td><p>first motor position for the step scan</p></td>
+</tr>
+<tr class="row-odd"><td><p>finish</p></td>
+<td><p>0.5</p></td>
+<td><p>last motor position for the step scan</p></td>
+</tr>
+<tr class="row-even"><td><p>npts</p></td>
+<td><p>11</p></td>
+<td><p>number of data points to be collected</p></td>
+</tr>
+<tr class="row-odd"><td><p>ct</p></td>
+<td><p>0.5</p></td>
+<td><p>scaler counting time per point</p></td>
+</tr>
+</tbody>
+</table>
+<p>The <code class="docutils literal notranslate"><span class="pre">m1</span></code> motor will be moved in constant size steps between <code class="docutils literal notranslate"><span class="pre">start</span></code> and <code class="docutils literal notranslate"><span class="pre">finish</span></code>. At each step of the scan, the scaler will be triggered to accumulate counts for <code class="docutils literal notranslate"><span class="pre">ct</span></code> seconds in each of its detector channels.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uids</span> <span class="o">=</span> <span class="n">RE</span><span class="p">(</span><span class="n">taxi_fly_sscan_plan</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+<span class="n">run</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+2024-03-06 12:32:00,970 INFO bluesky - Executing plan &lt;generator object taxi_fly_sscan_plan at 0x7fa6ed934d50&gt;
+2024-03-06 12:32:00,971 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-06 12:32:13,392 INFO root - Fly time: 11.998 s
+2024-03-06 12:32:13,396 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-06 12:32:13,397 INFO bluesky - Cleaned up from plan &lt;generator object taxi_fly_sscan_plan at 0x7fa6ed934d50&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+BlueskyRun
+  uid=&#39;0169d961-d823-4848-b62b-bbfe92d621a1&#39;
+  exit_status=&#39;success&#39;
+  2024-03-06 12:32:00.972 -- 2024-03-06 12:32:13.395
+  Streams:
+    * primary
+
+</pre></div></div>
+</div>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dataset</span> <span class="o">=</span> <span class="n">run</span><span class="o">.</span><span class="n">primary</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<span class="n">dataset</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
+</pre></div>
+</div>
+<div class="output_area rendered_html docutils container">
+<div><svg style="position: absolute; width: 0; height: 0; overflow: hidden">
+<defs>
+<symbol id="icon-database" viewBox="0 0 32 32">
+<path d="M16 0c-8.837 0-16 2.239-16 5v4c0 2.761 7.163 5 16 5s16-2.239 16-5v-4c0-2.761-7.163-5-16-5z"></path>
+<path d="M16 17c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+<path d="M16 26c-8.837 0-16-2.239-16-5v6c0 2.761 7.163 5 16 5s16-2.239 16-5v-6c0 2.761-7.163 5-16 5z"></path>
+</symbol>
+<symbol id="icon-file-text2" viewBox="0 0 32 32">
+<path d="M28.681 7.159c-0.694-0.947-1.662-2.053-2.724-3.116s-2.169-2.030-3.116-2.724c-1.612-1.182-2.393-1.319-2.841-1.319h-15.5c-1.378 0-2.5 1.121-2.5 2.5v27c0 1.378 1.122 2.5 2.5 2.5h23c1.378 0 2.5-1.122 2.5-2.5v-19.5c0-0.448-0.137-1.23-1.319-2.841zM24.543 5.457c0.959 0.959 1.712 1.825 2.268 2.543h-4.811v-4.811c0.718 0.556 1.584 1.309 2.543 2.268zM28 29.5c0 0.271-0.229 0.5-0.5 0.5h-23c-0.271 0-0.5-0.229-0.5-0.5v-27c0-0.271 0.229-0.5 0.5-0.5 0 0 15.499-0 15.5 0v7c0 0.552 0.448 1 1 1h7v19.5z"></path>
+<path d="M23 26h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 22h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+<path d="M23 18h-14c-0.552 0-1-0.448-1-1s0.448-1 1-1h14c0.552 0 1 0.448 1 1s-0.448 1-1 1z"></path>
+</symbol>
+</defs>
+</svg>
+<style>/* CSS stylesheet for displaying xarray objects in jupyterlab.
+ *
+ */
+
+:root {
+  --xr-font-color0: var(--jp-content-font-color0, rgba(0, 0, 0, 1));
+  --xr-font-color2: var(--jp-content-font-color2, rgba(0, 0, 0, 0.54));
+  --xr-font-color3: var(--jp-content-font-color3, rgba(0, 0, 0, 0.38));
+  --xr-border-color: var(--jp-border-color2, #e0e0e0);
+  --xr-disabled-color: var(--jp-layout-color3, #bdbdbd);
+  --xr-background-color: var(--jp-layout-color0, white);
+  --xr-background-color-row-even: var(--jp-layout-color1, white);
+  --xr-background-color-row-odd: var(--jp-layout-color2, #eeeeee);
+}
+
+html[theme=dark],
+body[data-theme=dark],
+body.vscode-dark {
+  --xr-font-color0: rgba(255, 255, 255, 1);
+  --xr-font-color2: rgba(255, 255, 255, 0.54);
+  --xr-font-color3: rgba(255, 255, 255, 0.38);
+  --xr-border-color: #1F1F1F;
+  --xr-disabled-color: #515151;
+  --xr-background-color: #111111;
+  --xr-background-color-row-even: #111111;
+  --xr-background-color-row-odd: #313131;
+}
+
+.xr-wrap {
+  display: block !important;
+  min-width: 300px;
+  max-width: 700px;
+}
+
+.xr-text-repr-fallback {
+  /* fallback to plain text repr when CSS is not injected (untrusted notebook) */
+  display: none;
+}
+
+.xr-header {
+  padding-top: 6px;
+  padding-bottom: 6px;
+  margin-bottom: 4px;
+  border-bottom: solid 1px var(--xr-border-color);
+}
+
+.xr-header > div,
+.xr-header > ul {
+  display: inline;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.xr-obj-type,
+.xr-array-name {
+  margin-left: 2px;
+  margin-right: 10px;
+}
+
+.xr-obj-type {
+  color: var(--xr-font-color2);
+}
+
+.xr-sections {
+  padding-left: 0 !important;
+  display: grid;
+  grid-template-columns: 150px auto auto 1fr 20px 20px;
+}
+
+.xr-section-item {
+  display: contents;
+}
+
+.xr-section-item input {
+  display: none;
+}
+
+.xr-section-item input + label {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-item input:enabled + label {
+  cursor: pointer;
+  color: var(--xr-font-color2);
+}
+
+.xr-section-item input:enabled + label:hover {
+  color: var(--xr-font-color0);
+}
+
+.xr-section-summary {
+  grid-column: 1;
+  color: var(--xr-font-color2);
+  font-weight: 500;
+}
+
+.xr-section-summary > span {
+  display: inline-block;
+  padding-left: 0.5em;
+}
+
+.xr-section-summary-in:disabled + label {
+  color: var(--xr-font-color2);
+}
+
+.xr-section-summary-in + label:before {
+  display: inline-block;
+  content: '►';
+  font-size: 11px;
+  width: 15px;
+  text-align: center;
+}
+
+.xr-section-summary-in:disabled + label:before {
+  color: var(--xr-disabled-color);
+}
+
+.xr-section-summary-in:checked + label:before {
+  content: '▼';
+}
+
+.xr-section-summary-in:checked + label > span {
+  display: none;
+}
+
+.xr-section-summary,
+.xr-section-inline-details {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.xr-section-inline-details {
+  grid-column: 2 / -1;
+}
+
+.xr-section-details {
+  display: none;
+  grid-column: 1 / -1;
+  margin-bottom: 5px;
+}
+
+.xr-section-summary-in:checked ~ .xr-section-details {
+  display: contents;
+}
+
+.xr-array-wrap {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 20px auto;
+}
+
+.xr-array-wrap > label {
+  grid-column: 1;
+  vertical-align: top;
+}
+
+.xr-preview {
+  color: var(--xr-font-color3);
+}
+
+.xr-array-preview,
+.xr-array-data {
+  padding: 0 5px !important;
+  grid-column: 2;
+}
+
+.xr-array-data,
+.xr-array-in:checked ~ .xr-array-preview {
+  display: none;
+}
+
+.xr-array-in:checked ~ .xr-array-data,
+.xr-array-preview {
+  display: inline-block;
+}
+
+.xr-dim-list {
+  display: inline-block !important;
+  list-style: none;
+  padding: 0 !important;
+  margin: 0;
+}
+
+.xr-dim-list li {
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+
+.xr-dim-list:before {
+  content: '(';
+}
+
+.xr-dim-list:after {
+  content: ')';
+}
+
+.xr-dim-list li:not(:last-child):after {
+  content: ',';
+  padding-right: 5px;
+}
+
+.xr-has-index {
+  font-weight: bold;
+}
+
+.xr-var-list,
+.xr-var-item {
+  display: contents;
+}
+
+.xr-var-item > div,
+.xr-var-item label,
+.xr-var-item > .xr-var-name span {
+  background-color: var(--xr-background-color-row-even);
+  margin-bottom: 0;
+}
+
+.xr-var-item > .xr-var-name:hover span {
+  padding-right: 5px;
+}
+
+.xr-var-list > li:nth-child(odd) > div,
+.xr-var-list > li:nth-child(odd) > label,
+.xr-var-list > li:nth-child(odd) > .xr-var-name span {
+  background-color: var(--xr-background-color-row-odd);
+}
+
+.xr-var-name {
+  grid-column: 1;
+}
+
+.xr-var-dims {
+  grid-column: 2;
+}
+
+.xr-var-dtype {
+  grid-column: 3;
+  text-align: right;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-preview {
+  grid-column: 4;
+}
+
+.xr-index-preview {
+  grid-column: 2 / 5;
+  color: var(--xr-font-color2);
+}
+
+.xr-var-name,
+.xr-var-dims,
+.xr-var-dtype,
+.xr-preview,
+.xr-attrs dt {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding-right: 10px;
+}
+
+.xr-var-name:hover,
+.xr-var-dims:hover,
+.xr-var-dtype:hover,
+.xr-attrs dt:hover {
+  overflow: visible;
+  width: auto;
+  z-index: 1;
+}
+
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  display: none;
+  background-color: var(--xr-background-color) !important;
+  padding-bottom: 5px !important;
+}
+
+.xr-var-attrs-in:checked ~ .xr-var-attrs,
+.xr-var-data-in:checked ~ .xr-var-data,
+.xr-index-data-in:checked ~ .xr-index-data {
+  display: block;
+}
+
+.xr-var-data > table {
+  float: right;
+}
+
+.xr-var-name span,
+.xr-var-data,
+.xr-index-name div,
+.xr-index-data,
+.xr-attrs {
+  padding-left: 25px !important;
+}
+
+.xr-attrs,
+.xr-var-attrs,
+.xr-var-data,
+.xr-index-data {
+  grid-column: 1 / -1;
+}
+
+dl.xr-attrs {
+  padding: 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 125px auto;
+}
+
+.xr-attrs dt,
+.xr-attrs dd {
+  padding: 0;
+  margin: 0;
+  float: left;
+  padding-right: 10px;
+  width: auto;
+}
+
+.xr-attrs dt {
+  font-weight: normal;
+  grid-column: 1;
+}
+
+.xr-attrs dt:hover span {
+  display: inline-block;
+  background: var(--xr-background-color);
+  padding-right: 10px;
+}
+
+.xr-attrs dd {
+  grid-column: 2;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.xr-icon-database,
+.xr-icon-file-text2,
+.xr-no-icon {
+  display: inline-block;
+  vertical-align: middle;
+  width: 1em;
+  height: 1.5em !important;
+  stroke-width: 0;
+  stroke: currentColor;
+  fill: currentColor;
+}
+</style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
+Dimensions:           (time: 1, dim_0: 11, dim_1: 11, dim_2: 11, dim_3: 11)
+Coordinates:
+  * time              (time) float64 1.71e+09
+Dimensions without coordinates: dim_0, dim_1, dim_2, dim_3
+Data variables:
+    scan1_m1          (time, dim_0) float64 -0.5 -0.4 -0.3 -0.2 ... 0.3 0.4 0.5
+    scan1_I0          (time, dim_1) float32 2.0 2.0 1.0 1.0 ... 3.0 3.0 5.0 2.0
+    scan1_scint       (time, dim_2) float32 3.0 2.0 2.0 2.0 ... 5.0 4.0 3.0 3.0
+    scan1_timestamps  (time, dim_3) float64 2.729 3.7 4.601 ... 10.91 11.82</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-fcb62892-ecbf-4a3a-9e66-e306f95ae5a0' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-fcb62892-ecbf-4a3a-9e66-e306f95ae5a0' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span>dim_0</span>: 11</li><li><span>dim_1</span>: 11</li><li><span>dim_2</span>: 11</li><li><span>dim_3</span>: 11</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-90347978-f1f9-48af-853c-1b05359a6b1e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-90347978-f1f9-48af-853c-1b05359a6b1e' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.71e+09</div><input id='attrs-0a9ac833-5926-41bd-928c-13ba87dd0369' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0a9ac833-5926-41bd-928c-13ba87dd0369' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0694234a-41ed-4d7c-bc88-34ba0dca5a05' class='xr-var-data-in' type='checkbox'><label for='data-0694234a-41ed-4d7c-bc88-34ba0dca5a05' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.70975e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-aa4ed780-c5d8-4046-9963-c3022285aaea' class='xr-section-summary-in' type='checkbox'  checked><label for='section-aa4ed780-c5d8-4046-9963-c3022285aaea' class='xr-section-summary' >Data variables: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>scan1_m1</span></div><div class='xr-var-dims'>(time, dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.5 -0.4 -0.3 -0.2 ... 0.3 0.4 0.5</div><input id='attrs-1bddc7fe-dac6-4b6d-82e3-d049f1513ced' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1bddc7fe-dac6-4b6d-82e3-d049f1513ced' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-addec942-6c9e-4d34-8545-26bfdb12fa27' class='xr-var-data-in' type='checkbox'><label for='data-addec942-6c9e-4d34-8545-26bfdb12fa27' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[-0.5, -0.4, -0.3, -0.2, -0.1,  0. ,  0.1,  0.2,  0.3,  0.4,  0.5]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I0</span></div><div class='xr-var-dims'>(time, dim_1)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>2.0 2.0 1.0 1.0 ... 3.0 3.0 5.0 2.0</div><input id='attrs-3b4c0461-6bba-4147-94c9-6b455ca89004' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3b4c0461-6bba-4147-94c9-6b455ca89004' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eaa9a854-8e00-4d7a-b638-a0d74c19bdf3' class='xr-var-data-in' type='checkbox'><label for='data-eaa9a854-8e00-4d7a-b638-a0d74c19bdf3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[2., 2., 1., 1., 2., 8., 8., 3., 3., 5., 2.]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_scint</span></div><div class='xr-var-dims'>(time, dim_2)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>3.0 2.0 2.0 2.0 ... 5.0 4.0 3.0 3.0</div><input id='attrs-fbd1da12-6f4b-4fdf-97e2-21fce887708f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fbd1da12-6f4b-4fdf-97e2-21fce887708f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a4159ce0-4fa6-4d56-b99f-ac95077f6309' class='xr-var-data-in' type='checkbox'><label for='data-a4159ce0-4fa6-4d56-b99f-ac95077f6309' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[3., 2., 2., 2., 2., 7., 6., 5., 4., 3., 3.]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_timestamps</span></div><div class='xr-var-dims'>(time, dim_3)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.729 3.7 4.601 ... 10.91 11.82</div><input id='attrs-99b85f37-97ed-434c-8a0d-97122f7bfa6e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-99b85f37-97ed-434c-8a0d-97122f7bfa6e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b4c1d9f6-59b1-445b-b9a1-176296ee6283' class='xr-var-data-in' type='checkbox'><label for='data-b4c1d9f6-59b1-445b-b9a1-176296ee6283' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[ 2.72867441,  3.699718  ,  4.60067749,  5.49965453,  6.40006113,
+         7.30474806,  8.20696402,  9.10958171, 10.00753117, 10.91087532,
+        11.8152566 ]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-73c27559-610d-4c36-bd6e-07019eeee243' class='xr-section-summary-in' type='checkbox'  ><label for='section-73c27559-610d-4c36-bd6e-07019eeee243' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-87d08062-a999-4a28-86b6-62dc470cb9e2' class='xr-index-data-in' type='checkbox'/><label for='index-87d08062-a999-4a28-86b6-62dc470cb9e2' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1709749933.3953764], dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a63ba7b6-3387-40ab-a789-63ade9636c82' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a63ba7b6-3387-40ab-a789-63ade9636c82' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+</div>
+</section>
+<section id="Plot-the-data-from-the-last-scan">
+<h3>Plot the data from the last scan<a class="headerlink" href="#Plot-the-data-from-the-last-scan" title="Permalink to this heading">#</a></h3>
+<p>Following the steps from the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/howto/_plot_x_y_databroker.html#3.-Show-the-(primary)-data">plotting howto</a>…</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_m1&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_scint&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_I0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y1</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;bx-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y2</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;ro-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;scan_id=</span><span class="si">{</span><span class="n">run</span><span class="o">.</span><span class="n">metadata</span><span class="p">[</span><span class="s1">&#39;start&#39;</span><span class="p">][</span><span class="s1">&#39;scan_id&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+&lt;matplotlib.legend.Legend at 0x7fa6eedd7d50&gt;
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/example__busy_fly_scan_34_1.png" src="../_images/example__busy_fly_scan_34_1.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="index.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Examples</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="_export_bluesky_data.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Exporting data from Bluesky</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Bluesky-(Python)-setup">Bluesky (Python) setup</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#EPICS-IOC">EPICS IOC</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#The-busy-record">The <code class="docutils literal notranslate"><span class="pre">busy</span></code> record</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Procedure----Delay-a-short-time">Procedure – Delay a short time</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SseqRecord">SseqRecord</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#SwaitRecord">SwaitRecord</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Connect-with-EPICS">Connect with EPICS</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Write-the-plan-that-prepares-EPICS">Write the plan that prepares EPICS</a><ul class="nav section-nav flex-column">
+<li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#The-reset()-method">The <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method</a></li>
+</ul>
+</li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taxi----Run-the-preparation-plan">taxi – Run the preparation plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fly----Run-taxi-&amp;-fly-scan-plan">fly – Run taxi &amp; fly scan plan</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Procedure----step-scan-scaler-&amp;-motor">Procedure – step scan scaler &amp; motor</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scaler-record">scaler record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motor-record">motor record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sscan-record">sscan record</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Write-a-preparation-plan-for-the-step-scan">Write a preparation plan for the step scan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taxi:-prepare-for-scan">taxi: prepare for scan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fly:-run-the-scan">fly: run the scan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Need-to-save-the-data">Need to save the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-the-complete-taxi/fly-scan">Run the complete taxi/fly scan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Plot-the-data-from-the-last-scan">Plot the data from the last scan</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/example/_busy_fly_scan.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=8d27b9dea8ad943066ae"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2023, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.15.2.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
