@@ -15,6 +15,7 @@ from .. import iconfig
 import getpass
 import os
 import socket
+import sys
 
 import apstools
 import databroker
@@ -47,6 +48,7 @@ versions = dict(
     numpy=numpy.__version__,
     ophyd=ophyd.__version__,
     pyRestTable=pyRestTable.__version__,
+    python=sys.version.split()[0],
     spec2nexus=spec2nexus.__version__,
 )
 
