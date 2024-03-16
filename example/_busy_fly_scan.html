@@ -428,6 +428,7 @@ document.write(`
 <li><p>step scan of scaler <em>v</em>. motor</p>
 <ul>
 <li><p>includes data collection</p></li>
+<li><p>additional PVs recorded</p></li>
 <li><p>plot saved data</p></li>
 <li><p>typical use case for APS beamlines</p></li>
 </ul>
@@ -553,12 +554,11 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
         <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
         <span class="k">yield from</span> <span class="n">abs_put</span><span class="p">(</span><span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Busy&quot;</span><span class="p">)</span>
-        <span class="c1"># TODO: refactor with a status object</span>
-        <span class="c1">#   Instead of polling, use Status to return to &#39;Done&#39;.</span>
 
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="n">deadline</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">timeout</span>
         <span class="k">while</span> <span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Busy&quot;</span><span class="p">):</span>
+            <span class="c1"># Instead of polling, use Status object to return to &#39;Done&#39;.</span>
             <span class="n">tNow</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">tNow</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2"> not started after </span><span class="si">{</span><span class="n">tNow</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
@@ -637,6 +637,7 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">SseqRecord</span><span class="p">,</span> <span class="n">SwaitRecord</span>
+<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignal</span>
 
 <span class="n">IOC</span> <span class="o">=</span> <span class="s2">&quot;gp:&quot;</span>
 
@@ -648,6 +649,13 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
 <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ifly</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">):</span>
     <span class="n">obj</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+
+<span class="c1"># just in case these are not already enabled</span>
+<span class="n">sseq_enable</span> <span class="o">=</span> <span class="n">EpicsSignal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userStringSeqEnable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;sseq_enable&quot;</span><span class="p">)</span>
+<span class="n">swait_enable</span> <span class="o">=</span> <span class="n">EpicsSignal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalcEnable&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;swait_enable&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">sseq_enable</span><span class="p">,</span> <span class="n">swait_enable</span><span class="p">):</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
+    <span class="n">obj</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;Enable&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -736,10 +744,10 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2024-03-06 12:31:38,660 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_simple_delay at 0x7fa6edab2e60&gt;
-2024-03-06 12:31:38,664 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-06 12:31:39,009 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-06 12:31:39,011 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_simple_delay at 0x7fa6edab2e60&gt;
+2024-03-16 14:33:45,586 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_simple_delay at 0x7f3bb7961000&gt;
+2024-03-16 14:33:45,588 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-16 14:33:45,919 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-16 14:33:45,920 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_simple_delay at 0x7f3bb7961000&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -769,10 +777,10 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2024-03-06 12:31:39,025 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ed1fcad0&gt;
-2024-03-06 12:31:39,027 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-06 12:31:45,085 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-06 12:31:45,085 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ed1fcad0&gt;
+2024-03-16 14:33:45,928 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b9acdcee0&gt;
+2024-03-16 14:33:45,929 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-16 14:33:51,976 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-16 14:33:51,980 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b9acdcee0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -788,6 +796,7 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </section>
 <section id="Procedure----step-scan-scaler-&amp;-motor">
 <h2>Procedure – step scan scaler &amp; motor<a class="headerlink" href="#Procedure----step-scan-scaler-&-motor" title="Permalink to this heading">#</a></h2>
+<p>We’ll need to connect with the EPICS scaler and motor PVs. Also we want to record other PVs in our step scan. And we want to record timestamps at each point to we can post the scan results as bluesky data.</p>
 <section id="scaler-record">
 <h3>scaler record<a class="headerlink" href="#scaler-record" title="Permalink to this heading">#</a></h3>
 <p><img alt="scaler" src="../_images/bf1-scaler-record.png" /></p>
@@ -804,8 +813,10 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
 <span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
 <span class="n">scaler1</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler1&quot;</span><span class="p">)</span>
+<span class="n">lorentzian</span> <span class="o">=</span> <span class="n">EpicsSignal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalc1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;lorentzian&quot;</span><span class="p">)</span>
+<span class="n">temperature</span> <span class="o">=</span> <span class="n">EpicsSignal</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalc8&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;temperature&quot;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">scaler1</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">m1</span><span class="p">,</span> <span class="n">scaler1</span><span class="p">,</span> <span class="n">lorentzian</span><span class="p">,</span> <span class="n">temperature</span><span class="p">):</span>
     <span class="n">obj</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
 
 <span class="c1"># convenience: pick out the individual detector signals from the scaler</span>
@@ -904,7 +915,7 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
     <span class="c1"># clear the records to be used: swait, sscan, and sseq</span>
     <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">,</span> <span class="n">scan1</span><span class="p">):</span>
         <span class="k">yield from</span> <span class="n">run_blocking_function</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">reset</span><span class="p">)</span>
-    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>  <span class="c1"># arbitrary wait for EPICS record processing</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.5</span><span class="p">)</span>  <span class="c1"># arbitrary wait for EPICS record processing</span>
 
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">description</span><span class="p">,</span> <span class="s2">&quot;taxi procedure&quot;</span><span class="p">,</span>
@@ -932,14 +943,31 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
     <span class="c1"># Configure sscan.</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
-        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">readback_pv</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_readback</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
-        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">setpoint_pv</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_setpoint</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
         <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">start</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span>
         <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">end</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span>
         <span class="n">scan1</span><span class="o">.</span><span class="n">number_points</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># Remember this mapping in scan1 of positioners and detectors.</span>
+    <span class="c1"># We&#39;ll use that later to get the data arrays.</span>
+    <span class="c1"># positioners</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">readback_pv</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_readback</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">setpoint_pv</span><span class="p">,</span> <span class="n">m1</span><span class="o">.</span><span class="n">user_setpoint</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p4</span><span class="o">.</span><span class="n">readback_pv</span><span class="p">,</span> <span class="s2">&quot;time&quot;</span><span class="p">,</span>  <span class="c1"># timestamp at each point</span>
+    <span class="p">)</span>
+    <span class="c1"># triggers</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">scan1</span><span class="o">.</span><span class="n">triggers</span><span class="o">.</span><span class="n">t1</span><span class="o">.</span><span class="n">trigger_pv</span><span class="p">,</span> <span class="n">scaler1</span><span class="o">.</span><span class="n">count</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
-        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">I0</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
-        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">scint</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="c1"># detectors</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">scint</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">diode</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d03</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">I0</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d04</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">I00</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d05</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">I000</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d06</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">lorentzian</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
+        <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d07</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">temperature</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># Trigger taxi &amp; fly sseq records (via swait record) from their busy records.</span>
@@ -990,10 +1018,10 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2024-03-06 12:31:46,628 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_step_scan at 0x7fa6edbc3400&gt;
-2024-03-06 12:31:46,629 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-06 12:31:47,063 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-06 12:31:47,064 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_step_scan at 0x7fa6edbc3400&gt;
+2024-03-16 14:33:53,576 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_step_scan at 0x7f3ba0358ca0&gt;
+2024-03-16 14:33:53,577 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-16 14:33:54,318 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-16 14:33:54,319 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_step_scan at 0x7f3ba0358ca0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1022,10 +1050,10 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2024-03-06 12:31:47,071 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ec5d2b50&gt;
-2024-03-06 12:31:47,073 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-06 12:32:00,947 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-06 12:32:00,947 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7fa6ec5d2b50&gt;
+2024-03-16 14:33:54,325 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b99d14790&gt;
+2024-03-16 14:33:54,327 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-16 14:34:08,860 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-16 14:34:08,861 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b99d14790&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1040,31 +1068,35 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </section>
 <section id="Need-to-save-the-data">
 <h3>Need to save the data<a class="headerlink" href="#Need-to-save-the-data" title="Permalink to this heading">#</a></h3>
-<p>Get the data (arrays) from <code class="docutils literal notranslate"><span class="pre">scan1</span></code> and make them into a readable ophyd device.</p>
+<p>Get the data (arrays) from <code class="docutils literal notranslate"><span class="pre">scan1</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-<span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">make_dict_device</span>
-
-<span class="k">def</span> <span class="nf">get_taxi_fly_sscan_data</span><span class="p">():</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_taxi_fly_sscan_data</span><span class="p">(</span><span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="c1"># t0: timestamp when sscan started</span>
     <span class="n">npts</span> <span class="o">=</span> <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-    <span class="n">xref</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">m1</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="p">,</span>
-        <span class="n">I0</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="p">,</span>
-        <span class="n">scint</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="p">,</span>
-    <span class="p">}</span>
+
+    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">]</span>
+
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
-        <span class="n">name_</span><span class="p">:</span> <span class="n">signal_</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">]</span>
-        <span class="k">for</span> <span class="n">name_</span><span class="p">,</span> <span class="n">signal_</span> <span class="ow">in</span> <span class="n">xref</span><span class="o">.</span><span class="n">items</span><span class="p">()</span>
+        <span class="c1"># use the same mapping as configured above</span>
+        <span class="s2">&quot;__dt__&quot;</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p4</span><span class="p">),</span>
+        <span class="n">m1</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="p">),</span>
+        <span class="n">scint</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="p">),</span>
+        <span class="n">diode</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="p">),</span>
+        <span class="n">I0</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d03</span><span class="p">),</span>
+        <span class="n">I00</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d04</span><span class="p">),</span>
+        <span class="n">I000</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d05</span><span class="p">),</span>
+        <span class="n">lorentzian</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d06</span><span class="p">),</span>
+        <span class="n">temperature</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d07</span><span class="p">),</span>
     <span class="p">}</span>
-    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;timestamps&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">npts</span><span class="p">))</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">make_dict_device</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scan1&quot;</span><span class="p">)</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span> <span class="ow">or</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;__dt__&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">data</span><span class="p">[</span><span class="s2">&quot;__timestamps__&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;__dt__&quot;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">data</span>
 
-<span class="c1"># r = get_taxi_fly_sscan_data().read()</span>
-<span class="c1"># data = get_taxi_fly_sscan_data()</span>
+<span class="c1"># get_taxi_fly_sscan_data()</span>
 </pre></div>
 </div>
 </div>
@@ -1082,7 +1114,9 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">make_dict_device</span>
+
+<span class="k">def</span> <span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
     <span class="n">md</span><span class="p">[</span><span class="s2">&quot;plan_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;taxi_fly_sscan_plan&quot;</span>
     <span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
 
@@ -1103,17 +1137,28 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
     <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
 
-    <span class="k">yield from</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">()</span>  <span class="c1"># &lt;--- the taxi/fly scan</span>
+    <span class="k">yield from</span> <span class="n">ifly</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;taxi&quot;</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="p">)</span>
+    <span class="n">t0_fly</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># Timestamp start of fly scan.</span>
+    <span class="k">yield from</span> <span class="n">ifly</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;fly&quot;</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="p">)</span>
 
     <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fly time: </span><span class="si">%.3f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
     <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">clear_sub</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">get_taxi_fly_sscan_data</span><span class="p">()</span>
-    <span class="n">data</span><span class="o">.</span><span class="n">timestamps</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">timestamps</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
 
-    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">)</span>
-    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
+    <span class="c1"># Get the data arrays from the sscan record.</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">get_taxi_fly_sscan_data</span><span class="p">(</span><span class="n">t0_fly</span><span class="p">)</span>
+
+    <span class="c1"># Post the data as discrete bluesky events.</span>
+    <span class="n">timestamps</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;__timestamps__&quot;</span><span class="p">)</span>
+    <span class="n">event_device</span> <span class="o">=</span> <span class="n">make_dict_device</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">scan1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">timestamps</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event_device</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">event_device</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">close_run</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1131,19 +1176,19 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </thead>
 <tbody>
 <tr class="row-even"><td><p>start</p></td>
-<td><p>-0.5</p></td>
+<td><p>-1.2</p></td>
 <td><p>first motor position for the step scan</p></td>
 </tr>
 <tr class="row-odd"><td><p>finish</p></td>
-<td><p>0.5</p></td>
+<td><p>1.2</p></td>
 <td><p>last motor position for the step scan</p></td>
 </tr>
 <tr class="row-even"><td><p>npts</p></td>
-<td><p>11</p></td>
+<td><p>21</p></td>
 <td><p>number of data points to be collected</p></td>
 </tr>
 <tr class="row-odd"><td><p>ct</p></td>
-<td><p>0.5</p></td>
+<td><p>0.2</p></td>
 <td><p>scaler counting time per point</p></td>
 </tr>
 </tbody>
@@ -1153,7 +1198,7 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uids</span> <span class="o">=</span> <span class="n">RE</span><span class="p">(</span><span class="n">taxi_fly_sscan_plan</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">,</span> <span class="mi">11</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">))</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">uids</span> <span class="o">=</span> <span class="n">RE</span><span class="p">(</span><span class="n">taxi_fly_sscan_plan</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">21</span><span class="p">,</span> <span class="mf">0.2</span><span class="p">))</span>
 <span class="n">run</span> <span class="o">=</span> <span class="n">cat</span><span class="p">[</span><span class="n">uids</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
 <span class="n">run</span>
 </pre></div>
@@ -1164,11 +1209,11 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </div>
 <div class="output_area stderr docutils container">
 <div class="highlight"><pre>
-2024-03-06 12:32:00,970 INFO bluesky - Executing plan &lt;generator object taxi_fly_sscan_plan at 0x7fa6ed934d50&gt;
-2024-03-06 12:32:00,971 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-06 12:32:13,392 INFO root - Fly time: 11.998 s
-2024-03-06 12:32:13,396 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7fa6f01d6f50&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-06 12:32:13,397 INFO bluesky - Cleaned up from plan &lt;generator object taxi_fly_sscan_plan at 0x7fa6ed934d50&gt;
+2024-03-16 14:34:08,883 INFO bluesky - Executing plan &lt;generator object taxi_fly_sscan_plan at 0x7f3ba0358ca0&gt;
+2024-03-16 14:34:08,885 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
+2024-03-16 14:34:27,155 INFO root - Fly time: 17.527 s
+2024-03-16 14:34:27,167 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
+2024-03-16 14:34:27,168 INFO bluesky - Cleaned up from plan &lt;generator object taxi_fly_sscan_plan at 0x7f3ba0358ca0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
@@ -1178,9 +1223,9 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 BlueskyRun
-  uid=&#39;0169d961-d823-4848-b62b-bbfe92d621a1&#39;
+  uid=&#39;62a31b63-ecd1-4a1f-a39c-8c3182d4821a&#39;
   exit_status=&#39;success&#39;
-  2024-03-06 12:32:00.972 -- 2024-03-06 12:32:13.395
+  2024-03-16 14:34:08.886 -- 2024-03-16 14:34:27.166
   Streams:
     * primary
 
@@ -1564,17 +1609,48 @@ dl.xr-attrs {
   fill: currentColor;
 }
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
-Dimensions:           (time: 1, dim_0: 11, dim_1: 11, dim_2: 11, dim_3: 11)
+Dimensions:            (time: 21)
 Coordinates:
-  * time              (time) float64 1.71e+09
-Dimensions without coordinates: dim_0, dim_1, dim_2, dim_3
+  * time               (time) float64 1.711e+09 1.711e+09 ... 1.711e+09
 Data variables:
-    scan1_m1          (time, dim_0) float64 -0.5 -0.4 -0.3 -0.2 ... 0.3 0.4 0.5
-    scan1_I0          (time, dim_1) float32 2.0 2.0 1.0 1.0 ... 3.0 3.0 5.0 2.0
-    scan1_scint       (time, dim_2) float32 3.0 2.0 2.0 2.0 ... 5.0 4.0 3.0 3.0
-    scan1_timestamps  (time, dim_3) float64 2.729 3.7 4.601 ... 10.91 11.82</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-fcb62892-ecbf-4a3a-9e66-e306f95ae5a0' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-fcb62892-ecbf-4a3a-9e66-e306f95ae5a0' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 1</li><li><span>dim_0</span>: 11</li><li><span>dim_1</span>: 11</li><li><span>dim_2</span>: 11</li><li><span>dim_3</span>: 11</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-90347978-f1f9-48af-853c-1b05359a6b1e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-90347978-f1f9-48af-853c-1b05359a6b1e' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.71e+09</div><input id='attrs-0a9ac833-5926-41bd-928c-13ba87dd0369' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-0a9ac833-5926-41bd-928c-13ba87dd0369' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0694234a-41ed-4d7c-bc88-34ba0dca5a05' class='xr-var-data-in' type='checkbox'><label for='data-0694234a-41ed-4d7c-bc88-34ba0dca5a05' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.70975e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-aa4ed780-c5d8-4046-9963-c3022285aaea' class='xr-section-summary-in' type='checkbox'  checked><label for='section-aa4ed780-c5d8-4046-9963-c3022285aaea' class='xr-section-summary' >Data variables: <span>(4)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>scan1_m1</span></div><div class='xr-var-dims'>(time, dim_0)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-0.5 -0.4 -0.3 -0.2 ... 0.3 0.4 0.5</div><input id='attrs-1bddc7fe-dac6-4b6d-82e3-d049f1513ced' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1bddc7fe-dac6-4b6d-82e3-d049f1513ced' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-addec942-6c9e-4d34-8545-26bfdb12fa27' class='xr-var-data-in' type='checkbox'><label for='data-addec942-6c9e-4d34-8545-26bfdb12fa27' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[-0.5, -0.4, -0.3, -0.2, -0.1,  0. ,  0.1,  0.2,  0.3,  0.4,  0.5]])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I0</span></div><div class='xr-var-dims'>(time, dim_1)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>2.0 2.0 1.0 1.0 ... 3.0 3.0 5.0 2.0</div><input id='attrs-3b4c0461-6bba-4147-94c9-6b455ca89004' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-3b4c0461-6bba-4147-94c9-6b455ca89004' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-eaa9a854-8e00-4d7a-b638-a0d74c19bdf3' class='xr-var-data-in' type='checkbox'><label for='data-eaa9a854-8e00-4d7a-b638-a0d74c19bdf3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[2., 2., 1., 1., 2., 8., 8., 3., 3., 5., 2.]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_scint</span></div><div class='xr-var-dims'>(time, dim_2)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>3.0 2.0 2.0 2.0 ... 5.0 4.0 3.0 3.0</div><input id='attrs-fbd1da12-6f4b-4fdf-97e2-21fce887708f' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fbd1da12-6f4b-4fdf-97e2-21fce887708f' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a4159ce0-4fa6-4d56-b99f-ac95077f6309' class='xr-var-data-in' type='checkbox'><label for='data-a4159ce0-4fa6-4d56-b99f-ac95077f6309' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[3., 2., 2., 2., 2., 7., 6., 5., 4., 3., 3.]], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_timestamps</span></div><div class='xr-var-dims'>(time, dim_3)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>2.729 3.7 4.601 ... 10.91 11.82</div><input id='attrs-99b85f37-97ed-434c-8a0d-97122f7bfa6e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-99b85f37-97ed-434c-8a0d-97122f7bfa6e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b4c1d9f6-59b1-445b-b9a1-176296ee6283' class='xr-var-data-in' type='checkbox'><label for='data-b4c1d9f6-59b1-445b-b9a1-176296ee6283' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([[ 2.72867441,  3.699718  ,  4.60067749,  5.49965453,  6.40006113,
-         7.30474806,  8.20696402,  9.10958171, 10.00753117, 10.91087532,
-        11.8152566 ]])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-73c27559-610d-4c36-bd6e-07019eeee243' class='xr-section-summary-in' type='checkbox'  ><label for='section-73c27559-610d-4c36-bd6e-07019eeee243' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-87d08062-a999-4a28-86b6-62dc470cb9e2' class='xr-index-data-in' type='checkbox'/><label for='index-87d08062-a999-4a28-86b6-62dc470cb9e2' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1709749933.3953764], dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-a63ba7b6-3387-40ab-a789-63ade9636c82' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-a63ba7b6-3387-40ab-a789-63ade9636c82' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+    scan1___dt__       (time) float64 0.3821 1.159 1.861 ... 13.08 13.78 14.48
+    scan1_m1           (time) float64 -1.2 -1.08 -0.96 -0.84 ... 0.96 1.08 1.2
+    scan1_scint        (time) float32 1.0 1.0 1.0 2.0 1.0 ... 1.0 1.0 1.0 0.0
+    scan1_diode        (time) float32 1.0 1.0 1.0 0.0 1.0 ... 1.0 1.0 2.0 0.0
+    scan1_I0           (time) float32 1.0 2.0 1.0 2.0 1.0 ... 2.0 1.0 1.0 1.0
+    scan1_I00          (time) float32 0.0 1.0 2.0 1.0 1.0 ... 1.0 1.0 1.0 0.0
+    scan1_I000         (time) float32 1.0 1.0 1.0 1.0 1.0 ... 2.0 1.0 1.0 1.0
+    scan1_lorentzian   (time) float32 408.4 609.4 997.4 ... 82.28 70.45 61.44
+    scan1_temperature  (time) float32 25.08 25.08 25.08 ... 25.16 25.16 25.18</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-bfa76a97-ff2f-4b50-98f1-253885b1c8f8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-bfa76a97-ff2f-4b50-98f1-253885b1c8f8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 21</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-135bca5c-f011-4074-a09e-4278606f7b96' class='xr-section-summary-in' type='checkbox'  checked><label for='section-135bca5c-f011-4074-a09e-4278606f7b96' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.711e+09 1.711e+09 ... 1.711e+09</div><input id='attrs-7dd6b22c-3757-4f75-9661-3355876b13d3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7dd6b22c-3757-4f75-9661-3355876b13d3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a27b1abb-3e3a-4ab3-bad3-ae82dd15805b' class='xr-var-data-in' type='checkbox'><label for='data-a27b1abb-3e3a-4ab3-bad3-ae82dd15805b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
+       1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
+       1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
+       1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
+       1.710618e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c3a37328-1439-4f91-a0b1-e9c37a9c6f8e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c3a37328-1439-4f91-a0b1-e9c37a9c6f8e' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>scan1___dt__</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.3821 1.159 1.861 ... 13.78 14.48</div><input id='attrs-eec694a5-666e-48bf-bb0c-0a62ea73db2a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eec694a5-666e-48bf-bb0c-0a62ea73db2a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-59e8a227-3640-4c40-bf5c-07ed0e2a9537' class='xr-var-data-in' type='checkbox'><label for='data-59e8a227-3640-4c40-bf5c-07ed0e2a9537' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([ 0.38214499,  1.15942792,  1.86088692,  2.56165651,  3.26270936,
+        3.96427265,  4.66494266,  5.36677113,  6.06745694,  6.76835481,
+        7.46975047,  8.17031758,  8.87144317,  9.57251492, 10.2738698 ,
+       10.97532579, 11.67655731, 12.37886661, 13.07932561, 13.78087207,
+       14.48168093])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_m1</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.2 -1.08 -0.96 ... 0.96 1.08 1.2</div><input id='attrs-4efd3de9-9d10-4de4-9347-fc825d5d54cb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4efd3de9-9d10-4de4-9347-fc825d5d54cb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-56623490-6805-4475-b37b-01b6c2ec66b3' class='xr-var-data-in' type='checkbox'><label for='data-56623490-6805-4475-b37b-01b6c2ec66b3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([-1.2 , -1.08, -0.96, -0.84, -0.72, -0.6 , -0.48, -0.36, -0.24,
+       -0.12,  0.  ,  0.12,  0.24,  0.36,  0.48,  0.6 ,  0.72,  0.84,
+        0.96,  1.08,  1.2 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_scint</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 2.0 ... 1.0 1.0 1.0 0.0</div><input id='attrs-6cb2f30c-e2f9-495f-85e1-394c6cd6c743' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6cb2f30c-e2f9-495f-85e1-394c6cd6c743' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0514806c-c86c-42c5-a19b-bab8c0ea22a6' class='xr-var-data-in' type='checkbox'><label for='data-0514806c-c86c-42c5-a19b-bab8c0ea22a6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., 2., 1., 1., 1., 0., 1., 3., 4., 3., 2., 2., 2., 2., 1.,
+       1., 1., 1., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_diode</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 0.0 ... 1.0 1.0 2.0 0.0</div><input id='attrs-9177d15c-fa15-41be-ba72-68b57b969276' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9177d15c-fa15-41be-ba72-68b57b969276' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-15ef4f12-c174-4e2f-824e-9fccabe6347a' class='xr-var-data-in' type='checkbox'><label for='data-15ef4f12-c174-4e2f-824e-9fccabe6347a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., 0., 1., 1., 1., 1., 2., 3., 5., 4., 3., 1., 2., 1., 1.,
+       1., 1., 2., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I0</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 2.0 1.0 2.0 ... 2.0 1.0 1.0 1.0</div><input id='attrs-564b908c-81cc-44c9-b866-6e7b5cf6599a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-564b908c-81cc-44c9-b866-6e7b5cf6599a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-774cf242-fccd-461d-afe8-7a50dd2ad37d' class='xr-var-data-in' type='checkbox'><label for='data-774cf242-fccd-461d-afe8-7a50dd2ad37d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 2., 1., 2., 1., 1., 0., 0., 2., 2., 3., 4., 4., 2., 1., 1., 1.,
+       2., 1., 1., 1.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I00</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 1.0 2.0 1.0 ... 1.0 1.0 1.0 0.0</div><input id='attrs-4306526a-4550-4e07-a707-1081a55ee206' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4306526a-4550-4e07-a707-1081a55ee206' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4c0bc53c-f774-4ff4-914b-ef203fd47c2a' class='xr-var-data-in' type='checkbox'><label for='data-4c0bc53c-f774-4ff4-914b-ef203fd47c2a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([0., 1., 2., 1., 1., 1., 1., 2., 1., 3., 4., 4., 2., 2., 1., 1., 1.,
+       1., 1., 1., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I000</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 2.0 1.0 1.0 1.0</div><input id='attrs-fd6f2e6e-86d0-4ee0-933b-2091775f130a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fd6f2e6e-86d0-4ee0-933b-2091775f130a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-22bb4c5a-da77-4ce5-a82c-2ab978acee50' class='xr-var-data-in' type='checkbox'><label for='data-22bb4c5a-da77-4ce5-a82c-2ab978acee50' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., 1., 1., 2., 1., 1., 2., 2., 3., 3., 2., 2., 2., 1., 0.,
+       2., 1., 1., 1.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_lorentzian</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>408.4 609.4 997.4 ... 70.45 61.44</div><input id='attrs-ee9ebc33-e272-43fd-9f2e-7e138903ee5e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ee9ebc33-e272-43fd-9f2e-7e138903ee5e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6495f313-3f57-4892-92fa-71690aa034ed' class='xr-var-data-in' type='checkbox'><label for='data-6495f313-3f57-4892-92fa-71690aa034ed' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([  408.39145,   609.39923,   997.3773 ,  1902.5912 ,  4952.4414 ,
+       27277.195  , 38559.195  ,  5755.5723 ,  2081.3643 ,  1060.8118 ,
+         643.5246 ,   426.3738 ,   305.78986,   231.37349,   178.40503,
+         142.77434,   115.9354 ,    97.73997,    82.28459,    70.44571,
+          61.43649], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_temperature</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>25.08 25.08 25.08 ... 25.16 25.18</div><input id='attrs-c4d656e1-63be-45a7-be82-601e81368174' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c4d656e1-63be-45a7-be82-601e81368174' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8dd6c6e6-f00f-4dd5-a67e-93b6da58b673' class='xr-var-data-in' type='checkbox'><label for='data-8dd6c6e6-f00f-4dd5-a67e-93b6da58b673' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([25.081278, 25.081278, 25.081278, 25.44632 , 25.44632 , 25.311306,
+       25.311306, 25.311306, 25.171366, 25.171366, 25.171366, 24.510117,
+       24.510117, 24.510117, 24.5495  , 24.5495  , 24.5495  , 25.158075,
+       25.158075, 25.158075, 25.177362], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8a11018d-34ab-47bd-aafc-2c092fcae7af' class='xr-section-summary-in' type='checkbox'  ><label for='section-8a11018d-34ab-47bd-aafc-2c092fcae7af' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-b22a80b7-1a75-45ae-90ef-69f7e2c49d6c' class='xr-index-data-in' type='checkbox'/><label for='index-b22a80b7-1a75-45ae-90ef-69f7e2c49d6c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1710617667.1605177, 1710617667.1608515, 1710617667.1611385,
+        1710617667.161413, 1710617667.1616862, 1710617667.1619854,
+       1710617667.1622581, 1710617667.1625328, 1710617667.1627982,
+       1710617667.1630547,  1710617667.163323, 1710617667.1635797,
+       1710617667.1638334, 1710617667.1640866, 1710617667.1643426,
+        1710617667.164607, 1710617667.1648607, 1710617667.1651125,
+       1710617667.1653628,  1710617667.165617,  1710617667.165879],
+      dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-50f9e83e-9440-4899-871d-0647a1c349ca' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-50f9e83e-9440-4899-871d-0647a1c349ca' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
 </div>
 </section>
 <section id="Plot-the-data-from-the-last-scan">
@@ -1588,9 +1664,9 @@ Data variables:
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
 
-<span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_m1&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">y1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_scint&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">y2</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_I0&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_m1&quot;</span><span class="p">]</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_lorentzian&quot;</span><span class="p">]</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_I0&quot;</span><span class="p">]</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y1</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;bx-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y2</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="s2">&quot;ro-&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="n">y2</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
@@ -1606,7 +1682,7 @@ Data variables:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x7fa6eedd7d50&gt;
+&lt;matplotlib.legend.Legend at 0x7f3b99efb0d0&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
