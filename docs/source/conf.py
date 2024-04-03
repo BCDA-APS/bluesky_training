@@ -43,6 +43,7 @@ nbsphinx_allow_errors = True
 
 html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
+html_title = project
 
 autodoc_mock_imports = """
     bluesky
