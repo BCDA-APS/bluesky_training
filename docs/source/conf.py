@@ -26,8 +26,10 @@ extensions = """
     sphinx.ext.viewcode
     nbsphinx
     myst_parser
+    sphinx_design
 """.split()
 extensions.append("sphinx_tabs.tabs")  # issue #129: this must be last
+myst_enable_extensions = ["colon_fence"]
 
 templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
