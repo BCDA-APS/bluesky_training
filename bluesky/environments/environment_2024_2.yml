@@ -1,0 +1,128 @@
+name: bluesky_2024_2
+
+# download:
+#   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2024_2.yml
+# create:
+#   conda env create --force -n bluesky_2024_2 -f ./environment_2024_2.yml --solver=libmamba
+# activate:
+#   conda activate bluesky_2024_2
+
+# Add/revise environment variable for default bluesky environment.
+# Add to ~/.bash_aliases (or if that does not exist, ~/.bashrc).
+# export BLUESKY_CONDA_ENV=bluesky_2024_2
+
+# For more advice about bash environment variables, see:
+# https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/environments/admin/bluesky.md#bash-environment-variables
+
+channels:
+  # To get epics-base compatible with both PyEpics _and_ pvapy, apsu channel first.
+  # BTW: apsu channel includes all of sveseli channel (no need for the extra).
+  - apsu
+
+  # then conda-forge
+  - conda-forge
+  - aps-anl-tag
+  - defaults
+
+dependencies:
+
+  # --- Python core packages
+  - python >=3.10
+  - ipython
+  - jupyter
+  - jupyterlab
+  - notebook
+  - pip
+  - psutil
+
+  # --- testing and quality assurance
+  - black
+  - flake8
+  - pylint
+  - pytest
+  - pytest-notebook
+  - ruff
+
+  # --- Qt
+  - pyqt =5
+  - qt =5
+
+  # --- general support packages
+  - apischema
+  - bitshuffle
+  - epics-base >=7.0.5
+  - h5py
+  - hdf5plugin
+  - httpie
+  - imagecodecs-lite
+  - ipympl
+  - lxml
+  - pandas
+  - pint
+  - pyEpics >=3.5.0
+  - pymongo
+  - pysumreg
+  - scikit-image
+  - xlrd
+
+  # --- Bluesky framework packages
+  - apstools
+  - area-detector-handlers
+  - bluesky >=1.8.1,!=1.11.0
+  - bluesky-httpserver
+  - bluesky-kafka
+  - bluesky-live
+  - bluesky-queueserver
+  - bluesky-queueserver-api
+  - bluesky-widgets
+  - databroker-pack
+  - databroker =1.2
+  - hklpy >=1.0.3  # --- linux-64
+  - httpx >=0.14  # issue #75
+  - ophyd >=1.7
+  - pydm
+  - tiled
+  # https://github.com/pydata/xarray/issues/6818
+  - xarray !=2022.6.0  # incompatible with numpy=1.20
+
+  # --- user-requested packages
+  - nexpy
+  - punx
+  - pvapy
+  - pvview
+  - pymca
+  - pyRestTable
+  - spec2nexus
+  - xrayutilities
+
+  # --- packaging and publishing
+  - conda-build
+  - coverage
+  - mamba
+  - micromamba
+  - myst-parser
+  - nbsphinx
+  - pydata-sphinx-theme
+  - pygithub
+  - sphinx
+  - sphinx-design
+  - sphinx-tabs
+  - sphinxcontrib-napoleon
+  - twine
+  - versioneer
+
+  # if not using this environment at APS, then comment these (and apsbss below)
+  - aps-dm-api >=5   # linux-64  osx-64
+  # - c2dataviewer  # --- linux-64
+  # LibMambaUnsatisfiableError: Encountered problems while solving:
+  #   - package c2dataviewer-1.7.6-py37_0 requires python >=3.7,<3.8.0a0, but none of the providers can be installed
+
+  - pip:
+    - apsbss  # only works on APS subnet
+    - ophyd-registry
+    # - happi
+    # - tiled[all]
+    - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
+    # --- optional Bluesky framework packages for evaluation
+    # - bluesky-webclient is NOT Python software, don't install it this way
+    #    https://github.com/bluesky/bluesky-webclient
