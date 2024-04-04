@@ -93,6 +93,13 @@ workstation at APS with access to the ``/APSshare`` file server):
          $ <b>python3 /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
          </pre>
 
+      .. tip::  Needs outside network access at APS.
+
+         Remember, since this will try to download content from the
+         public internet, it only works from workstations with
+         access to networks outside of APS.  From local private networks,
+         it will stall in the first steps.
+
    .. tab:: Not at APS
 
       Workstations on other networks (with no access to APSshare) need to
