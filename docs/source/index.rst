@@ -32,13 +32,13 @@ at a typical APS beamline.  Documentation is categorized in major sections.
 
       :ref:`instrument`
 
-      Details to configure and develop your ``instrument`` package.
+      Details to configure and develop your *instrument* package.
 
       .. rubric:: `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_
 
-      The ``bluesky/`` directory in this `repository
-      <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_
-      is the template for new beamline installations.
+      The ``bluesky/`` `directory
+      <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_ is the
+      template for new beamline :ref:`installations <checklist>`.
 
     .. grid-item-card:: :material-regular:`school;3em`
       :link: tutor/index
