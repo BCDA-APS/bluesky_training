@@ -1,3 +1,5 @@
+.. index:: install; new instrument
+
 Install New Instrument
 ======================
 
@@ -6,6 +8,8 @@ Describes the steps to install a new bluesky instrument.
 .. note:: These *instructions have been written for workstations running the Linux operating system*. They may be used for other operating systems but expect some modifications are necessary. One such modification is that the ``libhkl`` library, needed for diffractometer support, is only available for Linux x86_64 host architectures.
 
 .. warning:: In Linux, use the ``bash`` command shell. For more info see `what is bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__
+
+.. _checklist:
 
 Installation checklist
 --------------------------
@@ -31,7 +35,7 @@ Use the ``new_bluesky_instrument.py``
 `program <https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py>`__
 to install a new bluesky instrument configuration from the online `APS
 Bluesky Training <https://github.com/BCDA-APS/bluesky_training>`__
-repository template. The program creates a new ``bluesky`` directory in
+repository :index:`template`. The program creates a new ``bluesky`` directory in
 the home directory. Use ``new_bluesky_instrument.py -h`` for usage
 information.
 
