@@ -10,58 +10,51 @@ APS Bluesky Training
    the `index.rst` file of that folder.
 
 This APS Bluesky Training repository demonstrates use of the Bluesky framework
-at a typical APS beamline.  The repository ``bluesky/`` directory also serves as
-a template for new beamline installations.
+at a typical APS beamline.  Documentation is categorized in major sections.
 
-Documentation is categorized in four major sections. In addition to these
-highlights, additional content is available in each section of the
-documentation.
+.. icons: https://fonts.google.com/icons
 
 .. grid:: 2
 
-    .. grid-item-card:: :ref:`howto`
+    .. grid-item-card:: :material-regular:`alt_route;3em`
+      :link: howto/index
+      :link-type: doc
+
+      :ref:`howto`
 
       Practical guides for accomplishing specific tasks.
-
-      -  `Bluesky Cheat Sheet <howto/bluesky_cheat_sheet.md>`_:
-         First Steps to use Bluesky after installation.
-      -  `Plot x, y data from a databroker run <howto/_plot_x_y_databroker.ipynb>`_
-      -  `Working with data after the measurement <howto/_after_measurement.ipynb>`_
 
       .. rubric:: :ref:`examples`
 
       Demonstrations of specific tasks.
 
-      - `XAFS scan <https://bcda-aps.github.io/bluesky_training/example/_xafs_scan.html>`_ :
-        Example multi-segment XAFS scan.
+    .. grid-item-card::  :material-regular:`precision_manufacturing;3em`
 
-    .. grid-item-card:: :ref:`instrument`
+      :ref:`instrument`
 
       Details to configure and develop your ``instrument`` package.
 
-      -  `Installation Guide <instrument/_install_new_instrument.ipynb>`_:
-         Install the components of the Bluesky framework.
-      -  `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky/instrument>`_
-         for a bluesky ``instrument``
-      -  `Instrument Package Guide <instrument/guide.md>`__:
-         Building the ``instrument`` package.
-      - `About the instrument package <instrument/describe_instrument.ipynb>`_
+      .. rubric:: `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_
 
-    .. grid-item-card:: :ref:`tutorials`
+      The ``bluesky/`` directory in this `repository
+      <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_
+      is the template for new beamline installations.
+
+    .. grid-item-card:: :material-regular:`school;3em`
+      :link: tutor/index
+      :link-type: doc
+
+      :ref:`tutorials`
 
       Step-by-step guides to help you get started and learn through doing.
 
-      - `Hello, World <tutor/hello_world.ipynb>`_
-      - `Connect Bluesky with EPICS <tutor/connect_epics.ipynb>`_
+    .. grid-item-card:: :material-regular:`collections_bookmark;3em`
+      :link: reference/index
+      :link-type: doc
 
-    .. grid-item-card:: :ref:`reference`
+      :ref:`reference`
 
       More ways to learn more about Bluesky.
-
-      -  `bluesky training wiki <https://github.com/BCDA-APS/bluesky_training/wiki>`_:
-         Includes list of APS instruments
-      -  `General Bluesky Documentation (for APS) <https://wiki-ext.aps.anl.gov/blc/index.php?title=Controls_Software_Documentation#Bluesky>`_
-      - `Other resources <reference/_zz_other_resources.rst>`_
 
 .. toctree::
    :maxdepth: 1
@@ -77,8 +70,8 @@ documentation.
 About
 -----
 
-:home: https://prjemian.github.io/pyQParamWidget/
-:source: https://github.com/prjemian/pyQParamWidget
+:home: https://bcda-aps.github.io/bluesky_training/
+:source: https://github.com/bcda-aps/bluesky_training
 :published: |today|
 :revisions: :ref:`History of code changes <changes>`
 :index: :ref:`genindex`
