@@ -21,10 +21,26 @@ Project `milestones <https://github.com/BCDA-APS/bluesky_training/milestones>`_
 describe future plans.
 
 ..
-   1.0.3
+   1.0.4
    ******
 
-   release expected by 2024-04-02
+   release expected by 2024-07-19
+
+1.0.3
+******
+
+release expected by 2024-04-30
+
+New Features
+------------
+
+* Example of APS taxi/fly scans.
+
+Maintenance
+------------
+
+* Add environment file for 2024_2 cycle.
+* Make the home page less complex.
 
 1.0.2
 ******

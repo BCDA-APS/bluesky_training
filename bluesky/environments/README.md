@@ -11,8 +11,9 @@ The repository is: https://github.com/BCDA-APS/bluesky_training/
 
 version | file
 --- | ---
-2024-1 (latest) | [`environment_2024_1.yml`](.//environment_2024_1.yml)
-2023-3 | [`environment_2023_3.yml`](./environment_2023_3.yml)
+2024-2 (latest) | [`environment_2024_2.yml`](./environment_2024_2.yml)
+2024-1 | [`environment_2024_1.yml`](./environment_2024_1.yml)
+2023-3 | [`environment_2023_3.yml`](./archive/environment_2023_3.yml)
 2023-2 | [`environment_2023_2.yml`](./archive/environment_2023_2.yml)
 2023-1 | [`environment_2023_1.yml`](./archive/environment_2023_1.yml)
 2022_3 | [`environment_2022_3.yml`](./archive/environment_2022_3.yml)
@@ -21,9 +22,8 @@ version | file
 2021_2 | [`environment_2021_2.yml`](./archive/environment_2021_2.yml)
 2021_1 | [`environment_2021_1.yml`](./archive/environment_2021_1.yml)
 
-_note_: Prior to the 2023-2 version, the master source for these YAML files was the
-[BCDA Bluesky
-configuration](https://github.com/BCDA-APS/use_bluesky/tree/main/install)
+_note_: Prior to the 2023-2 version, the master source for these YAML files was a
+[now-archived](https://github.com/BCDA-APS/use_bluesky/tree/main/install)
 repository.
 
 ## Managing environments
@@ -33,6 +33,6 @@ First you must activate the conda
 you will use (if not already activated). Such as:
 
 ```bash
-(base) prjemian@zap:~$ conda activate bluesky_2023_3
-(bluesky_2023_3) prjemian@zap:~$ 
+(base) prjemian@zap:~$ conda activate bluesky_2024_2
+(bluesky_2024_2) prjemian@zap:~$ 
 ```
