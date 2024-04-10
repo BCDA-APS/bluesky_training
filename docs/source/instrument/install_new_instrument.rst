@@ -17,8 +17,7 @@ Installation checklist
 The *installation checklist* summarizes the steps with links
 to the documentation for each step.
 
-.. TODO: resolve confusing mismatch in names (like step 1)
-   Could move each section to its own file.
+.. TODO: Could move each section to its own file.
 
 #. :ref:`instrument.create_bluesky_directory`
 #. :ref:`reference.create_bluesky_enviroment`
