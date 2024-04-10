@@ -415,8 +415,17 @@ document.write(`
                   
   <section id="APS-fly-scans-with-taxi-&amp;-fly-busy-records">
 <h1>APS fly scans with taxi &amp; fly <code class="docutils literal notranslate"><span class="pre">busy</span></code> records<a class="headerlink" href="#APS-fly-scans-with-taxi-&-fly-busy-records" title="Permalink to this heading">#</a></h1>
-<p>Some EPICS fly scans at APS are triggered by a pair of EPICS <a class="reference external" href="https://epics-modules.github.io/busy/">busy</a> records. The first <em>busy</em> record is called <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and is responsible for preparing the hardware to fly. Once <em>taxi</em> is complete, the second <em>busy</em> record called <code class="docutils literal notranslate"><span class="pre">fly</span></code> performs the actual fly scan. In a third (optional) phase, data is collected from hardware and written to a file. Each <em>busy</em> record initates a sequence of processing steps as defined by other EPICS records.</p>
-<p>This document shows how to operate such a scan with two examples. We’ll refer to <em>taxi</em> and <em>fly</em> as phases.</p>
+<div class="line-block">
+<div class="line">Some EPICS fly scans at APS are triggered by a pair of EPICS <a class="reference external" href="https://epics-modules.github.io/busy/">busy</a> records.</div>
+<div class="line">Each <em>busy</em> record initates a sequence of EPICS processing steps as defined by other EPICS records. The first <em>busy</em> record is called <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and is responsible for preparing the hardware to fly. Once <em>taxi</em> is complete, the second <em>busy</em> record, called <code class="docutils literal notranslate"><span class="pre">fly</span></code>, performs the actual fly scan.</div>
+</div>
+<p>The next figure shows a control screen (from an APS beam line). The screen has buttons to initiate taxi &amp; fly sequences. Controls for some other scan parameters are also shown.</p>
+<p><img alt="taxi/fly control screen" src="../_images/1ide-taxi-fly-screen.png" /></p>
+<p>In a third (optional) phase, data is collected from hardware and written somewhere (in this example, to the databroker catalog).</p>
+<div class="line-block">
+<div class="line">This document shows how to operate such a scan with two examples.</div>
+<div class="line">We’ll refer to <em>taxi</em> and <em>fly</em> as phases.</div>
+</div>
 <ul class="simple">
 <li><p>simplified processing sequence for each phase</p>
 <ul>
@@ -446,7 +455,7 @@ document.write(`
 </thead>
 <tbody>
 <tr class="row-even"><td><p>preparation</p></td>
-<td><p>ticketing &amp; boarding</p></td>
+<td><p>ticketing, boarding, baggage handling</p></td>
 <td><p>configuration of software</p></td>
 </tr>
 <tr class="row-odd"><td><p>taxi</p></td>
@@ -456,6 +465,10 @@ document.write(`
 <tr class="row-even"><td><p>fly</p></td>
 <td><p>start moving, liftoff at flight velocity</p></td>
 <td><p>start moving, begin collecting data at first position</p></td>
+</tr>
+<tr class="row-odd"><td><p>data</p></td>
+<td><p>baggage claim</p></td>
+<td><p>retrieve the fly scan data arrays</p></td>
 </tr>
 </tbody>
 </table>
@@ -482,18 +495,13 @@ document.write(`
 <span class="kn">import</span> <span class="nn">bluesky.plan_stubs</span> <span class="k">as</span> <span class="nn">bps</span>
 <span class="kn">import</span> <span class="nn">databroker</span>
 <span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
-<span class="kn">from</span> <span class="nn">ophyd.status</span> <span class="kn">import</span> <span class="n">Status</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
-<span class="n">logging</span><span class="o">.</span><span class="n">basicConfig</span><span class="p">(</span>
-    <span class="n">level</span><span class="o">=</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">,</span>  <span class="c1"># more details than default (WARNING) level</span>
-    <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;</span><span class="si">%(asctime)s</span><span class="s2"> </span><span class="si">%(levelname)s</span><span class="s2"> </span><span class="si">%(name)s</span><span class="s2"> - </span><span class="si">%(message)s</span><span class="s2">&quot;</span>
-<span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
 
 <span class="n">RE</span> <span class="o">=</span> <span class="n">bluesky</span><span class="o">.</span><span class="n">RunEngine</span><span class="p">()</span>
 <span class="n">cat</span> <span class="o">=</span> <span class="n">databroker</span><span class="o">.</span><span class="n">temp</span><span class="p">()</span><span class="o">.</span><span class="n">v2</span>
 <span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">v1</span><span class="o">.</span><span class="n">insert</span><span class="p">)</span>
-<span class="c1"># RE.msg_hook = bluesky.utils.ts_msg_hook  # deeper logging details</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">cat</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -524,61 +532,57 @@ cat=&lt;Intake catalog: temp&gt;
 <td><p>taxi (preparation) phase</p></td>
 </tr>
 <tr class="row-odd"><td><p><code class="docutils literal notranslate"><span class="pre">gp:mybusy2</span></code></p></td>
-<td><p><em>fly</em></p></td>
+<td><p><em>busy</em></p></td>
 <td><p>fly (fly scan) phase</p></td>
 </tr>
 </tbody>
 </table>
-<p>Here, an ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> subclass coordinates both of these PVs. The <code class="docutils literal notranslate"><span class="pre">BusyRecord</span></code> class from <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/index.html#records">apstools.devices</a> provides a standard interface to the synApps <code class="docutils literal notranslate"><span class="pre">busy</span></code> record.</p>
-<p>Handling of the <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and <code class="docutils literal notranslate"><span class="pre">fly</span></code> phases is identical, as handled in the <code class="docutils literal notranslate"><span class="pre">run_one_phase()</span></code> method. A complete taxi/fly scan is performed by the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method. Note that both these methods are bluesky plans. They should be run by the bluesky RunEngine. Also note that, as written, the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method does not collect any data. As such, it should be considered as a part of a bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#plans">plan</a> which <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.open_run.html#bluesky.plan_stubs.open_run">opens a
-run</a> and (<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.trigger_and_read.html#bluesky.plan_stubs.trigger_and_read">triggers and</a>) <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.read.html">reads</a> data from one or more <a class="reference external" href="https://blueskyproject.io/ophyd/user/reference/signals.html">Signals</a> or
-<a class="reference external" href="https://blueskyproject.io/ophyd/user/tutorials/device.html">Devices</a>.</p>
+<p>Here, an ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> subclass coordinates both <em>busy</em> records.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">BusyRecord</span></code> class from <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/index.html#records">apstools.devices</a> provides a standard interface to the synApps <code class="docutils literal notranslate"><span class="pre">busy</span></code> record. We subclass <code class="docutils literal notranslate"><span class="pre">BusyRecord</span></code> here as <code class="docutils literal notranslate"><span class="pre">MyBusyRecord</span></code> and redefine the <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method, as advised by this <a class="reference external" href="https://blueskyproject.io/tutorials/Ophyd/02%20-%20Complex%20Behaviors%20%28Set%20and%20Multiple%20PVs%29.html">bluesky tutorial</a>. A <code class="docutils literal notranslate"><span class="pre">DeviceStatus</span></code> object is returned to monitor the progress of
+the busy record.</p>
+<p>Handling of the <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and <code class="docutils literal notranslate"><span class="pre">fly</span></code> phases is identical. A complete taxi/fly scan is performed by the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method. Note this method is a bluesky plan. It should be run by the bluesky RunEngine.</p>
+<p>Also note that, as written, the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method does not collect any data. As such, it should be considered as a part of a bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#plans">plan</a> which <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.open_run.html#bluesky.plan_stubs.open_run">opens a run</a> and (<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.trigger_and_read.html#bluesky.plan_stubs.trigger_and_read">triggers and</a>)
+<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plan_stubs.read.html">reads</a> data from one or more <a class="reference external" href="https://blueskyproject.io/ophyd/user/reference/signals.html">Signals</a> or <a class="reference external" href="https://blueskyproject.io/ophyd/user/tutorials/device.html">Devices</a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">abs_put</span><span class="p">(</span><span class="n">signal</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Like bps.abs_set(), but without a Status object.&quot;&quot;&quot;</span>
-    <span class="k">yield from</span> <span class="n">run_blocking_function</span><span class="p">(</span><span class="n">signal</span><span class="o">.</span><span class="n">put</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">DeviceStatus</span>
+
+<span class="k">class</span> <span class="nc">MyBusyRecord</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">):</span>
+    <span class="n">timeout</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Start this busy record and return status to monitor completion.</span>
+
+<span class="sd">        This method is called from &#39;bps.trigger(busy, wait=True)&#39;.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">status</span> <span class="o">=</span> <span class="n">DeviceStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
+        <span class="n">executing_values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">enum_strs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+        <span class="k">def</span> <span class="nf">watch_state</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">old_value</span> <span class="ow">in</span> <span class="n">executing_values</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">executing_values</span><span class="p">:</span>
+                <span class="c1"># When busy finishes, state changes from 1 to 0.</span>
+                <span class="n">status</span><span class="o">.</span><span class="n">set_finished</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">clear_sub</span><span class="p">(</span><span class="n">watch_state</span><span class="p">)</span>
+
+        <span class="c1"># Push the Busy button...</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Write number in case text is different.</span>
+        <span class="c1"># Start a CA monitor on self.state, call watch_state() with updates.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">watch_state</span><span class="p">)</span>
+
+        <span class="c1"># And return the DeviceStatus object.</span>
+        <span class="c1"># The caller can use it to tell when the action is complete.</span>
+        <span class="k">return</span> <span class="n">status</span>
 
 <span class="k">class</span> <span class="nc">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
-    <span class="n">taxi</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy1&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
-    <span class="n">fly</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy2&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
-    <span class="n">taxi_timeout</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
-    <span class="n">fly_timeout</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
-    <span class="n">poll_interval</span> <span class="o">=</span> <span class="mf">0.02</span>
-
-    <span class="k">def</span> <span class="nf">run_one_phase</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phase</span><span class="p">,</span> <span class="n">busy</span><span class="p">):</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> phase start&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
-        <span class="n">timeout</span><span class="o">=</span><span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2">_timeout&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-
-        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
-        <span class="k">yield from</span> <span class="n">abs_put</span><span class="p">(</span><span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Busy&quot;</span><span class="p">)</span>
-
-        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="n">deadline</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">timeout</span>
-        <span class="k">while</span> <span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="s2">&quot;Busy&quot;</span><span class="p">):</span>
-            <span class="c1"># Instead of polling, use Status object to return to &#39;Done&#39;.</span>
-            <span class="n">tNow</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">tNow</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2"> not started after </span><span class="si">{</span><span class="n">tNow</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-            <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> busy started&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
-
-        <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="n">deadline</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">timeout</span>
-        <span class="k">while</span> <span class="n">busy</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">):</span>
-            <span class="n">tNow</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">tNow</span> <span class="o">&gt;</span> <span class="n">deadline</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">TimeoutError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">phase</span><span class="si">}</span><span class="s2"> not complete after </span><span class="si">{</span><span class="n">tNow</span><span class="o">-</span><span class="n">t0</span><span class="si">:</span><span class="s2">.3g</span><span class="si">}</span><span class="s2"> s&quot;</span><span class="p">)</span>
-            <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll_interval</span><span class="p">)</span>
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> busy cleared&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
-
-        <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> phase end&quot;</span><span class="p">,</span> <span class="n">phase</span><span class="p">)</span>
+    <span class="n">taxi</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">MyBusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy1&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
+    <span class="n">fly</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">MyBusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy2&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">taxi_fly_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;taxi&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">taxi</span><span class="p">)</span>
-        <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;fly&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">fly</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taxi</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fly</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -641,13 +645,13 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
 <span class="n">IOC</span> <span class="o">=</span> <span class="s2">&quot;gp:&quot;</span>
 
-<span class="n">ifly</span> <span class="o">=</span> <span class="n">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">IOC</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;ifly&quot;</span><span class="p">)</span>
+<span class="n">flyscan</span> <span class="o">=</span> <span class="n">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">IOC</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;flyscan&quot;</span><span class="p">)</span>
 <span class="n">taxi_sseq</span> <span class="o">=</span> <span class="n">SseqRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userStringSeq1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;taxi_sseq&quot;</span><span class="p">)</span>
 <span class="n">taxi_swait</span> <span class="o">=</span> <span class="n">SwaitRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalc11&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;taxi_swait&quot;</span><span class="p">)</span>
 <span class="n">fly_sseq</span> <span class="o">=</span> <span class="n">SseqRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userStringSeq2&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fly_sseq&quot;</span><span class="p">)</span>
 <span class="n">fly_swait</span> <span class="o">=</span> <span class="n">SwaitRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">userCalc12&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;fly_swait&quot;</span><span class="p">)</span>
 
-<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">ifly</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">):</span>
+<span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="p">(</span><span class="n">flyscan</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="p">,</span> <span class="n">taxi_swait</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="p">,</span> <span class="n">fly_swait</span><span class="p">):</span>
     <span class="n">obj</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
 
 <span class="c1"># just in case these are not already enabled</span>
@@ -678,15 +682,15 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;fly time: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">)</span>
     <span class="c1"># stop any action in progress</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="c1"># clear the taxi &amp; fly busy records</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># clear the records to be used: swait and sseq</span>
@@ -697,14 +701,14 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
     <span class="c1"># busy record (via swait record) triggers sseq record</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
-        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
-        <span class="n">fly_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
@@ -715,21 +719,21 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
         <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
         <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
         <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">delay</span><span class="p">,</span> <span class="n">taxi_delay_s</span><span class="p">,</span>
-        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
         <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
         <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">delay</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">,</span>
-        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </section>
 </section>
-<section id="taxi----Run-the-preparation-plan">
-<h3>taxi – Run the preparation plan<a class="headerlink" href="#taxi----Run-the-preparation-plan" title="Permalink to this heading">#</a></h3>
+<section id="Run-the-preparation-plan">
+<h3>Run the preparation plan<a class="headerlink" href="#Run-the-preparation-plan" title="Permalink to this heading">#</a></h3>
 <p>Call the <code class="docutils literal notranslate"><span class="pre">prep_taxi_fly_simple_delay()</span></code> plan (with the bluesky RunEngine, <code class="docutils literal notranslate"><span class="pre">RE</span></code>) with delay times for each phase.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -738,17 +742,6 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">prep_taxi_fly_simple_delay</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-2024-03-16 14:33:45,586 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_simple_delay at 0x7f3bb7961000&gt;
-2024-03-16 14:33:45,588 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-16 14:33:45,919 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-16 14:33:45,920 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_simple_delay at 0x7f3bb7961000&gt;
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -760,28 +753,17 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </pre></div></div>
 </div>
 </section>
-<section id="fly----Run-taxi-&amp;-fly-scan-plan">
-<h3>fly – Run taxi &amp; fly scan plan<a class="headerlink" href="#fly----Run-taxi-&-fly-scan-plan" title="Permalink to this heading">#</a></h3>
+<section id="Run-taxi-&amp;-fly-scan-plan">
+<h3>Run taxi &amp; fly scan plan<a class="headerlink" href="#Run-taxi-&-fly-scan-plan" title="Permalink to this heading">#</a></h3>
 <p>Call the <code class="docutils literal notranslate"><span class="pre">taxi_fly_plan()</span></code> method with the bluesky RunEngine. Note this plan completes in the ~6s interval, as configured in the preparation step.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">RE</span><span class="p">(</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">())</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">flyscan</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-2024-03-16 14:33:45,928 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b9acdcee0&gt;
-2024-03-16 14:33:45,929 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-16 14:33:51,976 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-16 14:33:51,980 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b9acdcee0&gt;
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -850,7 +832,7 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <ul class="simple">
 <li><p>preparation</p>
 <ul>
-<li><p>setup ‘sseq’ records</p>
+<li><p>setup <em>sseq</em> records</p>
 <ul>
 <li><p>for both <em>taxi</em> and <em>fly</em> phases</p></li>
 </ul>
@@ -901,15 +883,15 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;count time: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">ct</span><span class="p">)</span>
     <span class="c1"># stop any action in progress</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">state</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="c1"># clear the taxi &amp; fly busy records</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
-        <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">forward_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+        <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">output_link</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 
     <span class="c1"># clear the records to be used: swait, sscan, and sseq</span>
@@ -973,14 +955,14 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
     <span class="c1"># Trigger taxi &amp; fly sseq records (via swait record) from their busy records.</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
-        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">taxi_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
         <span class="n">taxi_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">scanning_rate</span><span class="p">,</span> <span class="s2">&quot;I/O Intr&quot;</span><span class="p">,</span>
-        <span class="n">fly_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
+        <span class="n">fly_swait</span><span class="o">.</span><span class="n">channels</span><span class="o">.</span><span class="n">A</span><span class="o">.</span><span class="n">input_pv</span><span class="p">,</span> <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="p">,</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">calculation</span><span class="p">,</span> <span class="s2">&quot;A&gt;0&quot;</span><span class="p">,</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_execute_option</span><span class="p">,</span> <span class="s2">&quot;When Non-zero&quot;</span><span class="p">,</span>
         <span class="n">fly_swait</span><span class="o">.</span><span class="n">output_link_pv</span><span class="p">,</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">process_record</span><span class="o">.</span><span class="n">pvname</span><span class="p">,</span>
@@ -990,21 +972,21 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
     <span class="n">step</span> <span class="o">=</span> <span class="n">taxi_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">step</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
-        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
         <span class="n">step</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">step</span> <span class="o">=</span> <span class="n">fly_sseq</span><span class="o">.</span><span class="n">steps</span><span class="o">.</span><span class="n">step10</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">mv</span><span class="p">(</span>
         <span class="n">step</span><span class="o">.</span><span class="n">string_value</span><span class="p">,</span> <span class="s2">&quot;Done&quot;</span><span class="p">,</span>
-        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
+        <span class="n">step</span><span class="o">.</span><span class="n">output_pv</span><span class="p">,</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">prefix</span><span class="si">}</span><span class="s2"> CA NMS&quot;</span><span class="p">,</span>
         <span class="n">step</span><span class="o">.</span><span class="n">wait_completion</span><span class="p">,</span> <span class="s2">&quot;Wait&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </section>
-<section id="taxi:-prepare-for-scan">
-<h3>taxi: prepare for scan<a class="headerlink" href="#taxi:-prepare-for-scan" title="Permalink to this heading">#</a></h3>
+<section id="id1">
+<h3>Run the preparation plan<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -1013,17 +995,6 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-2024-03-16 14:33:53,576 INFO bluesky - Executing plan &lt;generator object prep_taxi_fly_step_scan at 0x7f3ba0358ca0&gt;
-2024-03-16 14:33:53,577 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-16 14:33:54,318 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-16 14:33:54,319 INFO bluesky - Cleaned up from plan &lt;generator object prep_taxi_fly_step_scan at 0x7f3ba0358ca0&gt;
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -1034,27 +1005,16 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </pre></div></div>
 </div>
 </section>
-<section id="fly:-run-the-scan">
-<h3>fly: run the scan<a class="headerlink" href="#fly:-run-the-scan" title="Permalink to this heading">#</a></h3>
+<section id="Run-the-taxi-&amp;-fly-scan">
+<h3>Run the taxi &amp; fly scan<a class="headerlink" href="#Run-the-taxi-&-fly-scan" title="Permalink to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
-<span class="n">RE</span><span class="p">(</span><span class="n">ifly</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">())</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
+<span class="n">RE</span><span class="p">(</span><span class="n">flyscan</span><span class="o">.</span><span class="n">taxi_fly_plan</span><span class="p">())</span>
 </pre></div>
 </div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-2024-03-16 14:33:54,325 INFO bluesky - Executing plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b99d14790&gt;
-2024-03-16 14:33:54,327 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-16 14:34:08,860 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-16 14:34:08,861 INFO bluesky - Cleaned up from plan &lt;generator object TaxiFlyScanDevice.taxi_fly_plan at 0x7f3b99d14790&gt;
-</pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1066,37 +1026,34 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </pre></div></div>
 </div>
 </section>
-<section id="Need-to-save-the-data">
-<h3>Need to save the data<a class="headerlink" href="#Need-to-save-the-data" title="Permalink to this heading">#</a></h3>
+<section id="Collect-the-data">
+<h3>Collect the data<a class="headerlink" href="#Collect-the-data" title="Permalink to this heading">#</a></h3>
 <p>Get the data (arrays) from <code class="docutils literal notranslate"><span class="pre">scan1</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_taxi_fly_sscan_data</span><span class="p">(</span><span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sscan_data</span><span class="p">(</span><span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># t0: timestamp when sscan started</span>
     <span class="n">npts</span> <span class="o">=</span> <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
-
-    <span class="k">def</span> <span class="nf">get_array</span><span class="p">(</span><span class="n">obj</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">obj</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">]</span>
-
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
         <span class="c1"># use the same mapping as configured above</span>
-        <span class="s2">&quot;__dt__&quot;</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p4</span><span class="p">),</span>
-        <span class="n">m1</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="p">),</span>
-        <span class="n">scint</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="p">),</span>
-        <span class="n">diode</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="p">),</span>
-        <span class="n">I0</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d03</span><span class="p">),</span>
-        <span class="n">I00</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d04</span><span class="p">),</span>
-        <span class="n">I000</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d05</span><span class="p">),</span>
-        <span class="n">lorentzian</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d06</span><span class="p">),</span>
-        <span class="n">temperature</span><span class="o">.</span><span class="n">name</span><span class="p">:</span> <span class="n">get_array</span><span class="p">(</span><span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d07</span><span class="p">),</span>
+        <span class="s2">&quot;__dt__&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p4</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;m1&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">positioners</span><span class="o">.</span><span class="n">p1</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;scint&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d01</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;diode&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d02</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;I0&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d03</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;I00&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d04</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;I000&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d05</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;lorentzian&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d06</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
+        <span class="s2">&quot;temperature&quot;</span><span class="p">:</span> <span class="n">scan1</span><span class="o">.</span><span class="n">detectors</span><span class="o">.</span><span class="n">d07</span><span class="o">.</span><span class="n">array</span><span class="o">.</span><span class="n">get</span><span class="p">()[:</span><span class="n">npts</span><span class="p">],</span>
     <span class="p">}</span>
+    <span class="c1"># get timestamps for each step from sscan p4</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span> <span class="ow">or</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;__dt__&quot;</span><span class="p">][</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">data</span><span class="p">[</span><span class="s2">&quot;__timestamps__&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">t0</span> <span class="o">+</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;__dt__&quot;</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">data</span>
 
-<span class="c1"># get_taxi_fly_sscan_data()</span>
+<span class="c1"># get_sscan_data()</span>
 </pre></div>
 </div>
 </div>
@@ -1114,11 +1071,9 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.devices</span> <span class="kn">import</span> <span class="n">make_dict_device</span>
-
-<span class="k">def</span> <span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
     <span class="n">md</span><span class="p">[</span><span class="s2">&quot;plan_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;taxi_fly_sscan_plan&quot;</span>
-    <span class="n">ifly</span><span class="o">.</span><span class="n">fly_timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
+    <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
 
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">open_run</span><span class="p">(</span><span class="n">md</span><span class="p">)</span>
 
@@ -1137,27 +1092,39 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 
     <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
 
-    <span class="k">yield from</span> <span class="n">ifly</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;taxi&quot;</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">taxi</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">flyscan</span><span class="o">.</span><span class="n">taxi</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">t0_fly</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>  <span class="c1"># Timestamp start of fly scan.</span>
-    <span class="k">yield from</span> <span class="n">ifly</span><span class="o">.</span><span class="n">run_one_phase</span><span class="p">(</span><span class="s2">&quot;fly&quot;</span><span class="p">,</span> <span class="n">ifly</span><span class="o">.</span><span class="n">fly</span><span class="p">)</span>
+    <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fly time: </span><span class="si">%.3f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
     <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">clear_sub</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
 
+    <span class="k">class</span> <span class="nc">SscanDataArrays</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+        <span class="n">__dt__</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">m1</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">I0</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">I00</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">I000</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">scint</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">diode</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">lorentzian</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+        <span class="n">temperature</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
+
+    <span class="n">scan_data_arrays</span> <span class="o">=</span> <span class="n">SscanDataArrays</span><span class="p">(</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scan1&quot;</span><span class="p">)</span>
+
     <span class="c1"># Get the data arrays from the sscan record.</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">get_taxi_fly_sscan_data</span><span class="p">(</span><span class="n">t0_fly</span><span class="p">)</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">get_sscan_data</span><span class="p">(</span><span class="n">t0_fly</span><span class="p">)</span>
 
     <span class="c1"># Post the data as discrete bluesky events.</span>
     <span class="n">timestamps</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;__timestamps__&quot;</span><span class="p">)</span>
-    <span class="n">event_device</span> <span class="o">=</span> <span class="n">make_dict_device</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="n">scan1</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">ts</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">timestamps</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">event_device</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
-            <span class="n">obj</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span>
         <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;primary&quot;</span><span class="p">)</span>
-        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">event_device</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">data</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">obj</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">scan_data_arrays</span><span class="p">,</span> <span class="n">k</span><span class="p">)</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">k</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>  <span class="c1"># to Python memory, will not block RE</span>
+            <span class="n">obj</span><span class="o">.</span><span class="n">_metadata</span><span class="p">[</span><span class="s2">&quot;timestamp&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ts</span>
+        <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">scan_data_arrays</span><span class="p">)</span>
         <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">save</span><span class="p">()</span>
     <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">close_run</span><span class="p">()</span>
 </pre></div>
@@ -1204,18 +1171,6 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 </pre></div>
 </div>
 </div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area stderr docutils container">
-<div class="highlight"><pre>
-2024-03-16 14:34:08,883 INFO bluesky - Executing plan &lt;generator object taxi_fly_sscan_plan at 0x7f3ba0358ca0&gt;
-2024-03-16 14:34:08,885 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;idle&#39; -&gt; &#39;running&#39;
-2024-03-16 14:34:27,155 INFO root - Fly time: 17.527 s
-2024-03-16 14:34:27,167 INFO bluesky.RE.state - Change state on &lt;bluesky.run_engine.RunEngine object at 0x7f3ba0fcbfd0&gt; from &#39;running&#39; -&gt; &#39;idle&#39;
-2024-03-16 14:34:27,168 INFO bluesky - Cleaned up from plan &lt;generator object taxi_fly_sscan_plan at 0x7f3ba0358ca0&gt;
-</pre></div></div>
-</div>
 <div class="nboutput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
@@ -1223,14 +1178,15 @@ run</a> and (<a class="reference external" href="https://blueskyproject.io/blues
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 BlueskyRun
-  uid=&#39;62a31b63-ecd1-4a1f-a39c-8c3182d4821a&#39;
+  uid=&#39;ddc2c053-1e25-4d76-ac56-0ebacdc2008f&#39;
   exit_status=&#39;success&#39;
-  2024-03-16 14:34:08.886 -- 2024-03-16 14:34:27.166
+  2024-04-03 13:27:59.117 -- 2024-04-03 13:28:17.454
   Streams:
     * primary
 
 </pre></div></div>
 </div>
+<p>Get and show the dataset from the <code class="docutils literal notranslate"><span class="pre">run</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
 </pre></div>
@@ -1611,46 +1567,41 @@ dl.xr-attrs {
 </style><pre class='xr-text-repr-fallback'>&lt;xarray.Dataset&gt;
 Dimensions:            (time: 21)
 Coordinates:
-  * time               (time) float64 1.711e+09 1.711e+09 ... 1.711e+09
+  * time               (time) float64 1.712e+09 1.712e+09 ... 1.712e+09
 Data variables:
-    scan1___dt__       (time) float64 0.3821 1.159 1.861 ... 13.08 13.78 14.48
+    scan1___dt__       (time) float64 0.6779 1.38 2.081 ... 16.61 17.31 18.01
     scan1_m1           (time) float64 -1.2 -1.08 -0.96 -0.84 ... 0.96 1.08 1.2
-    scan1_scint        (time) float32 1.0 1.0 1.0 2.0 1.0 ... 1.0 1.0 1.0 0.0
-    scan1_diode        (time) float32 1.0 1.0 1.0 0.0 1.0 ... 1.0 1.0 2.0 0.0
-    scan1_I0           (time) float32 1.0 2.0 1.0 2.0 1.0 ... 2.0 1.0 1.0 1.0
-    scan1_I00          (time) float32 0.0 1.0 2.0 1.0 1.0 ... 1.0 1.0 1.0 0.0
-    scan1_I000         (time) float32 1.0 1.0 1.0 1.0 1.0 ... 2.0 1.0 1.0 1.0
-    scan1_lorentzian   (time) float32 408.4 609.4 997.4 ... 82.28 70.45 61.44
-    scan1_temperature  (time) float32 25.08 25.08 25.08 ... 25.16 25.16 25.18</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-bfa76a97-ff2f-4b50-98f1-253885b1c8f8' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-bfa76a97-ff2f-4b50-98f1-253885b1c8f8' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 21</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-135bca5c-f011-4074-a09e-4278606f7b96' class='xr-section-summary-in' type='checkbox'  checked><label for='section-135bca5c-f011-4074-a09e-4278606f7b96' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.711e+09 1.711e+09 ... 1.711e+09</div><input id='attrs-7dd6b22c-3757-4f75-9661-3355876b13d3' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-7dd6b22c-3757-4f75-9661-3355876b13d3' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a27b1abb-3e3a-4ab3-bad3-ae82dd15805b' class='xr-var-data-in' type='checkbox'><label for='data-a27b1abb-3e3a-4ab3-bad3-ae82dd15805b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
-       1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
-       1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
-       1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09, 1.710618e+09,
-       1.710618e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c3a37328-1439-4f91-a0b1-e9c37a9c6f8e' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c3a37328-1439-4f91-a0b1-e9c37a9c6f8e' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>scan1___dt__</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.3821 1.159 1.861 ... 13.78 14.48</div><input id='attrs-eec694a5-666e-48bf-bb0c-0a62ea73db2a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-eec694a5-666e-48bf-bb0c-0a62ea73db2a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-59e8a227-3640-4c40-bf5c-07ed0e2a9537' class='xr-var-data-in' type='checkbox'><label for='data-59e8a227-3640-4c40-bf5c-07ed0e2a9537' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([ 0.38214499,  1.15942792,  1.86088692,  2.56165651,  3.26270936,
-        3.96427265,  4.66494266,  5.36677113,  6.06745694,  6.76835481,
-        7.46975047,  8.17031758,  8.87144317,  9.57251492, 10.2738698 ,
-       10.97532579, 11.67655731, 12.37886661, 13.07932561, 13.78087207,
-       14.48168093])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_m1</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.2 -1.08 -0.96 ... 0.96 1.08 1.2</div><input id='attrs-4efd3de9-9d10-4de4-9347-fc825d5d54cb' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4efd3de9-9d10-4de4-9347-fc825d5d54cb' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-56623490-6805-4475-b37b-01b6c2ec66b3' class='xr-var-data-in' type='checkbox'><label for='data-56623490-6805-4475-b37b-01b6c2ec66b3' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([-1.2 , -1.08, -0.96, -0.84, -0.72, -0.6 , -0.48, -0.36, -0.24,
-       -0.12,  0.  ,  0.12,  0.24,  0.36,  0.48,  0.6 ,  0.72,  0.84,
-        0.96,  1.08,  1.2 ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_scint</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 2.0 ... 1.0 1.0 1.0 0.0</div><input id='attrs-6cb2f30c-e2f9-495f-85e1-394c6cd6c743' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6cb2f30c-e2f9-495f-85e1-394c6cd6c743' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-0514806c-c86c-42c5-a19b-bab8c0ea22a6' class='xr-var-data-in' type='checkbox'><label for='data-0514806c-c86c-42c5-a19b-bab8c0ea22a6' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., 2., 1., 1., 1., 0., 1., 3., 4., 3., 2., 2., 2., 2., 1.,
-       1., 1., 1., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_diode</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 0.0 ... 1.0 1.0 2.0 0.0</div><input id='attrs-9177d15c-fa15-41be-ba72-68b57b969276' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-9177d15c-fa15-41be-ba72-68b57b969276' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-15ef4f12-c174-4e2f-824e-9fccabe6347a' class='xr-var-data-in' type='checkbox'><label for='data-15ef4f12-c174-4e2f-824e-9fccabe6347a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., 0., 1., 1., 1., 1., 2., 3., 5., 4., 3., 1., 2., 1., 1.,
-       1., 1., 2., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I0</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 2.0 1.0 2.0 ... 2.0 1.0 1.0 1.0</div><input id='attrs-564b908c-81cc-44c9-b866-6e7b5cf6599a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-564b908c-81cc-44c9-b866-6e7b5cf6599a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-774cf242-fccd-461d-afe8-7a50dd2ad37d' class='xr-var-data-in' type='checkbox'><label for='data-774cf242-fccd-461d-afe8-7a50dd2ad37d' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 2., 1., 2., 1., 1., 0., 0., 2., 2., 3., 4., 4., 2., 1., 1., 1.,
-       2., 1., 1., 1.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I00</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 1.0 2.0 1.0 ... 1.0 1.0 1.0 0.0</div><input id='attrs-4306526a-4550-4e07-a707-1081a55ee206' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-4306526a-4550-4e07-a707-1081a55ee206' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4c0bc53c-f774-4ff4-914b-ef203fd47c2a' class='xr-var-data-in' type='checkbox'><label for='data-4c0bc53c-f774-4ff4-914b-ef203fd47c2a' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([0., 1., 2., 1., 1., 1., 1., 2., 1., 3., 4., 4., 2., 2., 1., 1., 1.,
-       1., 1., 1., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I000</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 1.0 1.0 ... 2.0 1.0 1.0 1.0</div><input id='attrs-fd6f2e6e-86d0-4ee0-933b-2091775f130a' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fd6f2e6e-86d0-4ee0-933b-2091775f130a' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-22bb4c5a-da77-4ce5-a82c-2ab978acee50' class='xr-var-data-in' type='checkbox'><label for='data-22bb4c5a-da77-4ce5-a82c-2ab978acee50' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 1., 1., 1., 2., 1., 1., 2., 2., 3., 3., 2., 2., 2., 1., 0.,
-       2., 1., 1., 1.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_lorentzian</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>408.4 609.4 997.4 ... 70.45 61.44</div><input id='attrs-ee9ebc33-e272-43fd-9f2e-7e138903ee5e' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ee9ebc33-e272-43fd-9f2e-7e138903ee5e' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-6495f313-3f57-4892-92fa-71690aa034ed' class='xr-var-data-in' type='checkbox'><label for='data-6495f313-3f57-4892-92fa-71690aa034ed' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([  408.39145,   609.39923,   997.3773 ,  1902.5912 ,  4952.4414 ,
-       27277.195  , 38559.195  ,  5755.5723 ,  2081.3643 ,  1060.8118 ,
-         643.5246 ,   426.3738 ,   305.78986,   231.37349,   178.40503,
-         142.77434,   115.9354 ,    97.73997,    82.28459,    70.44571,
-          61.43649], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_temperature</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>25.08 25.08 25.08 ... 25.16 25.18</div><input id='attrs-c4d656e1-63be-45a7-be82-601e81368174' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-c4d656e1-63be-45a7-be82-601e81368174' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-8dd6c6e6-f00f-4dd5-a67e-93b6da58b673' class='xr-var-data-in' type='checkbox'><label for='data-8dd6c6e6-f00f-4dd5-a67e-93b6da58b673' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([25.081278, 25.081278, 25.081278, 25.44632 , 25.44632 , 25.311306,
-       25.311306, 25.311306, 25.171366, 25.171366, 25.171366, 24.510117,
-       24.510117, 24.510117, 24.5495  , 24.5495  , 24.5495  , 25.158075,
-       25.158075, 25.158075, 25.177362], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-8a11018d-34ab-47bd-aafc-2c092fcae7af' class='xr-section-summary-in' type='checkbox'  ><label for='section-8a11018d-34ab-47bd-aafc-2c092fcae7af' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-b22a80b7-1a75-45ae-90ef-69f7e2c49d6c' class='xr-index-data-in' type='checkbox'/><label for='index-b22a80b7-1a75-45ae-90ef-69f7e2c49d6c' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1710617667.1605177, 1710617667.1608515, 1710617667.1611385,
-        1710617667.161413, 1710617667.1616862, 1710617667.1619854,
-       1710617667.1622581, 1710617667.1625328, 1710617667.1627982,
-       1710617667.1630547,  1710617667.163323, 1710617667.1635797,
-       1710617667.1638334, 1710617667.1640866, 1710617667.1643426,
-        1710617667.164607, 1710617667.1648607, 1710617667.1651125,
-       1710617667.1653628,  1710617667.165617,  1710617667.165879],
-      dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-50f9e83e-9440-4899-871d-0647a1c349ca' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-50f9e83e-9440-4899-871d-0647a1c349ca' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
+    scan1_I0           (time) float32 1.0 2.0 1.0 1.0 0.0 ... 1.0 2.0 0.0 1.0
+    scan1_I00          (time) float32 1.0 0.0 1.0 0.0 2.0 ... 2.0 1.0 1.0 0.0
+    scan1_I000         (time) float32 0.0 1.0 1.0 2.0 1.0 ... 0.0 1.0 2.0 2.0
+    scan1_scint        (time) float32 1.0 0.0 1.0 2.0 1.0 ... 2.0 2.0 1.0 1.0
+    scan1_diode        (time) float32 1.0 1.0 2.0 1.0 1.0 ... 1.0 2.0 2.0 0.0
+    scan1_lorentzian   (time) float32 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0
+    scan1_temperature  (time) float32 0.0 0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</pre><div class='xr-wrap' style='display:none'><div class='xr-header'><div class='xr-obj-type'>xarray.Dataset</div></div><ul class='xr-sections'><li class='xr-section-item'><input id='section-e36f11ef-770b-4e4a-8363-433a0ec0aa08' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-e36f11ef-770b-4e4a-8363-433a0ec0aa08' class='xr-section-summary'  title='Expand/collapse section'>Dimensions:</label><div class='xr-section-inline-details'><ul class='xr-dim-list'><li><span class='xr-has-index'>time</span>: 21</li></ul></div><div class='xr-section-details'></div></li><li class='xr-section-item'><input id='section-1e9763e0-0e28-4550-b121-a16b59d2a09c' class='xr-section-summary-in' type='checkbox'  checked><label for='section-1e9763e0-0e28-4550-b121-a16b59d2a09c' class='xr-section-summary' >Coordinates: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span class='xr-has-index'>time</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>1.712e+09 1.712e+09 ... 1.712e+09</div><input id='attrs-06748080-62ed-4c1a-b473-e2c46b443607' class='xr-var-attrs-in' type='checkbox' disabled><label for='attrs-06748080-62ed-4c1a-b473-e2c46b443607' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-e1265935-c8ec-40b1-8492-e9e043befbc4' class='xr-var-data-in' type='checkbox'><label for='data-e1265935-c8ec-40b1-8492-e9e043befbc4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'></dl></div><div class='xr-var-data'><pre>array([1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09,
+       1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09,
+       1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09,
+       1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09, 1.712169e+09,
+       1.712169e+09])</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-c3afdf71-134d-4340-bed7-f091a4c43dd1' class='xr-section-summary-in' type='checkbox'  checked><label for='section-c3afdf71-134d-4340-bed7-f091a4c43dd1' class='xr-section-summary' >Data variables: <span>(9)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-var-name'><span>scan1___dt__</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>0.6779 1.38 2.081 ... 17.31 18.01</div><input id='attrs-36dc826c-4a01-481b-aa15-58f44ba4c2ff' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-36dc826c-4a01-481b-aa15-58f44ba4c2ff' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-59de9e95-c45a-49d5-adae-1803d5701763' class='xr-var-data-in' type='checkbox'><label for='data-59de9e95-c45a-49d5-adae-1803d5701763' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([ 0.67790034,  1.37950483,  2.08103187,  2.78109099,  3.48256743,
+        4.18405086,  4.88477824,  5.58597756,  6.28783485,  6.98914727,
+        7.69033721,  8.39139577,  9.09368232,  9.79353695, 10.49606595,
+       14.50351134, 15.20511129, 15.90563625, 16.60741902, 17.30851268,
+       18.01078499])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_m1</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float64</div><div class='xr-var-preview xr-preview'>-1.2 -1.08 -0.96 ... 0.96 1.08 1.2</div><input id='attrs-38e2ad04-8c21-46ae-bb33-60d7bcf3ec96' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-38e2ad04-8c21-46ae-bb33-60d7bcf3ec96' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-1a728e7b-9bd0-433a-829e-e38f87556b11' class='xr-var-data-in' type='checkbox'><label for='data-1a728e7b-9bd0-433a-829e-e38f87556b11' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([-1.2   , -1.08  , -0.96  , -0.84  , -0.72  , -0.6   , -0.48  ,
+       -0.36  , -0.24  , -0.12  ,  0.    ,  0.12  ,  0.24  ,  0.36  ,
+        0.2903,  0.6   ,  0.72  ,  0.84  ,  0.96  ,  1.08  ,  1.2   ])</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I0</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 2.0 1.0 1.0 ... 1.0 2.0 0.0 1.0</div><input id='attrs-ab56bbf8-7fcb-4f92-ad13-d0f185f01031' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-ab56bbf8-7fcb-4f92-ad13-d0f185f01031' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-b897d4e5-68eb-463a-8629-4c68dff3e32e' class='xr-var-data-in' type='checkbox'><label for='data-b897d4e5-68eb-463a-8629-4c68dff3e32e' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 2., 1., 1., 0., 2., 2., 2., 1., 3., 4., 4., 2., 2., 1., 1., 1.,
+       1., 2., 0., 1.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I00</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 0.0 1.0 0.0 ... 2.0 1.0 1.0 0.0</div><input id='attrs-fc8aa17d-575c-45a0-8bb3-41d71d6e2c32' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-fc8aa17d-575c-45a0-8bb3-41d71d6e2c32' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-a66d73d3-9119-44d7-9bff-a62fe1573ce4' class='xr-var-data-in' type='checkbox'><label for='data-a66d73d3-9119-44d7-9bff-a62fe1573ce4' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 0., 1., 0., 2., 1., 1., 1., 2., 3., 3., 4., 3., 2., 1., 1., 0.,
+       2., 1., 1., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_I000</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 1.0 1.0 2.0 ... 0.0 1.0 2.0 2.0</div><input id='attrs-a1805445-cb56-45dd-a7b6-779e5383a8f6' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-a1805445-cb56-45dd-a7b6-779e5383a8f6' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-02586cc4-096c-4023-a627-ea43cea2d3a0' class='xr-var-data-in' type='checkbox'><label for='data-02586cc4-096c-4023-a627-ea43cea2d3a0' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([0., 1., 1., 2., 1., 1., 1., 1., 3., 3., 4., 4., 3., 2., 1., 0., 0.,
+       0., 1., 2., 2.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_scint</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 0.0 1.0 2.0 ... 2.0 2.0 1.0 1.0</div><input id='attrs-1aa108f9-f381-4288-926e-dbe70a1d49de' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-1aa108f9-f381-4288-926e-dbe70a1d49de' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-5004c362-4638-4f62-9f40-371cdc55b82c' class='xr-var-data-in' type='checkbox'><label for='data-5004c362-4638-4f62-9f40-371cdc55b82c' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 0., 1., 2., 1., 0., 1., 1., 2., 3., 4., 3., 3., 1., 1., 0., 1.,
+       2., 2., 1., 1.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_diode</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>1.0 1.0 2.0 1.0 ... 1.0 2.0 2.0 0.0</div><input id='attrs-5ec88628-374a-4ca9-bb2b-7015726fd5d5' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-5ec88628-374a-4ca9-bb2b-7015726fd5d5' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-4db4ed51-2891-476e-ac28-239a145e998b' class='xr-var-data-in' type='checkbox'><label for='data-4db4ed51-2891-476e-ac28-239a145e998b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([1., 1., 2., 1., 1., 1., 0., 0., 1., 3., 4., 3., 3., 1., 1., 1., 0.,
+       1., 2., 2., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_lorentzian</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-b261d814-bc2a-4b36-9ef2-60f4a70ceb43' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-b261d814-bc2a-4b36-9ef2-60f4a70ceb43' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-36f525ce-2b03-437b-898e-e5967b1ee30b' class='xr-var-data-in' type='checkbox'><label for='data-36f525ce-2b03-437b-898e-e5967b1ee30b' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0.], dtype=float32)</pre></div></li><li class='xr-var-item'><div class='xr-var-name'><span>scan1_temperature</span></div><div class='xr-var-dims'>(time)</div><div class='xr-var-dtype'>float32</div><div class='xr-var-preview xr-preview'>0.0 0.0 0.0 0.0 ... 0.0 0.0 0.0 0.0</div><input id='attrs-6bb280db-b465-47be-8671-701740a14812' class='xr-var-attrs-in' type='checkbox' ><label for='attrs-6bb280db-b465-47be-8671-701740a14812' title='Show/Hide attributes'><svg class='icon xr-icon-file-text2'><use xlink:href='#icon-file-text2'></use></svg></label><input id='data-41abb140-b7da-4e03-96bb-ae4dab64f349' class='xr-var-data-in' type='checkbox'><label for='data-41abb140-b7da-4e03-96bb-ae4dab64f349' title='Show/Hide data repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-var-attrs'><dl class='xr-attrs'><dt><span>object :</span></dt><dd>scan1</dd></dl></div><div class='xr-var-data'><pre>array([0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0., 0.,
+       0., 0., 0., 0.], dtype=float32)</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-68dfa186-1f36-4ec9-8ea9-6f3a9b5a11e3' class='xr-section-summary-in' type='checkbox'  ><label for='section-68dfa186-1f36-4ec9-8ea9-6f3a9b5a11e3' class='xr-section-summary' >Indexes: <span>(1)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><ul class='xr-var-list'><li class='xr-var-item'><div class='xr-index-name'><div>time</div></div><div class='xr-index-preview'>PandasIndex</div><div></div><input id='index-dbfbb260-aad9-4588-b5ee-784f65d17b7e' class='xr-index-data-in' type='checkbox'/><label for='index-dbfbb260-aad9-4588-b5ee-784f65d17b7e' title='Show/Hide index repr'><svg class='icon xr-icon-database'><use xlink:href='#icon-database'></use></svg></label><div class='xr-index-data'><pre>PandasIndex(Index([1712168897.4489877,  1712168897.449327, 1712168897.4496205,
+        1712168897.449897,  1712168897.450174, 1712168897.4504843,
+       1712168897.4507613, 1712168897.4510362, 1712168897.4513063,
+       1712168897.4515712, 1712168897.4518461, 1712168897.4521103,
+       1712168897.4523726,  1712168897.452632, 1712168897.4528906,
+       1712168897.4531608, 1712168897.4534247, 1712168897.4536867,
+       1712168897.4539447, 1712168897.4542055, 1712168897.4544816],
+      dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-5f9c5190-e111-4bb5-8fc2-919dcb61bb0a' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-5f9c5190-e111-4bb5-8fc2-919dcb61bb0a' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
 </div>
 </section>
 <section id="Plot-the-data-from-the-last-scan">
@@ -1682,14 +1633,14 @@ Data variables:
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-&lt;matplotlib.legend.Legend at 0x7f3b99efb0d0&gt;
+&lt;matplotlib.legend.Legend at 0x7f72252bea50&gt;
 </pre></div></div>
 </div>
 <div class="nboutput nblast docutils container">
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/example__busy_fly_scan_34_1.png" src="../_images/example__busy_fly_scan_34_1.png" />
+<img alt="../_images/example__busy_fly_scan_35_1.png" src="../_images/example__busy_fly_scan_35_1.png" />
 </div>
 </div>
 </section>
@@ -1754,8 +1705,8 @@ Data variables:
 <li class="toc-h4 nav-item toc-entry"><a class="reference internal nav-link" href="#The-reset()-method">The <code class="docutils literal notranslate"><span class="pre">reset()</span></code> method</a></li>
 </ul>
 </li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taxi----Run-the-preparation-plan">taxi – Run the preparation plan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fly----Run-taxi-&amp;-fly-scan-plan">fly – Run taxi &amp; fly scan plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-the-preparation-plan">Run the preparation plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-taxi-&amp;-fly-scan-plan">Run taxi &amp; fly scan plan</a></li>
 </ul>
 </li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Procedure----step-scan-scaler-&amp;-motor">Procedure – step scan scaler &amp; motor</a><ul class="nav section-nav flex-column">
@@ -1763,9 +1714,9 @@ Data variables:
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#motor-record">motor record</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#sscan-record">sscan record</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Write-a-preparation-plan-for-the-step-scan">Write a preparation plan for the step scan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#taxi:-prepare-for-scan">taxi: prepare for scan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#fly:-run-the-scan">fly: run the scan</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Need-to-save-the-data">Need to save the data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Run the preparation plan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-the-taxi-&amp;-fly-scan">Run the taxi &amp; fly scan</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Collect-the-data">Collect the data</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-the-complete-taxi/fly-scan">Run the complete taxi/fly scan</a></li>
 <li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#Plot-the-data-from-the-last-scan">Plot the data from the last scan</a></li>
 </ul>
