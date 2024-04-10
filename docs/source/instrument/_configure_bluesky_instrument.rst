@@ -6,18 +6,19 @@ Configure bluesky instrument
 After the steps in the "ref"`checklist` are complete, it is time to configure
 the instrument for the details of this specific user.
 
-Settings for various aspects of data collection are distributed amongst
-the many directories and files of the ``instrument/`` subdirectory. We
-call this directory the ``instrument`` package (it is configured as a
-Python package for use by an ``import`` statement). See this
-`advice <./_configure_bluesky_instrument.md>`__ for configuration of the
-``instrument`` package.
+Settings for various aspects of data collection are distributed amongst the many
+directories and files of the ``instrument/`` subdirectory. This directory is
+configured as a Python `package
+<https://realpython.com/python-modules-packages/>`_ so that it can be loaded
+with an ``import`` `statement <https://www.askpython.com/python/python-import-statement>`_, such as:
 
-The ``instrument/iconfig.yml``
-`file <../../../bluesky/instrument/iconfig.yml>`__ gathers these many
-configurations into one location, easily found in the root directory of
-the ``instrument`` package. The definitions in this file are easily
-(re)configured.
+   from instrument.collection import *
+
+The `file <../../../bluesky/instrument/iconfig.yml>`__
+``instrument/iconfig.yml`` gathers many common configuration details
+into one location (in the root directory of the ``instrument``
+package).  This is a text file in `YAML <https://yaml.org>`_ format.  It's easy
+to edit with any text editor.
 
 Initial configuration of the instrument
 ---------------------------------------

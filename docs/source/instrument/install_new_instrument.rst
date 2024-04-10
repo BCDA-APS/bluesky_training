@@ -19,7 +19,6 @@ to the documentation for each step.
 
 .. TODO: resolve confusing mismatch in names (like step 1)
    Could move each section to its own file.
-   Then point to the next steps.
 
 #. :ref:`instrument.create_bluesky_directory`
 #. :ref:`reference.create_bluesky_enviroment`
@@ -28,8 +27,11 @@ to the documentation for each step.
 #. :ref:`instrument.test_new_instrument`
 #. create soft link:  ``ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/``
 #. :ref:`instrument.setup_catalog_configuration`
-#. :ref:`instrument.configure_bluesky_instrument`
 #. :ref:`instrument.start_vc`
+
+After these steps are complete, it is time to configure
+the instrument for the details of this specific user.
+See the :ref:`instrument.configure_bluesky_instrument` section next.
 
 .. _instrument.create_bluesky_directory:
 
