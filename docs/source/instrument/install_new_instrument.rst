@@ -17,19 +17,24 @@ Installation checklist
 The *installation checklist* summarizes the steps with links
 to the documentation for each step.
 
-#. run ``new_bluesky_instrument.py ~/bluesky`` (see sections below)
-#. `create conda environment <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html>`__
-#. `configure IPython profile startup <https://bcda-aps.github.io/bluesky_training/reference/_ipython.html>`__
-#. `configure bash with environment variable and alias <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment>`__
-#. Verify the installation by running the `Hello, World! tutorial. <https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html>`__
-#. create soft link:  ``ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/``
-#. Assign a MongoDB catalog for databroker: `instructions for BCDA <https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md>`__
-#. `databroker catalog configuration <https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration>`__
-#. `initial configuration of instrument <https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration>`__
-#. :ref:`start a remote repository <start_vc>`
+.. TODO: resolve confusing mismatch in names (like step 1)
+   Could move each section to its own file.
+   Then point to the next steps.
 
-Setup a bluesky instrument
---------------------------
+#. :ref:`instrument.create_bluesky_directory`
+#. :ref:`reference.create_bluesky_enviroment`
+#. :ref:`reference.configure_ipython_profile`
+#. :ref:`reference.create_conda-bluesky_alias`
+#. :ref:`instrument.test_new_instrument`
+#. create soft link:  ``ln -s ${HOME}/bluesky/blueskyStarter.sh ~/bin/``
+#. :ref:`instrument.setup_catalog_configuration`
+#. :ref:`instrument.configure_bluesky_instrument`
+#. :ref:`instrument.start_vc`
+
+.. _instrument.create_bluesky_directory:
+
+Create bluesky directory
+------------------------
 
 Use the ``new_bluesky_instrument.py``
 `program <https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py>`__
@@ -127,13 +132,19 @@ When run successfully, the program output should look like this:
    INFO:__main__:Installing to '/home/user/bluesky'
    INFO:__main__:Initialized Git repository in '/home/user/bluesky'
    </pre>
-   
-The installer program takes care of initializing a local git repository in the ``bluesky`` folder.
-Further instructions are provided :ref:`below <start_vc>` to create a remote reposititory. 
+
+The installer program takes care of initializing a local git repository in the
+``bluesky`` folder. Further instructions are provided :ref:`below
+<instrument.start_vc>` to create a remote reposititory.
 
 
 Activate the bluesky conda environment
 --------------------------------------
+
+.. TODO: instead of dropdown, make a paragraph that references the extra help page
+   If you need to install a bluesky conda environment, see these instruction...
+   See these instructions (link) if you need to create a bluesky conda environment.
+   MAKE SURE THE TITLE names match.  Use :ref: anchors.
 
 .. raw:: html
 
@@ -159,7 +170,7 @@ The prompt changes to display ``(bluesky_2023_3)`` .
    <details>
    <summary>How to create an alias to activate the bluesky environment?</summary>
 
-   See <a href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment">here</a>. 
+   See <a href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment">here</a>.
    </details>
 
 
@@ -170,7 +181,7 @@ different environment or deactivate it using the ``conda deactivate``
 command.
 
 
-
+.. _instrument.test_new_instrument:
 
 Test the new bluesky instrument
 -------------------------------
@@ -187,11 +198,12 @@ In the remaining steps, we'll configure the instrument for your catalog
 and specific hardware configuration.
 
 
-
 Create a bluesky IPython profile
 --------------------------------
 
-This bash command create a new IPython profile for bluesky: 
+.. note::  Compare with :ref:`reference.configure_ipython_profile`
+
+This bash command create a new IPython profile for bluesky:
 
 
 .. raw:: html
@@ -200,7 +212,7 @@ This bash command create a new IPython profile for bluesky:
    $ <b>ipython profile create bluesky --ipython-dir="~/.ipython"</b>
    </pre>
 
-Next, create the starter script for this profile. This will ensure that the instrument 
+Next, create the starter script for this profile. This will ensure that the instrument
 package gets loaded when starting a bluesky IPython session.
 
 .. note:: Copy *all* these lines and paste them exactly into your terminal.
@@ -228,22 +240,22 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    <details>
    <summary>How to create an alias to start a bluesky session?</summary>
 
-   Creating a bash alias is like creating a custom shortcut. 
-   You can do this by editing the <code>~/.bashrc</code> and  <code>~/.bash_aliases</code> 
-   files, which are configuration files for your bash shell. 
+   Creating a bash alias is like creating a custom shortcut.
+   You can do this by editing the <code>~/.bashrc</code> and  <code>~/.bash_aliases</code>
+   files, which are configuration files for your bash shell.
    Here's a simple step-by-step guide:
 
 
    <ol>
    <li>Open a terminal.</li>
-   <li>Open the <code>~/.bashrc</code> and <code>~/.bash_aliases</code> files with your prefered text editor, 
+   <li>Open the <code>~/.bashrc</code> and <code>~/.bash_aliases</code> files with your prefered text editor,
    <i>e.g.</i>:
    <pre>
    $ <b> gedit ~/.bashrc ~/.bash_aliases </b>
    </pre>
-   If any of those files do not exist, this command will create blank ones. 
+   If any of those files do not exist, this command will create blank ones.
    </li>
-   <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias. 
+   <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find a suitable place to add your alias.
    On a new line, type:
    <pre>
    export BLUESKY_CONDA_ENV=bluesky_2023_3
@@ -251,7 +263,7 @@ To start an IPython session with the new bluesky profile, you can now use the fo
    </pre>
    <b>Note:</b> this lines may already be included in your <code>~/.bash_aliases</code>,
    <i>e.g.</i>, if you have created an alias to activate the bluesky conda environment.
-   </li> 
+   </li>
    <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find a suitable place to add the following lines:
    <pre>
    source ~/.bash_aliases
@@ -262,19 +274,21 @@ To start an IPython session with the new bluesky profile, you can now use the fo
 
    </ol>
    You can now use the alias <code>start_bluesky</code> to activate the conda environment and
-   and start a new bluesky session in a terminal. 
+   and start a new bluesky session in a terminal.
 
    </details>
 
 
 For more info about IPython configuration, see `here <https://ipython.readthedocs.io/en/stable/config/intro.html>`__.
 
+.. _instrument.setup_catalog_configuration:
 
-Setup your databroker catalog configuration
--------------------------------------------
+Setup catalog configuration for databroker
+------------------------------------------
 
 Contact BCDA (bcda@aps.anl.gov) for assignment of a databroker catalog
-configuration.
+configuration.  BCDA maintains a list of all assigned catalogs on a
+`private server <https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md>`__
 
 For example purposes, let's assume you have been given this
 bluesky/databroker catalog assignment:
@@ -296,10 +310,10 @@ option:
    ['45ida_abcd']
    </pre>
 
-.. _start_vc:
+.. _instrument.start_vc:
 
-Start version control
----------------------
+Start software version control
+------------------------------
 
 While this step is optional, it is **highly recommended** that you keep
 your bluesky instrument directory under some form of software version
@@ -310,15 +324,15 @@ sharing your instrument's implementations.
 The installer program initializes a local git repository in the ``bluesky``
 folder. We now need to create a blank remote repository, for example
 on `GitHub <https://github.com/>`_ or the `APS GitLab server
-<https://git.aps.anl.gov/>`_ using your :ref:`beamline organization 
-<beamline-github-organizations>`. 
+<https://git.aps.anl.gov/>`_ using your :ref:`beamline organization
+<beamline-github-organizations>`.
 Note that the bluesky team recommends GitHub. (Why is that? See section
 :ref:`git-help` for more info).
 
 .. note:: APS beamlines use specific conventions for :ref:`beamline organization <beamline-github-organizations>`.
 
 .. warning:: To simplify the process (avoid merge conflicts), it is important for the
-   remote repository to be **empty**. To do so, carefully follow the instructions described 
+   remote repository to be **empty**. To do so, carefully follow the instructions described
    in the tabs below.
 
 

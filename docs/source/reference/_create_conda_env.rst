@@ -1,3 +1,5 @@
+.. _reference.create_bluesky_enviroment:
+
 Create bluesky environment
 ==========================
 
@@ -333,8 +335,7 @@ Once finished, the installer will report the commands to manage the new environm
     </pre>
 
 
-
-
+.. _reference.create_conda-bluesky_alias:
 
 Create an alias to activate the bluesky environment
 ---------------------------------------------------
