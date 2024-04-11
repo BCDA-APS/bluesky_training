@@ -10,59 +10,51 @@ APS Bluesky Training
    the `index.rst` file of that folder.
 
 This APS Bluesky Training repository demonstrates use of the Bluesky framework
-at a typical APS beamline.  Documentation is categorized in major sections.
+at a typical APS beamline.
 
 .. icons: https://fonts.google.com/icons
 
 .. grid:: 2
 
-    .. grid-item-card:: :material-regular:`alt_route;3em`
-      :link: howto/index
-      :link-type: doc
+    .. grid-item-card:: :material-regular:`list_alt;3em` :ref:`instrument.install`
 
-      :ref:`howto`
+      Install a new ``bluesky`` directory and get started.
+
+    .. grid-item-card:: :material-regular:`precision_manufacturing;3em` :ref:`instrument`
+
+      Customize your control system with Bluesky.
+
+    .. grid-item-card:: :material-regular:`straight;3em` :ref:`examples`
+
+      Examples show the steps that demonstrate how something was done.
+
+    .. grid-item-card:: :material-regular:`alt_route;3em` :ref:`howto`
 
       Practical guides for accomplishing specific tasks.
 
-      .. rubric:: :ref:`examples`
-
-      Demonstrations of specific tasks.
-
-    .. grid-item-card::  :material-regular:`precision_manufacturing;3em`
-
-      :ref:`instrument`
-
-      Details to configure and develop your *instrument* package.
-
-      .. rubric:: `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_
-
-      The ``bluesky/`` `directory
-      <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_ is the
-      template for new beamline :ref:`installations <checklist>`.
-
-    .. grid-item-card:: :material-regular:`school;3em`
-      :link: tutor/index
-      :link-type: doc
-
-      :ref:`tutorials`
+    .. grid-item-card:: :material-regular:`school;3em` :ref:`tutorials`
 
       Step-by-step guides to help you get started and learn through doing.
 
-    .. grid-item-card:: :material-regular:`collections_bookmark;3em`
-      :link: reference/index
-      :link-type: doc
+    .. grid-item-card::  :material-regular:`precision_manufacturing;3em` `Template <https://github.com/BCDA-APS/bluesky_training/tree/main/bluesky>`_
 
-      :ref:`reference`
+      The pristine model of your ``bluesky`` directory.
 
-      More ways to learn more about Bluesky.
+    .. grid-item-card:: :material-regular:`question_mark;3em` :ref:`FAQ`
+
+      Some commonly-asked questions concerning Bluesky.
+
+    .. grid-item-card:: :material-regular:`collections_bookmark;3em` :ref:`reference`
+
+      Learn more about Bluesky.
 
 .. toctree::
    :maxdepth: 1
    :hidden:
 
-   howto/index
    instrument/index
    example/index
+   howto/index
    tutor/index
    reference/index
    changes

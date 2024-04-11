@@ -1,5 +1,7 @@
 .. index:: install; new instrument
 
+.. _instrument.install:
+
 Install New Instrument
 ======================
 
@@ -141,6 +143,8 @@ The installer program takes care of initializing a local git repository in the
 
 Activate the bluesky conda environment
 --------------------------------------
+
+.. note:: Consider merging with :ref:`reference.create_bluesky_enviroment`
 
 .. TODO: instead of dropdown, make a paragraph that references the extra help page
    If you need to install a bluesky conda environment, see these instruction...

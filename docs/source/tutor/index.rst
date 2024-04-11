@@ -15,7 +15,7 @@ Tutorials
 
 Tutorials are lessons that take the reader by the hand through a series of steps
 to complete a project of some kind. Tutorials are *learning-oriented*.
-Tutorials often involve more depth than HowTo guides.
+(Tutorials often involve more depth than HowTo guides.)
 
 .. NOTE
    Likely there is duplication here to be resolved.

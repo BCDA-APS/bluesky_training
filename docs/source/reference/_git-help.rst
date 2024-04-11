@@ -1,7 +1,7 @@
 .. _git-help:
 
-Using Git for version control
-=============================
+Git Advice for APS beam lines
+============================
 
 .. _beamline-github-organizations:
 
