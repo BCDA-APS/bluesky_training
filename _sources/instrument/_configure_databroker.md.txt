@@ -1,6 +1,10 @@
 # Setup your databroker catalog configuration
 
-The bluesky instrument uses a YAML file which describes the connection
+```{index} catalog; databroker
+```
+
+
+The bluesky *instrument* uses a YAML file which describes the connection
 with some location where data is stored, typically a MongoDB collection.
 This is called a catalog configuration file.
 

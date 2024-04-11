@@ -15,7 +15,7 @@ How-To Guides
 
 How-to guides are directions that take the reader through the steps required to
 solve a real-world problem. How-to guides are *goal-oriented*.
-Tutorials often involve more depth than HowTo guides.
+(Tutorials often involve more depth than HowTo guides.)
 
 .. toctree::
    :maxdepth: 2

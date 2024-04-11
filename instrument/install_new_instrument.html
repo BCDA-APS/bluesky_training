@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Install New Instrument &#8212; APS Bluesky Training  documentation</title>
+    <title>Install New Instrument &#8212; APS Bluesky Training</title>
   
   
   
@@ -32,6 +32,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
     <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.1e8bd061cd6da7fc9cf755528e8ffc24.min.css" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8d27b9dea8ad943066ae" />
@@ -45,12 +46,13 @@
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_install_new_instrument';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/install_new_instrument';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Test that Bluesky Works at APS" href="_test_bluesky_at_aps.html" />
-    <link rel="prev" title="Translate Previous SPEC Configuration" href="_get_spec_config.html" />
+    <link rel="next" title="The instrument package for Bluesky Data Acquisition" href="describe_instrument.html" />
+    <link rel="prev" title="Instrument" href="index.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -123,7 +125,7 @@
   
   
   
-    <p class="title logo__title">APS Bluesky Training  documentation</p>
+    <p class="title logo__title">APS Bluesky Training</p>
   
 </a></div>
     
@@ -137,13 +139,6 @@
 <nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../howto/index.html">
-                        How-To Guides
-                      </a>
-                    </li>
-                
-
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="index.html">
                         Instrument
@@ -154,6 +149,13 @@
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../example/index.html">
                         Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
                       </a>
                     </li>
                 
@@ -268,13 +270,6 @@ document.write(`
 <nav class="navbar-nav">
   <ul class="bd-navbar-elements navbar-nav">
     
-                    <li class="nav-item">
-                      <a class="nav-link nav-internal" href="../howto/index.html">
-                        How-To Guides
-                      </a>
-                    </li>
-                
-
                     <li class="nav-item current active">
                       <a class="nav-link nav-internal" href="index.html">
                         Instrument
@@ -285,6 +280,13 @@ document.write(`
                     <li class="nav-item">
                       <a class="nav-link nav-internal" href="../example/index.html">
                         Examples
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../howto/index.html">
+                        How-To Guides
                       </a>
                     </li>
                 
@@ -348,13 +350,13 @@ document.write(`
      aria-label="Section Navigation">
   <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
   <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Install New Instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="describe_instrument.html">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</a></li>
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Install New Instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
 </ul>
@@ -415,7 +417,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="install-new-instrument">
-<h1>Install New Instrument<a class="headerlink" href="#install-new-instrument" title="Permalink to this heading">#</a></h1>
+<span id="instrument-install"></span><span id="index-0"></span><h1>Install New Instrument<a class="headerlink" href="#install-new-instrument" title="Permalink to this heading">#</a></h1>
 <p>Describes the steps to install a new bluesky instrument.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -426,29 +428,30 @@ document.write(`
 <p>In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell. For more info see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash">what is bash?</a></p>
 </div>
 <section id="installation-checklist">
-<h2>Installation checklist<a class="headerlink" href="#installation-checklist" title="Permalink to this heading">#</a></h2>
+<span id="checklist"></span><h2>Installation checklist<a class="headerlink" href="#installation-checklist" title="Permalink to this heading">#</a></h2>
 <p>The <em>installation checklist</em> summarizes the steps with links
 to the documentation for each step.</p>
 <ol class="arabic simple">
-<li><p>run <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span> <span class="pre">~/bluesky</span></code> (see sections below)</p></li>
-<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html">create conda environment</a></p></li>
-<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_ipython.html">configure IPython profile startup</a></p></li>
-<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#create-an-alias-to-activate-the-bluesky-environment">configure bash with environment variable and alias</a></p></li>
-<li><p>Verify the installation by running the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/hello_world.html">Hello, World! tutorial.</a></p></li>
+<li><p><a class="reference internal" href="#instrument-create-bluesky-directory"><span class="std std-ref">Create bluesky directory</span></a></p></li>
+<li><p><a class="reference internal" href="../reference/_create_conda_env.html#reference-create-bluesky-enviroment"><span class="std std-ref">Create bluesky environment</span></a></p></li>
+<li><p><a class="reference internal" href="../reference/_ipython.html#reference-configure-ipython-profile"><span class="std std-ref">Configure IPython Profile for Bluesky</span></a></p></li>
+<li><p><a class="reference internal" href="../reference/_create_conda_env.html#reference-create-conda-bluesky-alias"><span class="std std-ref">Create an alias to activate the bluesky environment</span></a></p></li>
+<li><p><a class="reference internal" href="#instrument-test-new-instrument"><span class="std std-ref">Test the new bluesky instrument</span></a></p></li>
 <li><p>create soft link:  <code class="docutils literal notranslate"><span class="pre">ln</span> <span class="pre">-s</span> <span class="pre">${HOME}/bluesky/blueskyStarter.sh</span> <span class="pre">~/bin/</span></code></p></li>
-<li><p>Assign a MongoDB catalog for databroker: <a class="reference external" href="https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md">instructions for BCDA</a></p></li>
-<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_configure_databroker.html#setup-your-databroker-catalog-configuration">databroker catalog configuration</a></p></li>
-<li><p><a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_configure_bluesky_instrument.html#initial-configuration">initial configuration of instrument</a></p></li>
-<li><p><a class="reference internal" href="#start-vc"><span class="std std-ref">start a remote repository</span></a></p></li>
+<li><p><a class="reference internal" href="#instrument-setup-catalog-configuration"><span class="std std-ref">Setup catalog configuration for databroker</span></a></p></li>
+<li><p><a class="reference internal" href="#instrument-start-vc"><span class="std std-ref">Start software version control</span></a></p></li>
 </ol>
+<p>After these steps are complete, it is time to configure
+the instrument for the details of this specific user.
+See the <a class="reference internal" href="_configure_bluesky_instrument.html#instrument-configure-bluesky-instrument"><span class="std std-ref">Configure bluesky instrument</span></a> section next.</p>
 </section>
-<section id="setup-a-bluesky-instrument">
-<h2>Setup a bluesky instrument<a class="headerlink" href="#setup-a-bluesky-instrument" title="Permalink to this heading">#</a></h2>
+<section id="create-bluesky-directory">
+<span id="instrument-create-bluesky-directory"></span><h2>Create bluesky directory<a class="headerlink" href="#create-bluesky-directory" title="Permalink to this heading">#</a></h2>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code>
 <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/new_bluesky_instrument.py">program</a>
 to install a new bluesky instrument configuration from the online <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training">APS
 Bluesky Training</a>
-repository template. The program creates a new <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory in
+repository <span class="target" id="index-1"></span>template. The program creates a new <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory in
 the home directory. Use <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span> <span class="pre">-h</span></code> for usage
 information.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">new_bluesky_instrument.py</span></code> program requires Python 3.6+ and the
@@ -487,7 +490,15 @@ workstation at APS with access to the <code class="docutils literal notranslate"
 run this command from a terminal session:</p>
 <pre>
 $ <b>python3 /APSshare/bin/new_bluesky_instrument.py ~/bluesky</b>
-</pre></div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Workstations on other networks (with no access to APSshare) need to
+</pre><div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Needs outside network access at APS.</p>
+<p>Remember, since this will try to download content from the
+public internet, it only works from workstations with
+access to networks outside of APS.  From local private networks,
+it will stall in the first steps.</p>
+</div>
+</div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Workstations on other networks (with no access to APSshare) need to
 download this program.  Open the file in your browser with this
 <a class="reference download internal" download="" href="../_downloads/703762ca5035428bf90058e522d35186/new_bluesky_instrument.py"><code class="xref download docutils literal notranslate"><span class="pre">link</span></code></a>
 and use your browser’s commands to <strong>Save As …</strong> in the directory of
@@ -504,11 +515,15 @@ INFO:__main__:Downloading 'https://github.com/BCDA-APS/bluesky_training/archive/
 INFO:__main__:Extracting content from '/tmp/bluesky_training-main.zip'
 INFO:__main__:Installing to '/home/user/bluesky'
 INFO:__main__:Initialized Git repository in '/home/user/bluesky'
-</pre><p>The installer program takes care of initializing a local git repository in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> folder.
-Further instructions are provided <a class="reference internal" href="#start-vc"><span class="std std-ref">below</span></a> to create a remote reposititory.</p>
+</pre><p>The installer program takes care of initializing a local git repository in the
+<code class="docutils literal notranslate"><span class="pre">bluesky</span></code> folder. Further instructions are provided <a class="reference internal" href="#instrument-start-vc"><span class="std std-ref">below</span></a> to create a remote reposititory.</p>
 </section>
 <section id="activate-the-bluesky-conda-environment">
 <h2>Activate the bluesky conda environment<a class="headerlink" href="#activate-the-bluesky-conda-environment" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Consider merging with <a class="reference internal" href="../reference/_create_conda_env.html#reference-create-bluesky-enviroment"><span class="std std-ref">Create bluesky environment</span></a></p>
+</div>
 <details>
 <summary>How to create a conda environment for bluesky?</summary>
 
@@ -528,7 +543,7 @@ different environment or deactivate it using the <code class="docutils literal n
 command.</p>
 </section>
 <section id="test-the-new-bluesky-instrument">
-<h2>Test the new bluesky instrument<a class="headerlink" href="#test-the-new-bluesky-instrument" title="Permalink to this heading">#</a></h2>
+<span id="instrument-test-new-instrument"></span><h2>Test the new bluesky instrument<a class="headerlink" href="#test-the-new-bluesky-instrument" title="Permalink to this heading">#</a></h2>
 <p>At this point, you have assembled enough of the parts to test the
 initial installation with bluesky. Follow the steps in the following guides:</p>
 <ul class="simple">
@@ -541,6 +556,10 @@ and specific hardware configuration.</p>
 </section>
 <section id="create-a-bluesky-ipython-profile">
 <h2>Create a bluesky IPython profile<a class="headerlink" href="#create-a-bluesky-ipython-profile" title="Permalink to this heading">#</a></h2>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Compare with <a class="reference internal" href="../reference/_ipython.html#reference-configure-ipython-profile"><span class="std std-ref">Configure IPython Profile for Bluesky</span></a></p>
+</div>
 <p>This bash command create a new IPython profile for bluesky:</p>
 <pre>
 $ <b>ipython profile create bluesky --ipython-dir="~/.ipython"</b>
@@ -601,10 +620,11 @@ and start a new bluesky session in a terminal.
 
 </details><p>For more info about IPython configuration, see <a class="reference external" href="https://ipython.readthedocs.io/en/stable/config/intro.html">here</a>.</p>
 </section>
-<section id="setup-your-databroker-catalog-configuration">
-<h2>Setup your databroker catalog configuration<a class="headerlink" href="#setup-your-databroker-catalog-configuration" title="Permalink to this heading">#</a></h2>
+<section id="setup-catalog-configuration-for-databroker">
+<span id="instrument-setup-catalog-configuration"></span><h2>Setup catalog configuration for databroker<a class="headerlink" href="#setup-catalog-configuration-for-databroker" title="Permalink to this heading">#</a></h2>
 <p>Contact BCDA (<a class="reference external" href="mailto:bcda&#37;&#52;&#48;aps&#46;anl&#46;gov">bcda<span>&#64;</span>aps<span>&#46;</span>anl<span>&#46;</span>gov</a>) for assignment of a databroker catalog
-configuration.</p>
+configuration.  BCDA maintains a list of all assigned catalogs on a
+<a class="reference external" href="https://git.aps.anl.gov/bcda/bluesky-catalogs/-/blob/master/README.md">private server</a></p>
 <p>For example purposes, let’s assume you have been given this
 bluesky/databroker catalog assignment:</p>
 <ul class="simple">
@@ -620,8 +640,8 @@ option:</p>
 $ <b>python -c "import databroker; print(list(databroker.catalog))"</b>
 ['45ida_abcd']
 </pre></section>
-<section id="start-version-control">
-<span id="start-vc"></span><h2>Start version control<a class="headerlink" href="#start-version-control" title="Permalink to this heading">#</a></h2>
+<section id="start-software-version-control">
+<span id="instrument-start-vc"></span><h2>Start software version control<a class="headerlink" href="#start-software-version-control" title="Permalink to this heading">#</a></h2>
 <p>While this step is optional, it is <strong>highly recommended</strong> that you keep
 your bluesky instrument directory under some form of software version
 control. At minimum, this can provide some form of backup protection. It
@@ -631,7 +651,7 @@ sharing your instrument’s implementations.</p>
 folder. We now need to create a blank remote repository, for example
 on <a class="reference external" href="https://github.com/">GitHub</a> or the <a class="reference external" href="https://git.aps.anl.gov/">APS GitLab server</a> using your <a class="reference internal" href="../reference/_git-help.html#beamline-github-organizations"><span class="std std-ref">beamline organization</span></a>.
 Note that the bluesky team recommends GitHub. (Why is that? See section
-<a class="reference internal" href="../reference/_git-help.html#git-help"><span class="std std-ref">Using Git for version control</span></a> for more info).</p>
+<a class="reference internal" href="../reference/_git-help.html#git-help"><span class="std std-ref">Git Advice for APS beam lines</span></a> for more info).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>APS beamlines use specific conventions for <a class="reference internal" href="../reference/_git-help.html#beamline-github-organizations"><span class="std std-ref">beamline organization</span></a>.</p>
@@ -705,20 +725,20 @@ configuration of the <code class="docutils literal notranslate"><span class="pre
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_get_spec_config.html"
+       href="index.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Translate Previous SPEC Configuration</p>
+        <p class="prev-next-title">Instrument</p>
       </div>
     </a>
     <a class="right-next"
-       href="_test_bluesky_at_aps.html"
+       href="describe_instrument.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Test that Bluesky Works at APS</p>
+        <p class="prev-next-title">The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -741,12 +761,12 @@ configuration of the <code class="docutils literal notranslate"><span class="pre
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#installation-checklist">Installation checklist</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-a-bluesky-instrument">Setup a bluesky instrument</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-bluesky-directory">Create bluesky directory</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#activate-the-bluesky-conda-environment">Activate the bluesky conda environment</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#test-the-new-bluesky-instrument">Test the new bluesky instrument</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-bluesky-ipython-profile">Create a bluesky IPython profile</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-your-databroker-catalog-configuration">Setup your databroker catalog configuration</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-version-control">Start version control</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#setup-catalog-configuration-for-databroker">Setup catalog configuration for databroker</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-software-version-control">Start software version control</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-bluesky-instrument">Configure bluesky instrument</a></li>
 </ul>
   </nav></div>
@@ -754,7 +774,7 @@ configuration of the <code class="docutils literal notranslate"><span class="pre
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/instrument/_install_new_instrument.rst.txt">
+    <a href="../_sources/instrument/install_new_instrument.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

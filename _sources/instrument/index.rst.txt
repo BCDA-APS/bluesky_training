@@ -22,6 +22,7 @@ reference for ideas rather than a set of requirements.
    :maxdepth: 2
    :glob:
 
+   install_new_instrument
    describe_instrument
    guide
    _*
