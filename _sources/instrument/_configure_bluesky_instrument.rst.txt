@@ -66,9 +66,6 @@ Parts of the instrument package
 
 The ``instrument`` package is divided into several submodules to make it
 easier to identify the source definition of any supported item.
-
-TODO: other parts at the root level?
-
 Framework
 ~~~~~~~~~
 

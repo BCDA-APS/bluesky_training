@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Configure bluesky instrument &#8212; APS Bluesky Training</title>
+    <title>Create a File System Soft Link &#8212; APS Bluesky Training</title>
   
   
   
@@ -47,11 +47,11 @@
     <script src="../_static/sphinx_highlight.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_configure_bluesky_instrument';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_create_starter_softlink';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Setup your databroker catalog configuration" href="_configure_databroker.html" />
-    <link rel="prev" title="Activate the bluesky conda environment" href="_activate_environment.html" />
+    <link rel="next" title="Translate Previous SPEC Configuration" href="_get_spec_config.html" />
+    <link rel="prev" title="Create a bluesky IPython profile" href="_create_bluesky_ipython_profile.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -354,11 +354,11 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_activate_environment.html">Activate the bluesky conda environment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configure bluesky instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_bluesky_directory.html">Create bluesky directory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_bluesky_ipython_profile.html">Create a bluesky IPython profile</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_create_starter_softlink.html">Create a File System Soft Link</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Create a File System Soft Link</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_setup_catalog_configuration.html">Setup catalog configuration for databroker</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_start_version_control.html">Start software version control</a></li>
@@ -405,7 +405,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Configure...</li>
+    <li class="breadcrumb-item active" aria-current="page">Create a...</li>
   </ul>
 </nav>
 </div>
@@ -422,130 +422,54 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="configure-bluesky-instrument">
-<span id="instrument-configure-bluesky-instrument"></span><h1>Configure bluesky instrument<a class="headerlink" href="#configure-bluesky-instrument" title="Permalink to this heading">#</a></h1>
-<p>After the steps in the “ref”<cite>checklist</cite> are complete, it is time to configure
-the instrument for the details of this specific user.</p>
-<p>Settings for various aspects of data collection are distributed amongst the many
-directories and files of the <code class="docutils literal notranslate"><span class="pre">instrument/</span></code> subdirectory. This directory is
-configured as a Python <a class="reference external" href="https://realpython.com/python-modules-packages/">package</a> so that it can be loaded
-with an <code class="docutils literal notranslate"><span class="pre">import</span></code> <a class="reference external" href="https://www.askpython.com/python/python-import-statement">statement</a>, such as:</p>
-<blockquote>
-<div><p>from instrument.collection import *</p>
-</div></blockquote>
-<p>The <a class="reference external" href="../../../bluesky/instrument/iconfig.yml">file</a>
-<code class="docutils literal notranslate"><span class="pre">instrument/iconfig.yml</span></code> gathers many common configuration details
-into one location (in the root directory of the <code class="docutils literal notranslate"><span class="pre">instrument</span></code>
-package).  This is a text file in <a class="reference external" href="https://yaml.org">YAML</a> format.  It’s easy
-to edit with any text editor.</p>
-<section id="initial-configuration-of-the-instrument">
-<h2>Initial configuration of the instrument<a class="headerlink" href="#initial-configuration-of-the-instrument" title="Permalink to this heading">#</a></h2>
-<p>Amongst the many items you might edit in the <code class="docutils literal notranslate"><span class="pre">instrument/iconfig.yml</span></code>
-file, the databroker catalog name is the first.</p>
-<p>Change:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">DATABROKER_CATALOG</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;databroker_catalog</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">training</span>
+  <section id="create-a-file-system-soft-link">
+<span id="instrument-create-starter-soft-link"></span><h1>Create a File System Soft Link<a class="headerlink" href="#create-a-file-system-soft-link" title="Permalink to this heading">#</a></h1>
+<p>This optional step makes it easy for those who prefer to use a command-line
+interface to start an IPython console session with Bluesky.</p>
+<p>Assuming that your account has this directory: <code class="docutils literal notranslate"><span class="pre">${HOME}/bin/</span></code>, create the
+soft link with this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ln -s ${HOME}/bluesky/blueskyStarter.sh ${HOME}/bin/
 </pre></div>
 </div>
-<p>to (assuming <em>your</em> catalog is named <code class="docutils literal notranslate"><span class="pre">45ida_abcd</span></code>):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">DATABROKER_CATALOG</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;databroker_catalog</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">45ida_abcd</span>
-</pre></div>
-</div>
-<p>You should change this line:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ALLOW_AREA_DETECTOR_WARMUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-<p>to</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ALLOW_AREA_DETECTOR_WARMUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</pre></div>
-</div>
-<p>You may comment these lines (used by the training IOCs, not so likely to
-use them with your instrument):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ADSIM_IOC_PREFIX</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ad:&quot;</span>
-<span class="nt">GP_IOC_PREFIX</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gp:&quot;</span>
-<span class="nt">AD_IMAGE_DIR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;adsimdet/%Y/%m/%d&quot;</span>
-<span class="nt">AD_MOUNT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp</span>
-<span class="nt">BLUESKY_MOUNT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp/docker_ioc/iocad/tmp</span>
+<section id="start-a-bluesky-console-session">
+<span id="instrument-start-bluesky-console-session"></span><h2>Start a Bluesky Console Session<a class="headerlink" href="#start-a-bluesky-console-session" title="Permalink to this heading">#</a></h2>
+<p>With this soft link in the executable PATH, you can start an IPython console
+session for Bluesky from any directory with one simple command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">blueskyStarter</span><span class="o">.</span><span class="n">sh</span>
 </pre></div>
 </div>
 </section>
-<section id="parts-of-the-instrument-package">
-<h2>Parts of the instrument package<a class="headerlink" href="#parts-of-the-instrument-package" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is divided into several submodules to make it
-easier to identify the source definition of any supported item.
-Framework
-~~~~~~~~~</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument.framework</span></code> directory contains the files that setup the
-core of Bluesky (and related packages).</p>
-<section id="matplotlib">
-<h3>matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument.mpl</span></code> directory contains the matplotlib configuration
-for data visualizations.</p>
-</section>
-<section id="callbacks">
-<h3>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument.callbacks</span></code> directory contains custom handling of the
-documents from the Bluesky RunEngine.</p>
-<p>If your instrument does not need to generate data files as if they came
-from the SPEC data collection software, then change this line in your
-<code class="docutils literal notranslate"><span class="pre">instrument/iconfig.yml</span></code> file:</p>
-<p>from</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WRITE_SPEC_DATA_FILES</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
+<section id="the-home-bin-directory">
+<h2>The <code class="docutils literal notranslate"><span class="pre">${HOME}/bin</span></code> directory<a class="headerlink" href="#the-home-bin-directory" title="Permalink to this heading">#</a></h2>
+<p>The <code class="docutils literal notranslate"><span class="pre">${HOME}/bin/</span></code> directory (same as <code class="docutils literal notranslate"><span class="pre">~/bin/</span></code>) is an optional addition to a
+Linux account. It is often used to save (or link to) executable software and
+starter scripts for various application software of interest to users of this
+account.</p>
+<p>In linux, <code class="docutils literal notranslate"><span class="pre">~/</span></code> is Linux shorthand for the user account home directory.</p>
+<p>If your account does not have this directory, create it with this command:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">~/</span><span class="nb">bin</span>
 </pre></div>
 </div>
-<p>to</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WRITE_SPEC_DATA_FILES</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</pre></div>
-</div>
-<p>Other callbacks are possible. For example, the APS USAXS instrument
-writes NeXus files using a
-<a class="reference external" href="https://github.com/APS-USAXS/usaxs-bluesky/blob/master/instrument/callbacks/nxwriter.py">callback</a>.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
+<dl class="field-list simple">
+<dt class="field-odd">see<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://www.baeldung.com/linux/home-bin-directory">https://www.baeldung.com/linux/home-bin-directory</a></p>
+</dd>
+<dt class="field-even">see<span class="colon">:</span></dt>
+<dd class="field-even"><p><a class="reference external" href="https://askubuntu.com/questions/402353/how-to-add-home-username-bin-to-path">https://askubuntu.com/questions/402353/how-to-add-home-username-bin-to-path</a></p>
+</dd>
+</dl>
 </section>
-<section id="devices">
-<h3>Devices<a class="headerlink" href="#devices" title="Permalink to this heading">#</a></h3>
-<p>On startup, Devices (which describe your hardware controls) are
-configured before Plans. This pattern is designed to avoid import loops
-(A needs B which needs A).</p>
-<p>There are many files in the <code class="docutils literal notranslate"><span class="pre">instrument/devices/</span></code> directory. None of
-them are in use until they are uncommented in the
-<code class="docutils literal notranslate"><span class="pre">./instrument/devices/__init__.py</span></code> file (and then the IPython session
-is restarted). Before you uncomment one of these files, you might need
-to adjust the contents of the file first to match your hardware. These
-files are leftovers as used in the bluesky training examples and provide
-ideas for what is possible with your instrument.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-<p><strong>Note</strong>: A major principle is that any activities on startup <strong>should
-not change settings in EPICS</strong>. With this in mind, you gain the
-confidence that EPICS will not be affected just beacuse a Bluesky
-session was started. (This is why you changed
-<code class="docutils literal notranslate"><span class="pre">ALLOW_AREA_DETECTOR_WARMUP</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> above.)</p>
-<p><strong>Tip</strong>: SPEC users:
-<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/applications/spec2ophyd.html#spec2ophyd">spec2ophyd</a>
-can translate much of your SPEC config file into content for the Devices
-directory.</p>
-</section>
-<section id="plans">
-<h3>Plans<a class="headerlink" href="#plans" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument/plans/</span></code> directory contains Python files that define
-the custom Bluesky plans for your instrument. The existing files serve
-as examples.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-</section>
-<section id="utils">
-<h3>Utils<a class="headerlink" href="#utils" title="Permalink to this heading">#</a></h3>
-<p>This directory is for Python code your instrument needs but is not
-easily classified as Callbacks, Devices, or Plans. For example, standard
-analytical routines might be best placed in Utils.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-</section>
+<section id="file-system-links">
+<h2>File system links<a class="headerlink" href="#file-system-links" title="Permalink to this heading">#</a></h2>
+<p>It is assumed that your account has this directory <code class="docutils literal notranslate"><span class="pre">~/bin/</span></code> and that this
+directory is on the executable path (as defined by the <code class="docutils literal notranslate"><span class="pre">PATH</span></code> environment
+variable).</p>
+<p>Lots of information about file system links is available online.</p>
+<dl class="field-list simple">
+<dt class="field-odd">see<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference external" href="https://www.redhat.com/sysadmin/linking-linux-explained">https://www.redhat.com/sysadmin/linking-linux-explained</a></p>
+</dd>
+</dl>
 </section>
 </section>
 
@@ -560,20 +484,20 @@ of loading is important.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_activate_environment.html"
+       href="_create_bluesky_ipython_profile.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Activate the bluesky conda environment</p>
+        <p class="prev-next-title">Create a bluesky IPython profile</p>
       </div>
     </a>
     <a class="right-next"
-       href="_configure_databroker.html"
+       href="_get_spec_config.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setup your databroker catalog configuration</p>
+        <p class="prev-next-title">Translate Previous SPEC Configuration</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -595,22 +519,16 @@ of loading is important.</p>
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-configuration-of-the-instrument">Initial configuration of the instrument</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-of-the-instrument-package">Parts of the instrument package</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">matplotlib</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">Callbacks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#devices">Devices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plans">Plans</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utils">Utils</a></li>
-</ul>
-</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-bluesky-console-session">Start a Bluesky Console Session</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#the-home-bin-directory">The <code class="docutils literal notranslate"><span class="pre">${HOME}/bin</span></code> directory</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#file-system-links">File system links</a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/instrument/_configure_bluesky_instrument.rst.txt">
+    <a href="../_sources/instrument/_create_starter_softlink.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>

@@ -17,17 +17,13 @@ tutorial.
 
 <br>
 
-Navigate to the in the `~/bluesky` directory:
+Navigate to the `~/bluesky` directory:
 
 <pre>
 $ <b>cd ~/bluesky</b>
 </pre>
 
-and start a Bluesky session (TODO add link).
-
-
-
-
+and :ref:`start a Bluesky console session <instrument.start_bluesky_console_session>`.
 
 <details>
 <summary>What does the (~) means in <b>~/bluesky</b>?</summary>
@@ -104,7 +100,5 @@ The IPython output should end with  the message:
 
 <pre>#### Startup is complete. ####
 </pre>
-
-
 
 Congratulations!  You've tested your new bluesky instrument.

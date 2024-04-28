@@ -1,7 +1,7 @@
 .. _git-help:
 
 Git Advice for APS beam lines
-============================
+=============================
 
 .. _beamline-github-organizations:
 

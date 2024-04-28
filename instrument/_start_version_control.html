@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
 
-    <title>Configure bluesky instrument &#8212; APS Bluesky Training</title>
+    <title>Start software version control &#8212; APS Bluesky Training</title>
   
   
   
@@ -45,13 +45,14 @@
     <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
     <script src="../_static/doctools.js"></script>
     <script src="../_static/sphinx_highlight.js"></script>
+    <script src="../_static/tabs.js"></script>
     <script src="../_static/design-tabs.js"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_configure_bluesky_instrument';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/_start_version_control';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Setup your databroker catalog configuration" href="_configure_databroker.html" />
-    <link rel="prev" title="Activate the bluesky conda environment" href="_activate_environment.html" />
+    <link rel="next" title="Test that Bluesky Works at APS" href="_test_bluesky_at_aps.html" />
+    <link rel="prev" title="Setup catalog configuration for databroker" href="_setup_catalog_configuration.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -354,14 +355,14 @@ document.write(`
 <li class="toctree-l1"><a class="reference internal" href="guide.html">Instrument Package Guide</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_about_init_files.html">Python <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> files</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_activate_environment.html">Activate the bluesky conda environment</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">Configure bluesky instrument</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_configure_bluesky_instrument.html">Configure bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_configure_databroker.html">Setup your databroker catalog configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_bluesky_directory.html">Create bluesky directory</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_bluesky_ipython_profile.html">Create a bluesky IPython profile</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_create_starter_softlink.html">Create a File System Soft Link</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_get_spec_config.html">Translate Previous SPEC Configuration</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_setup_catalog_configuration.html">Setup catalog configuration for databroker</a></li>
-<li class="toctree-l1"><a class="reference internal" href="_start_version_control.html">Start software version control</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Start software version control</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_bluesky_at_aps.html">Test that Bluesky Works at APS</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_initial_installation.html">Test the new bluesky instrument</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_test_new_instrument.html">Test the New Bluesky Instrument</a></li>
@@ -405,7 +406,7 @@ document.write(`
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">Instrument</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page">Configure...</li>
+    <li class="breadcrumb-item active" aria-current="page">Start...</li>
   </ul>
 </nav>
 </div>
@@ -422,131 +423,71 @@ document.write(`
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="configure-bluesky-instrument">
-<span id="instrument-configure-bluesky-instrument"></span><h1>Configure bluesky instrument<a class="headerlink" href="#configure-bluesky-instrument" title="Permalink to this heading">#</a></h1>
-<p>After the steps in the “ref”<cite>checklist</cite> are complete, it is time to configure
-the instrument for the details of this specific user.</p>
-<p>Settings for various aspects of data collection are distributed amongst the many
-directories and files of the <code class="docutils literal notranslate"><span class="pre">instrument/</span></code> subdirectory. This directory is
-configured as a Python <a class="reference external" href="https://realpython.com/python-modules-packages/">package</a> so that it can be loaded
-with an <code class="docutils literal notranslate"><span class="pre">import</span></code> <a class="reference external" href="https://www.askpython.com/python/python-import-statement">statement</a>, such as:</p>
-<blockquote>
-<div><p>from instrument.collection import *</p>
-</div></blockquote>
-<p>The <a class="reference external" href="../../../bluesky/instrument/iconfig.yml">file</a>
-<code class="docutils literal notranslate"><span class="pre">instrument/iconfig.yml</span></code> gathers many common configuration details
-into one location (in the root directory of the <code class="docutils literal notranslate"><span class="pre">instrument</span></code>
-package).  This is a text file in <a class="reference external" href="https://yaml.org">YAML</a> format.  It’s easy
-to edit with any text editor.</p>
-<section id="initial-configuration-of-the-instrument">
-<h2>Initial configuration of the instrument<a class="headerlink" href="#initial-configuration-of-the-instrument" title="Permalink to this heading">#</a></h2>
-<p>Amongst the many items you might edit in the <code class="docutils literal notranslate"><span class="pre">instrument/iconfig.yml</span></code>
-file, the databroker catalog name is the first.</p>
-<p>Change:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">DATABROKER_CATALOG</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;databroker_catalog</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">training</span>
-</pre></div>
+  <section id="start-software-version-control">
+<span id="instrument-start-version-control"></span><h1>Start software version control<a class="headerlink" href="#start-software-version-control" title="Permalink to this heading">#</a></h1>
+<p>While this step is optional, it is <strong>highly recommended</strong> that you keep
+your bluesky instrument directory under some form of software version
+control. At minimum, this can provide some form of backup protection. It
+also helps others to collaborate with similar bluesky instruments by
+sharing your instrument’s implementations.</p>
+<p>The installer program initializes a local git repository in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code>
+folder. We now need to create a blank remote repository, for example
+on <a class="reference external" href="https://github.com/">GitHub</a> or the <a class="reference external" href="https://git.aps.anl.gov/">APS GitLab server</a> using your <a class="reference internal" href="../reference/_git-help.html#beamline-github-organizations"><span class="std std-ref">beamline organization</span></a>.
+Note that the bluesky team recommends GitHub. (Why is that? See section
+<a class="reference internal" href="../reference/_git-help.html#git-help"><span class="std std-ref">Git Advice for APS beam lines</span></a> for more info).</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>APS beamlines use specific conventions for <a class="reference internal" href="../reference/_git-help.html#beamline-github-organizations"><span class="std std-ref">beamline organization</span></a>.</p>
 </div>
-<p>to (assuming <em>your</em> catalog is named <code class="docutils literal notranslate"><span class="pre">45ida_abcd</span></code>):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">DATABROKER_CATALOG</span><span class="p">:</span><span class="w"> </span><span class="nl">&amp;databroker_catalog</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">45ida_abcd</span>
-</pre></div>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>To simplify the process (avoid merge conflicts), it is important for the
+remote repository to be <strong>empty</strong>. To do so, carefully follow the instructions described
+in the tabs below.</p>
 </div>
-<p>You should change this line:</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ALLOW_AREA_DETECTOR_WARMUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-<p>to</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ALLOW_AREA_DETECTOR_WARMUP</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</pre></div>
-</div>
-<p>You may comment these lines (used by the training IOCs, not so likely to
-use them with your instrument):</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">ADSIM_IOC_PREFIX</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ad:&quot;</span>
-<span class="nt">GP_IOC_PREFIX</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;gp:&quot;</span>
-<span class="nt">AD_IMAGE_DIR</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;adsimdet/%Y/%m/%d&quot;</span>
-<span class="nt">AD_MOUNT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp</span>
-<span class="nt">BLUESKY_MOUNT_PATH</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">/tmp/docker_ioc/iocad/tmp</span>
-</pre></div>
-</div>
-</section>
-<section id="parts-of-the-instrument-package">
-<h2>Parts of the instrument package<a class="headerlink" href="#parts-of-the-instrument-package" title="Permalink to this heading">#</a></h2>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is divided into several submodules to make it
-easier to identify the source definition of any supported item.
-Framework
-~~~~~~~~~</p>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument.framework</span></code> directory contains the files that setup the
-core of Bluesky (and related packages).</p>
-<section id="matplotlib">
-<h3>matplotlib<a class="headerlink" href="#matplotlib" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument.mpl</span></code> directory contains the matplotlib configuration
-for data visualizations.</p>
-</section>
-<section id="callbacks">
-<h3>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument.callbacks</span></code> directory contains custom handling of the
-documents from the Bluesky RunEngine.</p>
-<p>If your instrument does not need to generate data files as if they came
-from the SPEC data collection software, then change this line in your
-<code class="docutils literal notranslate"><span class="pre">instrument/iconfig.yml</span></code> file:</p>
-<p>from</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WRITE_SPEC_DATA_FILES</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">true</span>
-</pre></div>
-</div>
-<p>to</p>
-<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">WRITE_SPEC_DATA_FILES</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
-</pre></div>
-</div>
-<p>Other callbacks are possible. For example, the APS USAXS instrument
-writes NeXus files using a
-<a class="reference external" href="https://github.com/APS-USAXS/usaxs-bluesky/blob/master/instrument/callbacks/nxwriter.py">callback</a>.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-</section>
-<section id="devices">
-<h3>Devices<a class="headerlink" href="#devices" title="Permalink to this heading">#</a></h3>
-<p>On startup, Devices (which describe your hardware controls) are
-configured before Plans. This pattern is designed to avoid import loops
-(A needs B which needs A).</p>
-<p>There are many files in the <code class="docutils literal notranslate"><span class="pre">instrument/devices/</span></code> directory. None of
-them are in use until they are uncommented in the
-<code class="docutils literal notranslate"><span class="pre">./instrument/devices/__init__.py</span></code> file (and then the IPython session
-is restarted). Before you uncomment one of these files, you might need
-to adjust the contents of the file first to match your hardware. These
-files are leftovers as used in the bluesky training examples and provide
-ideas for what is possible with your instrument.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-<p><strong>Note</strong>: A major principle is that any activities on startup <strong>should
-not change settings in EPICS</strong>. With this in mind, you gain the
-confidence that EPICS will not be affected just beacuse a Bluesky
-session was started. (This is why you changed
-<code class="docutils literal notranslate"><span class="pre">ALLOW_AREA_DETECTOR_WARMUP</span></code> to <code class="docutils literal notranslate"><span class="pre">false</span></code> above.)</p>
-<p><strong>Tip</strong>: SPEC users:
-<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/applications/spec2ophyd.html#spec2ophyd">spec2ophyd</a>
-can translate much of your SPEC config file into content for the Devices
-directory.</p>
-</section>
-<section id="plans">
-<h3>Plans<a class="headerlink" href="#plans" title="Permalink to this heading">#</a></h3>
-<p>The <code class="docutils literal notranslate"><span class="pre">instrument/plans/</span></code> directory contains Python files that define
-the custom Bluesky plans for your instrument. The existing files serve
-as examples.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-</section>
-<section id="utils">
-<h3>Utils<a class="headerlink" href="#utils" title="Permalink to this heading">#</a></h3>
-<p>This directory is for Python code your instrument needs but is not
-easily classified as Callbacks, Devices, or Plans. For example, standard
-analytical routines might be best placed in Utils.</p>
-<p>The order of file loading is controlled by the lines in the
-<a class="reference internal" href="_about_init_files.html"><span class="doc">init.py</span></a> file. In some cases, the sequence
-of loading is important.</p>
-</section>
-</section>
+<div class="sphinx-tabs docutils container">
+<div aria-label="Tabbed content" class="closeable" role="tablist"><button aria-controls="panel-0-0-0" aria-selected="true" class="sphinx-tabs-tab" id="tab-0-0-0" name="0-0" role="tab" tabindex="0">GitHub (recommended)</button><button aria-controls="panel-0-0-1" aria-selected="false" class="sphinx-tabs-tab" id="tab-0-0-1" name="0-1" role="tab" tabindex="-1">GitLab</button></div><div aria-labelledby="tab-0-0-0" class="sphinx-tabs-panel" id="panel-0-0-0" name="0-0" role="tabpanel" tabindex="0"><p>Follow the official GitHub instructions <a class="reference external" href="https://docs.github.com/en/get-started/quickstart/create-a-repo#create-a-repository">Create a repository</a>
+with the modifications below:</p>
+<ul>
+<li><b>Do not</b> select "Initialize this repository with a README" (skip step 5)</li>
+<li>Keep the other options as default:</li>
+<ul>
+<li>Visibility: Public</li>
+<li>Repository template: No template</li>
+<li><code>.gitignore</code> template: None</li>
+<li>License: None</li>
+</ul>
+</ul></div><div aria-labelledby="tab-0-0-1" class="sphinx-tabs-panel" hidden="true" id="panel-0-0-1" name="0-1" role="tabpanel" tabindex="0"><p>Follow the official GitLab instructions <a class="reference external" href="https://docs.gitlab.com/ee/user/project/#create-a-blank-project">Create a blank project</a>
+with the modifications below:</p>
+<ul>
+<li>Visibility Level: Public</li>
+<li><b>Unselect</b> "Initialize repository with a README"</li>
+<li>Keep "Enable Static Application Security Testing (SAST)" unselected</li>
+</ul></div></div>
+<p>The next steps are common to both web-based repositories (GitHub and GitLab):</p>
+<ul class="simple">
+<li><p>copy the remote <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories#choosing-a-url-for-your-remote-repository">repository URL</a>, for example,
+<code class="docutils literal notranslate"><span class="pre">https://github.com/OWNER/REPOSITORY.git</span></code></p></li>
+<li><p>open a terminal</p></li>
+</ul>
+<pre>
+$ <b>cd ~/bluesky </b>
+$ <b>git remote add origin https://github.com/OWNER/REPOSITORY.git  </b>
+# Set a new remote
+
+$ <b>git remote -v  </b>
+# Verify new remote
+> origin  https://github.com/OWNER/REPOSITORY.git (fetch)
+> origin  https://github.com/OWNER/REPOSITORY.git (push)
+
+$ <b>git push -u origin main  </b>
+# Push repo to remote
+</pre><p>For more information, you can refer to the official GitHub documentation:</p>
+<ul class="simple">
+<li><p>which URL to use (<code class="docutils literal notranslate"><span class="pre">ssh</span></code> vs <code class="docutils literal notranslate"><span class="pre">https</span></code>): <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/about-remote-repositories">About remote repositories</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">remote</span> <span class="pre">add</span></code> command: <a class="reference external" href="https://docs.github.com/en/get-started/getting-started-with-git/managing-remote-repositories#adding-a-remote-repository">Adding a remote repository</a></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">git</span> <span class="pre">push</span></code> command: <a class="reference external" href="https://docs.github.com/en/enterprise-server&#64;3.9/get-started/using-git/pushing-commits-to-a-remote-repository">Pushing to a remote repository</a></p></li>
+</ul>
 </section>
 
 
@@ -560,20 +501,20 @@ of loading is important.</p>
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_activate_environment.html"
+       href="_setup_catalog_configuration.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Activate the bluesky conda environment</p>
+        <p class="prev-next-title">Setup catalog configuration for databroker</p>
       </div>
     </a>
     <a class="right-next"
-       href="_configure_databroker.html"
+       href="_test_bluesky_at_aps.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Setup your databroker catalog configuration</p>
+        <p class="prev-next-title">Test that Bluesky Works at APS</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -588,29 +529,9 @@ of loading is important.</p>
 
 
   <div class="sidebar-secondary-item">
-<div
-    id="pst-page-navigation-heading-2"
-    class="page-toc tocsection onthispage">
-    <i class="fa-solid fa-list"></i> On this page
-  </div>
-  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
-    <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#initial-configuration-of-the-instrument">Initial configuration of the instrument</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#parts-of-the-instrument-package">Parts of the instrument package</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#matplotlib">matplotlib</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#callbacks">Callbacks</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#devices">Devices</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#plans">Plans</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#utils">Utils</a></li>
-</ul>
-</li>
-</ul>
-  </nav></div>
-
-  <div class="sidebar-secondary-item">
 
   <div class="tocsection sourcelink">
-    <a href="../_sources/instrument/_configure_bluesky_instrument.rst.txt">
+    <a href="../_sources/instrument/_start_version_control.rst.txt">
       <i class="fa-solid fa-file-lines"></i> Show Source
     </a>
   </div>
