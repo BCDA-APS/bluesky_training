@@ -1057,7 +1057,8 @@ generator scan [&#39;991bdcb1&#39;] (scan num: 928)
 <h2>Create a suspender<a class="headerlink" href="#Create-a-suspender" title="Permalink to this heading">#</a></h2>
 <p>Block the RunEngine when the permit fails.</p>
 <p>N.B. Might need to consider the special case where the permit fails when first starting the run. Why did that fail? (We’ll answer that soon.)</p>
-<p>Following this example: <a class="reference external" href="https://blueskyproject.io/bluesky/state-machine.html#example-suspend-a-plan-if-the-beam-current-dips-low">https://blueskyproject.io/bluesky/state-machine.html#example-suspend-a-plan-if-the-beam-current-dips-low</a>, we’ll do similar but know that our signal is a boolean, that indicates <em>no permit</em> when low. Suspends interrupt the <code class="docutils literal notranslate"><span class="pre">RE</span></code> as long as the signal is invalid and automatically resume if the signal becomes valid again. Let’s see how this works here.</p>
+<p>The Bluesky project shows <a class="reference external" href="https://blueskyproject.io/bluesky/main/state-machine.html#example-suspend-a-plan-if-the-beam-current-dips-low">how to suspend a plan when the source X-ray intensity drops too low</a>.</p>
+<p>Following this example, we’ll do similar. In our case, the signal is a boolean that indicates <em>no permit</em> when low. The suspender interrupts the <code class="docutils literal notranslate"><span class="pre">RE</span></code> as long as the signal is invalid and automatically resumes if the signal becomes valid again. Let’s see how this works here.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>

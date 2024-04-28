@@ -805,8 +805,12 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Following this example: https://blueskyproject.io/bluesky/state-machine.html#example-suspend-a-plan-if-the-beam-current-dips-low,\n",
-    "we'll do similar but know that our signal is a boolean, that indicates *no permit* when low.  Suspends interrupt the `RE` as long as the signal is invalid and automatically resume if the signal becomes valid again.  Let's see how this works here."
+    "The Bluesky project shows [how to suspend a plan when the source X-ray intensity drops too low](https://blueskyproject.io/bluesky/main/state-machine.html#example-suspend-a-plan-if-the-beam-current-dips-low).\n",
+    "\n",
+    "Following this example, we'll do similar.  In our case, the signal is a boolean\n",
+    "that indicates *no permit* when low.  The suspender interrupts the `RE` as long\n",
+    "as the signal is invalid and automatically resumes if the signal becomes valid\n",
+    "again.  Let's see how this works here."
    ]
   },
   {
