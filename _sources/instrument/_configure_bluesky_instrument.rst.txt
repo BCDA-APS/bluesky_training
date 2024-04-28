@@ -3,7 +3,7 @@
 Configure bluesky instrument
 ============================
 
-After the steps in the "ref"`checklist` are complete, it is time to configure
+After the steps in the :ref:`checklist` are complete, it is time to configure
 the instrument for the details of this specific user.
 
 Settings for various aspects of data collection are distributed amongst the many
