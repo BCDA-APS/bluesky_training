@@ -26,11 +26,11 @@ at a typical APS beamline.
 
     .. grid-item-card:: :material-regular:`straight;3em` :ref:`examples`
 
-      Examples show the steps that demonstrate how something was done.
+      See real-case scenarios of the Bluesky framework in action.
 
     .. grid-item-card:: :material-regular:`alt_route;3em` :ref:`howto`
 
-      Practical guides for accomplishing specific tasks.
+      Step-by-step instructions tailored for you to master specific Bluesky tasks.
 
     .. grid-item-card:: :material-regular:`school;3em` :ref:`tutorials`
 
