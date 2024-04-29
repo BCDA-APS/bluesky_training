@@ -1,3 +1,5 @@
+.. _reference.create_bluesky_enviroment:
+
 Create bluesky environment
 ==========================
 
@@ -333,15 +335,14 @@ Once finished, the installer will report the commands to manage the new environm
     </pre>
 
 
-
-
+.. _reference.create_conda-bluesky_alias:
 
 Create an alias to activate the bluesky environment
 ---------------------------------------------------
 
-Creating a bash alias is like creating a custom shortcut. You can do this by
-editing the ``~/.bashrc`` and  ``~/.bash_aliases`` files, which are
-configuration files for your bash shell. Here's a simple step-by-step guide:
+Creating a bash alias, an optional step, is like creating a custom shortcut. You
+can do this by editing the ``~/.bashrc`` and  ``~/.bash_aliases`` files, which
+are configuration files for your bash shell. Here's a simple step-by-step guide:
 
 .. raw:: html
 

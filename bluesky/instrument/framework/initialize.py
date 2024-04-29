@@ -56,6 +56,7 @@ def get_md_path():
     logger.info("RunEngine metadata saved in directory: %s", str(path))
     return str(path)
 
+
 # Set up a RunEngine and use metadata backed PersistentDict
 RE = RunEngine({})
 RE.md = PersistentDict(get_md_path())

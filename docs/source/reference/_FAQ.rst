@@ -6,21 +6,21 @@
 Frequently Asked Questions
 ==========================
 
-This is a list of commonly asked questions concerning Bluesky.
+A collection of commonly-asked questions concerning Bluesky.
 
 .. _faq-install-bluesky:
 
 How to install Bluesky?
 ~~~~~~~~~~~~~~~~~~~~~~~
 
-Visit `Bluesky Installation <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html>`_
+See :ref:`instrument.install`
 
 .. _faq-start-bluesky-session:
 
 How to start a Bluesky session?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Visit `Getting started <https://bcda-aps.github.io/bluesky_training/howto/getting_started.html>`_
+See :doc:`Getting Started </howto/getting_started>`
 
 .. _faq-alias-start-bluesky:
 
@@ -28,14 +28,14 @@ How to create an alias to start a bluesky session?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 There are several ways to create an alias to start a bluesky session. One is described
-`here <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#Create-a-bluesky-ipython-profile>`__.
+:ref:`here <reference.configure_ipython_profile>`.
 
 .. _faq-alias-become-bluesky:
 
 How to create an alias to activate the bluesky environment?
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Visit `here <https://bcda-aps.github.io/bluesky_training/reference/_create_conda_env.html#Create-an-alias-to-activate-the-bluesky-environment>`__.
+In this section: :ref:`reference.create_conda-bluesky_alias`, look for ``become_bluesky``.
 
 
 .. _faq-obj-oriented:

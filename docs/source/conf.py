@@ -26,8 +26,10 @@ extensions = """
     sphinx.ext.viewcode
     nbsphinx
     myst_parser
+    sphinx_design
 """.split()
 extensions.append("sphinx_tabs.tabs")  # issue #129: this must be last
+myst_enable_extensions = ["colon_fence"]
 
 templates_path = ["_templates"]
 source_suffix = ".rst .md".split()
@@ -43,6 +45,7 @@ nbsphinx_allow_errors = True
 
 html_static_path = ["_static"]
 html_theme = "pydata_sphinx_theme"
+html_title = project
 
 autodoc_mock_imports = """
     bluesky
