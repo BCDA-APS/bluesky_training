@@ -3,8 +3,8 @@
 Configure IPython Profile for Bluesky
 =====================================
 
-An IPython profile [#profile]_ is used to enable the console interface for a bluesky
-session.
+In this optional step, an IPython profile [#profile]_ is used to enable the
+console interface for a bluesky session.
 
 .. index:: startup; snippet
 
