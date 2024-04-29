@@ -21,12 +21,12 @@ to the documentation for each step.
 
 #. :ref:`instrument.create_bluesky_directory`
 #. :ref:`reference.create_bluesky_enviroment`
-#. :ref:`reference.configure_ipython_profile`
-#. :ref:`reference.create_conda-bluesky_alias`
-#. :ref:`instrument.test_initial_installation`
-#. :ref:`instrument.create_starter_soft_link`
+#. (optional) :ref:`reference.configure_ipython_profile`
+#. (optional) :ref:`reference.create_conda-bluesky_alias`
+#. (optional) :ref:`instrument.test_initial_installation`
+#. (optional) :ref:`instrument.create_starter_soft_link`
 #. :ref:`instrument.setup_catalog_configuration`
-#. :ref:`instrument.start_version_control`
+#. (optional) :ref:`instrument.start_version_control`
 
 Next steps ...
 --------------
