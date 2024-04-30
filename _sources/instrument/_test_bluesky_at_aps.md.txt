@@ -139,12 +139,12 @@ OrderedDict([('aps_current',
 
 
 <details>
-<summary><tt>device_read2table(aps): <tt>aps.read()</tt> in table with formatted timestamps</tt></summary>
+<summary><tt>listdevice(aps): <tt>aps.read()</tt> in table with formatted timestamps</tt></summary>
 
 ```
-In [4]: from apstools.utils import device_read2table
+In [4]: from apstools.utils import listdevice
 
-In [5]: device_read2table(aps)
+In [5]: listdevice(aps)
 ========================================== ================================== ==========================
 name                                       value                              timestamp
 ========================================== ================================== ==========================
