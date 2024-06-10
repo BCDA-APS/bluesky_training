@@ -35,7 +35,7 @@ USAGE::
 
 DEPENDENCIES:
 
-* Python 3.6 or higher
+* Python 3.9 or higher
 * Python Standard Libraries (already installed with Python)
 * requests package: https://docs.python-requests.org/en/latest/index.html
 """
@@ -45,13 +45,14 @@ import pathlib
 import shlex
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import zipfile
 
-import requests
-
 logger = None  # set by command_line_options()
+
+MINIMUM_PYTHON_VERSION = (3, 9)
 
 GITHUB_URL = "https://github.com"
 REPO_NAME = "bluesky_training"
@@ -140,6 +141,8 @@ def branch_name_header(org, repo):
 
 def download_zip(local_zip_file, branch):
     """Download repository as ZIP file."""
+    import requests
+
     url = f"{TRAINING_REPO}/archive/refs/tags/{branch}.zip"
     logger.info("Downloading '%s'", url)
     try:
@@ -185,9 +188,7 @@ def git_init(destination):
     """
 
     def shell(cmd):
-        logger.debug(
-            "Execute shell command \"%s\" in directory '%s'.", cmd, destination
-        )
+        logger.debug("Execute shell command \"%s\" in directory '%s'.", cmd, destination)
         split_command = shlex.split(cmd)
         process = subprocess.Popen(
             split_command,
@@ -214,6 +215,8 @@ def git_init(destination):
 
 
 def latest_github_release_string(org, repo, ref="releases/latest"):
+    import requests
+
     global release_details_cache_
 
     if release_details_cache_ is None:
@@ -367,7 +370,18 @@ def command_line_options():
     return args
 
 
+def validate_python_version():
+    """Raise exception if Python version too old."""
+    if sys.version_info < MINIMUM_PYTHON_VERSION:
+        ver_str = ".".join((map(str, MINIMUM_PYTHON_VERSION)))
+        raise RuntimeError(
+            f"You have Python {sys.version} from {sys.prefix}.\n"
+            f"This installer requires minimum Python version {ver_str}."
+        )
+
+
 if __name__ == "__main__":
+    validate_python_version()
     args = command_line_options()
     destination = pathlib.Path(args.directory)
     logger.info("Requested installation to: '%s'", destination)
