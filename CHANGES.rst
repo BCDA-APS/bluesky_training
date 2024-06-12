@@ -36,11 +36,17 @@ New Features
 
 * Example of APS taxi/fly scans.
 
+Fixes
+-----
+
+* Application new_bluesky_environment would crash when requests package not found.
+
 Maintenance
 ------------
 
 * Add environment file for 2024_2 cycle.
 * Make the home page less complex.
+* Require Py3.9 or higher to run new_bluesky_environment application.
 
 1.0.2
 ******
