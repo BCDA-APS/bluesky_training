@@ -50,9 +50,19 @@ import tempfile
 import time
 import zipfile
 
-logger = None  # set by command_line_options()
-
 MINIMUM_PYTHON_VERSION = (3, 9)
+
+if sys.version_info < MINIMUM_PYTHON_VERSION:
+    ver_str = ".".join((map(str, MINIMUM_PYTHON_VERSION)))
+    raise RuntimeError(
+        f"You have Python {sys.version} from {sys.prefix}.\n"
+        f"This installer requires minimum Python version {ver_str}."
+    )
+
+# Py3.8+ standard library package
+import requests
+
+logger = None  # set by command_line_options()
 
 GITHUB_URL = "https://github.com"
 REPO_NAME = "bluesky_training"
@@ -141,8 +151,6 @@ def branch_name_header(org, repo):
 
 def download_zip(local_zip_file, branch):
     """Download repository as ZIP file."""
-    import requests
-
     url = f"{TRAINING_REPO}/archive/refs/tags/{branch}.zip"
     logger.info("Downloading '%s'", url)
     try:
@@ -215,8 +223,6 @@ def git_init(destination):
 
 
 def latest_github_release_string(org, repo, ref="releases/latest"):
-    import requests
-
     global release_details_cache_
 
     if release_details_cache_ is None:
