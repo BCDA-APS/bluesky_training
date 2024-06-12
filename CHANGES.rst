@@ -45,6 +45,7 @@ Maintenance
 ------------
 
 * Add environment file for 2024_2 cycle.
+* Testing with Python 3.9, 3.10, 3.11.
 * Make the home page less complex.
 * Require Py3.9 or higher to run new_bluesky_environment application.
 
