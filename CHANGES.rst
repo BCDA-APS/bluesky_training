@@ -36,6 +36,11 @@ New Features
 
 * Example of APS taxi/fly scans.
 
+Fixes
+-----
+
+* newSpecFile did not update scan_id in some cases.
+
 Maintenance
 ------------
 
