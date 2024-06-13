@@ -6,10 +6,13 @@ import tempfile
 
 import pytest
 from apstools.utils import cleanupText
-from instrument.callbacks.spec_data_file_writer import newSpecFile, specwriter
-from spec2nexus.spec import SpecDataFile, is_spec_file
+from spec2nexus.spec import SpecDataFile
+from spec2nexus.spec import is_spec_file
 
 from bluesky.run_engine import RunEngine
+from instrument.callbacks.spec_data_file_writer import RE_finder
+from instrument.callbacks.spec_data_file_writer import newSpecFile
+from instrument.callbacks.spec_data_file_writer import specwriter
 
 INITIAL_SCAN_ID = 1234
 RE = RunEngine(dict(scan_id=INITIAL_SCAN_ID))
@@ -59,6 +62,37 @@ def test_newSpecFile(title, scan_id, tempdir):
         assert safe_title in specwriter.spec_filename.name
         assert specwriter.spec_filename.name[5:] == f"_{safe_title}.dat"
         assert isinstance(specwriter.spec_filename, pathlib.Path)
+
+
+@pytest.mark.parametrize("scan_id", [1, 2, 3, INITIAL_SCAN_ID - 1, INITIAL_SCAN_ID + 1])
+def test_issue_271(scan_id, tempdir):
+    """newSpecFile("title", scan_id=1) did not reset scan id."""
+    found_RE = RE_finder()  # Won't find the one in this module's globals()
+    assert found_RE is None
+
+    RE = RunEngine()  # define for this function, so it can be found
+    found_RE = RE_finder()
+    assert found_RE is not None
+    assert found_RE == RE
+
+    assert isinstance(scan_id, int)
+    assert tempdir.exists()
+    os.chdir(tempdir)  # newSpecFile() works in pwd
+
+    RE.md["scan_id"] = INITIAL_SCAN_ID
+    assert RE.md["scan_id"] == INITIAL_SCAN_ID
+
+    newSpecFile("title", scan_id=scan_id, RE=RE)
+    assert RE.md["scan_id"] != INITIAL_SCAN_ID
+    assert RE.md["scan_id"] == scan_id
+
+    # repeat, without passing RE as parameter
+    RE.md["scan_id"] = INITIAL_SCAN_ID
+    assert RE.md["scan_id"] == INITIAL_SCAN_ID
+
+    newSpecFile("title", scan_id=scan_id)
+    assert RE.md["scan_id"] != INITIAL_SCAN_ID
+    assert RE.md["scan_id"] == scan_id
 
 
 def test_newSpecFile_with_existing(tempdir):

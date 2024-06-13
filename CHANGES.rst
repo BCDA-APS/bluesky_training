@@ -40,6 +40,7 @@ Fixes
 -----
 
 * Application new_bluesky_environment would crash when requests package not found.
+* Function newSpecFile did not update scan_id in some cases.
 
 Maintenance
 ------------

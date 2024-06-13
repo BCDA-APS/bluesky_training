@@ -48,6 +48,32 @@ def spec_comment(comment, doc=None):
     APS_fw.spec_comment(comment, doc, specwriter)
 
 
+def RE_finder():
+    """
+    Find RunEngine object from namespaces of the stack.
+
+    * Search backwards through each frame in the stack.
+        * Find any RunEngine objects.
+            * Prefer one with name 'RE'.
+            * Otherwise, pick the first one.
+    * Otherwise, return 'None'.
+    
+    suggestion: Hoist to apstools.utils
+    """
+    import inspect
+    from bluesky import RunEngine
+
+    fallback = None
+    for fr in inspect.stack():  # Walk backwards from this frame.
+        static = fr.frame.f_locals.copy()  # f_locals will change during 'for'.
+        for k, v in static.items():
+            if isinstance(v, RunEngine):  # Got one!
+                if k == "RE":
+                    return v  # Ideal selection.
+                fallback = fallback or None
+    return fallback
+
+
 def newSpecFile(title, scan_id=None, RE=None):
     """
     User choice of the SPEC file name.
@@ -59,6 +85,7 @@ def newSpecFile(title, scan_id=None, RE=None):
     ``RE.md["scan_id"]`` is set to the last scan number in the file.
     """
     kwargs = {}
+    RE = RE or RE_finder()  # Search for a defined RunEngine instance
     if RE is not None:
         kwargs["RE"] = RE
 
