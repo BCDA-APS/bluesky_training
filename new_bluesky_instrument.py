@@ -35,7 +35,7 @@ USAGE::
 
 DEPENDENCIES:
 
-* Python 3.6 or higher
+* Python 3.9 or higher
 * Python Standard Libraries (already installed with Python)
 * requests package: https://docs.python-requests.org/en/latest/index.html
 """
@@ -45,10 +45,21 @@ import pathlib
 import shlex
 import shutil
 import subprocess
+import sys
 import tempfile
 import time
 import zipfile
 
+MINIMUM_PYTHON_VERSION = (3, 9)
+
+if sys.version_info < MINIMUM_PYTHON_VERSION:
+    ver_str = ".".join((map(str, MINIMUM_PYTHON_VERSION)))
+    raise RuntimeError(
+        f"You have Python {sys.version} from {sys.prefix}.\n"
+        f"This installer requires minimum Python version {ver_str}."
+    )
+
+# Py3.8+ standard library package
 import requests
 
 logger = None  # set by command_line_options()
@@ -185,9 +196,7 @@ def git_init(destination):
     """
 
     def shell(cmd):
-        logger.debug(
-            "Execute shell command \"%s\" in directory '%s'.", cmd, destination
-        )
+        logger.debug("Execute shell command \"%s\" in directory '%s'.", cmd, destination)
         split_command = shlex.split(cmd)
         process = subprocess.Popen(
             split_command,
@@ -367,7 +376,18 @@ def command_line_options():
     return args
 
 
+def validate_python_version():
+    """Raise exception if Python version too old."""
+    if sys.version_info < MINIMUM_PYTHON_VERSION:
+        ver_str = ".".join((map(str, MINIMUM_PYTHON_VERSION)))
+        raise RuntimeError(
+            f"You have Python {sys.version} from {sys.prefix}.\n"
+            f"This installer requires minimum Python version {ver_str}."
+        )
+
+
 if __name__ == "__main__":
+    validate_python_version()
     args = command_line_options()
     destination = pathlib.Path(args.directory)
     logger.info("Requested installation to: '%s'", destination)
