@@ -29,7 +29,7 @@ describe future plans.
 1.0.3
 ******
 
-release expected by 2024-04-30
+released 2024-06-13
 
 New Features
 ------------
