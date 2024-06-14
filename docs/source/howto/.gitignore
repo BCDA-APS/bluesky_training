@@ -1,0 +1,4 @@
+# ignore any output data files recorded here while running the notebooks
+2*.dat
+*.hdf
+*.h5
