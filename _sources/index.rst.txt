@@ -16,7 +16,7 @@ at a typical APS beamline.
 
 .. grid:: 2
 
-    .. grid-item-card:: :material-regular:`list_alt;3em` :ref:`instrument.install`
+    .. grid-item-card:: :material-regular:`list_alt;3em` :ref:`Install <instrument.install>`
 
       Install a new ``bluesky`` directory and get started.
 
