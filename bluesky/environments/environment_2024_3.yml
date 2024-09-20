@@ -23,13 +23,15 @@ channels:
   # Note this advice: https://stackoverflow.com/questions/67695893/
 
 dependencies:
-
   # Use conda to install only the basics and whatever pip can't install.
   # This includes binaries such as Qt and hkl.
   # Everything else by pip.
 
-# -------------------------------------------------------
-  - python =3.11
+  # Some Bluesky packages are not ready for 3.12+.
+  # Since this uses pip to install most packages, their
+  # requirements will not be handled until after the
+  # conda environment is installed.
+  - python <3.12
   - pip
   - apsu::pvapy
   - apsu::aps-dm-api >=8   # linux-64  osx-64 -- ONLY at APS!
