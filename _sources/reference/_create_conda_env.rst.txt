@@ -104,7 +104,7 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
          <pre>
          $ <b>source /PATH/TO/CONDA/bin/activate</b>
          </pre>
-         
+
       However, if the command ``which conda`` does not return anything, or if
       you are getting an error message (``bash: conda: command not found`` or
       ``bash: activate: No such file or directory``), conda is not installed on
@@ -167,11 +167,11 @@ bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>
 
          # update ~/.bashrc to activate base environment on login
          conda init
-         </code></pre>     
-         
+         </code></pre>
+
          </details>
          <br />
-      
+
 
       If you still encounter the same error message after installing conda or
       miniconda, you may need to add the conda installation directory to your
@@ -216,7 +216,7 @@ prompt is also prefixed with the environment name, as mentioned above.
     <pre>
     $ <b>conda config --show channels</b>
     </pre>
-    
+
     To add more channels:
 
     <pre>
@@ -244,7 +244,7 @@ prompt is also prefixed with the environment name, as mentioned above.
     href="https://conda.github.io/conda-libmamba-solver/">conda-libmamba-solver</a>
     package. If you have installed miniconda using the instructions for Linux
     above, this package is already installed and configured as the default solver.
-    
+
     You can check your default solver with the following command:
 
     <pre>
@@ -261,7 +261,7 @@ prompt is also prefixed with the environment name, as mentioned above.
     <li>Set libmamba as the default solver:</li>
     <pre>
     $ <b>conda config --set solver libmamba</b>
-    </pre>      
+    </pre>
     <li>Confirm libmanda is now your default solver:</li>
     <pre>
     $ <b>conda config --show solver</b>
@@ -281,7 +281,15 @@ The following commands install the ``bluesky_2023_3`` environment inside the
 (see `setup a bluesky instrument
 <https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
 
+.. hint:: Software requirements evolve.  Use the newest ``environment*.yml``
+   file in the ``environments/`` directory.  This command gives a directory
+   listing in chronological order:
 
+   .. raw:: html
+
+      <pre>
+      $ <b>ls -larth /environments/environment*.yml</b>
+      </pre>
 
 Note that the installation takes several minutes.
 
@@ -297,22 +305,22 @@ Note that the installation takes several minutes.
     </pre>
 
     <details><summary>Details</summary>
-    
-    <ul> 
+
+    <ul>
     <li>The <code>--force</code> option will replace any existing environment by this
     name without asking for confirmation. Remove this option if you wish.</li>
     <li>The <code>-n bluesky_2023_3</code> sets the name of the conda environment to be
-    created.</li> 
-    <li>The <code>-f ./environments/environment_2023_3.yml</code> option names the 
+    created.</li>
+    <li>The <code>-f ./environments/environment_2023_3.yml</code> option names the
     YAML file to be used. We create different versions of the YAML file, named
     for the APS operating cycle (2021-1, 2023-2, …), as the suite of packages
     for a working installation may change over time. By keeping all these files
     in the environments subdirectory, we can restore any of these environments
     with a simple command.</li>
-    <li>The <code>--solver=libmamba</code> option will use the conda-libmamba-solver. 
-    The <code>--solver</code> option can be removed but its use results in a much 
-    faster installation of the bluesky environment. The <code>libmamba</code> installation 
-    is described in the previous section.</li> 
+    <li>The <code>--solver=libmamba</code> option will use the conda-libmamba-solver.
+    The <code>--solver</code> option can be removed but its use results in a much
+    faster installation of the bluesky environment. The <code>libmamba</code> installation
+    is described in the previous section.</li>
     </ul>
 
     </details>
@@ -348,35 +356,35 @@ are configuration files for your bash shell. Here's a simple step-by-step guide:
 
    <ol>
    <li>Open a terminal.</li>
-   <li>Open the <code>~/.bashrc</code> and <code>~/.bash_aliases</code> files with your prefered text editor, 
+   <li>Open the <code>~/.bashrc</code> and <code>~/.bash_aliases</code> files with your prefered text editor,
    <i>e.g.</i>:
    <pre>
    $ <b> gedit ~/.bashrc ~/.bash_aliases </b>
    </pre>
-   If any of those files do not exist, this command will create blank ones. 
+   If any of those files do not exist, this command will create blank ones.
    </li>
-   <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find 
+   <li> In <code>~/.bashrc</code>, scroll down to the end of the file or find
    a suitable place to add the following lines:
    <pre>
    source ~/.bash_aliases
    </pre>
    <b>Note:</b> this line may already be included in your <code>~/.bashrc</code>.
    </li>
-   <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find 
-   a suitable place to add your alias. 
+   <li>In <code>~/.bash_aliases</code>, scroll down to the end of the file or find
+   a suitable place to add your alias.
    On a new line, type:
    <pre>
    export BLUESKY_CONDA_ENV=bluesky_2023_3
    alias become_bluesky='conda activate ${BLUESKY_CONDA_ENV}'
    </pre>
-   </li>  
+   </li>
    <li>Save your changes.</li>
    <li>Type <code>bash</code> and press enter, or open a new terminal windows to
    make the new alias available.</li>
 
    </ol>
    You can now use the alias <code>become_bluesky</code> to activate the bluesky
-   environment. 
+   environment.
 
 
 

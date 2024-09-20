@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Dynamic Limits for Two Motors &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,9 +425,9 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Dynamic-Limits-for-Two-Motors">
-<h1>Dynamic Limits for Two Motors<a class="headerlink" href="#Dynamic-Limits-for-Two-Motors" title="Permalink to this heading">#</a></h1>
+<h1>Dynamic Limits for Two Motors<a class="headerlink" href="#Dynamic-Limits-for-Two-Motors" title="Link to this heading">#</a></h1>
 <section id="Overview">
-<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#Overview" title="Link to this heading">#</a></h2>
 <p>Some instrument designs need protection against accidental collision between moving parts during routine operations. In such cases, each of the axes may be operating between its valid range but an interim (in-motion) state can pose the possibility of a collision.</p>
 <p>One such possible collision is when arms of a diffractometer (such as <span class="math notranslate nohighlight">\(\theta\)</span> and <span class="math notranslate nohighlight">\(2\theta\)</span>, known here as <code class="docutils literal notranslate"><span class="pre">theta</span></code> and <code class="docutils literal notranslate"><span class="pre">ttheta</span></code>, respectively) collide causing damage to beam transport apparatus and consequential instrumental downtime.</p>
 <p>To prevent the collision <em>in this case</em>, the <span class="math notranslate nohighlight">\(2\theta\)</span> axis must be at least <span class="math notranslate nohighlight">\(\delta\)</span> degrees above the <span class="math notranslate nohighlight">\(\theta\)</span> axis. Empirically, <span class="math notranslate nohighlight">\(\delta\)</span> of 3 degrees is sufficient protection.</p>
@@ -458,11 +454,11 @@ Suspending... To get to the prompt, hit Ctrl-C twice to pause.
 <p>We might need to write our own suspender if none of the <a class="reference external" href="https://blueskyproject.io/bluesky/state-machine.html#built-in-suspenders">provided suspenders</a> will do the job we want.</p>
 </details></section>
 <section id="Summary">
-<h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this heading">#</a></h2>
+<h2>Summary<a class="headerlink" href="#Summary" title="Link to this heading">#</a></h2>
 <p>Any time the motors are moved by the bluesky RunEngine, they will be stopped if the dynamic limit permit calculation goes to zero and the scan will pause.</p>
 </section>
 <section id="EPICS-setup">
-<h2>EPICS setup<a class="headerlink" href="#EPICS-setup" title="Permalink to this heading">#</a></h2>
+<h2>EPICS setup<a class="headerlink" href="#EPICS-setup" title="Link to this heading">#</a></h2>
 <p>We start with two motor axes defined in EPICS. Here, we run the docker image <a class="reference external" href="https://hub.docker.com/r/prjemian/synapps">prjemian/synApps</a> to make the <a class="reference external" href="https://github.com/prjemian/epics-docker/#custom-synappshttps://github.com/prjemian/epics-docker/#custom-synapps">EPICS IOC simulator run in a docker container</a> with IOC prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. These are motor PVs: <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> and <code class="docutils literal notranslate"><span class="pre">gp:m2</span></code> as shown.</p>
 <p><img alt="EPICS motor GUI screens" src="../_images/demo_dynamic_limits_motors.png" /></p>
 <p>To compute a dynamic limit between the two motor axes, we use a <em>userCalc</em> (EPICS <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html">swait</a> record), <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code> with settings as shown.</p>
@@ -481,7 +477,7 @@ Suspending... To get to the prompt, hit Ctrl-C twice to pause.
 <p><img alt="noisy detector simulation" src="../_images/demo_dynamic_limits_permit_noisy.png" /></p>
 </section>
 <section id="Bluesky-setup">
-<h2>Bluesky setup<a class="headerlink" href="#Bluesky-setup" title="Permalink to this heading">#</a></h2>
+<h2>Bluesky setup<a class="headerlink" href="#Bluesky-setup" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -690,7 +686,7 @@ I Tue-18:47:32 - #### Startup is complete. ####
 </div>
 </section>
 <section id="Custom-Bluesky-plan-for-\theta:2\theta-scan">
-<h2>Custom Bluesky plan for <span class="math notranslate nohighlight">\(\theta:2\theta\)</span> scan<a class="headerlink" href="#Custom-Bluesky-plan-for-\theta:2\theta-scan" title="Permalink to this heading">#</a></h2>
+<h2>Custom Bluesky plan for <span class="math notranslate nohighlight">\(\theta:2\theta\)</span> scan<a class="headerlink" href="#Custom-Bluesky-plan-for-\theta:2\theta-scan" title="Link to this heading">#</a></h2>
 <p>Define a plan for a coupled theta:2theta scan.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -830,7 +826,7 @@ generator scan [&#39;6ddca39f&#39;] (scan num: 926)
 <p>So far, have not registered a permit denied. Have not encountered a condition where permit <em>would</em> be denied.</p>
 </section>
 <section id="Try-to-provoke-a-permit-denied">
-<h2>Try to provoke a permit denied<a class="headerlink" href="#Try-to-provoke-a-permit-denied" title="Permalink to this heading">#</a></h2>
+<h2>Try to provoke a permit denied<a class="headerlink" href="#Try-to-provoke-a-permit-denied" title="Link to this heading">#</a></h2>
 <p>Check the backlash parameters for 2theta motor. Use the custom motor class that provides the backlash parameters.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -1055,7 +1051,7 @@ generator scan [&#39;991bdcb1&#39;] (scan num: 928)
 <p>We see some zero values (and then return to one) indicating occasional removal of the dynamic limit calculation permit. Since we only saw these when we added a backlash correction, we understand these dynamic violations of the limits are exactly what we hoped to intercept.</p>
 </section>
 <section id="Create-a-suspender">
-<h2>Create a suspender<a class="headerlink" href="#Create-a-suspender" title="Permalink to this heading">#</a></h2>
+<h2>Create a suspender<a class="headerlink" href="#Create-a-suspender" title="Link to this heading">#</a></h2>
 <p>Block the RunEngine when the permit fails.</p>
 <p>N.B. Might need to consider the special case where the permit fails when first starting the run. Why did that fail? (We’ll answer that soon.)</p>
 <p>The Bluesky project shows <a class="reference external" href="https://blueskyproject.io/bluesky/main/state-machine.html#example-suspend-a-plan-if-the-beam-current-dips-low">how to suspend a plan when the source X-ray intensity drops too low</a>.</p>
@@ -1164,7 +1160,7 @@ timeout with a <code class="docutils literal notranslate"><span class="pre">Fail
 <p>The signal (for the suspender) does not automatically clear since it is only computed when the motor readback value changes. We can clear this manually by moving the <code class="docutils literal notranslate"><span class="pre">theta</span></code> motor away from the <code class="docutils literal notranslate"><span class="pre">ttheta</span></code> motor. Yet, still, we encounter the problem when the two motors are close together either, as in this example.</p>
 </section>
 <section id="Conclusion">
-<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Permalink to this heading">#</a></h2>
+<h2>Conclusion<a class="headerlink" href="#Conclusion" title="Link to this heading">#</a></h2>
 <p>We can avoid an anticipated collision of instrument hardware by providing a RunEngine suspender tied to the value of an EPICS PV.</p>
 </section>
 </section>
@@ -1269,7 +1265,7 @@ timeout with a <code class="docutils literal notranslate"><span class="pre">Fail
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Simulate a temperature controller with an EPICS swait record &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,12 +425,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Simulate-a-temperature-controller-with-an-EPICS-swait-record">
-<h1>Simulate a temperature controller with an EPICS <code class="docutils literal notranslate"><span class="pre">swait</span></code> record<a class="headerlink" href="#Simulate-a-temperature-controller-with-an-EPICS-swait-record" title="Permalink to this heading">#</a></h1>
+<h1>Simulate a temperature controller with an EPICS <code class="docutils literal notranslate"><span class="pre">swait</span></code> record<a class="headerlink" href="#Simulate-a-temperature-controller-with-an-EPICS-swait-record" title="Link to this heading">#</a></h1>
 <blockquote><p>TODO: This HowTo is written as a tutorial (how to setup the swait record then apply it as a positioner). Refactor into a HowTo (cut directly to use of the swait record) using apstools.devices.SimulatedSwaitControllerPositioner. Then make a new notebook for apstools.devices.SimulatedTransformControllerPositioner.</p>
 </blockquote><p>Learn how to create a simulated <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/describe_instrument.html#temperature">temperature controller</a> with Bluesky and an EPICS <a class="reference external" href="https://bcda-aps.github.io/apstools/1.6.17/api/synApps/_swait.html">swait</a> record. We’ll show how to simulate the controller in EPICS and use that simulation as a <em>positioner</em> in Bluesky.</p>
 <p>In this simulation, the <code class="docutils literal notranslate"><span class="pre">swait</span></code> record provides the computations for the feedback loop that updates the simulated temperature.</p>
 <section id="Connect-with-a-swait-record">
-<h2>Connect with a <code class="docutils literal notranslate"><span class="pre">swait</span></code> record<a class="headerlink" href="#Connect-with-a-swait-record" title="Permalink to this heading">#</a></h2>
+<h2>Connect with a <code class="docutils literal notranslate"><span class="pre">swait</span></code> record<a class="headerlink" href="#Connect-with-a-swait-record" title="Link to this heading">#</a></h2>
 <p>We’ll connect with the <code class="docutils literal notranslate"><span class="pre">gp:userCalc18</span></code> PV, an instance of an EPICS <code class="docutils literal notranslate"><span class="pre">swait</span></code> record in our example IOC. We’ll create the ophyd controller object using the <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/_swait.html#apstools.synApps.swait.SwaitRecord">SwaitRecord</a> structure from the <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/">apstools</a> package.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -459,7 +455,7 @@ controller.read_configuration()=OrderedDict([(&#39;simulator_description&#39;, {
 </div>
 </section>
 <section id="Create-a-function-to-setup-the-controller">
-<h2>Create a function to setup the controller<a class="headerlink" href="#Create-a-function-to-setup-the-controller" title="Permalink to this heading">#</a></h2>
+<h2>Create a function to setup the controller<a class="headerlink" href="#Create-a-function-to-setup-the-controller" title="Link to this heading">#</a></h2>
 <p>Create a function to configure the <code class="docutils literal notranslate"><span class="pre">swait</span></code> record as a simulated temperature controller. The “controller” will update the current computed value (the <em>readback</em>) at <code class="docutils literal notranslate"><span class="pre">period</span></code> based on the setpoint. Note that <code class="docutils literal notranslate"><span class="pre">period</span></code> here is one of the preset EPICS <code class="docutils literal notranslate"><span class="pre">.SCAN</span></code> field values. Pick from any of these values (from the table at <a class="reference external" href="https://epics-base.github.io/epics-base/menuScan.html">this reference</a>):</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">&quot;10</span> <span class="pre">second&quot;</span></code></p></li>
@@ -532,7 +528,7 @@ controller.read_configuration()=OrderedDict([(&#39;simulator_description&#39;, {
 </div>
 </section>
 <section id="Setup-our-controller">
-<h2>Setup our controller<a class="headerlink" href="#Setup-our-controller" title="Permalink to this heading">#</a></h2>
+<h2>Setup our controller<a class="headerlink" href="#Setup-our-controller" title="Link to this heading">#</a></h2>
 <p>Setup our controller with a (randomly-selected) setpoint and scan period.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -578,7 +574,7 @@ controller.read_configuration()=OrderedDict([(&#39;simulator_description&#39;, {
 </div>
 </section>
 <section id="temperature-as-a-positioner">
-<h2>temperature as a positioner<a class="headerlink" href="#temperature-as-a-positioner" title="Permalink to this heading">#</a></h2>
+<h2>temperature as a positioner<a class="headerlink" href="#temperature-as-a-positioner" title="Link to this heading">#</a></h2>
 <p>A <em>positioner</em> is a device that has both a <em>readback</em> (the current measured value) and a <em>setpoint</em> (the expected, or demanded, value of the device). These are available as EPICS PVs from our <code class="docutils literal notranslate"><span class="pre">swait</span></code> record. We can obtain these directly from our ophyd <code class="docutils literal notranslate"><span class="pre">controller</span></code> object:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -627,7 +623,7 @@ temperature.position=19.527702862815946
 </pre></div></div>
 </div>
 <section id="Change-the-setpoint">
-<h3>Change the setpoint<a class="headerlink" href="#Change-the-setpoint" title="Permalink to this heading">#</a></h3>
+<h3>Change the setpoint<a class="headerlink" href="#Change-the-setpoint" title="Link to this heading">#</a></h3>
 <p>Watch the readback after the setpoint is changed, until the temperature becomes <code class="docutils literal notranslate"><span class="pre">inposition</span></code> (<code class="docutils literal notranslate"><span class="pre">inposition</span></code> is a property that reports a <code class="docutils literal notranslate"><span class="pre">True</span></code>/<code class="docutils literal notranslate"><span class="pre">False</span></code> value determined by <code class="docutils literal notranslate"><span class="pre">abs(readback</span> <span class="pre">-</span> <span class="pre">setpoint)</span> <span class="pre">&lt;=</span> <span class="pre">tolerance</span></code>).</p>
 <p>Here, we lower the temperature setpoint by 10 from the current readback value. Then, monitor the readback value until <code class="docutils literal notranslate"><span class="pre">inposition</span></code>.</p>
 <div class="nbinput docutils container">
@@ -661,7 +657,7 @@ temperature.position=19.527702862815946
 </div>
 </section>
 <section id="Move-the-temperature-as-a-positioner">
-<h3>Move the temperature as a positioner<a class="headerlink" href="#Move-the-temperature-as-a-positioner" title="Permalink to this heading">#</a></h3>
+<h3>Move the temperature as a positioner<a class="headerlink" href="#Move-the-temperature-as-a-positioner" title="Link to this heading">#</a></h3>
 <p>Here, we treat the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> object as a <em>positioner</em>.</p>
 <p>Tip: In ophyd, a positioner object has a <code class="docutils literal notranslate"><span class="pre">move()</span></code> method and a <code class="docutils literal notranslate"><span class="pre">position</span></code> property. The <code class="docutils literal notranslate"><span class="pre">position</span></code> property is a shortcut for <code class="docutils literal notranslate"><span class="pre">readback.get()</span></code>.</p>
 <div class="nbinput docutils container">
@@ -739,7 +735,7 @@ MoveStatus(done=True, pos=temperature, elapsed=2.0, success=True, settle_time=0.
 </section>
 </section>
 <section id="Use-the-temperature-positioner-with-a-bluesky-plan">
-<h2>Use the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> positioner with a bluesky plan<a class="headerlink" href="#Use-the-temperature-positioner-with-a-bluesky-plan" title="Permalink to this heading">#</a></h2>
+<h2>Use the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> positioner with a bluesky plan<a class="headerlink" href="#Use-the-temperature-positioner-with-a-bluesky-plan" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">temperature</span></code> positioner may be used as a detector or a positioner in a bluesky plan.</p>
 <p>First, setup the bluesky objects needed for scanning and reporting. We won’t need plots nor will we need to save any data. Also create a convenience function to report the current parameters of the positioner.</p>
 <div class="nbinput nblast docutils container">
@@ -981,7 +977,7 @@ generator rel_scan [&#39;f1cc2819&#39;] (scan num: 3)
 </div>
 </section>
 <section id="SimulatedTransformControllerPositioner-device">
-<h2>SimulatedTransformControllerPositioner device<a class="headerlink" href="#SimulatedTransformControllerPositioner-device" title="Permalink to this heading">#</a></h2>
+<h2>SimulatedTransformControllerPositioner device<a class="headerlink" href="#SimulatedTransformControllerPositioner-device" title="Link to this heading">#</a></h2>
 <p>Combine the setup steps into a single ophyd Device to make a simulator. Show the support code first:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[29]:
@@ -1117,7 +1113,7 @@ generator rel_scan [&#39;f1cc2819&#39;] (scan num: 3)
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

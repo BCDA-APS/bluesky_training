@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Create bluesky environment &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/tabs.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/tabs.js?v=3030b3cb"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/_create_conda_env';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -413,7 +409,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="create-bluesky-environment">
-<span id="reference-create-bluesky-enviroment"></span><h1>Create bluesky environment<a class="headerlink" href="#create-bluesky-environment" title="Permalink to this heading">#</a></h1>
+<span id="reference-create-bluesky-enviroment"></span><h1>Create bluesky environment<a class="headerlink" href="#create-bluesky-environment" title="Link to this heading">#</a></h1>
 <p>Describes the steps to create a virtual environment for a bluesky instrument
 (see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument">setup a bluesky instrument</a>).</p>
 <p>A bluesky instrument uses many Python packages not included in the Python
@@ -468,7 +464,7 @@ See this <a
 hrf="https://medium.com/@balance1150/how-to-build-a-conda-environment-through-a-yaml-file-db185acf5d22">article</a>
 for more instruction about conda environment YAML files.
 </details><section id="activate-conda">
-<h2>Activate conda<a class="headerlink" href="#activate-conda" title="Permalink to this heading">#</a></h2>
+<h2>Activate conda<a class="headerlink" href="#activate-conda" title="Link to this heading">#</a></h2>
 <p><strong>IMPORTANT</strong>: In Linux, use the <code class="docutils literal notranslate"><span class="pre">bash</span></code> command shell. For more info
 see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash">what is
 bash?</a></p>
@@ -624,10 +620,18 @@ $ <b>conda config --show solver</b>
 
 </details></section>
 <section id="install-the-bluesky-environment">
-<h2>Install the bluesky environment<a class="headerlink" href="#install-the-bluesky-environment" title="Permalink to this heading">#</a></h2>
+<h2>Install the bluesky environment<a class="headerlink" href="#install-the-bluesky-environment" title="Link to this heading">#</a></h2>
 <p>The following commands install the <code class="docutils literal notranslate"><span class="pre">bluesky_2023_3</span></code> environment inside the
 <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> directory  that was created when installing a new bluesky instrument
 (see <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument">setup a bluesky instrument</a>).</p>
+<div class="admonition hint">
+<p class="admonition-title">Hint</p>
+<p>Software requirements evolve.  Use the newest <code class="docutils literal notranslate"><span class="pre">environment*.yml</span></code>
+file in the <code class="docutils literal notranslate"><span class="pre">environments/</span></code> directory.  This command gives a directory
+listing in chronological order:</p>
+<pre>
+$ <b>ls -larth /environments/environment*.yml</b>
+</pre></div>
 <p>Note that the installation takes several minutes.</p>
 <pre>
 $ <b>cd ~/bluesky</b>
@@ -669,7 +673,7 @@ is described in the previous section.</li>
 #     $ conda deactivate
 </pre></section>
 <section id="create-an-alias-to-activate-the-bluesky-environment">
-<span id="reference-create-conda-bluesky-alias"></span><h2>Create an alias to activate the bluesky environment<a class="headerlink" href="#create-an-alias-to-activate-the-bluesky-environment" title="Permalink to this heading">#</a></h2>
+<span id="reference-create-conda-bluesky-alias"></span><h2>Create an alias to activate the bluesky environment<a class="headerlink" href="#create-an-alias-to-activate-the-bluesky-environment" title="Link to this heading">#</a></h2>
 <p>Creating a bash alias, an optional step, is like creating a custom shortcut. You
 can do this by editing the <code class="docutils literal notranslate"><span class="pre">~/.bashrc</span></code> and  <code class="docutils literal notranslate"><span class="pre">~/.bash_aliases</span></code> files, which
 are configuration files for your bash shell. Here’s a simple step-by-step guide:</p>
@@ -705,7 +709,7 @@ make the new alias available.</li>
 You can now use the alias <code>become_bluesky</code> to activate the bluesky
 environment.</section>
 <section id="other-reading">
-<h2>Other reading<a class="headerlink" href="#other-reading" title="Permalink to this heading">#</a></h2>
+<h2>Other reading<a class="headerlink" href="#other-reading" title="Link to this heading">#</a></h2>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference external" href="https://docs.conda.io/projects/conda/en/latest/user-guide/getting-started.html">Getting started with conda</a></p></li>
@@ -817,7 +821,7 @@ environment.</section>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

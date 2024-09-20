@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Export bluesky data to CSV &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -414,7 +410,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Export-bluesky-data-to-CSV">
-<h1>Export bluesky data to CSV<a class="headerlink" href="#Export-bluesky-data-to-CSV" title="Permalink to this heading">#</a></h1>
+<h1>Export bluesky data to CSV<a class="headerlink" href="#Export-bluesky-data-to-CSV" title="Link to this heading">#</a></h1>
 <p>Export bluesky experiment data from databroker to CSV files. Each data stream is written to its own file.</p>
 <p>As a bonus, it is shown how to write all of a run’s data to a single JSON file.</p>
 <p>First, identify the experiment data to be exported. Show what catalogs are available.</p>
@@ -950,7 +946,7 @@ Data variables:
 </div>
 </div>
 <section id="Export-one-run-to-CSV">
-<h2>Export one run to CSV<a class="headerlink" href="#Export-one-run-to-CSV" title="Permalink to this heading">#</a></h2>
+<h2>Export one run to CSV<a class="headerlink" href="#Export-one-run-to-CSV" title="Link to this heading">#</a></h2>
 <p>Make a function to do this, then call it with the <code class="docutils literal notranslate"><span class="pre">run</span></code>. The function should export all data streams and the run’s metadata. Each to a separate CSV file.</p>
 <ol class="arabic simple">
 <li><p>Starting with a catalog instance, <code class="docutils literal notranslate"><span class="pre">cat</span></code>, pick a <code class="docutils literal notranslate"><span class="pre">run</span></code> by <code class="docutils literal notranslate"><span class="pre">scan_id</span></code> (or <code class="docutils literal notranslate"><span class="pre">uid</span></code>).</p></li>
@@ -1007,7 +1003,7 @@ wrote file: run-85-baseline.csv
 </div>
 </section>
 <section id="Search-for-runs-by-time">
-<h2>Search for runs by time<a class="headerlink" href="#Search-for-runs-by-time" title="Permalink to this heading">#</a></h2>
+<h2>Search for runs by time<a class="headerlink" href="#Search-for-runs-by-time" title="Link to this heading">#</a></h2>
 <p>Since a search by scan_id` might not be unique, we hope to resolve that by restricting the time span for a search. Here’s how to search by a time span.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -1030,7 +1026,7 @@ wrote file: run-85-baseline.csv
 </div>
 </section>
 <section id="Export-a-list-of-runs">
-<h2>Export a list of runs<a class="headerlink" href="#Export-a-list-of-runs" title="Permalink to this heading">#</a></h2>
+<h2>Export a list of runs<a class="headerlink" href="#Export-a-list-of-runs" title="Link to this heading">#</a></h2>
 <p>Search the catalog by time and <code class="docutils literal notranslate"><span class="pre">scan_id</span></code> for a <strong>list</strong> of runs. Call the <code class="docutils literal notranslate"><span class="pre">export_run()</span></code> function on each run. We’ll look for #70 - #84 using the <code class="docutils literal notranslate"><span class="pre">range(70,</span> <span class="pre">86)</span></code> function. But, since we have a time restriction, only some of the scans will be written.</p>
 <p>The result of <code class="docutils literal notranslate"><span class="pre">cat.search(query)</span></code> (where <code class="docutils literal notranslate"><span class="pre">query</span></code> is a dictionary of search terms) is another catalog with runs matching the search terms. This result can be searched again and again as needed. The dictionary can use <a class="reference external" href="https://docs.mongodb.com/manual/reference/operator/query/">mongoquery</a> as shown here: <code class="docutils literal notranslate"><span class="pre">{'scan_id':</span> <span class="pre">{'$in':</span> <span class="pre">scan_id_list}}</span></code></p>
 <p>Here, a time span is selected along with a list of scan IDs. The time span is searched first, since any <code class="docutils literal notranslate"><span class="pre">scan_id</span></code> might not be unique in the catalog. (<em>assumption</em>: A <code class="docutils literal notranslate"><span class="pre">scan_id</span></code> might be unique within the time span.) The result is a catalog of scans from the list but also within the time span.</p>
@@ -1073,7 +1069,7 @@ wrote file: run-85-baseline.csv
 </div>
 </section>
 <section id="Export-run-to-JSON-file">
-<h2>Export run to JSON file<a class="headerlink" href="#Export-run-to-JSON-file" title="Permalink to this heading">#</a></h2>
+<h2>Export run to JSON file<a class="headerlink" href="#Export-run-to-JSON-file" title="Link to this heading">#</a></h2>
 <p>A Python dictionary can be written to JSON (its contents can be expressed in JSON. There are a few notable problems, such as <code class="docutils literal notranslate"><span class="pre">None</span></code> values.) Here, a dictionary (<code class="docutils literal notranslate"><span class="pre">data</span></code>) is built with the different parts of a run (metadata, streams). Then <code class="docutils literal notranslate"><span class="pre">data</span></code> is written to a single file.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -1203,7 +1199,7 @@ wrote file run_85.json
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

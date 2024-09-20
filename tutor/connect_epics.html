@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Connect Bluesky with EPICS &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -425,12 +421,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Connect-Bluesky-with-EPICS">
-<h1>Connect Bluesky with EPICS<a class="headerlink" href="#Connect-Bluesky-with-EPICS" title="Permalink to this heading">#</a></h1>
+<h1>Connect Bluesky with EPICS<a class="headerlink" href="#Connect-Bluesky-with-EPICS" title="Link to this heading">#</a></h1>
 <p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong>:</p>
 <p>Connect Bluesky with EPICS Process Variable(s).</p>
 <section id="Fundamentals">
-<h2>Fundamentals<a class="headerlink" href="#Fundamentals" title="Permalink to this heading">#</a></h2>
+<h2>Fundamentals<a class="headerlink" href="#Fundamentals" title="Link to this heading">#</a></h2>
 <p>In Bluesky, the <a class="reference external" href="https://blueskyproject.io/ophyd">ophyd</a> package is used to connect with the underlying control system (EPICS, in this case). The fundamental structure is the <a class="reference external" href="https://blueskyproject.io/ophyd/tutorials/single-PV.html#connect-to-a-pv-from-ophyd">EpicsSignal</a> which connects a single EPICS Process Variable (PV) with a single python object. Behind the scenes, the connection is made using the <a class="reference external" href="https://cars9.uchicago.edu/software/python/pyepics3/">PyEpics</a> package and the
 EPICS Channel Access protocol. Other information, when available (such as units, limits, displayed precision, data type, enumeration labels), is obtained from EPICS.</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -452,7 +448,7 @@ EPICS Channel Access protocol. Other information, when available (such as units,
 <p>Note that <code class="docutils literal notranslate"><span class="pre">EpicsSignal</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">EpicsSignalRO</span></code> have many additional configuration features beyond what is described here. Consult the ophyd documentation or <a class="reference external" href="https://github.com/bluesky/ophyd/blob/master/ophyd/signal.py#L1346">source code</a> for more details.</p>
 </section>
 <section id="EpicsSignal">
-<h2><code class="docutils literal notranslate"><span class="pre">EpicsSignal</span></code><a class="headerlink" href="#EpicsSignal" title="Permalink to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">EpicsSignal</span></code><a class="headerlink" href="#EpicsSignal" title="Link to this heading">#</a></h2>
 <p>Start by importing the support from <em>ophyd</em>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -604,7 +600,7 @@ bit1.get() = &#39;off&#39;
 </div>
 </section>
 <section id="EpicsSignalRO">
-<h2><code class="docutils literal notranslate"><span class="pre">EpicsSignalRO</span></code><a class="headerlink" href="#EpicsSignalRO" title="Permalink to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">EpicsSignalRO</span></code><a class="headerlink" href="#EpicsSignalRO" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">gp:UPTIME</span></code> PV tells us how long the IOC has been running. This PV contains information that we cannot change since it reports a value that only the IOC knows. Create an <code class="docutils literal notranslate"><span class="pre">uptime</span></code> object with the <code class="docutils literal notranslate"><span class="pre">EpicsSignalRO</span></code> class from <code class="docutils literal notranslate"><span class="pre">ophyd</span></code>:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -627,7 +623,7 @@ uptime.get() = &#39;04:47:37&#39;
 </div>
 </section>
 <section id="Device-and-Component">
-<h2><code class="docutils literal notranslate"><span class="pre">Device</span></code> and <code class="docutils literal notranslate"><span class="pre">Component</span></code><a class="headerlink" href="#Device-and-Component" title="Permalink to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">Device</span></code> and <code class="docutils literal notranslate"><span class="pre">Component</span></code><a class="headerlink" href="#Device-and-Component" title="Link to this heading">#</a></h2>
 <p>We may have a group of PVs that are related in some way. It is possible to organize the Python objects into a larger structure called an <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> where each of the <code class="docutils literal notranslate"><span class="pre">EpicsSignal</span></code> objects is an <code class="docutils literal notranslate"><span class="pre">ophyd.Component</span></code>. Import the ophyd structures next:</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -885,7 +881,7 @@ OrderedDict([(&#39;stack_basic_enable&#39;,
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

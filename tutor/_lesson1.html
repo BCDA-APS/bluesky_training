@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Lesson 1: scaler and count &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -425,12 +421,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Lesson-1:-scaler-and-count">
-<h1>Lesson 1: scaler and count<a class="headerlink" href="#Lesson-1:-scaler-and-count" title="Permalink to this heading">#</a></h1>
+<h1>Lesson 1: scaler and count<a class="headerlink" href="#Lesson-1:-scaler-and-count" title="Link to this heading">#</a></h1>
 <p>In this lesson, we’ll work with a scaler (devices that counts pulses emitted from one or more pulse-emitting <strong>detector</strong> electronics) and use this to make a first lesson in using <a class="reference external" href="https://blueskyproject.io/bluesky/">Bluesky</a> and <a class="reference external" href="https://blueskyproject.io/">related tools</a>.</p>
 <p>First, we’ll show how to start a Jupyter notebook. Next, we’ll connect with an EPICS scaler (using <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a>), and then use the Bluesky software to count from the scaler.</p>
 <p><strong>note</strong>: This tutorial expects to find an EPICS IOC on the local network configured as a synApps <a class="reference external" href="https://github.com/epics-modules/xxx">xxx</a> IOC with prefix <code class="docutils literal notranslate"><span class="pre">sky:</span></code>. A docker container is available to provide this IOC. See this URL for instructions: <a class="github reference external" href="https://github.com/prjemian/epics-docker/blob/master/n3_synApps/README.md">prjemian/epics-docker</a></p>
 <section id="Starting-this-session-in-a-Jupyter-notebook">
-<h2>Starting this session in a Jupyter notebook<a class="headerlink" href="#Starting-this-session-in-a-Jupyter-notebook" title="Permalink to this heading">#</a></h2>
+<h2>Starting this session in a Jupyter notebook<a class="headerlink" href="#Starting-this-session-in-a-Jupyter-notebook" title="Link to this heading">#</a></h2>
 <p>This session was started from the linux command line:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>jemian@otz ~ $ source /APSshare/anaconda3/Bluesky/bin/activate
 (base) jemian@otz ~ $ jupyter-notebook
@@ -454,7 +450,7 @@ document.write(`
 <p>Finally, from the <strong>File</strong> menu in the jupyter notebook (in the browser), selected <em>Rename …</em> to save the <em>Untitled</em> notebook with the name <em>lesson1</em> (default extension is <code class="docutils literal notranslate"><span class="pre">.ipynb</span></code>).</p>
 </section>
 <section id="Connect-an-EPICS-scaler">
-<h2>Connect an EPICS scaler<a class="headerlink" href="#Connect-an-EPICS-scaler" title="Permalink to this heading">#</a></h2>
+<h2>Connect an EPICS scaler<a class="headerlink" href="#Connect-an-EPICS-scaler" title="Link to this heading">#</a></h2>
 <p>I have a synApps (v6.1) <em>XXX</em>-style IOC with the prefix <code class="docutils literal notranslate"><span class="pre">sky:</span></code>. It has a <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/std/R3-4-1/documentation/scalerRecord.html">scaler</a>, 16 soft channel <a class="reference external" href="https://github.com/epics-modules/motor">motor</a>s, and some other support we’ll ignore in lesson 1.</p>
 <p>The scaler is <code class="docutils literal notranslate"><span class="pre">sky:scaler1</span></code>. We’ll connect to that first. To make the connection, we need to import the <a class="reference external" href="https://blueskyproject.io/ophyd/builtin-devices.html#epicsscaler">ScalerCH</a> device from the <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd.scaler</a> library.</p>
 <div class="nbinput docutils container">
@@ -621,7 +617,7 @@ Cell <span class="ansi-green-fg">In[7], line 1</span>
 </div>
 </section>
 <section id="Get,-then-Set-the-count-time-on-the-scaler">
-<h2>Get, then Set the count time on the scaler<a class="headerlink" href="#Get,-then-Set-the-count-time-on-the-scaler" title="Permalink to this heading">#</a></h2>
+<h2>Get, then Set the count time on the scaler<a class="headerlink" href="#Get,-then-Set-the-count-time-on-the-scaler" title="Link to this heading">#</a></h2>
 <p>The preset counting time (<code class="docutils literal notranslate"><span class="pre">.TP</span></code>) is one of the many fields of the EPICS scaler record. It is available as <code class="docutils literal notranslate"><span class="pre">scaler.preset_time</span></code> in this scaler object. We can inspect this:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
@@ -734,7 +730,7 @@ Cell <span class="ansi-green-fg">In[12], line 1</span>
 </div>
 </section>
 <section id="Use-Bluesky-to-count-the-scaler">
-<h2>Use Bluesky to count the scaler<a class="headerlink" href="#Use-Bluesky-to-count-the-scaler" title="Permalink to this heading">#</a></h2>
+<h2>Use Bluesky to count the scaler<a class="headerlink" href="#Use-Bluesky-to-count-the-scaler" title="Link to this heading">#</a></h2>
 <p>So far, we have used ophyd to talk with the EPICS scaler. Let’s start to use Bluesky. We need to load support to start the Bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/tutorial.html#the-runengine">RunEngine</a>. For now, we’ll use the most basic configuration (does not save data anywhere).</p>
 <p>The job of the RunEngine is to process command messages (our data acquisition commands) and to output documents (the data to be acquired). Initially, we’ll use predefined data acquisition sequences (called <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">plans</a>) and ignore the <a class="reference external" href="https://blueskyproject.io/bluesky/documents.html">documents</a>.</p>
 <div class="nbinput docutils container">
@@ -806,7 +802,7 @@ Cell <span class="ansi-green-fg">In[15], line 1</span>
 </div>
 <p>The final result from submitting a plan to the RunEngine is an identifier of the sequence of documents. Since we did not capture that sequence, we can’t view it or access it in any way. Let’s <em>fix</em> that next.</p>
 <section id="Report-about-the-documents-emitted-from-the-RunEngine">
-<h3>Report about the documents emitted from the RunEngine<a class="headerlink" href="#Report-about-the-documents-emitted-from-the-RunEngine" title="Permalink to this heading">#</a></h3>
+<h3>Report about the documents emitted from the RunEngine<a class="headerlink" href="#Report-about-the-documents-emitted-from-the-RunEngine" title="Link to this heading">#</a></h3>
 <p>To display information about the documents emitted from the RunEngine, we need to make a function that will receive the documents.</p>
 <p>In Bluesky terms, this type of function is a <em>callback</em>. It takes two arguments. The first argument is a <code class="docutils literal notranslate"><span class="pre">str</span></code> that tells what kind of document is coming, the second is a python dictionary with the document’s contents. We’ll start by printing summary information. We then submit the plan again with the name of our callback function as a second argument (not to <code class="docutils literal notranslate"><span class="pre">bp.count</span></code> but as a second argument to <code class="docutils literal notranslate"><span class="pre">RE()</span></code>).</p>
 <div class="nbinput nblast docutils container">
@@ -905,7 +901,7 @@ Cell <span class="ansi-green-fg">In[20], line 1</span>
 </section>
 </section>
 <section id="Summary">
-<h2>Summary<a class="headerlink" href="#Summary" title="Permalink to this heading">#</a></h2>
+<h2>Summary<a class="headerlink" href="#Summary" title="Link to this heading">#</a></h2>
 <p>We’ll show this code as a python program:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>#!/usr/bin/env python
 
@@ -941,7 +937,7 @@ print(RE(bp.count([scaler], num=3), myCallback))
 </div>
 </section>
 <section id="Quit-the-jupyter-notebook">
-<h2>Quit the jupyter notebook<a class="headerlink" href="#Quit-the-jupyter-notebook" title="Permalink to this heading">#</a></h2>
+<h2>Quit the jupyter notebook<a class="headerlink" href="#Quit-the-jupyter-notebook" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p>Save the “lesson1” page if you wish.</p></li>
 <li><p>Press the <strong>Logout</strong> button in the upper right corner of “lesson1” and close the page.</p></li>
@@ -1052,7 +1048,7 @@ print(RE(bp.count([scaler], num=3), myCallback))
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

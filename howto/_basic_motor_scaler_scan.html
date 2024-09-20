@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Minimal: Scan scaler vs motor &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Minimal:-Scan-scaler-vs-motor">
-<h1>Minimal: Scan scaler <em>vs</em> motor<a class="headerlink" href="#Minimal:-Scan-scaler-vs-motor" title="Permalink to this heading">#</a></h1>
+<h1>Minimal: Scan scaler <em>vs</em> motor<a class="headerlink" href="#Minimal:-Scan-scaler-vs-motor" title="Link to this heading">#</a></h1>
 <p><em>APS Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>Connect an EPICS motor PV, an EPICS scaler PV, and scan using the bluesky <em>RunEngine</em> with the <em>BestEffortCallback</em> to visualize the acquired data.</p>
@@ -453,7 +449,7 @@ document.write(`
 </table>
 </div>
 <section id="Connect-the-motor">
-<h2>Connect the motor<a class="headerlink" href="#Connect-the-motor" title="Permalink to this heading">#</a></h2>
+<h2>Connect the motor<a class="headerlink" href="#Connect-the-motor" title="Link to this heading">#</a></h2>
 <p>First, import the <a class="reference external" href="https://blueskyproject.io/ophyd/generated/ophyd.epics_motor.EpicsMotor.html?highlight=epicsmotor#ophyd.epics_motor.EpicsMotor">ophyd.EpicsMotor</a> (class) definition. This Python class from <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> is the best representation of the synApps <a class="reference external" href="https://github.com/epics-modules/motor">motor</a> record.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -581,7 +577,7 @@ xpos [In progress. No progress bar available.]
 </div>
 </section>
 <section id="Connect-the-scaler">
-<h2>Connect the scaler<a class="headerlink" href="#Connect-the-scaler" title="Permalink to this heading">#</a></h2>
+<h2>Connect the scaler<a class="headerlink" href="#Connect-the-scaler" title="Link to this heading">#</a></h2>
 <p>The <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> package provides two representations of the synApps <a class="reference external" href="https://github.com/epics-modules/scaler">scaler</a> record (<a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#epicsscaler">EpicsScaler</a> and <a class="reference external" href="https://blueskyproject.io/ophyd/reference/builtin-devices.html#scalerch">ScalerCH</a>). My <em>opinion</em> is that the <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> class provides the representation most compatible with use at the APS.</p>
 <p>As before, import the ophyd class:</p>
 <div class="nbinput nblast docutils container">
@@ -686,7 +682,7 @@ OrderedDict([(&#39;timebase&#39;,
 </pre></div></div>
 </div>
 <section id="Set-the-scaler's-counting-time">
-<h3>Set the scaler’s counting time<a class="headerlink" href="#Set-the-scaler's-counting-time" title="Permalink to this heading">#</a></h3>
+<h3>Set the scaler’s counting time<a class="headerlink" href="#Set-the-scaler's-counting-time" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">ScalerCH</span></code> class defines the count time as the <code class="docutils literal notranslate"><span class="pre">preset_time</span></code> attribute. Show it’s value:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
@@ -782,7 +778,7 @@ vsc16_time                     0.6
 </div>
 </section>
 <section id="labels-and-the-%wa-magic-command">
-<h3><code class="docutils literal notranslate"><span class="pre">labels</span></code> and the <code class="docutils literal notranslate"><span class="pre">%wa</span></code> magic command<a class="headerlink" href="#labels-and-the-%wa-magic-command" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">labels</span></code> and the <code class="docutils literal notranslate"><span class="pre">%wa</span></code> magic command<a class="headerlink" href="#labels-and-the-%wa-magic-command" title="Link to this heading">#</a></h3>
 <p>As noted above, the <code class="docutils literal notranslate"><span class="pre">labels=LIST</span></code> keyword argument used when the motor and scaler objects were create enable certain features. For example, the <code class="docutils literal notranslate"><span class="pre">%ct</span></code> magic command will count all the <code class="docutils literal notranslate"><span class="pre">detectors</span></code>.</p>
 <p>Actually, <code class="docutils literal notranslate"><span class="pre">detectors</span></code> is the default argument for the <code class="docutils literal notranslate"><span class="pre">%ct</span></code> magic. If an arument is supplied, it is the name of a label to be matched. This is why the additional label of <code class="docutils literal notranslate"><span class="pre">scalers</span></code> was included. Thus, we could count <em>only</em> <code class="docutils literal notranslate"><span class="pre">scalers</span></code> with the command <code class="docutils literal notranslate"><span class="pre">%ct</span> <span class="pre">scalers</span></code>.</p>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">labels</span></code> keyword liberally to group similar objects.</p>
@@ -842,7 +838,7 @@ motor
 </section>
 </section>
 <section id="Prepare-to-scan">
-<h2>Prepare to scan<a class="headerlink" href="#Prepare-to-scan" title="Permalink to this heading">#</a></h2>
+<h2>Prepare to scan<a class="headerlink" href="#Prepare-to-scan" title="Link to this heading">#</a></h2>
 <p>Before we can run our first bluesky scan, we have to import various software tools.</p>
 <p>First is the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine()</span></code>, which will manage the various activities for the scan (move motor, wait, trigger scaler, wait, collect channel data, publish to data subscribers, …).</p>
 <p>Create a <code class="docutils literal notranslate"><span class="pre">RunEngine()</span></code> object. The argument here is a dictionary (empty in this training session). (For routine operations at an instrument, the dictionary is filled with information saved from the previous session.)</p>
@@ -975,7 +971,7 @@ sources:
 </div>
 </div>
 <section id="Summary-of-preparations-for-scanning">
-<h3>Summary of preparations for scanning<a class="headerlink" href="#Summary-of-preparations-for-scanning" title="Permalink to this heading">#</a></h3>
+<h3>Summary of preparations for scanning<a class="headerlink" href="#Summary-of-preparations-for-scanning" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>EPICS connections to motor and scaler</p></li>
 <li><p>databroker</p></li>
@@ -993,7 +989,7 @@ sources:
 </section>
 </section>
 <section id="First-scan">
-<h2>First scan<a class="headerlink" href="#First-scan" title="Permalink to this heading">#</a></h2>
+<h2>First scan<a class="headerlink" href="#First-scan" title="Link to this heading">#</a></h2>
 <p>The standard plans provided in <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans">bluesky.plans</a> are sufficient for many needs, so import them and, in the same command, give the package a short name (<code class="docutils literal notranslate"><span class="pre">bp</span></code>) since it is used frequently.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[31]:
@@ -1153,7 +1149,7 @@ generator scan [&#39;fb41419c&#39;] (scan num: 1)
 <p>The scan ran, data was collected and printed at each step of the scan. Finally, plots were made of the scaler channel <em>vs</em> motor position for each active channel.</p>
 </section>
 <section id="Fix-a-few-problems">
-<h2>Fix a few <em>problems</em><a class="headerlink" href="#Fix-a-few-problems" title="Permalink to this heading">#</a></h2>
+<h2>Fix a few <em>problems</em><a class="headerlink" href="#Fix-a-few-problems" title="Link to this heading">#</a></h2>
 <p>There were some problems. First is that an error was reported after the scan (<code class="docutils literal notranslate"><span class="pre">...</span> <span class="pre">callbacks/fitting.py:165:</span> <span class="pre">RuntimeWarning:</span> <span class="pre">invalid</span> <span class="pre">value</span> <span class="pre">encountered</span> <span class="pre">in</span> <span class="pre">double_scalars</span></code>). This error is because the scalers showed no peak during the scan. The scaler is a simulator with no real data. We’ll ignore that error here.</p>
 <p>Another problem is that all <em>named</em> scaler channels are shown. Let’s reduce that list to <code class="docutils literal notranslate"><span class="pre">I0</span></code> and <code class="docutils literal notranslate"><span class="pre">scint</span></code> just to show how it is done. (Set back to default: <code class="docutils literal notranslate"><span class="pre">vsc16.select_channels()</span></code>)</p>
 <div class="nbinput nblast docutils container">
@@ -1228,7 +1224,7 @@ generator scan [&#39;b5f76f7c&#39;] (scan num: 2)
 </div>
 </section>
 <section id="Scan-with-a-different-counting-time-:-staging">
-<h2>Scan with a <em>different</em> counting time : <em>staging</em><a class="headerlink" href="#Scan-with-a-different-counting-time-:-staging" title="Permalink to this heading">#</a></h2>
+<h2>Scan with a <em>different</em> counting time : <em>staging</em><a class="headerlink" href="#Scan-with-a-different-counting-time-:-staging" title="Link to this heading">#</a></h2>
 <p>Suppose that we wish to use a different counting time, we could change the <code class="docutils literal notranslate"><span class="pre">vsc16.preset_time</span></code> value before running the scan. Another way is to use the <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> concept of <a class="reference external" href="https://blueskyproject.io/ophyd/device-overview.html?highlight=staging#stage-and-unstage">stage &amp; unstage</a>.</p>
 <p><em>Staging</em> is the action of preparing an ophyd device for operation, then resetting it afterwards to its previous values. For our scaler, we could <em>stage</em> a different counting time that would be used during the run, then removed after the run is complete. The <code class="docutils literal notranslate"><span class="pre">stage()</span></code> and <code class="docutils literal notranslate"><span class="pre">unstage()</span></code> methods are controlled by an <code class="docutils literal notranslate"><span class="pre">OrderedDictionary</span></code> where the keys are the attributes of the Python object and the values are used during the run. The <code class="docutils literal notranslate"><span class="pre">RE()</span></code> takes care of calling <code class="docutils literal notranslate"><span class="pre">stage()</span></code> and <code class="docutils literal notranslate"><span class="pre">unstage()</span></code>
 during the scan.</p>
@@ -1311,7 +1307,7 @@ generator scan [&#39;04dd2069&#39;] (scan num: 3)
 </div>
 </section>
 <section id="Custom-plan-with-configurable-count-time">
-<h2>Custom plan with configurable count time<a class="headerlink" href="#Custom-plan-with-configurable-count-time" title="Permalink to this heading">#</a></h2>
+<h2>Custom plan with configurable count time<a class="headerlink" href="#Custom-plan-with-configurable-count-time" title="Link to this heading">#</a></h2>
 <p>It is common to want to set the count time at the time the scan is started. For this feature, a custom scan plan is needed, where we will repeat the steps just shown. This plan will use similar arguments as the <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> used above, but add an optional keyword argument <code class="docutils literal notranslate"><span class="pre">ct</span></code> for the count time with a default of 1.0 second. For housekeeping, we’ll remove the staging configuration from the scaler after the scan.</p>
 <p>A bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">plan</a> is a <a class="reference external" href="https://duckduckgo.com/?t=ffsb&amp;q=Python+generator+function&amp;ia=web">Python generator function</a>. The <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> call is the part that makes this a generator function. Briefly, a bluesky plan defers execution of the actual scan until the <code class="docutils literal notranslate"><span class="pre">RE()</span></code> calls for it. This indirection allows the <code class="docutils literal notranslate"><span class="pre">RE()</span></code> to manage the plan’s execution when the beam dumps or other interruptions occur. (A function becomes a generator by the
 presence of one or more <code class="docutils literal notranslate"><span class="pre">yield</span></code> commands.)</p>
@@ -1386,7 +1382,7 @@ scaler.preset_time.get() = 0.5
 </div>
 </section>
 <section id="Challenges">
-<h2>Challenges<a class="headerlink" href="#Challenges" title="Permalink to this heading">#</a></h2>
+<h2>Challenges<a class="headerlink" href="#Challenges" title="Link to this heading">#</a></h2>
 <p>Try these additional modifications or activities.</p>
 <ol class="arabic">
 <li><p>Use <code class="docutils literal notranslate"><span class="pre">logger</span></code> to report at various places.</p>
@@ -1507,7 +1503,7 @@ scaler.preset_time.get() = 0.5
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

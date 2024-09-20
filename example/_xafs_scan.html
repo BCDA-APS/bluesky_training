@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>XAFS scan &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -414,7 +410,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="XAFS-scan">
-<h1>XAFS scan<a class="headerlink" href="#XAFS-scan" title="Permalink to this heading">#</a></h1>
+<h1>XAFS scan<a class="headerlink" href="#XAFS-scan" title="Link to this heading">#</a></h1>
 <p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>Example multi-segment XAFS scan. A full scan might be divided into:</p>
@@ -457,7 +453,7 @@ document.write(`
 <p>where <code class="docutils literal notranslate"><span class="pre">exponent=0.5</span></code>, <code class="docutils literal notranslate"><span class="pre">factor=2.0</span></code>, and <code class="docutils literal notranslate"><span class="pre">requested_time</span></code> is the time specified by the caller.</p>
 <p>note: We are connected to <em>simulated</em> hardware. The simulated scalers generate random pulses. All detector data is random numbers.</p>
 <section id="Start-the-instrument-package">
-<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
 <p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -568,7 +564,7 @@ I Thu-18:16:35 - #### Startup is complete. ####
 </div>
 </section>
 <section id="Energy-&amp;-k">
-<h2>Energy &amp; <em>k</em><a class="headerlink" href="#Energy-&-k" title="Permalink to this heading">#</a></h2>
+<h2>Energy &amp; <em>k</em><a class="headerlink" href="#Energy-&-k" title="Link to this heading">#</a></h2>
 <p>The Kohzu monochromator support expects energy in <em>keV</em> and wavelength in <em>1/angstrom</em>. XAFS is similar, <em>k</em> in <em>1/angstrom</em>, but also uses <em>eV</em> sometimes for energy. We need to be flexible.</p>
 <p>Fundamental physical constants are provided by the <a class="reference external" href="https://www.scipy.org/">scipy</a> package. The Python <a class="reference external" href="https://pint.readthedocs.io/">pint</a> package is used to provide unit conversions that will help to convert between energy and <em>k</em> coordinates. With these two packages, our software provides flexibility for the units a caller must use. And the code we use documents itself about our choice of units.</p>
 <p>Here we define routines to convert between energy and <em>k</em>.</p>
@@ -606,7 +602,7 @@ I Thu-18:16:35 - #### Startup is complete. ####
 </div>
 </section>
 <section id="Multiple-segments">
-<h2>Multiple segments<a class="headerlink" href="#Multiple-segments" title="Permalink to this heading">#</a></h2>
+<h2>Multiple segments<a class="headerlink" href="#Multiple-segments" title="Link to this heading">#</a></h2>
 <p>XAFS scans measure signals from two or more detectors as the incident X-ray energy is varied. One method is to step the energy where the step size is different depending on the region of the scan. Steps could be in constant units of energy or <em>k</em> (see above).</p>
 <p>We define here a default list of four regions (known here as <code class="docutils literal notranslate"><span class="pre">segments</span></code>), each showing a different feature of units or count time weighting. This default list is used in the <code class="docutils literal notranslate"><span class="pre">xafs()</span></code> scan below if the caller chooses. The <code class="docutils literal notranslate"><span class="pre">get_energies_and_times()</span></code> function parses the supplied list of segments and returns a list of <code class="docutils literal notranslate"><span class="pre">(energy_keV,</span> <span class="pre">count_time)</span></code> pairs for use in a
 <a class="reference external" href="https://blueskyproject.io/bluesky/">bluesky</a>.<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">plans</a>.<a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan">list_scan()</a>.</p>
@@ -728,7 +724,7 @@ I Thu-18:16:35 - #### Startup is complete. ####
 </div>
 </section>
 <section id="real-time-computation-of-absorption-coefficient">
-<h2>real-time computation of absorption coefficient<a class="headerlink" href="#real-time-computation-of-absorption-coefficient" title="Permalink to this heading">#</a></h2>
+<h2>real-time computation of absorption coefficient<a class="headerlink" href="#real-time-computation-of-absorption-coefficient" title="Link to this heading">#</a></h2>
 <p>The absorption coefficient is computed from the ratio of two scaler channels. We could compute that either in Python or EPICS. Here, we choose an EPICS <em>userCalc</em> because its setup is more familiar to people experienced with EPICS. The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package already provides support for 10 userCalcs. We’ll pick userCalc2 (since userCalc1 is already used by the simulated temperature controller).</p>
 <p>The computation will update when it gets new values for either scaler channel. In our <code class="docutils literal notranslate"><span class="pre">xafs()</span></code> scan below, we’ll connect (separately, so we don’t get all the other data provided by the userCalc support) with the calculated value (<em>log(I00/I0)</em>) as an additional <em>detector</em>.</p>
 <div class="nbinput nblast docutils container">
@@ -757,7 +753,7 @@ I Thu-18:16:35 - #### Startup is complete. ####
 </div>
 </section>
 <section id="xafs()-plan">
-<h2><code class="docutils literal notranslate"><span class="pre">xafs()</span></code> plan<a class="headerlink" href="#xafs()-plan" title="Permalink to this heading">#</a></h2>
+<h2><code class="docutils literal notranslate"><span class="pre">xafs()</span></code> plan<a class="headerlink" href="#xafs()-plan" title="Link to this heading">#</a></h2>
 <p>With all the pieces defined, it is time to write a plan to measure the XAFS. The caller must provide the absorption edge energy (in keV). A list of segments is optional (will default to <code class="docutils literal notranslate"><span class="pre">DEFAULT_XAFS_SCAN_SEGMENTS</span></code> as defined above) so only the absorption edge energy is required. Once the inputs are checked for correctness, the absorption calculation is setup in an EPICS userCalc (<a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/synApps/_swait.html#synapps-swait-record">SwaitRecord</a>).
 Finally, the 1-D step scan is run by calling <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.list_scan.html#bluesky.plans.list_scan">bp.list_scan()</a> with lists of energy and count time values for each step.</p>
 <div class="nbinput nblast docutils container">
@@ -855,7 +851,7 @@ Initial dcm.energy.position=7.4563 keV
 </div>
 </section>
 <section id="XAFS-scan-with-bluesky">
-<h2>XAFS scan with bluesky<a class="headerlink" href="#XAFS-scan-with-bluesky" title="Permalink to this heading">#</a></h2>
+<h2>XAFS scan with bluesky<a class="headerlink" href="#XAFS-scan-with-bluesky" title="Link to this heading">#</a></h2>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
@@ -965,7 +961,7 @@ generator xafs [&#39;13d5ecf4&#39;] (scan num: 965)
 </div>
 </section>
 <section id="Challenges">
-<h2>Challenges<a class="headerlink" href="#Challenges" title="Permalink to this heading">#</a></h2>
+<h2>Challenges<a class="headerlink" href="#Challenges" title="Link to this heading">#</a></h2>
 <ol class="arabic simple">
 <li><p>Scan XAFS with 3 segments (below-edge, near-edge, above-edge regions).</p></li>
 <li><p>Explain why we can’t we scan in negative <em>k</em>-space.</p></li>
@@ -974,7 +970,7 @@ generator xafs [&#39;13d5ecf4&#39;] (scan num: 965)
 </ol>
 </section>
 <section id="References">
-<h2>References<a class="headerlink" href="#References" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#References" title="Link to this heading">#</a></h2>
 <ul class="simple">
 <li><p><a class="reference external" href="https://docs.xrayabsorption.org/tutorials/XAFS_Fundamentals.pdf">https://docs.xrayabsorption.org/tutorials/XAFS_Fundamentals.pdf</a></p></li>
 <li><p><a class="reference external" href="https://docs.xrayabsorption.org/Workshops/IIT2013/Newville_Theory.pdf">https://docs.xrayabsorption.org/Workshops/IIT2013/Newville_Theory.pdf</a></p></li>
@@ -1085,7 +1081,7 @@ generator xafs [&#39;13d5ecf4&#39;] (scan num: 965)
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

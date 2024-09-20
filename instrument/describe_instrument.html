@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>The instrument package for Bluesky Data Acquisition &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -424,7 +420,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="The-instrument-package-for-Bluesky-Data-Acquisition">
-<h1>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition<a class="headerlink" href="#The-instrument-package-for-Bluesky-Data-Acquisition" title="Permalink to this heading">#</a></h1>
+<h1>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for Bluesky Data Acquisition<a class="headerlink" href="#The-instrument-package-for-Bluesky-Data-Acquisition" title="Link to this heading">#</a></h1>
 <p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>In this notebook, we describe the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package for a simulated X-ray instrument at a user facility such as the Advanced Photon Source. The goal is to use EPICS as much as possible to provide the control system features and to use Bluesky (providing the data acquisition framework) as a thin layer on top of EPICS.</p>
@@ -462,7 +458,7 @@ document.write(`
 </table>
 </div>
 </details><section id="Start-the-instrument-package">
-<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
 <p>To start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code>, use this Python startup <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/reference/_ipython.html#python-snippet-to-start-instrument-for-data-collection">snippet</a>:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -558,7 +554,7 @@ I Fri-11:15:58 - #### Startup is complete. ####
 </div>
 </section>
 <section id="Description">
-<h2>Description<a class="headerlink" href="#Description" title="Permalink to this heading">#</a></h2>
+<h2>Description<a class="headerlink" href="#Description" title="Link to this heading">#</a></h2>
 <p>Might be a good idea to know now what this instrument package provides.</p>
 <p>Notably, the table includes:</p>
 <div class="pst-scrollable-table-container"><table class="table">
@@ -613,11 +609,11 @@ I Fri-11:15:58 - #### Startup is complete. ####
 </table>
 </div>
 <section id="iconfig">
-<h3><code class="docutils literal notranslate"><span class="pre">iconfig</span></code><a class="headerlink" href="#iconfig" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">iconfig</span></code><a class="headerlink" href="#iconfig" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">iconfig</span></code>, a Python dictionary, contains the instrument’s configuration details defined in one place for the user to control. These details, defined in <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/iconfig.yml">instrument/iconfig.yml</a>, are used in various places in the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package. Any changes to the <code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code> file will take effect the <em>next</em> time the instrument is started.</p>
 </section>
 <section id="adsimdet">
-<h3><code class="docutils literal notranslate"><span class="pre">adsimdet</span></code><a class="headerlink" href="#adsimdet" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">adsimdet</span></code><a class="headerlink" href="#adsimdet" title="Link to this heading">#</a></h3>
 <p>The EPICS Area Detector ADSimDetector is included with this instrument as <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code>. The detector is a monochrome 1k x 1k frame. The image is written to an HDF5 file and made available to the <a class="reference internal" href="#databroker"><span class="std std-ref">databroker</span></a> via a shared volume from the docker container. <code class="docutils literal notranslate"><span class="pre">adsimdet</span></code> can be used as a detector.</p>
 <p>The image is a simulated diffraction spot with center randomly-chosen between 100..900 on both axes. The width is also random as is the peak intensity and noise level. Furthermore, to simulate realistic conditions, the center position of both axes is adjusted by a few pixels using a pair of <em>swait</em> records (<code class="docutils literal notranslate"><span class="pre">gp:userCalc9</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">gp:userCalc10</span></code>) updating from random numbers.</p>
 <div class="nbinput docutils container">
@@ -674,7 +670,7 @@ pva                  PvaPlugin_V34       (&#39;adsimdet_pva&#39;)
 </div>
 </section>
 <section id="scaler1">
-<h3><code class="docutils literal notranslate"><span class="pre">scaler1</span></code><a class="headerlink" href="#scaler1" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">scaler1</span></code><a class="headerlink" href="#scaler1" title="Link to this heading">#</a></h3>
 <p>A simulated 16-channel scaler is configured with several channels of pulse counters, typical of a synchrotron beamline. <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> can be used as a detector.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -983,7 +979,7 @@ scaler1_egu                               2023-04-14 10:58:36.645292
 <p>This command: <code class="docutils literal notranslate"><span class="pre">scaler1.select_channels()</span></code> configures <code class="docutils literal notranslate"><span class="pre">scaler</span></code> to use just the channels with non-empty names. To limit data collection to a subset of these channels, name the channels in a list argument, such as: <code class="docutils literal notranslate"><span class="pre">scaler1.select_channels(['I0',</span> <span class="pre">'diode'])</span></code></p>
 </section>
 <section id="temperature">
-<h3><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">temperature</span></code><a class="headerlink" href="#temperature" title="Link to this heading">#</a></h3>
 <p>The temperature simulator, implemented in <code class="docutils literal notranslate"><span class="pre">gp:userCalc8</span></code> works like a temperature controller, with setpoint and readback values. <code class="docutils literal notranslate"><span class="pre">temperature</span></code> can be used as a detector <strong>and</strong> as a positioner (like a motor).</p>
 <p>Additional controls for noise, update interval, maximum change per update, in-position tolerance, and done are provided, either through EPICS or in Python. Once a new setpoint is entered, the readback will progress towards it, limited by the max change and the update interval. Once at the setpoint, noise continues to be added to the temperature to provide realism.</p>
 <div class="nbinput docutils container">
@@ -1063,7 +1059,7 @@ temperature_report_dmov_changes False                               2023-04-14 1
 </div>
 </section>
 <section id="motors">
-<h3>motors<a class="headerlink" href="#motors" title="Permalink to this heading">#</a></h3>
+<h3>motors<a class="headerlink" href="#motors" title="Link to this heading">#</a></h3>
 <p>There are 16 soft motor channels: <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> .. <code class="docutils literal notranslate"><span class="pre">gp:m16</span></code>. Any motor can be used as a detector <strong>and</strong> as a positioner.</p>
 <p>The first motor, <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code>, is used to compute a simulated 1-D diffraction peak (<a class="reference internal" href="#noisy"><span class="std std-ref">noisy</span></a>) using <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>.</p>
 <p>To make it easier to change the motor step size, a custom <code class="docutils literal notranslate"><span class="pre">MyEpicsMotor</span></code> class was made, subclassing from <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code> and adding a component to access the motor’s <code class="docutils literal notranslate"><span class="pre">.SREV</span></code> (steps/revolution) field. The default motor step size is 0.01 (with SREV=200). For only <code class="docutils literal notranslate"><span class="pre">m1</span></code>, the step size has been changed to 0.001 by setting SREV=2000.</p>
@@ -1160,7 +1156,7 @@ m1_steps_per_revolution 2000    2023-04-14 10:58:33.041083
 </div>
 </section>
 <section id="noisy">
-<h3><code class="docutils literal notranslate"><span class="pre">noisy</span></code><a class="headerlink" href="#noisy" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">noisy</span></code><a class="headerlink" href="#noisy" title="Link to this heading">#</a></h3>
 <p>A simulated diffraction peak is computed in 1-D using a Lorentzian function in EPICS PV <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code>. The simulation uses the position of motor <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> and random choices for center, width, noise, and peak intensity (scale factor). <code class="docutils literal notranslate"><span class="pre">noisy</span></code> can be used as a detector.</p>
 <p>NOTE: <code class="docutils literal notranslate"><span class="pre">noisy</span></code> is an <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsSignal</span></code> (variant), thus it lacks the <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method that <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> objects have.</p>
 <div class="nbinput docutils container">
@@ -1186,12 +1182,12 @@ noisy     685.3703376927396 2023-04-14 11:15:56.876793
 </div>
 </section>
 <section id="plans">
-<h3>plans<a class="headerlink" href="#plans" title="Permalink to this heading">#</a></h3>
+<h3>plans<a class="headerlink" href="#plans" title="Link to this heading">#</a></h3>
 <p>Several examples of user plan are provided in file <code class="docutils literal notranslate"><span class="pre">instrument/plans/peak_finder_example.py</span></code>. These plans are described and used in the notebook <a class="reference external" href="https://nbviewer.jupyter.org/github/BCDA-APS/bluesky_instrument_training/blob/main/lineup_1d_peak.ipynb">Lineup a 1-D peak</a>.</p>
 </section>
 </section>
 <section id="Log-files">
-<h2>Log files<a class="headerlink" href="#Log-files" title="Permalink to this heading">#</a></h2>
+<h2>Log files<a class="headerlink" href="#Log-files" title="Link to this heading">#</a></h2>
 <p>For diagnostic and general support, log files are created to record activity. In the working directory, the log files are written to a <code class="docutils literal notranslate"><span class="pre">./.logs</span></code> subdirectory.</p>
 <p>There are two kinds of file, one that records user commands and the python result, the other records items sent to the Python <a class="reference external" href="https://docs.python.org/3/library/logging.html">logging</a> package.</p>
 <p>In the IPython session, use the <code class="docutils literal notranslate"><span class="pre">!</span></code> to run a linux command:</p>
@@ -1291,7 +1287,7 @@ I Wed-00:24:52 - Startup is complete.
 </div>
 </section>
 <section id="SPEC-data-files">
-<h2>SPEC data files<a class="headerlink" href="#SPEC-data-files" title="Permalink to this heading">#</a></h2>
+<h2>SPEC data files<a class="headerlink" href="#SPEC-data-files" title="Link to this heading">#</a></h2>
 <p>A <a class="reference external" href="https://certif.com">SPEC</a> data file records a copy of the scan data (area detector images are not stored in SPEC files). By default, the file is created in the present working directory using a name constructed from the date and time with a <code class="docutils literal notranslate"><span class="pre">.dat</span></code> file extension. Unlike SPEC, new data is written <em>at the end of a scan</em>. It is also possible to use the <a class="reference external" href="https://apstools.readthedocs.io/en/latest/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">SpecWriterCallback</a> to write
 data extracted from the database after the experiment is done.</p>
 <p>The 2021-03 training does not cover the use of these files. You are free to examine them yourselves.</p>
@@ -1468,7 +1464,7 @@ data extracted from the database after the experiment is done.</p>
 </div>
 </details></section>
 <section id="User-Code-File">
-<h2>User Code File<a class="headerlink" href="#User-Code-File" title="Permalink to this heading">#</a></h2>
+<h2>User Code File<a class="headerlink" href="#User-Code-File" title="Link to this heading">#</a></h2>
 <p>A common request from instruments is to allow the user to write some python code that can be loaded into the current session. Since development of this <em>user code</em> is often iterative, it must be possible to reload the code without requiring the session to exit and restart.</p>
 <p>The local file <code class="docutils literal notranslate"><span class="pre">user/quick_hello.py</span></code> provides an example of such a user code file. Load this file with the command:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>%run -im user.quick_hello
@@ -1522,7 +1518,7 @@ Loading &#39;Hello, World!&#39; example.
 <p>Observe that the same <code class="docutils literal notranslate"><span class="pre">.calculation</span></code> is both readable and writable from two different ophyd objects: <code class="docutils literal notranslate"><span class="pre">calcs.calc8</span></code> and <code class="docutils literal notranslate"><span class="pre">temperature</span></code>.</p>
 </section>
 <section id="databroker">
-<h2>databroker<a class="headerlink" href="#databroker" title="Permalink to this heading">#</a></h2>
+<h2>databroker<a class="headerlink" href="#databroker" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://blueskyproject.io/databroker">databroker</a> package provides a Python interface to the database with the experiment data, including references to the large file content such as area detector images. A <a class="reference external" href="https://yaml.org">YAML</a> configuration file connects databroker with a specific repository in the MongoDB database server. In the example here (<a class="reference external" href="./bluesky_class.yml">bluesky_class.yml</a>), the name of the <em>catalog</em> entry in this file is <code class="docutils literal notranslate"><span class="pre">class_2021_03</span></code>. It makes two connections
 to a MongoDB server running on the same workstation <code class="docutils literal notranslate"><span class="pre">localhost</span></code>. Both connections are to the same MongoDB collection: <code class="docutils literal notranslate"><span class="pre">class_2021_03-bluesky</span></code>. The name of the file is not important as long as it is placed in a directory searched by <code class="docutils literal notranslate"><span class="pre">databroker.catalog</span></code>.</p>
 <p><strong>Example</strong></p>
@@ -1657,7 +1653,7 @@ to a MongoDB server running on the same workstation <code class="docutils litera
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

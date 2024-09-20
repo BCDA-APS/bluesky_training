@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Lesson 5, Part A: find a peak and lineup &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -425,13 +421,13 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Lesson-5,-Part-A:-find-a-peak-and-lineup">
-<h1>Lesson 5, Part A: find a peak and lineup<a class="headerlink" href="#Lesson-5,-Part-A:-find-a-peak-and-lineup" title="Permalink to this heading">#</a></h1>
+<h1>Lesson 5, Part A: find a peak and lineup<a class="headerlink" href="#Lesson-5,-Part-A:-find-a-peak-and-lineup" title="Link to this heading">#</a></h1>
 <p>In this lesson, alignment to a narrow diffraction peak is using capabilities provided by the <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a> package. The simulation consists of a simulated motor and simulated noisy detector.</p>
 <p>The noisy detector is configured to describe a narrow diffraction peak with Gaussian profile based on the value of the motor position. The peak is centered randomly somewhere between motor values -1 and +1. The width is less than 0.05 in the same units. The peak intensity is expected to be approximately 100,000 (counts/sec are typical units).</p>
 <p><strong>Preparation</strong></p>
 <p>Make sure the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is in the same directory as this jupyter notebook. The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package included with this lesson is a brief version of the standard package used with any APS instrument. Since the notebook is for teaching, it does not connect with any mongodb database. The scans are not kept by the databroker. However, every scan is saved to a SPEC data file as described when the instrument package is loaded.</p>
 <section id="Objective">
-<h2>Objective<a class="headerlink" href="#Objective" title="Permalink to this heading">#</a></h2>
+<h2>Objective<a class="headerlink" href="#Objective" title="Link to this heading">#</a></h2>
 <p>Use <em>Bluesky</em> (the tools provided by the various packages of the <a class="reference external" href="https://blueskyproject.io/">Bluesky framework</a>) to find the center and width of a simulated diffraction peak. Move the motor to the peak center.</p>
 <ol class="arabic simple">
 <li><p>Use interactive ophyd commands to find the peak and assess the width.</p></li>
@@ -439,7 +435,7 @@ document.write(`
 </ol>
 </section>
 <section id="Advanced">
-<h2>Advanced<a class="headerlink" href="#Advanced" title="Permalink to this heading">#</a></h2>
+<h2>Advanced<a class="headerlink" href="#Advanced" title="Link to this heading">#</a></h2>
 <ol class="arabic simple" start="3">
 <li><p>Make a custom plan and run it to find the peak center.</p></li>
 <li><p>Add that new plan to the instrument package, then restart the notebook’s kernel and try it.</p></li>
@@ -448,7 +444,7 @@ document.write(`
 <hr class="docutils" />
 </section>
 <section id="Initialize">
-<h2>Initialize<a class="headerlink" href="#Initialize" title="Permalink to this heading">#</a></h2>
+<h2>Initialize<a class="headerlink" href="#Initialize" title="Link to this heading">#</a></h2>
 <p>Load the instrument controls (which sets up the Bluesky framework for collection: <code class="docutils literal notranslate"><span class="pre">RE</span></code>, <code class="docutils literal notranslate"><span class="pre">bec</span></code>, <code class="docutils literal notranslate"><span class="pre">bp</span></code>, …). This defines more than we need but works as a simple start, just like regular data acquisition at a beamline.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -508,7 +504,7 @@ I Thu-11:06:17 -    to change SPEC file, use command:   newSpecFile(&#39;title&#
 </div>
 </section>
 <section id="Make-a-noisy-detector">
-<h2>Make a noisy detector<a class="headerlink" href="#Make-a-noisy-detector" title="Permalink to this heading">#</a></h2>
+<h2>Make a noisy detector<a class="headerlink" href="#Make-a-noisy-detector" title="Link to this heading">#</a></h2>
 <p>Make a new <code class="docutils literal notranslate"><span class="pre">noisy</span></code>, replacing the one from the simulator.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
@@ -594,12 +590,12 @@ noisy_det : 0
 </div>
 </section>
 <section id="1.-Use-ophyd-commands">
-<h2>1. Use <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> commands<a class="headerlink" href="#1.-Use-ophyd-commands" title="Permalink to this heading">#</a></h2>
+<h2>1. Use <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> commands<a class="headerlink" href="#1.-Use-ophyd-commands" title="Link to this heading">#</a></h2>
 <p>The first thing to learn is how to move the motor. As typical of many control systems, there are several ways to do this. We will focus on only two of these since we can apply them to both simulated motors <em>and</em> EPICS motors.</p>
 <p>Different from a real motor, our simulated motor moves immediately, so motor velocity and acceleration are not involved. Since the motor moves immediately, there is no discernable delay due to short or long motor motions.</p>
 <p><strong>tip</strong>: There are several ways to do most things but this tutorial focuses on just a few with the hope that these ways are both simple and reuseable.</p>
 <section id="motor,-move-and-get-position">
-<h3>motor, move and get position<a class="headerlink" href="#motor,-move-and-get-position" title="Permalink to this heading">#</a></h3>
+<h3>motor, move and get position<a class="headerlink" href="#motor,-move-and-get-position" title="Link to this heading">#</a></h3>
 <p>For a motor named <code class="docutils literal notranslate"><span class="pre">motor</span></code>, any of these commands can be used in an interactive session to move the motor from its current position to <code class="docutils literal notranslate"><span class="pre">1.0</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>motor.set(1)
 motor.set(1).wait()
@@ -664,7 +660,7 @@ motor.set(1).wait()
 </div>
 </section>
 <section id="detector,-count-and-get-value">
-<h3>detector, count and get value<a class="headerlink" href="#detector,-count-and-get-value" title="Permalink to this heading">#</a></h3>
+<h3>detector, count and get value<a class="headerlink" href="#detector,-count-and-get-value" title="Link to this heading">#</a></h3>
 <p>Above, we created a detector named <code class="docutils literal notranslate"><span class="pre">noisy</span></code> that simulates a <em>scaler</em> (detector that records a single integer number of detection events, usually the number of X-ray photons received). Real scalers are told to measure for a fixed time interval. Our simulator does not have that feature.</p>
 <p>The simulated noisy detector computes its value for <em>counts</em> based on the position of the configured motor.</p>
 <p>Show the name of the motor configured into the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> detector. Check that its name is <code class="docutils literal notranslate"><span class="pre">motor</span></code>.</p>
@@ -725,7 +721,7 @@ noisy                          0
 </div>
 </section>
 <section id="Find-the-simulated-peak">
-<h3>Find the simulated peak<a class="headerlink" href="#Find-the-simulated-peak" title="Permalink to this heading">#</a></h3>
+<h3>Find the simulated peak<a class="headerlink" href="#Find-the-simulated-peak" title="Link to this heading">#</a></h3>
 <p>With tools to move the motor and acquire data from the detector, we can try to find the simulated peak. It may take some retries since the peak is narrow. Take big steps first (such as <code class="docutils literal notranslate"><span class="pre">0.1</span></code>) to find non-zero counts, then smaller steps to find the peak.</p>
 <p>First, move to one end of the range, then start stepping until you find non-zero counts. Then use <code class="docutils literal notranslate"><span class="pre">%movr</span></code> and execute the same notebook cell repeatedly. Call the detector’s <code class="docutils literal notranslate"><span class="pre">.get()</span></code> method to only print the number of counts and not the other information.</p>
 <div class="nbinput docutils container">
@@ -773,7 +769,7 @@ noisy                          31
 </section>
 </section>
 <section id="2.-Use-RunEngine-and-bluesky-plans">
-<h2>2. Use RunEngine and bluesky plans<a class="headerlink" href="#2.-Use-RunEngine-and-bluesky-plans" title="Permalink to this heading">#</a></h2>
+<h2>2. Use RunEngine and bluesky plans<a class="headerlink" href="#2.-Use-RunEngine-and-bluesky-plans" title="Link to this heading">#</a></h2>
 <p>Here we use the RunEngine (<code class="docutils literal notranslate"><span class="pre">RE</span></code>) and standard <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html">bluesky plans</a> to locate the simulated diffraction peak.</p>
 <p>Since we will do a series of scans, let’s make a list to collect the results from each scan. We’ll report that list later.</p>
 <div class="nbinput nblast docutils container">
@@ -796,7 +792,7 @@ noisy                          31
 </div>
 </div>
 <section id="Locate-the-approximate-peak-position">
-<h3>Locate the approximate peak position<a class="headerlink" href="#Locate-the-approximate-peak-position" title="Permalink to this heading">#</a></h3>
+<h3>Locate the approximate peak position<a class="headerlink" href="#Locate-the-approximate-peak-position" title="Link to this heading">#</a></h3>
 <p>Scan from -2 to 2 to find the peak. Since it is a Gaussian (which decays rapidly away from the peak), we may need to increase <em>n</em>, the number of points in the scan. All we need is one point above the background to find it!</p>
 <p>Use the <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.scan.html?highlight=scan">scan</a> plan from <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> (provided here as <code class="docutils literal notranslate"><span class="pre">bp</span></code>) to locate at least one point on the peak that is above the background of 0 counts.</p>
 <div class="nbinput docutils container">
@@ -866,7 +862,8 @@ generator scan [&#39;000f574f&#39;] (scan num: 1)
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutor__lesson5a_38_2.svg" src="../_images/tutor__lesson5a_38_2.svg" /></div>
+<img alt="../_images/tutor__lesson5a_38_2.svg" src="../_images/tutor__lesson5a_38_2.svg" />
+</div>
 </div>
 <p>One of the tools that works in the background of the Bluesky framework is the <a class="reference external" href="https://blueskyproject.io/bluesky/callbacks.html#best-effort-callback">BestEffortCallback</a>, known here as <code class="docutils literal notranslate"><span class="pre">bec</span></code>. When <code class="docutils literal notranslate"><span class="pre">bec</span></code> is configured (see <code class="docutils literal notranslate"><span class="pre">instrument/framework/initialize.py</span></code>) as part of scanning with the RunEngine, it will assess peak parameters from each scan, where applicable. The parameters are available in <code class="docutils literal notranslate"><span class="pre">bec.peaks</span></code> which we have, for convenience, defined as <code class="docutils literal notranslate"><span class="pre">peaks</span></code>. We access a couple of
 those parameters here for peak center and width.</p>
@@ -927,7 +924,7 @@ center=-1.0000000,  FWHM=0.1428571
 </div>
 </section>
 <section id="Refine-the-peak-position">
-<h3>Refine the peak position<a class="headerlink" href="#Refine-the-peak-position" title="Permalink to this heading">#</a></h3>
+<h3>Refine the peak position<a class="headerlink" href="#Refine-the-peak-position" title="Link to this heading">#</a></h3>
 <p>Refine the scan to the range of (-sigma .. +sigma) near the center of the previous scan. Repeat as often as necessary (using ) to get the peak center and width. Use the <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.rel_scan.html?highlight=rel_scan">relative scan</a> plan from <code class="docutils literal notranslate"><span class="pre">bluesky.plans</span></code> to find the peak.</p>
 <p><strong>tip</strong>: Look for the plot in the cell above. Replots will be drawn in different colors. The legend indicates the <code class="docutils literal notranslate"><span class="pre">scan_id</span></code>.</p>
 <div class="nbinput docutils container">
@@ -996,11 +993,12 @@ center=-0.9921816,  FWHM=0.0535156
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutor__lesson5a_44_1.svg" src="../_images/tutor__lesson5a_44_1.svg" /></div>
+<img alt="../_images/tutor__lesson5a_44_1.svg" src="../_images/tutor__lesson5a_44_1.svg" />
+</div>
 </div>
 </section>
 <section id="Report-the-results">
-<h3>Report the results<a class="headerlink" href="#Report-the-results" title="Permalink to this heading">#</a></h3>
+<h3>Report the results<a class="headerlink" href="#Report-the-results" title="Link to this heading">#</a></h3>
 <p>Print a nice table with the results from each of our scans.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[24]:
@@ -1143,7 +1141,7 @@ scan ID center              sigma
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>synApps busy record &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="synApps-busy-record">
-<h1>synApps <em>busy</em> record<a class="headerlink" href="#synApps-busy-record" title="Permalink to this heading">#</a></h1>
+<h1>synApps <em>busy</em> record<a class="headerlink" href="#synApps-busy-record" title="Link to this heading">#</a></h1>
 <p><strong>Objective</strong></p>
 <p>In this notebook, we show how to use the EPICS <em>busy</em> record.</p>
 <p>The synApps <a class="reference external" href="https://epics.anl.gov/bcda/synApps/busy/busyRecord.html">busy record</a> is used to signal the completion of an operation. Generally, the <em>busy</em> record is used for operations that have no inherent means of reporting that a long or complex operation has completed. Two cases come to mind immediately, both involving waiting for completion of some operation):</p>
@@ -524,11 +520,11 @@ Exception reporting mode: Minimal
 </pre></div></div>
 </div>
 <section id="arbitrary-operation">
-<h2>arbitrary operation<a class="headerlink" href="#arbitrary-operation" title="Permalink to this heading">#</a></h2>
+<h2>arbitrary operation<a class="headerlink" href="#arbitrary-operation" title="Link to this heading">#</a></h2>
 <p>Use a <em>busy</em> record to indicate the state of some arbitrary operation. A <em>fly</em> scan is one example. In this example, a user-adjustable time delay is sued to simulate the arbitrary operation.</p>
 <p>The <em>apstools</em> package provides support for the <em>busy</em> record, <code class="docutils literal notranslate"><span class="pre">apstools.synApps.BusyRecord</span></code>.</p>
 <section id="operation-uses-trigger()-method">
-<h3><em>operation</em> uses <code class="docutils literal notranslate"><span class="pre">trigger()</span></code> method<a class="headerlink" href="#operation-uses-trigger()-method" title="Permalink to this heading">#</a></h3>
+<h3><em>operation</em> uses <code class="docutils literal notranslate"><span class="pre">trigger()</span></code> method<a class="headerlink" href="#operation-uses-trigger()-method" title="Link to this heading">#</a></h3>
 <p>Let’s start with a Device with a <em>busy</em> PV and a user-settable delay time. The <em>operation</em> is run (in an external thread) from the device’s <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method.</p>
 <p>Follow example from <a class="reference external" href="https://blueskyproject.io/ophyd/explanations/status.html?highlight=devicestatus">https://blueskyproject.io/ophyd/explanations/status.html?highlight=devicestatus</a></p>
 <div class="nbinput nblast docutils container">
@@ -645,7 +641,7 @@ generator count [&#39;fb42dc41&#39;] (scan num: 1)
 </section>
 </section>
 <section id="positioner-movement">
-<h2>positioner movement<a class="headerlink" href="#positioner-movement" title="Permalink to this heading">#</a></h2>
+<h2>positioner movement<a class="headerlink" href="#positioner-movement" title="Link to this heading">#</a></h2>
 <p>Use a <em>busy</em> record to signal <em>done moving</em> for a positioner built from separate PVs (using <code class="docutils literal notranslate"><span class="pre">ophyd.PVPositioner</span></code>).</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1041,7 +1037,7 @@ INFO:__main__:simulator: self.readback.get() = -1.0 self.is_done = True end
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

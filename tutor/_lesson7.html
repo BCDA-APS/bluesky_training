@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Lesson 7: 4-circle diffractometer &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -425,15 +421,15 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Lesson-7:-4-circle-diffractometer">
-<h1>Lesson 7: 4-circle diffractometer<a class="headerlink" href="#Lesson-7:-4-circle-diffractometer" title="Permalink to this heading">#</a></h1>
+<h1>Lesson 7: 4-circle diffractometer<a class="headerlink" href="#Lesson-7:-4-circle-diffractometer" title="Link to this heading">#</a></h1>
 <p>Operate a four-circle diffractometer using the <em>hkl</em> package. The lesson will first show how to setup the diffractometer and demonstrate the basic features of the software. Then, the lesson will setup a diffractometer with a single crystal sample, orient it, and scan along one axis of reciprocal space. Examples are then provided for several different crystals.</p>
 <p>The <a class="reference external" href="https://github.com/bluesky/hklpy">hkl</a> package is a python interface to the C++ <a class="reference external" href="https://repo.or.cz/hkl.git">hkl</a> library, written by Frederic Picca.</p>
 <p>Documentation for the C++ library is here: <a class="reference external" href="https://people.debian.org/~picca/hkl/hkl.html">https://people.debian.org/~picca/hkl/hkl.html</a></p>
 <section id="Setup">
-<h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this heading">#</a></h2>
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
 <p>Setup involves starting the bluesky session, importing various support packages, and defining any custom classes or functions as needed.</p>
 <section id="Preparation">
-<h3>Preparation<a class="headerlink" href="#Preparation" title="Permalink to this heading">#</a></h3>
+<h3>Preparation<a class="headerlink" href="#Preparation" title="Link to this heading">#</a></h3>
 <p>Import the instrument package as our routine initialization.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -511,7 +507,7 @@ I Wed-17:24:47 -    to change SPEC file, use command:   newSpecFile(&#39;title&#
 </div>
 </section>
 <section id="The-diffractometer-object">
-<h3>The diffractometer object<a class="headerlink" href="#The-diffractometer-object" title="Permalink to this heading">#</a></h3>
+<h3>The diffractometer object<a class="headerlink" href="#The-diffractometer-object" title="Link to this heading">#</a></h3>
 <p>Define a 4-circle class for our example with simulated motors. There are attributes for the reciprocal space axes <code class="docutils literal notranslate"><span class="pre">h</span></code>, <code class="docutils literal notranslate"><span class="pre">k</span></code>, &amp; <code class="docutils literal notranslate"><span class="pre">l</span></code> and for the real space axes: <code class="docutils literal notranslate"><span class="pre">phi</span></code>, <code class="docutils literal notranslate"><span class="pre">omega</span></code>, <code class="docutils literal notranslate"><span class="pre">chi</span></code>, &amp; <code class="docutils literal notranslate"><span class="pre">tth</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -706,7 +702,7 @@ FourCircleDiffractometerPseudoPos(h=0.0, k=0.0, l=0.0)
 <p>The sections below will cover each of these.</p>
 </section>
 <section id="Operating-mode">
-<h3>Operating mode<a class="headerlink" href="#Operating-mode" title="Permalink to this heading">#</a></h3>
+<h3>Operating mode<a class="headerlink" href="#Operating-mode" title="Link to this heading">#</a></h3>
 <p>The default operating mode is <code class="docutils literal notranslate"><span class="pre">bissector</span></code>. This mode constrains <code class="docutils literal notranslate"><span class="pre">tth</span></code> to equal <code class="docutils literal notranslate"><span class="pre">2*omega</span></code>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -780,7 +776,7 @@ bissector
 </div>
 </section>
 <section id="Wavelength">
-<h3>Wavelength<a class="headerlink" href="#Wavelength" title="Permalink to this heading">#</a></h3>
+<h3>Wavelength<a class="headerlink" href="#Wavelength" title="Link to this heading">#</a></h3>
 <p>The default wavelength is <code class="docutils literal notranslate"><span class="pre">1.54</span></code> angstroms. The units must match the units of the unit cell.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
@@ -811,7 +807,7 @@ bissector
 <p><strong>NOTE</strong>: Stick to wavelength, at least for now. Do not specify X-ray photon energy. For the <em>hkl</em> code, specify wavelength in angstrom. While the documentation may state wavelength in <code class="docutils literal notranslate"><span class="pre">nm</span></code>, use <code class="docutils literal notranslate"><span class="pre">angstrom</span></code> since these units <em>must</em> match the units used for the lattice parameters. Also, note that the (internal) calculation of X-ray energy assumes the units were <code class="docutils literal notranslate"><span class="pre">nm</span></code> so its conversion between energy and wavelength is off by a factor of 10.</p>
 </section>
 <section id="Sample">
-<h3>Sample<a class="headerlink" href="#Sample" title="Permalink to this heading">#</a></h3>
+<h3>Sample<a class="headerlink" href="#Sample" title="Link to this heading">#</a></h3>
 <p>The default sample is named <code class="docutils literal notranslate"><span class="pre">main</span></code> and is a hypothetical cubic lattice with 1.54 angstrom edges.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
@@ -1082,7 +1078,7 @@ FourCircleDiffractometerPseudoPos(h=1.5121846940302517e-16, k=1.9999999974773768
 </div>
 </section>
 <section id="Reflections">
-<h3>Reflections<a class="headerlink" href="#Reflections" title="Permalink to this heading">#</a></h3>
+<h3>Reflections<a class="headerlink" href="#Reflections" title="Link to this heading">#</a></h3>
 <p>A reflection associates a set of reciprocal-space axes (<em>hkl</em>) with a set of real-space motor positions. Following the method of Busing &amp; Levy (<a class="reference external" href="https://www.psi.ch/sites/default/files/import/sinq/zebra/PracticalsEN/1967-Busing-Levy-3-4-circle-Acta22.pdf">Acta Cryst (1967) 22, pp 457-464</a>), two reflections are used to calculate an orientation matix (<em>UB</em> matrix) which is used to convert between motor positions and <em>hkl</em> values.</p>
 <p>There are no reflections defined by default.</p>
 <p>Define a reflection by associating a known <em>hkl</em> reflection with a set of motor positions.</p>
@@ -1127,7 +1123,7 @@ FourCircleDiffractometerPseudoPos(h=1.5121846940302517e-16, k=1.9999999974773768
 </div>
 </section>
 <section id="Forward-Solutions">
-<h3>Forward Solutions<a class="headerlink" href="#Forward-Solutions" title="Permalink to this heading">#</a></h3>
+<h3>Forward Solutions<a class="headerlink" href="#Forward-Solutions" title="Link to this heading">#</a></h3>
 <p>Forward solutions are the calculated combinations of real-space motor positions given the sample oreitnation matrix, reciprocal-space axes, operating mode, wavelength, and applied constraints. These combinations are presented as a python list which may be empty if there are no solutions.</p>
 <p>Show default solution for a few reflections (<em>100</em>), (<em>010</em>) and (<em>001</em>):</p>
 <div class="nbinput docutils container">
@@ -1290,7 +1286,7 @@ FourCircleDiffractometerPseudoPos(h=1.5121846940302517e-16, k=1.9999999974773768
 </div>
 </section>
 <section id="Constraints">
-<h3>Constraints<a class="headerlink" href="#Constraints" title="Permalink to this heading">#</a></h3>
+<h3>Constraints<a class="headerlink" href="#Constraints" title="Link to this heading">#</a></h3>
 <p>Constraints are applied to restrict the motor positions that are allowed to be solutions of the forward calculation from a reflection <em>hkl</em> to motor positions.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[38]:
@@ -1479,7 +1475,7 @@ tth   -180.0    180.0      -11.01665011929264 True
 </section>
 </section>
 <section id="Example---4-circle-with-LNO_LAO-sample">
-<h2>Example - 4-circle with <code class="docutils literal notranslate"><span class="pre">LNO_LAO</span></code> sample<a class="headerlink" href="#Example---4-circle-with-LNO_LAO-sample" title="Permalink to this heading">#</a></h2>
+<h2>Example - 4-circle with <code class="docutils literal notranslate"><span class="pre">LNO_LAO</span></code> sample<a class="headerlink" href="#Example---4-circle-with-LNO_LAO-sample" title="Link to this heading">#</a></h2>
 <p>We have some example information from a SPEC data file (collected at APS beamline 33BM). In summary, the sample and orientation information extracted is:</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1526,7 +1522,7 @@ tth   -180.0    180.0      -11.01665011929264 True
 </div>
 <p><strong>Note</strong>: In SPEC’s fourc geometry, the motors are reported in this order: <code class="docutils literal notranslate"><span class="pre">tth</span> <span class="pre">omega</span> <span class="pre">chi</span> <span class="pre">phi</span></code></p>
 <section id="use-4-circle-geometry">
-<h3>use 4-circle geometry<a class="headerlink" href="#use-4-circle-geometry" title="Permalink to this heading">#</a></h3>
+<h3>use 4-circle geometry<a class="headerlink" href="#use-4-circle-geometry" title="Link to this heading">#</a></h3>
 <p>Reset all the above changes by re-creating the <code class="docutils literal notranslate"><span class="pre">fourc</span></code> object.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[43]:
@@ -1538,7 +1534,7 @@ tth   -180.0    180.0      -11.01665011929264 True
 </div>
 </section>
 <section id="define-the-sample">
-<h3>define the sample<a class="headerlink" href="#define-the-sample" title="Permalink to this heading">#</a></h3>
+<h3>define the sample<a class="headerlink" href="#define-the-sample" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[44]:
 </pre></div>
@@ -1565,7 +1561,7 @@ HklSample(name=&#39;LNO_LAO&#39;, lattice=LatticeTuple(a=3.781726143, b=3.791444
 </div>
 </section>
 <section id="set-wavelength">
-<h3>set wavelength<a class="headerlink" href="#set-wavelength" title="Permalink to this heading">#</a></h3>
+<h3>set wavelength<a class="headerlink" href="#set-wavelength" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[45]:
 </pre></div>
@@ -1576,7 +1572,7 @@ HklSample(name=&#39;LNO_LAO&#39;, lattice=LatticeTuple(a=3.781726143, b=3.791444
 </div>
 </section>
 <section id="define-two-reflections">
-<h3>define two reflections<a class="headerlink" href="#define-two-reflections" title="Permalink to this heading">#</a></h3>
+<h3>define two reflections<a class="headerlink" href="#define-two-reflections" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[46]:
 </pre></div>
@@ -1590,7 +1586,7 @@ HklSample(name=&#39;LNO_LAO&#39;, lattice=LatticeTuple(a=3.781726143, b=3.791444
 </div>
 </section>
 <section id="calculate-UB-matrix">
-<h3>calculate <em>UB</em> matrix<a class="headerlink" href="#calculate-UB-matrix" title="Permalink to this heading">#</a></h3>
+<h3>calculate <em>UB</em> matrix<a class="headerlink" href="#calculate-UB-matrix" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[47]:
 </pre></div>
@@ -1620,7 +1616,7 @@ array([[-9.55499011e-02, -1.65427863e+00,  2.42844485e-03],
 <p>Same numbers, different row order, different order of real-space motors.</p>
 </section>
 <section id="calculate-(hkl)-given-motor-positions">
-<h3>calculate <em>(hkl)</em> given motor positions<a class="headerlink" href="#calculate-(hkl)-given-motor-positions" title="Permalink to this heading">#</a></h3>
+<h3>calculate <em>(hkl)</em> given motor positions<a class="headerlink" href="#calculate-(hkl)-given-motor-positions" title="Link to this heading">#</a></h3>
 <p>Given these motor positions, confirm this is the (2 2 1.9) reflection.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -1689,7 +1685,7 @@ tth                   67.78225           real
 </div>
 </section>
 <section id="compute-the-motor-positions-of-the-(2-2-1.9)-reflection">
-<h3>compute the motor positions of the (<em>2 2 1.9</em>) reflection<a class="headerlink" href="#compute-the-motor-positions-of-the-(2-2-1.9)-reflection" title="Permalink to this heading">#</a></h3>
+<h3>compute the motor positions of the (<em>2 2 1.9</em>) reflection<a class="headerlink" href="#compute-the-motor-positions-of-the-(2-2-1.9)-reflection" title="Link to this heading">#</a></h3>
 <p>Observe that <code class="docutils literal notranslate"><span class="pre">tth</span> <span class="pre">~</span> <span class="pre">2*omega</span></code> which is consistent with <code class="docutils literal notranslate"><span class="pre">bissector</span></code> mode. The (<em>2 2 1.9</em>) reflection is not available in <code class="docutils literal notranslate"><span class="pre">constant_omega</span></code> mode with <code class="docutils literal notranslate"><span class="pre">omega=0</span></code>. Need to change modes.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[49]:
@@ -1879,7 +1875,7 @@ tth                   67.78225           real
 <p>These values match exactly the values from the SPEC data file.</p>
 </section>
 <section id="sample-(2k2)-scan,-near-k=2">
-<h3>sample <em>(2k2)</em> scan, near <code class="docutils literal notranslate"><span class="pre">k=2</span></code><a class="headerlink" href="#sample-(2k2)-scan,-near-k=2" title="Permalink to this heading">#</a></h3>
+<h3>sample <em>(2k2)</em> scan, near <code class="docutils literal notranslate"><span class="pre">k=2</span></code><a class="headerlink" href="#sample-(2k2)-scan,-near-k=2" title="Link to this heading">#</a></h3>
 <p>Use the <code class="docutils literal notranslate"><span class="pre">fourc</span></code> object as the <em>detector</em> for the scans. Plotting is not necessary.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[54]:
@@ -1938,7 +1934,7 @@ generator rel_scan [&#39;9a48a80e&#39;] (scan num: 1)
 </section>
 </section>
 <section id="Example---epitaxial-thin-film-on-substrate">
-<h2>Example - <code class="docutils literal notranslate"><span class="pre">epitaxial</span> <span class="pre">thin</span> <span class="pre">film</span> <span class="pre">on</span> <span class="pre">substrate</span></code><a class="headerlink" href="#Example---epitaxial-thin-film-on-substrate" title="Permalink to this heading">#</a></h2>
+<h2>Example - <code class="docutils literal notranslate"><span class="pre">epitaxial</span> <span class="pre">thin</span> <span class="pre">film</span> <span class="pre">on</span> <span class="pre">substrate</span></code><a class="headerlink" href="#Example---epitaxial-thin-film-on-substrate" title="Link to this heading">#</a></h2>
 <p>Found an example on the web from Rigaku. The sample is an epitaxial thin film of Mn3O4 on MgO substrate.</p>
 <p>ref: <a class="reference external" href="http://www.rigaku.com/downloads/journal/Vol16.1.1999/cguide.pdf">http://www.rigaku.com/downloads/journal/Vol16.1.1999/cguide.pdf</a></p>
 <p>Condense all the setup steps into one cell here.</p>
@@ -2337,7 +2333,7 @@ generator scan [&#39;dc673022&#39;] (scan num: 3)
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

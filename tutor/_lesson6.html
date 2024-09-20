@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Lesson 6: EPICS area detector &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -425,7 +421,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Lesson-6:-EPICS-area-detector">
-<h1>Lesson 6: EPICS area detector<a class="headerlink" href="#Lesson-6:-EPICS-area-detector" title="Permalink to this heading">#</a></h1>
+<h1>Lesson 6: EPICS area detector<a class="headerlink" href="#Lesson-6:-EPICS-area-detector" title="Link to this heading">#</a></h1>
 <p>In this lesson, we’ll show how to use the tools provided with Bluesky to acquire an image from an EPICS Area Detector and show the image in the notebook.</p>
 <p>The EPICS Area Detector supports many different kinds of detector and provides many configuration possibilities for each detector in addition to configuration for handling of the acquired image or image stream via area detector components referred to as <em>plugins</em>. Configuration of bluesky to use an EPICS Area Detector usually requires several steps that are particular to the installation of the detector, specifically the type of camera and the use of the plugin chain.</p>
 <p>The amount of data that comes from imaging devices such as area detectors is much larger than the data involved with other data acquisition devices such as motors, scalers, temperature sensors, etc. Often, the imaging cameras will save the image data direct to a file system such as local storage. EPICS Area Detector has plugins to store the image stream to a file system accessible from the IOC (the camera’s EPICS server computer). The Bluesky framework is designed with these considerations. The
@@ -654,7 +650,7 @@ plt.imshow(im)
 </pre></div>
 </div>
 <section id="Use-HDF-file-saving-plugin">
-<h2>Use HDF file saving plugin<a class="headerlink" href="#Use-HDF-file-saving-plugin" title="Permalink to this heading">#</a></h2>
+<h2>Use HDF file saving plugin<a class="headerlink" href="#Use-HDF-file-saving-plugin" title="Link to this heading">#</a></h2>
 <p>Use the EPICS Area Detector HDF (HDF5) File saving plugin to save image(s) to HDF5 file. We’ll need more tools from the ophyd package to configure the plugin.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -885,7 +881,7 @@ generator count [&#39;b761689f&#39;] (scan num: 2)
 </div>
 </section>
 <section id="Show-the-image">
-<h2>Show the image<a class="headerlink" href="#Show-the-image" title="Permalink to this heading">#</a></h2>
+<h2>Show the image<a class="headerlink" href="#Show-the-image" title="Link to this heading">#</a></h2>
 <p>Now, use <em>databroker</em> to retrieve that data and show the image. We imported the <code class="docutils literal notranslate"><span class="pre">db</span></code> symbol (instance of the <em>databroker</em>) with the instrument package. The most recent data is accessed using a list-style reference. The symbol <code class="docutils literal notranslate"><span class="pre">h</span></code> is customary to use as a run <em>header</em> in reference to the most recent data.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
@@ -1105,7 +1101,8 @@ uid             : 3a76df5b-502d-48c1-a934-28cd38a02807
 <div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
-<img alt="../_images/tutor__lesson6_45_1.svg" src="../_images/tutor__lesson6_45_1.svg" /></div>
+<img alt="../_images/tutor__lesson6_45_1.svg" src="../_images/tutor__lesson6_45_1.svg" />
+</div>
 </div>
 <p>The structure of the HDF5 file as reported by the punx program (<a class="reference external" href="https://punx.readthedocs.io">https://punx.readthedocs.io</a>):</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>entry:NXentry
@@ -1277,7 +1274,7 @@ uid             : 3a76df5b-502d-48c1-a934-28cd38a02807
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Count the scaler &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Count-the-scaler">
-<h1>Count the scaler<a class="headerlink" href="#Count-the-scaler" title="Permalink to this heading">#</a></h1>
+<h1>Count the scaler<a class="headerlink" href="#Count-the-scaler" title="Link to this heading">#</a></h1>
 <p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>In this notebook, we show how to count the scaler:</p>
@@ -444,7 +440,7 @@ document.write(`
 <li><p>choose certain channels for data acquisition</p></li>
 </ul>
 <section id="Start-the-instrument-package">
-<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
 <p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -540,7 +536,7 @@ I Thu-13:07:16 - #### Startup is complete. ####
 </div>
 </section>
 <section id="A-closer-look-at-the-EPICS-scaler">
-<h2>A closer look at the EPICS scaler<a class="headerlink" href="#A-closer-look-at-the-EPICS-scaler" title="Permalink to this heading">#</a></h2>
+<h2>A closer look at the EPICS scaler<a class="headerlink" href="#A-closer-look-at-the-EPICS-scaler" title="Link to this heading">#</a></h2>
 <p>A scaler is a device that counts digital pulses from a pulse detector such as a scintillation counter or from photodiodes or ionization chamber with pulse chain electronics. Scalers have many channels, some of which might have no associated detector. Our scaler (<code class="docutils literal notranslate"><span class="pre">scaler1</span></code>) is a simulated device that records a random number of pulses in each channel. We are only interested in the channels that have names provided by users in the GUI screens. In this control screen for our scaler, only a few of
 the channels are named:</p>
 <p><img alt="``scaler`` GUI" src="../_images/scaler.png" /></p>
@@ -613,7 +609,7 @@ scaler1_time                   1.6
 </div>
 <p>As noted before, the <code class="docutils literal notranslate"><span class="pre">%ct</span></code> command is only available from the command shell.</p>
 <section id="use-ophyd-to-count-the-scaler">
-<h3>use ophyd to count the scaler<a class="headerlink" href="#use-ophyd-to-count-the-scaler" title="Permalink to this heading">#</a></h3>
+<h3>use ophyd to count the scaler<a class="headerlink" href="#use-ophyd-to-count-the-scaler" title="Link to this heading">#</a></h3>
 <p>We should learn how to use the underlying Python code to do the same steps.</p>
 <p>The first step is to use pure ophyd methods to count and report, then use a bluesky plan to do the same thing. The ophyd methods are <code class="docutils literal notranslate"><span class="pre">trigger</span></code>, <code class="docutils literal notranslate"><span class="pre">wait</span></code>, and <code class="docutils literal notranslate"><span class="pre">read</span></code>. The <code class="docutils literal notranslate"><span class="pre">trigger</span></code> and <code class="docutils literal notranslate"><span class="pre">wait</span></code> methods can be chained together:</p>
 <div class="nbinput nblast docutils container">
@@ -718,7 +714,7 @@ Scaler configured to count for 1.5s
 </div>
 </details></section>
 <section id="use-bluesky-(the-package)-to-count-the-scaler">
-<h3>use bluesky (the package) to count the scaler<a class="headerlink" href="#use-bluesky-(the-package)-to-count-the-scaler" title="Permalink to this heading">#</a></h3>
+<h3>use bluesky (the package) to count the scaler<a class="headerlink" href="#use-bluesky-(the-package)-to-count-the-scaler" title="Link to this heading">#</a></h3>
 <p>Now, use the bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.run_engine.RunEngine.html?highlight=runengine#bluesky.run_engine.RunEngine">RunEngine</a> (<code class="docutils literal notranslate"><span class="pre">RE</span></code>) to count <code class="docutils literal notranslate"><span class="pre">scaler1</span></code>. We’ll use the bluesky plan (<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html?highlight=count#pre-assembled-plans">bp</a>) called <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count">count()</a>. To be consistent with the result returned from <code class="docutils literal notranslate"><span class="pre">%ct</span></code>, we’ll include the
 <code class="docutils literal notranslate"><span class="pre">noisy</span></code> detector.</p>
 <div class="nbinput docutils container">
@@ -1317,7 +1313,7 @@ CA.Client.Exception...............................................
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

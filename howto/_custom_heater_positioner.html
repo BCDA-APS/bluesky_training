@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Heater Simulation using synApps epid and transform records &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Heater-Simulation-using-synApps-epid-and-transform-records">
-<h1>Heater Simulation using synApps epid and transform records<a class="headerlink" href="#Heater-Simulation-using-synApps-epid-and-transform-records" title="Permalink to this heading">#</a></h1>
+<h1>Heater Simulation using synApps epid and transform records<a class="headerlink" href="#Heater-Simulation-using-synApps-epid-and-transform-records" title="Link to this heading">#</a></h1>
 <details><p>TODO</p>
 <p>Needs GUI screen shots, collected data, …</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">pushd</span><span class="w"> </span>/tmp/docker_ioc/iocgp/tmp/screens/ui/
@@ -470,7 +466,7 @@ caQtDM<span class="w"> </span>-macro<span class="w"> </span><span class="s2">&qu
 <p>A cooling simulation is necessary or the controller could never decrease the temperature.</p>
 </details><p>This simulation is an example of building a custom <a class="reference external" href="https://blueskyproject.io/ophyd/">ophyd</a> <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device">Device</a>.</p>
 <section id="Overview">
-<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#Overview" title="Link to this heading">#</a></h2>
 <p>A <em>PID</em> loop (see below) has been <a class="reference external" href="https://github.com/epics-modules/optics/blob/master/opticsApp/Db/fb_epid.db">paired</a> with the simulated temperature using the synApps <a class="reference external" href="https://epics.anl.gov/bcda/synApps/std/epidRecord.html">epid</a> record, to update the operating power of the heater so that the temperature reaches a desired value.</p>
 <p>Significant <em>additional</em> <strong>realism is added to the simulation</strong> by switching to the synApps <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/transformRecord.html">transform</a> record. The <code class="docutils literal notranslate"><span class="pre">transform</span></code> record also has 16 fields for values plus additional features:</p>
 <ul class="simple">
@@ -488,7 +484,7 @@ caQtDM<span class="w"> </span>-macro<span class="w"> </span><span class="s2">&qu
 </ul>
 </section>
 <section id="Schematic">
-<h2>Schematic<a class="headerlink" href="#Schematic" title="Permalink to this heading">#</a></h2>
+<h2>Schematic<a class="headerlink" href="#Schematic" title="Link to this heading">#</a></h2>
 <p>The PID loop decreases the difference (the <em>following error</em>) between the current temperature (readback) and a given setpoint by controlling the heater’s power:</p>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span>power_fraction --&gt; temperature --&gt; PID --&gt; output
   ^                                          |
@@ -498,7 +494,7 @@ caQtDM<span class="w"> </span>-macro<span class="w"> </span><span class="s2">&qu
 </div>
 </section>
 <section id="Implementation">
-<h2>Implementation<a class="headerlink" href="#Implementation" title="Permalink to this heading">#</a></h2>
+<h2>Implementation<a class="headerlink" href="#Implementation" title="Link to this heading">#</a></h2>
 <p>The simulated temperature signal is computed from the various inputs of the <code class="docutils literal notranslate"><span class="pre">transform</span></code> record. The computation follows:</p>
 <p><span class="math notranslate nohighlight">\(T_{sim} = T_{last} + \Delta T_{cool} + \Delta T_{heat} + \Delta T_{noise}\)</span></p>
 <p>Certain fields of this <code class="docutils literal notranslate"><span class="pre">transform</span></code> record are linked to fields in an <code class="docutils literal notranslate"><span class="pre">epid</span></code> record. When the <code class="docutils literal notranslate"><span class="pre">transform</span></code> record is <a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Process_Database_Concepts.html">evaluated</a> (<em>processed</em>, in EPICS terms), the <code class="docutils literal notranslate"><span class="pre">epid</span></code> is then <em>processed</em>. The <code class="docutils literal notranslate"><span class="pre">epid</span></code> record computes a new value (of <em>power_fraction</em>, the fraction of total heater power) for the next computation of the temperature signal.</p>
@@ -508,7 +504,7 @@ next simulated temperature.</p>
 <p>In addition to the simulated heater, the temperature calculation includes a simulation of cooling. This cooling is computed as a fraction of the last simulated temperature. Without any applied heating (when the heater power is OFF), the simulated will progress to the minimum temperature. (This simulation is a <em>heater</em> where the simulated temperature is constrained by <code class="docutils literal notranslate"><span class="pre">T_min</span> <span class="pre">&lt;=</span> <span class="pre">T</span> <span class="pre">&lt;=</span> <span class="pre">T_max</span></code>.)</p>
 </section>
 <section id="PID-Control-Loops">
-<h2>PID Control Loops<a class="headerlink" href="#PID-Control-Loops" title="Permalink to this heading">#</a></h2>
+<h2>PID Control Loops<a class="headerlink" href="#PID-Control-Loops" title="Link to this heading">#</a></h2>
 <p>See these on-line references which explain PID control loops in detail.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://en.wikipedia.org/wiki/PID_controller">https://en.wikipedia.org/wiki/PID_controller</a></p></li>
@@ -518,7 +514,7 @@ next simulated temperature.</p>
 </ul>
 </section>
 <section id="ophyd-interface">
-<h2>ophyd interface<a class="headerlink" href="#ophyd-interface" title="Permalink to this heading">#</a></h2>
+<h2>ophyd interface<a class="headerlink" href="#ophyd-interface" title="Link to this heading">#</a></h2>
 <p>This notebook will configure both <code class="docutils literal notranslate"><span class="pre">transform</span></code> and <code class="docutils literal notranslate"><span class="pre">epid</span></code> records using <code class="docutils literal notranslate"><span class="pre">ophyd</span></code> Python tools within the <a class="reference external" href="https://blueskyproject.io/">Bluesky</a> framework. GUI screens from the <a class="reference external" href="https://caqtdm.github.io/">caQtDM</a> application will show the summary settings of each record.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -543,7 +539,7 @@ next simulated temperature.</p>
 </table>
 </div>
 <section id="Setup-the-heater-and-pid">
-<h3>Setup the <code class="docutils literal notranslate"><span class="pre">heater</span></code> and <code class="docutils literal notranslate"><span class="pre">pid</span></code><a class="headerlink" href="#Setup-the-heater-and-pid" title="Permalink to this heading">#</a></h3>
+<h3>Setup the <code class="docutils literal notranslate"><span class="pre">heater</span></code> and <code class="docutils literal notranslate"><span class="pre">pid</span></code><a class="headerlink" href="#Setup-the-heater-and-pid" title="Link to this heading">#</a></h3>
 <p>There’s a lot to configure here. Symbols have been defined as shortcuts to the transform record channels and comments have been added to explain.</p>
 <p>The <code class="docutils literal notranslate"><span class="pre">EpidRecord</span></code> and <code class="docutils literal notranslate"><span class="pre">TransformRecord</span></code> classes connect with many PVs, far more than we need <em>as an EPICS client</em> to operate a temperature controller. We must access <em>some</em> of these fields to configure the records for our simulator. Local instances are created for each, within the setup function, to access all the settings for the EPICS configuration of the simulator. Once set, a simpler interface to the simulator PVs will be constructed.</p>
 <p>Create a <code class="docutils literal notranslate"><span class="pre">setup()</span></code> which can be called when needed to reset the simulated heater.</p>
@@ -714,7 +710,7 @@ next simulated temperature.</p>
 </section>
 </section>
 <section id="heater-as-positioner">
-<h2>heater as positioner<a class="headerlink" href="#heater-as-positioner" title="Permalink to this heading">#</a></h2>
+<h2>heater as positioner<a class="headerlink" href="#heater-as-positioner" title="Link to this heading">#</a></h2>
 <p>The heater temperature may be described in ophyd as a <em>positioner</em>, enabling temperature scans and (thermal profiles)[<a class="reference external" href="https://en.wikipedia.org/wiki/Thermal_profiling">https://en.wikipedia.org/wiki/Thermal_profiling</a>] such as <em>ramp, soak, cool</em>.</p>
 <p>Remember to turn on the power to the heater, or the controller will not come up to temperature.</p>
 <div class="nbinput nblast docutils container">
@@ -968,7 +964,7 @@ MoveStatus(done=True, pos=temperature, elapsed=21.3, success=True, settle_time=0
 <p>Good. Now we see how to change the temperature in a step-wise manner, using <code class="docutils literal notranslate"><span class="pre">bps.mv()</span></code> and a settling time using <code class="docutils literal notranslate"><span class="pre">bps.sleep()</span></code>.</p>
 </section>
 <section id="ramp-the-temperature">
-<h2>ramp the temperature<a class="headerlink" href="#ramp-the-temperature" title="Permalink to this heading">#</a></h2>
+<h2>ramp the temperature<a class="headerlink" href="#ramp-the-temperature" title="Link to this heading">#</a></h2>
 <p>When the tmperature is <em>ramped</em>, the setpoint is varied only some predetermined trajectory until some end condition is satisfied. One type of ramp is at constant rate where the temperature changes by a constant number of degrees / second (or minute).</p>
 <p>In the <code class="docutils literal notranslate"><span class="pre">ramp()</span></code> plan below, the <em>duration</em> of the ramp is computed, given the <em>start</em> and <em>final</em> positions and the ramp <em>rate</em>. The setpoint is continually updated during the ramp (at the given <em>period</em>) to keep the temperature changing. The setpoint is a linear function of elapsed time, the <em>start</em> &amp; <em>final</em> temperatures, and the <em>direction</em> of the ramp. The ramp ends when the <em>duration</em> has elapsed. One move to the <em>final</em> temperature finishes the ramp.</p>
 <div class="nbinput nblast docutils container">
@@ -1050,7 +1046,7 @@ MoveStatus(done=True, pos=temperature, elapsed=21.3, success=True, settle_time=0
 <p>Good. The following error was smaller in this last ramp and the final readback was within tolerance of the setpoint.</p>
 </section>
 <section id="Thermal-profile">
-<h2>Thermal profile<a class="headerlink" href="#Thermal-profile" title="Permalink to this heading">#</a></h2>
+<h2>Thermal profile<a class="headerlink" href="#Thermal-profile" title="Link to this heading">#</a></h2>
 <p>With the <code class="docutils literal notranslate"><span class="pre">ramp()</span></code> plan above, a plan to <em>ramp, soak, and cool</em> is possible. Remember to control the ramp <em>rate</em>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[26]:
@@ -1212,7 +1208,7 @@ MoveStatus(done=True, pos=temperature, elapsed=21.3, success=True, settle_time=0
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

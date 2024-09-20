@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Configure IPython Profile for Bluesky &#8212; APS Bluesky Training</title>
   
@@ -29,23 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'reference/_ipython';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -412,11 +408,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="configure-ipython-profile-for-bluesky">
-<span id="reference-configure-ipython-profile"></span><h1>Configure IPython Profile for Bluesky<a class="headerlink" href="#configure-ipython-profile-for-bluesky" title="Permalink to this heading">#</a></h1>
+<span id="reference-configure-ipython-profile"></span><h1>Configure IPython Profile for Bluesky<a class="headerlink" href="#configure-ipython-profile-for-bluesky" title="Link to this heading">#</a></h1>
 <p>In this optional step, an IPython profile <a class="footnote-reference brackets" href="#profile" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> is used to enable the
 console interface for a bluesky session.</p>
 <section id="python-snippet-to-start-instrument-for-data-collection">
-<span id="startup-snippet"></span><span id="index-0"></span><h2>Python snippet to start instrument for data collection<a class="headerlink" href="#python-snippet-to-start-instrument-for-data-collection" title="Permalink to this heading">#</a></h2>
+<span id="startup-snippet"></span><span id="index-0"></span><h2>Python snippet to start instrument for data collection<a class="headerlink" href="#python-snippet-to-start-instrument-for-data-collection" title="Link to this heading">#</a></h2>
 <p>This snippet of Python code will start Bluesky for data collection.  Use it in
 the IPython startup script and also in Jupyter notebooks.  First, it puts the
 parent directory of the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package on the exectuable path, then it
@@ -434,7 +430,7 @@ starts the instrument.</p>
 <a class="reference download internal" download="" href="../_downloads/9f76a7f63ab3740e857a4fc494f7568d/__start_bluesky_instrument__.py"><code class="xref download docutils literal notranslate"><span class="pre">__start_bluesky_instrument__.py</span></code></a></p>
 </section>
 <section id="create-ipython-profile-for-bluesky">
-<h2>Create IPython Profile for Bluesky<a class="headerlink" href="#create-ipython-profile-for-bluesky" title="Permalink to this heading">#</a></h2>
+<h2>Create IPython Profile for Bluesky<a class="headerlink" href="#create-ipython-profile-for-bluesky" title="Link to this heading">#</a></h2>
 <p>If there is an existing <code class="docutils literal notranslate"><span class="pre">~/.ipython</span></code> directory (perhaps created for
 other use from this account), then choose a unique directory for
 bluesky. Typical alternative is <code class="docutils literal notranslate"><span class="pre">~/.ipython-bluesky</span></code>.</p>
@@ -444,14 +440,14 @@ bluesky. Typical alternative is <code class="docutils literal notranslate"><span
 </pre></div>
 </div>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="profile" role="note">
+<aside class="footnote brackets" id="profile" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://ipython.readthedocs.io/en/stable/config/intro.html#profiles">https://ipython.readthedocs.io/en/stable/config/intro.html#profiles</a></p>
 </aside>
 </aside>
 </section>
 <section id="add-a-single-python-file-to-the-startup-directory">
-<h2>Add a single Python file to the startup directory<a class="headerlink" href="#add-a-single-python-file-to-the-startup-directory" title="Permalink to this heading">#</a></h2>
+<h2>Add a single Python file to the startup directory<a class="headerlink" href="#add-a-single-python-file-to-the-startup-directory" title="Link to this heading">#</a></h2>
 <div class="highlight-text notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>  .ipython-bluesky/
 <span class="linenos">2</span>    profile_bluesky/
 <span class="linenos">3</span>      startup/
@@ -562,7 +558,7 @@ The files are run in lexical (alphabetical) order.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Images,-Darks,-&amp;-whites-with-EPICS-area-detector,-ophyd,-and-Bluesky">
-<h1>Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky<a class="headerlink" href="#Images,-Darks,-&-whites-with-EPICS-area-detector,-ophyd,-and-Bluesky" title="Permalink to this heading">#</a></h1>
+<h1>Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky<a class="headerlink" href="#Images,-Darks,-&-whites-with-EPICS-area-detector,-ophyd,-and-Bluesky" title="Link to this heading">#</a></h1>
 <p>In some scientific data acquisition processes, an area detector acquires a sequence of image frames and stores them as a sequence in a data file. In tomography and other processes, the frames are associated with certain imaging conditions, such as when the illumination is on and the sample is in view (known as an <em>image</em> or <em>data</em> frame) or the sample is not in view (a <em>flat</em>, <em>flood</em>, or <em>white</em> frame) or when the illumination is off (a <em>dark</em> or <em>background</em> frame).</p>
 <p>This document describes how to configure the <a class="reference external" href="https://blueskyproject.io/">Bluesky</a> software to write such <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5</a> files when using <a class="reference external" href="https://epics-controls.org/">EPICS</a> and the <a class="reference external" href="https://areadetector.github.io/areaDetector/">Area Detector</a> support.</p>
 <p>The HDF5 File Writer <a class="reference external" href="https://areadetector.github.io/areaDetector/ADCore/NDFileHDF5.html">plugin</a> can be configured to save image frames into separate datasets within the same HDF5 data file. The selection of frame type (image frame, background/dark frame, white/flat frame) is made by use of an existing PV in area detector: <code class="docutils literal notranslate"><span class="pre">$(P):cam1:FrameType</span></code> which is an <a class="reference external" href="https://epics.anl.gov/base/R7-0/6-docs/mbboRecord.html">mbbo</a> record. In ophyd, the readback version of this PV:
@@ -523,10 +519,10 @@ the <code class="docutils literal notranslate"><span class="pre">/entry/data</sp
 </div>
 <p>In any following acquisition(s), the HDF5 file writer will direct the image frame to the dataset as specified by the ZRST, ONST, or TWST field, respectively.</p>
 <section id="Setup">
-<h2>Setup<a class="headerlink" href="#Setup" title="Permalink to this heading">#</a></h2>
+<h2>Setup<a class="headerlink" href="#Setup" title="Link to this heading">#</a></h2>
 <p>Try acquiring three different frame types into the same <a class="reference external" href="https://www.hdfgroup.org/solutions/hdf5/">HDF5</a> file with the <a class="reference external" href="https://areadetector.github.io/master/ADSimDetector/simDetector.html">ADSimDetector</a> IOC. Use the <a class="reference external" href="https://manual.nexusformat.org/user_manual.html">NeXus</a> format. The procedures are similar for the <a class="reference external" href="https://www.aps.anl.gov/Science/Scientific-Software/DataExchange">data exchange</a> format.</p>
 <section id="Notebook-specific-details">
-<h3>Notebook-specific details<a class="headerlink" href="#Notebook-specific-details" title="Permalink to this heading">#</a></h3>
+<h3>Notebook-specific details<a class="headerlink" href="#Notebook-specific-details" title="Link to this heading">#</a></h3>
 <p>These details are specific to the area detector running for <em>this</em> notebook.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -557,7 +553,7 @@ the <code class="docutils literal notranslate"><span class="pre">/entry/data</sp
 </div>
 </section>
 <section id="XML-Attributes-File">
-<h3>XML Attributes File<a class="headerlink" href="#XML-Attributes-File" title="Permalink to this heading">#</a></h3>
+<h3>XML Attributes File<a class="headerlink" href="#XML-Attributes-File" title="Link to this heading">#</a></h3>
 <p>Here, we create the custom <code class="docutils literal notranslate"><span class="pre">/tmp/attributes.xml</span></code> (starting from the XML layout file supplied with the ADSimDetector). Rather than use an XML library to write this file, we’ll create all the content here as text and write the file with the usual text file tools. Then, we’ll check that the file exists.</p>
 <p>Note: This is the part of the file that connects the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV with an attribute to be used in the <a class="reference internal" href="#XML-Layout-File"><span class="std std-ref">layout</span></a> file. We can choose any unique name for this attribute (within the names allowed by XML) but we must use the same name in both the attributes and layout XML files. Here, we choose the name <code class="docutils literal notranslate"><span class="pre">HDF5FrameLocation</span></code> .</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;Attribute</span>
@@ -608,7 +604,7 @@ xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/attributes.xml&#39;)
 </div>
 </section>
 <section id="XML-Layout-File">
-<h3>XML Layout File<a class="headerlink" href="#XML-Layout-File" title="Permalink to this heading">#</a></h3>
+<h3>XML Layout File<a class="headerlink" href="#XML-Layout-File" title="Link to this heading">#</a></h3>
 <p>Here, we create the custom <code class="docutils literal notranslate"><span class="pre">/tmp/layout.xml</span></code> (starting from the XML layout file supplied with the ADSimDetector). Rather than use an XML library to write this file, we’ll create all the content here as text and write the file with the usual text file tools. Then, we’ll check that the file exists.</p>
 <p>Note: This is the part of the file that directs each frame type to its configured field:</p>
 <div class="highlight-xml notranslate"><div class="highlight"><pre><span></span><span class="nt">&lt;global</span><span class="w"> </span><span class="na">name=</span><span class="s">&quot;detector_data_destination&quot;</span><span class="w"> </span><span class="na">ndattribute=</span><span class="s">&quot;HDF5FrameLocation&quot;</span><span class="w"> </span><span class="nt">/&gt;</span>
@@ -683,7 +679,7 @@ xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/layout.xml&#39;)
 </div>
 </section>
 <section id="Ophyd-Device-Setup">
-<h3>Ophyd Device Setup<a class="headerlink" href="#Ophyd-Device-Setup" title="Permalink to this heading">#</a></h3>
+<h3>Ophyd Device Setup<a class="headerlink" href="#Ophyd-Device-Setup" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -719,7 +715,7 @@ xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/layout.xml&#39;)
 </div>
 </section>
 <section id="Support-Functions">
-<h3>Support Functions<a class="headerlink" href="#Support-Functions" title="Permalink to this heading">#</a></h3>
+<h3>Support Functions<a class="headerlink" href="#Support-Functions" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
@@ -901,7 +897,7 @@ xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/layout.xml&#39;)
 </div>
 </section>
 <section id="Configure-PV-for-the-Frame-Type">
-<h3>Configure PV for the Frame Type<a class="headerlink" href="#Configure-PV-for-the-Frame-Type" title="Permalink to this heading">#</a></h3>
+<h3>Configure PV for the Frame Type<a class="headerlink" href="#Configure-PV-for-the-Frame-Type" title="Link to this heading">#</a></h3>
 <p>Configure our PV(s) for the <em>NeXus</em> addresses we want to use. We <strong>must</strong> reconnect our ophyd object after our change to the EPICS PVs to pick up this change. (The choices that the Python objects sees are only updated when the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV is first connected.)</p>
 <p>Must call <code class="docutils literal notranslate"><span class="pre">setup_frame_type()</span></code> <em>before</em> creating detector object, so the Python detector object picks up on the different string values. The EPICS IOC gets the correct string directly from the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV.</p>
 <div class="nbinput nblast docutils container">
@@ -914,7 +910,7 @@ xml_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/layout.xml&#39;)
 </div>
 </section>
 <section id="Create-Detector-Object">
-<h3>Create Detector Object<a class="headerlink" href="#Create-Detector-Object" title="Permalink to this heading">#</a></h3>
+<h3>Create Detector Object<a class="headerlink" href="#Create-Detector-Object" title="Link to this heading">#</a></h3>
 <p>… and connect with the Area Detector IOC. Set the counting time per frame (something short). <em>Prime</em> (push an image frame from the camera to the plugin) the HDF5 plugin, if found necessary.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -940,7 +936,7 @@ Priming hdf1
 </div>
 </section>
 <section id="Create-RunEngine">
-<h3>Create RunEngine<a class="headerlink" href="#Create-RunEngine" title="Permalink to this heading">#</a></h3>
+<h3>Create RunEngine<a class="headerlink" href="#Create-RunEngine" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -963,7 +959,7 @@ Priming hdf1
 </div>
 </section>
 <section id="Review-the-Configurations">
-<h3>Review the Configurations<a class="headerlink" href="#Review-the-Configurations" title="Permalink to this heading">#</a></h3>
+<h3>Review the Configurations<a class="headerlink" href="#Review-the-Configurations" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
@@ -1050,7 +1046,7 @@ det_cam_trigger_mode   integer (&#39;Internal&#39;, &#39;External&#39;)         
 </section>
 </section>
 <section id="Acquire-Images-with-Standard-bp.count()-Plan">
-<h2>Acquire Images with Standard <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> Plan<a class="headerlink" href="#Acquire-Images-with-Standard-bp.count()-Plan" title="Permalink to this heading">#</a></h2>
+<h2>Acquire Images with Standard <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> Plan<a class="headerlink" href="#Acquire-Images-with-Standard-bp.count()-Plan" title="Link to this heading">#</a></h2>
 <p>To understand what the custom frame type support will do for us, we first demonstrate image acquisition when the custom support is not yet installed. When a custom layout file is not configured in the HDF5 plugin, the standard layout (NeXus schema) writes all image frames into the <code class="docutils literal notranslate"><span class="pre">/entry/data/data</span></code> field of the HDF5 file.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
@@ -1110,10 +1106,10 @@ h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0000.h5&#39;)
 </div>
 </section>
 <section id="Use-Ophyd-to-Acquire-Image-Frames">
-<h2>Use Ophyd to Acquire Image Frames<a class="headerlink" href="#Use-Ophyd-to-Acquire-Image-Frames" title="Permalink to this heading">#</a></h2>
+<h2>Use Ophyd to Acquire Image Frames<a class="headerlink" href="#Use-Ophyd-to-Acquire-Image-Frames" title="Link to this heading">#</a></h2>
 <p>Test the acquisition of the different frame types.</p>
 <section id="Install-Support-for-Custom-Frame-Types">
-<h3>Install Support for Custom Frame Types<a class="headerlink" href="#Install-Support-for-Custom-Frame-Types" title="Permalink to this heading">#</a></h3>
+<h3>Install Support for Custom Frame Types<a class="headerlink" href="#Install-Support-for-Custom-Frame-Types" title="Link to this heading">#</a></h3>
 <p>Previously we wrote <a class="reference internal" href="#XML-Attributes-File"><span class="std std-ref">attributes</span></a> and <a class="reference internal" href="#XML-Layout-File"><span class="std std-ref">layout</span></a> files for the IOC to use. Configure the IOC to use these files now. With these files, the HDF5 writer will use the <code class="docutils literal notranslate"><span class="pre">cam1:FrameType</span></code> PV, configured <a class="reference internal" href="#Configure-PV-for-the-Frame-Type"><span class="std std-ref">above</span></a>, to direct each frame to its configured HDF5 address in the file.</p>
 <p><strong>NOTE</strong>: Very important that you set the <a class="reference internal" href="#XML-Attributes-File"><span class="std std-ref">attributes</span></a> file in the <code class="docutils literal notranslate"><span class="pre">cam</span></code>, and not the <code class="docutils literal notranslate"><span class="pre">hdf1</span></code> plugin!</p>
 <div class="nbinput docutils container">
@@ -1139,7 +1135,7 @@ adsimdet.hdf1.layout_filename_valid.get()=&#39;Yes&#39;
 </div>
 </section>
 <section id="Start-Data-Acquisition">
-<h3>Start Data Acquisition<a class="headerlink" href="#Start-Data-Acquisition" title="Permalink to this heading">#</a></h3>
+<h3>Start Data Acquisition<a class="headerlink" href="#Start-Data-Acquisition" title="Link to this heading">#</a></h3>
 <p>In staging, ophyd sets the various detector PVs to the values to be used for the next data acquisition. The configuration is stored in the various <code class="docutils literal notranslate"><span class="pre">stage_sigs</span></code> dictionaries printed <a class="reference internal" href="#Review-the-Configurations"><span class="std std-ref">above</span></a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
@@ -1152,7 +1148,7 @@ adsimdet.hdf1.layout_filename_valid.get()=&#39;Yes&#39;
 </div>
 </section>
 <section id="Collect-Different-Frame-Types">
-<h3>Collect Different Frame Types<a class="headerlink" href="#Collect-Different-Frame-Types" title="Permalink to this heading">#</a></h3>
+<h3>Collect Different Frame Types<a class="headerlink" href="#Collect-Different-Frame-Types" title="Link to this heading">#</a></h3>
 <p>Since execution by the RunEngine may appear to be opaque to the user, let’s bypass the RunEngine and collect the different frame types using pure ophyd commands.</p>
 <p>For the different image types, first set the frame type, then tell the camera to acquire. The camera has been configured to wait for all plugins to finish before it sets detector state to idle. The <code class="docutils literal notranslate"><span class="pre">responder()</span></code> function is subscribed to any updates of the detector state PV. A <code class="docutils literal notranslate"><span class="pre">Status()</span></code> object is used to wait for the PV to reach the value of <code class="docutils literal notranslate"><span class="pre">&quot;Idle&quot;</span></code> (or <code class="docutils literal notranslate"><span class="pre">0</span></code>).</p>
 <div class="nbinput nblast docutils container">
@@ -1217,7 +1213,7 @@ adsimdet.hdf1.layout_filename_valid.get()=&#39;Yes&#39;
 </div>
 </section>
 <section id="End-Data-Acquisition">
-<h3>End Data Acquisition<a class="headerlink" href="#End-Data-Acquisition" title="Permalink to this heading">#</a></h3>
+<h3>End Data Acquisition<a class="headerlink" href="#End-Data-Acquisition" title="Link to this heading">#</a></h3>
 <p><em>Unstaging</em> reverses the <code class="docutils literal notranslate"><span class="pre">stage()</span></code> step above, restoring PVs to their prior values.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
@@ -1258,10 +1254,10 @@ h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0001.h5&#39;)
 </section>
 </section>
 <section id="Use-Bluesky-to-Acquire-Image-Frames">
-<h2>Use Bluesky to Acquire Image Frames<a class="headerlink" href="#Use-Bluesky-to-Acquire-Image-Frames" title="Permalink to this heading">#</a></h2>
+<h2>Use Bluesky to Acquire Image Frames<a class="headerlink" href="#Use-Bluesky-to-Acquire-Image-Frames" title="Link to this heading">#</a></h2>
 <p>Here, we collect image frames with a custom plan using the bluesky RunEngine (<code class="docutils literal notranslate"><span class="pre">RE</span></code>).</p>
 <section id="Custom-Bluesky-Plan">
-<h3>Custom Bluesky Plan<a class="headerlink" href="#Custom-Bluesky-Plan" title="Permalink to this heading">#</a></h3>
+<h3>Custom Bluesky Plan<a class="headerlink" href="#Custom-Bluesky-Plan" title="Link to this heading">#</a></h3>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
 </pre></div>
@@ -1309,7 +1305,7 @@ h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0001.h5&#39;)
 </div>
 </section>
 <section id="Acquire-Image-Frames-with-Bluesky">
-<h3>Acquire Image Frames with Bluesky<a class="headerlink" href="#Acquire-Image-Frames-with-Bluesky" title="Permalink to this heading">#</a></h3>
+<h3>Acquire Image Frames with Bluesky<a class="headerlink" href="#Acquire-Image-Frames-with-Bluesky" title="Link to this heading">#</a></h3>
 <p>Describe a sequence of acquisitions with different frame types and number of frames to collect with each.</p>
 <p>Run this sequence with the custom plan (in the RunEngine), then print an overview of the HDF5 file.</p>
 <div class="nbinput docutils container">
@@ -1505,7 +1501,7 @@ h5_file=PosixPath(&#39;/tmp/docker_ioc/iocad/tmp/test_image_0002.h5&#39;)
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

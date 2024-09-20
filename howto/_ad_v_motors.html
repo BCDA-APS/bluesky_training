@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Scan Area Detector v. Motor &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,7 +425,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Scan-Area-Detector-v.-Motor">
-<h1>Scan Area Detector v. Motor<a class="headerlink" href="#Scan-Area-Detector-v.-Motor" title="Permalink to this heading">#</a></h1>
+<h1>Scan Area Detector v. Motor<a class="headerlink" href="#Scan-Area-Detector-v.-Motor" title="Link to this heading">#</a></h1>
 <h3><p>Goals</p>
 </h3><ul class="simple">
 <li><p>☒ <strong>Use EPICS motor(s):</strong></p>
@@ -461,7 +457,7 @@ document.write(`
 <li><p>☒ <strong>Collect data in a SPEC data file.</strong></p></li>
 </ul>
 <section id="Start-the-instrument-package">
-<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
 <p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory, so we add that to the search path before importing it.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -608,7 +604,7 @@ I Sat-13:18:38 - #### Startup is complete. ####
 </div>
 </section>
 <section id="Setup-&amp;-connect-with-EPICS">
-<h2>Setup &amp; connect with EPICS<a class="headerlink" href="#Setup-&-connect-with-EPICS" title="Permalink to this heading">#</a></h2>
+<h2>Setup &amp; connect with EPICS<a class="headerlink" href="#Setup-&-connect-with-EPICS" title="Link to this heading">#</a></h2>
 <p>Search the ophyd object registry (<code class="docutils literal notranslate"><span class="pre">oregistry</span></code>) for the detector and motors. Verify that each is connected to EPICS.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -669,7 +665,7 @@ obj.connected=True &#39;m2&#39;
 </div>
 </section>
 <section id="Diagnostics-(optional)">
-<h2>Diagnostics (optional)<a class="headerlink" href="#Diagnostics-(optional)" title="Permalink to this heading">#</a></h2>
+<h2>Diagnostics (optional)<a class="headerlink" href="#Diagnostics-(optional)" title="Link to this heading">#</a></h2>
 <p>These steps are optional.</p>
 <ul class="simple">
 <li><p><strong>Show the data</strong> from area detector <code class="docutils literal notranslate"><span class="pre">simdet</span></code>. This is the data collected by the <code class="docutils literal notranslate"><span class="pre">RE</span></code> during a run..</p></li>
@@ -778,7 +774,7 @@ Image frames per point: 3
 </div>
 </div>
 <section id="Read-the-Stats-plugin-signals">
-<h3>Read the Stats plugin signals<a class="headerlink" href="#Read-the-Stats-plugin-signals" title="Permalink to this heading">#</a></h3>
+<h3>Read the Stats plugin signals<a class="headerlink" href="#Read-the-Stats-plugin-signals" title="Link to this heading">#</a></h3>
 <ul class="simple">
 <li><p>The plan below reads the signals from <code class="docutils literal notranslate"><span class="pre">simdet.stats1</span></code> multiple times. Since <code class="docutils literal notranslate"><span class="pre">simdet</span></code> itself is not included in the list of detectors, it will not be triggered (and thus will not produce new images). One can notice that the <code class="docutils literal notranslate"><span class="pre">unique_id</span></code> does not change. For clarity, the command is split into multiple lines.</p></li>
 </ul>
@@ -1266,7 +1262,7 @@ Data variables:
 </section>
 </section>
 <section id="Take-image(s)-with-the-bp.count-plan">
-<h2>Take image(s) with the <code class="docutils literal notranslate"><span class="pre">bp.count</span></code> plan<a class="headerlink" href="#Take-image(s)-with-the-bp.count-plan" title="Permalink to this heading">#</a></h2>
+<h2>Take image(s) with the <code class="docutils literal notranslate"><span class="pre">bp.count</span></code> plan<a class="headerlink" href="#Take-image(s)-with-the-bp.count-plan" title="Link to this heading">#</a></h2>
 <p>Collect 5 sets of images (3-frames each as configured above).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1324,7 +1320,7 @@ uids=!r
 </div>
 </div>
 <section id="Visualize-the-collected-data">
-<h3>Visualize the collected data<a class="headerlink" href="#Visualize-the-collected-data" title="Permalink to this heading">#</a></h3>
+<h3>Visualize the collected data<a class="headerlink" href="#Visualize-the-collected-data" title="Link to this heading">#</a></h3>
 <p>Let’s examine the data from the most recent run in the catalog:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
@@ -1802,7 +1798,7 @@ Data variables:
 </div>
 </section>
 <section id="About-the-HDF5-image-file">
-<h3>About the HDF5 image file<a class="headerlink" href="#About-the-HDF5-image-file" title="Permalink to this heading">#</a></h3>
+<h3>About the HDF5 image file<a class="headerlink" href="#About-the-HDF5-image-file" title="Link to this heading">#</a></h3>
 <p>Information about the HDF5 file is saved as a <code class="docutils literal notranslate"><span class="pre">resource</span></code> document in the catalog. This command shows the content of that document.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
@@ -1871,7 +1867,7 @@ True
 </section>
 </section>
 <section id="The-(1-D)-bp.scan()-plan-with-one-motor">
-<h2>The (1-D) <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> plan with one motor<a class="headerlink" href="#The-(1-D)-bp.scan()-plan-with-one-motor" title="Permalink to this heading">#</a></h2>
+<h2>The (1-D) <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> plan with one motor<a class="headerlink" href="#The-(1-D)-bp.scan()-plan-with-one-motor" title="Link to this heading">#</a></h2>
 <p>Step scan a motor (m1); at each step:</p>
 <ul class="simple">
 <li><p>Measure 3 images (as configured above during detector staging).</p></li>
@@ -2364,7 +2360,7 @@ Data variables:
 </div>
 </section>
 <section id="The-(1-D)-bp.scan()-plan-with-two-motors">
-<h2>The (1-D) <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> plan with two motors<a class="headerlink" href="#The-(1-D)-bp.scan()-plan-with-two-motors" title="Permalink to this heading">#</a></h2>
+<h2>The (1-D) <code class="docutils literal notranslate"><span class="pre">bp.scan()</span></code> plan with two motors<a class="headerlink" href="#The-(1-D)-bp.scan()-plan-with-two-motors" title="Link to this heading">#</a></h2>
 <p>Step scan two motors together (m1 &amp; m2) as in the previous section; at each step:</p>
 <ul class="simple">
 <li><p>Measure 3 images (as configured above during detector staging).</p></li>
@@ -2860,13 +2856,13 @@ Data variables:
       dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-f8f30c1f-efba-4220-bfc6-77b44fca1c13' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-f8f30c1f-efba-4220-bfc6-77b44fca1c13' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
 </div>
 <section id="Show-the-sequence-of-motor-positions">
-<h3>Show the sequence of motor positions<a class="headerlink" href="#Show-the-sequence-of-motor-positions" title="Permalink to this heading">#</a></h3>
+<h3>Show the sequence of motor positions<a class="headerlink" href="#Show-the-sequence-of-motor-positions" title="Link to this heading">#</a></h3>
 <p>Both motors move at the same time. The same number of steps are taken by each motor. Below is a plot showing the readback values of each motor during a two-motor <code class="docutils literal notranslate"><span class="pre">scan</span></code> versus the data point number:</p>
 <p><img alt="grid_scan motors v point number" src="../_images/scan_two_motors.png" /></p>
 </section>
 </section>
 <section id="The-(2-D)-bp.grid_scan()-(mesh)-plan">
-<h2>The (2-D) <code class="docutils literal notranslate"><span class="pre">bp.grid_scan()</span></code> (mesh) plan<a class="headerlink" href="#The-(2-D)-bp.grid_scan()-(mesh)-plan" title="Permalink to this heading">#</a></h2>
+<h2>The (2-D) <code class="docutils literal notranslate"><span class="pre">bp.grid_scan()</span></code> (mesh) plan<a class="headerlink" href="#The-(2-D)-bp.grid_scan()-(mesh)-plan" title="Link to this heading">#</a></h2>
 <p>Step scan two motors (m1 &amp; m2) as in the previous section; at each step:</p>
 <ul class="simple">
 <li><p>Measure 3 images (as configured aboveduring detector staging).</p></li>
@@ -3398,7 +3394,7 @@ Data variables:
       dtype=&#x27;float64&#x27;, name=&#x27;time&#x27;))</pre></div></li></ul></div></li><li class='xr-section-item'><input id='section-596d5917-c8bd-4ff3-a28a-635ef7e6b2a4' class='xr-section-summary-in' type='checkbox' disabled ><label for='section-596d5917-c8bd-4ff3-a28a-635ef7e6b2a4' class='xr-section-summary'  title='Expand/collapse section'>Attributes: <span>(0)</span></label><div class='xr-section-inline-details'></div><div class='xr-section-details'><dl class='xr-attrs'></dl></div></li></ul></div></div></div>
 </div>
 <section id="id1">
-<h3>Show the sequence of motor positions<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h3>
+<h3>Show the sequence of motor positions<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <details><p>Here is the sequence of how the motors are stepped during a <code class="docutils literal notranslate"><span class="pre">grid_scan</span></code>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">m1</span></code> is stepped through its range; at each step of <code class="docutils literal notranslate"><span class="pre">m1</span></code>:</p>
@@ -3428,7 +3424,7 @@ Data variables:
 </section>
 </section>
 <section id="SPEC-data-file">
-<h2>SPEC data file<a class="headerlink" href="#SPEC-data-file" title="Permalink to this heading">#</a></h2>
+<h2>SPEC data file<a class="headerlink" href="#SPEC-data-file" title="Link to this heading">#</a></h2>
 <p>All along, quietly in the background, the data has been saved both to a catalog and to a SPEC data file. The total counts, max counts, and unique ID from all scans can be plotted from the SPEC file using PyMCA or NeXpy.</p>
 <p>The image content is not stored in the SPEC file, so images cannot be viewed from it. However, references to the images are saved as comments. See the comment lines that match a search for</p>
 <p><code class="docutils literal notranslate"><span class="pre">resource</span> <span class="pre">{'spec':</span> <span class="pre">'AD_HDF5'</span></code></p>
@@ -3845,7 +3841,7 @@ Data variables:
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

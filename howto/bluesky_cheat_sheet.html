@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Bluesky Cheat Sheet &#8212; APS Bluesky Training</title>
   
@@ -29,23 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'howto/bluesky_cheat_sheet';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -426,7 +422,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="bluesky-cheat-sheet">
-<h1>Bluesky Cheat Sheet<a class="headerlink" href="#bluesky-cheat-sheet" title="Permalink to this heading">#</a></h1>
+<h1>Bluesky Cheat Sheet<a class="headerlink" href="#bluesky-cheat-sheet" title="Link to this heading">#</a></h1>
 <p>This is a quick-reference guide for those learning how
 to use the Bluesky Framework for data acquisition.</p>
 <p>Covered here:</p>
@@ -440,7 +436,7 @@ to use the Bluesky Framework for data acquisition.</p>
 </ul>
 <p>There steps are repeated in a <a class="reference internal" href="../tutor/_command_review.html"><span class="std std-doc">Jupyter notebook</span></a>.</p>
 <section id="read">
-<h2>Read<a class="headerlink" href="#read" title="Permalink to this heading">#</a></h2>
+<h2>Read<a class="headerlink" href="#read" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>command</p></th>
@@ -539,7 +535,7 @@ steps_per_rev        EpicsSignal         ('m1_steps_per_rev')
 </details>
 </section>
 <section id="move">
-<h2>Move<a class="headerlink" href="#move" title="Permalink to this heading">#</a></h2>
+<h2>Move<a class="headerlink" href="#move" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>command</p></th>
@@ -589,7 +585,7 @@ Out[19]: ()
 </details>
 </section>
 <section id="count">
-<h2>Count<a class="headerlink" href="#count" title="Permalink to this heading">#</a></h2>
+<h2>Count<a class="headerlink" href="#count" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>command</p></th>
@@ -664,7 +660,7 @@ OrderedDict([('I0Mon', {'value': 11.0, 'timestamp': 1613880389.315847}),
 </details>
 </section>
 <section id="list-describe-summary">
-<h2>List, Describe, Summary<a class="headerlink" href="#list-describe-summary" title="Permalink to this heading">#</a></h2>
+<h2>List, Describe, Summary<a class="headerlink" href="#list-describe-summary" title="Link to this heading">#</a></h2>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
 <tr class="row-odd"><th class="head"><p>command</p></th>
@@ -890,7 +886,7 @@ auto_count_update_rate EpicsSignal         ('scaler_auto_count_update_rate')
 </details>
 </section>
 <section id="bluesky-plans-vs-command-line-actions">
-<h2>Bluesky Plans <em>vs</em>. Command-line Actions<a class="headerlink" href="#bluesky-plans-vs-command-line-actions" title="Permalink to this heading">#</a></h2>
+<h2>Bluesky Plans <em>vs</em>. Command-line Actions<a class="headerlink" href="#bluesky-plans-vs-command-line-actions" title="Link to this heading">#</a></h2>
 <p>There is a difference in the commands to use depending on the context.</p>
 <div class="pst-scrollable-table-container"><table class="table">
 <thead>
@@ -950,7 +946,7 @@ procedures.</p>
 <a class="reference external" href="https://blueskyproject.io/bluesky/from-pyepics-to-bluesky.html?highlight=blocking">guide</a>.</p>
 </section>
 <section id="log-files">
-<h2>Log files<a class="headerlink" href="#log-files" title="Permalink to this heading">#</a></h2>
+<h2>Log files<a class="headerlink" href="#log-files" title="Link to this heading">#</a></h2>
 <p>In the working directory, the log files are written to a <code class="docutils literal notranslate"><span class="pre">./.logs</span></code> subdirectory.
 There are two kinds of file, one that records user commands and the python
 result, the other records items sent to the Python
@@ -1095,7 +1091,7 @@ In [52]: <b>!head .logs/ipython_logger.log</b>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

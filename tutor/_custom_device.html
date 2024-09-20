@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Custom Devices &#8212; APS Bluesky Training</title>
   
@@ -29,23 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -424,7 +420,7 @@ document.write(`
                 <article class="bd-article">
                   
   <span class="target" id="index-0"></span><section id="custom-devices">
-<span id="howto-custom-device"></span><h1>Custom Devices<a class="headerlink" href="#custom-devices" title="Permalink to this heading">#</a></h1>
+<span id="howto-custom-device"></span><h1>Custom Devices<a class="headerlink" href="#custom-devices" title="Link to this heading">#</a></h1>
 <aside class="sidebar">
 <p class="sidebar-title">Form follows function <a class="footnote-reference brackets" href="#fff" id="id1" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a></p>
 <p>Integral to the implementation of a custom <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> is the
@@ -446,7 +442,7 @@ specification. <a class="footnote-reference brackets" href="#v1-device" id="id5"
 specification <a class="footnote-reference brackets" href="#v2-device" id="id6" role="doc-noteref"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></a> has not been released from its draft form.</p>
 </div>
 <section id="overview">
-<h2>Overview<a class="headerlink" href="#overview" title="Permalink to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
 <p><em>Ophyd</em> is a hardware abstraction layer connects with the underlying control
 system (such as EPICS). <em>Ophyd</em> describes the objects for control as either:</p>
 <ul class="simple">
@@ -464,11 +460,11 @@ describe actions specific to that class.  Subclasses, such as <cite>EpicsSignal<
 <p>These will be presented in sections below.</p>
 </section>
 <section id="simple-devices">
-<h2>Simple Devices<a class="headerlink" href="#simple-devices" title="Permalink to this heading">#</a></h2>
+<h2>Simple Devices<a class="headerlink" href="#simple-devices" title="Link to this heading">#</a></h2>
 <p>Perhaps the best starting point is one or two simple examples of <em>ophyd</em>
 Devices.</p>
 <section id="hello-world">
-<h3>Hello, World!<a class="headerlink" href="#hello-world" title="Permalink to this heading">#</a></h3>
+<h3>Hello, World!<a class="headerlink" href="#hello-world" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">HelloDevice</span></code> (in the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html">Hello, World!</a>
 notebook) is a subclass of <cite>ophyd.Device</cite>.</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
@@ -500,7 +496,7 @@ meaning that the previous values are restored.</p>
 <code class="docutils literal notranslate"><span class="pre">text</span></code> component to contain text values. To keep the example simple, we have
 not added <a class="reference external" href="https://docs.python.org/3/library/typing.html">type</a> hints.</p>
 <section id="read">
-<h4><code class="docutils literal notranslate"><span class="pre">.read()</span></code><a class="headerlink" href="#read" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">.read()</span></code><a class="headerlink" href="#read" title="Link to this heading">#</a></h4>
 <p>All ophyd <code class="docutils literal notranslate"><span class="pre">Signal</span></code> and <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.read()</span></code> <a class="footnote-reference brackets" href="#id18" id="id8" role="doc-noteref"><span class="fn-bracket">[</span>12<span class="fn-bracket">]</span></a> method
 which is called by data acquisition during execution of a bluesky plan. The
 <code class="docutils literal notranslate"><span class="pre">.read()</span></code> method returns a Python dictionary with the current value of each
@@ -517,7 +513,7 @@ Here’s an example:</p>
 <p>See <a class="reference internal" href="../reference/_FAQ.html#faq-timestamp"><span class="std std-ref">How to understand a timestamp?</span></a></p>
 </section>
 <section id="summary">
-<h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#summary" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#summary" title="Link to this heading">#</a></h4>
 <p>All ophyd <code class="docutils literal notranslate"><span class="pre">Device</span></code> instances have a <code class="docutils literal notranslate"><span class="pre">.summary()</span></code> method to describe
 a Device to an interactive user.  Here is <code class="docutils literal notranslate"><span class="pre">hello_device.summary()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">In</span> <span class="p">[</span><span class="mi">5</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
@@ -543,7 +539,7 @@ a Device to an interactive user.  Here is <code class="docutils literal notransl
 </div>
 </section>
 <section id="stage">
-<h4><code class="docutils literal notranslate"><span class="pre">.stage()</span></code><a class="headerlink" href="#stage" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">.stage()</span></code><a class="headerlink" href="#stage" title="Link to this heading">#</a></h4>
 <p>Each device participating in a plan is staged at the beginning of data
 acquisition. Here is the result of staging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
@@ -557,7 +553,7 @@ acquisition. Here is the result of staging <code class="docutils literal notrans
 </div>
 </section>
 <section id="unstage">
-<h4><code class="docutils literal notranslate"><span class="pre">.unstage()</span></code><a class="headerlink" href="#unstage" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">.unstage()</span></code><a class="headerlink" href="#unstage" title="Link to this heading">#</a></h4>
 <p>After data acquisition concludes, the participating devices are unstaged. Here
 is the result of unstaging <code class="docutils literal notranslate"><span class="pre">hello_device</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">In</span> <span class="p">[</span><span class="mi">8</span><span class="p">]:</span> <span class="n">hello_device</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
@@ -572,7 +568,7 @@ is the result of unstaging <code class="docutils literal notranslate"><span clas
 </section>
 </section>
 <section id="connect-with-epics">
-<h3>Connect with EPICS<a class="headerlink" href="#connect-with-epics" title="Permalink to this heading">#</a></h3>
+<h3>Connect with EPICS<a class="headerlink" href="#connect-with-epics" title="Link to this heading">#</a></h3>
 <p>EPICS is a control system completely separate from Python.
 <code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> (in the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/connect_epics.html">Connect Bluesky with EPICS</a>
 notebook) is a subclass of <cite>ophyd.Device</cite> that connects with EPICS.</p>
@@ -623,7 +619,7 @@ identifier for a unit <a class="footnote-reference brackets" href="#pv-intro" id
 updating the PV with new content, as directed by one or more clients, such as
 <em>ophyd</em>.</p>
 <section id="wait-for-connection">
-<span id="index-5"></span><h4><code class="docutils literal notranslate"><span class="pre">.wait_for_connection()</span></code><a class="headerlink" href="#wait-for-connection" title="Permalink to this heading">#</a></h4>
+<span id="index-5"></span><h4><code class="docutils literal notranslate"><span class="pre">.wait_for_connection()</span></code><a class="headerlink" href="#wait-for-connection" title="Link to this heading">#</a></h4>
 <p>We must allow some time after creating an instance, albeit short, for the
 instance to connect by calling its <code class="docutils literal notranslate"><span class="pre">wait_for_connection()</span></code> <a class="reference external" href="https://nsls-ii.github.io/ophyd/device-overview.html#low-level-api">method</a>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="n">group</span> <span class="o">=</span> <span class="n">MyGroup</span><span class="p">(</span><span class="s2">&quot;kgp:&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;group&quot;</span><span class="p">)</span>
@@ -644,7 +640,7 @@ before interacting with the instance.</p>
 </div>
 </section>
 <section id="id11">
-<h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#id11" title="Permalink to this heading">#</a></h4>
+<h4><code class="docutils literal notranslate"><span class="pre">.summary()</span></code><a class="headerlink" href="#id11" title="Link to this heading">#</a></h4>
 <p>Here is <code class="docutils literal notranslate"><span class="pre">group.summary()</span></code>:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="n">In</span> <span class="p">[</span><span class="mi">4</span><span class="p">]:</span> <span class="n">group</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="n">data</span> <span class="n">keys</span> <span class="p">(</span><span class="o">*</span> <span class="n">hints</span><span class="p">)</span>
@@ -675,14 +671,14 @@ before interacting with the instance.</p>
 </section>
 </section>
 <section id="groupings">
-<h2>Groupings<a class="headerlink" href="#groupings" title="Permalink to this heading">#</a></h2>
+<h2>Groupings<a class="headerlink" href="#groupings" title="Link to this heading">#</a></h2>
 <p>A custom Device may be created to group several controls together as they relate
 to a common object, such as a motorized stage or even an abstract object such as
 undulator or monochoromator energy.  A Device might refer to some other grouping
 of information, such as the proposal information related to the current
 measurements.  Presented here are a few examples of the many possibilities.</p>
 <section id="neat-stage-2apd">
-<h3>Neat Stage 2APD<a class="headerlink" href="#neat-stage-2apd" title="Permalink to this heading">#</a></h3>
+<h3>Neat Stage 2APD<a class="headerlink" href="#neat-stage-2apd" title="Link to this heading">#</a></h3>
 <p class="rubric">NEAT Stage</p>
 <p>The <em>NEAT Stage 2APD</em>, stage from APS station 3-ID-D, consists of
 three motorized axes, as described in the next table.</p>
@@ -709,7 +705,8 @@ three motorized axes, as described in the next table.</p>
 </tbody>
 </table>
 </div>
-<a class="reference internal image-reference" href="../_images/neat_stage_2apd.png"><img alt="../_images/neat_stage_2apd.png" src="../_images/neat_stage_2apd.png" style="width: 80%;" /></a>
+<a class="reference internal image-reference" href="../_images/neat_stage_2apd.png"><img alt="../_images/neat_stage_2apd.png" src="../_images/neat_stage_2apd.png" style="width: 80%;" />
+</a>
 <p>Since each of these axes are EPICS motors, we’ll use <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code>
 <a class="footnote-reference brackets" href="#epics-motor" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> to connect with the rich set of EPICS controls for each:</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsMotor</span>
@@ -724,7 +721,7 @@ three motorized axes, as described in the next table.</p>
 </div>
 </section>
 <section id="aps-undulator">
-<h3>APS Undulator<a class="headerlink" href="#aps-undulator" title="Permalink to this heading">#</a></h3>
+<h3>APS Undulator<a class="headerlink" href="#aps-undulator" title="Link to this heading">#</a></h3>
 <p>In the <em>apstools</em> <a class="footnote-reference brackets" href="#apstools" id="id13" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> package, the <a class="reference external" href="https://github.com/BCDA-APS/apstools/blob/d87ca0782bbcc7339bdda328b90f734f9957eaa6/apstools/devices/aps_undulator.py#L20-L63">ApsUndulator</a>
 Device groups the EPICS PVs into Device.  This makes it easy to access useful
 controls such as <code class="docutils literal notranslate"><span class="pre">undulator.energy</span></code>, and to record the undulator configuration
@@ -754,7 +751,7 @@ for data acquisition.</p>
 </div>
 </section>
 <section id="aps-dual-undulator">
-<h3>APS Dual Undulator<a class="headerlink" href="#aps-dual-undulator" title="Permalink to this heading">#</a></h3>
+<h3>APS Dual Undulator<a class="headerlink" href="#aps-dual-undulator" title="Link to this heading">#</a></h3>
 <p>The APS Dual Undulator consists of two APS Undulator devices, installed
 end-to-end in the storage ring.  The two devices are referred to as <em>upstream</em>
 and <em>downstream</em>, as described in the next table.</p>
@@ -795,7 +792,7 @@ Similarly, <code class="docutils literal notranslate"><span class="pre">45ID:ds:
 </section>
 </section>
 <section id="modify-existing-device">
-<span id="index-6"></span><h2>Modify existing Device<a class="headerlink" href="#modify-existing-device" title="Permalink to this heading">#</a></h2>
+<span id="index-6"></span><h2>Modify existing Device<a class="headerlink" href="#modify-existing-device" title="Link to this heading">#</a></h2>
 <p>Sometimes, a <em>standard</em> device is missing a feature, such as connection with an
 additional field (or fields) in an EPICS record. A <em>mixin</em> class can modify
 a class by providing additional structures and/or methods.
@@ -862,7 +859,7 @@ Signal.</p>
 <a class="footnote-reference brackets" href="#apstools-epics-mixins" id="id15" role="doc-noteref"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></a> includes a method in addition to a new component.</p>
 </div>
 <section id="epics-ai-ao-records">
-<h3>EPICS <code class="docutils literal notranslate"><span class="pre">ai</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">ao</span></code> Records<a class="headerlink" href="#epics-ai-ao-records" title="Permalink to this heading">#</a></h3>
+<h3>EPICS <code class="docutils literal notranslate"><span class="pre">ai</span></code> &amp; <code class="docutils literal notranslate"><span class="pre">ao</span></code> Records<a class="headerlink" href="#epics-ai-ao-records" title="Link to this heading">#</a></h3>
 <p>One variation might be recognizing that all of the PVs are the same (or similar)
 EPICS record type, such as EPICS <code class="docutils literal notranslate"><span class="pre">ai</span></code>  and <code class="docutils literal notranslate"><span class="pre">ao</span></code> records.  These records are
 all floating point PVs which share many extra fields.  The difference is that
@@ -962,60 +959,60 @@ Define the custom Device:</p>
 <hr class="docutils" />
 <p class="rubric">Footnotes</p>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="apstools-epics-mixins" role="note">
+<aside class="footnote brackets" id="apstools-epics-mixins" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id15">1</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://bcda-aps.github.io/apstools/latest/_modules/apstools/synApps/_common.html#EpicsSynAppsRecordEnableMixin">https://bcda-aps.github.io/apstools/latest/_modules/apstools/synApps/_common.html#EpicsSynAppsRecordEnableMixin</a></p>
 </aside>
-<aside class="footnote brackets" id="apstools-mixins" role="note">
+<aside class="footnote brackets" id="apstools-mixins" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id14">2</a><span class="fn-bracket">]</span></span>
 <p><code class="docutils literal notranslate"><span class="pre">apstools.synApps</span></code> mixin classes: <a class="github reference external" href="https://github.com/BCDA-APS/apstools/blob/b9d959cd7beb70994b0fc2fca0f344ef160f9849/apstools/synApps/_common.py#L25-L109">BCDA-APS/apstools</a></p>
 </aside>
-<aside class="footnote brackets" id="apstools" role="note">
+<aside class="footnote brackets" id="apstools" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id13">1</a>,<a role="doc-backlink" href="#id17">2</a>)</span>
 <p><em>apstools</em> :  <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/">https://bcda-aps.github.io/apstools/latest/</a></p>
 </aside>
-<aside class="footnote brackets" id="bluesky" role="note">
+<aside class="footnote brackets" id="bluesky" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id2">4</a><span class="fn-bracket">]</span></span>
 <p><em>bluesky</em> : <a class="reference external" href="https://blueskyproject.io/bluesky">https://blueskyproject.io/bluesky</a></p>
 </aside>
-<aside class="footnote brackets" id="epics" role="note">
+<aside class="footnote brackets" id="epics" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">5</a><span class="fn-bracket">]</span></span>
 <p>EPICS : <a class="reference external" href="https://epics-controls.org">https://epics-controls.org</a></p>
 </aside>
-<aside class="footnote brackets" id="epics-common-fields" role="note">
+<aside class="footnote brackets" id="epics-common-fields" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id16">6</a><span class="fn-bracket">]</span></span>
 <p>EPICS common fields : <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/synApps/__common.html">https://bcda-aps.github.io/apstools/latest/api/synApps/__common.html</a></p>
 </aside>
-<aside class="footnote brackets" id="epics-motor" role="note">
+<aside class="footnote brackets" id="epics-motor" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id12">7</a><span class="fn-bracket">]</span></span>
 <p><code class="docutils literal notranslate"><span class="pre">EpicsMotor</span></code>: <a class="reference external" href="https://blueskyproject.io/ophyd/builtin-devices.html?highlight=epicsmotor#epicsmotor">https://blueskyproject.io/ophyd/builtin-devices.html?highlight=epicsmotor#epicsmotor</a></p>
 </aside>
-<aside class="footnote brackets" id="fff" role="note">
+<aside class="footnote brackets" id="fff" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">8</a><span class="fn-bracket">]</span></span>
 <p>Form follows function : <a class="reference external" href="https://en.wikipedia.org/wiki/Form_follows_function">https://en.wikipedia.org/wiki/Form_follows_function</a></p>
 </aside>
-<aside class="footnote brackets" id="ophyd" role="note">
+<aside class="footnote brackets" id="ophyd" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id4">9</a><span class="fn-bracket">]</span></span>
 <p><em>ophyd</em> : <a class="reference external" href="https://blueskyproject.io/ophyd">https://blueskyproject.io/ophyd</a></p>
 </aside>
-<aside class="footnote brackets" id="pv-intro" role="note">
+<aside class="footnote brackets" id="pv-intro" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id10">10</a><span class="fn-bracket">]</span></span>
 <p>PV introduction: <a class="reference external" href="https://docs.epics-controls.org/en/latest/specs/ca_protocol.html?highlight=Process%20Variable#process-variables">https://docs.epics-controls.org/en/latest/specs/ca_protocol.html?highlight=Process%20Variable#process-variables</a></p>
 </aside>
-<aside class="footnote brackets" id="pv" role="note">
+<aside class="footnote brackets" id="pv" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">11</a><span class="fn-bracket">]</span></span>
 <p>PV: <a class="reference external" href="https://docs.epics-controls.org/en/latest/guides/EPICS_Intro.html#appendix-objects-vs-process-variables-discussion">https://docs.epics-controls.org/en/latest/guides/EPICS_Intro.html#appendix-objects-vs-process-variables-discussion</a></p>
 </aside>
-<aside class="footnote brackets" id="id18" role="note">
+<aside class="footnote brackets" id="id18" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id8">12</a><span class="fn-bracket">]</span></span>
 <p><code class="docutils literal notranslate"><span class="pre">.read()</span></code>: <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/tutorials/single-PV.html#read">https://blueskyproject.io/ophyd/user_v1/tutorials/single-PV.html#read</a></p>
 </aside>
-<aside class="footnote brackets" id="v1-device" role="note">
+<aside class="footnote brackets" id="v1-device" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id5">13</a><span class="fn-bracket">]</span></span>
 <p><em>ophyd</em> v1 Device : <a class="reference external" href="https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device">https://blueskyproject.io/ophyd/user_v1/tutorials/device.html#define-a-custom-device</a></p>
 </aside>
-<aside class="footnote brackets" id="v2-device" role="note">
+<aside class="footnote brackets" id="v2-device" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id6">14</a><span class="fn-bracket">]</span></span>
 <p><em>ophyd</em> v2 Device : <a class="reference external" href="https://blueskyproject.io/ophyd/user_v2/how-to/make-a-simple-device.html">https://blueskyproject.io/ophyd/user_v2/how-to/make-a-simple-device.html</a></p>
 </aside>
@@ -1142,7 +1139,7 @@ Define the custom Device:</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

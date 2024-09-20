@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Locate peak on 2-D area detector image &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,13 +425,13 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Locate-peak-on-2-D-area-detector-image">
-<h1>Locate peak on 2-D area detector image<a class="headerlink" href="#Locate-peak-on-2-D-area-detector-image" title="Permalink to this heading">#</a></h1>
+<h1>Locate peak on 2-D area detector image<a class="headerlink" href="#Locate-peak-on-2-D-area-detector-image" title="Link to this heading">#</a></h1>
 <p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>Measure a simulated diffraction spot with an EPICS area detector and find its centroid and width.</p>
 <p>Note: The position, width, and peak intensity of the simulated is randomized and will be different each time this note book is run. In fact, the EPICS support applies a small amount of jitter to the position to better simulate a real signal.</p>
 <section id="Start-the-instrument-package">
-<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
 <p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -568,10 +564,10 @@ generator count [&#39;8923a036&#39;] (scan num: 970)
 </div>
 </section>
 <section id="View-the-image">
-<h2>View the image<a class="headerlink" href="#View-the-image" title="Permalink to this heading">#</a></h2>
+<h2>View the image<a class="headerlink" href="#View-the-image" title="Link to this heading">#</a></h2>
 <p>Since area detector images are typically quite large, they are never read into Python memory during data acquisition. To view the image here, we need to use the <em>databroker</em> which reads the run data. The run data includes the reference to the file that contains the image.</p>
 <section id="Get-the-run">
-<h3>Get the run<a class="headerlink" href="#Get-the-run" title="Permalink to this heading">#</a></h3>
+<h3>Get the run<a class="headerlink" href="#Get-the-run" title="Link to this heading">#</a></h3>
 <p>First, get the most recent run from the <code class="docutils literal notranslate"><span class="pre">catalog</span></code> of runs.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -617,7 +613,7 @@ locate_image_peak
 </div>
 </section>
 <section id="Primary-stream">
-<h3>Primary stream<a class="headerlink" href="#Primary-stream" title="Permalink to this heading">#</a></h3>
+<h3>Primary stream<a class="headerlink" href="#Primary-stream" title="Link to this heading">#</a></h3>
 <p>The image was collected in the primary data stream. Get the primary stream data from the database.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1046,7 +1042,7 @@ Data variables:
 </div>
 </section>
 <section id="Get-the-image-data">
-<h3>Get the image data<a class="headerlink" href="#Get-the-image-data" title="Permalink to this heading">#</a></h3>
+<h3>Get the image data<a class="headerlink" href="#Get-the-image-data" title="Link to this heading">#</a></h3>
 <p>Get the named image <code class="docutils literal notranslate"><span class="pre">adsimdet_image</span></code> from the primary stream.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -1516,7 +1512,7 @@ Attributes:
 </div>
 </section>
 <section id="Image-frame">
-<h3>Image frame<a class="headerlink" href="#Image-frame" title="Permalink to this heading">#</a></h3>
+<h3>Image frame<a class="headerlink" href="#Image-frame" title="Link to this heading">#</a></h3>
 <p>This image object has rank of 4. We just want the image frame (the last two indices). Select the first item of each of the first two indices (time, frame number).</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
@@ -1917,7 +1913,7 @@ Attributes:
 </div>
 </section>
 <section id="Show-the-image">
-<h3>Show the image<a class="headerlink" href="#Show-the-image" title="Permalink to this heading">#</a></h3>
+<h3>Show the image<a class="headerlink" href="#Show-the-image" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
@@ -1944,7 +1940,7 @@ Attributes:
 </div>
 </section>
 <section id="Center-&amp;-size-of-spot">
-<h3>Center &amp; size of spot<a class="headerlink" href="#Center-&-size-of-spot" title="Permalink to this heading">#</a></h3>
+<h3>Center &amp; size of spot<a class="headerlink" href="#Center-&-size-of-spot" title="Link to this heading">#</a></h3>
 <p>Determine the center and width of this spot in both directions. We’ll use our own function (from <code class="docutils literal notranslate"><span class="pre">instrument/utils/image_analysis.py</span></code>) since no package gives us all of this in one place. Our function is extracted and modified from the <em>PeakStats</em> support in bluesky’s <em>BestEffortCallback</em> and also uses a function from <em>scipy</em>.</p>
 <p>Note that the <code class="docutils literal notranslate"><span class="pre">centroid</span></code> measure here is the channel number weighted by the intensity value (as computed by the <em>scipy</em> package). The <code class="docutils literal notranslate"><span class="pre">fwhm</span></code> measure here (from the <em>BestEffortCallback</em>) is the computed difference in channel number between the high and low side of the maximum at half the maximum-minimum value. The <code class="docutils literal notranslate"><span class="pre">crossings</span></code> measure shows the interpolated locations at which the intensity crossed this half value. The other measures should be self-explanatory.</p>
 <div class="nbinput docutils container">
@@ -1976,7 +1972,7 @@ minimum           (813, 15953)                (819, 15960)
 </section>
 </section>
 <section id="Next-Steps">
-<h2>Next Steps<a class="headerlink" href="#Next-Steps" title="Permalink to this heading">#</a></h2>
+<h2>Next Steps<a class="headerlink" href="#Next-Steps" title="Link to this heading">#</a></h2>
 <p>Make these additions or improvements:</p>
 <ol class="arabic simple">
 <li><p>Repeat the same analysis for <em>all</em> area detector images in the catalog. (hint: <code class="docutils literal notranslate"><span class="pre">for</span> <span class="pre">uid</span> <span class="pre">in</span> <span class="pre">catalog:</span> <span class="pre">run</span> <span class="pre">=</span> <span class="pre">catalog[uid]</span> <span class="pre">...</span></code>)</p></li>
@@ -2089,7 +2085,7 @@ minimum           (813, 15953)                (819, 15960)
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Instrument Package Guide &#8212; APS Bluesky Training</title>
   
@@ -29,23 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'instrument/guide';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -421,7 +417,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="instrument-package-guide">
-<h1>Instrument Package Guide<a class="headerlink" href="#instrument-package-guide" title="Permalink to this heading">#</a></h1>
+<h1>Instrument Package Guide<a class="headerlink" href="#instrument-package-guide" title="Link to this heading">#</a></h1>
 <p>The instrument package defines the features of your equipment for use with data
 acquisition using the Bluesky framework.  It is structured as a Python
 <a class="reference external" href="https://packaging.python.org/en/latest/tutorials/packaging-projects/">package</a>
@@ -435,7 +431,7 @@ reference for ideas rather than a set of requirements.</p>
 <li><p>use with the bluesky queueserver</p></li>
 </ul>
 <section id="basic-structure">
-<h2>Basic Structure<a class="headerlink" href="#basic-structure" title="Permalink to this heading">#</a></h2>
+<h2>Basic Structure<a class="headerlink" href="#basic-structure" title="Link to this heading">#</a></h2>
 <p>The basic structure is organized into components of the Bluesky framework.  All
 these directories may contain python file(s).</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">instrument</span><span class="o">/</span>       <span class="o">&lt;--</span> <span class="nb">all</span> <span class="n">aspects</span> <span class="n">of</span> <span class="n">the</span> <span class="n">equipment</span>
@@ -458,7 +454,7 @@ that identifies which Python symbols from that file will be imported by default.
 (Any Python symbol may be imported by name, this just controls the more general
 case.)</p>
 <section id="iconfig">
-<h3><code class="docutils literal notranslate"><span class="pre">iconfig</span></code><a class="headerlink" href="#iconfig" title="Permalink to this heading">#</a></h3>
+<h3><code class="docutils literal notranslate"><span class="pre">iconfig</span></code><a class="headerlink" href="#iconfig" title="Link to this heading">#</a></h3>
 <p><code class="docutils literal notranslate"><span class="pre">iconfig</span></code>, a Python dictionary, contains the instrument’s configuration details
 defined in one place for the user to control.  These details, defined in
 <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/iconfig.yml">instrument/iconfig.yml</a>,
@@ -467,7 +463,7 @@ are used in various places in the <code class="docutils literal notranslate"><sp
 </section>
 </section>
 <section id="add-motor-s">
-<h2>Add Motor(s)<a class="headerlink" href="#add-motor-s" title="Permalink to this heading">#</a></h2>
+<h2>Add Motor(s)<a class="headerlink" href="#add-motor-s" title="Link to this heading">#</a></h2>
 <p>To add an EPICS <a class="reference external" href="https://github.com/epics-modules/motor">motor</a> to your
 instrument package, edit the file <code class="docutils literal notranslate"><span class="pre">instrument/devices/motors.py</span></code>.  You’ll need
 the EPICS PV for the motor (example is <code class="docutils literal notranslate"><span class="pre">ioc:m1</span></code>).  There may be comments in your
@@ -506,7 +502,7 @@ enable its automatic import by removing the comment from the line in
 </div>
 </section>
 <section id="add-scaler-s">
-<h2>Add Scaler(s)<a class="headerlink" href="#add-scaler-s" title="Permalink to this heading">#</a></h2>
+<h2>Add Scaler(s)<a class="headerlink" href="#add-scaler-s" title="Link to this heading">#</a></h2>
 <p>Often, an instrument will use a single scaler to collect pulse signals from
 various counting detectors such as ionization chambers, photodiodes, and
 scintillation counters.  These are coordinated by the EPICS
@@ -527,7 +523,7 @@ to distinguish this type of detector from, for example, area detectors.</p>
 of scaler.py by editing <code class="docutils literal notranslate"><span class="pre">instrument/devices/__init__.py</span></code>.</p>
 </section>
 <section id="re-organize-into-devices">
-<h2>Re-organize into Devices<a class="headerlink" href="#re-organize-into-devices" title="Permalink to this heading">#</a></h2>
+<h2>Re-organize into Devices<a class="headerlink" href="#re-organize-into-devices" title="Link to this heading">#</a></h2>
 <p>Once many motors have been entered, it might be convenient to group them in
 terms of a common structure.  Consider a sample X-Y stage might have motors
 <code class="docutils literal notranslate"><span class="pre">sample_x</span></code> and <code class="docutils literal notranslate"><span class="pre">sample_y</span></code>.  These can be grouped together into an <a class="reference external" href="https://blueskyproject.io/ophyd/device-overview.html">ophyd
@@ -604,7 +600,7 @@ such as <code class="docutils literal notranslate"><span class="pre">motors.py</
 </details>
 </section>
 <section id="add-area-detector-s">
-<h2>Add Area Detector(s)<a class="headerlink" href="#add-area-detector-s" title="Permalink to this heading">#</a></h2>
+<h2>Add Area Detector(s)<a class="headerlink" href="#add-area-detector-s" title="Link to this heading">#</a></h2>
 <p>EPICS Area Detectors are implemented as custom ophyd Devices that subclass (use) various standard parts
 from ophyd.</p>
 <p>See these examples:</p>
@@ -614,7 +610,7 @@ from ophyd.</p>
 </ul>
 </section>
 <section id="other-device-support">
-<h2>Other Device Support<a class="headerlink" href="#other-device-support" title="Permalink to this heading">#</a></h2>
+<h2>Other Device Support<a class="headerlink" href="#other-device-support" title="Link to this heading">#</a></h2>
 <p>The examples so far only begin to demonstrate the variety of Device
 customizations.  Consult the various instrument configurations on the
 <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/wiki">wiki</a> and the
@@ -623,7 +619,7 @@ package for more device examples.</p>
 <p>TIP: Organize your custom Device code into separate files to make it easy to manage.  Don’t forget to edit the <code class="docutils literal notranslate"><span class="pre">__add__</span></code> symbol and also edit the <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code> file so the new code is imported automatically.</p>
 </section>
 <section id="implement-custom-plans">
-<h2>Implement Custom Plans<a class="headerlink" href="#implement-custom-plans" title="Permalink to this heading">#</a></h2>
+<h2>Implement Custom Plans<a class="headerlink" href="#implement-custom-plans" title="Link to this heading">#</a></h2>
 <p>Plans describe your custom sequence of actions.  They can be a complete plan that acquires a <em>run</em> or just part of a measurement sequence.</p>
 <p>Consult the various instrument configurations on the
 <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/wiki">wiki</a> and the
@@ -639,7 +635,7 @@ is provided in the context of how the RunEngine processes its
 <a class="reference external" href="https://blueskyproject.io/bluesky/msg.html?highlight=blocking">Messages</a>.</p>
 </section>
 <section id="callbacks">
-<h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h2>
+<h2>Callbacks<a class="headerlink" href="#callbacks" title="Link to this heading">#</a></h2>
 <p>One custom RunEngine callback has been added to the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package
 template for the APS.  The <a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_filewriters.html#apstools.callbacks.spec_file_writer.SpecWriterCallback">SPEC file writer
 callback</a>
@@ -653,7 +649,7 @@ received.</p>
 <code class="docutils literal notranslate"><span class="pre">import</span></code> in <code class="docutils literal notranslate"><span class="pre">instrument/framework/__init__.py</span></code>.</p>
 </section>
 <section id="review-metadata">
-<h2>Review Metadata<a class="headerlink" href="#review-metadata" title="Permalink to this heading">#</a></h2>
+<h2>Review Metadata<a class="headerlink" href="#review-metadata" title="Link to this heading">#</a></h2>
 <p>A strength of the Bluesky framework is the coordination in a database of
 acquired data with metadata about the acquisition.  This enables a variety of
 data science after the measurement is complete.</p>
@@ -700,7 +696,7 @@ specific runs, or even specific types of runs.  The system for adding metadata
 is versatile.</p>
 </section>
 <section id="experiment-specific-user-code">
-<h2>Experiment-specific User Code<a class="headerlink" href="#experiment-specific-user-code" title="Permalink to this heading">#</a></h2>
+<h2>Experiment-specific User Code<a class="headerlink" href="#experiment-specific-user-code" title="Link to this heading">#</a></h2>
 <p>Sometimes, a user may need experiment-specific code that is not for general
 inclusion in the instrument package.  Components from the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package
 may be imported from such custom user code by writing a file in the working
@@ -874,7 +870,7 @@ In [1]:
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

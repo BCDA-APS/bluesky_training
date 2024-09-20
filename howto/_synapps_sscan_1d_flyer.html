@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>synApps sscan as 1D Flyer &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -429,11 +425,11 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="synApps-sscan-as-1D-Flyer">
-<h1>synApps <em>sscan</em> as 1D Flyer<a class="headerlink" href="#synApps-sscan-as-1D-Flyer" title="Permalink to this heading">#</a></h1>
+<h1>synApps <em>sscan</em> as 1D Flyer<a class="headerlink" href="#synApps-sscan-as-1D-Flyer" title="Link to this heading">#</a></h1>
 <p>In this notebook, the EPICS <em>sscan</em> record is demonstrated as a bluesky <em>Flyer</em>. The EPICS sscan record will conduct a scan as configured from bluesky. After the scan, the data will be returned to bluesky for routine inclusion in the run’s documents.</p>
 <p>NOTE: This notebook is under construction!</p>
 <section id="Overview">
-<h2>Overview<a class="headerlink" href="#Overview" title="Permalink to this heading">#</a></h2>
+<h2>Overview<a class="headerlink" href="#Overview" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://blueskyproject.io/bluesky">Bluesky</a> framework has support for data acquisition using an external data collector. The support is for an ophyd <em>fly-able</em> device, which must be customized for the details of that external data collector. The design prototype collector is a <em>fly</em> scan controller (hence the name used by bluesky), operating outside the <em>bluesky</em> process, which performs its readings of detector(s) during continuous (<em>on-the-fly</em>) motion of one or more positioners.
 Triggering of the detectors must also be part of the external controller. The description is that this type of <a class="reference external" href="https://blueskyproject.io/bluesky/async.html#asynchronous-acquisition">asynchronous acquisition</a> requires fine-grained timing beyond the capabilities of <em>bluesky</em>.</p>
 <blockquote>
@@ -444,7 +440,7 @@ Triggering of the detectors must also be part of the external controller. The de
 <p>The EPICS <a class="reference external" href="https://epics.anl.gov/bcda/synApps/sscan/sscanRecord.html">sscan record</a> is an example of an external data acquisition controller. It supports various scan types (step, list, continuous) with flexible configuration for up to four positioners and dozens of detectors, as well as scans of up to four dimensions. The <em>sscan</em> record is used by many APS beamlines for routine data collection.</p>
 </section>
 <section id="References">
-<h2>References<a class="headerlink" href="#References" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#References" title="Link to this heading">#</a></h2>
 <p>The documentation for <em>Flyer</em>s is distributed across the <em>bluesky</em> and <em>ophyd</em> packages:</p>
 <ul class="simple">
 <li><p>Pre-assembled bluesky plans: <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans">https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans</a></p></li>
@@ -461,7 +457,7 @@ configure the Device staging to setup the sscan record for a 1-D step scan using
 <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html">swait</a> record configured to recalculate a Lorentzian profile when the <code class="docutils literal notranslate"><span class="pre">m1</span></code> readback value changes. The center, width, and height are <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/711baca0e4fcdffc97fb4d05ee73d4b5b93fcc3a/bluesky/instrument/devices/noisy_detector.py#L24-L38">set randomly</a> as this bluesky instrument package is loaded. The center of the simulated
 peak will be defined somewhere between <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/711baca0e4fcdffc97fb4d05ee73d4b5b93fcc3a/bluesky/instrument/devices/noisy_detector.py#L34">+/- 1</a>.</p>
 <section id="Load-the-instrument-package">
-<h3>Load the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Load-the-instrument-package" title="Permalink to this heading">#</a></h3>
+<h3>Load the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Load-the-instrument-package" title="Link to this heading">#</a></h3>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
@@ -569,7 +565,7 @@ I Thu-17:53:45 - #### Startup is complete. ####
 </section>
 </section>
 <section id="Bluesky-step-scan">
-<h2>Bluesky step scan<a class="headerlink" href="#Bluesky-step-scan" title="Permalink to this heading">#</a></h2>
+<h2>Bluesky step scan<a class="headerlink" href="#Bluesky-step-scan" title="Link to this heading">#</a></h2>
 <p>We are told that the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> signal will show a peak when <code class="docutils literal notranslate"><span class="pre">m1</span></code> is moved over the range <code class="docutils literal notranslate"><span class="pre">[-1</span> <span class="pre">..</span> <span class="pre">+1]</span></code>. Use <em>bluesky</em> to show that peak.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -672,7 +668,7 @@ generator scan [&#39;cfa4afcd&#39;] (scan num: 956)
 </div>
 </section>
 <section id="sscan-as-Bluesky-Flyer">
-<h2>sscan as Bluesky Flyer<a class="headerlink" href="#sscan-as-Bluesky-Flyer" title="Permalink to this heading">#</a></h2>
+<h2>sscan as Bluesky Flyer<a class="headerlink" href="#sscan-as-Bluesky-Flyer" title="Link to this heading">#</a></h2>
 <p>Load some structures to be used.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
@@ -1450,7 +1446,7 @@ sigma: 0.6149932116936468
 </div>
 </section>
 <section id="id1">
-<h2>References<a class="headerlink" href="#id1" title="Permalink to this heading">#</a></h2>
+<h2>References<a class="headerlink" href="#id1" title="Link to this heading">#</a></h2>
 <p>The documentation for <em>Flyer</em>s is distributed across the <em>bluesky</em> and <em>ophyd</em> packages:</p>
 <ul class="simple">
 <li><p>Pre-assembled bluesky plans: <a class="reference external" href="https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans">https://blueskyproject.io/bluesky/plans.html#pre-assembled-plans</a></p></li>
@@ -1563,7 +1559,7 @@ sigma: 0.6149932116936468
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

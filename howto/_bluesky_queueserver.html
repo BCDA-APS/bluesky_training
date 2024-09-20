@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>First steps with bluesky-queueserver &#8212; APS Bluesky Training</title>
   
@@ -29,23 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_bluesky_queueserver';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -426,7 +422,7 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="first-steps-with-bluesky-queueserver">
-<h1>First steps with bluesky-queueserver<a class="headerlink" href="#first-steps-with-bluesky-queueserver" title="Permalink to this heading">#</a></h1>
+<h1>First steps with bluesky-queueserver<a class="headerlink" href="#first-steps-with-bluesky-queueserver" title="Link to this heading">#</a></h1>
 <p>Starting with the bluesky-queueserver web
 <a class="reference external" href="https://blueskyproject.io/bluesky-queueserver/cli_tools.html">documentation</a>,
 make a quick demonstration of what is possible <em>out of the box</em> from the linux
@@ -440,7 +436,7 @@ you might first review
 from the [APS beamline data pipelines.</p>
 </details>
 <section id="one-time-setup">
-<h2>One-time setup<a class="headerlink" href="#one-time-setup" title="Permalink to this heading">#</a></h2>
+<h2>One-time setup<a class="headerlink" href="#one-time-setup" title="Link to this heading">#</a></h2>
 <p>Install <code class="docutils literal notranslate"><span class="pre">redis</span></code> package in OS (if not already installed):</p>
 <pre>
 $ <b>sudo apt install redis</b>
@@ -451,7 +447,7 @@ $ <b>conda create -y -n qserver -c conda-forge bluesky-queueserver</b>
 </pre>
 </section>
 <section id="start-a-monitor-on-a-qserver">
-<h2>Start a monitor on a qserver<a class="headerlink" href="#start-a-monitor-on-a-qserver" title="Permalink to this heading">#</a></h2>
+<h2>Start a monitor on a qserver<a class="headerlink" href="#start-a-monitor-on-a-qserver" title="Link to this heading">#</a></h2>
 <p>In a separate terminal:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>qserver
 start-re-manager<span class="w"> </span>--zmq-publish-console<span class="w"> </span>ON<span class="w"> </span>--databroker-config<span class="w"> </span>training
@@ -473,7 +469,7 @@ INFO:bluesky_queueserver.manager.manager:ZeroMQ server is waiting on tcp://*:606
 </details>
 </section>
 <section id="run-plans-on-the-qserver">
-<h2>Run plans on the qserver<a class="headerlink" href="#run-plans-on-the-qserver" title="Permalink to this heading">#</a></h2>
+<h2>Run plans on the qserver<a class="headerlink" href="#run-plans-on-the-qserver" title="Link to this heading">#</a></h2>
 <p>In a separate terminal …</p>
 <p>Get a queue started:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>qserver
@@ -482,7 +478,7 @@ qserver<span class="w"> </span>environment<span class="w"> </span>open
 </pre></div>
 </div>
 <section id="available-devices-and-plans">
-<h3>Available devices and plans<a class="headerlink" href="#available-devices-and-plans" title="Permalink to this heading">#</a></h3>
+<h3>Available devices and plans<a class="headerlink" href="#available-devices-and-plans" title="Link to this heading">#</a></h3>
 <p>Without any local configuration, the <code class="docutils literal notranslate"><span class="pre">bluesky-queueserver</span></code> starts with devices from  the ophyd simulators and the standard bluesky plans.</p>
 <p>These commands show (in JSON) what is available:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>allowed<span class="w"> </span>devices
@@ -491,7 +487,7 @@ qserver<span class="w"> </span>allowed<span class="w"> </span>plans
 </div>
 </section>
 <section id="count">
-<h3>Count<a class="headerlink" href="#count" title="Permalink to this heading">#</a></h3>
+<h3>Count<a class="headerlink" href="#count" title="Link to this heading">#</a></h3>
 <p>Add a plan to count from two detectors (from the ophyd simulators):</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>add<span class="w"> </span>plan<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;count&quot;, &quot;args&quot;: [[&quot;det1&quot;, &quot;det2&quot;]], &quot;kwargs&quot;: {&quot;num&quot;: 10, &quot;delay&quot;: 1, &quot;md&quot;: {&quot;purpose&quot;: &quot;test bluesky-queueserver&quot;}}}&#39;</span>
 </pre></div>
@@ -616,7 +612,7 @@ Data variables:
 <p>That’s our run!</p>
 </section>
 <section id="scan">
-<h3>Scan<a class="headerlink" href="#scan" title="Permalink to this heading">#</a></h3>
+<h3>Scan<a class="headerlink" href="#scan" title="Link to this heading">#</a></h3>
 <p>Pick the <code class="docutils literal notranslate"><span class="pre">noisy_det</span></code> and <code class="docutils literal notranslate"><span class="pre">motor1</span></code> from the ophyd simulators:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>add<span class="w"> </span>plan<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;scan&quot;, &quot;args&quot;: [[&quot;noisy_det&quot;], &quot;motor1&quot;, 0, 1, 5 ], &quot;kwargs&quot;: {&quot;md&quot;: {&quot;purpose&quot;: &quot;test bluesky-queueserver&quot;}}}&#39;</span>
 </pre></div>
@@ -667,7 +663,7 @@ INFO:bluesky_queueserver.manager.manager:Queue is empty.
 </section>
 </section>
 <section id="shutdown-the-queue-server">
-<h2>Shutdown the queue server<a class="headerlink" href="#shutdown-the-queue-server" title="Permalink to this heading">#</a></h2>
+<h2>Shutdown the queue server<a class="headerlink" href="#shutdown-the-queue-server" title="Link to this heading">#</a></h2>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>manager<span class="w"> </span>stop<span class="w"> </span>safe<span class="w"> </span>on
 </pre></div>
 </div>
@@ -789,7 +785,7 @@ $
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

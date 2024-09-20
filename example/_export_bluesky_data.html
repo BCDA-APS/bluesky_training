@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Exporting data from Bluesky &#8212; APS Bluesky Training</title>
   
@@ -29,23 +28,20 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>DOCUMENTATION_OPTIONS.pagename = 'example/_export_bluesky_data';</script>
     <link rel="index" title="Index" href="../genindex.html" />
@@ -411,14 +407,14 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="exporting-data-from-bluesky">
-<h1>Exporting data from Bluesky<a class="headerlink" href="#exporting-data-from-bluesky" title="Permalink to this heading">#</a></h1>
+<h1>Exporting data from Bluesky<a class="headerlink" href="#exporting-data-from-bluesky" title="Link to this heading">#</a></h1>
 <p>An instrument scientist asks:</p>
 <blockquote>
 <div><p>How to export experiment data for a user?
 How do I get the data out of the databroker to send it to my user?</p>
 </div></blockquote>
 <section id="choices">
-<h2>Choices<a class="headerlink" href="#choices" title="Permalink to this heading">#</a></h2>
+<h2>Choices<a class="headerlink" href="#choices" title="Link to this heading">#</a></h2>
 <p>First, you have some choices:</p>
 <ul class="simple">
 <li><p>How frequently do you want to do this?</p>
@@ -458,7 +454,7 @@ Bluesky <strong>data access</strong> service for data-aware portals and data sci
 </ul>
 </section>
 <section id="databroker-pack">
-<h2>databroker-pack<a class="headerlink" href="#databroker-pack" title="Permalink to this heading">#</a></h2>
+<h2>databroker-pack<a class="headerlink" href="#databroker-pack" title="Link to this heading">#</a></h2>
 <p>The <a class="reference external" href="https://blueskyproject.io/databroker-pack/">databroker-pack</a> package
 is used as part of the process to move a subset of a databroker catalog (or the entire catalog).</p>
 <blockquote>
@@ -474,7 +470,7 @@ it using <code class="docutils literal notranslate"><span class="pre">databroker
 </div></blockquote>
 </section>
 <section id="identify-experiment-data-in-databroker">
-<h2>Identify experiment data in databroker<a class="headerlink" href="#identify-experiment-data-in-databroker" title="Permalink to this heading">#</a></h2>
+<h2>Identify experiment data in databroker<a class="headerlink" href="#identify-experiment-data-in-databroker" title="Link to this heading">#</a></h2>
 <p>To access your experiment’s data, you need to get it from your <em>catalog</em>
 (usually <code class="docutils literal notranslate"><span class="pre">cat</span></code> where <code class="docutils literal notranslate"><span class="pre">cat</span> <span class="pre">=</span> <span class="pre">databroker.catalog[CATALOG_NAME]</span></code>).  You can
 access by providing a reference.  The reference is one of these:</p>
@@ -538,18 +534,18 @@ This is a Python dictionary with <code class="docutils literal notranslate"><spa
 <p><img alt="scan_id=554 plotted" src="../_images/554-plot-scatter.png" /></p>
 </section>
 <section id="file-export">
-<h2>file export<a class="headerlink" href="#file-export" title="Permalink to this heading">#</a></h2>
+<h2>file export<a class="headerlink" href="#file-export" title="Link to this heading">#</a></h2>
 <p>For one-time (or occasional) use, it might be simpler to export a data
 stream to a file.  For simple data, text is very easy.  For more
 structured data, you  might consider SPEC or NeXus at this time.</p>
 <section id="text-files">
-<h3>text files<a class="headerlink" href="#text-files" title="Permalink to this heading">#</a></h3>
+<h3>text files<a class="headerlink" href="#text-files" title="Link to this heading">#</a></h3>
 <p>Text files represent an easy way to inspect the data contents outside of
 any specific data analyasis software.  But it helps to have some kind of
 structure (schema) to the content.  That’s the purpose of CSV, JSON,
 SPEC, or some other schema.</p>
 <section id="csv">
-<h4>CSV<a class="headerlink" href="#csv" title="Permalink to this heading">#</a></h4>
+<h4>CSV<a class="headerlink" href="#csv" title="Link to this heading">#</a></h4>
 <p>A <a class="reference internal" href="_export_to_csv.html"><span class="std std-doc">notebook</span></a> shows how to export data to CSV files.</p>
 <p>The xarray structure of <code class="docutils literal notranslate"><span class="pre">ds</span></code> does not have a method to export to CSV,
 but <code class="docutils literal notranslate"><span class="pre">pandas</span></code> does and <code class="docutils literal notranslate"><span class="pre">ds</span></code> has a <code class="docutils literal notranslate"><span class="pre">to_pandas()</span></code> exporter:
@@ -564,7 +560,7 @@ against the objective keeping it simple).  Here is an example:</p>
 <p>Since <code class="docutils literal notranslate"><span class="pre">md</span></code> is a dictionary structure, it is not so easy to write into a CSV file.</p>
 </section>
 <section id="json">
-<h4>JSON<a class="headerlink" href="#json" title="Permalink to this heading">#</a></h4>
+<h4>JSON<a class="headerlink" href="#json" title="Link to this heading">#</a></h4>
 <p>While Python provides a
 <a class="reference external" href="https://docs.python.org/3/library/json.html">json</a> package to
 read/write a JSON file, it may be easier to use the <code class="docutils literal notranslate"><span class="pre">xarray</span></code> structure
@@ -584,7 +580,7 @@ example:</p>
 </div>
 </section>
 <section id="spec">
-<h4>SPEC<a class="headerlink" href="#spec" title="Permalink to this heading">#</a></h4>
+<h4>SPEC<a class="headerlink" href="#spec" title="Link to this heading">#</a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is configured to write SPEC files automatically
 using the SPEC file writer callback (see <em>SPEC: SpecWriterCallback</em> section
 below).  The <code class="docutils literal notranslate"><span class="pre">WRITE_SPEC_DATA_FILES</span></code> key in the <code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code>
@@ -593,11 +589,11 @@ can be set to <code class="docutils literal notranslate"><span class="pre">false
 </section>
 </section>
 <section id="hdf5-files">
-<h3>HDF5 files<a class="headerlink" href="#hdf5-files" title="Permalink to this heading">#</a></h3>
+<h3>HDF5 files<a class="headerlink" href="#hdf5-files" title="Link to this heading">#</a></h3>
 <p>Python support for the HDF5 format is usally provided through use of the
 <a class="reference external" href="https://www.h5py.org/">h5py</a> package.  NeXus is an example of a specific</p>
 <section id="raw">
-<h4>raw<a class="headerlink" href="#raw" title="Permalink to this heading">#</a></h4>
+<h4>raw<a class="headerlink" href="#raw" title="Link to this heading">#</a></h4>
 <p>HDF5 is a hierarchical data format, allowing much structure in how the
 data is stored in an HDF5 data file.  Refer to the <a class="reference external" href="https://portal.hdfgroup.org/display/HDF5/HDF5">HDF5
 documentation</a> and/or the
@@ -605,12 +601,12 @@ documentation</a> and/or the
 raw data to this format.</p>
 </section>
 <section id="nexus">
-<h4>NeXus<a class="headerlink" href="#nexus" title="Permalink to this heading">#</a></h4>
+<h4>NeXus<a class="headerlink" href="#nexus" title="Link to this heading">#</a></h4>
 <p>The <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package is not configured to write NeXus files by default.  See
 the <em>NeXus - NXWriterAPS</em> section below if you wish to write NeXus files.</p>
 </section>
 <section id="dx-data-exchange">
-<h4>DX : Data Exchange<a class="headerlink" href="#dx-data-exchange" title="Permalink to this heading">#</a></h4>
+<h4>DX : Data Exchange<a class="headerlink" href="#dx-data-exchange" title="Link to this heading">#</a></h4>
 <p>not supported yet</p>
 <p>Since there is no bluesky code yet to write data in the DX format, you
 must refer to the <a class="reference external" href="https://www.aps.anl.gov/Science/Scientific-Software/DataExchange">Data
@@ -620,27 +616,27 @@ documentation for details.</p>
 </section>
 </section>
 <section id="callbacks">
-<h2>Callbacks<a class="headerlink" href="#callbacks" title="Permalink to this heading">#</a></h2>
+<h2>Callbacks<a class="headerlink" href="#callbacks" title="Link to this heading">#</a></h2>
 <p>In the context of data for bluesky, a <em>callback</em> is python code that
 subscribes to the bluesky <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code> and receives documents during a
 run.  The callback should handle each of those documents to pwrite the
 data according to the terms of the file format.</p>
 <section id="apstools">
-<h3>apstools<a class="headerlink" href="#apstools" title="Permalink to this heading">#</a></h3>
+<h3>apstools<a class="headerlink" href="#apstools" title="Link to this heading">#</a></h3>
 <p>The
 <a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html">apstools</a>
 package supports automatic data export to NeXus or SPEC data files via
 callbacks.  The support is provided in python <code class="docutils literal notranslate"><span class="pre">class</span></code> definitions that
 handle each of the document types from the <code class="docutils literal notranslate"><span class="pre">RunEngine</span></code>.</p>
 <section id="nexus-nxwriteraps">
-<h4>NeXus - NXWriterAPS<a class="headerlink" href="#nexus-nxwriteraps" title="Permalink to this heading">#</a></h4>
+<h4>NeXus - NXWriterAPS<a class="headerlink" href="#nexus-nxwriteraps" title="Link to this heading">#</a></h4>
 <p>The
 <a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html#apstools.filewriters.NXWriterAPS">documentation</a>
 is brief.  It may be more interesting to see the setup for the <a class="reference external" href="https://github.com/APS-USAXS/ipython-usaxs/blob/master/profile_bluesky/startup/instrument/callbacks/nxwriter_usaxs.py">USAXS
 instrument</a></p>
 </section>
 <section id="spec-specwritercallback">
-<h4>SPEC: SpecWriterCallback<a class="headerlink" href="#spec-specwritercallback" title="Permalink to this heading">#</a></h4>
+<h4>SPEC: SpecWriterCallback<a class="headerlink" href="#spec-specwritercallback" title="Link to this heading">#</a></h4>
 <p>The
 <a class="reference external" href="https://bcda-aps.github.io/apstools/source/_filewriters.html#apstools.filewriters.SpecWriterCallback">documentation</a>
 is brief.  It may be more interesting to see the setup for the <a class="reference external" href="https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/instrument/callbacks/spec_data_file_writer.py">bluesky
@@ -769,7 +765,7 @@ instrument</a>.</p>
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>

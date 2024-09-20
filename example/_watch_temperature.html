@@ -1,13 +1,12 @@
 
-
 <!DOCTYPE html>
 
 
-<html lang="en" data-content_root="" >
+<html lang="en" data-content_root="../" >
 
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>Watch a temperature : scan temperature v time &#8212; APS Bluesky Training</title>
   
@@ -29,24 +28,21 @@
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
 <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/tabs.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.5ea377869091fd0449014c60fc090103.min.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+    <link rel="stylesheet" type="text/css" href="../_static/tabs.css?v=a5c4661c" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
 <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
   <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/sphinx_highlight.js"></script>
-    <script src="../_static/design-tabs.js"></script>
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
     <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
@@ -414,12 +410,12 @@ document.write(`
                 <article class="bd-article">
                   
   <section id="Watch-a-temperature-:-scan-temperature-v-time">
-<h1>Watch a temperature : scan temperature <em>v</em> time<a class="headerlink" href="#Watch-a-temperature-:-scan-temperature-v-time" title="Permalink to this heading">#</a></h1>
+<h1>Watch a temperature : scan temperature <em>v</em> time<a class="headerlink" href="#Watch-a-temperature-:-scan-temperature-v-time" title="Link to this heading">#</a></h1>
 <p>From <em>APS Python Training for Bluesky Data Acquisition</em>.</p>
 <p><strong>Objective</strong></p>
 <p>Measure the temperature for a short period and compute basics measures of the collected readings.</p>
 <section id="Start-the-instrument-package">
-<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Permalink to this heading">#</a></h2>
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
 <p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
@@ -515,7 +511,7 @@ I Thu-17:54:49 - #### Startup is complete. ####
 </div>
 </section>
 <section id="Describe">
-<h2>Describe<a class="headerlink" href="#Describe" title="Permalink to this heading">#</a></h2>
+<h2>Describe<a class="headerlink" href="#Describe" title="Link to this heading">#</a></h2>
 <p>Note the initial settings of the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> (controller). It’s actually an EPICS <em>swait</em> record that simulates a temperature sensor and controller. It has a setpoint, a readback, and a few other support attributes as shown. A Random noise level is part of the simulation. We’ll compute that noise level from the standard deviation of the measurements.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -550,7 +546,7 @@ temperature_report_dmov_changes False                               2023-04-13 1
 </div>
 </section>
 <section id="Count">
-<h2>Count<a class="headerlink" href="#Count" title="Permalink to this heading">#</a></h2>
+<h2>Count<a class="headerlink" href="#Count" title="Link to this heading">#</a></h2>
 <p>Use the bluesky RunEngine, <code class="docutils literal notranslate"><span class="pre">RE</span></code>, and a standard plan, <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code>, to <em>count</em> the temperature. The <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> plan triggers (typically a scaler) and then reads from the detector. In this case, the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> device’s <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method does not do anything, yet it is still <em>countable</em>.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
@@ -661,7 +657,7 @@ generator count [&#39;8b99ba9a&#39;] (scan num: 959)
 </div>
 </section>
 <section id="Adjust-the-measurement-interval">
-<h2>Adjust the measurement interval<a class="headerlink" href="#Adjust-the-measurement-interval" title="Permalink to this heading">#</a></h2>
+<h2>Adjust the measurement interval<a class="headerlink" href="#Adjust-the-measurement-interval" title="Link to this heading">#</a></h2>
 <p>We need to slow down the measurement to this interval by adding the <code class="docutils literal notranslate"><span class="pre">delay=2</span></code> kwarg, sampling every 2 seconds.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
@@ -748,7 +744,7 @@ generator count [&#39;b55776f1&#39;] (scan num: 960)
 </div>
 </section>
 <section id="Collect-our-measurements">
-<h2>Collect our measurements<a class="headerlink" href="#Collect-our-measurements" title="Permalink to this heading">#</a></h2>
+<h2>Collect our measurements<a class="headerlink" href="#Collect-our-measurements" title="Link to this heading">#</a></h2>
 <p>Repeat the measurement, this time with more observations.</p>
 <p>Also, we’ll add a metadata key:value pair so that later we can find this data more easily in the database. Most plans take a <code class="docutils literal notranslate"><span class="pre">md={}</span></code> kwarg where the value is a Python dictionary with the key:value pair(s) to add to the run’s metadata.</p>
 <div class="nbinput docutils container">
@@ -848,7 +844,7 @@ generator count [&#39;51779bd1&#39;] (scan num: 961)
 </div>
 </section>
 <section id="Get-the-data-(from-the-database)">
-<h2>Get the data (from the database)<a class="headerlink" href="#Get-the-data-(from-the-database)" title="Permalink to this heading">#</a></h2>
+<h2>Get the data (from the database)<a class="headerlink" href="#Get-the-data-(from-the-database)" title="Link to this heading">#</a></h2>
 <p>Let’s get the measured data from the database now. It’s the most recent bluesky run, so an index of <code class="docutils literal notranslate"><span class="pre">-1</span></code> will identify it.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
@@ -869,7 +865,7 @@ generator count [&#39;51779bd1&#39;] (scan num: 961)
 </div>
 </section>
 <section id="Compute-the-statistics">
-<h2>Compute the statistics<a class="headerlink" href="#Compute-the-statistics" title="Permalink to this heading">#</a></h2>
+<h2>Compute the statistics<a class="headerlink" href="#Compute-the-statistics" title="Link to this heading">#</a></h2>
 <p>Use the methods of numpy arrays to compute maximum, mean, standard deviation, and minimum. Looks nicer in a table.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
@@ -1033,7 +1029,7 @@ min     24.50918593118181
         <div class="footer-item">
 
   <p class="sphinx-version">
-    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 5.3.0.
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.0.2.
     <br/>
   </p>
 </div>
