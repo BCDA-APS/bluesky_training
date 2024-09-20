@@ -1,13 +1,15 @@
 name: training_2022
 
+#
+
 # use:
-#   date -Is; micromamba create -y -f ./environment.yml; date -Is
+#   date -Is; conda env create -y -f ./environment.yml date -Is
 
 channels:
   - conda-forge
-  - defaults
+  - nodefaults
   - aps-anl-tag
-  - nsls2forge
+  # - nsls2forge
 
 dependencies:
 
