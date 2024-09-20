@@ -23,7 +23,7 @@ dependencies:
   # Everything else by pip.
 
 # -------------------------------------------------------
-  - python =3.11
+  - python
   - pip
   - apsu::pvapy
   - apsu::aps-dm-api >=8   # linux-64  osx-64
