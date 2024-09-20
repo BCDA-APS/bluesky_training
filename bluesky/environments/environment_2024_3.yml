@@ -16,11 +16,10 @@ name: bluesky_2024_3
 
 channels:
   - apsu  # Must be first for compatible epics-base, pyepics, pvapy
-
-  # then these channels
   - conda-forge
-  # - aps-anl-tag  # for pvview
-  # - defaults  # licensing Ts & Cs say don't use this now
+
+  # due to licensing Terms & Conditions,  don't use the defaults channel.
+  # - defaults
 
 dependencies:
 
