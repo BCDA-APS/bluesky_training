@@ -3,7 +3,7 @@ name: bluesky_2024_3
 # download:
 #   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2024_3.yml
 # create:
-#   conda env create --force -n bluesky_2024_3 -f ./environment_2024_3.yml --solver=libmamba
+#   conda env create -y -n bluesky_2024_3 -f ./environment_2024_3.yml --solver=libmamba
 # activate:
 #   conda activate bluesky_2024_3
 
@@ -20,7 +20,7 @@ channels:
   # then these channels
   - conda-forge
   # - aps-anl-tag  # for pvview
-  - defaults
+  # - defaults  # licensing Ts & Cs say don't use this now
 
 dependencies:
 
