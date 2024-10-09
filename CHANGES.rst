@@ -21,10 +21,15 @@ Project `milestones <https://github.com/BCDA-APS/bluesky_training/milestones>`_
 describe future plans.
 
 ..
-   1.0.4
-   ******
+    1.0.4
+    ******
 
-   release expected by 2024-07-19
+    release expected by 2024-12-31?
+
+    Maintenance
+    ------------
+
+    * Change environment installation to prefer pip for most packages.
 
 1.0.3
 ******
