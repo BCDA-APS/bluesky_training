@@ -298,16 +298,16 @@ Note that the installation takes several minutes.
     <pre>
     $ <b>cd ~/bluesky</b>
     $ <b>conda env create \
-        --force \
+        -y \
         -n bluesky_2023_3 \
         -f ./environments/environment_2023_3.yml \
         --solver=libmamba</b>
     </pre>
 
     <details><summary>Details</summary>
-
-    <ul>
-    <li>The <code>--force</code> option will replace any existing environment by this
+    
+    <ul> 
+    <li>The <code>-y</code> option will replace any existing environment by this
     name without asking for confirmation. Remove this option if you wish.</li>
     <li>The <code>-n bluesky_2023_3</code> sets the name of the conda environment to be
     created.</li>

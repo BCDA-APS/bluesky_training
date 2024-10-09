@@ -7,7 +7,7 @@
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
 
 project = "APS Bluesky Training"
-copyright = "2023, APS BCDA"
+copyright = "2024, APS BCDA"
 author = "APS BCDA"
 
 # -- General configuration ---------------------------------------------------
