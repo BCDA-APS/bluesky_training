@@ -1,12 +1,18 @@
-name: training_2022
+name: bluesky_2024_3
 
-# Provide a run-time suite of software supporting various
-# user activities during and after data collection
+# download:
+#   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2024_3.yml
+# create:
+#   conda env create -y -n bluesky_2024_3 -f ./environment_2024_3.yml --solver=libmamba
+# activate:
+#   conda activate bluesky_2024_3
 
-# use:
-#   date -Is; conda env create -y -f ./environment.yml date -Is
+# Add/revise environment variable for default bluesky environment.
+# Add to ~/.bash_aliases (or if that does not exist, ~/.bashrc).
+# export BLUESKY_CONDA_ENV=bluesky_2024_3
 
-# Copied & adapted from current ./bluesky/environment*.yml file
+# For more advice about bash environment variables, see:
+# https://github.com/BCDA-APS/bluesky_training/blob/main/bluesky/environments/admin/bluesky.md#bash-environment-variables
 
 channels:
   # - apsu  # Must be first for compatible epics-base, pyepics, pvapy
@@ -17,16 +23,18 @@ channels:
   # Note this advice: https://stackoverflow.com/questions/67695893/
 
 dependencies:
-
   # Use conda to install only the basics and whatever pip can't install.
   # This includes binaries such as Qt and hkl.
   # Everything else by pip.
 
-# -------------------------------------------------------
-  - python
+  # Some Bluesky packages are not ready for 3.12+.
+  # Since this uses pip to install most packages, their
+  # requirements will not be handled until after the
+  # conda environment is installed.
+  - python <3.12
   - pip
   - apsu::pvapy
-  - apsu::aps-dm-api >=8   # linux-64  osx-64
+  - apsu::aps-dm-api >=8   # linux-64  osx-64 -- ONLY at APS!
   - hkl   # linux-64
   - nbconvert-pandoc
   - pandoc >3
