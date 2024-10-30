@@ -3,9 +3,8 @@
 Create bluesky environment
 ==========================
 
-Describes the steps to create a virtual environment for a bluesky instrument
-(see `setup a bluesky instrument
-<https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#setup-a-bluesky-instrument>`__).
+Describes the steps to create a virtual environment for a bluesky
+:doc:`/instrument/index`.
 
 A bluesky instrument uses many Python packages not included in the Python
 Standard Library. Rather than add these directly into the system Python
