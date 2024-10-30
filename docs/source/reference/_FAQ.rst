@@ -37,6 +37,13 @@ How to create an alias to activate the bluesky environment?
 
 In this section: :ref:`reference.create_conda-bluesky_alias`, look for ``become_bluesky``.
 
+.. _faq-alias-time-series:
+
+How to record a time series?
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+See :doc:`Time Series </howto/_time_scan>` for a few examples.
+
 
 .. _faq-obj-oriented:
 
