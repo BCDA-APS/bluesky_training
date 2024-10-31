@@ -20,6 +20,20 @@ History of user-visible changes between the versions.
 Project `milestones <https://github.com/BCDA-APS/bluesky_training/milestones>`_
 describe future plans.
 
+
+..
+  subsections could include these headings (in this order), omit if no content
+
+    Notice
+    Breaking Changes
+    New Features
+    Enhancements
+    Fixes
+    Maintenance
+    Deprecations
+    Known Problems
+    New Contributors
+
 ..
     1.0.4
     ******
@@ -31,8 +45,32 @@ describe future plans.
 
     * Change environment installation to prefer pip for most packages.
 
+1.0.4
+*****
+
+released 2024-10-31
+
+New Features
+------------
+
+* Example of scans with area detector and motor.
+* Show how to collect a scan time series.
+* Documentation shows how *and where* to install the databroker configuration file.
+* Tab completion problem is not observed now.
+
+Fixes
+-----
+
+* Fix a broken documentation link.
+
+Maintenance
+-----------
+
+* Add environment file for 2024_3 cycle.
+* Replace conda `defaults` channel with `nodefaults`, rely on `conda-forge`.
+
 1.0.3
-******
+*****
 
 released 2024-06-13
 
