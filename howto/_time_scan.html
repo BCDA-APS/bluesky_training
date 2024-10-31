@@ -1,0 +1,860 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Time Series &#8212; APS Bluesky Training</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+    <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+
+    <script src="../_static/documentation_options.js?v=5929fcd5"></script>
+    <script src="../_static/doctools.js?v=9bcbadda"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
+    <script>window.MathJax = {"tex": {"inlineMath": [["$", "$"], ["\\(", "\\)"]], "processEscapes": true}, "options": {"ignoreHtmlClass": "tex2jax_ignore|mathjax_ignore|document", "processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_time_scan';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Tutorials" href="../tutor/index.html" />
+    <link rel="prev" title="Simulate a temperature controller with an EPICS swait record" href="_temperature_controller_swait.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
+    
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search the docs ..."
+         aria-label="Search the docs ..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+<div class="bd-header__inner bd-page-width">
+  <button class="pst-navbar-icon sidebar-toggle primary-toggle" aria-label="Site navigation">
+    <span class="fa-solid fa-bars"></span>
+  </button>
+  
+  
+  <div class="col-lg-3 navbar-header-items__start">
+    
+      <div class="navbar-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../index.html">
+  
+  
+  
+  
+  
+  
+    <p class="title logo__title">APS Bluesky Training</p>
+  
+</a></div>
+    
+  </div>
+  
+  <div class="col-lg-9 navbar-header-items">
+    
+    <div class="me-auto navbar-header-items__center">
+      
+        <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../instrument/index.html">
+    Instrument
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../example/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutor/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+            <li class="nav-item dropdown">
+                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                    More
+                </button>
+                <ul id="pst-nav-more-links" class="dropdown-menu">
+                    
+<li class=" ">
+  <a class="nav-link dropdown-item nav-internal" href="../changes.html">
+    Changes
+  </a>
+</li>
+
+                </ul>
+            </li>
+            
+  </ul>
+</nav></div>
+      
+    </div>
+    
+    
+    <div class="navbar-header-items__end">
+      
+        <div class="navbar-item navbar-persistent--container">
+          
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+        </div>
+      
+      
+        <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+      
+    </div>
+    
+  </div>
+  
+  
+    <div class="navbar-persistent--mobile">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button>
+    </div>
+  
+
+  
+    <button class="pst-navbar-icon sidebar-toggle secondary-toggle" aria-label="On this page">
+      <span class="fa-solid fa-outdent"></span>
+    </button>
+  
+</div>
+
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+        
+          
+          
+            <div class="navbar-item">
+<nav>
+  <ul class="bd-navbar-elements navbar-nav">
+    
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../instrument/index.html">
+    Instrument
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../example/index.html">
+    Examples
+  </a>
+</li>
+
+
+<li class="nav-item current active">
+  <a class="nav-link nav-internal" href="index.html">
+    How-To Guides
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../tutor/index.html">
+    Tutorials
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../reference/index.html">
+    Reference
+  </a>
+</li>
+
+
+<li class="nav-item ">
+  <a class="nav-link nav-internal" href="../changes.html">
+    Changes
+  </a>
+</li>
+
+  </ul>
+</nav></div>
+          
+        
+      </div>
+    
+    
+    
+      <div class="sidebar-header-items__end">
+        
+          <div class="navbar-item">
+
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
+</button></div>
+        
+      </div>
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+<nav class="bd-docs-nav bd-links"
+     aria-label="Section Navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">Section Navigation</p>
+  <div class="bd-toc-item navbar-nav"><ul class="current nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="getting_started.html">Getting started</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bluesky_cheat_sheet.html">Bluesky Cheat Sheet</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_ad_v_motors.html">Scan Area Detector v. Motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beamlines</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
+
+<li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_epics_proc_field.html">Trigger a Device with the EPICS record .PROC field</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_images_darks_flats.html">Images, Darks, &amp; whites with EPICS area detector, ophyd, and Bluesky</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_lineup_1d_peak.html">Lineup a 1-D peak : scan detector <em>v</em> motor</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_locate_image_peak.html">Locate peak on 2-D area detector image</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_plot_x_y_databroker.html">Plot x, y data from a databroker run</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_busy.html">synApps <em>busy</em> record</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_synapps_sscan_1d_flyer.html">synApps <em>sscan</em> as 1D Flyer</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_temperature_controller_swait.html">Simulate a temperature controller with an EPICS <code class="docutils literal notranslate"><span class="pre">swait</span></code> record</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Time Series</a></li>
+</ul>
+</div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item">
+
+<nav aria-label="Breadcrumb" class="d-print-none">
+  <ul class="bd-breadcrumbs">
+    
+    <li class="breadcrumb-item breadcrumb-home">
+      <a href="../index.html" class="nav-link" aria-label="Home">
+        <i class="fa-solid fa-home"></i>
+      </a>
+    </li>
+    
+    <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
+    
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Time Series</span></li>
+  </ul>
+</nav>
+</div>
+      
+    </div>
+  
+  
+</div>
+</div>
+              
+              
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <section id="Time-Series">
+<h1>Time Series<a class="headerlink" href="#Time-Series" title="Link to this heading">#</a></h1>
+<p>Record a series of readings over time.</p>
+<p><strong>Objective</strong></p>
+<p>In this notebook, we show how to record time series with several examples:</p>
+<ul class="simple">
+<li><p>scaler</p></li>
+<li><p>temperature</p></li>
+<li><p>multiple detectors</p></li>
+</ul>
+<p>See <a class="reference internal" href="_count_scaler.html"><span class="doc">Count the scaler</span></a> for more details about configuring and using a scaler.</p>
+<section id="Start-the-instrument-package">
+<h2>Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package<a class="headerlink" href="#Start-the-instrument-package" title="Link to this heading">#</a></h2>
+<p>Our instrument package is in the <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> subdirectory here so we add that to the search path before importing it.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
+<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+/home/prjemian/bluesky/instrument/_iconfig.py
+Activating auto-logging. Current session state plus future input saved.
+Filename       : /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/.logs/ipython_console.log
+Mode           : rotate
+Output logging : True
+Raw input log  : False
+Timestamping   : True
+State          : active
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Wed-12:51:21 - ############################################################ startup
+I Wed-12:51:21 - logging started
+I Wed-12:51:21 - logging level = 10
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/session_logs.py
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/collection.py
+I Wed-12:51:21 - CONDA_PREFIX = /home/prjemian/.conda/envs/bluesky_2024_3
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+Exception reporting mode: Minimal
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area stderr docutils container">
+<div class="highlight"><pre>
+I Wed-12:51:21 - xmode exception level: &#39;Minimal&#39;
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/mpl/notebook.py
+I Wed-12:51:21 - #### Bluesky Framework ####
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/framework/check_python.py
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/framework/check_bluesky.py
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/framework/initialize.py
+I Wed-12:51:21 - RunEngine metadata saved in directory: /home/prjemian/.config/Bluesky_RunEngine_md
+I Wed-12:51:21 - using databroker catalog &#39;training&#39;
+I Wed-12:51:21 - using ophyd control layer: pyepics
+I Wed-12:51:21 - Using EPICS PV gp:gp:int20 for scan_id
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/framework/metadata.py
+I Wed-12:51:21 - #### Devices ####
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/devices/area_detector.py
+I Wed-12:51:21 - /home/prjemian/bluesky/instrument/devices/calculation_records.py
+I Wed-12:51:26 - /home/prjemian/bluesky/instrument/devices/fourc_diffractometer.py
+I Wed-12:51:26 - /home/prjemian/bluesky/instrument/devices/ioc_stats.py
+I Wed-12:51:26 - /home/prjemian/bluesky/instrument/devices/kohzu_monochromator.py
+I Wed-12:51:26 - /home/prjemian/bluesky/instrument/devices/motors.py
+I Wed-12:51:27 - /home/prjemian/bluesky/instrument/devices/noisy_detector.py
+I Wed-12:51:27 - /home/prjemian/bluesky/instrument/devices/scaler.py
+I Wed-12:51:28 - /home/prjemian/bluesky/instrument/devices/shutter_simulator.py
+I Wed-12:51:28 - /home/prjemian/bluesky/instrument/devices/simulated_fourc.py
+I Wed-12:51:28 - /home/prjemian/bluesky/instrument/devices/simulated_kappa.py
+I Wed-12:51:28 - /home/prjemian/bluesky/instrument/devices/slits.py
+I Wed-12:51:28 - /home/prjemian/bluesky/instrument/devices/sixc_diffractometer.py
+I Wed-12:51:28 - /home/prjemian/bluesky/instrument/devices/temperature_signal.py
+I Wed-12:51:29 - #### Callbacks ####
+I Wed-12:51:29 - /home/prjemian/bluesky/instrument/callbacks/spec_data_file_writer.py
+I Wed-12:51:30 - #### Plans ####
+I Wed-12:51:30 - /home/prjemian/bluesky/instrument/plans/lup_plan.py
+I Wed-12:51:30 - /home/prjemian/bluesky/instrument/plans/peak_finder_example.py
+I Wed-12:51:30 - /home/prjemian/bluesky/instrument/utils/image_analysis.py
+I Wed-12:51:30 - /home/prjemian/bluesky/instrument/plans/randomize_noisy_peak_plan.py
+I Wed-12:51:30 - #### Utilities ####
+I Wed-12:51:30 - writing to SPEC file: /home/prjemian/Documents/projects/BCDA-APS/bluesky_training/docs/source/howto/20241030-125129.dat
+I Wed-12:51:30 -    &gt;&gt;&gt;&gt;   Using default SPEC file name   &lt;&lt;&lt;&lt;
+I Wed-12:51:30 -    file will be created when bluesky ends its next scan
+I Wed-12:51:30 -    to change SPEC file, use command:   newSpecFile(&#39;title&#39;)
+I Wed-12:51:30 - #### Startup is complete. ####
+</pre></div></div>
+</div>
+</section>
+<section id="Time-Series:-scaler1">
+<h2>Time Series: scaler1<a class="headerlink" href="#Time-Series:-scaler1" title="Link to this heading">#</a></h2>
+<p>First, set the scaler’s <em>counting time</em> to 0.2 seconds when we count here.</p>
+<details><p>NOTE</p>
+<p>The scaler used here is an EPICS software simulator of real scaler hardware. It has a bug that almost always adds to the configured preset time. Expect the counting times to be 0.3s in this document.</p>
+</details><div class="nbinput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">preset_time</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<p>Now, use the bluesky <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.run_engine.RunEngine.html?highlight=runengine#bluesky.run_engine.RunEngine">RunEngine</a> (<code class="docutils literal notranslate"><span class="pre">RE</span></code>) to count <code class="docutils literal notranslate"><span class="pre">scaler1</span></code>. We’ll use the bluesky plan (<a class="reference external" href="https://blueskyproject.io/bluesky/plans.html?highlight=count#pre-assembled-plans">bp</a>) called <a class="reference external" href="https://blueskyproject.io/bluesky/generated/bluesky.plans.count.html#bluesky.plans.count">count()</a>.</p>
+<p>The first argument to <code class="docutils literal notranslate"><span class="pre">bp.count()</span></code> is a <em>list</em> of detectors. At each reading, each “detector” is triggered (to executes its data acquisition steps). Once all detectors have finished triggering, all detectors are read out and reported.</p>
+<p>Any “detector” (readable device or signal) can be recorded as a time series. For example <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> (in this simulator) is such a readable device. A readable device or signal has a <code class="docutils literal notranslate"><span class="pre">.read()</span></code> method that returns time-stamped data.</p>
+<p>Here, we read <code class="docutils literal notranslate"><span class="pre">scaler1</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaler1</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;clock&#39;, {&#39;value&#39;: 3000000.0, &#39;timestamp&#39;: 1730310528.098214}),
+             (&#39;I0&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1730310528.098214}),
+             (&#39;scint&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1730310528.098214}),
+             (&#39;diode&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1730310528.098214}),
+             (&#39;I000&#39;, {&#39;value&#39;: 1.0, &#39;timestamp&#39;: 1730310528.098214}),
+             (&#39;I00&#39;, {&#39;value&#39;: 2.0, &#39;timestamp&#39;: 1730310528.098214}),
+             (&#39;scaler1_time&#39;, {&#39;value&#39;: 0.3, &#39;timestamp&#39;: 1730310528.098214})])
+</pre></div></div>
+</div>
+<p>Using <code class="docutils literal notranslate"><span class="pre">scaler1</span></code>, record 10 measurements at 1.0 second intervals.</p>
+<p>We choose an interval time that is longer than the count time for the <code class="docutils literal notranslate"><span class="pre">scaler</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">scaler1</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 59     Time: 2024-10-30 12:51:30
+Persistent Unique Scan ID: &#39;9933bc4e-a764-4bc8-8eca-15e09fa66a8b&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time |      clock |         I0 |      scint |      diode |       I000 |        I00 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 12:51:30.6 |    3000000 |          1 |          2 |          1 |          2 |          1 |
+|         2 | 12:51:32.6 |    3000000 |          0 |          1 |          1 |          1 |          1 |
+|         3 | 12:51:34.4 |    3000000 |          1 |          1 |          2 |          1 |          1 |
+|         4 | 12:51:36.2 |    3000000 |          0 |          1 |          0 |          0 |          1 |
+|         5 | 12:51:38.0 |    3000000 |          2 |          2 |          1 |          1 |          1 |
+|         6 | 12:51:40.0 |    3000000 |          1 |          1 |          2 |          1 |          1 |
+|         7 | 12:51:41.8 |    3000000 |          0 |          1 |          2 |          1 |          1 |
+|         8 | 12:51:43.7 |    3000000 |          1 |          1 |          1 |          1 |          1 |
+|         9 | 12:51:45.5 |    3000000 |          2 |          1 |          1 |          1 |          1 |
+|        10 | 12:51:47.4 |    3000000 |          1 |          2 |          1 |          1 |          1 |
++-----------+------------+------------+------------+------------+------------+------------+------------+
+generator count [&#39;9933bc4e&#39;] (scan num: 59)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;9933bc4e-a764-4bc8-8eca-15e09fa66a8b&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__time_scan_8_2.png" src="../_images/howto__time_scan_8_2.png" />
+</div>
+</div>
+</section>
+<section id="Time-Series:-Temperature">
+<h2>Time Series: Temperature<a class="headerlink" href="#Time-Series:-Temperature" title="Link to this heading">#</a></h2>
+<p>Here, we read the <code class="docutils literal notranslate"><span class="pre">temperature</span></code>. See the <a class="reference internal" href="_temperature_controller_swait.html"><span class="doc">HOWTO</span></a> for more details about the <code class="docutils literal notranslate"><span class="pre">temperature</span></code> device.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">temperature</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+OrderedDict([(&#39;temperature&#39;,
+              {&#39;value&#39;: 24.76918440527962, &#39;timestamp&#39;: 1730310709.524552}),
+             (&#39;temperature_setpoint&#39;,
+              {&#39;value&#39;: 25.0, &#39;timestamp&#39;: 1730310688.811508})])
+</pre></div></div>
+</div>
+<p>Measure the time series. Same command as before, substituting <code class="docutils literal notranslate"><span class="pre">temperature</span></code> for <code class="docutils literal notranslate"><span class="pre">scaler1</span></code>.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">temperature</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 60     Time: 2024-10-30 12:51:50
+Persistent Unique Scan ID: &#39;e0c35c09-77f7-4281-9b54-3ed9d8003122&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+-------------+
+|   seq_num |       time | temperature |
++-----------+------------+-------------+
+|         1 | 12:51:51.1 |    24.76918 |
+|         2 | 12:51:52.1 |    25.07096 |
+|         3 | 12:51:53.1 |    25.07096 |
+|         4 | 12:51:54.1 |    25.25232 |
+|         5 | 12:51:55.1 |    25.25232 |
+|         6 | 12:51:56.1 |    25.48341 |
+|         7 | 12:51:57.1 |    25.48341 |
+|         8 | 12:51:58.1 |    25.04672 |
+|         9 | 12:51:59.1 |    25.04672 |
+|        10 | 12:52:00.1 |    24.77842 |
++-----------+------------+-------------+
+generator count [&#39;e0c35c09&#39;] (scan num: 60)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;e0c35c09-77f7-4281-9b54-3ed9d8003122&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__time_scan_12_2.png" src="../_images/howto__time_scan_12_2.png" />
+</div>
+</div>
+</section>
+<section id="Time-Series:-multiple-detectors">
+<h2>Time Series: multiple detectors<a class="headerlink" href="#Time-Series:-multiple-detectors" title="Link to this heading">#</a></h2>
+<p>Measure a time series with a list of several “detectors”.</p>
+<p>It is possible to use a component of a device as a detector. Here, we pick the simulated double-crystal monochromator energy (<code class="docutils literal notranslate"><span class="pre">dcm.energy</span></code>) as a detector. See the <a class="reference internal" href="../example/_xafs_scan.html"><span class="doc">XAFS scan example</span></a> for more details about the <code class="docutils literal notranslate"><span class="pre">dcm.energy</span></code> device.</p>
+<p>See the <a class="reference internal" href="_lineup_1d_peak.html"><span class="doc">lineup 1D HOWTO</span></a> for more details about the <code class="docutils literal notranslate"><span class="pre">noisy</span></code> signal.</p>
+<div class="nbinput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">temperature</span><span class="p">,</span> <span class="n">noisy</span><span class="p">,</span> <span class="n">dcm</span><span class="o">.</span><span class="n">energy</span><span class="p">,</span> <span class="n">scaler1</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mf">1.0</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+
+
+Transient Scan ID: 61     Time: 2024-10-30 12:52:01
+Persistent Unique Scan ID: &#39;70a10a74-dd7c-4de4-b949-206024987ce9&#39;
+New stream: &#39;label_start_motor&#39;
+New stream: &#39;primary&#39;
++-----------+------------+-------------+------------+------------+------------+------------+------------+------------+------------+------------+
+|   seq_num |       time | temperature | dcm_energy |      noisy |      clock |         I0 |      scint |      diode |       I000 |        I00 |
++-----------+------------+-------------+------------+------------+------------+------------+------------+------------+------------+------------+
+|         1 | 12:52:01.9 |    24.93169 |    10.2000 |  411.76118 |    3000000 |          1 |          1 |          2 |          0 |          1 |
+|         2 | 12:52:05.9 |    24.98342 |    10.2000 |  411.76118 |    3000000 |          0 |          0 |          0 |          1 |          2 |
+|         3 | 12:52:09.7 |    25.44995 |    10.2000 |  411.76118 |    3000000 |          1 |          2 |          1 |          1 |          1 |
+|         4 | 12:52:13.5 |    24.81434 |    10.2000 |  411.76118 |    3000000 |          1 |          1 |          1 |          1 |          1 |
+|         5 | 12:52:17.3 |    24.79197 |    10.2000 |  411.76118 |    3000000 |          2 |          1 |          1 |          1 |          0 |
+|         6 | 12:52:21.2 |    25.33772 |    10.2000 |  411.76118 |    3000000 |          1 |          1 |          1 |          0 |          1 |
+|         7 | 12:52:24.9 |    25.06681 |    10.2000 |  411.76118 |    3000000 |          2 |          1 |          1 |          0 |          1 |
+|         8 | 12:52:28.6 |    24.82886 |    10.2000 |  411.76118 |    3000000 |          1 |          1 |          1 |          1 |          1 |
+|         9 | 12:52:32.3 |    25.08286 |    10.2000 |  411.76118 |    3000000 |          2 |          2 |          1 |          2 |          0 |
+|        10 | 12:52:36.1 |    25.27217 |    10.2000 |  411.76118 |    3000000 |          0 |          2 |          1 |          1 |          1 |
++-----------+------------+-------------+------------+------------+------------+------------+------------+------------+------------+------------+
+generator count [&#39;70a10a74&#39;] (scan num: 61)
+</pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;70a10a74-dd7c-4de4-b949-206024987ce9&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__time_scan_14_2.png" src="../_images/howto__time_scan_14_2.png" />
+</div>
+</div>
+</section>
+</section>
+
+
+                </article>
+              
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="_temperature_controller_swait.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">Simulate a temperature controller with an EPICS <code class="docutils literal notranslate"><span class="pre">swait</span></code> record</p>
+      </div>
+    </a>
+    <a class="right-next"
+       href="../tutor/index.html"
+       title="next page">
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Tutorials</p>
+      </div>
+      <i class="fa-solid fa-angle-right"></i>
+    </a>
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+<div
+    id="pst-page-navigation-heading-2"
+    class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> On this page
+  </div>
+  <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Start-the-instrument-package">Start the <code class="docutils literal notranslate"><span class="pre">instrument</span></code> package</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Time-Series:-scaler1">Time Series: scaler1</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Time-Series:-Temperature">Time Series: Temperature</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Time-Series:-multiple-detectors">Time Series: multiple detectors</a></li>
+</ul>
+  </nav></div>
+
+  <div class="sidebar-secondary-item">
+
+  <div class="tocsection sourcelink">
+    <a href="../_sources/howto/_time_scan.ipynb.txt">
+      <i class="fa-solid fa-file-lines"></i> Show Source
+    </a>
+  </div>
+</div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+          </footer>
+        
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+
+  <footer class="bd-footer">
+<div class="bd-footer__inner bd-page-width">
+  
+    <div class="footer-items__start">
+      
+        <div class="footer-item">
+
+  <p class="copyright">
+    
+      © Copyright 2024, APS BCDA.
+      <br/>
+    
+  </p>
+</div>
+      
+        <div class="footer-item">
+
+  <p class="sphinx-version">
+    Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 8.1.3.
+    <br/>
+  </p>
+</div>
+      
+    </div>
+  
+  
+  
+    <div class="footer-items__end">
+      
+        <div class="footer-item">
+<p class="theme-version">
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+</p></div>
+      
+    </div>
+  
+</div>
+
+  </footer>
+  </body>
+</html>
