@@ -40,6 +40,11 @@ describe future plans.
 
     release expected by 2024-12-31?
 
+    New Features
+    ------------
+
+    * Document how to setup and use APS DM API in a Bluesky session.
+
     Maintenance
     ------------
 
