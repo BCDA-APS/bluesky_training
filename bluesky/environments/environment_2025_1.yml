@@ -3,7 +3,7 @@ name: bluesky_2025_1
 # download:
 #   wget https://raw.githubusercontent.com/BCDA-APS/bluesky_training/main/bluesky/environments/environment_2024_3.yml
 # create:
-#   conda env create -y -n bluesky_2025_1 -f ./environment_2025_1.yml --solver=libmamba
+#   conda env create -y -n bluesky_2025_1 -f ./environment_2025_1.yml
 # activate:
 #   conda activate bluesky_2025_1
 
@@ -24,7 +24,7 @@ channels:
 
 dependencies:
   # Use conda to install only the basics and whatever pip can't install.
-  # This includes binaries such as Qt and hkl.
+  # This includes binaries such as EPICS, Qt, and hkl.
   # Everything else by pip.
 
   # Some Bluesky packages are not ready for 3.12+.
@@ -35,9 +35,11 @@ dependencies:
   - pip
   - apsu::pvapy
   - apsu::aps-dm-api >=8   # linux-64  osx-64 -- ONLY at APS!
+  - conda-forge::epics-base
   - hkl   # linux-64
   - nbconvert-pandoc
   - pandoc >3
+  - pyepics
   - pyqt =5
   - qt =5
 
