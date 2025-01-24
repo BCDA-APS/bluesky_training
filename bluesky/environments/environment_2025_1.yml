@@ -22,121 +22,122 @@ channels:
   - nodefaults
   # Note this advice: https://stackoverflow.com/questions/67695893/
 
-dependencies:
-  # Use conda to install only the basics and whatever pip can't install.
-  # This includes binaries such as EPICS, Qt, and hkl.
-  # Everything else by pip.
+  - aps-anl-tag
 
-  # Some Bluesky packages are not ready for 3.12+.
+# Prefer conda install if possible, pip install as fallback.
+# https://github.com/BCDA-APS/bluesky_training/pull/334#issuecomment-2613340849
+# Some Bluesky packages are not ready for 3.12+.
+# Pip installs cannot adjust the Python version but conda can.
+
+dependencies:
+
   # Since this uses pip to install most packages, their
   # requirements will not be handled until after the
   # conda environment is installed.
-  - python <3.12
-  - pip
-  - apsu::pvapy
+  - python
   - apsu::aps-dm-api >=8   # linux-64  osx-64 -- ONLY at APS!
+  - apsu::pvapy
   - conda-forge::epics-base
   - hkl   # linux-64
   - nbconvert-pandoc
   - pandoc >3
+  - pip
   - pyepics
   - pyqt =5
   - qt =5
 
+  # user-requested visualization packages
+  - gemviz  # tiled data server
+  - nexpy  # HDF5 and SPEC data files
+  - pymca  # HDF5 and SPEC data files
+
+  # --- user-requested packages
+  - punx
+  - pvmail
+  - pvview
+  - pyRestTable
+  - spec2nexus
+  - xrayutilities
+
+  # --- Python core packages
+  - ipython
+  - jupyter
+  - jupyterlab
+  - notebook
+  - numpy <1.999  # avoid any and all numpy 2.0 releases (includes 2.0.0aNNN)
+  - psutil
+
+  # --- general support packages
+  - apischema
+  - bitshuffle
+  - h5py
+  - hdf5plugin
+  - imagecodecs-lite
+  - ipympl
+  - lxml
+  - pandas
+  - pint
+  - pymongo
+  - scikit-image
+  - xlrd
+
+  # --- Bluesky framework packages
+  - apstools
+  - area-detector-handlers
+  - bluesky >=1.12
+  - bluesky-httpserver
+  - bluesky-kafka
+  - bluesky-live
+  - bluesky-queueserver
+  - bluesky-queueserver-api
+  - bluesky-widgets
+  - databroker <=1.999
+  - databroker-pack
+  - happi
+  - hklpy >=1.1.1
+  - httpx >=0.14  # issue #75
+  - ophyd >=1.9
+  - pydm
+  - tiled[all]
+  # https://github.com/pydata/xarray/issues/6818
+  - xarray !=2022.6.0  # incompatible with numpy=1.20
+
+  # --- testing and quality assurance
+  - black
+  - flake8
+  - isort
+  - mypy
+  - pre-commit
+  - pylint
+  - pytest
+  - pytest-notebook
+  - ruff
+
+  # --- packaging and publishing
+  - babel
+  - conda-build
+  - coverage
+  - ipykernel
+  - jinja2
+  - markupsafe
+  - myst-parser
+  - nbsphinx
+  - pydata-sphinx-theme
+  - pygments
+  - pygithub
+  - sphinx
+  - sphinx-design
+  - sphinx-tabs
+  - sphinxcontrib-napoleon
+  - twine
+
   - pip:
 
-    # APS-only
     # - apsbss  # only works on APS subnet
 
-    # user-requested visualization packages
     - c2dataviewer  # EPICS PVA images
-    - gemviz  # from tiled
-    - mdaviz  # MDA data files
-    - nexpy  # HDF5 and SPEC data files
-    - pymca  # HDF5 and SPEC data files
-
-    # --- user-requested packages
-    - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
-    - punx
-    # - pvmail
-    - pvview
-    - pyRestTable
-    - spec2nexus
-    - xrayutilities
-
-    # --- Python core packages
-    - ipython
-    - jupyter
-    - jupyterlab
-    - notebook
-    - numpy <1.999  # avoid any and all numpy 2.0 releases (includes 2.0.0aNNN)
-    - psutil
-
-    # --- general support packages
-    - apischema
-    - bitshuffle
-    - h5py
-    - hdf5plugin
-    # - httpie
-    - imagecodecs-lite
-    - ipympl
-    - lxml
-    - pandas
-    - pint
-    - pymongo
-    # - pysumreg
-    - scikit-image
-    - xlrd
-
-    # --- Bluesky framework packages
-    - apstools
-    - area-detector-handlers
-    - bluesky >=1.12
-    - bluesky-httpserver
-    - bluesky-kafka
-    - bluesky-live
-    - bluesky-queueserver
-    - bluesky-queueserver-api
-    - bluesky-widgets
-    - databroker <=1.999
-    - databroker-pack
     - guarneri
-    - happi
-    - hklpy >=1.1.1
-    - httpx >=0.14  # issue #75
-    - ophyd >=1.9
+    - https://github.com/BCDA-APS/adl2pydm/archive/main.zip
+    - mdaviz  # MDA data files
     - ophyd-registry
-    - pydm
-    - tiled[all]
-    # https://github.com/pydata/xarray/issues/6818
-    - xarray !=2022.6.0  # incompatible with numpy=1.20
-
-    # --- testing and quality assurance
-    - black
-    - flake8
-    - isort
-    - mypy
-    - pre-commit
-    - pylint
-    - pytest
-    - pytest-notebook
-    - ruff
-
-    # --- packaging and publishing
-    - babel
-    - build
-    - coverage
-    - ipykernel
-    - jinja2
-    - markupsafe
-    - myst-parser
-    - nbsphinx
-    - pydata-sphinx-theme
-    - pygments
     - pygments-ipython-console
-    - pygithub
-    - sphinx
-    - sphinx-design
-    - sphinx-tabs
-    - sphinxcontrib-napoleon
-    - twine
