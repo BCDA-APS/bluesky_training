@@ -45,7 +45,6 @@ jobs:
     strategy:
       matrix:
         python-version:
-          - "3.9"
           - "3.10"
           - "3.11"
           # - "3.12"  # 2023-Q4  wait for upstreams to be ready
