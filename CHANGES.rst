@@ -35,21 +35,26 @@ describe future plans.
     New Contributors
 
 ..
-    1.0.5
+    1.0.6
     ******
 
-    release expected by 2025-01-25
+    release expected by 2025-03-25
 
-    New Features
-    ------------
+1.0.5
+******
 
-    * Document how to setup and use APS DM API in a Bluesky session.
+Released by 2025-01-25
 
-    Maintenance
-    ------------
+New Features
+------------
 
-    * Change environment installation to prefer pip for most packages.
-    * Require Py3.10 or Py3.11
+* Document how to setup and use APS DM API in a Bluesky session.
+
+Maintenance
+------------
+
+* Change environment installation to prefer pip for most packages.
+* Require Py3.10 or Py3.11
 
 1.0.4
 *****
