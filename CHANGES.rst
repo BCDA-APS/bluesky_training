@@ -35,10 +35,10 @@ describe future plans.
     New Contributors
 
 ..
-    1.0.4
+    1.0.5
     ******
 
-    release expected by 2024-12-31?
+    release expected by 2025-01-25
 
     New Features
     ------------
@@ -49,6 +49,7 @@ describe future plans.
     ------------
 
     * Change environment installation to prefer pip for most packages.
+    * Require Py3.10 or Py3.11
 
 1.0.4
 *****
