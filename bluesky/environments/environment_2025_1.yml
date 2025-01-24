@@ -22,8 +22,6 @@ channels:
   - nodefaults
   # Note this advice: https://stackoverflow.com/questions/67695893/
 
-  - aps-anl-tag
-
 # Prefer conda install if possible, pip install as fallback.
 # https://github.com/BCDA-APS/bluesky_training/pull/334#issuecomment-2613340849
 # Some Bluesky packages are not ready for 3.12+.
@@ -31,9 +29,6 @@ channels:
 
 dependencies:
 
-  # Since this uses pip to install most packages, their
-  # requirements will not be handled until after the
-  # conda environment is installed.
   - python
   - apsu::aps-dm-api >=8   # linux-64  osx-64 -- ONLY at APS!
   - apsu::pvapy
@@ -54,7 +49,7 @@ dependencies:
   # --- user-requested packages
   - punx
   - pvmail
-  - pvview
+  - aps-anl-tag::pvview
   - pyRestTable
   - spec2nexus
   - xrayutilities
