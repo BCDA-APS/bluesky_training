@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,19 +27,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -52,7 +52,7 @@
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dynamic Limits for Two Motors" href="_dynamic_limits_2motor.html" />
-    <link rel="prev" title="Custom bluesky plan" href="_custom_plan.html" />
+    <link rel="prev" title="Setup APS Data Management" href="_data_management.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -166,7 +166,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -333,6 +335,7 @@
 <li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="_data_management.html">Setup APS Data Management</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_epics_proc_field.html">Trigger a Device with the EPICS record .PROC field</a></li>
@@ -351,9 +354,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -401,18 +409,17 @@
                   
   <section id="Linux-Command-&amp;-Wait-for-Finish">
 <h1>Linux Command &amp; Wait for Finish<a class="headerlink" href="#Linux-Command-&-Wait-for-Finish" title="Link to this heading">#</a></h1>
-<p>Demonstrate how to launch a (Linux bash) shell command from Python and wait for it to finish.</p>
-<p>This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> is for setting and reading one value. The <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> can provide the multiple values needed.</p>
-<p>This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> is for setting and reading only one value. First we show how a <code class="docutils literal notranslate"><span class="pre">Signal</span></code>-based implementation would behave. Then, we show how the <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code> can provide the multiple values needed.</p>
-<p>To simulate a Linux command to be run, a bash shell script (<code class="docutils literal notranslate"><span class="pre">doodle.sh</span></code>) was created that runs a 5 second countdown printing to stdout (the terminal console).</p>
-<section id="1.-Example-shell-command">
-<h2>1. Example shell command<a class="headerlink" href="#1.-Example-shell-command" title="Link to this heading">#</a></h2>
+<p>Demonstrate how to launch a (Linux bash) shell command from Python and wait for it to finish. This involves setting a command and receiving two different values (<em>stdout</em> and <em>stderr</em>). A custom subclass of <code class="docutils literal notranslate"><span class="pre">ophyd.SignalRO</span></code> executes the shell command and processes the results. We add a <code class="docutils literal notranslate"><span class="pre">parse_response(stdout,</span> <span class="pre">stderr)</span></code> method so any subclass can easily process the string output result of the Linux command.</p>
+<p>To simulate a Linux command to be run, a bash shell script (<code class="docutils literal notranslate"><span class="pre">doodle.sh</span></code>) was created that runs a countdown (default: 5 seconds) printing to stdout (the terminal console).</p>
+<p>Later, we replace the <code class="docutils literal notranslate"><span class="pre">doodle.sh</span></code> with other common shell commands.</p>
+<section id="Example-shell-command">
+<h2>Example shell command<a class="headerlink" href="#Example-shell-command" title="Link to this heading">#</a></h2>
 <p>The example shell command is a bash script that executes a 5 second countdown. The script is shown first:</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>cat<span class="w"> </span>./doodle.sh
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">pycat</span> ./doodle.sh
 </pre></div>
 </div>
 </div>
@@ -421,15 +428,19 @@
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-#!/bin/bash
+<span class="ansi-red-fg">#!/bin/bash</span>
 
-echo $(date): Doodle demonstration starting
-echo $(date): sleep 5 seconds
-for i in 5 4 3 2 1; do
-    echo $(date): countdown ${i}
-    sleep 1
+echo<span class="ansi-red-fg"> </span><span class="ansi-red-fg">$</span><span class="ansi-blue-fg">(</span>date<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> Doodle demonstration starting
+
+<span class="ansi-red-fg"># optional argument is number of seconds to sleep, default is 5</span>
+counter<span class="ansi-blue-fg">=</span><span class="ansi-red-fg">$</span><span class="ansi-blue-fg">{</span><span class="ansi-cyan-fg">1</span><span class="ansi-blue-fg">:</span><span class="ansi-blue-fg">-</span><span class="ansi-cyan-fg">5</span><span class="ansi-blue-fg">}</span>
+
+until <span class="ansi-blue-fg">[</span><span class="ansi-red-fg"> </span><span class="ansi-red-fg">$</span>counter <span class="ansi-blue-fg">-</span>eq <span class="ansi-cyan-fg">0</span> <span class="ansi-blue-fg">]</span><span class="ansi-blue-fg">;</span> do
+    echo<span class="ansi-red-fg"> </span><span class="ansi-red-fg">$</span><span class="ansi-blue-fg">(</span>date<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> countdown<span class="ansi-red-fg"> </span><span class="ansi-red-fg">$</span><span class="ansi-blue-fg">{</span>counter<span class="ansi-blue-fg">}</span>
+    sleep <span class="ansi-cyan-fg">1</span>
+    <span class="ansi-blue-fg">(</span><span class="ansi-blue-fg">(</span>counter<span class="ansi-blue-fg">-</span><span class="ansi-blue-fg">-</span><span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">)</span>
 done
-echo $(date): Doodle demonstration complete
+echo<span class="ansi-red-fg"> </span><span class="ansi-red-fg">$</span><span class="ansi-blue-fg">(</span>date<span class="ansi-blue-fg">)</span><span class="ansi-blue-fg">:</span> Doodle demonstration complete
 </pre></div></div>
 </div>
 <p>Now, run it to show how it works.</p>
@@ -446,28 +457,30 @@ echo $(date): Doodle demonstration complete
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-Fri 23 Jul 2021 09:38:40 PM CDT: Doodle demonstration starting
-Fri 23 Jul 2021 09:38:40 PM CDT: sleep 5 seconds
-Fri 23 Jul 2021 09:38:40 PM CDT: countdown 5
-Fri 23 Jul 2021 09:38:41 PM CDT: countdown 4
-Fri 23 Jul 2021 09:38:42 PM CDT: countdown 3
-Fri 23 Jul 2021 09:38:43 PM CDT: countdown 2
-Fri 23 Jul 2021 09:38:44 PM CDT: countdown 1
-Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration complete
+Fri Nov 8 04:33:26 PM CST 2024: Doodle demonstration starting
+Fri Nov 8 04:33:26 PM CST 2024: countdown 5
+Fri Nov 8 04:33:27 PM CST 2024: countdown 4
+Fri Nov 8 04:33:28 PM CST 2024: countdown 3
+Fri Nov 8 04:33:29 PM CST 2024: countdown 2
+Fri Nov 8 04:33:30 PM CST 2024: countdown 1
+Fri Nov 8 04:33:31 PM CST 2024: Doodle demonstration complete
 </pre></div></div>
 </div>
 </section>
-<section id="2.-Run-from-Python-subprocess">
-<h2>2. Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code><a class="headerlink" href="#2.-Run-from-Python-subprocess" title="Link to this heading">#</a></h2>
+<section id="Run-from-Python-subprocess">
+<h2>Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code><a class="headerlink" href="#Run-from-Python-subprocess" title="Link to this heading">#</a></h2>
+<p>There are <a class="reference external" href="https://stackoverflow.com/questions/89228/how-do-i-execute-a-program-or-call-a-system-command">several possibilities</a> to run a shell command from Python. For various reasons, we choose <code class="docutils literal notranslate"><span class="pre">subprocess.Popen()</span></code> which allows us to start the command in one step, then wait for the process to complete in another step.</p>
+<p>For more details, see the <a class="reference external" href="https://docs.python.org/3/library/subprocess.html#subprocess.Popen">documentation</a>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">subprocess</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 </pre></div>
 </div>
 </div>
+<p>First step: Start the Linux command.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
@@ -486,13 +499,15 @@ Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration complete
 </pre></div>
 </div>
 </div>
+<p>Second step: Wait for the command to finish.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[5]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># wait for the command to finish and collect the outputs.</span>
 <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span> <span class="o">=</span> <span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">duration</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">duration</span><span class="si">=:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">s&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -501,9 +516,10 @@ Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration complete
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-time.time() - t0 = 5.049006938934326
+duration=5.0260s
 </pre></div></div>
 </div>
+<p>Show the results.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
@@ -518,17 +534,18 @@ time.time() - t0 = 5.049006938934326
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-stdout = b&#39;Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:38:45 PM CDT: countdown 5\nFri 23 Jul 2021 09:38:46 PM CDT: countdown 4\nFri 23 Jul 2021 09:38:47 PM CDT: countdown 3\nFri 23 Jul 2021 09:38:48 PM CDT: countdown 2\nFri 23 Jul 2021 09:38:49 PM CDT: countdown 1\nFri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete\n&#39;
+stdout = b&#39;Fri Nov 8 04:33:31 PM CST 2024: Doodle demonstration starting\nFri Nov 8 04:33:31 PM CST 2024: countdown 5\nFri Nov 8 04:33:32 PM CST 2024: countdown 4\nFri Nov 8 04:33:33 PM CST 2024: countdown 3\nFri Nov 8 04:33:34 PM CST 2024: countdown 2\nFri Nov 8 04:33:35 PM CST 2024: countdown 1\nFri Nov 8 04:33:36 PM CST 2024: Doodle demonstration complete\n&#39;
 stderr = b&#39;&#39;
 </pre></div></div>
 </div>
+<p>Convert from byte strings to plain <a class="reference external" href="https://en.wikipedia.org/wiki/UTF-8">utf8</a> text.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># byte strings, must decode to see as string</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stdout</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;stderr</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stdout</span><span class="se">\n</span><span class="si">{</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;stderr</span><span class="se">\n</span><span class="si">{</span><span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s1">&#39;utf8&#39;</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -538,69 +555,72 @@ stderr = b&#39;&#39;
 <div class="output_area docutils container">
 <div class="highlight"><pre>
 stdout
- Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting
-Fri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds
-Fri 23 Jul 2021 09:38:45 PM CDT: countdown 5
-Fri 23 Jul 2021 09:38:46 PM CDT: countdown 4
-Fri 23 Jul 2021 09:38:47 PM CDT: countdown 3
-Fri 23 Jul 2021 09:38:48 PM CDT: countdown 2
-Fri 23 Jul 2021 09:38:49 PM CDT: countdown 1
-Fri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete
+Fri Nov 8 04:33:31 PM CST 2024: Doodle demonstration starting
+Fri Nov 8 04:33:31 PM CST 2024: countdown 5
+Fri Nov 8 04:33:32 PM CST 2024: countdown 4
+Fri Nov 8 04:33:33 PM CST 2024: countdown 3
+Fri Nov 8 04:33:34 PM CST 2024: countdown 2
+Fri Nov 8 04:33:35 PM CST 2024: countdown 1
+Fri Nov 8 04:33:36 PM CST 2024: Doodle demonstration complete
 
 stderr
 
 </pre></div></div>
 </div>
 </section>
-<section id="3.-As-ophyd.Signal">
-<h2>3. As <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code><a class="headerlink" href="#3.-As-ophyd.Signal" title="Link to this heading">#</a></h2>
-<p>Since this is a demonstration, we show here why the <code class="docutils literal notranslate"><span class="pre">Signal</span></code> implementation just does not provide the right behavior.</p>
-<p>An <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> will be used to accept an input, launch the shell command in a <code class="docutils literal notranslate"><span class="pre">subprocess</span></code> from the <code class="docutils literal notranslate"><span class="pre">Signal.set()</span></code> method, and wait for the response using an <code class="docutils literal notranslate"><span class="pre">ophyd.Status</span></code> object.</p>
-<p>Since a redefinition of the <code class="docutils literal notranslate"><span class="pre">set()</span></code> method is needed, it is necessary to create a <em>subclass</em> of <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code>.</p>
+<section id="Custom-ophyd.SignalRO-subclass">
+<h2>Custom <code class="docutils literal notranslate"><span class="pre">ophyd.SignalRO</span></code> subclass<a class="headerlink" href="#Custom-ophyd.SignalRO-subclass" title="Link to this heading">#</a></h2>
+<p>Let’s show how to use a <em>read-only</em> Signal (<code class="docutils literal notranslate"><span class="pre">SignalRO</span></code>) to execute a pre-configured Linux shell command.</p>
+<p>We’ll execute the shell command in the Signal’s <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method using <code class="docutils literal notranslate"><span class="pre">subprocess.communicate()</span></code> in a thread. The <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method returns a <code class="docutils literal notranslate"><span class="pre">Status</span></code> object. Once the Linux command finishes, any text returned by the command will be stored in the Signal’s <code class="docutils literal notranslate"><span class="pre">._readback</span></code> attribute (to be returned by the <code class="docutils literal notranslate"><span class="pre">.get()</span></code> method). Any error output will be stored in the <code class="docutils literal notranslate"><span class="pre">.stderr</span></code> attribute.</p>
+<p>We redefine the <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method in a custom <em>subclass</em> of <code class="docutils literal notranslate"><span class="pre">ophyd.SignalRO</span></code>.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ophyd</span>
-<span class="kn">import</span> <span class="nn">threading</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">ophyd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">threading</span>
 
-<span class="k">class</span> <span class="nc">ProcessSignal</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">):</span>
 
-    <span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">_readback</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">stderr</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">ProcessSignal</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">SignalRO</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Signal that returns output from a shell command.&quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="nf">set</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">command</span><span class="p">,</span> <span class="o">*</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">settle_time</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="n">st</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;bash doodle.sh&quot;</span>
+    <span class="n">status</span> <span class="o">=</span> <span class="kc">None</span>
 
-        <span class="k">def</span> <span class="nf">wait_process</span><span class="p">():</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_readback</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="n">timeout</span><span class="o">=</span><span class="n">timeout</span><span class="p">)</span>
-            <span class="n">st</span><span class="o">.</span><span class="n">_finished</span><span class="p">()</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_readback</span> <span class="o">=</span> <span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">st</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
-            <span class="n">command</span><span class="p">,</span>
-            <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-            <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="c1"># TODO: settle_time</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">wait_process</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">st</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">status</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">Status</span><span class="p">()</span>
+
+        <span class="k">def</span><span class="w"> </span><span class="nf">action</span><span class="p">():</span>
+<span class="w">            </span><span class="sd">&quot;&quot;&quot;Calls command and waits for it to complete.&quot;&quot;&quot;</span>
+            <span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="p">,</span>
+                <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+                <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
+            <span class="p">)</span>
+
+            <span class="c1"># wait for the command to finish and collect the outputs.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">parse_response</span><span class="p">(</span><span class="o">*</span><span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">())</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">_finished</span><span class="p">(</span><span class="n">success</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">action</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">status</span>  <span class="c1"># returns right away</span>
 </pre></div>
 </div>
 </div>
-<p>Create the processor object and run (<code class="docutils literal notranslate"><span class="pre">.set()</span></code>) it. This will return immediately, before the shell script finishes. The return result is a <code class="docutils literal notranslate"><span class="pre">Status</span></code> object that <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> will use to wait for the <code class="docutils literal notranslate"><span class="pre">.set()</span></code> operation to finish.</p>
+<p>Create the <code class="docutils literal notranslate"><span class="pre">signal</span></code> object. Print its initial value.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">obj</span> <span class="o">=</span> <span class="n">ProcessSignal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;obj&quot;</span><span class="p">)</span>
-<span class="n">st</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="s2">&quot;bash ./doodle.sh&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">signal</span> <span class="o">=</span> <span class="n">ProcessSignal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;signal&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">signal</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -609,19 +629,19 @@ stderr
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-st = Status(obj=ProcessSignal(name=&#39;obj&#39;, value=0.0, timestamp=1627094331.38266), done=False, success=False)
-time.time()-t0 = 0.012959480285644531
+signal.get()=0.0
 </pre></div></div>
 </div>
-<p>The <em>timeout</em> was not configured. The shell script runs for 5 seconds so we use the status object to wait for it to complete.</p>
+<p>The default value of a new <code class="docutils literal notranslate"><span class="pre">SignalRO</span></code> object is <code class="docutils literal notranslate"><span class="pre">0.0</span></code>. That will change once <code class="docutils literal notranslate"><span class="pre">signal</span></code> has completed its first Linux command.</p>
+<p>Trigger the <code class="docutils literal notranslate"><span class="pre">signal</span></code> (run its <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> method). This returns immediately, before the shell command finishes. The return result is a <code class="docutils literal notranslate"><span class="pre">Status</span></code> object that <code class="docutils literal notranslate"><span class="pre">bluesky</span></code> will use to wait for the <code class="docutils literal notranslate"><span class="pre">.trigger()</span></code> operation to finish.</p>
+<p>Until the Linux command finishes, the value returned by <code class="docutils literal notranslate"><span class="pre">signal.get()</span></code> is still unchanged.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[10]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">_status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">st</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">_status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">status</span> <span class="o">=</span> <span class="n">signal</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">signal</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -631,145 +651,93 @@ time.time()-t0 = 0.012959480285644531
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-obj._status = Status(obj=ProcessSignal(name=&#39;obj&#39;, value=0.0, timestamp=1627094331.38266), done=False, success=False)
-time.time()-t0 = 0.09882283210754395
-obj._status = Status(obj=ProcessSignal(name=&#39;obj&#39;, value=b&#39;Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\n&#39;, timestamp=1627094331.38266), done=True, success=True)
-time.time()-t0 = 5.05002236366272
+signal.get()=0.0
+status = Status(obj=None, done=False, success=False)
+time.time()-t0 = 0.011680364608764648
 </pre></div></div>
 </div>
-<p>Show what is returned from the <code class="docutils literal notranslate"><span class="pre">read()</span></code> method.</p>
+<p>We use the <code class="docutils literal notranslate"><span class="pre">status</span></code> object to wait for the Linux command to complete. The shell script runs for 5 seconds, the status object is done in that time plus a smidgen.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">status</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">signal</span><span class="o">.</span><span class="n">get</span><span class="p">()</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">status</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[11]:
-</pre></div>
+<div class="prompt empty docutils container">
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-{&#39;obj&#39;: {&#39;value&#39;: b&#39;Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\n&#39;,
-  &#39;timestamp&#39;: 1627094331.38266}}
+status = Status(obj=None, done=False, success=False)
+time.time()-t0 = 0.018770456314086914
+signal.get()=&#39;Fri Nov 8 04:33:36 PM CST 2024: Doodle demonstration starting\nFri Nov 8 04:33:36 PM CST 2024: countdown 5\nFri Nov 8 04:33:37 PM CST 2024: countdown 4\nFri Nov 8 04:33:38 PM CST 2024: countdown 3\nFri Nov 8 04:33:39 PM CST 2024: countdown 2\nFri Nov 8 04:33:40 PM CST 2024: countdown 1\nFri Nov 8 04:33:41 PM CST 2024: Doodle demonstration complete\n&#39;
+status = Status(obj=None, done=True, success=True)
+time.time()-t0 = 5.043781518936157
 </pre></div></div>
 </div>
-<p>The problem is seen after we try the <code class="docutils literal notranslate"><span class="pre">.put()</span></code> method</p>
-<div class="nbinput docutils container">
+</section>
+<section id="Linux-system-uptime-Signal">
+<h2>Linux system uptime Signal<a class="headerlink" href="#Linux-system-uptime-Signal" title="Link to this heading">#</a></h2>
+<p>Make a signal that provides a numerical value, so we can plot it.</p>
+<p>The elapsed time since the Linux workstation was last started is updated in virtual file <code class="docutils literal notranslate"><span class="pre">/proc/uptime</span></code>. The file has two string values: <code class="docutils literal notranslate"><span class="pre">uptime</span></code> <code class="docutils literal notranslate"><span class="pre">idletime</span></code>. We want the first one.</p>
+<p>We can modify the <code class="docutils literal notranslate"><span class="pre">ProcessSignal</span></code> class and change the <code class="docutils literal notranslate"><span class="pre">command</span></code> and the <code class="docutils literal notranslate"><span class="pre">parse_response()</span></code> method.</p>
+<p>For more details, see the <a class="reference external" href="https://www.man7.org/linux/man-pages/man5/proc_uptime.5.html">documentation</a>.</p>
+<div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">st</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="s2">&quot;bash ./doodle.sh&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">UptimeSignal</span><span class="p">(</span><span class="n">ProcessSignal</span><span class="p">):</span>
+    <span class="n">command</span> <span class="o">=</span> <span class="s2">&quot;cat /proc/uptime&quot;</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">parse_response</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">stdout</span><span class="p">,</span> <span class="n">stderr</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_readback</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">stdout</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span> <span class="o">=</span> <span class="n">stderr</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">)</span>
+
+
+<span class="n">uptime</span> <span class="o">=</span> <span class="n">UptimeSignal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;uptime&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-st = None
-time.time()-t0 = 0.006703853607177734
-</pre></div></div>
-</div>
-<p>As before, wait for it to finish and the <code class="docutils literal notranslate"><span class="pre">value</span></code> is still the input command. Note the <code class="docutils literal notranslate"><span class="pre">put()</span></code> method does not return its status object so we have to use a sleep timer.</p>
+</section>
+<section id="Record-a-time-series-with-the-Bluesky-Run-Engine">
+<h2>Record a time series with the Bluesky Run Engine<a class="headerlink" href="#Record-a-time-series-with-the-Bluesky-Run-Engine" title="Link to this heading">#</a></h2>
+<p>When we record a time series of the system uptime, we expect a straight line plot. Try it. First, setup the minimum required bluesky objects.</p>
 <div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bluesky</span><span class="w"> </span><span class="kn">import</span> <span class="n">RunEngine</span><span class="p">,</span> <span class="n">plans</span> <span class="k">as</span> <span class="n">bp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bluesky.callbacks.best_effort</span><span class="w"> </span><span class="kn">import</span> <span class="n">BestEffortCallback</span>
+
+<span class="n">RE</span> <span class="o">=</span> <span class="n">RunEngine</span><span class="p">()</span>
+<span class="n">bec</span> <span class="o">=</span> <span class="n">BestEffortCallback</span><span class="p">()</span>
+<span class="n">RE</span><span class="o">.</span><span class="n">subscribe</span><span class="p">(</span><span class="n">bec</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
+</pre></div>
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-obj.read() = {&#39;obj&#39;: {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094336.6018999}}
-time.time()-t0 = 0.13547873497009277
-obj.read() = {&#39;obj&#39;: {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094336.6018999}}
-time.time()-t0 = 5.1512017250061035
+0
 </pre></div></div>
 </div>
-<p>The <code class="docutils literal notranslate"><span class="pre">ophyd.Signal.put()</span></code> method requests the Signal to go to the <code class="docutils literal notranslate"><span class="pre">value</span></code> and then waits for it to get there (that’s when it uses up its status object). The output of the shell script will <em>never</em> become the value of the command string. If we were to set <code class="docutils literal notranslate"><span class="pre">obj._readback</span></code> to be the output from the shell script, then the <code class="docutils literal notranslate"><span class="pre">put()</span></code> method would never return (it hangs because the readback value does not equal the input value).</p>
-<p>Signal is not the right interface.</p>
-</section>
-<section id="4.-As-ophyd.Device">
-<h2>4. As <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code><a class="headerlink" href="#4.-As-ophyd.Device" title="Link to this heading">#</a></h2>
-<div class="nbinput nblast docutils container">
+<p>Record the time series. Here, <code class="docutils literal notranslate"><span class="pre">uptime</span></code> is a detector. At each step, the <code class="docutils literal notranslate"><span class="pre">count</span></code> plan will trigger it, wait for the trigger to complete, then read the signal with its <code class="docutils literal notranslate"><span class="pre">.read()</span></code> method.</p>
+<div class="nbinput docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ophyd</span>
-<span class="kn">import</span> <span class="nn">subprocess</span>
-<span class="kn">import</span> <span class="nn">threading</span>
-<span class="kn">import</span> <span class="nn">time</span>
-
-<span class="k">class</span> <span class="nc">ProcessDevice</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Device</span><span class="p">):</span>
-    <span class="n">command</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">stdout</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">stderr</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">Component</span><span class="p">(</span><span class="n">ophyd</span><span class="o">.</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
-    <span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">def</span> <span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Start acquisition.&quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">get</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Must set </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">.command.  Cannot be `None`.&quot;</span><span class="p">)</span>
-
-        <span class="n">st</span> <span class="o">=</span> <span class="n">ophyd</span><span class="o">.</span><span class="n">status</span><span class="o">.</span><span class="n">DeviceStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-
-        <span class="k">def</span> <span class="nf">watch_process</span><span class="p">():</span>
-            <span class="n">out</span><span class="p">,</span> <span class="n">err</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">process</span><span class="o">.</span><span class="n">communicate</span><span class="p">()</span>
-            <span class="c1"># these are byte strings, decode them to get str</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">out</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="n">err</span><span class="o">.</span><span class="n">decode</span><span class="p">(</span><span class="s2">&quot;utf8&quot;</span><span class="p">))</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="kc">None</span>
-            <span class="n">st</span><span class="o">.</span><span class="n">_finished</span><span class="p">()</span>
-
-        <span class="bp">self</span><span class="o">.</span><span class="n">_status</span> <span class="o">=</span> <span class="n">st</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stderr</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">process</span> <span class="o">=</span> <span class="n">subprocess</span><span class="o">.</span><span class="n">Popen</span><span class="p">(</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">command</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span>
-            <span class="n">shell</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-            <span class="n">stdin</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-            <span class="n">stdout</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-            <span class="n">stderr</span><span class="o">=</span><span class="n">subprocess</span><span class="o">.</span><span class="n">PIPE</span><span class="p">,</span>
-        <span class="p">)</span>
-        <span class="n">threading</span><span class="o">.</span><span class="n">Thread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">watch_process</span><span class="p">,</span> <span class="n">daemon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-        <span class="k">return</span> <span class="n">st</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[15]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span> <span class="o">=</span> <span class="n">ProcessDevice</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;obj&quot;</span><span class="p">)</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">stage_sigs</span><span class="p">[</span><span class="s2">&quot;command&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;bash ./doodle.sh&quot;</span>
-</pre></div>
-</div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">stage</span><span class="p">()</span>
-<span class="n">st</span> <span class="o">=</span> <span class="n">obj</span><span class="o">.</span><span class="n">trigger</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">uptime</span><span class="p">],</span> <span class="n">num</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">delay</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -778,206 +746,49 @@ time.time()-t0 = 5.1512017250061035
 </div>
 <div class="output_area docutils container">
 <div class="highlight"><pre>
-time.time() - t0 = 0.011952638626098633s
-st = DeviceStatus(device=obj, done=False, success=False)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[16]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-OrderedDict([(&#39;obj_command&#39;,
-              {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094342.1131032}),
-             (&#39;obj_stdout&#39;, {&#39;value&#39;: None, &#39;timestamp&#39;: 1627094342.1135113}),
-             (&#39;obj_stderr&#39;, {&#39;value&#39;: None, &#39;timestamp&#39;: 1627094342.113497})])
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">st</span><span class="o">.</span><span class="n">wait</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">t0</span><span class="w"> </span><span class="si">= }</span><span class="s2">s&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">st</span><span class="w"> </span><span class="si">= }</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="n">obj</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-time.time() - t0 = 5.063066720962524s
-st = DeviceStatus(device=obj, done=True, success=True)
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-OrderedDict([(&#39;obj_command&#39;,
-              {&#39;value&#39;: &#39;bash ./doodle.sh&#39;, &#39;timestamp&#39;: 1627094342.1131032}),
-             (&#39;obj_stdout&#39;,
-              {&#39;value&#39;: &#39;Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting\nFri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds\nFri 23 Jul 2021 09:39:02 PM CDT: countdown 5\nFri 23 Jul 2021 09:39:03 PM CDT: countdown 4\nFri 23 Jul 2021 09:39:04 PM CDT: countdown 3\nFri 23 Jul 2021 09:39:05 PM CDT: countdown 2\nFri 23 Jul 2021 09:39:06 PM CDT: countdown 1\nFri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete\n&#39;,
-               &#39;timestamp&#39;: 1627094347.1758268}),
-             (&#39;obj_stderr&#39;, {&#39;value&#39;: &#39;&#39;, &#39;timestamp&#39;: 1627094347.1758533})])
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">obj</span><span class="o">.</span><span class="n">unstage</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[18]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-[ProcessDevice(prefix=&#39;&#39;, name=&#39;obj&#39;, read_attrs=[&#39;command&#39;, &#39;stdout&#39;, &#39;stderr&#39;], configuration_attrs=[])]
-</pre></div></div>
-</div>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[19]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="o">.</span><span class="n">stdout</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting
-Fri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds
-Fri 23 Jul 2021 09:39:02 PM CDT: countdown 5
-Fri 23 Jul 2021 09:39:03 PM CDT: countdown 4
-Fri 23 Jul 2021 09:39:04 PM CDT: countdown 3
-Fri 23 Jul 2021 09:39:05 PM CDT: countdown 2
-Fri 23 Jul 2021 09:39:06 PM CDT: countdown 1
-Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
+
+
+Transient Scan ID: 1     Time: 2024-11-08 16:33:42
+Persistent Unique Scan ID: &#39;2e05f6e6-bf6c-4fa0-815e-9da8f2bac8c5&#39;
+New stream: &#39;primary&#39;
++-----------+------------+------------+
+|   seq_num |       time |     uptime |
++-----------+------------+------------+
+|         1 | 16:33:42.4 | 630362.860 |
+|         2 | 16:33:43.3 | 630363.870 |
+|         3 | 16:33:44.3 | 630364.870 |
+|         4 | 16:33:45.4 | 630365.880 |
+|         5 | 16:33:46.3 | 630366.870 |
++-----------+------------+------------+
+generator count [&#39;2e05f6e6&#39;] (scan num: 1)
+
+
 
 </pre></div></div>
+</div>
+<div class="nboutput docutils container">
+<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[14]:
+</pre></div>
+</div>
+<div class="output_area docutils container">
+<div class="highlight"><pre>
+(&#39;2e05f6e6-bf6c-4fa0-815e-9da8f2bac8c5&#39;,)
+</pre></div></div>
+</div>
+<div class="nboutput nblast docutils container">
+<div class="prompt empty docutils container">
+</div>
+<div class="output_area docutils container">
+<img alt="../_images/howto__doodle_29_2.png" src="../_images/howto__doodle_29_2.png" />
+</div>
 </div>
 </section>
-<section id="5.-Run-with-bluesky">
-<h2>5. Run with bluesky<a class="headerlink" href="#5.-Run-with-bluesky" title="Link to this heading">#</a></h2>
-<p>This is a simplest implementation of the bluesky RunEngine with no custom callbacks, no table output, and no saving data anywhere. Capture the document stream from <code class="docutils literal notranslate"><span class="pre">RE</span></code> using a simple callback (<code class="docutils literal notranslate"><span class="pre">document_printer()</span></code>) that prints the content of each document.</p>
-<p>In this demo, we do not show how to implement a timeout and or interrupt execution of the shell script.</p>
-<div class="nbinput docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
-</pre></div>
-</div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">bluesky</span>
-<span class="kn">import</span> <span class="nn">bluesky.plans</span> <span class="k">as</span> <span class="nn">bp</span>
-<span class="kn">import</span> <span class="nn">pprint</span>
-
-<span class="k">def</span> <span class="nf">document_printer</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">doc</span><span class="p">):</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;***</span><span class="si">{</span><span class="n">key</span><span class="si">}</span><span class="s2">***&quot;</span><span class="p">)</span>
-    <span class="n">pprint</span><span class="o">.</span><span class="n">pprint</span><span class="p">(</span><span class="n">doc</span><span class="p">)</span>
-
-<span class="n">RE</span> <span class="o">=</span> <span class="n">bluesky</span><span class="o">.</span><span class="n">RunEngine</span><span class="p">({})</span>
-<span class="n">RE</span><span class="p">(</span><span class="n">bp</span><span class="o">.</span><span class="n">count</span><span class="p">([</span><span class="n">obj</span><span class="p">]),</span> <span class="n">document_printer</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="nboutput docutils container">
-<div class="prompt empty docutils container">
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-
-***start***
-{&#39;detectors&#39;: [&#39;obj&#39;],
- &#39;hints&#39;: {&#39;dimensions&#39;: [((&#39;time&#39;,), &#39;primary&#39;)]},
- &#39;num_intervals&#39;: 0,
- &#39;num_points&#39;: 1,
- &#39;plan_args&#39;: {&#39;detectors&#39;: [&#34;ProcessDevice(prefix=&#39;&#39;, name=&#39;obj&#39;, &#34;
-                             &#34;read_attrs=[&#39;command&#39;, &#39;stdout&#39;, &#39;stderr&#39;], &#34;
-                             &#39;configuration_attrs=[])&#39;],
-               &#39;num&#39;: 1},
- &#39;plan_name&#39;: &#39;count&#39;,
- &#39;plan_type&#39;: &#39;generator&#39;,
- &#39;scan_id&#39;: 1,
- &#39;time&#39;: 1627094347.901483,
- &#39;uid&#39;: &#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,
- &#39;versions&#39;: {&#39;bluesky&#39;: &#39;1.7.0&#39;, &#39;ophyd&#39;: &#39;1.6.1&#39;}}
-
-***descriptor***
-{&#39;configuration&#39;: {&#39;obj&#39;: {&#39;data&#39;: {},
-                           &#39;data_keys&#39;: OrderedDict(),
-                           &#39;timestamps&#39;: {}}},
- &#39;data_keys&#39;: {&#39;obj_command&#39;: {&#39;dtype&#39;: &#39;string&#39;,
-                               &#39;object_name&#39;: &#39;obj&#39;,
-                               &#39;shape&#39;: [],
-                               &#39;source&#39;: &#39;SIM:obj_command&#39;},
-               &#39;obj_stderr&#39;: {&#39;dtype&#39;: &#39;string&#39;,
-                              &#39;object_name&#39;: &#39;obj&#39;,
-                              &#39;shape&#39;: [],
-                              &#39;source&#39;: &#39;SIM:obj_stderr&#39;},
-               &#39;obj_stdout&#39;: {&#39;dtype&#39;: &#39;string&#39;,
-                              &#39;object_name&#39;: &#39;obj&#39;,
-                              &#39;shape&#39;: [],
-                              &#39;source&#39;: &#39;SIM:obj_stdout&#39;}},
- &#39;hints&#39;: {&#39;obj&#39;: {&#39;fields&#39;: []}},
- &#39;name&#39;: &#39;primary&#39;,
- &#39;object_keys&#39;: {&#39;obj&#39;: [&#39;obj_command&#39;, &#39;obj_stdout&#39;, &#39;obj_stderr&#39;]},
- &#39;run_start&#39;: &#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,
- &#39;time&#39;: 1627094353.0929906,
- &#39;uid&#39;: &#39;a2bfc0cb-1447-4be6-92e9-0b3b157e3c30&#39;}
-
-***event***
-{&#39;data&#39;: {&#39;obj_command&#39;: &#39;bash ./doodle.sh&#39;,
-          &#39;obj_stderr&#39;: &#39;&#39;,
-          &#39;obj_stdout&#39;: &#39;Fri 23 Jul 2021 09:39:08 PM CDT: Doodle demonstration &#39;
-                        &#39;starting\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:08 PM CDT: sleep 5 seconds\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:08 PM CDT: countdown 5\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:09 PM CDT: countdown 4\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:10 PM CDT: countdown 3\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:11 PM CDT: countdown 2\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:12 PM CDT: countdown 1\n&#39;
-                        &#39;Fri 23 Jul 2021 09:39:13 PM CDT: Doodle demonstration &#39;
-                        &#39;complete\n&#39;},
- &#39;descriptor&#39;: &#39;a2bfc0cb-1447-4be6-92e9-0b3b157e3c30&#39;,
- &#39;filled&#39;: {},
- &#39;seq_num&#39;: 1,
- &#39;time&#39;: 1627094353.3092813,
- &#39;timestamps&#39;: {&#39;obj_command&#39;: 1627094347.901314,
-                &#39;obj_stderr&#39;: 1627094353.0920315,
-                &#39;obj_stdout&#39;: 1627094353.0919352},
- &#39;uid&#39;: &#39;2d5d29de-8c80-46c1-8085-c1eb1c609b07&#39;}
-
-***stop***
-{&#39;exit_status&#39;: &#39;success&#39;,
- &#39;num_events&#39;: {&#39;primary&#39;: 1},
- &#39;reason&#39;: &#39;&#39;,
- &#39;run_start&#39;: &#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,
- &#39;time&#39;: 1627094353.429601,
- &#39;uid&#39;: &#39;9aa6d3c6-8bfc-4ded-8b9b-28a2f2455ffb&#39;}
-</pre></div></div>
-</div>
-<div class="nboutput nblast docutils container">
-<div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[20]:
-</pre></div>
-</div>
-<div class="output_area docutils container">
-<div class="highlight"><pre>
-(&#39;b7fca79d-87de-446b-aec9-a14369899306&#39;,)
-</pre></div></div>
-</div>
-<p>Looks like we got the output from the bash shell script.</p>
+<section id="Summary">
+<h2>Summary<a class="headerlink" href="#Summary" title="Link to this heading">#</a></h2>
+<p><code class="docutils literal notranslate"><span class="pre">SignalRO</span></code> is the right class to use for a shell command that returns a single value.</p>
+<p>One might think the <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code> class could be used where the command would be put and the returned value would be as above. The problem is the design of the <code class="docutils literal notranslate"><span class="pre">Signal.put()</span></code> method.</p>
+<p>The <code class="docutils literal notranslate"><span class="pre">ophyd.Signal.put()</span></code> method requests the Signal to go to the <code class="docutils literal notranslate"><span class="pre">value</span></code> and then waits for it to get there (that’s when it uses up its status object). The output of the shell command will <em>never</em> become the value of the command string. If we were to set <code class="docutils literal notranslate"><span class="pre">obj._readback</span></code> to be the output from the shell command, then the <code class="docutils literal notranslate"><span class="pre">put()</span></code> method would never return (it hangs because the readback value does not equal the input value).</p>
+<p><code class="docutils literal notranslate"><span class="pre">SignalRO</span></code>, not <code class="docutils literal notranslate"><span class="pre">Signal</span></code>, is the right interface.</p>
 </section>
 </section>
 
@@ -992,12 +803,12 @@ Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_custom_plan.html"
+       href="_data_management.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Custom bluesky plan</p>
+        <p class="prev-next-title">Setup APS Data Management</p>
       </div>
     </a>
     <a class="right-next"
@@ -1028,22 +839,23 @@ Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#1.-Example-shell-command">1. Example shell command</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#2.-Run-from-Python-subprocess">2. Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#3.-As-ophyd.Signal">3. As <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#4.-As-ophyd.Device">4. As <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code></a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#5.-Run-with-bluesky">5. Run with bluesky</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Example-shell-command">Example shell command</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Run-from-Python-subprocess">Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code></a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Custom-ophyd.SignalRO-subclass">Custom <code class="docutils literal notranslate"><span class="pre">ophyd.SignalRO</span></code> subclass</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Linux-system-uptime-Signal">Linux system uptime Signal</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Record-a-time-series-with-the-Bluesky-Run-Engine">Record a time series with the Bluesky Run Engine</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#Summary">Summary</a></li>
 </ul>
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/howto/_doodle.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/howto/_doodle.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1058,8 +870,8 @@ Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1092,7 +904,8 @@ Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

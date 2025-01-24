@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,19 +27,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -166,7 +166,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -335,9 +337,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -390,7 +397,7 @@
 <div class="line">Each <em>busy</em> record initates a sequence of EPICS processing steps as defined by other EPICS records. The first <em>busy</em> record is called <code class="docutils literal notranslate"><span class="pre">taxi</span></code> and is responsible for preparing the hardware to fly. Once <em>taxi</em> is complete, the second <em>busy</em> record, called <code class="docutils literal notranslate"><span class="pre">fly</span></code>, performs the actual fly scan.</div>
 </div>
 <p>The next figure shows a control screen (from an APS beam line). The screen has buttons to initiate taxi &amp; fly sequences. Controls for some other scan parameters are also shown.</p>
-<p><img alt="taxi/fly control screen" src="../_images/1ide-taxi-fly-screen.png" /></p>
+<img alt="taxi/fly control screen" src="../_images/1ide-taxi-fly-screen.png" />
 <p>In a third (optional) phase, data is collected from hardware and written somewhere (in this example, to the databroker catalog).</p>
 <div class="line-block">
 <div class="line">This document shows how to operate such a scan with two examples.</div>
@@ -457,15 +464,15 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">logging</span>
-<span class="kn">import</span> <span class="nn">time</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">logging</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
 
-<span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">BusyRecord</span>
-<span class="kn">from</span> <span class="nn">apstools.plans</span> <span class="kn">import</span> <span class="n">run_blocking_function</span>
-<span class="kn">import</span> <span class="nn">bluesky</span>
-<span class="kn">import</span> <span class="nn">bluesky.plan_stubs</span> <span class="k">as</span> <span class="nn">bps</span>
-<span class="kn">import</span> <span class="nn">databroker</span>
-<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">apstools.synApps</span><span class="w"> </span><span class="kn">import</span> <span class="n">BusyRecord</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">apstools.plans</span><span class="w"> </span><span class="kn">import</span> <span class="n">run_blocking_function</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bluesky</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">bluesky.plan_stubs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">bps</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">databroker</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
 
 <span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">()</span>
 <span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
@@ -519,12 +526,12 @@ the busy record.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">DeviceStatus</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">DeviceStatus</span>
 
-<span class="k">class</span> <span class="nc">MyBusyRecord</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyBusyRecord</span><span class="p">(</span><span class="n">BusyRecord</span><span class="p">):</span>
     <span class="n">timeout</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">trigger</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Start this busy record and return status to monitor completion.</span>
 
@@ -533,7 +540,7 @@ the busy record.</p>
         <span class="n">status</span> <span class="o">=</span> <span class="n">DeviceStatus</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">get</span><span class="p">())</span>
         <span class="n">executing_values</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">state</span><span class="o">.</span><span class="n">enum_strs</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
-        <span class="k">def</span> <span class="nf">watch_state</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">watch_state</span><span class="p">(</span><span class="n">old_value</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">old_value</span> <span class="ow">in</span> <span class="n">executing_values</span> <span class="ow">and</span> <span class="n">value</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">executing_values</span><span class="p">:</span>
                 <span class="c1"># When busy finishes, state changes from 1 to 0.</span>
                 <span class="n">status</span><span class="o">.</span><span class="n">set_finished</span><span class="p">()</span>
@@ -548,11 +555,11 @@ the busy record.</p>
         <span class="c1"># The caller can use it to tell when the action is complete.</span>
         <span class="k">return</span> <span class="n">status</span>
 
-<span class="k">class</span> <span class="nc">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TaxiFlyScanDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
     <span class="n">taxi</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">MyBusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy1&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
     <span class="n">fly</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">MyBusyRecord</span><span class="p">,</span> <span class="s2">&quot;mybusy2&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;config&quot;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">taxi_fly_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">taxi_fly_plan</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">taxi</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">yield from</span> <span class="n">bps</span><span class="o">.</span><span class="n">trigger</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">fly</span><span class="p">,</span> <span class="n">wait</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -565,7 +572,7 @@ the busy record.</p>
 <p>The <em>busy</em> record has a very limited task. It signals the procedure should start and reports if the procedure is either <code class="docutils literal notranslate"><span class="pre">Busy</span></code> or <code class="docutils literal notranslate"><span class="pre">Done</span></code>.</p>
 <p><em>The details of the procedure should be of no concern to the busy record.</em></p>
 <details><p>The EPICS <em>busy</em> record is quite simple. It is a boolean that is used to indicate if a procedure is still active (busy). The caller is responsible for setting it to <code class="docutils literal notranslate"><span class="pre">Busy</span></code> (value of 1) to start the procedure. The procedure (and <strong>not</strong> the caller) is responsible for setting it back to <code class="docutils literal notranslate"><span class="pre">Done</span></code> (value of 0) when the procedure is finished.</p>
-<p><img alt="example of busy record" src="../_images/bf1-busy-record.png" /></p>
+<img alt="example of busy record" src="../_images/bf1-busy-record.png" />
 <p>A <em>userCalc</em> (the <em>swait</em> record) starts the <em>sseq</em> record when the <em>busy</em> record changes to <code class="docutils literal notranslate"><span class="pre">Busy</span></code>.</p>
 </details></section>
 <section id="Procedure----Delay-a-short-time">
@@ -596,14 +603,14 @@ the busy record.</p>
 <section id="SseqRecord">
 <h3>SseqRecord<a class="headerlink" href="#SseqRecord" title="Link to this heading">#</a></h3>
 <p>The sseq record runs the procedure, then sets busy to <code class="docutils literal notranslate"><span class="pre">Done</span></code>.</p>
-<details><p><img alt="sseq record example" src="../_images/bf1-sseq-record.png" /></p>
+<details><img alt="sseq record example" src="../_images/bf1-sseq-record.png" />
 <p>Setting <code class="docutils literal notranslate"><span class="pre">.SCAN=&quot;Passive&quot;</span></code> allows this record to process on command (from the swait record, below). Only the last step, step 10, is needed for this simple <em>delay</em> procedure. Other procedures may use steps 1-9 for additional tasks. For more than 10 steps, use an additional sseq record(s), called from a step in this sseq record.</p>
 <p>Write the delay time to <code class="docutils literal notranslate"><span class="pre">.DLYA</span></code>, the busy record value to write (<code class="docutils literal notranslate"><span class="pre">.STRA=&quot;Done&quot;</span></code>), and the busy record PV to be written (<code class="docutils literal notranslate"><span class="pre">LNKA</span></code>). Note the use of the <code class="docutils literal notranslate"><span class="pre">CA</span></code> modifier to the PV name, which is required for the <code class="docutils literal notranslate"><span class="pre">.WAITA=&quot;Wait&quot;</span></code> setting.</p>
 </details></section>
 <section id="SwaitRecord">
 <h3>SwaitRecord<a class="headerlink" href="#SwaitRecord" title="Link to this heading">#</a></h3>
 <p>The swait record acts like a trigger to start the sseq record. It senses when busy changes value.</p>
-<details><p><img alt="swait record example" src="../_images/bf1-swait-record.png" /></p>
+<details><img alt="swait record example" src="../_images/bf1-swait-record.png" />
 <p>For both phases, the swait record watches its busy record (the PV name in channel A). It reacts (via its <code class="docutils literal notranslate"><span class="pre">.SCAN=&quot;I/O</span> <span class="pre">Intr&quot;</span></code> setting) when the busy record changes value. When busy is 1 (via <code class="docutils literal notranslate"><span class="pre">.CALC=&quot;A&gt;0&quot;</span></code> and setting <code class="docutils literal notranslate"><span class="pre">.OOPT=&quot;When</span> <span class="pre">Non-zero&quot;</span></code>), it tells sseq to process (by sending a 1 to the <code class="docutils literal notranslate"><span class="pre">.PROC</span></code> field of the sseq record configured in the <code class="docutils literal notranslate"><span class="pre">.OUTN</span></code> field).</p>
 </details></section>
 <section id="Connect-with-EPICS">
@@ -613,8 +620,8 @@ the busy record.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[3]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">SseqRecord</span><span class="p">,</span> <span class="n">SwaitRecord</span>
-<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsSignal</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">apstools.synApps</span><span class="w"> </span><span class="kn">import</span> <span class="n">SseqRecord</span><span class="p">,</span> <span class="n">SwaitRecord</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">EpicsSignal</span>
 
 <span class="n">IOC</span> <span class="o">=</span> <span class="s2">&quot;gp:&quot;</span>
 
@@ -649,7 +656,7 @@ the busy record.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[4]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_taxi_fly_simple_delay</span><span class="p">(</span><span class="n">taxi_delay_s</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prep_taxi_fly_simple_delay</span><span class="p">(</span><span class="n">taxi_delay_s</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Delay before returning from both taxi &amp; fly phases.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;taxi time: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">taxi_delay_s</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;fly time: </span><span class="si">%.2f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">fly_delay_s</span><span class="p">)</span>
@@ -754,17 +761,17 @@ the busy record.</p>
 <p>We’ll need to connect with the EPICS scaler and motor PVs. Also we want to record other PVs in our step scan. And we want to record timestamps at each point to we can post the scan results as bluesky data.</p>
 <section id="scaler-record">
 <h3>scaler record<a class="headerlink" href="#scaler-record" title="Link to this heading">#</a></h3>
-<p><img alt="scaler" src="../_images/bf1-scaler-record.png" /></p>
+<img alt="scaler" src="../_images/bf1-scaler-record.png" />
 </section>
 <section id="motor-record">
 <h3>motor record<a class="headerlink" href="#motor-record" title="Link to this heading">#</a></h3>
-<p><img alt="motor" src="../_images/bf1-motor-record.png" /></p>
+<img alt="motor" src="../_images/bf1-motor-record.png" />
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[7]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">EpicsMotor</span>
-<span class="kn">from</span> <span class="nn">ophyd.scaler</span> <span class="kn">import</span> <span class="n">ScalerCH</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">EpicsMotor</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ophyd.scaler</span><span class="w"> </span><span class="kn">import</span> <span class="n">ScalerCH</span>
 
 <span class="n">m1</span> <span class="o">=</span> <span class="n">EpicsMotor</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">m1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;m1&quot;</span><span class="p">)</span>
 <span class="n">scaler1</span> <span class="o">=</span> <span class="n">ScalerCH</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">scaler1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scaler1&quot;</span><span class="p">)</span>
@@ -786,12 +793,12 @@ the busy record.</p>
 </section>
 <section id="sscan-record">
 <h3>sscan record<a class="headerlink" href="#sscan-record" title="Link to this heading">#</a></h3>
-<p><img alt="sscan scaler and motor" src="../_images/bf1-sscan-record.png" /></p>
+<img alt="sscan scaler and motor" src="../_images/bf1-sscan-record.png" />
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[8]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">SscanRecord</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">apstools.synApps</span><span class="w"> </span><span class="kn">import</span> <span class="n">SscanRecord</span>
 
 <span class="n">scan1</span> <span class="o">=</span> <span class="n">SscanRecord</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">IOC</span><span class="si">}</span><span class="s2">scan1&quot;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s2">&quot;scan1&quot;</span><span class="p">)</span>
 <span class="n">scan1</span><span class="o">.</span><span class="n">wait_for_connection</span><span class="p">()</span>
@@ -848,7 +855,7 @@ the busy record.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[9]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">prep_taxi_fly_step_scan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">prep_taxi_fly_step_scan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Setup EPICS for step scan directed by taxi &amp; fly.&quot;&quot;&quot;</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;start: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
     <span class="n">logger</span><span class="o">.</span><span class="n">debug</span><span class="p">(</span><span class="s2">&quot;finish: </span><span class="si">%g</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">finish</span><span class="p">)</span>
@@ -1006,7 +1013,7 @@ the busy record.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[12]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">get_sscan_data</span><span class="p">(</span><span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">get_sscan_data</span><span class="p">(</span><span class="n">t0</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
     <span class="c1"># t0: timestamp when sscan started</span>
     <span class="n">npts</span> <span class="o">=</span> <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">get</span><span class="p">()</span>
     <span class="n">data</span> <span class="o">=</span> <span class="p">{</span>
@@ -1044,7 +1051,7 @@ the busy record.</p>
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[13]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">taxi_fly_sscan_plan</span><span class="p">(</span><span class="n">start</span><span class="p">,</span> <span class="n">finish</span><span class="p">,</span> <span class="n">npts</span><span class="p">,</span> <span class="n">ct</span><span class="p">,</span> <span class="n">md</span><span class="o">=</span><span class="p">{}):</span>
     <span class="n">md</span><span class="p">[</span><span class="s2">&quot;plan_name&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;taxi_fly_sscan_plan&quot;</span>
     <span class="n">flyscan</span><span class="o">.</span><span class="n">fly</span><span class="o">.</span><span class="n">timeout</span><span class="o">.</span><span class="n">put</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>  <span class="c1"># might take longer than usual</span>
 
@@ -1055,7 +1062,7 @@ the busy record.</p>
     <span class="n">timestamps</span> <span class="o">=</span> <span class="n">Signal</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;timestamps&quot;</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="p">[])</span>  <span class="c1"># collect by observing &#39;scan1&#39;</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">callback</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">callback</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="c1"># print(f&quot;{len(timestamps.get())=} {kwargs=}&quot;)</span>
         <span class="k">if</span> <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;value&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">timestamps</span><span class="o">.</span><span class="n">put</span><span class="p">([])</span>
@@ -1073,7 +1080,7 @@ the busy record.</p>
     <span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="s2">&quot;Fly time: </span><span class="si">%.3f</span><span class="s2"> s&quot;</span><span class="p">,</span> <span class="n">t1</span><span class="p">)</span>
     <span class="n">scan1</span><span class="o">.</span><span class="n">current_point</span><span class="o">.</span><span class="n">clear_sub</span><span class="p">(</span><span class="n">callback</span><span class="p">)</span>
 
-    <span class="k">class</span> <span class="nc">SscanDataArrays</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">SscanDataArrays</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
         <span class="n">__dt__</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
         <span class="n">m1</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
         <span class="n">I0</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
@@ -1586,7 +1593,7 @@ Data variables:
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="k">matplotlib</span> inline
-<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
 
 <span class="n">x</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="s2">&quot;scan1_m1&quot;</span><span class="p">]</span>
@@ -1700,13 +1707,13 @@ Data variables:
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/example/_busy_fly_scan.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/example/_busy_fly_scan.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1721,8 +1728,8 @@ Data variables:
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1755,7 +1762,8 @@ Data variables:
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

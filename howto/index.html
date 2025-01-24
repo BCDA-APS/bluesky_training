@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -165,7 +165,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -332,6 +334,7 @@
 <li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="_data_management.html">Setup APS Data Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_epics_proc_field.html">Trigger a Device with the EPICS record .PROC field</a></li>
@@ -350,9 +353,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -479,12 +487,19 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.
 <li class="toctree-l2"><a class="reference internal" href="_custom_plan.html#Challenges">Challenges</a></li>
 </ul>
 </li>
+<li class="toctree-l1"><a class="reference internal" href="_data_management.html">Setup APS Data Management</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="_data_management.html#about-aps-data-management-dm">About APS Data Management (DM)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_data_management.html#dm-is-configured-by-environment-variables">DM is configured by Environment Variables</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_data_management.html#submit-a-dm-workflow-job-from-a-bluesky-session">Submit a DM workflow job from a Bluesky session</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="_doodle.html#1.-Example-shell-command">1. Example shell command</a></li>
-<li class="toctree-l2"><a class="reference internal" href="_doodle.html#2.-Run-from-Python-subprocess">2. Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="_doodle.html#3.-As-ophyd.Signal">3. As <code class="docutils literal notranslate"><span class="pre">ophyd.Signal</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="_doodle.html#4.-As-ophyd.Device">4. As <code class="docutils literal notranslate"><span class="pre">ophyd.Device</span></code></a></li>
-<li class="toctree-l2"><a class="reference internal" href="_doodle.html#5.-Run-with-bluesky">5. Run with bluesky</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_doodle.html#Example-shell-command">Example shell command</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_doodle.html#Run-from-Python-subprocess">Run from Python <code class="docutils literal notranslate"><span class="pre">subprocess</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="_doodle.html#Custom-ophyd.SignalRO-subclass">Custom <code class="docutils literal notranslate"><span class="pre">ophyd.SignalRO</span></code> subclass</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_doodle.html#Linux-system-uptime-Signal">Linux system uptime Signal</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_doodle.html#Record-a-time-series-with-the-Bluesky-Run-Engine">Record a time series with the Bluesky Run Engine</a></li>
+<li class="toctree-l2"><a class="reference internal" href="_doodle.html#Summary">Summary</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a><ul>
@@ -602,13 +617,13 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.
 
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/howto/index.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/howto/index.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -623,8 +638,8 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -657,7 +672,8 @@ solve a real-world problem. How-to guides are <em>goal-oriented</em>.
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

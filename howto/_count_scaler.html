@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,19 +27,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -166,7 +166,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -333,6 +335,7 @@
 <li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="_data_management.html">Setup APS Data Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_epics_proc_field.html">Trigger a Device with the EPICS record .PROC field</a></li>
@@ -351,9 +354,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -421,9 +429,9 @@
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[1]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
-<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">instrument.collection</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 </pre></div>
 </div>
 </div>
@@ -514,7 +522,7 @@ I Thu-13:07:16 - #### Startup is complete. ####
 <h2>A closer look at the EPICS scaler<a class="headerlink" href="#A-closer-look-at-the-EPICS-scaler" title="Link to this heading">#</a></h2>
 <p>A scaler is a device that counts digital pulses from a pulse detector such as a scintillation counter or from photodiodes or ionization chamber with pulse chain electronics. Scalers have many channels, some of which might have no associated detector. Our scaler (<code class="docutils literal notranslate"><span class="pre">scaler1</span></code>) is a simulated device that records a random number of pulses in each channel. We are only interested in the channels that have names provided by users in the GUI screens. In this control screen for our scaler, only a few of
 the channels are named:</p>
-<p><img alt="``scaler`` GUI" src="../_images/scaler.png" /></p>
+<img alt="``scaler`` GUI" src="../_images/scaler.png" />
 <p>Let’s configure <code class="docutils literal notranslate"><span class="pre">scaler1</span></code> to report only the <code class="docutils literal notranslate"><span class="pre">scint</span></code> and <code class="docutils literal notranslate"><span class="pre">I0</span></code> channels (plus the count time channel which will <em>always</em> be included). Keep in mind that the argument to this function is a Python list, so the channel names must be enclosed with <code class="docutils literal notranslate"><span class="pre">[]</span></code>. The function does not return a result. If something <em>is</em> printed, there is an error to be fixed.</p>
 <div class="nbinput nblast docutils container">
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[2]:
@@ -681,8 +689,8 @@ Scaler configured to count for 1.5s
 <p>The report from <code class="docutils literal notranslate"><span class="pre">.read()</span></code> includes both values and timestamps (in seconds since the Python <a class="reference external" href="https://docs.python.org/3/library/time.html">time</a> epoch, UTC). The structure is a Python dictionary. This is the low-level method used to collect readings from any ophyd device. We had to <code class="docutils literal notranslate"><span class="pre">print()</span></code> this since the return result from a command within a sequence is not returned at the end of the sequence, just the return result of the <em>final</em> command in the sequence.</p>
 <p>See that the scaler counted for 2.1 seconds (a small bug in the scaler simulator it seems, always adds .1 to the count time!). But before staging, the scaler was configured for 1.0 seconds, and after unstaging, the scaler returned to that value.</p>
 <p><strong>That’s how to control the counting time for a scaler.</strong> (Area detectors use different terms. More on that later.)</p>
-<details><p>about scaler1_time</p>
-<p>Of note is the key <code class="docutils literal notranslate"><span class="pre">scaler1_time</span></code> which is the name of the ophyd symbol <code class="docutils literal notranslate"><span class="pre">scaler1.time</span></code> as returned by <code class="docutils literal notranslate"><span class="pre">scaler1.time.name</span></code>:</p>
+<details><summary><p>about scaler1_time</p>
+</summary><p>Of note is the key <code class="docutils literal notranslate"><span class="pre">scaler1_time</span></code> which is the name of the ophyd symbol <code class="docutils literal notranslate"><span class="pre">scaler1.time</span></code> as returned by <code class="docutils literal notranslate"><span class="pre">scaler1.time.name</span></code>:</p>
 <div class="highlight-none notranslate"><div class="highlight"><pre><span></span>In [21]: scaler1.time.name
     Out [21]: &#39;scaler1_time&#39;
 </pre></div>
@@ -1247,13 +1255,13 @@ CA.Client.Exception...............................................
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/howto/_count_scaler.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/howto/_count_scaler.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1268,8 +1276,8 @@ CA.Client.Exception...............................................
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1302,7 +1310,8 @@ CA.Client.Exception...............................................
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

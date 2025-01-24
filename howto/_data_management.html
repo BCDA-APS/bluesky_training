@@ -8,7 +8,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>First steps with bluesky-queueserver &#8212; APS Bluesky Training</title>
+    <title>Setup APS Data Management &#8212; APS Bluesky Training</title>
   
   
   
@@ -45,11 +45,11 @@
     <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="../_static/design-tabs.js?v=f930bc37"></script>
     <script crossorigin="anonymous" integrity="sha256-Ae2Vz/4ePdIu6ZyI/5ZGsYnb+m0JlOmKPjt6XZ9JJkA=" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.4/require.min.js"></script>
-    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_bluesky_queueserver';</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'howto/_data_management';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Count the scaler" href="_count_scaler.html" />
-    <link rel="prev" title="Minimal: Scan scaler vs motor" href="_basic_motor_scaler_scan.html" />
+    <link rel="next" title="Linux Command &amp; Wait for Finish" href="_doodle.html" />
+    <link rel="prev" title="Custom bluesky plan" href="_custom_plan.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   <meta name="docsearch:version" content="" />
@@ -327,12 +327,12 @@
 <li class="toctree-l1"><a class="reference internal" href="_after_measurement.html">Accessing data later, after the measurement</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_aps_info.html">APS Accelerator Information for Beamlines</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_basic_motor_scaler_scan.html">Minimal: Scan scaler <em>vs</em> motor</a></li>
-<li class="toctree-l1 current active"><a class="current reference internal" href="#">First steps with bluesky-queueserver</a></li>
+<li class="toctree-l1"><a class="reference internal" href="_bluesky_queueserver.html">First steps with bluesky-queueserver</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_count_scaler.html">Count the scaler</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
-<li class="toctree-l1"><a class="reference internal" href="_data_management.html">Setup APS Data Management</a></li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">Setup APS Data Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_dynamic_limits_2motor.html">Dynamic Limits for Two Motors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_epics_proc_field.html">Trigger a Device with the EPICS record .PROC field</a></li>
@@ -387,7 +387,7 @@
     
     <li class="breadcrumb-item"><a href="index.html" class="nav-link">How-To Guides</a></li>
     
-    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">First steps with bluesky-queueserver</span></li>
+    <li class="breadcrumb-item active" aria-current="page"><span class="ellipsis">Setup APS Data Management</span></li>
   </ul>
 </nav>
 </div>
@@ -404,266 +404,136 @@
 <div id="searchbox"></div>
                 <article class="bd-article">
                   
-  <section id="first-steps-with-bluesky-queueserver">
-<h1>First steps with bluesky-queueserver<a class="headerlink" href="#first-steps-with-bluesky-queueserver" title="Link to this heading">#</a></h1>
-<p>Starting with the bluesky-queueserver web
-<a class="reference external" href="https://blueskyproject.io/bluesky-queueserver/cli_tools.html">documentation</a>,
-make a quick demonstration of what is possible <em>out of the box</em> from the linux
-command line.</p>
-<details>
-<summary>Note</summary>
-<p>These <em>stream-of-consciousness</em> notes document first steps with
-<em>bluesky-queueserver</em>.  Until these find their way into proper documentation,
-you might first review
-<a class="reference external" href="https://github.com/BCDA-APS/bdp_controls/tree/main/qserver/README.md">documentation</a>
-from the [APS beamline data pipelines.</p>
-</details>
-<section id="one-time-setup">
-<h2>One-time setup<a class="headerlink" href="#one-time-setup" title="Link to this heading">#</a></h2>
-<p>Install <code class="docutils literal notranslate"><span class="pre">redis</span></code> package in OS (if not already installed):</p>
-<pre>
-$ <b>sudo apt install redis</b>
-</pre>
-<p>Create conda environment</p>
-<pre>
-$ <b>conda create -y -n qserver -c conda-forge bluesky-queueserver</b>
-</pre>
+  <section id="setup-aps-data-management">
+<h1>Setup APS Data Management<a class="headerlink" href="#setup-aps-data-management" title="Link to this heading">#</a></h1>
+<p>This document describes how to setup and submit a workflow job using the <a class="reference external" href="https://git.aps.anl.gov/DM/dm-docs/-/wikis/home">APS
+Data Management</a> (DM) Python
+<a class="reference external" href="https://git.aps.anl.gov/DM/dm-docs/-/wikis/DM/Beamline-Services/API-Reference">API</a>
+(tools) in a Bluesky session.</p>
+<p>This document provides guidance for workstations at the APS, where DM tools and
+services are available.</p>
+<p>For more information, see the DM API reference for more information about how to
+use the DM API and tools. See the <code class="docutils literal notranslate"><span class="pre">apstools</span></code>
+<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_utils.html#apstools.utils.aps_data_management">documentation</a>,
+for a list of the support code available.</p>
+<section id="about-aps-data-management-dm">
+<h2>About APS Data Management (DM)<a class="headerlink" href="#about-aps-data-management-dm" title="Link to this heading">#</a></h2>
+<p>As stated in the DM <em>Getting Started</em>
+<a class="reference external" href="https://git.aps.anl.gov/DM/dm-docs/-/wikis/DM/HowTos/Getting-Started">guide</a>:</p>
+<blockquote>
+<div><p>The APS Data Management System is a system for gathering together experimental
+data, metadata about the experiment and providing users access to the data
+based on a users role.</p>
+</div></blockquote>
 </section>
-<section id="start-a-monitor-on-a-qserver">
-<h2>Start a monitor on a qserver<a class="headerlink" href="#start-a-monitor-on-a-qserver" title="Link to this heading">#</a></h2>
-<p>In a separate terminal:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>qserver
-start-re-manager<span class="w"> </span>--zmq-publish-console<span class="w"> </span>ON<span class="w"> </span>--databroker-config<span class="w"> </span>training
+<section id="dm-is-configured-by-environment-variables">
+<h2>DM is configured by Environment Variables<a class="headerlink" href="#dm-is-configured-by-environment-variables" title="Link to this heading">#</a></h2>
+<p>The DM <em>Getting Started</em>
+<a class="reference external" href="https://git.aps.anl.gov/DM/dm-docs/-/wikis/DM/HowTos/Getting-Started">guide</a>
+explains how to activate a pre-configured conda environment to use the DM tools
+directly from the command line.  The setup procedure uses this shell command:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>/home/DM_INSTALL_DIR/etc/dm.setup.sh
 </pre></div>
 </div>
-<p>Here, the <code class="docutils literal notranslate"><span class="pre">training</span></code> catalog is subscribed to the RunEngine, in addition to a 0MQ stream (on port tcp://*:60615).</p>
+<p>where <code class="docutils literal notranslate"><span class="pre">DM_INSTALL_DIR</span></code> is the deployment directory for this beamline.</p>
 <details>
-<pre>
-$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
-<pre>
-$ <b>start-re-manager --zmq-publish-console ON --databroker-config training</b>
-INFO:bluesky_queueserver.manager.manager:Starting ZMQ server at 'tcp://*:60615'
-INFO:bluesky_queueserver.manager.manager:ZMQ control channels: encryption disabled
-INFO:bluesky_queueserver.manager.manager:Starting RE Manager process
-INFO:bluesky_queueserver.manager.manager:Loading the lists of allowed plans and devices ...
-INFO:bluesky_queueserver.manager.manager:Starting ZeroMQ server ...
-INFO:bluesky_queueserver.manager.manager:ZeroMQ server is waiting on tcp://*:60615
-</pre>
+<summary>NOTE</summary>
+<p>The exact path to this file will vary between beamline accounts.  Contact the DM
+support team for details about your beamline.</p>
 </details>
+<p>The DM conda environment does not have the packages installed to run a Bluesky
+session.</p>
+<section id="configure-dm-in-bluesky-sessions">
+<h3>Configure DM in Bluesky sessions<a class="headerlink" href="#configure-dm-in-bluesky-sessions" title="Link to this heading">#</a></h3>
+<p>The Bluesky conda environment has all the packages for both Bluesky and DM
+already installed (for APS installations).  One of those packages,
+<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_utils.html#aps-data-management">apstools</a>,
+provides support for using DM in a Bluesky session.</p>
+<details>
+<p>The <code class="docutils literal notranslate"><span class="pre">dm_source_environ()</span></code>
+<a class="reference external" href="https://bcda-aps.github.io/apstools/latest/api/_utils.html#apstools.utils.aps_data_management.dm_source_environ">function</a>
+is used internally to install the environment variables.  It expects a global
+variable <code class="docutils literal notranslate"><span class="pre">DM_SETUP_FILE</span></code> to be defined in the module.</p>
+<p><strong>Do not call <code class="docutils literal notranslate"><span class="pre">dm_source_environ()</span></code> directly.</strong></p>
+<p>Use <code class="docutils literal notranslate"><span class="pre">dm_setup(&quot;/home/DM_INSTALL_DIR/etc/dm.setup.sh&quot;)</span></code>.</p>
+</details>
+<p>Use these Python commands to install DM’s environment variables:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">apstools.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">dm_setup</span>
+
+<span class="n">dm_setup</span><span class="p">(</span><span class="s2">&quot;/home/DM_INSTALL_DIR/etc/dm.setup.sh&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>CAUTION</strong>:  <code class="docutils literal notranslate"><span class="pre">dm_setup()</span></code> must be run <strong>before</strong> any other DM tools are used.
+Do this each time a Bluesky session is started (where the DM API is to be used).</p>
+<p>In typical Bluesky installations at APS, this file name is defined in the
+<code class="docutils literal notranslate"><span class="pre">iconfig.yml</span></code> file, such as for <a class="reference external" href="https://github.com/aps-8id-dys/bluesky/blob/6bbcfeceab7a6695d3be81ffd56954d362bf25ea/src/instrument/configs/iconfig.yml#L29">XPCS at station
+8-ID-I</a>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="c1"># APS Data Management</span>
+<span class="c1"># Use bash shell, deactivate all conda environments, source this file:</span>
+<span class="nt">DM_SETUP_FILE</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;/home/dm/etc/dm.setup.sh&quot;</span>
+</pre></div>
+</div>
 </section>
-<section id="run-plans-on-the-qserver">
-<h2>Run plans on the qserver<a class="headerlink" href="#run-plans-on-the-qserver" title="Link to this heading">#</a></h2>
-<p>In a separate terminal …</p>
-<p>Get a queue started:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>qserver
-qserver<span class="w"> </span>queue<span class="w"> </span>start
-qserver<span class="w"> </span>environment<span class="w"> </span>open
+<section id="example-at-aps-xpcs-station-8-id-i">
+<h3>Example at APS XPCS station 8-ID-I<a class="headerlink" href="#example-at-aps-xpcs-station-8-id-i" title="Link to this heading">#</a></h3>
+<p>Show how many DM workflow jobs are processing now:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">In</span> <span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="kn">from</span><span class="w"> </span><span class="nn">apstools.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">dm_setup</span>
+   <span class="o">...</span><span class="p">:</span> 
+   <span class="o">...</span><span class="p">:</span> <span class="n">dm_setup</span><span class="p">(</span><span class="s2">&quot;/home/dm/etc/dm.setup.sh&quot;</span><span class="p">)</span>
+   <span class="o">...</span><span class="p">:</span> 
+<span class="n">Out</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span> <span class="s1">&#39;8idi&#39;</span>
+
+<span class="n">In</span> <span class="p">[</span><span class="mi">2</span><span class="p">]:</span> <span class="kn">from</span><span class="w"> </span><span class="nn">dm.proc_web_service.api.procApiFactory</span><span class="w"> </span><span class="kn">import</span> <span class="n">ProcApiFactory</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">api</span> <span class="o">=</span> <span class="n">ProcApiFactory</span><span class="o">.</span><span class="n">getWorkflowProcApi</span><span class="p">()</span>
+   <span class="o">...</span><span class="p">:</span> <span class="n">jobs</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">listProcessingJobs</span><span class="p">()</span>
+   <span class="o">...</span><span class="p">:</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="n">jobs</span><span class="p">:</span>
+   <span class="o">...</span><span class="p">:</span>     <span class="k">if</span> <span class="n">j</span><span class="p">[</span><span class="s2">&quot;status&quot;</span><span class="p">]</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">(</span><span class="s2">&quot;done&quot;</span><span class="p">,</span> <span class="s2">&quot;failed&quot;</span><span class="p">):</span>
+   <span class="o">...</span><span class="p">:</span>         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">=!r}</span><span class="s2">  </span><span class="si">{</span><span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;submissionTimestamp&#39;</span><span class="p">)</span><span class="si">=!r}</span><span class="s2">  </span><span class="si">{</span><span class="n">j</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="si">=!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="n">Out</span><span class="p">[</span><span class="mi">2</span><span class="p">]:</span>  <span class="c1"># lots of jobs, only showing a few of them</span>
+<span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;6754e679-cedb-482b-bb4d-b58137f84001&#39;</span>  <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;submissionTimestamp&#39;</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2024/11/08 04:48:31 CST&#39;</span>  <span class="n">j</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;pending&#39;</span>
+<span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;ad7328ae-35ba-4418-a9fd-b3dcc873348f&#39;</span>  <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;submissionTimestamp&#39;</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2024/11/08 04:48:34 CST&#39;</span>  <span class="n">j</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;pending&#39;</span>
+<span class="o">...</span>
+<span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;72b6d1b7-b6e0-4eb8-87d5-5f52792a043b&#39;</span>  <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;submissionTimestamp&#39;</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2024/11/08 08:31:22 CST&#39;</span>  <span class="n">j</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;running&#39;</span>
+<span class="n">j</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;19252b7d-8961-4994-8977-86929811a988&#39;</span>  <span class="n">j</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;submissionTimestamp&#39;</span><span class="p">)</span><span class="o">=</span><span class="s1">&#39;2024/11/08 08:31:28 CST&#39;</span>  <span class="n">j</span><span class="p">[</span><span class="s1">&#39;status&#39;</span><span class="p">]</span><span class="o">=</span><span class="s1">&#39;running&#39;</span>
+
 </pre></div>
 </div>
-<section id="available-devices-and-plans">
-<h3>Available devices and plans<a class="headerlink" href="#available-devices-and-plans" title="Link to this heading">#</a></h3>
-<p>Without any local configuration, the <code class="docutils literal notranslate"><span class="pre">bluesky-queueserver</span></code> starts with devices from  the ophyd simulators and the standard bluesky plans.</p>
-<p>These commands show (in JSON) what is available:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>allowed<span class="w"> </span>devices
-qserver<span class="w"> </span>allowed<span class="w"> </span>plans
-</pre></div>
-</div>
-</section>
-<section id="count">
-<h3>Count<a class="headerlink" href="#count" title="Link to this heading">#</a></h3>
-<p>Add a plan to count from two detectors (from the ophyd simulators):</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>add<span class="w"> </span>plan<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;count&quot;, &quot;args&quot;: [[&quot;det1&quot;, &quot;det2&quot;]], &quot;kwargs&quot;: {&quot;num&quot;: 10, &quot;delay&quot;: 1, &quot;md&quot;: {&quot;purpose&quot;: &quot;test bluesky-queueserver&quot;}}}&#39;</span>
-</pre></div>
-</div>
-<details>
-<p>The monitor shows this response:</p>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INFO:bluesky_queueserver.manager.manager:Adding new item to the queue ...
-INFO:bluesky_queueserver.manager.manager:Item added: success=True item_type=&#39;plan&#39; name=&#39;count&#39; item_uid=&#39;33487d7a-d1c8-4639-9a77-eef753a79c8b&#39; qsize=1.
-</pre></div>
-</div>
-</details>
-<p>Check the queue of plans to be run:</p>
-<pre>
-$ <b>qserver queue get</b>
-Arguments: ['queue', 'get']
-13:02:44 - MESSAGE: {'items': [{'args': [['det1', 'det2']],
-            'item_type': 'plan',
-            'item_uid': '33487d7a-d1c8-4639-9a77-eef753a79c8b',
-            'kwargs': {'delay': 1,
-                       'md': {'purpose': 'test bluesky-queueserver'},
-                       'num': 10},
-            'name': 'count',
-            'user': 'qserver-cli',
-            'user_group': 'primary'}],
- 'msg': '',
- 'plan_queue_uid': '40dc1e75-11b8-4331-8a03-24d5dff9f459',
- 'running_item': {},
- 'success': True}
-</pre>
-<p>Start running the queue:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>start
-</pre></div>
-</div>
-<p>The monitor window shows this response:</p>
-<details>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INFO:bluesky_queueserver.manager.manager:Starting queue processing ...
-INFO:bluesky_queueserver.manager.manager:Processing the next queue item: 1 plans are left in the queue.
-INFO:bluesky_queueserver.manager.manager:Starting the plan:
-{&#39;args&#39;: [[&#39;det1&#39;, &#39;det2&#39;]],
- &#39;item_uid&#39;: &#39;33487d7a-d1c8-4639-9a77-eef753a79c8b&#39;,
- &#39;kwargs&#39;: {&#39;delay&#39;: 1,
-            &#39;md&#39;: {&#39;purpose&#39;: &#39;test bluesky-queueserver&#39;},
-            &#39;num&#39;: 10},
- &#39;meta&#39;: {},
- &#39;name&#39;: &#39;count&#39;,
- &#39;user&#39;: &#39;qserver-cli&#39;,
- &#39;user_group&#39;: &#39;primary&#39;}.
-INFO:bluesky_queueserver.manager.worker:Starting execution of a plan ...
-INFO:bluesky_queueserver.manager.worker:Starting a plan &#39;count&#39;.
-INFO:bluesky_queueserver.manager.plan_monitoring:New run was open: &#39;dc48f1b8-6f98-4da4-922e-4daff406849a&#39;
-
-
-Transient Scan ID: 1     Time: 2021-10-21 13:05:16
-Persistent Unique Scan ID: &#39;dc48f1b8-6f98-4da4-922e-4daff406849a&#39;
-New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+
-|   seq_num |       time |       det1 |       det2 |
-+-----------+------------+------------+------------+
-|         1 | 13:05:16.8 |      5.000 |      1.765 |
-|         2 | 13:05:17.8 |      5.000 |      1.765 |
-|         3 | 13:05:18.8 |      5.000 |      1.765 |
-|         4 | 13:05:19.8 |      5.000 |      1.765 |
-|         5 | 13:05:20.8 |      5.000 |      1.765 |
-|         6 | 13:05:21.8 |      5.000 |      1.765 |
-|         7 | 13:05:22.8 |      5.000 |      1.765 |
-|         8 | 13:05:23.8 |      5.000 |      1.765 |
-|         9 | 13:05:24.8 |      5.000 |      1.765 |
-|        10 | 13:05:25.8 |      5.000 |      1.765 |
-Run was closed: &#39;dc48f1b8-6f98-4da4-922e-4daff406849a&#39;
-+-----------+------------+------------+------------+
-generator count [&#39;dc48f1b8&#39;] (scan num: 1)
-
-
-
-INFO:bluesky_queueserver.manager.manager:No items are left in the queue.
-INFO:bluesky_queueserver.manager.manager:Queue is empty.
-</pre></div>
-</div>
-</details>
-<p>Check the queue now:</p>
-<pre>
-$ <b>qserver queue get</b>
-Arguments: ['queue', 'get']
-13:06:11 - MESSAGE: {'items': [],
- 'msg': '',
- 'plan_queue_uid': '747545db-a402-4568-9282-74eeb2f1ebf1',
- 'running_item': {},
- 'success': True}
-</pre>
-<p>In a new terminal window, check if we can see that run in our databroker:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>qserver
-ipython
-</pre></div>
-</div>
-<details>
-<pre>
-In [1]: <b>import databroker</b>
-   ...: <b>cat = databroker.catalog["training"]</b>
-   ...: <b>run = cat[-1]</b>
-   ...: <b>run</b>
-   ...:
-Out[1]:
-BlueskyRun
-  uid='dc48f1b8-6f98-4da4-922e-4daff406849a'
-  exit_status='success'
-  2021-10-21 13:05:16.819 -- 2021-10-21 13:05:26.847
-  Streams:
-    * primary
-
-
-In [2]: <b>run.primary.read()</b>
-Out[2]:
-<xarray.Dataset>
-Dimensions:  (time: 10)
-Coordinates:
-  * time     (time) float64 1.635e+09 1.635e+09 ... 1.635e+09 1.635e+09
-Data variables:
-    det1     (time) float64 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0 5.0
-    det2     (time) float64 1.765 1.765 1.765 1.765 ... 1.765 1.765 1.765 1.765
-</pre>
-</details>
-<p>That’s our run!</p>
-</section>
-<section id="scan">
-<h3>Scan<a class="headerlink" href="#scan" title="Link to this heading">#</a></h3>
-<p>Pick the <code class="docutils literal notranslate"><span class="pre">noisy_det</span></code> and <code class="docutils literal notranslate"><span class="pre">motor1</span></code> from the ophyd simulators:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>add<span class="w"> </span>plan<span class="w"> </span><span class="s1">&#39;{&quot;name&quot;: &quot;scan&quot;, &quot;args&quot;: [[&quot;noisy_det&quot;], &quot;motor1&quot;, 0, 1, 5 ], &quot;kwargs&quot;: {&quot;md&quot;: {&quot;purpose&quot;: &quot;test bluesky-queueserver&quot;}}}&#39;</span>
-</pre></div>
-</div>
-<p>Start the queue again:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>queue<span class="w"> </span>start
-</pre></div>
-</div>
-<p>Response (in monitor window):</p>
-<details>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INFO:bluesky_queueserver.manager.manager:Starting queue processing ...
-INFO:bluesky_queueserver.manager.manager:Processing the next queue item: 1 plans are left in the queue.
-INFO:bluesky_queueserver.manager.manager:Starting the plan:
-{&#39;args&#39;: [[&#39;noisy_det&#39;], &#39;motor1&#39;, 0, 1, 5],
- &#39;item_uid&#39;: &#39;9c10c3f2-2214-4a70-b3e8-8be4170e68be&#39;,
- &#39;kwargs&#39;: {&#39;md&#39;: {&#39;purpose&#39;: &#39;test bluesky-queueserver&#39;}},
- &#39;meta&#39;: {},
- &#39;name&#39;: &#39;scan&#39;,
- &#39;user&#39;: &#39;qserver-cli&#39;,
- &#39;user_group&#39;: &#39;primary&#39;}.
-INFO:bluesky_queueserver.manager.worker:Starting execution of a plan ...
-INFO:bluesky_queueserver.manager.worker:Starting a plan &#39;scan&#39;.
-
-
-Transient Scan ID: 2     Time: 2021-10-21 13:17:04
-Persistent Unique Scan ID: &#39;0e076f4d-c7c3-4a59-bc7f-8fcc636e5d4b&#39;
-INFO:bluesky_queueserver.manager.plan_monitoring:New run was open: &#39;0e076f4d-c7c3-4a59-bc7f-8fcc636e5d4b&#39;
-New stream: &#39;primary&#39;
-+-----------+------------+------------+------------+
-|   seq_num |       time |     motor1 |  noisy_det |
-+-----------+------------+------------+------------+
-|         1 | 13:17:04.2 |      0.000 |      1.028 |
-|         2 | 13:17:04.2 |      0.250 |      0.932 |
-Run was closed: &#39;0e076f4d-c7c3-4a59-bc7f-8fcc636e5d4b&#39;
-|         3 | 13:17:04.2 |      0.500 |      0.993 |
-|         4 | 13:17:04.2 |      0.750 |      0.953 |
-|         5 | 13:17:04.2 |      1.000 |      0.975 |
-+-----------+------------+------------+------------+
-generator scan [&#39;0e076f4d&#39;] (scan num: 2)
-
-
-
-INFO:bluesky_queueserver.manager.manager:No items are left in the queue.
-INFO:bluesky_queueserver.manager.manager:Queue is empty.
-</pre></div>
-</div>
-</details>
 </section>
 </section>
-<section id="shutdown-the-queue-server">
-<h2>Shutdown the queue server<a class="headerlink" href="#shutdown-the-queue-server" title="Link to this heading">#</a></h2>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>qserver<span class="w"> </span>manager<span class="w"> </span>stop<span class="w"> </span>safe<span class="w"> </span>on
+<section id="submit-a-dm-workflow-job-from-a-bluesky-session">
+<h2>Submit a DM workflow job from a Bluesky session<a class="headerlink" href="#submit-a-dm-workflow-job-from-a-bluesky-session" title="Link to this heading">#</a></h2>
+<p>Here, we demonstrate one way to start a DM workflow from a Bluesky session.</p>
+<p>To submit a workflow job from a Bluesky session, first call <code class="docutils literal notranslate"><span class="pre">dm_setup()</span></code> as described above.  Then,
+get the “DM Processing API” as follows:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">apstools.utils</span><span class="w"> </span><span class="kn">import</span> <span class="n">dm_api_proc</span>
+
+<span class="n">api</span> <span class="o">=</span> <span class="n">dm_api_proc</span><span class="p">()</span>
 </pre></div>
 </div>
-<p>Note in the monitor window tells the monitor to shutdown:</p>
-<details>
-<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>INFO:bluesky_queueserver.manager.worker:Closing RE Worker environment ...
-INFO:bluesky_queueserver.manager.worker:Environment is waiting to be closed ...
-INFO:bluesky_queueserver.manager.manager:Waiting for exit confirmation from RE worker ...
-INFO:bluesky_queueserver.manager.worker:Run Engine environment was closed successfully
-INFO:bluesky_queueserver.manager.manager:Wait for RE Worker process to close (join)
-INFO:bluesky_queueserver.manager.start_manager:Joining RE Worker ...
-INFO:bluesky_queueserver.manager.manager:RE Manager was stopped by ZMQ command.
-INFO:bluesky_queueserver.manager.start_manager:RE Watchdog is stopped
-$
+<p>Choose the workflow by name:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">workflowOwner</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">username</span>
+<span class="n">workflowName</span> <span class="o">=</span> <span class="s2">&quot;xpcs8-02-gladier-boost&quot;</span>
 </pre></div>
 </div>
-</details>
+<p>Define the workflow arguments in a Python dictionary (these arguments are
+specific to the XPCS workflow named above):</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">argsDict</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s2">&quot;filePath&quot;</span><span class="p">:</span> <span class="s2">&quot;H001_005_test_Feb_7-01000.h5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;qmap&quot;</span><span class="p">:</span> <span class="s2">&quot;eiger4M_qmap_d36_s360.h5&quot;</span><span class="p">,</span>
+    <span class="s2">&quot;experimentName&quot;</span><span class="p">:</span> <span class="s2">&quot;zhang202402&quot;</span><span class="p">,</span>
+    <span class="c1"># any other keyword arguments required by the workflow come next ...</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>Start the processing job:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="n">job</span> <span class="o">=</span> <span class="n">api</span><span class="o">.</span><span class="n">startProcessingJob</span><span class="p">(</span><span class="n">workflowOwner</span><span class="p">,</span> <span class="n">workflowName</span><span class="p">,</span> <span class="n">argsDict</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Show the processing job ID:</p>
+<div class="highlight-py notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">job</span><span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">]</span><span class="si">=!r}</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="s1">&#39;c322e87c-ec43-4077-b074-eeef8522889c&#39;</span>
+</pre></div>
+</div>
 </section>
 </section>
 
@@ -678,20 +548,20 @@ $
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="_basic_motor_scaler_scan.html"
+       href="_custom_plan.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Minimal: Scan scaler <em>vs</em> motor</p>
+        <p class="prev-next-title">Custom bluesky plan</p>
       </div>
     </a>
     <a class="right-next"
-       href="_count_scaler.html"
+       href="_doodle.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Count the scaler</p>
+        <p class="prev-next-title">Linux Command &amp; Wait for Finish</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>
@@ -714,15 +584,13 @@ $
   </div>
   <nav class="bd-toc-nav page-toc" aria-labelledby="pst-page-navigation-heading-2">
     <ul class="visible nav section-nav flex-column">
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#one-time-setup">One-time setup</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#start-a-monitor-on-a-qserver">Start a monitor on a qserver</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#run-plans-on-the-qserver">Run plans on the qserver</a><ul class="nav section-nav flex-column">
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#available-devices-and-plans">Available devices and plans</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#count">Count</a></li>
-<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#scan">Scan</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#about-aps-data-management-dm">About APS Data Management (DM)</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#dm-is-configured-by-environment-variables">DM is configured by Environment Variables</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-dm-in-bluesky-sessions">Configure DM in Bluesky sessions</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#example-at-aps-xpcs-station-8-id-i">Example at APS XPCS station 8-ID-I</a></li>
 </ul>
 </li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#shutdown-the-queue-server">Shutdown the queue server</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#submit-a-dm-workflow-job-from-a-bluesky-session">Submit a DM workflow job from a Bluesky session</a></li>
 </ul>
   </nav></div>
 
@@ -730,7 +598,7 @@ $
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="../_sources/howto/_bluesky_queueserver.md.txt"
+      <li><a href="../_sources/howto/_data_management.md.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div></div>

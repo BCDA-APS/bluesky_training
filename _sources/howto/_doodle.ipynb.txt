@@ -7,26 +7,25 @@
    "source": [
     "# Linux Command & Wait for Finish\n",
     "\n",
-    "Demonstrate how to launch a (Linux bash) shell command from Python and wait for it to finish.\n",
+    "Demonstrate how to launch a (Linux bash) shell command from Python and wait for\n",
+    "it to finish.  This involves setting a command and receiving two different\n",
+    "values (_stdout_ and _stderr_).  A custom subclass of `ophyd.SignalRO` executes\n",
+    "the shell command and processes the results.  We add a `parse_response(stdout,\n",
+    "stderr)` method so any subclass can easily process the string output result of\n",
+    "the Linux command.\n",
     "\n",
-    "This involves setting a command and receiving two different values (_stdout_ and _stderr_).  An `ophyd.Signal` is for setting and reading one value.  The `ophyd.Device` can provide the multiple values needed.\n",
+    "To simulate a Linux command to be run, a bash shell script (`doodle.sh`) was\n",
+    "created that runs a countdown (default: 5 seconds) printing to stdout (the\n",
+    "terminal console).\n",
     "\n",
-    "This involves setting a command and receiving two different values\n",
-    "(_stdout_ and _stderr_).  An `ophyd.Signal` is for setting and reading\n",
-    "only one value.  First we show how a `Signal`-based implementation would\n",
-    "behave.  Then, we show how the `ophyd.Device` can provide the multiple\n",
-    "values needed.\n",
-    "\n",
-    "To simulate a Linux command to be run, a bash shell script (`doodle.sh`)\n",
-    "was created that runs a 5 second countdown printing to stdout (the\n",
-    "terminal console).\n"
+    "Later, we replace the `doodle.sh` with other common shell commands.\n"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## 1. Example shell command\n",
+    "## Example shell command\n",
     "The example shell command is a bash script that executes a 5 second countdown.  The script is shown first:"
    ]
   },
@@ -39,20 +38,24 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "#!/bin/bash\n",
-      "\n",
-      "echo $(date): Doodle demonstration starting\n",
-      "echo $(date): sleep 5 seconds\n",
-      "for i in 5 4 3 2 1; do\n",
-      "    echo $(date): countdown ${i}\n",
-      "    sleep 1\n",
-      "done\n",
-      "echo $(date): Doodle demonstration complete\n"
+      "\u001b[0;31m#!/bin/bash\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0mecho\u001b[0m\u001b[0;31m \u001b[0m\u001b[0;31m$\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdate\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mDoodle\u001b[0m \u001b[0mdemonstration\u001b[0m \u001b[0mstarting\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;31m# optional argument is number of seconds to sleep, default is 5\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0mcounter\u001b[0m\u001b[0;34m=\u001b[0m\u001b[0;31m$\u001b[0m\u001b[0;34m{\u001b[0m\u001b[0;36m1\u001b[0m\u001b[0;34m:\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;36m5\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0muntil\u001b[0m \u001b[0;34m[\u001b[0m\u001b[0;31m \u001b[0m\u001b[0;31m$\u001b[0m\u001b[0mcounter\u001b[0m \u001b[0;34m-\u001b[0m\u001b[0meq\u001b[0m \u001b[0;36m0\u001b[0m \u001b[0;34m]\u001b[0m\u001b[0;34m;\u001b[0m \u001b[0mdo\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m    \u001b[0mecho\u001b[0m\u001b[0;31m \u001b[0m\u001b[0;31m$\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdate\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mcountdown\u001b[0m\u001b[0;31m \u001b[0m\u001b[0;31m$\u001b[0m\u001b[0;34m{\u001b[0m\u001b[0mcounter\u001b[0m\u001b[0;34m}\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m    \u001b[0msleep\u001b[0m \u001b[0;36m1\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m    \u001b[0;34m(\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mcounter\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;34m-\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0mdone\u001b[0m\u001b[0;34m\u001b[0m\n",
+      "\u001b[0;34m\u001b[0m\u001b[0mecho\u001b[0m\u001b[0;31m \u001b[0m\u001b[0;31m$\u001b[0m\u001b[0;34m(\u001b[0m\u001b[0mdate\u001b[0m\u001b[0;34m)\u001b[0m\u001b[0;34m:\u001b[0m \u001b[0mDoodle\u001b[0m \u001b[0mdemonstration\u001b[0m \u001b[0mcomplete\u001b[0m\u001b[0;34m\u001b[0m\u001b[0;34m\u001b[0m\u001b[0m\n"
      ]
     }
    ],
    "source": [
-    "!cat ./doodle.sh"
+    "%pycat ./doodle.sh"
    ]
   },
   {
@@ -71,14 +74,13 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "Fri 23 Jul 2021 09:38:40 PM CDT: Doodle demonstration starting\n",
-      "Fri 23 Jul 2021 09:38:40 PM CDT: sleep 5 seconds\n",
-      "Fri 23 Jul 2021 09:38:40 PM CDT: countdown 5\n",
-      "Fri 23 Jul 2021 09:38:41 PM CDT: countdown 4\n",
-      "Fri 23 Jul 2021 09:38:42 PM CDT: countdown 3\n",
-      "Fri 23 Jul 2021 09:38:43 PM CDT: countdown 2\n",
-      "Fri 23 Jul 2021 09:38:44 PM CDT: countdown 1\n",
-      "Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration complete\n"
+      "Fri Nov 8 04:33:26 PM CST 2024: Doodle demonstration starting\n",
+      "Fri Nov 8 04:33:26 PM CST 2024: countdown 5\n",
+      "Fri Nov 8 04:33:27 PM CST 2024: countdown 4\n",
+      "Fri Nov 8 04:33:28 PM CST 2024: countdown 3\n",
+      "Fri Nov 8 04:33:29 PM CST 2024: countdown 2\n",
+      "Fri Nov 8 04:33:30 PM CST 2024: countdown 1\n",
+      "Fri Nov 8 04:33:31 PM CST 2024: Doodle demonstration complete\n"
      ]
     }
    ],
@@ -90,7 +92,21 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## 2. Run from Python `subprocess`"
+    "## Run from Python `subprocess`"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "There are [several\n",
+    "possibilities](https://stackoverflow.com/questions/89228/how-do-i-execute-a-program-or-call-a-system-command)\n",
+    "to run a shell command from Python.  For various reasons, we choose\n",
+    "`subprocess.Popen()` which allows us to start the command in one step, then wait\n",
+    "for the process to complete in another step.\n",
+    "\n",
+    "For more details, see the\n",
+    "[documentation](https://docs.python.org/3/library/subprocess.html#subprocess.Popen)."
    ]
   },
   {
@@ -101,6 +117,13 @@
    "source": [
     "import subprocess\n",
     "import time"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "First step: Start the Linux command."
    ]
   },
   {
@@ -123,6 +146,13 @@
    ]
   },
   {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Second step: Wait for the command to finish."
+   ]
+  },
+  {
    "cell_type": "code",
    "execution_count": 5,
    "metadata": {},
@@ -131,14 +161,22 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "time.time() - t0 = 5.049006938934326\n"
+      "duration=5.0260s\n"
      ]
     }
    ],
    "source": [
     "# wait for the command to finish and collect the outputs.\n",
     "stdout, stderr = process.communicate()\n",
-    "print(f\"{time.time() - t0 = }\")"
+    "duration = time.time() - t0\n",
+    "print(f\"{duration=:.4f}s\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Show the results."
    ]
   },
   {
@@ -150,7 +188,7 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "stdout = b'Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:38:45 PM CDT: countdown 5\\nFri 23 Jul 2021 09:38:46 PM CDT: countdown 4\\nFri 23 Jul 2021 09:38:47 PM CDT: countdown 3\\nFri 23 Jul 2021 09:38:48 PM CDT: countdown 2\\nFri 23 Jul 2021 09:38:49 PM CDT: countdown 1\\nFri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete\\n'\n",
+      "stdout = b'Fri Nov 8 04:33:31 PM CST 2024: Doodle demonstration starting\\nFri Nov 8 04:33:31 PM CST 2024: countdown 5\\nFri Nov 8 04:33:32 PM CST 2024: countdown 4\\nFri Nov 8 04:33:33 PM CST 2024: countdown 3\\nFri Nov 8 04:33:34 PM CST 2024: countdown 2\\nFri Nov 8 04:33:35 PM CST 2024: countdown 1\\nFri Nov 8 04:33:36 PM CST 2024: Doodle demonstration complete\\n'\n",
       "stderr = b''\n"
      ]
     }
@@ -158,6 +196,14 @@
    "source": [
     "print(f\"{stdout = }\")\n",
     "print(f\"{stderr = }\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "Convert from byte strings to plain [utf8](https://en.wikipedia.org/wiki/UTF-8)\n",
+    "text."
    ]
   },
   {
@@ -170,37 +216,43 @@
      "output_type": "stream",
      "text": [
       "stdout\n",
-      " Fri 23 Jul 2021 09:38:45 PM CDT: Doodle demonstration starting\n",
-      "Fri 23 Jul 2021 09:38:45 PM CDT: sleep 5 seconds\n",
-      "Fri 23 Jul 2021 09:38:45 PM CDT: countdown 5\n",
-      "Fri 23 Jul 2021 09:38:46 PM CDT: countdown 4\n",
-      "Fri 23 Jul 2021 09:38:47 PM CDT: countdown 3\n",
-      "Fri 23 Jul 2021 09:38:48 PM CDT: countdown 2\n",
-      "Fri 23 Jul 2021 09:38:49 PM CDT: countdown 1\n",
-      "Fri 23 Jul 2021 09:38:50 PM CDT: Doodle demonstration complete\n",
+      "Fri Nov 8 04:33:31 PM CST 2024: Doodle demonstration starting\n",
+      "Fri Nov 8 04:33:31 PM CST 2024: countdown 5\n",
+      "Fri Nov 8 04:33:32 PM CST 2024: countdown 4\n",
+      "Fri Nov 8 04:33:33 PM CST 2024: countdown 3\n",
+      "Fri Nov 8 04:33:34 PM CST 2024: countdown 2\n",
+      "Fri Nov 8 04:33:35 PM CST 2024: countdown 1\n",
+      "Fri Nov 8 04:33:36 PM CST 2024: Doodle demonstration complete\n",
       "\n",
       "stderr\n",
-      " \n"
+      "\n"
      ]
     }
    ],
    "source": [
     "# byte strings, must decode to see as string\n",
-    "print(\"stdout\\n\", stdout.decode('utf8'))\n",
-    "print(\"stderr\\n\", stderr.decode('utf8'))"
+    "print(f\"stdout\\n{stdout.decode('utf8')}\")\n",
+    "print(f\"stderr\\n{stderr.decode('utf8')}\")"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## 3. As `ophyd.Signal`\n",
+    "## Custom `ophyd.SignalRO` subclass\n",
     "\n",
-    "Since this is a demonstration, we show here why the `Signal` implementation just does not provide the right behavior.\n",
+    "Let's show how to use a *read-only* Signal (`SignalRO`) to execute a\n",
+    "pre-configured Linux shell command.  \n",
     "\n",
-    "An `ophyd.Signal` will be used to accept an input, launch the shell command in a `subprocess` from the `Signal.set()` method, and wait for the response using an `ophyd.Status` object.\n",
+    "We'll execute the shell command in the Signal's `.trigger()` method using\n",
+    "`subprocess.communicate()` in a thread.  The `.trigger()` method returns a\n",
+    "`Status` object.  Once the Linux command finishes, any text returned by the\n",
+    "command will be stored in the Signal's `._readback` attribute (to be returned by\n",
+    "the `.get()` method).  Any error output will be stored in the `.stderr`\n",
+    "attribute.\n",
     "\n",
-    "Since a redefinition of the `set()` method is needed, it is necessary to create a *subclass* of `ophyd.Signal`."
+    "We redefine the `.trigger()` method in a custom *subclass* of\n",
+    "`ophyd.SignalRO`."
    ]
   },
   {
@@ -212,37 +264,43 @@
     "import ophyd\n",
     "import threading\n",
     "\n",
-    "class ProcessSignal(ophyd.Signal):\n",
     "\n",
-    "    process = None\n",
-    "    _readback = None\n",
-    "    stderr = None\n",
+    "class ProcessSignal(ophyd.SignalRO):\n",
+    "    \"\"\"Signal that returns output from a shell command.\"\"\"\n",
     "\n",
-    "    def set(self, command, *, timeout=None, settle_time=None):\n",
-    "        st = ophyd.status.Status(self)\n",
+    "    command = \"bash doodle.sh\"\n",
+    "    status = None\n",
     "\n",
-    "        def wait_process():\n",
-    "            self._readback, self.stderr = self.process.communicate(timeout=timeout)\n",
-    "            st._finished()\n",
+    "    def parse_response(self, stdout, stderr):\n",
+    "        self._readback = stdout.decode(\"utf8\")\n",
+    "        self.stderr = stderr.decode(\"utf8\")\n",
     "\n",
-    "        self._status = st\n",
-    "        self.process = subprocess.Popen(\n",
-    "            command,\n",
-    "            shell=True,\n",
-    "            stdin=subprocess.PIPE,\n",
-    "            stdout=subprocess.PIPE,\n",
-    "            stderr=subprocess.PIPE,\n",
-    "        )\n",
-    "        # TODO: settle_time\n",
-    "        threading.Thread(target=wait_process, daemon=True).start()\n",
-    "        return st"
+    "    def trigger(self):\n",
+    "        self.status = ophyd.status.Status()\n",
+    "\n",
+    "        def action():\n",
+    "            \"\"\"Calls command and waits for it to complete.\"\"\"\n",
+    "            process = subprocess.Popen(\n",
+    "                self.command,\n",
+    "                shell=True,\n",
+    "                stdin=subprocess.PIPE,\n",
+    "                stdout=subprocess.PIPE,\n",
+    "                stderr=subprocess.PIPE,\n",
+    "            )\n",
+    "\n",
+    "            # wait for the command to finish and collect the outputs.\n",
+    "            self.parse_response(*process.communicate())\n",
+    "            self.status._finished(success=True)\n",
+    "\n",
+    "        threading.Thread(target=action, daemon=True).start()\n",
+    "        return self.status  # returns right away"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Create the processor object and run (`.set()`) it.  This will return immediately, before the shell script finishes.  The return result is a `Status` object that `bluesky` will use to wait for the `.set()` operation to finish."
+    "Create the `signal` object.  Print its initial value."
    ]
   },
   {
@@ -254,24 +312,29 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "st = Status(obj=ProcessSignal(name='obj', value=0.0, timestamp=1627094331.38266), done=False, success=False)\n",
-      "time.time()-t0 = 0.012959480285644531\n"
+      "signal.get()=0.0\n"
      ]
     }
    ],
    "source": [
     "t0 = time.time()\n",
-    "obj = ProcessSignal(name=\"obj\")\n",
-    "st = obj.set(\"bash ./doodle.sh\")\n",
-    "print(f\"{st = }\")\n",
-    "print(f\"{time.time()-t0 = }\")"
+    "signal = ProcessSignal(name=\"signal\")\n",
+    "print(f\"{signal.get()=}\")"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "The _timeout_ was not configured.  The shell script runs for 5 seconds so we use the status object to wait for it to complete."
+    "The default value of a new `SignalRO` object is `0.0`.  That will change once\n",
+    "`signal` has completed its first Linux command.\n",
+    "\n",
+    "Trigger the `signal` (run its `.trigger()` method).  This returns immediately,\n",
+    "before the shell command finishes.  The return result is a `Status` object that\n",
+    "`bluesky` will use to wait for the `.trigger()` operation to finish.\n",
+    "\n",
+    "Until the Linux command finishes, the value returned by `signal.get()` is\n",
+    "still unchanged."
    ]
   },
   {
@@ -283,18 +346,16 @@
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "obj._status = Status(obj=ProcessSignal(name='obj', value=0.0, timestamp=1627094331.38266), done=False, success=False)\n",
-      "time.time()-t0 = 0.09882283210754395\n",
-      "obj._status = Status(obj=ProcessSignal(name='obj', value=b'Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\\n', timestamp=1627094331.38266), done=True, success=True)\n",
-      "time.time()-t0 = 5.05002236366272\n"
+      "signal.get()=0.0\n",
+      "status = Status(obj=None, done=False, success=False)\n",
+      "time.time()-t0 = 0.011680364608764648\n"
      ]
     }
    ],
    "source": [
-    "print(f\"{obj._status = }\")\n",
-    "print(f\"{time.time()-t0 = }\")\n",
-    "st.wait()\n",
-    "print(f\"{obj._status = }\")\n",
+    "status = signal.trigger()\n",
+    "print(f\"{signal.get()=}\")\n",
+    "print(f\"{status = }\")\n",
     "print(f\"{time.time()-t0 = }\")"
    ]
   },
@@ -302,7 +363,8 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Show what is returned from the `read()` method."
+    "We use the `status` object to wait for the Linux command to complete. The shell\n",
+    "script runs for 5 seconds, the status object is done in that time plus a smidgen."
    ]
   },
   {
@@ -311,46 +373,24 @@
    "metadata": {},
    "outputs": [
     {
-     "data": {
-      "text/plain": [
-       "{'obj': {'value': b'Fri 23 Jul 2021 09:38:51 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:38:51 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:38:51 PM CDT: countdown 5\\nFri 23 Jul 2021 09:38:52 PM CDT: countdown 4\\nFri 23 Jul 2021 09:38:53 PM CDT: countdown 3\\nFri 23 Jul 2021 09:38:54 PM CDT: countdown 2\\nFri 23 Jul 2021 09:38:55 PM CDT: countdown 1\\nFri 23 Jul 2021 09:38:56 PM CDT: Doodle demonstration complete\\n',\n",
-       "  'timestamp': 1627094331.38266}}"
-      ]
-     },
-     "execution_count": 11,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "obj.read()"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "The problem is seen after we try the `.put()` method"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 12,
-   "metadata": {},
-   "outputs": [
-    {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "st = None\n",
-      "time.time()-t0 = 0.006703853607177734\n"
+      "status = Status(obj=None, done=False, success=False)\n",
+      "time.time()-t0 = 0.018770456314086914\n",
+      "signal.get()='Fri Nov 8 04:33:36 PM CST 2024: Doodle demonstration starting\\nFri Nov 8 04:33:36 PM CST 2024: countdown 5\\nFri Nov 8 04:33:37 PM CST 2024: countdown 4\\nFri Nov 8 04:33:38 PM CST 2024: countdown 3\\nFri Nov 8 04:33:39 PM CST 2024: countdown 2\\nFri Nov 8 04:33:40 PM CST 2024: countdown 1\\nFri Nov 8 04:33:41 PM CST 2024: Doodle demonstration complete\\n'\n",
+      "status = Status(obj=None, done=True, success=True)\n",
+      "time.time()-t0 = 5.043781518936157\n"
      ]
     }
    ],
    "source": [
-    "t0 = time.time()\n",
-    "st = obj.put(\"bash ./doodle.sh\")\n",
-    "print(f\"{st = }\")\n",
+    "print(f\"{status = }\")\n",
+    "print(f\"{time.time()-t0 = }\")\n",
+    "status.wait()\n",
+    "\n",
+    "print(f\"{signal.get()=}\")\n",
+    "print(f\"{status = }\")\n",
     "print(f\"{time.time()-t0 = }\")"
    ]
   },
@@ -358,7 +398,45 @@
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "As before, wait for it to finish and the `value` is still the input command.  Note the `put()` method does not return its status object so we have to use a sleep timer."
+    "## Linux system uptime Signal\n",
+    "\n",
+    "Make a signal that provides a numerical value, so we can plot it.\n",
+    "\n",
+    "The elapsed time since the Linux workstation was last started is updated in\n",
+    "virtual file `/proc/uptime`.  The file has two string values: `uptime`\n",
+    "`idletime`.  We want the first one.\n",
+    "\n",
+    "We can modify the `ProcessSignal` class and change the `command` and the\n",
+    "`parse_response()` method.\n",
+    "\n",
+    "For more details, see the [documentation](https://www.man7.org/linux/man-pages/man5/proc_uptime.5.html)."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 12,
+   "metadata": {},
+   "outputs": [],
+   "source": [
+    "class UptimeSignal(ProcessSignal):\n",
+    "    command = \"cat /proc/uptime\"\n",
+    "\n",
+    "    def parse_response(self, stdout, stderr):\n",
+    "        self._readback = float(stdout.decode(\"utf8\").split()[0])\n",
+    "        self.stderr = stderr.decode(\"utf8\")\n",
+    "\n",
+    "\n",
+    "uptime = UptimeSignal(name=\"uptime\")"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "metadata": {},
+   "source": [
+    "## Record a time series with the Bluesky Run Engine\n",
+    "\n",
+    "When we record a time series of the system uptime, we expect a straight line\n",
+    "plot.  Try it.  First, setup the minimum required bluesky objects."
    ]
   },
   {
@@ -367,342 +445,115 @@
    "metadata": {},
    "outputs": [
     {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "obj.read() = {'obj': {'value': 'bash ./doodle.sh', 'timestamp': 1627094336.6018999}}\n",
-      "time.time()-t0 = 0.13547873497009277\n",
-      "obj.read() = {'obj': {'value': 'bash ./doodle.sh', 'timestamp': 1627094336.6018999}}\n",
-      "time.time()-t0 = 5.1512017250061035\n"
-     ]
+     "data": {
+      "text/plain": [
+       "0"
+      ]
+     },
+     "execution_count": 13,
+     "metadata": {},
+     "output_type": "execute_result"
     }
    ],
    "source": [
-    "print(f\"{obj.read() = }\")\n",
-    "print(f\"{time.time()-t0 = }\")\n",
-    "time.sleep(5)\n",
-    "print(f\"{obj.read() = }\")\n",
-    "print(f\"{time.time()-t0 = }\")"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "The `ophyd.Signal.put()` method requests the Signal to go to the `value` and then waits for it to get there (that's when it uses up its status object).  The output of the shell script will *never* become the value of the command string.  If we were to set `obj._readback` to be the output from the shell script, then the `put()` method would never return (it hangs because the readback value does not equal the input value).\n",
+    "from bluesky import RunEngine, plans as bp\n",
+    "from bluesky.callbacks.best_effort import BestEffortCallback\n",
     "\n",
-    "Signal is not the right interface."
+    "RE = RunEngine()\n",
+    "bec = BestEffortCallback()\n",
+    "RE.subscribe(bec)"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "## 4. As `ophyd.Device`"
+    "Record the time series.  Here, `uptime` is a detector.  At each step, the\n",
+    "`count` plan will trigger it, wait for the trigger to complete, then read the\n",
+    "signal with its `.read()` method."
    ]
   },
   {
    "cell_type": "code",
    "execution_count": 14,
    "metadata": {},
-   "outputs": [],
-   "source": [
-    "import ophyd\n",
-    "import subprocess\n",
-    "import threading\n",
-    "import time\n",
-    "\n",
-    "class ProcessDevice(ophyd.Device):\n",
-    "    command = ophyd.Component(ophyd.Signal, value=None)\n",
-    "    stdout = ophyd.Component(ophyd.Signal, value=None)\n",
-    "    stderr = ophyd.Component(ophyd.Signal, value=None)\n",
-    "    process = None\n",
-    "\n",
-    "    def trigger(self):\n",
-    "        \"\"\"Start acquisition.\"\"\"\n",
-    "        if self.command.get() is None:\n",
-    "            raise ValueError(f\"Must set {self.name}.command.  Cannot be `None`.\")\n",
-    "        \n",
-    "        st = ophyd.status.DeviceStatus(self)\n",
-    "        \n",
-    "        def watch_process():\n",
-    "            out, err = self.process.communicate()\n",
-    "            # these are byte strings, decode them to get str\n",
-    "            self.stdout.put(out.decode(\"utf8\"))\n",
-    "            self.stderr.put(err.decode(\"utf8\"))\n",
-    "            self.process = None\n",
-    "            st._finished()\n",
-    "\n",
-    "        self._status = st\n",
-    "        self.stderr.put(None)\n",
-    "        self.stdout.put(None)\n",
-    "        self.process = subprocess.Popen(\n",
-    "            self.command.get(),\n",
-    "            shell=True,\n",
-    "            stdin=subprocess.PIPE,\n",
-    "            stdout=subprocess.PIPE,\n",
-    "            stderr=subprocess.PIPE,\n",
-    "        )\n",
-    "        threading.Thread(target=watch_process, daemon=True).start()\n",
-    "        return st"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 15,
-   "metadata": {},
-   "outputs": [],
-   "source": [
-    "obj = ProcessDevice(name=\"obj\")\n",
-    "obj.stage_sigs[\"command\"] = \"bash ./doodle.sh\""
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 16,
-   "metadata": {},
    "outputs": [
     {
      "name": "stdout",
      "output_type": "stream",
      "text": [
-      "time.time() - t0 = 0.011952638626098633s\n",
-      "st = DeviceStatus(device=obj, done=False, success=False)\n"
-     ]
-    },
-    {
-     "data": {
-      "text/plain": [
-       "OrderedDict([('obj_command',\n",
-       "              {'value': 'bash ./doodle.sh', 'timestamp': 1627094342.1131032}),\n",
-       "             ('obj_stdout', {'value': None, 'timestamp': 1627094342.1135113}),\n",
-       "             ('obj_stderr', {'value': None, 'timestamp': 1627094342.113497})])"
-      ]
-     },
-     "execution_count": 16,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "t0 = time.time()\n",
-    "obj.stage()\n",
-    "st = obj.trigger()\n",
-    "print(f\"{time.time() - t0 = }s\")\n",
-    "print(f\"{st = }\")\n",
-    "obj.read()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 17,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "time.time() - t0 = 5.063066720962524s\n",
-      "st = DeviceStatus(device=obj, done=True, success=True)\n"
-     ]
-    },
-    {
-     "data": {
-      "text/plain": [
-       "OrderedDict([('obj_command',\n",
-       "              {'value': 'bash ./doodle.sh', 'timestamp': 1627094342.1131032}),\n",
-       "             ('obj_stdout',\n",
-       "              {'value': 'Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting\\nFri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds\\nFri 23 Jul 2021 09:39:02 PM CDT: countdown 5\\nFri 23 Jul 2021 09:39:03 PM CDT: countdown 4\\nFri 23 Jul 2021 09:39:04 PM CDT: countdown 3\\nFri 23 Jul 2021 09:39:05 PM CDT: countdown 2\\nFri 23 Jul 2021 09:39:06 PM CDT: countdown 1\\nFri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete\\n',\n",
-       "               'timestamp': 1627094347.1758268}),\n",
-       "             ('obj_stderr', {'value': '', 'timestamp': 1627094347.1758533})])"
-      ]
-     },
-     "execution_count": 17,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "st.wait()\n",
-    "print(f\"{time.time() - t0 = }s\")\n",
-    "print(f\"{st = }\")\n",
-    "obj.read()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 18,
-   "metadata": {},
-   "outputs": [
-    {
-     "data": {
-      "text/plain": [
-       "[ProcessDevice(prefix='', name='obj', read_attrs=['command', 'stdout', 'stderr'], configuration_attrs=[])]"
-      ]
-     },
-     "execution_count": 18,
-     "metadata": {},
-     "output_type": "execute_result"
-    }
-   ],
-   "source": [
-    "obj.unstage()"
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 19,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "Fri 23 Jul 2021 09:39:02 PM CDT: Doodle demonstration starting\n",
-      "Fri 23 Jul 2021 09:39:02 PM CDT: sleep 5 seconds\n",
-      "Fri 23 Jul 2021 09:39:02 PM CDT: countdown 5\n",
-      "Fri 23 Jul 2021 09:39:03 PM CDT: countdown 4\n",
-      "Fri 23 Jul 2021 09:39:04 PM CDT: countdown 3\n",
-      "Fri 23 Jul 2021 09:39:05 PM CDT: countdown 2\n",
-      "Fri 23 Jul 2021 09:39:06 PM CDT: countdown 1\n",
-      "Fri 23 Jul 2021 09:39:07 PM CDT: Doodle demonstration complete\n",
+      "\n",
+      "\n",
+      "Transient Scan ID: 1     Time: 2024-11-08 16:33:42\n",
+      "Persistent Unique Scan ID: '2e05f6e6-bf6c-4fa0-815e-9da8f2bac8c5'\n",
+      "New stream: 'primary'\n",
+      "+-----------+------------+------------+\n",
+      "|   seq_num |       time |     uptime |\n",
+      "+-----------+------------+------------+\n",
+      "|         1 | 16:33:42.4 | 630362.860 |\n",
+      "|         2 | 16:33:43.3 | 630363.870 |\n",
+      "|         3 | 16:33:44.3 | 630364.870 |\n",
+      "|         4 | 16:33:45.4 | 630365.880 |\n",
+      "|         5 | 16:33:46.3 | 630366.870 |\n",
+      "+-----------+------------+------------+\n",
+      "generator count ['2e05f6e6'] (scan num: 1)\n",
+      "\n",
+      "\n",
       "\n"
      ]
-    }
-   ],
-   "source": [
-    "print(obj.stdout.get())"
-   ]
-  },
-  {
-   "cell_type": "markdown",
-   "metadata": {},
-   "source": [
-    "## 5. Run with bluesky\n",
-    "This is a simplest implementation of the bluesky RunEngine with no custom callbacks, no table output, and no saving data anywhere.  Capture the document stream from `RE` using a simple callback (`document_printer()`) that prints the content of each document.\n",
-    "\n",
-    "In this demo, we do not show how to implement a timeout and or interrupt execution of the shell script."
-   ]
-  },
-  {
-   "cell_type": "code",
-   "execution_count": 20,
-   "metadata": {},
-   "outputs": [
-    {
-     "name": "stdout",
-     "output_type": "stream",
-     "text": [
-      "\n",
-      "***start***\n",
-      "{'detectors': ['obj'],\n",
-      " 'hints': {'dimensions': [(('time',), 'primary')]},\n",
-      " 'num_intervals': 0,\n",
-      " 'num_points': 1,\n",
-      " 'plan_args': {'detectors': [\"ProcessDevice(prefix='', name='obj', \"\n",
-      "                             \"read_attrs=['command', 'stdout', 'stderr'], \"\n",
-      "                             'configuration_attrs=[])'],\n",
-      "               'num': 1},\n",
-      " 'plan_name': 'count',\n",
-      " 'plan_type': 'generator',\n",
-      " 'scan_id': 1,\n",
-      " 'time': 1627094347.901483,\n",
-      " 'uid': 'b7fca79d-87de-446b-aec9-a14369899306',\n",
-      " 'versions': {'bluesky': '1.7.0', 'ophyd': '1.6.1'}}\n",
-      "\n",
-      "***descriptor***\n",
-      "{'configuration': {'obj': {'data': {},\n",
-      "                           'data_keys': OrderedDict(),\n",
-      "                           'timestamps': {}}},\n",
-      " 'data_keys': {'obj_command': {'dtype': 'string',\n",
-      "                               'object_name': 'obj',\n",
-      "                               'shape': [],\n",
-      "                               'source': 'SIM:obj_command'},\n",
-      "               'obj_stderr': {'dtype': 'string',\n",
-      "                              'object_name': 'obj',\n",
-      "                              'shape': [],\n",
-      "                              'source': 'SIM:obj_stderr'},\n",
-      "               'obj_stdout': {'dtype': 'string',\n",
-      "                              'object_name': 'obj',\n",
-      "                              'shape': [],\n",
-      "                              'source': 'SIM:obj_stdout'}},\n",
-      " 'hints': {'obj': {'fields': []}},\n",
-      " 'name': 'primary',\n",
-      " 'object_keys': {'obj': ['obj_command', 'obj_stdout', 'obj_stderr']},\n",
-      " 'run_start': 'b7fca79d-87de-446b-aec9-a14369899306',\n",
-      " 'time': 1627094353.0929906,\n",
-      " 'uid': 'a2bfc0cb-1447-4be6-92e9-0b3b157e3c30'}\n",
-      "\n",
-      "***event***\n",
-      "{'data': {'obj_command': 'bash ./doodle.sh',\n",
-      "          'obj_stderr': '',\n",
-      "          'obj_stdout': 'Fri 23 Jul 2021 09:39:08 PM CDT: Doodle demonstration '\n",
-      "                        'starting\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:08 PM CDT: sleep 5 seconds\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:08 PM CDT: countdown 5\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:09 PM CDT: countdown 4\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:10 PM CDT: countdown 3\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:11 PM CDT: countdown 2\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:12 PM CDT: countdown 1\\n'\n",
-      "                        'Fri 23 Jul 2021 09:39:13 PM CDT: Doodle demonstration '\n",
-      "                        'complete\\n'},\n",
-      " 'descriptor': 'a2bfc0cb-1447-4be6-92e9-0b3b157e3c30',\n",
-      " 'filled': {},\n",
-      " 'seq_num': 1,\n",
-      " 'time': 1627094353.3092813,\n",
-      " 'timestamps': {'obj_command': 1627094347.901314,\n",
-      "                'obj_stderr': 1627094353.0920315,\n",
-      "                'obj_stdout': 1627094353.0919352},\n",
-      " 'uid': '2d5d29de-8c80-46c1-8085-c1eb1c609b07'}\n",
-      "\n",
-      "***stop***\n",
-      "{'exit_status': 'success',\n",
-      " 'num_events': {'primary': 1},\n",
-      " 'reason': '',\n",
-      " 'run_start': 'b7fca79d-87de-446b-aec9-a14369899306',\n",
-      " 'time': 1627094353.429601,\n",
-      " 'uid': '9aa6d3c6-8bfc-4ded-8b9b-28a2f2455ffb'}\n"
-     ]
     },
     {
      "data": {
       "text/plain": [
-       "('b7fca79d-87de-446b-aec9-a14369899306',)"
+       "('2e05f6e6-bf6c-4fa0-815e-9da8f2bac8c5',)"
       ]
      },
-     "execution_count": 20,
+     "execution_count": 14,
      "metadata": {},
      "output_type": "execute_result"
+    },
+    {
+     "data": {
+      "image/png": "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",
+      "text/plain": [
+       "<Figure size 500x500 with 1 Axes>"
+      ]
+     },
+     "metadata": {},
+     "output_type": "display_data"
     }
    ],
    "source": [
-    "import bluesky\n",
-    "import bluesky.plans as bp\n",
-    "import pprint\n",
-    "\n",
-    "def document_printer(key, doc):\n",
-    "    print()\n",
-    "    print(f\"***{key}***\")\n",
-    "    pprint.pprint(doc)\n",
-    "\n",
-    "RE = bluesky.RunEngine({})\n",
-    "RE(bp.count([obj]), document_printer)"
+    "RE(bp.count([uptime], num=5, delay=1))"
    ]
   },
   {
    "cell_type": "markdown",
    "metadata": {},
    "source": [
-    "Looks like we got the output from the bash shell script."
+    "## Summary\n",
+    "\n",
+    "`SignalRO` is the right class to use for a shell command that returns a single value.\n",
+    "\n",
+    "One might think the `ophyd.Signal` class could be used where the command would\n",
+    "be put and the returned value would be as above.  The problem is the design of\n",
+    "the `Signal.put()` method.\n",
+    "\n",
+    "The `ophyd.Signal.put()` method requests the Signal to go to the `value` and\n",
+    "then waits for it to get there (that's when it uses up its status object).  The\n",
+    "output of the shell command will *never* become the value of the command string.\n",
+    "If we were to set `obj._readback` to be the output from the shell command, then\n",
+    "the `put()` method would never return (it hangs because the readback value does\n",
+    "not equal the input value).\n",
+    "\n",
+    "`SignalRO`, not `Signal`, is the right interface."
    ]
   }
  ],
  "metadata": {
-  "interpreter": {
-   "hash": "60aa360bcd8d3c8cfbc4e726e53a455fcd5c15cdf29caaf63c7ca2494eba79e9"
-  },
   "kernelspec": {
-   "display_name": "Python 3.8.10 64-bit ('bluesky_2021_2': conda)",
+   "display_name": "bluesky_2024_3",
+   "language": "python",
    "name": "python3"
   },
   "language_info": {
@@ -715,7 +566,7 @@
    "name": "python",
    "nbconvert_exporter": "python",
    "pygments_lexer": "ipython3",
-   "version": "3.8.10"
+   "version": "3.11.10"
   },
   "orig_nbformat": 2
  },

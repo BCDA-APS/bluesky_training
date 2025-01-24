@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,19 +27,19 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
     <link rel="stylesheet" type="text/css" href="../_static/nbsphinx-code-cells.css?v=2aa19091" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -166,7 +166,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -333,6 +335,7 @@
 <li class="toctree-l1"><a class="reference internal" href="_custom_heater_positioner.html">Heater Simulation using synApps epid and transform records</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_custom_plan.html">Custom bluesky plan</a></li>
 
+<li class="toctree-l1"><a class="reference internal" href="_data_management.html">Setup APS Data Management</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_doodle.html">Linux Command &amp; Wait for Finish</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Dynamic Limits for Two Motors</a></li>
 <li class="toctree-l1"><a class="reference internal" href="_epics_proc_field.html">Trigger a Device with the EPICS record .PROC field</a></li>
@@ -351,9 +354,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -435,7 +443,7 @@ Suspending... To get to the prompt, hit Ctrl-C twice to pause.
 <section id="EPICS-setup">
 <h2>EPICS setup<a class="headerlink" href="#EPICS-setup" title="Link to this heading">#</a></h2>
 <p>We start with two motor axes defined in EPICS. Here, we run the docker image <a class="reference external" href="https://hub.docker.com/r/prjemian/synapps">prjemian/synApps</a> to make the <a class="reference external" href="https://github.com/prjemian/epics-docker/#custom-synappshttps://github.com/prjemian/epics-docker/#custom-synapps">EPICS IOC simulator run in a docker container</a> with IOC prefix <code class="docutils literal notranslate"><span class="pre">gp:</span></code>. These are motor PVs: <code class="docutils literal notranslate"><span class="pre">gp:m1</span></code> and <code class="docutils literal notranslate"><span class="pre">gp:m2</span></code> as shown.</p>
-<p><img alt="EPICS motor GUI screens" src="../_images/demo_dynamic_limits_motors.png" /></p>
+<img alt="EPICS motor GUI screens" src="../_images/demo_dynamic_limits_motors.png" />
 <p>To compute a dynamic limit between the two motor axes, we use a <em>userCalc</em> (EPICS <a class="reference external" href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/epics-modules/calc/R3-6-1/documentation/swaitRecord.html">swait</a> record), <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code> with settings as shown.</p>
 <ol class="arabic simple">
 <li><p>Set the description field to describe what this does.</p></li>
@@ -447,9 +455,9 @@ Suspending... To get to the prompt, hit Ctrl-C twice to pause.
 <li><p>Enter the permit calculation: <code class="docutils literal notranslate"><span class="pre">(B-A)&gt;=C</span></code></p></li>
 </ol>
 <p>The calculated result (in <code class="docutils literal notranslate"><span class="pre">gp:userCalc1.VAL</span></code>, <code class="docutils literal notranslate"><span class="pre">gp:userCalc1</span></code> for short) once either of the motors move.</p>
-<p><img alt="motion permit calculation" src="../_images/demo_dynamic_limits_permit_calc.png" /></p>
+<img alt="motion permit calculation" src="../_images/demo_dynamic_limits_permit_calc.png" />
 <p>To scan, we want a “detector”. Let’s use another <em>userCalc</em> (<code class="docutils literal notranslate"><span class="pre">gp:userCalc2</span></code>) to simulate a noisy detector with a random number generator. We’ll update this detector only when either motor moves (same as with the permit calculation) setting its <code class="docutils literal notranslate"><span class="pre">.SCAN</span></code> to <em>I/O Intr</em>. The setup is shown in the next screen view image:</p>
-<p><img alt="noisy detector simulation" src="../_images/demo_dynamic_limits_permit_noisy.png" /></p>
+<img alt="noisy detector simulation" src="../_images/demo_dynamic_limits_permit_noisy.png" />
 </section>
 <section id="Bluesky-setup">
 <h2>Bluesky setup<a class="headerlink" href="#Bluesky-setup" title="Link to this heading">#</a></h2>
@@ -458,14 +466,14 @@ Suspending... To get to the prompt, hit Ctrl-C twice to pause.
 </pre></div>
 </div>
 <div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># put the instrument package into the path</span>
-<span class="kn">import</span> <span class="nn">pathlib</span><span class="o">,</span> <span class="nn">sys</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pathlib</span><span class="o">,</span><span class="w"> </span><span class="nn">sys</span>
 <span class="n">sys</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="o">.</span><span class="n">home</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;bluesky&quot;</span><span class="p">))</span>
 
 <span class="c1"># start the instrument package for data collection</span>
-<span class="kn">from</span> <span class="nn">instrument.collection</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">plans</span> <span class="k">as</span> <span class="n">bp</span>
-<span class="kn">from</span> <span class="nn">bluesky</span> <span class="kn">import</span> <span class="n">plan_stubs</span> <span class="k">as</span> <span class="n">bps</span>
-<span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsMotor</span><span class="p">,</span> <span class="n">EpicsSignal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">instrument.collection</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bluesky</span><span class="w"> </span><span class="kn">import</span> <span class="n">plans</span> <span class="k">as</span> <span class="n">bp</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">bluesky</span><span class="w"> </span><span class="kn">import</span> <span class="n">plan_stubs</span> <span class="k">as</span> <span class="n">bps</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsMotor</span><span class="p">,</span> <span class="n">EpicsSignal</span>
 
 <span class="n">bec</span><span class="o">.</span><span class="n">disable_plots</span><span class="p">()</span>  <span class="c1"># not interested in graphics in this notebook</span>
 <span class="n">RE</span><span class="o">.</span><span class="n">waiting_hook</span> <span class="o">=</span> <span class="kc">None</span>  <span class="c1"># disable the progress bar, looks awful in notebooks</span>
@@ -621,7 +629,7 @@ I Tue-18:47:32 - #### Startup is complete. ####
 <span class="c1"># For this demo, we want to set the theta &amp; ttheta motor backlash to the default condition</span>
 <span class="c1"># when the IOC is first created.  We&#39;ll change this later in the demo.</span>
 
-<span class="k">class</span> <span class="nc">BacklashMotor</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BacklashMotor</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">):</span>
     <span class="n">backlash_distance</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.BDST&quot;</span><span class="p">)</span>
     <span class="n">backlash_velocity</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.BVEL&quot;</span><span class="p">)</span>
 
@@ -667,7 +675,7 @@ I Tue-18:47:32 - #### Startup is complete. ####
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[6]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">th_tth_scan</span><span class="p">(</span><span class="n">detectors</span><span class="p">,</span> <span class="n">tth_start</span><span class="p">,</span> <span class="n">tth_end</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">min_sep</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">th_tth_scan</span><span class="p">(</span><span class="n">detectors</span><span class="p">,</span> <span class="n">tth_start</span><span class="p">,</span> <span class="n">tth_end</span><span class="p">,</span> <span class="n">points</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span> <span class="n">min_sep</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    run a coupled theta:2theta scan</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1035,7 +1043,7 @@ generator scan [&#39;991bdcb1&#39;] (scan num: 928)
 <div class="prompt highlight-none notranslate"><div class="highlight"><pre><span></span>[17]:
 </pre></div>
 </div>
-<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">bluesky.suspenders</span> <span class="kn">import</span> <span class="n">SuspendBoolLow</span>
+<div class="input_area highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span><span class="w"> </span><span class="nn">bluesky.suspenders</span><span class="w"> </span><span class="kn">import</span> <span class="n">SuspendBoolLow</span>
 <span class="n">sus</span> <span class="o">=</span> <span class="n">SuspendBoolLow</span><span class="p">(</span><span class="n">th_tth_permit</span><span class="p">)</span>
 <span class="n">RE</span><span class="o">.</span><span class="n">install_suspender</span><span class="p">(</span><span class="n">sus</span><span class="p">)</span>
 </pre></div>
@@ -1199,13 +1207,13 @@ timeout with a <code class="docutils literal notranslate"><span class="pre">Fail
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/howto/_dynamic_limits_2motor.ipynb.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/howto/_dynamic_limits_2motor.ipynb.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1220,8 +1228,8 @@ timeout with a <code class="docutils literal notranslate"><span class="pre">Fail
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1254,7 +1262,8 @@ timeout with a <code class="docutils literal notranslate"><span class="pre">Fail
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>

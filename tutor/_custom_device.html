@@ -16,8 +16,8 @@
     document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
     document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
   </script>
-  <!-- 
-    this give us a css class that will be invisible only if js is disabled 
+  <!--
+    this give us a css class that will be invisible only if js is disabled
   -->
   <noscript>
     <style>
@@ -27,18 +27,18 @@
   </noscript>
   
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+  <link href="../_static/styles/theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=8878045cc6db502f8baf" rel="stylesheet" />
 
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=8f2a1f02" />
     <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
   
   <!-- So that users can add custom icons -->
-  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script src="../_static/scripts/fontawesome.js?digest=8878045cc6db502f8baf"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
-<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf" />
 
     <script src="../_static/documentation_options.js?v=5929fcd5"></script>
     <script src="../_static/doctools.js?v=9bcbadda"></script>
@@ -165,7 +165,9 @@
 </li>
 
             <li class="nav-item dropdown">
-                <button class="btn dropdown-toggle nav-item" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-controls="pst-nav-more-links">
+                <button class="btn dropdown-toggle nav-item" type="button"
+                data-bs-toggle="dropdown" aria-expanded="false"
+                aria-controls="pst-nav-more-links">
                     More
                 </button>
                 <ul id="pst-nav-more-links" class="dropdown-menu">
@@ -345,9 +347,14 @@
   
   
   <div class="sidebar-primary-items__end sidebar-primary__section">
+      <div class="sidebar-primary-item">
+<div id="ethical-ad-placement"
+      class="flat"
+      data-ea-publisher="readthedocs"
+      data-ea-type="readthedocs-sidebar"
+      data-ea-manual="true">
+</div></div>
   </div>
-  
-  <div id="rtd-footer-container"></div>
 
 
       </div>
@@ -441,9 +448,9 @@ Devices.</p>
 <h3>Hello, World!<a class="headerlink" href="#hello-world" title="Link to this heading">#</a></h3>
 <p>The <code class="docutils literal notranslate"><span class="pre">HelloDevice</span></code> (in the <a class="reference external" href="https://bcda-aps.github.io/bluesky_training/tutor/_hello_world.html">Hello, World!</a>
 notebook) is a subclass of <cite>ophyd.Device</cite>.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="k">class</span> <span class="nc">HelloDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">HelloDevice</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos">4</span>    <span class="n">number</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;hinted&quot;</span><span class="p">)</span>
 <span class="linenos">5</span>    <span class="n">text</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;normal&quot;</span><span class="p">)</span>
 </pre></div>
@@ -577,9 +584,9 @@ we have these EPICS PVs to connect:</p>
 <p>Separating the common PV prefix, we create a <code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> Device that connects
 these PVs (using the remaining PV suffix for each).  Remember to provide the
 common PV prefix:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="k">class</span> <span class="nc">MyGroup</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">MyGroup</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos">4</span>    <span class="n">enable</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:bit1&quot;</span><span class="p">)</span>
 <span class="linenos">5</span>    <span class="n">setpoint</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:float1&quot;</span><span class="p">)</span>
 <span class="linenos">6</span>    <span class="n">units</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;gp:float1.EGU&quot;</span><span class="p">)</span>
@@ -683,9 +690,9 @@ three motorized axes, as described in the next table.</p>
 </a>
 <p>Since each of these axes are EPICS motors, we’ll use <code class="docutils literal notranslate"><span class="pre">ophyd.EpicsMotor</span></code>
 <a class="footnote-reference brackets" href="#epics-motor" id="id12" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a> to connect with the rich set of EPICS controls for each:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsMotor</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsMotor</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="k">class</span> <span class="nc">NeatStage_3IDD</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">NeatStage_3IDD</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos">4</span>    <span class="n">x</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;m1&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;NEAT stage&quot;</span><span class="p">,))</span>
 <span class="linenos">5</span>    <span class="n">y</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;m2&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;NEAT stage&quot;</span><span class="p">,))</span>
 <span class="linenos">6</span>    <span class="n">theta</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsMotor</span><span class="p">,</span> <span class="s2">&quot;m3&quot;</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;NEAT stage&quot;</span><span class="p">,))</span>
@@ -700,9 +707,9 @@ three motorized axes, as described in the next table.</p>
 Device groups the EPICS PVs into Device.  This makes it easy to access useful
 controls such as <code class="docutils literal notranslate"><span class="pre">undulator.energy</span></code>, and to record the undulator configuration
 for data acquisition.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span>
 <span class="linenos"> 2</span>
-<span class="linenos"> 3</span><span class="k">class</span> <span class="nc">ApsUndulator</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos"> 3</span><span class="k">class</span><span class="w"> </span><span class="nc">ApsUndulator</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos"> 4</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="linenos"> 5</span><span class="sd">    APS Undulator</span>
 <span class="linenos"> 6</span>
@@ -752,7 +759,7 @@ and <em>downstream</em>, as described in the next table.</p>
 object is created (below).  In the <code class="docutils literal notranslate"><span class="pre">ApsUndulatorDual</span></code> class below, the
 combined prefix of <code class="docutils literal notranslate"><span class="pre">45ID:us:</span></code> will be passed to the upstream undulator.
 Similarly, <code class="docutils literal notranslate"><span class="pre">45ID:ds:</span></code> for the downstream undulator.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">ApsUndulatorDual</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span><span class="w"> </span><span class="nc">ApsUndulatorDual</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="n">upstream</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">ApsUndulator</span><span class="p">,</span> <span class="s2">&quot;us:&quot;</span><span class="p">)</span>
 <span class="linenos">3</span>    <span class="n">downstream</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">ApsUndulator</span><span class="p">,</span> <span class="s2">&quot;ds:&quot;</span><span class="p">)</span>
 </pre></div>
@@ -782,15 +789,15 @@ the process of searching and matching acquired data in the database.</p>
 <p>For example, we might want to define a new feature that is not yet present in
 <em>ophyd</em>.  Here, we define a <code class="docutils literal notranslate"><span class="pre">home_value</span></code> component.  The position can be
 either preset or changed programmatically.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">Signal</span>
 <span class="linenos">2</span>
-<span class="linenos">3</span><span class="k">class</span> <span class="nc">HomeValue</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<span class="linenos">3</span><span class="k">class</span><span class="w"> </span><span class="nc">HomeValue</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos">4</span>    <span class="n">home_value</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">Signal</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>We can use <code class="docutils literal notranslate"><span class="pre">HomeValue()</span></code> as a <em>mixin</em> class to modify (actually, create a
 variation of) the <code class="docutils literal notranslate"><span class="pre">MyGroup</span></code> (above):</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">MyGroupWithHome</span><span class="p">(</span><span class="n">HomeValue</span><span class="p">,</span> <span class="n">MyGroup</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span><span class="w"> </span><span class="nc">MyGroupWithHome</span><span class="p">(</span><span class="n">HomeValue</span><span class="p">,</span> <span class="n">MyGroup</span><span class="p">):</span>
 <span class="linenos">2</span><span class="w">    </span><span class="sd">&quot;&quot;&quot;MyGroup with known home value.&quot;&quot;&quot;</span>
 </pre></div>
 </div>
@@ -846,14 +853,14 @@ The extra fields follow two common EPICS patterns:</p>
 <p>Support for these common fields <a class="footnote-reference brackets" href="#epics-common-fields" id="id16" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> is provided in the
 <em>apstools</em> <a class="footnote-reference brackets" href="#apstools" id="id17" role="doc-noteref"><span class="fn-bracket">[</span>3<span class="fn-bracket">]</span></a> package.  Make custom Devices including the additional
 configuration support from apstools.  Like this:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">EpicsRecordDeviceCommonAll</span>
-<span class="linenos">2</span><span class="kn">from</span> <span class="nn">apstools.synApps</span> <span class="kn">import</span> <span class="n">EpicsRecordFloatFields</span>
-<span class="linenos">3</span><span class="kn">from</span> <span class="nn">ophyd</span> <span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span><span class="p">,</span> <span class="n">EpicsSignalRO</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="kn">from</span><span class="w"> </span><span class="nn">apstools.synApps</span><span class="w"> </span><span class="kn">import</span> <span class="n">EpicsRecordDeviceCommonAll</span>
+<span class="linenos">2</span><span class="kn">from</span><span class="w"> </span><span class="nn">apstools.synApps</span><span class="w"> </span><span class="kn">import</span> <span class="n">EpicsRecordFloatFields</span>
+<span class="linenos">3</span><span class="kn">from</span><span class="w"> </span><span class="nn">ophyd</span><span class="w"> </span><span class="kn">import</span> <span class="n">Component</span><span class="p">,</span> <span class="n">Device</span><span class="p">,</span> <span class="n">EpicsSignal</span><span class="p">,</span> <span class="n">EpicsSignalRO</span>
 <span class="linenos">4</span>
-<span class="linenos">5</span><span class="k">class</span> <span class="nc">EpicsAiRecord</span><span class="p">(</span><span class="n">EpicsRecordFloatFields</span><span class="p">,</span> <span class="n">EpicsRecordDeviceCommonAll</span><span class="p">):</span>
+<span class="linenos">5</span><span class="k">class</span><span class="w"> </span><span class="nc">EpicsAiRecord</span><span class="p">(</span><span class="n">EpicsRecordFloatFields</span><span class="p">,</span> <span class="n">EpicsRecordDeviceCommonAll</span><span class="p">):</span>
 <span class="linenos">6</span>    <span class="n">signal</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignalRO</span><span class="p">,</span> <span class="s2">&quot;.VAL&quot;</span><span class="p">)</span>  <span class="c1"># read-only</span>
 <span class="linenos">7</span>
-<span class="linenos">8</span><span class="k">class</span> <span class="nc">EpicsAoRecord</span><span class="p">(</span><span class="n">EpicsRecordFloatFields</span><span class="p">,</span> <span class="n">EpicsRecordDeviceCommonAll</span><span class="p">):</span>
+<span class="linenos">8</span><span class="k">class</span><span class="w"> </span><span class="nc">EpicsAoRecord</span><span class="p">(</span><span class="n">EpicsRecordFloatFields</span><span class="p">,</span> <span class="n">EpicsRecordDeviceCommonAll</span><span class="p">):</span>
 <span class="linenos">9</span>    <span class="n">signal</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsSignal</span><span class="p">,</span> <span class="s2">&quot;.VAL&quot;</span><span class="p">)</span>  <span class="c1"># read &amp; write</span>
 </pre></div>
 </div>
@@ -918,7 +925,7 @@ controls.</p>
 </div>
 <p>Recognize that all these EPICS PVs share a common prefix: <code class="docutils literal notranslate"><span class="pre">ioc:</span></code>.
 Define the custom Device:</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span> <span class="nc">MyController</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="k">class</span><span class="w"> </span><span class="nc">MyController</span><span class="p">(</span><span class="n">Device</span><span class="p">):</span>
 <span class="linenos">2</span>    <span class="n">pressure</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAiRecord</span><span class="p">,</span> <span class="s2">&quot;ai4&quot;</span><span class="p">)</span>
 <span class="linenos">3</span>    <span class="n">temperature</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAiRecord</span><span class="p">,</span> <span class="s2">&quot;ai2&quot;</span><span class="p">)</span>
 <span class="linenos">4</span>    <span class="n">flow</span> <span class="o">=</span> <span class="n">Component</span><span class="p">(</span><span class="n">EpicsAoRecord</span><span class="p">,</span> <span class="s2">&quot;ao12&quot;</span><span class="p">)</span>
@@ -1072,13 +1079,13 @@ Define the custom Device:</p>
   </nav></div>
 
   <div class="sidebar-secondary-item">
-
-  <div class="tocsection sourcelink">
-    <a href="../_sources/tutor/_custom_device.rst.txt">
-      <i class="fa-solid fa-file-lines"></i> Show Source
-    </a>
-  </div>
-</div>
+  <div role="note" aria-label="source link">
+    <h3>This Page</h3>
+    <ul class="this-page-menu">
+      <li><a href="../_sources/tutor/_custom_device.rst.txt"
+            rel="nofollow">Show Source</a></li>
+    </ul>
+   </div></div>
 
 </div></div>
               
@@ -1093,8 +1100,8 @@ Define the custom Device:</p>
   </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
-<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=8878045cc6db502f8baf"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=8878045cc6db502f8baf"></script>
 
   <footer class="bd-footer">
 <div class="bd-footer__inner bd-page-width">
@@ -1127,7 +1134,8 @@ Define the custom Device:</p>
       
         <div class="footer-item">
 <p class="theme-version">
-  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.0.
+  <!-- # L10n: Setting the PST URL as an argument as this does not need to be localized -->
+  Built with the <a href="https://pydata-sphinx-theme.readthedocs.io/en/stable/index.html">PyData Sphinx Theme</a> 0.16.1.
 </p></div>
       
     </div>
