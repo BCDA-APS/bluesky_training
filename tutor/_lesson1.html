@@ -449,8 +449,8 @@
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">ophyd</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">scaler</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ScalerCH
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[1]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">ophyd</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">scaler</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ScalerCH
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;ophyd&#39;
 </pre></div></div>
@@ -471,8 +471,8 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[2], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> scaler <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">ScalerCH</span>(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">sky:scaler1</span><span style="color: rgb(175,0,0)">&#34;</span>, name<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scaler</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> scaler = <span class="ansi-yellow-bg">ScalerCH</span>(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">sky:scaler1</span><span class="ansi-yellow-fg">&#34;</span>, name=<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">scaler</span><span class="ansi-yellow-fg">&#34;</span>)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;ScalerCH&#39; is not defined
 </pre></div></div>
@@ -493,8 +493,8 @@ Cell <span class="ansi-green-fg">In[2], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[3], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>wait_for_connection()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.wait_for_connection()
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -515,8 +515,8 @@ Cell <span class="ansi-green-fg">In[3], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[4], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>read()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.read()
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -541,9 +541,9 @@ Cell <span class="ansi-green-fg">In[4], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[5], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>select_channels(<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
-<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>read()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[5]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.select_channels(<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
+<span class="ansi-green-fg">      2</span> scaler.read()
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -565,9 +565,9 @@ Cell <span class="ansi-green-fg">In[5], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[6], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan04<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>)
-<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan07<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">roi1</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[6]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.channels.chan04.chname.put(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">scint</span><span class="ansi-yellow-fg">&#34;</span>)
+<span class="ansi-green-fg">      2</span> scaler.channels.chan07.chname.put(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">roi1</span><span class="ansi-yellow-fg">&#34;</span>)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -589,9 +589,9 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[7], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>select_channels(<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
-<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>read()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[7]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.select_channels(<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>)
+<span class="ansi-green-fg">      2</span> scaler.read()
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -615,8 +615,8 @@ Cell <span class="ansi-green-fg">In[7], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[8], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>preset_time
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[8]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.preset_time
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -637,8 +637,8 @@ Cell <span class="ansi-green-fg">In[8], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[9], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>preset_time<span style="color: rgb(98,98,98)">.</span>get()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[9]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.preset_time.get()
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -659,8 +659,8 @@ Cell <span class="ansi-green-fg">In[9], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[10], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>preset_time<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(98,98,98)">1.5</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[10]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.preset_time.put(<span class="ansi-green-fg">1.5</span>)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -681,8 +681,8 @@ Cell <span class="ansi-green-fg">In[10], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>count<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(98,98,98)">1</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.count.put(<span class="ansi-green-fg">1</span>)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -703,8 +703,8 @@ Cell <span class="ansi-green-fg">In[11], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[12], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>read()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.read()
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -730,9 +730,9 @@ Cell <span class="ansi-green-fg">In[12], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> RunEngine
-<span class="ansi-green-intense-fg ansi-bold">      2</span> RE <span style="color: rgb(98,98,98)">=</span> RunEngine({})
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[13]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> RunEngine
+<span class="ansi-green-fg">      2</span> RE = RunEngine({})
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
 </pre></div></div>
@@ -753,8 +753,8 @@ Cell <span class="ansi-green-fg">In[13], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[14], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">plans</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">as</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bp</span>
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[14]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">plans</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">as</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bp</span>
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
 </pre></div></div>
@@ -775,8 +775,8 @@ Cell <span class="ansi-green-fg">In[14], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[15], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler]))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[15]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler]))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -810,8 +810,8 @@ Cell <span class="ansi-green-fg">In[15], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[17], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler]), myCallbackBrief)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[17]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler]), myCallbackBrief)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -844,8 +844,8 @@ Cell <span class="ansi-green-fg">In[17], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[19], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler]), myCallback)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[19]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler]), myCallback)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -872,8 +872,8 @@ the RunEngine reports when the scan stops.</p>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[20], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">3</span>), myCallback)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[20]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler], num=<span class="ansi-green-fg">3</span>), myCallback)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>

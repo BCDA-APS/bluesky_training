@@ -7,6 +7,10 @@ Install New Instrument
 
 Describes the steps to install a new bluesky instrument.
 
+.. note:: 2025-03-25.  The entire installation procedure is being redesigned.
+    New repository (and documentation) are here: https://github.com/BCDA-APS/BITS
+    Installation is described (for now) here: https://bcda-aps.github.io/BITS/install.html
+
 .. note:: These *instructions have been written for workstations running the Linux operating system*. They may be used for other operating systems but expect some modifications are necessary. One such modification is that the ``libhkl`` library, needed for diffractometer support, is only available for Linux x86_64 host architectures.
 
 .. warning:: In Linux, use the ``bash`` command shell. For more info see `what is bash? <https://bcda-aps.github.io/bluesky_training/reference/_FAQ.html#faq-bash>`__

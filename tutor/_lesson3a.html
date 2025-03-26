@@ -427,10 +427,10 @@
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[1], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">ophyd</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> EpicsMotor
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">ophyd</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">scaler</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ScalerCH
-<span class="ansi-green-intense-fg ansi-bold">      3</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> RunEngine
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[1]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">ophyd</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> EpicsMotor
+<span class="ansi-green-fg">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">ophyd</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">scaler</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> ScalerCH
+<span class="ansi-green-fg">      3</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> RunEngine
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;ophyd&#39;
 </pre></div></div>
@@ -455,10 +455,10 @@ Cell <span class="ansi-green-fg">In[1], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[2], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> RE <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">RunEngine</span>({})
-<span class="ansi-green-intense-fg ansi-bold">      3</span> P <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">sky:</span><span style="color: rgb(175,0,0)">&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">      4</span> m1 <span style="color: rgb(98,98,98)">=</span> EpicsMotor(<span style="color: rgb(175,0,0)">f</span><span style="color: rgb(175,0,0)">&#34;</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>P<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span style="color: rgb(175,0,0)">m1</span><span style="color: rgb(175,0,0)">&#34;</span>, name<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">m1</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[2]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> RE = <span class="ansi-yellow-bg">RunEngine</span>({})
+<span class="ansi-green-fg">      3</span> P = <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">sky:</span><span class="ansi-yellow-fg">&#34;</span>
+<span class="ansi-green-fg">      4</span> m1 = EpicsMotor(<span class="ansi-yellow-fg">f</span><span class="ansi-yellow-fg">&#34;</span><span class="ansi-bold" style="color: rgb(175,95,135)">{</span>P<span class="ansi-bold" style="color: rgb(175,95,135)">}</span><span class="ansi-yellow-fg">m1</span><span class="ansi-yellow-fg">&#34;</span>, name=<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">m1</span><span class="ansi-yellow-fg">&#34;</span>)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RunEngine&#39; is not defined
 </pre></div></div>
@@ -486,10 +486,10 @@ Cell <span class="ansi-green-fg">In[2], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[3], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">scaler</span><span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan01<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">clock</span><span style="color: rgb(175,0,0)">&#34;</span>)
-<span class="ansi-green-intense-fg ansi-bold">      2</span> scaler<span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan02<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">I0</span><span style="color: rgb(175,0,0)">&#34;</span>)
-<span class="ansi-green-intense-fg ansi-bold">      3</span> scaler<span style="color: rgb(98,98,98)">.</span>channels<span style="color: rgb(98,98,98)">.</span>chan03<span style="color: rgb(98,98,98)">.</span>chname<span style="color: rgb(98,98,98)">.</span>put(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>)
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[3]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">scaler</span>.channels.chan01.chname.put(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">clock</span><span class="ansi-yellow-fg">&#34;</span>)
+<span class="ansi-green-fg">      2</span> scaler.channels.chan02.chname.put(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">I0</span><span class="ansi-yellow-fg">&#34;</span>)
+<span class="ansi-green-fg">      3</span> scaler.channels.chan03.chname.put(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">scint</span><span class="ansi-yellow-fg">&#34;</span>)
 
 <span class="ansi-red-fg">NameError</span>: name &#39;scaler&#39; is not defined
 </pre></div></div>
@@ -514,8 +514,8 @@ Cell <span class="ansi-green-fg">In[3], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[4], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">callbacks</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> LiveTable
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[4]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">callbacks</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> LiveTable
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
 </pre></div></div>
@@ -536,8 +536,8 @@ Cell <span class="ansi-green-fg">In[4], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[5], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], <span style="color: rgb(98,98,98)">5</span>), LiveTable([scaler]))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[5]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler], <span class="ansi-green-fg">5</span>), LiveTable([scaler]))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -559,8 +559,8 @@ Cell <span class="ansi-green-fg">In[5], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[6], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>), LiveTable([m1, scaler]))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[6]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.scan([scaler], m1, <span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">5</span>, <span class="ansi-green-fg">5</span>), LiveTable([m1, scaler]))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -586,48 +586,47 @@ Cell <span class="ansi-green-fg">In[6], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[7], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">run_line_magic</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">matplotlib</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">notebook</span><span class="ansi-yellow-bg" style="color: rgb(175,0,0)">&#39;</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">utils</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> install_nb_kicker
-<span class="ansi-green-intense-fg ansi-bold">      3</span> install_nb_kicker()
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[7]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">get_ipython</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">)</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">run_line_magic</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-fg ansi-yellow-bg">&#39;</span><span class="ansi-yellow-fg ansi-yellow-bg">matplotlib</span><span class="ansi-yellow-fg ansi-yellow-bg">&#39;</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-fg ansi-yellow-bg">&#39;</span><span class="ansi-yellow-fg ansi-yellow-bg">notebook</span><span class="ansi-yellow-fg ansi-yellow-bg">&#39;</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">      2</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">utils</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> install_nb_kicker
+<span class="ansi-green-fg">      3</span> install_nb_kicker()
 
-File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/interactiveshell.py:2482</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_line_magic</span><span class="ansi-blue-fg">(self, magic_name, line, _stack_depth)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2480</span>     kwargs[<span style="color: rgb(175,0,0)">&#39;</span><span style="color: rgb(175,0,0)">local_ns</span><span style="color: rgb(175,0,0)">&#39;</span>] <span style="color: rgb(98,98,98)">=</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>get_local_scope(stack_depth)
-<span class="ansi-green-intense-fg ansi-bold">   2481</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>builtin_trap:
-<span class="ansi-green-fg">-&gt; 2482</span>     result <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   2484</span> <span style="color: rgb(95,135,135)"># The code below prevents the output from being displayed</span>
-<span class="ansi-green-intense-fg ansi-bold">   2485</span> <span style="color: rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
-<span class="ansi-green-intense-fg ansi-bold">   2486</span> <span style="color: rgb(95,135,135)"># when the last Python token in the expression is a &#39;;&#39;.</span>
-<span class="ansi-green-intense-fg ansi-bold">   2487</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">getattr</span>(fn, magic<span style="color: rgb(98,98,98)">.</span>MAGIC_OUTPUT_CAN_BE_SILENCED, <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>):
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/interactiveshell.py:2481</span>, in <span class="ansi-cyan-fg">InteractiveShell.run_line_magic</span><span class="ansi-blue-fg">(self, magic_name, line, _stack_depth)</span>
+<span class="ansi-green-fg">   2479</span>     kwargs[<span class="ansi-yellow-fg">&#39;</span><span class="ansi-yellow-fg">local_ns</span><span class="ansi-yellow-fg">&#39;</span>] = <span style="color: rgb(0,135,0)">self</span>.get_local_scope(stack_depth)
+<span class="ansi-green-fg">   2480</span> <span class="ansi-bold" style="color: rgb(0,135,0)">with</span> <span style="color: rgb(0,135,0)">self</span>.builtin_trap:
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">2481</span>     result = <span class="ansi-yellow-bg">fn</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">*</span><span class="ansi-yellow-bg">kwargs</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   2483</span> <span style="color: rgb(95,135,135)"># The code below prevents the output from being displayed</span>
+<span class="ansi-green-fg">   2484</span> <span style="color: rgb(95,135,135)"># when using magics with decorator @output_can_be_silenced</span>
+<span class="ansi-green-fg">   2485</span> <span style="color: rgb(95,135,135)"># when the last Python token in the expression is a &#39;;&#39;.</span>
+<span class="ansi-green-fg">   2486</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">getattr</span>(fn, magic.MAGIC_OUTPUT_CAN_BE_SILENCED, <span class="ansi-bold" style="color: rgb(0,135,0)">False</span>):
 
-File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/magics/pylab.py:103</span>, in <span class="ansi-cyan-fg">PylabMagics.matplotlib</span><span class="ansi-blue-fg">(self, line)</span>
-<span class="ansi-green-intense-fg ansi-bold">     98</span>     <span style="color: rgb(0,135,0)">print</span>(
-<span class="ansi-green-intense-fg ansi-bold">     99</span>         <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">Available matplotlib backends: </span><span class="ansi-bold" style="color: rgb(175,95,135)">%s</span><span style="color: rgb(175,0,0)">&#34;</span>
-<span class="ansi-green-intense-fg ansi-bold">    100</span>         <span style="color: rgb(98,98,98)">%</span> _list_matplotlib_backends_and_gui_loops()
-<span class="ansi-green-intense-fg ansi-bold">    101</span>     )
-<span class="ansi-green-intense-fg ansi-bold">    102</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
-<span class="ansi-green-fg">--&gt; 103</span>     gui, backend <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">shell</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">enable_matplotlib</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">    104</span>     <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>_show_matplotlib_backend(args<span style="color: rgb(98,98,98)">.</span>gui, backend)
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/magics/pylab.py:103</span>, in <span class="ansi-cyan-fg">PylabMagics.matplotlib</span><span class="ansi-blue-fg">(self, line)</span>
+<span class="ansi-green-fg">     98</span>     <span style="color: rgb(0,135,0)">print</span>(
+<span class="ansi-green-fg">     99</span>         <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">Available matplotlib backends: </span><span class="ansi-bold" style="color: rgb(175,95,135)">%s</span><span class="ansi-yellow-fg">&#34;</span>
+<span class="ansi-green-fg">    100</span>         % _list_matplotlib_backends_and_gui_loops()
+<span class="ansi-green-fg">    101</span>     )
+<span class="ansi-green-fg">    102</span> <span class="ansi-bold" style="color: rgb(0,135,0)">else</span>:
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">103</span>     gui, backend = <span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">shell</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">enable_matplotlib</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">args</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">    104</span>     <span style="color: rgb(0,135,0)">self</span>._show_matplotlib_backend(args.gui, backend)
 
-File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/interactiveshell.py:3667</span>, in <span class="ansi-cyan-fg">InteractiveShell.enable_matplotlib</span><span class="ansi-blue-fg">(self, gui)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3664</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">matplotlib_inline</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">backend_inline</span>
-<span class="ansi-green-intense-fg ansi-bold">   3666</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">IPython</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">core</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> pylabtools <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> pt
-<span class="ansi-green-fg">-&gt; 3667</span> gui, backend <span style="color: rgb(98,98,98)">=</span> <span class="ansi-yellow-bg">pt</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">find_gui_and_backend</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg" style="color: rgb(98,98,98)">.</span><span class="ansi-yellow-bg">pylab_gui_select</span><span class="ansi-yellow-bg">)</span>
-<span class="ansi-green-intense-fg ansi-bold">   3669</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> gui <span style="color: rgb(98,98,98)">!=</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
-<span class="ansi-green-intense-fg ansi-bold">   3670</span>     <span style="color: rgb(95,135,135)"># If we have our first gui selection, store it</span>
-<span class="ansi-green-intense-fg ansi-bold">   3671</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span><span style="color: rgb(98,98,98)">.</span>pylab_gui_select <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/interactiveshell.py:3637</span>, in <span class="ansi-cyan-fg">InteractiveShell.enable_matplotlib</span><span class="ansi-blue-fg">(self, gui)</span>
+<span class="ansi-green-fg">   3634</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">matplotlib_inline</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">backend_inline</span>
+<span class="ansi-green-fg">   3636</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">IPython</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">core</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> pylabtools <span class="ansi-bold" style="color: rgb(0,135,0)">as</span> pt
+<span class="ansi-green-fg">-&gt; </span><span class="ansi-green-fg">3637</span> gui, backend = <span class="ansi-yellow-bg">pt</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">find_gui_and_backend</span><span class="ansi-yellow-bg">(</span><span class="ansi-yellow-bg">gui</span><span class="ansi-yellow-bg">,</span><span class="ansi-yellow-bg"> </span><span class="ansi-yellow-bg" style="color: rgb(0,135,0)">self</span><span class="ansi-yellow-bg">.</span><span class="ansi-yellow-bg">pylab_gui_select</span><span class="ansi-yellow-bg">)</span>
+<span class="ansi-green-fg">   3639</span> <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> gui != <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
+<span class="ansi-green-fg">   3640</span>     <span style="color: rgb(95,135,135)"># If we have our first gui selection, store it</span>
+<span class="ansi-green-fg">   3641</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> <span style="color: rgb(0,135,0)">self</span>.pylab_gui_select <span class="ansi-bold" style="color: rgb(175,0,255)">is</span> <span class="ansi-bold" style="color: rgb(0,135,0)">None</span>:
 
-File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/pylabtools.py:338</span>, in <span class="ansi-cyan-fg">find_gui_and_backend</span><span class="ansi-blue-fg">(gui, gui_select)</span>
-<span class="ansi-green-intense-fg ansi-bold">    321</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span style="color: rgb(0,0,255)">find_gui_and_backend</span>(gui<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>, gui_select<span style="color: rgb(98,98,98)">=</span><span class="ansi-bold" style="color: rgb(0,135,0)">None</span>):
-<span class="ansi-green-intense-fg ansi-bold">    322</span> <span style="color: rgb(188,188,188)">    </span><span style="color: rgb(175,0,0)">&#34;&#34;&#34;Given a gui string return the gui and mpl backend.</span>
-<span class="ansi-green-intense-fg ansi-bold">    323</span>
-<span class="ansi-green-intense-fg ansi-bold">    324</span> <span style="color: rgb(175,0,0)">    Parameters</span>
-<span class="ansi-green-fg">   (...)</span>
-<span class="ansi-green-intense-fg ansi-bold">    335</span> <span style="color: rgb(175,0,0)">    &#39;WXAgg&#39;,&#39;Qt4Agg&#39;,&#39;module://matplotlib_inline.backend_inline&#39;,&#39;agg&#39;).</span>
-<span class="ansi-green-intense-fg ansi-bold">    336</span> <span style="color: rgb(175,0,0)">    &#34;&#34;&#34;</span>
-<span class="ansi-green-fg">--&gt; 338</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">matplotlib</span>
-<span class="ansi-green-intense-fg ansi-bold">    340</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> _matplotlib_manages_backends():
-<span class="ansi-green-intense-fg ansi-bold">    341</span>         backend_registry <span style="color: rgb(98,98,98)">=</span> matplotlib<span style="color: rgb(98,98,98)">.</span>backends<span style="color: rgb(98,98,98)">.</span>registry<span style="color: rgb(98,98,98)">.</span>backend_registry
+<span class="ansi-cyan-fg">File </span><span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/python3.12/site-packages/IPython/core/pylabtools.py:338</span>, in <span class="ansi-cyan-fg">find_gui_and_backend</span><span class="ansi-blue-fg">(gui, gui_select)</span>
+<span class="ansi-green-fg">    321</span> <span class="ansi-bold" style="color: rgb(0,135,0)">def</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-fg">find_gui_and_backend</span>(gui=<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>, gui_select=<span class="ansi-bold" style="color: rgb(0,135,0)">None</span>):
+<span class="ansi-green-fg">    322</span> <span style="color: rgb(188,188,188)">    </span><span class="ansi-yellow-fg">&#34;&#34;&#34;Given a gui string return the gui and mpl backend.</span>
+<span class="ansi-green-fg">    323</span>
+<span class="ansi-green-fg">    324</span> <span class="ansi-yellow-fg">    Parameters</span>
+<span class="ansi-green-fg">   (...)</span><span class="ansi-green-fg">    335</span> <span class="ansi-yellow-fg">    &#39;WXAgg&#39;,&#39;Qt4Agg&#39;,&#39;module://matplotlib_inline.backend_inline&#39;,&#39;agg&#39;).</span>
+<span class="ansi-green-fg">    336</span> <span class="ansi-yellow-fg">    &#34;&#34;&#34;</span>
+<span class="ansi-green-fg">--&gt; </span><span class="ansi-green-fg">338</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">import</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">matplotlib</span>
+<span class="ansi-green-fg">    340</span>     <span class="ansi-bold" style="color: rgb(0,135,0)">if</span> _matplotlib_manages_backends():
+<span class="ansi-green-fg">    341</span>         backend_registry = matplotlib.backends.registry.backend_registry
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;matplotlib&#39;
 </pre></div></div>
@@ -648,8 +647,8 @@ File <span class="ansi-green-fg">/opt/hostedtoolcache/Python/3.12.9/x64/lib/pyth
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[8], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">callbacks</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> LivePlot
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[8]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">callbacks</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> LivePlot
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
 </pre></div></div>
@@ -670,8 +669,8 @@ Cell <span class="ansi-green-fg">In[8], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[9], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler],num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">5</span>), LivePlot(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[9]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler],num=<span class="ansi-green-fg">5</span>), LivePlot(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">scint</span><span class="ansi-yellow-fg">&#34;</span>))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -692,8 +691,8 @@ Cell <span class="ansi-green-fg">In[9], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[10], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>), LivePlot(<span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">scint</span><span style="color: rgb(175,0,0)">&#34;</span>, <span style="color: rgb(175,0,0)">&#34;</span><span style="color: rgb(175,0,0)">m1</span><span style="color: rgb(175,0,0)">&#34;</span>))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[10]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.scan([scaler], m1, <span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">5</span>, <span class="ansi-green-fg">5</span>), LivePlot(<span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">scint</span><span class="ansi-yellow-fg">&#34;</span>, <span class="ansi-yellow-fg">&#34;</span><span class="ansi-yellow-fg">m1</span><span class="ansi-yellow-fg">&#34;</span>))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -717,8 +716,8 @@ the current plan.</p>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">ModuleNotFoundError</span>                       Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[11], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,0,255)">bluesky</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">callbacks</span><span class="ansi-bold" style="color: rgb(0,0,255)">.</span><span class="ansi-bold" style="color: rgb(0,0,255)">best_effort</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> BestEffortCallback
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[11]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-bold" style="color: rgb(0,135,0)">from</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-blue-intense-fg ansi-bold">bluesky</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">callbacks</span><span class="ansi-blue-intense-fg ansi-bold">.</span><span class="ansi-blue-intense-fg ansi-bold">best_effort</span><span style="color: rgb(188,188,188)"> </span><span class="ansi-bold" style="color: rgb(0,135,0)">import</span> BestEffortCallback
 
 <span class="ansi-red-fg">ModuleNotFoundError</span>: No module named &#39;bluesky&#39;
 </pre></div></div>
@@ -739,8 +738,8 @@ Cell <span class="ansi-green-fg">In[11], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[12], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">5</span>), BestEffortCallback())
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[12]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler], num=<span class="ansi-green-fg">5</span>), BestEffortCallback())
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -762,8 +761,8 @@ Cell <span class="ansi-green-fg">In[12], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[13], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>), BestEffortCallback())
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[13]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.scan([scaler], m1, <span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">5</span>, <span class="ansi-green-fg">5</span>), BestEffortCallback())
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -784,8 +783,8 @@ Cell <span class="ansi-green-fg">In[13], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[14], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span><span style="color: rgb(98,98,98)">.</span>subscribe(BestEffortCallback())
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[14]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>.subscribe(BestEffortCallback())
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -807,8 +806,8 @@ Cell <span class="ansi-green-fg">In[14], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[15], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>count([scaler], num<span style="color: rgb(98,98,98)">=</span><span style="color: rgb(98,98,98)">5</span>))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[15]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.count([scaler], num=<span class="ansi-green-fg">5</span>))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
@@ -830,8 +829,8 @@ Cell <span class="ansi-green-fg">In[15], line 1</span>
 <div class="highlight"><pre>
 <span class="ansi-red-fg">---------------------------------------------------------------------------</span>
 <span class="ansi-red-fg">NameError</span>                                 Traceback (most recent call last)
-Cell <span class="ansi-green-fg">In[16], line 1</span>
-<span class="ansi-green-fg">----&gt; 1</span> <span class="ansi-yellow-bg">RE</span>(bp<span style="color: rgb(98,98,98)">.</span>scan([scaler], m1, <span style="color: rgb(98,98,98)">1</span>, <span style="color: rgb(98,98,98)">5</span>, <span style="color: rgb(98,98,98)">5</span>))
+<span class="ansi-cyan-fg">Cell</span><span class="ansi-cyan-fg"> </span><span class="ansi-green-fg">In[16]</span><span class="ansi-green-fg">, line 1</span>
+<span class="ansi-green-fg">----&gt; </span><span class="ansi-green-fg">1</span> <span class="ansi-yellow-bg">RE</span>(bp.scan([scaler], m1, <span class="ansi-green-fg">1</span>, <span class="ansi-green-fg">5</span>, <span class="ansi-green-fg">5</span>))
 
 <span class="ansi-red-fg">NameError</span>: name &#39;RE&#39; is not defined
 </pre></div></div>
