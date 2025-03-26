@@ -5,10 +5,12 @@ beamlines to use the [Bluesky](https://blueskyproject.io) framework.
 
 - [HowTo guides, tutorials, & references](https://bcda-aps.github.io/bluesky_training/)
   demonstrating use of the Bluesky framework at a typical beamline.
-- A [template](./bluesky/) for beamlines to configure their instrument.
-- A [checklist](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#installation-checklist) to install a new instrument.
-- A [list of APS instrument](https://github.com/BCDA-APS/bluesky_training/wiki/)
-  repositories
+- new design 2025-03
+  - See new BITS [instrument support](https://github.com/BCDA-APS/BITS) layout and [installation](https://bcda-aps.github.io/BITS/install.html) documentation.
+- old
+  - A [template](./bluesky/) for beamlines to configure their instrument.
+  - A [checklist](https://bcda-aps.github.io/bluesky_training/instrument/_install_new_instrument.html#installation-checklist) to install a new instrument.
+  - A [list of APS instrument](https://github.com/BCDA-APS/bluesky_training/wiki/) repositories
 
 Unit Tests | License | GH tag | Code Coverage
 --- | --- | --- | ---
