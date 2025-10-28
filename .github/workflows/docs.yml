@@ -57,7 +57,7 @@ jobs:
       run: ls -lAFgh ${{ steps.deployment.outputs.artifact }}
 
     - name: Upload Docs ZIP file as artifact
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: bluesky_training-docs
         path: ${{ steps.deployment.outputs.artifact }}
